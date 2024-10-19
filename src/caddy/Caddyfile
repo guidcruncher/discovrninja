@@ -1,0 +1,12 @@
+# Caddy's configuration file
+# see: https://caddyserver.com/docs/caddyfile
+{
+    auto_https off
+}
+
+:5000 {
+   
+}
+
+import /etc/caddy/caddy.d/*.conf
+

@@ -1,0 +1,12 @@
+services:
+   discovrninja:
+     image: guidcruncher/discovrninja:development
+     build: .
+     container_name: discovrninja
+     hostname: discovrninja
+     expose:
+       - 3000
+       - 3053
+     stdin_open: true
+     tty: true
+
