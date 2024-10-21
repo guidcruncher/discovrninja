@@ -1,4 +1,5 @@
 import AutoLoad from "@fastify/autoload";
+import Helmet from "@fastify/helmet";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import Fastify from "fastify";
@@ -27,6 +28,8 @@ const swaggerUiOptions = {
 const app = Fastify({
   logger: true,
 });
+
+app.register(Helmet, { global: true });
 
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
