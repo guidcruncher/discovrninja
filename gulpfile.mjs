@@ -75,7 +75,7 @@ function startdev(cb) {
     done: cb,
   });
 
-  estream
+  stream
       .on('restart', function () {
         console.log('restarted!')
       })

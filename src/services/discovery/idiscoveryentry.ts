@@ -6,8 +6,14 @@ interface IDiscoveryEntry {
   targetAddress: string;
 }
 
-interface IDiscoveryAgent {
-  scan(): Promise<IDiscoveryEntry[]>;
+interface IDiscoveryScan {
+  created: Date;
+  hash: string;
+  entries: IDiscoveryEntry[];
 }
 
-export { IDiscoveryEntry, IDiscoveryAgent };
+interface IDiscoveryAgent {
+  scan(): Promise<IDiscoveryScan>;
+}
+
+export { IDiscoveryEntry, IDiscoveryAgent, IDiscoveryScan };
