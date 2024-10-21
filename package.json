@@ -1,0 +1,37 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with Fastify-CLI.",
+  "main": "app.mjs",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test test/**/*.test.mjs",
+    "start": "node ./app.mjs",
+    "dev": "node ./app.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/autoload": "^6.0.0",
+    "@fastify/sensible": "^6.0.0",
+    "@fastify/swagger": "^9.2.0",
+    "@fastify/swagger-ui": "^5.1.0",
+    "cron": "^3.1.7",
+    "fastify": "^5.0.0",
+    "fastify-plugin": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.7",
+    "gulp": "^5.0.0",
+    "gulp-execa": "^7.0.1",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-prettier": "^6.0.0",
+    "gulp-tslint": "^8.1.4",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "tslint": "^5.20.1",
+    "typescript": "^5.6.3"
+  }
+}

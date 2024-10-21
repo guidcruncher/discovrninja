@@ -1,0 +1,11 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "ordered-imports": false,
+    "jsRules": {},
+    "rules": {},
+    "rulesDirectory": [],
+    "program": "./tsconfig.json"
+}
