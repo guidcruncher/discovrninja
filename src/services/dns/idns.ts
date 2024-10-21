@@ -4,11 +4,11 @@ interface IDnsEntry {
 }
 
 interface IDnsManager {
-  pushToDns(entry: IDnsEntry): boolean;
+  pushToDns(entry: IDnsEntry): Promise<boolean>;
   remove(entry: IDnsEntry): void;
-  contains(host: string): boolean;
-  resolve(host: string): string;
-  get(): IDnsEntry[];
+  contains(host: string): Promise<boolean>;
+  resolve(host: string): Promise<string>;
+  get(): Promise<IDnsEntry[]>;
 }
 
 export { IDnsEntry, IDnsManager };

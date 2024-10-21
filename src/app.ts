@@ -7,7 +7,6 @@ import path from "path";
 const swaggerOptions = {
   swagger: {
     consumes: ["application/json"],
-    host: "localhost",
     info: {
       description: "DiscovrNinja API.",
       title: "DiscovrNinja",
