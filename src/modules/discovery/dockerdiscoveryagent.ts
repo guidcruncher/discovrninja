@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import Docker from "dockerode";
 import { DiscoveryEntry } from "discovery/discoveryentry";
 import { DiscoveryScan } from "discovery/discoveryscan";
@@ -39,7 +40,12 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                 result.entries.push(record);
               }
             });
-            result.entries.sort((a, b) => a.containerName.localCompare(b));
+            result.entries.sort((a, b) =>
+              a.containerName.localeCompare(b.containerName),
+            );
+            result.hash = createHash("sha256")
+              .update(JSON.stringify(result.entries))
+              .digest("base64");
             resolve(result);
           });
         }
