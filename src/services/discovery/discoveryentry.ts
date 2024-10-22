@@ -11,11 +11,17 @@ export class DiscoveryEntry implements IDiscoveryEntry {
 
   public targetAddress: string;
 
+  public containerName: string;
+
+  public hostname: string;
+
   constructor() {
     this.name = "";
     this.description = "";
     this.icon = "";
     this.sourceAddress = "";
     this.targetAddress = "";
+    this.containerName = "";
+    this.hostname = "";
   }
 }

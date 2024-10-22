@@ -16,6 +16,18 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
         if (err) {
           reject(err);
         } else {
+          containers.forEach((container) => {
+            const record: IDiscoveryEntry = {
+              name: "",
+              description: "",
+              icon: "",
+              containerName: "",
+              hostname: container.HostName,
+              sourceAddress: container.HostName,
+              targetAddress: "",
+            };
+            result.entries.push(record);
+          });
           resolve(result);
         }
       });

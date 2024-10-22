@@ -2,6 +2,8 @@ interface IDiscoveryEntry {
   name: string;
   description: string;
   icon: string;
+  hostname: string;
+  containerName: string;
   sourceAddress: string;
   targetAddress: string;
 }
