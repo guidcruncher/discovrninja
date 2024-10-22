@@ -15,10 +15,13 @@ export class DiscoveryEntry implements IDiscoveryEntry {
 
   public hostname: string;
 
+  public ports: string[];
+
   constructor() {
     this.name = "";
     this.description = "";
     this.icon = "";
+    this.ports = [];
     this.sourceAddress = "";
     this.targetAddress = "";
     this.containerName = "";

@@ -6,6 +6,7 @@ interface IDiscoveryEntry {
   containerName: string;
   sourceAddress: string;
   targetAddress: string;
+  ports: string[];
 }
 
 interface IDiscoveryScan {
