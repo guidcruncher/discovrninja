@@ -21,6 +21,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
       });
     });
   }
+
   private createDocker(): Docker {
     return new Docker({ socketPath: "/var/run/docker.sock" });
   }

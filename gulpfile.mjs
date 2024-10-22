@@ -38,30 +38,12 @@ function tsformat() {
     .pipe(gulp.dest("src"));
 }
 
-function linter() {
-  return new Promise((resolve, reject) => {
-    gulp
-      .src("./src/**/*.ts")
-      .pipe(
-        tslint({
-          fix: true,
-          formatter: "stylish",
-          configuration: "./tslint.json",
-        }),
-      )
-      .pipe(
-        tslint
-          .report({
-            emitError: true,
-          })
-          .on("end", function () {
-            resolve();
-          })
-          .on("error", function (err) {
-            reject(new Error("Error"));
-          }),
-      );
-  });
+ function linter() {
+return gulp.src("./src/**/*.ts")
+.pipe(gulpESLintNew({ configType: "flat", overrideConfigFile: "./eslint.config.mjs", fix: true }))
+.pipe(gulpESLintNew.fix())
+.pipe(gulpESLintNew.format())
+.pipe(gulpESLintNew.failAfterError());
 }
 
 function startdev(cb) {

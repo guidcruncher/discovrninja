@@ -2,9 +2,13 @@ import { IDiscoveryEntry } from "./idiscoveryentry";
 
 export class DiscoveryEntry implements IDiscoveryEntry {
   public name: string;
+
   public description: string;
+
   public icon: string;
+
   public sourceAddress: string;
+
   public targetAddress: string;
 
   constructor() {

@@ -45,5 +45,5 @@ app.listen({ host: "0.0.0.0", port: 5000 }, (err, address) => {
   if (err) {
     throw err;
   }
-  // console.log("Server is now listening on ${address}");
+  console.log("Server is now listening on ", address);
 });
