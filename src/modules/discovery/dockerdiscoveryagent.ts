@@ -1,4 +1,4 @@
-import { Docker } from "dockerode";
+import Docker from "dockerode";
 import { DiscoveryEntry } from "discovery/discoveryentry";
 import { DiscoveryScan } from "discovery/discoveryscan";
 import {

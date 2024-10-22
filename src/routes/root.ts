@@ -1,6 +1,6 @@
 import { DockerDiscoveryAgent } from "discovery/dockerdiscoveryagent";
 
-module.exports = (fastify, opts) => {
+export default (fastify, opts) => {
   fastify.get("/", (request, reply) => {
     const agent = new DockerDiscoveryAgent();
 

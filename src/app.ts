@@ -1,9 +1,8 @@
-import AutoLoad from "@fastify/autoload";
 import Helmet from "@fastify/helmet";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import Fastify from "fastify";
-import path from "path";
+import root from "./routes/root";
 
 const swaggerOptions = {
   swagger: {
@@ -34,10 +33,7 @@ app.register(Helmet, { global: true });
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 
-app.register(AutoLoad, {
-  dir: path.join(__dirname, "routes"),
-  options: {},
-});
+app.register(root);
 
 app.ready();
 

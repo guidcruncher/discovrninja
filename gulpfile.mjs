@@ -1,7 +1,6 @@
 import gulp from "gulp";
 import { series, parallel, task, watch } from "gulp";
 import { exec, stream } from "gulp-execa";
-import nodemon from "gulp-nodemon";
 import gulpESLintNew from "gulp-eslint-new";
 import ts from "gulp-typescript";
 import prettier from "gulp-prettier";
@@ -56,25 +55,10 @@ function linter() {
     .pipe(gulpESLintNew.failAfterError());
 }
 
-function startdev(cb) {
-  var stream = nodemon({
-    script: "./dist/app.js",
-    ext: "ts",
-    ignore: ["node_modules/"],
-    watch: ["./src/"],
-    tasks: ["build"],
-    env: { NODE_ENV: "development" },
-    done: cb,
+async function startdev() {
+  const { stdout1 } = await exec("npx tsx ./src/app.ts", {
+    stdout: ["pipe", "inherit"],
   });
-
-  stream
-    .on("restart", function () {
-      console.log("restarted!");
-    })
-    .on("crash", function () {
-      console.error("Application has crashed!\n");
-      stream.emit("restart", 10); // restart the server in 10 seconds
-    });
 }
 
 gulp.task("build", series(tsformat, linter, transpile));
