@@ -2,6 +2,15 @@ import { DockerDiscoveryAgent } from "discovery/dockerdiscoveryagent";
 
 module.exports = (fastify, opts) => {
   fastify.get("/", (request, reply) => {
-    return { root: true };
+    const agent = new DockerDiscoveryAgent();
+
+    agent
+      .scan()
+      .then((result) => {
+        reply.code(200).send(result);
+      })
+      .catch((err) => {
+        reply.code(500).send(err);
+      });
   });
 };

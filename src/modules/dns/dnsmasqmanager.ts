@@ -25,7 +25,8 @@ export class DnsMasqManager implements IDnsManager {
 
   public get(): Promise<IDnsEntry[]> {
     return new Promise<IDnsEntry[]>((resolve, reject) => {
-      resolve(null);
+      const result: IDnsEntry[] = [];
+      resolve(result);
     });
   }
 }
