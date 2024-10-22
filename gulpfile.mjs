@@ -2,8 +2,8 @@ import gulp from "gulp";
 import { series, parallel, task, watch } from "gulp";
 import { exec, stream } from "gulp-execa";
 import nodemon from "gulp-nodemon";
-import tslint from "gulp-tslint";
-import ts from "gulp-typescr	ipt";
+import gulpESLintNew from "gulp-eslint-new";
+import ts from "gulp-typescript";
 import prettier from "gulp-prettier";
 
 async function clean() {
