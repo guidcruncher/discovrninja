@@ -39,6 +39,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                 result.entries.push(record);
               }
             });
+            result.entries.sort((a, b) => a.containerName.localCompare(b));
             resolve(result);
           });
         }
