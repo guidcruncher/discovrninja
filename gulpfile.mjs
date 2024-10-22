@@ -17,7 +17,10 @@ async function clean() {
 
 function transpile() {
   return new Promise((resolve, reject) => {
-    var tsProject = ts.createProject("./tsconfig.json");
+    var tsProject = ts.createProject("./tsconfig.json", {
+      declaration: true,
+    });
+
     gulp
       .src("src/**/*.ts")
       .pipe(tsProject())
@@ -38,12 +41,19 @@ function tsformat() {
     .pipe(gulp.dest("src"));
 }
 
- function linter() {
-return gulp.src("./src/**/*.ts")
-.pipe(gulpESLintNew({ configType: "flat", overrideConfigFile: "./eslint.config.mjs", fix: true }))
-.pipe(gulpESLintNew.fix())
-.pipe(gulpESLintNew.format())
-.pipe(gulpESLintNew.failAfterError());
+function linter() {
+  return gulp
+    .src("./src/**/*.ts")
+    .pipe(
+      gulpESLintNew({
+        configType: "flat",
+        overrideConfigFile: "./eslint.config.mjs",
+        fix: true,
+      }),
+    )
+    .pipe(gulpESLintNew.fix())
+    .pipe(gulpESLintNew.format())
+    .pipe(gulpESLintNew.failAfterError());
 }
 
 function startdev(cb) {
@@ -58,14 +68,13 @@ function startdev(cb) {
   });
 
   stream
-      .on('restart', function () {
-        console.log('restarted!')
-      })
-      .on('crash', function() {
-        console.error('Application has crashed!\n')
-         stream.emit('restart', 10)  // restart the server in 10 seconds
-      })
-
+    .on("restart", function () {
+      console.log("restarted!");
+    })
+    .on("crash", function () {
+      console.error("Application has crashed!\n");
+      stream.emit("restart", 10); // restart the server in 10 seconds
+    });
 }
 
 gulp.task("build", series(tsformat, linter, transpile));

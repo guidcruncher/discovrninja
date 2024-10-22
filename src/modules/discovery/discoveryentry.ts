@@ -1,4 +1,4 @@
-import { IDiscoveryEntry } from "./idiscoveryentry";
+import { IDiscoveryEntry } from "discovery/idiscoveryentry";
 
 export class DiscoveryEntry implements IDiscoveryEntry {
   public name: string;

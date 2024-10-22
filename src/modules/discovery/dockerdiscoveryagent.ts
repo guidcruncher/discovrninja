@@ -1,11 +1,11 @@
 import { Docker } from "dockerode";
-import { DiscoveryEntry } from "./discoveryentry";
-import { DiscoveryScan } from "./discoveryscan";
+import { DiscoveryEntry } from "discovery/discoveryentry";
+import { DiscoveryScan } from "discovery/discoveryscan";
 import {
   IDiscoveryAgent,
   IDiscoveryEntry,
   IDiscoveryScan,
-} from "./idiscoveryentry";
+} from "discovery/idiscoveryentry";
 
 export class DockerDiscoveryAgent implements IDiscoveryAgent {
   public scan(): Promise<IDiscoveryScan> {
