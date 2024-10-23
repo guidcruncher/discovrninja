@@ -26,12 +26,12 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
           });
 
           Promise.allSettled(promises).then((results) => {
-            const addressPromises: Promise<IDiscoveryEntry>[] = [];
+            const addressPromises: Promise<any>[] = [];
 
             results.forEach((promise) => {
               if (promise.status == "fulfilled") {
                 const container = promise.value;
-                const record: IDiscoveryEntry = {
+                const record: DiscoveryEntry = {
                   name: container.Config.Labels["homepage.name"],
                   description: container.Config.Labels["homepage.description"],
                   icon: container.Config.Labels["homepage.icon"],
@@ -50,12 +50,12 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
 
             Promise.allSettled(addressPromises).then((results) => {
               results.forEach((value) => {
-                result.entries.push(value);
+                result.entries.push(value.value);
               });
 
-//              result.entries.sort((a, b) =>
-//                a.containerName.localeCompare(b.containerName),
-//              );
+              //              result.entries.sort((a, b) =>
+              //                a.containerName.localeCompare(b.containerName),
+              //              );
 
               result.hash = createHash("sha256")
                 .update(JSON.stringify(result.entries))
@@ -75,41 +75,39 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
     return "http://";
   }
 
-  private resolveSourceAddress(
-    entry: IDiscoveryEntry,
-  ): Promise<IDiscoveryEntry> {
+  private resolveSourceAddress(entry: DiscoveryEntry): Promise<any> {
     const iputils: IpUtilities = new IpUtilities();
-    iputils.getHostIpAddress().then((hostIpAddress) => {
-      return new Promise<IDiscoveryEntry>((resolve, reject) => {
-        const result: IDiscoveryEntry = entry;
-        if (entry.ports.length == 0) {
-          resolve(result);
-        }
+    return new Promise<DiscoveryEntry>((resolve, reject) => {
+      const hostIpAddress = iputils.getHostIpAddress();
 
-        const promises: Promise<IAddress>[] = [];
+      const result: DiscoveryEntry = entry;
+      if (entry.ports.length == 0) {
+        resolve(result);
+      }
 
-        entry.ports.forEach((port) => {
-          entry.ipAddresses.forEach((addr) => {
-            const url: IAddress = {network: addr.network};
-            if (addr.address == "") {
-              addr.address = hostIpAddress;
-            }
-            url.address = this.getScheme(port) + addr.address + ":" + port;
-            promises.push(iputils.checkUrlLive(url));
-          });
+      const promises: Promise<IAddress>[] = [];
+
+      entry.ports.forEach((port) => {
+        entry.ipAddresses.forEach((addr) => {
+          const url: IAddress = { address: "", network: addr.network };
+          if (addr.address == "") {
+            addr.address = hostIpAddress;
+          }
+          url.address = this.getScheme(port) + addr.address + ":" + port;
+          promises.push(iputils.checkUrlLive(url));
         });
-
-        Promise.any(promises)
-          .then((result) => {
-            entry.sourceAddress = result;
-            resolve(entry);
-          })
-          .catch(() => {
-            entry.sourceAddress.address = "";
-            entry.sourceAddress.network = "";
-            resolve(entry);
-          });
       });
+
+      Promise.any(promises)
+        .then((result) => {
+          entry.sourceAddress = result;
+          resolve(entry);
+        })
+        .catch(() => {
+          entry.sourceAddress.address = "";
+          entry.sourceAddress.network = "";
+          resolve(entry);
+        });
     });
   }
 

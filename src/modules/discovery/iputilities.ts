@@ -7,8 +7,7 @@ export class IpUtilities {
   public getIpAddress(hostname: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const options = { family: 4 };
-
-      dns.lookup(os.hostname(), options, (err, addr) => {
+      dns.lookup(hostname, options, (err, addr) => {
         if (err) {
           reject(err);
         } else {
@@ -18,19 +17,32 @@ export class IpUtilities {
     });
   }
 
-  public getHostIpAddress(): Promise<string> {
-    return this.getIpAddress(os.hostname());
+  public getHostIpAddress(): string {
+    const networkInterfaces = os.networkInterfaces();
+    for (const interfaceName of Object.keys(networkInterfaces)) {
+      const networkInterface = networkInterfaces[interfaceName];
+      if (networkInterface) {
+        for (const net of networkInterface) {
+          if (net.family === "IPv4" && !net.internal) {
+            return net.address;
+          }
+        }
+      }
+    }
+    return "";
   }
 
   public checkUrlLive(url: IAddress): Promise<IAddress> {
     return new Promise<IAddress>((resolve, reject) => {
-      console.log("Resolving " + url.address);
       superagent.head(url.address).end((err, res) => {
         if (err) {
-          reject(err);
+          if (err.status) {
+            resolve(url);
+          } else {
+            reject(err);
+          }
         } else {
           if (res.status != 404 && res.status != 500) {
-console.log(url);
             resolve(url);
           } else {
             reject();
