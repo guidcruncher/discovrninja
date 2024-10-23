@@ -103,9 +103,9 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
 
       Promise.any(promises)
         .then((result) => {
+          entry.sourceAddress = result;
           if (result.network != "host") {
             const uri = new URL(result.address);
-            entry.sourceAddress = result;
             entry.sourceAddress.address =
               uri.protocol +
               "//" +
