@@ -43,7 +43,16 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                   ipAddresses: this.resolveNetworks(container.NetworkSettings),
                 };
 
-                addressPromises.push(this.resolveSourceAddress(record));
+                if (container.Config.Labels["homepage.targetaddress"]) {
+                  record.targetAddress = container.Config.Labels["homepage.targetaddress"];
+                }
+
+                if (container.Config.Labels["homepage.sourceaddress"]) {
+                  record.ourceAddress.address = container.Config.Labels["homepage.sourceaddress"];
+                  result.entries.push(record);
+                } else {
+                  addressPromises.push(this.resolveSourceAddress(record));
+                }
               }
             });
 
