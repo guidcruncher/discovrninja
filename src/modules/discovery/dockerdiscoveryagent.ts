@@ -60,23 +60,30 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
   }
 
   private getScheme(port: string): string {
-    if (port == "443") { return "https://"; }
+    if (port == "443") {
+      return "https://";
+    }
     return "http://";
   }
 
   private resolveSourceAddress(hostname: string, ports: string[]): string {
-    if (ports.length == 0)  { return ""; }
-    if (ports.length == 1) { return this.getScheme(ports[0]) + hostname + ":" + ports[0]; }
-    return hostname;
+    if (ports.length == 0) {
+      return "";
+    }
+    if (ports.length == 1) {
+      return this.getScheme(ports[0]) + hostname + ":" + ports[0];
+    }
+    return "";
   }
 
   private resolveNetworks(networksettings: any): IIpAddress[] {
     const results: IIpAddress[] = [];
 
     for (const key of Object.keys(networksettings.Networks)) {
-      const network: any = networksettings.Networks[key as keyof typeof networksettings.Networks];
+      const network: any =
+        networksettings.Networks[key as keyof typeof networksettings.Networks];
       const address: IIpAddress = {
-        network: (key as string),
+        network: key as string,
         address: network.IPAddress,
       };
       results.push(address);
