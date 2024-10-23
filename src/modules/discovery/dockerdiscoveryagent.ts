@@ -26,7 +26,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
           });
 
           Promise.allSettled(promises).then((results) => {
-            const addressPromises: Promise<any>[] = [];
+            const addressPromises: Promise<DiscoveryEntry>[] = [];
 
             results.forEach((promise) => {
               if (promise.status == "fulfilled") {
@@ -48,7 +48,11 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
             });
 
             Promise.allSettled(addressPromises).then((results) => {
-              results.forEach((value) => {
+              const fulfilled = results.filter(
+                (res) => res.status === "fulfilled",
+              ) as PromiseFulfilledResult<DiscoveryEntry>[];
+
+              fulfilled.forEach((value) => {
                 result.entries.push(value.value);
               });
 
@@ -74,7 +78,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
     return "http://";
   }
 
-  private resolveSourceAddress(entry: DiscoveryEntry): Promise<any> {
+  private resolveSourceAddress(entry: DiscoveryEntry): Promise<DiscoveryEntry> {
     const iputils: IpUtilities = new IpUtilities();
     return new Promise<DiscoveryEntry>((resolve, reject) => {
       const hostIpAddress = iputils.getHostIpAddress();
@@ -99,9 +103,15 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
 
       Promise.any(promises)
         .then((result) => {
-          const uri = new URL(result.address); 
-          entry.sourceAddress = result;
-          entry.sourceAddress.address = uri.protocol + "//" + entry.hostname + (uri.port=="" ? "" : ":" + uri.port);
+          if (result.network != "host") {
+            const uri = new URL(result.address);
+            entry.sourceAddress = result;
+            entry.sourceAddress.address =
+              uri.protocol +
+              "//" +
+              entry.hostname +
+              (uri.port == "" ? "" : ":" + uri.port);
+          }
           resolve(entry);
         })
         .catch(() => {
@@ -114,6 +124,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
 
   private resolveNetworks(networksettings: any): IAddress[] {
     const results: IAddress[] = [];
+    const iputils: IpUtilities = new IpUtilities();
 
     for (const key of Object.keys(networksettings.Networks)) {
       const network: any =
@@ -122,6 +133,9 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
         network: key as string,
         address: network.IPAddress,
       };
+      if (key == "host") {
+        address.address = iputils.getHostIpAddress();
+      }
       results.push(address);
     }
     return results;
