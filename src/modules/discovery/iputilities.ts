@@ -1,6 +1,7 @@
 import dns from "node:dns";
 import os from "node:os";
-import fetch from "node:fetch";
+import { IAddress } from "discovery/idiscoveryentry";
+import superagent from "superagent";
 
 export class IpUtilities {
   public getIpAddress(hostname: string): Promise<string> {
@@ -17,17 +18,25 @@ export class IpUtilities {
     });
   }
 
-  public getHostIpAddresa(): Promise<string> {
+  public getHostIpAddress(): Promise<string> {
     return this.getIpAddress(os.hostname());
   }
 
-  public checkAddressLive(url: string): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      fetch(url, { method: "HEAD" })
-        .then((response) => {
-          resolve(response.ok);
-        })
-        .catch((err) => reject(err));
+  public checkUrlLive(url: IAddress): Promise<IAddress> {
+    return new Promise<IAddress>((resolve, reject) => {
+      console.log("Resolving " + url.address);
+      superagent.head(url.address).end((err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (res.status != 404 && res.status != 500) {
+console.log(url);
+            resolve(url);
+          } else {
+            reject();
+          }
+        }
+      });
     });
   }
 }

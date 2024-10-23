@@ -2,11 +2,12 @@ import { createHash } from "node:crypto";
 import Docker from "dockerode";
 import { DiscoveryEntry } from "discovery/discoveryentry";
 import { DiscoveryScan } from "discovery/discoveryscan";
+import { IpUtilities } from "discovery/iputilities";
 import {
   IDiscoveryAgent,
   IDiscoveryEntry,
   IDiscoveryScan,
-  IIpAddress,
+  IAddress,
 } from "discovery/idiscoveryentry";
 
 export class DockerDiscoveryAgent implements IDiscoveryAgent {
@@ -25,6 +26,8 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
           });
 
           Promise.allSettled(promises).then((results) => {
+            const addressPromises: Promise<IDiscoveryEntry>[] = [];
+
             results.forEach((promise) => {
               if (promise.status == "fulfilled") {
                 const container = promise.value;
@@ -35,24 +38,30 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                   containerName: container.Name,
                   hostname: container.Config.Hostname,
                   ports: this.resolvePorts(container.Config.ExposedPorts),
-                  sourceAddress: container.Config.Hostname,
+                  sourceAddress: { network: "", address: "" },
                   targetAddress: container.Config.Labels["homepage.href"],
                   ipAddresses: this.resolveNetworks(container.NetworkSettings),
                 };
-                record.sourceAddress = this.resolveSourceAddress(
-                  record.hostname,
-                  record.ports,
-                );
-                result.entries.push(record);
+
+                addressPromises.push(this.resolveSourceAddress(record));
+                // result.entries.push(record);
               }
             });
-            result.entries.sort((a, b) =>
-              a.containerName.localeCompare(b.containerName),
-            );
-            result.hash = createHash("sha256")
-              .update(JSON.stringify(result.entries))
-              .digest("base64");
-            resolve(result);
+
+            Promise.allSettled(addressPromises).then((results) => {
+              results.forEach((value) => {
+                result.entries.push(value);
+              });
+
+//              result.entries.sort((a, b) =>
+//                a.containerName.localeCompare(b.containerName),
+//              );
+
+              result.hash = createHash("sha256")
+                .update(JSON.stringify(result.entries))
+                .digest("base64");
+              resolve(result);
+            });
           });
         }
       });
@@ -66,23 +75,51 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
     return "http://";
   }
 
-  private resolveSourceAddress(hostname: string, ports: string[]): string {
-    if (ports.length == 0) {
-      return "";
-    }
-    if (ports.length == 1) {
-      return this.getScheme(ports[0]) + hostname + ":" + ports[0];
-    }
-    return "";
+  private resolveSourceAddress(
+    entry: IDiscoveryEntry,
+  ): Promise<IDiscoveryEntry> {
+    const iputils: IpUtilities = new IpUtilities();
+    iputils.getHostIpAddress().then((hostIpAddress) => {
+      return new Promise<IDiscoveryEntry>((resolve, reject) => {
+        const result: IDiscoveryEntry = entry;
+        if (entry.ports.length == 0) {
+          resolve(result);
+        }
+
+        const promises: Promise<IAddress>[] = [];
+
+        entry.ports.forEach((port) => {
+          entry.ipAddresses.forEach((addr) => {
+            const url: IAddress = {network: addr.network};
+            if (addr.address == "") {
+              addr.address = hostIpAddress;
+            }
+            url.address = this.getScheme(port) + addr.address + ":" + port;
+            promises.push(iputils.checkUrlLive(url));
+          });
+        });
+
+        Promise.any(promises)
+          .then((result) => {
+            entry.sourceAddress = result;
+            resolve(entry);
+          })
+          .catch(() => {
+            entry.sourceAddress.address = "";
+            entry.sourceAddress.network = "";
+            resolve(entry);
+          });
+      });
+    });
   }
 
-  private resolveNetworks(networksettings: any): IIpAddress[] {
-    const results: IIpAddress[] = [];
+  private resolveNetworks(networksettings: any): IAddress[] {
+    const results: IAddress[] = [];
 
     for (const key of Object.keys(networksettings.Networks)) {
       const network: any =
         networksettings.Networks[key as keyof typeof networksettings.Networks];
-      const address: IIpAddress = {
+      const address: IAddress = {
         network: key as string,
         address: network.IPAddress,
       };

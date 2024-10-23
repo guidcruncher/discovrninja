@@ -4,13 +4,13 @@ interface IDiscoveryEntry {
   icon: string;
   hostname: string;
   containerName: string;
-  sourceAddress: string;
+  sourceAddress: IAddress;
   targetAddress: string;
   ports: string[];
-  ipAddresses: IIpAddress[];
+  ipAddresses: IAddress[];
 }
 
-interface IIpAddress {
+interface IAddress {
   network: string;
   address: string;
 }
@@ -25,4 +25,4 @@ interface IDiscoveryAgent {
   scan(): Promise<IDiscoveryScan>;
 }
 
-export { IIpAddress, IDiscoveryEntry, IDiscoveryAgent, IDiscoveryScan };
+export { IAddress, IDiscoveryEntry, IDiscoveryAgent, IDiscoveryScan };
