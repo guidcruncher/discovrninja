@@ -7,6 +7,12 @@ interface IDiscoveryEntry {
   sourceAddress: string;
   targetAddress: string;
   ports: string[];
+  ipAddresses: IIpAddress[];
+}
+
+interface IIpAddress {
+  network: string;
+  address: string;
 }
 
 interface IDiscoveryScan {
@@ -19,4 +25,4 @@ interface IDiscoveryAgent {
   scan(): Promise<IDiscoveryScan>;
 }
 
-export { IDiscoveryEntry, IDiscoveryAgent, IDiscoveryScan };
+export { IIpAddress, IDiscoveryEntry, IDiscoveryAgent, IDiscoveryScan };

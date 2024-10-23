@@ -6,6 +6,7 @@ import {
   IDiscoveryAgent,
   IDiscoveryEntry,
   IDiscoveryScan,
+  IIpAddress,
 } from "discovery/idiscoveryentry";
 
 export class DockerDiscoveryAgent implements IDiscoveryAgent {
@@ -36,7 +37,12 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                   ports: this.resolvePorts(container.Config.ExposedPorts),
                   sourceAddress: container.Config.Hostname,
                   targetAddress: container.Config.Labels["homepage.href"],
+                  ipAddresses: this.resolveNetworks(container.NetworkSettings),
                 };
+                record.sourceAddress = this.resolveSourceAddress(
+                  record.hostname,
+                  record.ports,
+                );
                 result.entries.push(record);
               }
             });
@@ -51,6 +57,31 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
         }
       });
     });
+  }
+
+  private getScheme(port: string): string {
+    if (port == "443") { return "https://"; }
+    return "http://";
+  }
+
+  private resolveSourceAddress(hostname: string, ports: string[]): string {
+    if (ports.length == 0)  { return ""; }
+    if (ports.length == 1) { return this.getScheme(ports[0]) + hostname + ":" + ports[0]; }
+    return hostname;
+  }
+
+  private resolveNetworks(networksettings: any): IIpAddress[] {
+    const results: IIpAddress[] = [];
+
+    for (const key of Object.keys(networksettings.Networks)) {
+      const network: any = networksettings.Networks[key as keyof typeof networksettings.Networks];
+      const address: IIpAddress = {
+        network: (key as string),
+        address: network.IPAddress,
+      };
+      results.push(address);
+    }
+    return results;
   }
 
   private resolvePorts(ports: any): string[] {

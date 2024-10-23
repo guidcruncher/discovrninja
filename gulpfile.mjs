@@ -56,7 +56,7 @@ function linter() {
 }
 
 async function startdev() {
-  const { stdout1 } = await exec("npx tsx ./src/app.ts", {
+  const { stdout1 } = await exec("npx tsx watch --include ./src/**/* ./src/app.ts", {
     stdout: ["pipe", "inherit"],
   });
 }

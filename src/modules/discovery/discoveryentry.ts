@@ -1,4 +1,4 @@
-import { IDiscoveryEntry } from "discovery/idiscoveryentry";
+import { IIpAddress, IDiscoveryEntry } from "discovery/idiscoveryentry";
 
 export class DiscoveryEntry implements IDiscoveryEntry {
   public name: string;
@@ -17,6 +17,8 @@ export class DiscoveryEntry implements IDiscoveryEntry {
 
   public ports: string[];
 
+  public ipAddresses: IIpAddress[];
+
   constructor() {
     this.name = "";
     this.description = "";
@@ -26,5 +28,6 @@ export class DiscoveryEntry implements IDiscoveryEntry {
     this.targetAddress = "";
     this.containerName = "";
     this.hostname = "";
+    this.ipAddresses = [];
   }
 }
