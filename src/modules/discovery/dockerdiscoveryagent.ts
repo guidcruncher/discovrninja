@@ -44,7 +44,6 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                 };
 
                 addressPromises.push(this.resolveSourceAddress(record));
-                // result.entries.push(record);
               }
             });
 
@@ -53,9 +52,9 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                 result.entries.push(value.value);
               });
 
-              //              result.entries.sort((a, b) =>
-              //                a.containerName.localeCompare(b.containerName),
-              //              );
+              result.entries.sort((a, b) =>
+                a.containerName.localeCompare(b.containerName),
+              );
 
               result.hash = createHash("sha256")
                 .update(JSON.stringify(result.entries))
@@ -100,7 +99,9 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
 
       Promise.any(promises)
         .then((result) => {
+          const uri = new URL(result.address); 
           entry.sourceAddress = result;
+          entry.sourceAddress.address = uri.protocol + "//" + entry.hostname + (uri.port=="" ? "" : ":" + uri.port);
           resolve(entry);
         })
         .catch(() => {
