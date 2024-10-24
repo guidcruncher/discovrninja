@@ -4,6 +4,13 @@ import superagent from "superagent";
 import { IDiscoveryEntry, IDiscoveryScan } from "@discovery/idiscoveryentry";
 
 export class IpUtilities {
+
+private uniqueArray(array) {
+    return Array.from(
+        array.reduce((set, e) => set.add(e), new Set())
+    )
+}
+
   public getIpAddress(hostname: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const options = { family: 4 };
@@ -71,10 +78,10 @@ export class IpUtilities {
   }
 
   public convertSourceToHosts(scan: IDiscoveryScan): string {
-    return scan.entries
+    return this.uniqueArray( scan.entries
       .filter((a) => a.sourceAddress.address != "")
       .sort((a, b) => a.hostname.localeCompare(b.hostname))
-      .map((a) => this.convertSourceToHostEntry(a))
+      .map((a) => this.convertSourceToHostEntry(a)))
       .join("\n");
   }
 
@@ -89,16 +96,16 @@ export class IpUtilities {
   }
 
   public convertTargetToHosts(scan: IDiscoveryScan): string {
-    return scan.entries
+    return this.uniqueArray(scan.entries
       .filter((a) => a.targetAddress && a.targetAddress != "")
       .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
-      .map((a) => this.convertTargetToHostEntry(a))
+      .map((a) => this.convertTargetToHostEntry(a)))
       .join("\n");
   }
 }
 
 export interface IAddress {
-  id: string;
   network: string;
   address: string;
+  preferred: boolean;
 }

@@ -24,7 +24,7 @@ export class DiscoveryEntry implements IDiscoveryEntry {
     this.description = "";
     this.icon = "";
     this.ports = [];
-    this.sourceAddress = { network: "", address: "" };
+    this.sourceAddress = { network: "", address: "", preferred: false };
     this.targetAddress = "";
     this.containerName = "";
     this.hostname = "";
