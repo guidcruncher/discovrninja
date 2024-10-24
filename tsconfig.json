@@ -19,6 +19,7 @@
       "@routes/*": [ "routes/*" ],
       "@discovery/*": [ "modules/discovery/*" ],
       "@dns/*": [ "modules/dns/*" ],
+      "@web/*": [ "modules/web/*" ],
     }
   },
 }
