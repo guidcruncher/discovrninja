@@ -1,14 +1,14 @@
 import { createHash } from "node:crypto";
 import Docker from "dockerode";
-import { DiscoveryEntry } from "discovery/discoveryentry";
-import { DiscoveryScan } from "discovery/discoveryscan";
-import { IpUtilities } from "discovery/iputilities";
+import { DiscoveryEntry } from "@discovery/discoveryentry";
+import { DiscoveryScan } from "@discovery/discoveryscan";
+import { IpUtilities } from "@discovery/iputilities";
 import {
   IDiscoveryAgent,
   IDiscoveryEntry,
   IDiscoveryScan,
   IAddress,
-} from "discovery/idiscoveryentry";
+} from "@discovery/idiscoveryentry";
 
 export class DockerDiscoveryAgent implements IDiscoveryAgent {
   public scan(): Promise<IDiscoveryScan> {
@@ -44,11 +44,13 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                 };
 
                 if (container.Config.Labels["homepage.targetaddress"]) {
-                  record.targetAddress = container.Config.Labels["homepage.targetaddress"];
+                  record.targetAddress =
+                    container.Config.Labels["homepage.targetaddress"];
                 }
 
                 if (container.Config.Labels["homepage.sourceaddress"]) {
-                  record.ourceAddress.address = container.Config.Labels["homepage.sourceaddress"];
+                  record.sourceAddress.address =
+                    container.Config.Labels["homepage.sourceaddress"];
                   result.entries.push(record);
                 } else {
                   addressPromises.push(this.resolveSourceAddress(record));
@@ -82,9 +84,9 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
 
   private getScheme(port: string): string {
     if (port == "443") {
-      return "https://";
+      return "https:";
     }
-    return "http://";
+    return "http:";
   }
 
   private resolveSourceAddress(entry: DiscoveryEntry): Promise<DiscoveryEntry> {
@@ -102,11 +104,21 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
       entry.ports.forEach((port) => {
         entry.ipAddresses.forEach((addr) => {
           const url: IAddress = { address: "", network: addr.network };
+          const scheme: string = this.getScheme(port);
+
           if (addr.address == "") {
             addr.address = hostIpAddress;
           }
-          url.address = this.getScheme(port) + addr.address + ":" + port;
-          promises.push(iputils.checkUrlLive(url));
+
+          if (scheme == "http:") {
+            url.address = "http://" + addr.address + ":" + port;
+            promises.push(iputils.checkUrlLive(url));
+            url.address = "https://" + addr.address + ":" + port;
+            promises.push(iputils.checkUrlLive(url));
+          } else {
+            url.address = scheme + "//" + addr.address + ":" + port;
+            promises.push(iputils.checkUrlLive(url));
+          }
         });
       });
 

@@ -1,4 +1,4 @@
-import { IDnsEntry, IDnsManager } from "dns/idns";
+import { IDnsEntry, IDnsManager } from "@dns/idns";
 
 export class DnsMasqManager implements IDnsManager {
   public pushToDns(entry: IDnsEntry): Promise<boolean> {

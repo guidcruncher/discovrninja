@@ -2,7 +2,7 @@
   "extends": "./node_modules/@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "lib": ["es2023"],
-    "module": "node16",
+    "module": "Node16",
     "target": "es2022",
     "experimentalDecorators": true,
     "esModuleInterop": true,
@@ -14,10 +14,11 @@
     "sourceRoot": "./src",
     "noImplicitAny": false,
     "moduleResolution": "Node16",
+    "baseUrl": "src",
     "paths": {
-      "@app/*": ["./*"],
-      "@discovery/*": ["./discovery/*"],
-      "@dns/*": ["./dns/*"]
+      "@routes/*": [ "routes/*" ],
+      "@discovery/*": [ "modules/discovery/*" ],
+      "@dns/*": [ "modules/dns/*" ],
     }
   },
 }

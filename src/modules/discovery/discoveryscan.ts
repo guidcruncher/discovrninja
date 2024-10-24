@@ -1,4 +1,4 @@
-import { IDiscoveryEntry, IDiscoveryScan } from "discovery/idiscoveryentry";
+import { IDiscoveryEntry, IDiscoveryScan } from "@discovery/idiscoveryentry";
 
 export class DiscoveryScan implements IDiscoveryScan {
   public created: Date;

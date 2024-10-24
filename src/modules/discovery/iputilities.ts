@@ -1,6 +1,6 @@
 import dns from "node:dns";
 import os from "node:os";
-import { IAddress } from "discovery/idiscoveryentry";
+import { IAddress } from "@discovery/idiscoveryentry";
 import superagent from "superagent";
 
 export class IpUtilities {

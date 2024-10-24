@@ -1,8 +1,11 @@
-import Helmet from "@fastify/helmet";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-import Fastify from "fastify";
-import root from "./routes/root";
+import { root, discovery } from "@routes/routes";
+
+import Fastify, { FastifyInstance, RouteShorthandOptions } from "fastify";
+import { Server, IncomingMessage, ServerResponse } from "http";
+
+const server: FastifyInstance = Fastify({ logger: true });
 
 const swaggerOptions = {
   swagger: {
@@ -24,22 +27,22 @@ const swaggerUiOptions = {
   routePrefix: "/docs",
 };
 
-const app = Fastify({
-  logger: true,
-});
+server.register(fastifySwagger, swaggerOptions);
+server.register(fastifySwaggerUi, swaggerUiOptions);
 
-app.register(Helmet, { global: true });
+server.register(root);
+server.register(discovery);
 
-app.register(fastifySwagger, swaggerOptions);
-app.register(fastifySwaggerUi, swaggerUiOptions);
+const start = async () => {
+  try {
+    await server.listen({ host: "0.0.0.0", port: 5000 });
 
-app.register(root);
-
-app.ready();
-
-app.listen({ host: "0.0.0.0", port: 5000 }, (err, address) => {
-  if (err) {
-    throw err;
+    const address = server.server.address();
+    const port = typeof address === "string" ? address : address?.port;
+  } catch (err) {
+    server.log.error(err);
+    process.exit(1);
   }
-  console.log("Server is now listening on ", address);
-});
+};
+
+start();
