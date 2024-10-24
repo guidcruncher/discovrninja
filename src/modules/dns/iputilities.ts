@@ -4,12 +4,9 @@ import superagent from "superagent";
 import { IDiscoveryEntry, IDiscoveryScan } from "@discovery/idiscoveryentry";
 
 export class IpUtilities {
-
-private uniqueArray(array) {
-    return Array.from(
-        array.reduce((set, e) => set.add(e), new Set())
-    )
-}
+  private uniqueArray(array) {
+    return Array.from(array.reduce((set, e) => set.add(e), new Set()));
+  }
 
   public getIpAddress(hostname: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
@@ -78,11 +75,12 @@ private uniqueArray(array) {
   }
 
   public convertSourceToHosts(scan: IDiscoveryScan): string {
-    return this.uniqueArray( scan.entries
-      .filter((a) => a.sourceAddress.address != "")
-      .sort((a, b) => a.hostname.localeCompare(b.hostname))
-      .map((a) => this.convertSourceToHostEntry(a)))
-      .join("\n");
+    return this.uniqueArray(
+      scan.entries
+        .filter((a) => a.sourceAddress.address != "")
+        .sort((a, b) => a.hostname.localeCompare(b.hostname))
+        .map((a) => this.convertSourceToHostEntry(a)),
+    ).join("\n");
   }
 
   public convertTargetToHostEntry(entry: IDiscoveryEntry): string {
@@ -96,11 +94,12 @@ private uniqueArray(array) {
   }
 
   public convertTargetToHosts(scan: IDiscoveryScan): string {
-    return this.uniqueArray(scan.entries
-      .filter((a) => a.targetAddress && a.targetAddress != "")
-      .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
-      .map((a) => this.convertTargetToHostEntry(a)))
-      .join("\n");
+    return this.uniqueArray(
+      scan.entries
+        .filter((a) => a.targetAddress && a.targetAddress != "")
+        .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
+        .map((a) => this.convertTargetToHostEntry(a)),
+    ).join("\n");
   }
 }
 

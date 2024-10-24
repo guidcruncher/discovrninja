@@ -1,12 +1,9 @@
 import { IDiscoveryEntry, IDiscoveryScan } from "@discovery/idiscoveryentry";
 
 export class CaddyServerUtility {
-
-private uniqueArray(array) {
-    return Array.from(
-        array.reduce((set, e) => set.add(e), new Set())
-    )
-}
+  private uniqueArray(array) {
+    return Array.from(array.reduce((set, e) => set.add(e), new Set()));
+  }
 
   private getSourceAddress(entry: IDiscoveryEntry): string {
     if (!entry.sourceAddress || !entry.sourceAddress.address) {
@@ -44,10 +41,11 @@ private uniqueArray(array) {
   }
 
   public getServerConfiguration(scan: IDiscoveryScan): string {
-    return this.uniqueArray(scan.entries
-      .filter((a) => a.targetAddress && a.targetAddress != "")
-      .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
-      .map((a) => this.getServerConfigurationEntry(a)))
-      .join("\n");
+    return this.uniqueArray(
+      scan.entries
+        .filter((a) => a.targetAddress && a.targetAddress != "")
+        .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
+        .map((a) => this.getServerConfigurationEntry(a)),
+    ).join("\n");
   }
 }

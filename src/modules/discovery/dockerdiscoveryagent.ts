@@ -127,31 +127,31 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
       }
 
       const promises: Promise<IAddress>[] = [];
-      const preferredNetwork = networks.find((n)=>n.preferred);
+      const preferredNetwork = networks.find((n) => n.preferred);
 
       entry.ports.forEach((port) => {
         networks.forEach((addr) => {
-          if ((addr.preferred) || (!preferredNetwork)) {
-          const url: IAddress = {
-            preferred: addr.preferred,
-            address: "",
-            network: addr.network,
-          };
-          const scheme: string = this.getScheme(port);
+          if (addr.preferred || !preferredNetwork) {
+            const url: IAddress = {
+              preferred: addr.preferred,
+              address: "",
+              network: addr.network,
+            };
+            const scheme: string = this.getScheme(port);
 
-          if (addr.address == "") {
-            addr.address = hostIpAddress;
-          }
+            if (addr.address == "") {
+              addr.address = hostIpAddress;
+            }
 
-          if (scheme == "http:") {
-            url.address = "http://" + addr.address + ":" + port;
-            promises.push(iputils.checkUrlLive(url));
-            url.address = "https://" + addr.address + ":" + port;
-            promises.push(iputils.checkUrlLive(url));
-          } else {
-            url.address = scheme + "//" + addr.address + ":" + port;
-            promises.push(iputils.checkUrlLive(url));
-          }
+            if (scheme == "http:") {
+              url.address = "http://" + addr.address + ":" + port;
+              promises.push(iputils.checkUrlLive(url));
+              url.address = "https://" + addr.address + ":" + port;
+              promises.push(iputils.checkUrlLive(url));
+            } else {
+              url.address = scheme + "//" + addr.address + ":" + port;
+              promises.push(iputils.checkUrlLive(url));
+            }
           }
         });
       });
@@ -185,7 +185,8 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
     const iputils: IpUtilities = new IpUtilities();
 
     for (const key of Object.keys(networksettings.Networks)) {
-      const network: any = networksettings.Networks[key as keyof typeof networksettings.Networks];
+      const network: any =
+        networksettings.Networks[key as keyof typeof networksettings.Networks];
       const address: IAddress = {
         preferred: networkMode == network.NetworkID,
         network: key as string,
