@@ -1,4 +1,5 @@
 import { DockerDiscoveryAgent } from "@discovery/dockerdiscoveryagent";
+import { IpUtilities } from "@dns/iputilities";
 
 export function discovery(fastify, opts) {
   fastify.get(
@@ -6,10 +7,7 @@ export function discovery(fastify, opts) {
     {
       schema: {
         description: "Performs a service discovery and return the results.",
-        tags: [],
         summary: "Performs a service discovery and return the results.",
-        security: [],
-        params: {},
       },
     },
     (request, reply) => {
@@ -18,6 +16,28 @@ export function discovery(fastify, opts) {
         .scan()
         .then((result) => {
           reply.code(200).send(result);
+        })
+        .catch((err) => {
+          reply.code(500).send(err);
+        });
+    },
+  );
+
+  fastify.get(
+    "/discover/source/hosts",
+    {
+      schema: {
+        description: "Performs a service discovery and returns host file.",
+        summary: "Return the hosts file from a scan.",
+      },
+    },
+    (request, reply) => {
+      const agent = new DockerDiscoveryAgent();
+      const iputilities = new IpUtilities();
+      agent
+        .scan()
+        .then((result) => {
+          reply.code(200).send(iputilities.convertSourceToHosts(result));
         })
         .catch((err) => {
           reply.code(500).send(err);
