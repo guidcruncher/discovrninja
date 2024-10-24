@@ -52,7 +52,11 @@ export class IpUtilities {
     });
   }
 
-  public convertSourceToHostEntry(entry: IDiscoveryEntry): string {
+  public convertSourceToHostEntry(entry: IDiscoveryEntry): string    {
+    if ((!entry.sourceAddress) || (!entry.sourceAddress.address)) {
+      return "";
+    }
+
     if (entry.sourceAddress.address == "") {
       return "";
     }
@@ -67,23 +71,25 @@ export class IpUtilities {
   public convertSourceToHosts(scan: IDiscoveryScan): string {
     return scan.entries
       .filter((a) => a.sourceAddress.address != "")
+      .sort((a, b) => a.hostname.localeCompare(b.hostname))
       .map((a) => this.convertSourceToHostEntry(a))
       .join("\n");
   }
 
   public convertTargetToHostEntry(entry: IDiscoveryEntry): string {
-    if (entry.targetAddress == "") {
+    if ((!entry.targetAddress) || (entry.targetAddress == "")) {
       return "";
     }
 
     const uri = new URL(entry.targetAddress);
     const addr = this.getHostIpAddress();
-    return addr.padEnd(16, " ") + " " + entry.hostname;
+    return addr.padEnd(16, " ") + " " + uri.hostname;
   }
 
   public convertTargetToHosts(scan: IDiscoveryScan): string {
     return scan.entries
-      .filter((a) => a.targetAddress != "")
+      .filter((a) => (a.targetAddress && a.targetAddress!=""))
+      .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
       .map((a) => this.convertTargetToHostEntry(a))
       .join("\n");
   }
