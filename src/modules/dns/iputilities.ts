@@ -1,6 +1,5 @@
 import dns from "node:dns";
 import os from "node:os";
-import { IAddress } from "@discovery/idiscoveryentry";
 import superagent from "superagent";
 
 export class IpUtilities {
@@ -37,7 +36,7 @@ export class IpUtilities {
       superagent.head(url.address).end((err, res) => {
         if (err) {
           if (err.status) {
-            resolve(url);
+            qresolve(url);
           } else {
             reject(err);
           }
@@ -51,4 +50,9 @@ export class IpUtilities {
       });
     });
   }
+}
+
+export interface IAddress {
+  network: string;
+  address: string;
 }

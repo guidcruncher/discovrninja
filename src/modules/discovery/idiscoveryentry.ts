@@ -1,3 +1,5 @@
+import { IAddress } from "@dns/iputilities";
+
 interface IDiscoveryEntry {
   name: string;
   description: string;
@@ -8,11 +10,6 @@ interface IDiscoveryEntry {
   targetAddress: string;
   ports: string[];
   ipAddresses: IAddress[];
-}
-
-interface IAddress {
-  network: string;
-  address: string;
 }
 
 interface IDiscoveryScan {

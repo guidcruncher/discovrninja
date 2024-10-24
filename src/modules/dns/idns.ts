@@ -11,4 +11,9 @@ interface IDnsManager {
   get(): Promise<IDnsEntry[]>;
 }
 
+interface IAddress {
+  network: string;
+  address: string;
+}
+
 export { IDnsEntry, IDnsManager };

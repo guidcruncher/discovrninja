@@ -2,12 +2,11 @@ import { createHash } from "node:crypto";
 import Docker from "dockerode";
 import { DiscoveryEntry } from "@discovery/discoveryentry";
 import { DiscoveryScan } from "@discovery/discoveryscan";
-import { IpUtilities } from "@discovery/iputilities";
+import { IAddress, IpUtilities } from "@dns/iputilities";
 import {
   IDiscoveryAgent,
   IDiscoveryEntry,
   IDiscoveryScan,
-  IAddress,
 } from "@discovery/idiscoveryentry";
 
 export class DockerDiscoveryAgent implements IDiscoveryAgent {
