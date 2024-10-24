@@ -9,10 +9,14 @@ RUN mkdir -p /etc/caddy/caddy.d /etc/caddy/certificates /etc/dnsmasq.d/discovere
 
 WORKDIR /app
 
+COPY ./package.json /app/
+COPY ./tsconfig.json /app/
+RUN npm install
+
 COPY ./caddy/Caddyfile /etc/caddy/Caddyfile
 COPY ./dnsmasq/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./dnsmasq/dnsmasq.d/* /etc/dnsmasq.d/
-COPY ./dist/* /spspsp?
+COPY ./src/* /app/
 COPY start.sh /app/
 RUN chmod +x /app/start.sh
 
