@@ -30,6 +30,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
             results.forEach((promise) => {
               if (promise.status == "fulfilled") {
                 const container = promise.value;
+                const networkMode = container.HostConfig.NetworkMode;
                 const record: DiscoveryEntry = {
                   name: container.Config.Labels["homepage.name"],
                   description: container.Config.Labels["homepage.description"],
@@ -39,7 +40,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                   ports: this.resolvePorts(container.Config.ExposedPorts),
                   sourceAddress: { network: "", address: "" },
                   targetAddress: container.Config.Labels["homepage.href"],
-                  ipAddresses: this.resolveNetworks(container.NetworkSettings),
+                  ipAddresses: this.resolveNetworks(container.NetworkSettings, container.HostConfig.NetworkMode),
                 };
 
                 if (container.Config.Labels["homepage.targetaddress"]) {
@@ -52,7 +53,13 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
                     container.Config.Labels["homepage.sourceaddress"];
                   result.entries.push(record);
                 } else {
-                  addressPromises.push(this.resolveSourceAddress(record));
+                  if (networkMode.startsWith("container:")) {
+                     const containerId: string = networkMode.split(":")[1];
+                     const parentContainer = results.filter((a)=>a.status=="fulfilled").map((b)=>b.Value).find((c)=>c.Id == containerId);
+                     addressPromises.push(this.resolveSourceAddress(record, parentContainer));
+                  } else {
+                     addressPromises.push(this.resolveSourceAddress(record, container));
+                  }
                 }
               }
             });
@@ -88,8 +95,9 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
     return "http:";
   }
 
-  private resolveSourceAddress(entry: DiscoveryEntry): Promise<DiscoveryEntry> {
+  private resolveSourceAddress(entry: DiscoveryEntry, container: any): Promise<DiscoveryEntry> {
     const iputils: IpUtilities = new IpUtilities();
+    const networks = this.resolveNetworks(container.NetworkSettings, container.HostConfig.NetworkMode);
     return new Promise<DiscoveryEntry>((resolve, reject) => {
       const hostIpAddress = iputils.getHostIpAddress();
 
@@ -101,8 +109,8 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
       const promises: Promise<IAddress>[] = [];
 
       entry.ports.forEach((port) => {
-        entry.ipAddresses.forEach((addr) => {
-          const url: IAddress = { address: "", network: addr.network };
+        networks.forEach((addr) => {
+          const url: IAddress = { id: "", address: "", network: addr.network };
           const scheme: string = this.getScheme(port);
 
           if (addr.address == "") {
@@ -142,7 +150,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
     });
   }
 
-  private resolveNetworks(networksettings: any): IAddress[] {
+  private resolveNetworks(networksettings: any, networkMode: string): IAddress[] {
     const results: IAddress[] = [];
     const iputils: IpUtilities = new IpUtilities();
 
@@ -150,6 +158,7 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
       const network: any =
         networksettings.Networks[key as keyof typeof networksettings.Networks];
       const address: IAddress = {
+        id: network.NetworkId,
         network: key as string,
         address: network.IPAddress,
       };

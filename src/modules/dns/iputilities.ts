@@ -98,6 +98,7 @@ export class IpUtilities {
 }
 
 export interface IAddress {
+  id: string;
   network: string;
   address: string;
 }
