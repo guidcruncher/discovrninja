@@ -51,11 +51,13 @@ export class CaddyServerUtility {
   }
 
   public saveWebConfig(e: IDiscoveryEntry) {
-    const uri: URL = new URL(e.targetAddress);
-    const filename = path.join(
-      process.env.CADDYCONFIG as string,
-      uri.hostname + ".conf",
-    );
-    fs.writeFileSync(filename, this.getServerConfigurationEntry(e));
+    if (e.targetAddress) {
+      const uri: URL = new URL(e.targetAddress);
+      const filename = path.join(
+        process.env.CADDYCONFIG as string,
+        uri.hostname + ".conf",
+      );
+      fs.writeFileSync(filename, this.getServerConfigurationEntry(e));
+    }
   }
 }

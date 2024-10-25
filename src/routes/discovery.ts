@@ -114,7 +114,7 @@ export function discovery(fastify, opts) {
             caddyServer.saveWebConfig(f);
             ipUtilities.saveDNSConfig(f);
           });
-          reply.code(200).send(caddyServer.getServerConfiguration(result));
+          reply.code(200).send(result);
         })
         .catch((err) => {
           reply.code(500).send(err);

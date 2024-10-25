@@ -115,6 +115,7 @@ export class IpUtilities {
   }
 
   public saveDNSConfig(e: IDiscoveryEntry) {
+    if (e.targetAddress) {
     const uri: URL = new URL(e.targetAddress);
     const filename = path.join(
       process.env.DNSHOSTS as string,
@@ -122,7 +123,8 @@ export class IpUtilities {
     );
     console.log(filename);
     fs.writeFileSync(filename, this.convertTargetToHostEntry(e));
-  }
+    } 
+ }
 }
 
 export interface IAddress {
