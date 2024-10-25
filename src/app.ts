@@ -33,9 +33,12 @@ server.register(fastifySwaggerUi, swaggerUiOptions);
 server.register(root);
 server.register(discovery);
 
+const serverPort: number = process.env.PORT ? parseInt(process.env.PORT) : 5000;
+const serverHost: string = process.env.HOST ? process.env.HOST : "0.0.0.0";
+
 const start = async () => {
   try {
-    await server.listen({ host: "0.0.0.0", port: 5000 });
+    await server.listen({ port: serverPort, host: serverHost });
 
     const address = server.server.address();
     const port = typeof address === "string" ? address : address?.port;

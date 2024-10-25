@@ -22,4 +22,6 @@
       "@web/*": [ "modules/web/*" ],
     }
   },
+  "include": [ "./environment.d.ts", "./src/**/*" ],
+  "exclude": [ "node_modules" ],
 }
