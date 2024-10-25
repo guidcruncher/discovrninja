@@ -116,15 +116,18 @@ export class IpUtilities {
 
   public saveDNSConfig(e: IDiscoveryEntry) {
     if (e.targetAddress) {
-    const uri: URL = new URL(e.targetAddress);
-    const filename = path.join(
-      process.env.DNSHOSTS as string,
-      uri.hostname + ".conf",
-    );
-    console.log(filename);
-    fs.writeFileSync(filename, this.convertTargetToHostEntry(e));
-    } 
- }
+      const uri: URL = new URL(e.targetAddress);
+      const filename = path.join(
+        process.env.DNSHOSTS as string,
+        uri.hostname + ".conf",
+      );
+
+      console.log(this.convertTargetToHostEntry(e));
+      fs.writeFileSync(filename, this.convertTargetToHostEntry(e), {
+        encoding: "utf8",
+      });
+    }
+  }
 }
 
 export interface IAddress {

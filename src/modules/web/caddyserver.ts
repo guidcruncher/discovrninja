@@ -57,7 +57,10 @@ export class CaddyServerUtility {
         process.env.CADDYCONFIG as string,
         uri.hostname + ".conf",
       );
-      fs.writeFileSync(filename, this.getServerConfigurationEntry(e));
+      console.log(this.getServerConfigurationEntry(e));
+      fs.writeFileSync(filename, this.getServerConfigurationEntry(e), {
+        encoding: "utf8",
+      });
     }
   }
 }
