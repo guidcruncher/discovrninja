@@ -8,6 +8,7 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 dnsmasq.d
+discovered-hosts
 caddy.d
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

@@ -7,7 +7,11 @@ ENV HOST="0.0.0.0"
 ENV OS_ENV=docker
 ENV TZ=UTC
 
-RUN mkdir -p /app/src /app/caddy/caddy.d /app/caddy/certificates /app/dnsmasq/dnsmasq.d/discovered-hosts/ /app/src
+RUN mkdir -p /app/src
+RUN mkdir -p /app/caddy/caddy.d
+RUN mkdir -p /app/caddy/certificates
+RUN mkdir -p /app/dnsmasq/dnsmasq.d
+RUN mkdir -p /app/dnsmasq/discovered-hosts/
 
 WORKDIR /app
 
