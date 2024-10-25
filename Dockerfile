@@ -30,7 +30,6 @@ RUN npx gulp build
 
 COPY ./caddy/Caddyfile /app/caddy/Caddyfile
 COPY ./dnsmasq/dnsmasq.conf /app/dnsmasq/dnsmasq.conf
-COPY ./dnsmasq/dnsmasq.d/* /app/dnsmasq/dnsmasq.d/
 RUN chmod +x /app/start.sh
 
 EXPOSE 5000
