@@ -8,5 +8,5 @@
    
 }
 
-import /etc/caddy/caddy.d/*.conf
+import /app/caddy/caddy.d/*.conf
 

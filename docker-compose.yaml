@@ -4,9 +4,12 @@ services:
      build: .
      container_name: discovrninja
      hostname: discovrninja
+     volumes:
+       - /var/run/docker.sock:/var/run/docker.sock:ro
      expose:
-       - 3000
-       - 3053
+       - 5000
+       - 5001
+       - 5053
      stdin_open: true
      tty: true
 

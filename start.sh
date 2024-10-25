@@ -1,6 +1,8 @@
-  #!/bin/bash
+#!/bin/bash
 
 cp /usr/share/zoneinfo/"$TZ" /etc/localtime
+export DNSHOSTS="/app/dnsmasq/dnsmasq.d/"
+export CADDYCONFIG="/app/caddy/caddy.d/"
 
 echo "nameserver 9.9.9.9" > /app/dnsmasq/upstream-servers.conf
 echo "nameserver 149.112.112.112" >> /app/dnsmasq/upstream-servers.conf

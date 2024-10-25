@@ -7,23 +7,26 @@ ENV HOST="0.0.0.0"
 ENV OS_ENV=docker
 ENV TZ=UTC
 
-RUN mkdir -p /app/caddy/caddy.d /app/caddy/certificates /app/dnsmasq/dnsmasq.d/discovered-hosts/ /app/src
+RUN mkdir -p /app/src /app/caddy/caddy.d /app/caddy/certificates /app/dnsmasq/dnsmasq.d/discovered-hosts/ /app/src
 
 WORKDIR /app
 
-COPY ./package.json /app/
-COPY ./* /app/
-RUN rm Dockerfile docker-compose.yaml build.sh
+COPY ./eslint.config.mjs /app
+COPY ./package.json /app
+COPY ./gulpfile.mjs /app
+COPY ./start.sh /app
+COPY ./environment.d.ts /app
+COPY ./package-lock.json /app
+COPY ./tsconfig.json /app
+COPY ./src/ /app/src
 
 RUN npm install
 
-RUN npx tsc -p ./tsconfig.json
+RUN npx gulp build
 
 COPY ./caddy/Caddyfile /app/caddy/Caddyfile
 COPY ./dnsmasq/dnsmasq.conf /app/dnsmasq/dnsmasq.conf
 COPY ./dnsmasq/dnsmasq.d/* /app/dnsmasq/dnsmasq.d/
-COPY ./src/* /app/src/
-COPY start.sh /app/
 RUN chmod +x /app/start.sh
 
 EXPOSE 5000
