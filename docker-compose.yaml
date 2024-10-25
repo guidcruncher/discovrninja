@@ -6,10 +6,15 @@ services:
      hostname: discovrninja
      volumes:
        - /var/run/docker.sock:/var/run/docker.sock:ro
-     expose:
+     networks:
+       - proxy
+     ports:
        - 5000
        - 5001
        - 5053
      stdin_open: true
      tty: true
 
+networks:
+  proxy:
+    external: true

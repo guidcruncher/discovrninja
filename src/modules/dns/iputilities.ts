@@ -38,6 +38,7 @@ export class IpUtilities {
 
   public checkUrlLive(url: IAddress): Promise<IAddress> {
     return new Promise<IAddress>((resolve, reject) => {
+      console.log("Trying", url.address);
       superagent
         .head(url.address)
         .timeout({
