@@ -146,8 +146,8 @@ export class DockerDiscoveryAgent implements IDiscoveryAgent {
             if (scheme == "http:") {
               url.address = "http://" + addr.address + ":" + port;
               promises.push(iputils.checkUrlLive(url));
-              url.address = "https://" + addr.address + ":" + port;
-              promises.push(iputils.checkUrlLive(url));
+              //url.address = "https://" + addr.address + ":" + port;
+              //promises.push(iputils.checkUrlLive(url));
             } else {
               url.address = scheme + "//" + addr.address + ":" + port;
               promises.push(iputils.checkUrlLive(url));

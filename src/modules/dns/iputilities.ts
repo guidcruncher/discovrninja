@@ -38,21 +38,30 @@ export class IpUtilities {
 
   public checkUrlLive(url: IAddress): Promise<IAddress> {
     return new Promise<IAddress>((resolve, reject) => {
-      superagent.head(url.address).end((err, res) => {
-        if (err) {
-          if (err.status) {
-            resolve(url);
+      superagent
+        .head(url.address)
+        .timeout({
+          deadline: 1000,
+          response: 2000,
+        })
+        .end((err, res) => {
+          if (err) {
+            if (err.status) {
+              console.log(url.address, err.status);
+              resolve(url);
+            } else {
+              reject(err);
+            }
           } else {
-            reject(err);
+            console.log(url.address, res.status);
+
+            if ( res.status != 500) {
+              resolve(url);
+            } else {
+              reject();
+            }
           }
-        } else {
-          if (res.status != 404 && res.status != 500) {
-            resolve(url);
-          } else {
-            reject();
-          }
-        }
-      });
+        });
     });
   }
 
