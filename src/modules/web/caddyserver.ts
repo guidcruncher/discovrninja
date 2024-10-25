@@ -40,12 +40,12 @@ export class CaddyServerUtility {
     return targetAddress + " {\n        reverse_proxy " + sourceAddress + "\n}";
   }
 
-  public getServerConfiguration(scan: IDiscoveryScan): string {
+  public getServerConfiguration(scan: IDiscoveryScan): string[] {
     return this.uniqueArray(
       scan.entries
         .filter((a) => a.targetAddress && a.targetAddress != "")
         .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
         .map((a) => this.getServerConfigurationEntry(a)),
-    ).join("\n");
+    ).filter((a) => a != "") as string[];
   }
 }

@@ -56,7 +56,7 @@ export class IpUtilities {
           } else {
             console.log(url.address, res.status);
 
-            if ( res.status != 500) {
+            if (res.status != 500) {
               resolve(url);
             } else {
               reject();
@@ -84,13 +84,13 @@ export class IpUtilities {
     return "";
   }
 
-  public convertSourceToHosts(scan: IDiscoveryScan): string {
+  public convertSourceToHosts(scan: IDiscoveryScan): string[] {
     return this.uniqueArray(
       scan.entries
         .filter((a) => a.sourceAddress.address != "")
         .sort((a, b) => a.hostname.localeCompare(b.hostname))
         .map((a) => this.convertSourceToHostEntry(a)),
-    ).join("\n");
+    ).filter((a) => a != "") as string[];
   }
 
   public convertTargetToHostEntry(entry: IDiscoveryEntry): string {
@@ -103,13 +103,13 @@ export class IpUtilities {
     return addr.padEnd(16, " ") + " " + uri.hostname;
   }
 
-  public convertTargetToHosts(scan: IDiscoveryScan): string {
+  public convertTargetToHosts(scan: IDiscoveryScan): string[] {
     return this.uniqueArray(
       scan.entries
         .filter((a) => a.targetAddress && a.targetAddress != "")
         .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
         .map((a) => this.convertTargetToHostEntry(a)),
-    ).join("\n");
+    ).filter((a) => a != "") as string[];
   }
 }
 
