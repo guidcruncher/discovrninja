@@ -13,8 +13,11 @@ WORKDIR /app
 
 COPY ./package.json /app/
 COPY ./* /app/
+RUN rm Dockerfile docker-compose.yaml build.sh
 
 RUN npm install
+
+RUN npx tsc -p ./tsconfig.json
 
 COPY ./caddy/Caddyfile /app/caddy/Caddyfile
 COPY ./dnsmasq/dnsmasq.conf /app/dnsmasq/dnsmasq.conf
