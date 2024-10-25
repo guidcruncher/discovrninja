@@ -6,6 +6,8 @@ ENV PORT=5001
 ENV HOST="0.0.0.0"
 ENV OS_ENV=docker
 ENV TZ=UTC
+ENV DNSHOSTS=/app/dnsmasq/discovered-hosts/
+ENV CADDYCONFIG=/app/caddy/caddy.d/
 
 RUN mkdir -p /app/src
 RUN mkdir -p /app/caddy/caddy.d
