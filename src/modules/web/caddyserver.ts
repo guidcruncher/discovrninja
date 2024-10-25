@@ -1,5 +1,6 @@
 import { IDiscoveryEntry, IDiscoveryScan } from "@discovery/idiscoveryentry";
-
+import path from "node:path";
+import fs from "node:fs";
 export class CaddyServerUtility {
   private uniqueArray(array) {
     return Array.from(array.reduce((set, e) => set.add(e), new Set()));
@@ -47,5 +48,14 @@ export class CaddyServerUtility {
         .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
         .map((a) => this.getServerConfigurationEntry(a)),
     ).filter((a) => a != "") as string[];
+  }
+
+  public saveWebConfig(e: IDiscoveryEntry) {
+    const uri: URL = new URL(e.targetAddress);
+    const filename = path.join(
+      process.env.CADDYCONFIG as string,
+      uri.hostname + ".conf",
+    );
+    fs.writeFileSync(filename, this.getServerConfigurationEntry(e));
   }
 }

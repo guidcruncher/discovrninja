@@ -2,6 +2,8 @@ import dns from "node:dns";
 import os from "node:os";
 import superagent from "superagent";
 import { IDiscoveryEntry, IDiscoveryScan } from "@discovery/idiscoveryentry";
+import path from "node:path";
+import fs from "node:fs";
 
 export class IpUtilities {
   private uniqueArray(array) {
@@ -110,6 +112,16 @@ export class IpUtilities {
         .sort((a, b) => a.targetAddress.localeCompare(b.targetAddress))
         .map((a) => this.convertTargetToHostEntry(a)),
     ).filter((a) => a != "") as string[];
+  }
+
+  public saveDNSConfig(e: IDiscoveryEntry) {
+    const uri: URL = new URL(e.targetAddress);
+    const filename = path.join(
+      process.env.DNSHOSTS as string,
+      uri.hostname + ".conf",
+    );
+    console.log(filename);
+    fs.writeFileSync(filename, this.convertTargetToHostEntry(e));
   }
 }
 

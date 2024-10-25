@@ -91,4 +91,34 @@ export function discovery(fastify, opts) {
         });
     },
   );
+
+  fastify.get(
+    "/discover/update",
+    {
+      schema: {
+        description:
+          "Performs a service discovery and updates the internal data.",
+        summary:
+          "Performs a service discovery and updates the internal settingds with the results.",
+      },
+    },
+    (request, reply) => {
+      const agent = new DockerDiscoveryAgent();
+      const caddyServer = new CaddyServerUtility();
+      const ipUtilities = new IpUtilities();
+
+      agent
+        .scan()
+        .then((result) => {
+          result.entries.forEach((f) => {
+            caddyServer.saveWebConfig(f);
+            ipUtilities.saveDNSConfig(f);
+          });
+          reply.code(200).send(caddyServer.getServerConfiguration(result));
+        })
+        .catch((err) => {
+          reply.code(500).send(err);
+        });
+    },
+  );
 }

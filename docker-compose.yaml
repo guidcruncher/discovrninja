@@ -7,11 +7,7 @@ services:
      volumes:
        - /var/run/docker.sock:/var/run/docker.sock:ro
      networks:
-       - proxy
-     ports:
-       - 5000
-       - 5001
-       - 5053
+       proxy:
      stdin_open: true
      tty: true
 
