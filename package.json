@@ -35,6 +35,7 @@
     "gulp-eslint-new": "^2.3.0",
     "gulp-execa": "^7.0.1",
     "gulp-prettier": "^6.0.0",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",

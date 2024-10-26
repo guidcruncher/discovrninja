@@ -4,6 +4,7 @@ import { exec, stream } from "gulp-execa";
 import gulpESLintNew from "gulp-eslint-new";
 import ts from "gulp-typescript";
 import prettier from "gulp-prettier";
+import sourcemaps from "gulp-sourcemaps";
 
 async function clean() {
   const { stdout1 } = await exec("rm -r ./dist", {
@@ -22,13 +23,15 @@ function transpile() {
 
     gulp
       .src("src/**/*.ts")
+      .pipe(sourcemaps.init())
       .pipe(tsProject())
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest("./dist"))
       .on("end", function () {
         resolve();
       })
       .on("error", function (err) {
-        reject(new Error("Error"));
+        reject(err);
       });
   });
 }
