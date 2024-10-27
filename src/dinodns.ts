@@ -13,7 +13,27 @@ const server = new DinoDNS({
     cache: cache,
     logger: logger,
     networks: [
-        new DNSOverTCP("localhost", 1053),
-        new DNSOverUDP("localhost", 1053),
+        new DNSOverTCP("0.0.0.0", 5353),
+        new DNSOverUDP("0.0.0.0", 5353),
     ]
+});
+
+server.handle('0.0.0.0', (req, res) => {
+  const { type } = req.packet.questions[0];
+  switch (type) {
+    case 'TXT':
+      return res.answer({
+        name: 'example.com',
+        type: 'TXT',
+        class: 'IN',
+        ttl: 300,
+        data: 'Hello, World!',
+      });
+    default:
+      return res.errors.notImplemented();
+  }
+});
+
+server.start(() => {
+  console.log('Server started');
 });
