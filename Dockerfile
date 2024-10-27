@@ -1,6 +1,6 @@
 FROM node:22.9.0-alpine3.20
 
-RUN apk add --no-cache nano bash curl sqlite tzdata dnsmasq caddy
+RUN apk add --no-cache nano bash curl sqlite tzdata dnsmasq caddy bind-tools
 
 ENV PORT=5001
 ENV HOST="0.0.0.0"

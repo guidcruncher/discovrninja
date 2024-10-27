@@ -6,6 +6,9 @@ services:
      hostname: discovrninja
      volumes:
        - /var/run/docker.sock:/var/run/docker.sock:ro
+     cap_add:
+       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+       - CAP_SYS_TIME
      networks:
        proxy:
      stdin_open: true
