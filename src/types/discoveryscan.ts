@@ -1,6 +1,6 @@
-import { DiscoveryEntry } from "@types/discoveryentry";
+import { DiscoveryEntry } from "@customtypes/discoveryentry";
 
-export class DiscoveryScan {
+class DiscoveryScan {
   public created: Date;
 
   public hash: string;
@@ -13,3 +13,5 @@ export class DiscoveryScan {
     this.entries = [];
   }
 }
+
+export { DiscoveryScan };

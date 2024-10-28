@@ -1,6 +1,8 @@
-export class Address {
+class Address {
   public network: string;
+
   public address: string;
+
   public preferred: boolean;
 
   constructor() {
@@ -9,3 +11,5 @@ export class Address {
     this.preferred = false;
   }
 }
+
+export { Address };

@@ -1,5 +1,6 @@
-export class DnsEntry {
+class DnsEntry {
   public host: string;
+
   public address: string;
 
   constructor() {
@@ -7,3 +8,5 @@ export class DnsEntry {
     this.address = "";
   }
 }
+
+export { DnsEntry };

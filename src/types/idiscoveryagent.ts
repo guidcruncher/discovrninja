@@ -1,4 +1,4 @@
-import { DiscoveryScan } from "@types/discoveryscan";
+import { DiscoveryScan } from "@customtypes/discoveryscan";
 
 interface IDiscoveryAgent {
   scan(): Promise<DiscoveryScan>;

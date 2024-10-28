@@ -1,6 +1,6 @@
-import { Address } from "@types/address";
+import { Address } from "@customtypes/address";
 
-export class DiscoveryEntry {
+class DiscoveryEntry {
   public name: string;
 
   public description: string;
@@ -31,3 +31,5 @@ export class DiscoveryEntry {
     this.ipAddresses = [];
   }
 }
+
+export { DiscoveryEntry };
