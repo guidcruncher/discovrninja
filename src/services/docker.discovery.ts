@@ -1,16 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { createHash } from "node:crypto";
 import Docker from "dockerode";
-import { DiscoveryEntry } from "@discovery/discoveryentry";
-import { DiscoveryScan } from "@discovery/discoveryscan";
+import { DiscoveryEntry } from "@customtypes/discoveryentry";
 import { Address } from "@customtypes/address";
 import { IpUtilities } from "@helpers/iputilities";
-import { IDiscoveryAgent } from "@types/idiscoveryagent";
-import { DiscoveryScan } from "@types/discoveryscan";
+import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
+import { DiscoveryScan } from "@customtypes/discoveryscan";
 
 @Injectable()
 export class DockerDiscoveryService implements IDiscoveryAgent {
-
   public scan(): Promise<DiscoveryScan> {
     return new Promise<DiscoveryScan>((resolve, reject) => {
       const result = new DiscoveryScan();
@@ -127,13 +125,13 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
         resolve(result);
       }
 
-      const promises: Promise<IAddress>[] = [];
+      const promises: Promise<Address>[] = [];
       const preferredNetwork = networks.find((n) => n.preferred);
 
       entry.ports.forEach((port) => {
         networks.forEach((addr) => {
           if (addr.preferred || !preferredNetwork) {
-            const url: IAddress = {
+            const url: Address = {
               preferred: addr.preferred,
               address: "",
               network: addr.network,
@@ -181,14 +179,14 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
   private resolveNetworks(
     networksettings: any,
     networkMode: string,
-  ): IAddress[] {
-    const results: IAddress[] = [];
+  ): Address[] {
+    const results: Address[] = [];
     const iputils: IpUtilities = new IpUtilities();
 
     for (const key of Object.keys(networksettings.Networks)) {
       const network: any =
         networksettings.Networks[key as keyof typeof networksettings.Networks];
-      const address: IAddress = {
+      const address: Address = {
         preferred: networkMode == network.NetworkID,
         network: key as string,
         address: network.IPAddress,

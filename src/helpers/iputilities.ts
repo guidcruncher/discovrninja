@@ -1,8 +1,8 @@
 import dns from "node:dns";
 import os from "node:os";
 import superagent from "superagent";
-import { DiscoveryEntry } from "@types/discoveryentry";
-import { DiscoveryScan } from "@types/discoveryscan";
+import { DiscoveryEntry } from "@customtypes/discoveryentry";
+import { DiscoveryScan } from "@customtypes/discoveryscan";
 import path from "node:path";
 import fs from "node:fs";
 
@@ -69,7 +69,7 @@ export class IpUtilities {
     });
   }
 
-  public convertSourceToHostEntry(entry: IDiscoveryEntry): string {
+  public convertSourceToHostEntry(entry: DiscoveryEntry): string {
     if (!entry.sourceAddress || !entry.sourceAddress.address) {
       return "";
     }
@@ -87,7 +87,7 @@ export class IpUtilities {
     return "";
   }
 
-  public convertSourceToHosts(scan: IDiscoveryScan): string[] {
+  public convertSourceToHosts(scan: DiscoveryScan): string[] {
     return this.uniqueArray(
       scan.entries
         .filter((a) => a.sourceAddress.address != "")
@@ -96,7 +96,7 @@ export class IpUtilities {
     ).filter((a) => a != "") as string[];
   }
 
-  public convertTargetToHostEntry(entry: IDiscoveryEntry): string {
+  public convertTargetToHostEntry(entry: DiscoveryEntry): string {
     if (!entry.targetAddress || entry.targetAddress == "") {
       return "";
     }
@@ -106,7 +106,7 @@ export class IpUtilities {
     return addr.padEnd(16, " ") + " " + uri.hostname;
   }
 
-  public convertTargetToHosts(scan: IDiscoveryScan): string[] {
+  public convertTargetToHosts(scan: DiscoveryScan): string[] {
     return this.uniqueArray(
       scan.entries
         .filter((a) => a.targetAddress && a.targetAddress != "")
@@ -115,7 +115,7 @@ export class IpUtilities {
     ).filter((a) => a != "") as string[];
   }
 
-  public saveDNSConfig(e: IDiscoveryEntry) {
+  public saveDNSConfig(e: DiscoveryEntry) {
     if (e.targetAddress) {
       const uri: URL = new URL(e.targetAddress);
       const filename = path.join(
