@@ -211,7 +211,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">  import { Module } from &quot;@nestjs/common&quot;;
 import { AppController } from &quot;@controllers/app.controller&quot;;
 import { AppService } from &quot;@services/app.service&quot;;
 import { ServeStaticModule } from &quot;@nestjs/serve-static&quot;;
@@ -226,6 +226,15 @@ import { join } from &quot;path&quot;;
       },
       serveRoot: &quot;/documentation/&quot;,
       rootPath: join(__dirname, &quot;..&quot;, &quot;docs&quot;),
+    }),
+    ServeStaticModule.forRoot({
+      serveStaticOptions: {
+        cacheControl: false,
+        etag: false,
+        // @ts-expect-error Fastify option which is missing in nestjs typings
+        decorateReply: false,
+      },
+      rootPath: join(__dirname, &quot;..&quot;, &quot;client&quot;, &quot;dist&quot;),
     }),
   ],
   controllers: [AppController],

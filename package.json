@@ -21,6 +21,7 @@
     "test:e2e": "npx jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@fastify/static": "^6.4.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-fastify": "^10.4.6",
