@@ -1,14 +1,15 @@
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { apiReference } from "@scalar/nestjs-api-reference"
 import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
-import { AppModule } from "./app.module";
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
+
+   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({
       logger: true,
@@ -26,7 +27,7 @@ async function bootstrap() {
 //  SwaggerModule.setup("docs", app, documentFactory);
 
   app.use(
-    "/docs",
+    "/documentation/api",
     apiReference({
       withFastify: true,
       theme: "purple",
@@ -43,4 +44,5 @@ async function bootstrap() {
 
   await app.listen(serverPort, serverHost);
 }
+
 bootstrap();
