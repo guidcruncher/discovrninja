@@ -1,27 +1,28 @@
-{
-  "extends": "./node_modules/@tsconfig/node-lts/tsconfig.json",
+  {
   "compilerOptions": {
-    "lib": ["es2023"],
-    "module": "Node16",
-    "target": "es2022",
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "./src/modules",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
-    "removeComments": true,
-    "sourceRoot": "./src",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
     "noImplicitAny": false,
-    "moduleResolution": "Node16",
-    "baseUrl": "src",
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@routes/*": [ "routes/*" ],
-      "@discovery/*": [ "modules/discovery/*" ],
-      "@dns/*": [ "modules/dns/*" ],
-      "@web/*": [ "modules/web/*" ],
+      "@controllers/*": [ "src/controllers/*" ],
+      "@services/*": [ "src/services/*" ],
+      "@customtypes/*": [ "src/types/*" ],
+      "@helpers/*": [ "src/helpers/*" ],
     }
-  },
-  "include": [ "./environment.d.ts", "./src/**/*.ts" ],
-  "exclude": [ "node_modules", "dist" ],
+  }
+
 }

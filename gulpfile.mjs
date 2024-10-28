@@ -1,75 +1,22 @@
+import { series } from "gulp";
 import gulp from "gulp";
-import { series, parallel, task, watch } from "gulp";
-import { exec, stream } from "gulp-execa";
-import gulpESLintNew from "gulp-eslint-new";
-import ts from "gulp-typescript";
-import prettier from "gulp-prettier";
-import sourcemaps from "gulp-sourcemaps";
+import { task, exec, stream } from "gulp-execa";
 
-async function clean() {
-  const { stdout1 } = await exec("rm -r ./dist", {
-    stdout: ["pipe", "inherit"],
-  });
-  const { stdout2 } = await exec("mkdir -p ./dist", {
-    stdout: ["pipe", "inherit"],
-  });
-}
+gulp.task("doc", task("npm run doc"));
+gulp.task("compile", task("npm run build"));
+gulp.task("format", task("npm run format"));
+gulp.task("start", task("npm run start"));
+gulp.task("startdev", task("npm run start:dev"));
+gulp.task("startdebug", task("npm run start:debug"));
+gulp.task("lint", task("npm run lint"));
+gulp.task("test", task("npm run test"));
+gulp.task("coverage", task("npm run test:cov"));
+gulp.task("e2e", task("npm run test:e2e"));
 
-function transpile() {
-  return new Promise((resolve, reject) => {
-    var tsProject = ts.createProject("./tsconfig.json", {
-      declaration: true,
-    });
+gulp.task("clientbuild", task("npm run build", {cwd: "./client"}));
+gulp.task("clientformat", task("npm run format", {cwd: "./client"}));
+gulp.task("clientlint", task("npm run lint", {cwd: "./client"}));
 
-    gulp
-      .src("src/**/*.ts")
-      .pipe(sourcemaps.init())
-      .pipe(tsProject())
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest("./dist"))
-      .on("end", function () {
-        resolve();
-      })
-      .on("error", function (err) {
-        reject(err);
-      });
-  });
-}
-
-function tsformat() {
-  return gulp
-    .src("src/**/*.ts")
-    .pipe(prettier({ parser: "typescript", singleQuote: false }))
-    .pipe(gulp.dest("src"));
-}
-
-function linter() {
-  return gulp
-    .src("./src/**/*.ts")
-    .pipe(
-      gulpESLintNew({
-        configType: "flat",
-        overrideConfigFile: "./eslint.config.mjs",
-        fix: true,
-      }),
-    )
-    .pipe(gulpESLintNew.fix())
-    .pipe(gulpESLintNew.format())
-    .pipe(gulpESLintNew.failAfterError());
-}
-
-async function startdev() {
-  const { stdout1 } = await exec("npx tsx watch --include ./src/**/* ./src/app.ts", {
-    stdout: ["pipe", "inherit"],
-  });
-}
-
-
-gulp.task("format", tsformat);
-
-gulp.task("dev", series(tsformat, startdev));
-
-gulp.task("build", series(tsformat, linter, transpile));
-
-gulp.task("default", series(clean, tsformat, linter, transpile, startdev));
-
+gulp.task("default", series("doc", "clientformat", "clientlint", "format", "lint", "clientbuild", "startdev"));
+gulp.task("build", series("doc", "format", "lint", "compile", "clientformat", "clientlint", "clientbuild", "test", "coverage"));
+gulp.task("tests", series("doc", "coverage", "test", "e2e"));

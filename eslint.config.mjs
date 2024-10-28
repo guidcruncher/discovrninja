@@ -21,6 +21,7 @@ export default [ ...compat.extends("plugin:@typescript-eslint/strict"), {
     rules: {
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-extraneous-class": "off",
 	"lines-between-class-members": "warn",
         "no-unused-vars": "off",
     },
