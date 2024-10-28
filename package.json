@@ -29,6 +29,7 @@
     "@nestjs/serve-static": "^4.0.2",
     "@nestjs/swagger": "^7.4.2",
     "@scalar/nestjs-api-reference": "^0.3.166",
+    "dockerode": "^4.0.2",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },

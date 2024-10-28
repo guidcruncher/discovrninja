@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { AppController } from "@controllers/app.controller";
 import { AppService } from "@services/app.service";
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { ScheduleModule } from "@nestjs/schedule";
 import { join } from "path";
 
 @Module({
@@ -23,6 +24,7 @@ import { join } from "path";
       },
       rootPath: join(__dirname, "..", "client", "dist"),
     }),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

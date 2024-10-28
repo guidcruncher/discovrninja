@@ -211,10 +211,11 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">  import { Module } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &quot;@nestjs/common&quot;;
 import { AppController } from &quot;@controllers/app.controller&quot;;
 import { AppService } from &quot;@services/app.service&quot;;
 import { ServeStaticModule } from &quot;@nestjs/serve-static&quot;;
+import { ScheduleModule } from &#x27;@nestjs/schedule&#x27;;
 import { join } from &quot;path&quot;;
 
 @Module({
@@ -236,6 +237,7 @@ import { join } from &quot;path&quot;;
       },
       rootPath: join(__dirname, &quot;..&quot;, &quot;client&quot;, &quot;dist&quot;),
     }),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
