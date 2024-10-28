@@ -3,6 +3,7 @@ import os from "node:os";
 import superagent from "superagent";
 import { DiscoveryEntry } from "@customtypes/discoveryentry";
 import { DiscoveryScan } from "@customtypes/discoveryscan";
+import { Address } from "@customtypes/address";
 import path from "node:path";
 import fs from "node:fs";
 
@@ -39,8 +40,8 @@ export class IpUtilities {
     return "";
   }
 
-  public checkUrlLive(url: IAddress): Promise<IAddress> {
-    return new Promise<IAddress>((resolve, reject) => {
+  public checkUrlLive(url: Address): Promise<Address> {
+    return new Promise<Address>((resolve, reject) => {
       console.log("Trying", url.address);
       superagent
         .head(url.address)
@@ -129,10 +130,4 @@ export class IpUtilities {
       });
     }
   }
-}
-
-export interface IAddress {
-  network: string;
-  address: string;
-  preferred: boolean;
 }
