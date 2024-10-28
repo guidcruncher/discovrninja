@@ -1,5 +1,7 @@
-import { IDiscoveryScan } from "@types/idiscoveryscan";
+import { DiscoveryScan } from "@types/discoveryscan";
 
-export interface IDiscoveryAgent {
-  scan(): Promise<IDiscoveryScan>;
+interface IDiscoveryAgent {
+  scan(): Promise<DiscoveryScan>;
 }
+
+export { IDiscoveryAgent };

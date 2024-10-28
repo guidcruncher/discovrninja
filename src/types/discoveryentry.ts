@@ -1,16 +1,24 @@
-import { IDiscoveryEntry } from "@types/idiscoveryentry";
-import { IAddress } from "@types/iaddress";
+import { Address } from "@types/address";
 
-export class DiscoveryEntry implements IDiscoveryEntry {
+export class DiscoveryEntry {
   public name: string;
+
   public description: string;
+
   public icon: string;
-  public sourceAddress: IAddress;
+
+  public sourceAddress: Address;
+
   public targetAddress: string;
+
   public containerName: string;
+
   public hostname: string;
+
   public ports: string[];
-  public ipAddresses: IAddress[];
+
+  public ipAddresses: Address[];
+
   constructor() {
     this.name = "";
     this.description = "";

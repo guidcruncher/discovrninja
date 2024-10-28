@@ -1,9 +1,11 @@
-import { IDnsEntry} from "@types/idnsentry";
+import { DnsEntry } from "@types/dnsentry";
 
-export interface IDnsManager {
-  pushToDns(entry: IDnsEntry): Promise<boolean>;
-  remove(entry: IDnsEntry): void;
+interface IDnsManager {
+  pushToDns(entry: DnsEntry): Promise<boolean>;
+  remove(entry: DnsEntry): void;
   contains(host: string): Promise<boolean>;
-  resolve(host: string): Promise<string>;
-  get(): Promise<IDnsEntry[]>;
+  resolve(host: string): Promise<string>;  
+get(): Promise<DnsEntry[]>;
 }
+
+export { IDnsManager };

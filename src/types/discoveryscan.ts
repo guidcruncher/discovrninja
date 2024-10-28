@@ -1,10 +1,12 @@
-import { IDiscoveryEntry } from "@types/idiscoveryentry";
-import { IDiscoveryScan } from "@types/idiscoveryscan";
+import { DiscoveryEntry } from "@types/discoveryentry";
 
-export class DiscoveryScan implements IDiscoveryScan {
+export class DiscoveryScan {
   public created: Date;
+
   public hash: string;
-  public entries: IDiscoveryEntry[];
+
+  public entries: DiscoveryEntry[];
+
   constructor() {
     this.created = new Date();
     this.hash = "";
