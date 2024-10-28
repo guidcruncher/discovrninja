@@ -1,4 +1,4 @@
-  import { Module } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { AppController } from "@controllers/app.controller";
 import { AppService } from "@services/app.service";
 import { ServeStaticModule } from "@nestjs/serve-static";
