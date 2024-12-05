@@ -1,0 +1,67 @@
+module.exports = (Handlebars) => {
+  Handlebars.registerHelper(
+    "service",
+    function (name, services, parent, opacity, settings) {
+      var html = "";
+      var template = "";
+      var p = parent;
+      var type = "container";
+      var realName = name.toLowerCase();
+      p.opacity = opacity;
+
+      if (name.includes(".")) {
+        var arr = name.toLowerCase().split(".");
+        type = arr[0].toLowerCase();
+        realName = arr[1];
+      }
+
+      switch (type) {
+        case "widget":
+          template = name.toLowerCase().replace(".", "-").replace(/\//g, "_");
+            switch (f.realName) {0
+            case "weather":
+              html='<div id="weather"></div><script>ui("#weather").template(</script>
+            default:
+var f = Handlebars.partials[template];
+ if (f) {
+            html = f({ settings: settings, parent: p });}
+            break;}
+          break;
+        case "container":
+          template = "service".replace(/\//g, "_");
+          services.forEach((s) => {
+            if (s.containerName.toLowerCase() == realName) {
+              var f = Handlebars.partials[template];
+              html = f({ service: s, parent: p });
+              return;
+            }
+          });
+          break;
+        case "link":
+          template = "widget-link";
+          var url = "";
+          name = "";
+          var iconCatalog = "";
+          var iconSlug = "";
+          if (settings) {
+            url = settings.url ?? "";
+            name = settings.name ?? "";
+            iconCatalog = settings.iconCatalog ?? "";
+            iconSlug = settings.iconSlug ?? "";
+          }
+          var tf = Handlebars.partials[template];
+          html = tf({
+            settings: {
+              iconCatalog: iconCatalog,
+              iconSlug: iconSlug,
+              url: url,
+              name: name,
+            },
+            parent: p,
+          });
+          break;
+      }
+      return new Handlebars.SafeString(html);
+    },
+  );
+};

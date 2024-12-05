@@ -1,0 +1,56 @@
+host:
+  serviceGateway:
+    address: "192.168.1.201"
+  logging:
+    level: "debug"
+  cluster:
+    enabled: false
+    workerProcessCount: 2
+  appServer:
+    listenAddress: "0.0.0.0"
+    listenPort: 5001
+  dnsServer:
+    endpoint: http://192.168.1.201:5002
+  webServer:
+    listenAddress: "0.0.0.0"
+    listenPort: 80
+  mongo:
+    url: mongodb://root:password@127.0.0.1:27017/
+
+docker:
+  connection:
+    socketPath: "/var/run/docker.sock"
+    hostUri: ""
+    ca: ""
+    cert: ""
+    key: ""
+  stackBasePath: "/home/jcrocker/docker/stacks/"
+  repositories:
+    docker_io:
+      username: ""
+      password: ""
+    ghcr_io:
+      username: ""
+      password: ""
+
+discovery:
+  file:
+    enabled: true
+    watch: true
+    filename: "./config/services.yaml"
+  docker:
+    enabled: true
+
+desktop:
+  filename: "./config/desktop.yaml"
+
+dns:
+  useInternalServer: true
+  listenAddress: "0.0.0.0"
+  listenPort: 5353
+  maximumCacheEntries: 10000,
+  ttl: 10000,
+  upStreamDns:
+    - name: "cloudflare"
+      address: "1.1.1.1:53"
+      transport: "udp"

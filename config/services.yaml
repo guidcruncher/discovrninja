@@ -1,0 +1,7 @@
+services:
+  - name: Service
+    containerName: containername
+    hostname: hostname
+    ipaddress:
+    proxy: http://private:8000
+    public: https://public.home

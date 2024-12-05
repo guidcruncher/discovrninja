@@ -1,0 +1,94 @@
+header: false
+footer: false
+background:
+  type: "daily" # [none, daily, image, bgcolor, filter ]
+  url: "bing"
+  bgcolor: "#d6d3ff"
+  filter: "linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet)"
+  image:
+    filter: ""
+  foregroundOpacity: 0.85
+  buttonForegroundOpacity: 
+
+layout:
+  applications:
+    title: Applications
+    icon:
+    bgcolor:
+    buttonClass:
+    background:
+    items:
+      - jellyfin:
+      - linkding:
+      - mealie:
+      - photoprism:
+      - pigallery2:
+      - vscode:
+  tools:
+    title: Tools
+    icon:
+    bgcolor:
+    buttonClass:
+    background:
+    items:
+      - mailhog:
+      - privoxy:
+      - widget.discovrninja:
+      - widget.clock:
+  servers:
+    title: Servers
+    icon:
+    bgcolor:
+    buttonClass:
+    background:
+    items:
+      - keycloak:
+      - lldap:
+      - mailhog:
+      - phptmyadmin:
+      - adguardhome:
+      - webtop:
+  torr:
+    title: Torr
+    icon:
+    bgcolor:
+    buttonClass:
+    background:
+    items:
+      - lidarr:
+      - prowlarr:
+      - radarr:
+      - sonarr:
+      - transmission:
+
+  widgets:
+    title: Widgets
+    icon:
+    bgcolor:
+    buttonclass:
+    background:
+    items:
+      - widget.weather:
+          latitude: 
+          longitude:
+          days: 10
+      - widget.news:
+          name: The Guardian"
+          url: "https://feeds.theguardian.com/theguardian/uk/rss"
+          iconUrl: "https://assets.guim.co.uk/images/guardian-logo-rss.c45beb1bafa34b347ac333af2e6fe23f.png"
+      - widget.news:
+          name: BBC
+          url: "https://feeds.bbci.co.uk/news/rss.xml"
+          iconUrl: "https://news.bbcimg.co.uk/nol/shared/img/bbc_news_120x60.gif"
+      - widget.news:
+          name: Software Enginnering Times
+          url: "https://thesoftwareengineeringtimes.substack.com/feed"
+          iconUrl: "https://substackcdn.com/image/fetch/w_1360,c_limit,f_webp,q_auto:best,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8541fed4-02e6-492a-ae30-f21ff5e6fb9f_600x600.png"
+      - widget.news:
+          name: Mail Online
+          url: https://www.dailymail.co.uk/home/index.rss
+          iconUrl: https://i.dailymail.co.uk/i/furniture/mastHead_1_rss.png
+      - widget.news: 
+          name: The Register
+          url: https://www.theregister.com/headlines.atom
+          iconUrl:
