@@ -35,6 +35,28 @@ export class ResourcesService {
     });
   }
 
+  public fetchWikipediaPage(lang: string, page: string): Promise<Any> {
+    var apiUrl =
+      "https://" +
+      lang.toLowerCase() +
+      ".wikipedia.org/w/api.php?action=parse&section=0&prop=text&page=" +
+      encodeURIComponent(page) +
+      "&format=json";
+    const client: HttpUtilities = new HttpUtilities();
+    this.logger.debug("Getting bing daily", apiUrl);
+    return new Promise<string>((resolve, reject) => {
+      client
+        .retrieve("GET", apiUrl)
+        .then((jsonData) => {
+          const parsed = JSON.parse(jsonData);
+          resolve(parsed);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
   public fetchWeather(lat: number, long: number, days: number): Promise<any> {
     return new Promise((resolve, reject) => {
       if (isNaN(lat) || isNaN(long)) {

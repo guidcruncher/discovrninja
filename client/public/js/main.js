@@ -1,35 +1,35 @@
-!(function(a, b) {
-  "object" == typeof exports && "object" == typeof module ?
-    (module.exports = b()) :
-    "function" == typeof define && define.amd ?
-    define([], b) :
-    "object" == typeof exports ?
-    (exports.Handlebars = b()) :
-    (a.Handlebars = b());
-})(this, function() {
-  return (function(a) {
+!(function (a, b) {
+  "object" == typeof exports && "object" == typeof module
+    ? (module.exports = b())
+    : "function" == typeof define && define.amd
+      ? define([], b)
+      : "object" == typeof exports
+        ? (exports.Handlebars = b())
+        : (a.Handlebars = b());
+})(this, function () {
+  return (function (a) {
     function b(d) {
       if (c[d]) return c[d].exports;
       var e = (c[d] = {
         exports: {},
         id: d,
-        loaded: !1
+        loaded: !1,
       });
       return a[d].call(e.exports, e, e.exports, b), (e.loaded = !0), e.exports;
     }
     var c = {};
     return (b.m = a), (b.c = c), (b.p = ""), b(0);
   })([
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
         var a = r();
         return (
-          (a.compile = function(b, c) {
+          (a.compile = function (b, c) {
             return k.compile(b, c, a);
           }),
-          (a.precompile = function(b, c) {
+          (a.precompile = function (b, c) {
             return k.precompile(b, c, a);
           }),
           (a.AST = i["default"]),
@@ -58,22 +58,24 @@
         r = g["default"].create,
         s = d();
       (s.create = d),
-      q["default"](s),
+        q["default"](s),
         (s.Visitor = o["default"]),
         (s["default"] = s),
         (b["default"] = s),
         (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
-      (b["default"] = function(a) {
-        return a && a.__esModule ? a : {
-          default: a
-        };
+      (b["default"] = function (a) {
+        return a && a.__esModule
+          ? a
+          : {
+              default: a,
+            };
       }),
-      (b.__esModule = !0);
+        (b.__esModule = !0);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -85,7 +87,7 @@
           (a.Utils = n),
           (a.escapeExpression = n.escapeExpression),
           (a.VM = p),
-          (a.template = function(b) {
+          (a.template = function (b) {
             return p.template(b, a);
           }),
           a
@@ -108,14 +110,14 @@
         r = f(q),
         s = d();
       (s.create = d),
-      r["default"](s),
+        r["default"](s),
         (s["default"] = s),
         (b["default"] = s),
         (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
-      (b["default"] = function(a) {
+      (b["default"] = function (a) {
         if (a && a.__esModule) return a;
         var b = {};
         if (null != a)
@@ -123,16 +125,16 @@
             Object.prototype.hasOwnProperty.call(a, c) && (b[c] = a[c]);
         return (b["default"] = a), b;
       }),
-      (b.__esModule = !0);
+        (b.__esModule = !0);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b, c) {
         (this.helpers = a || {}),
-        (this.partials = b || {}),
-        (this.decorators = c || {}),
-        i.registerDefaultHelpers(this),
+          (this.partials = b || {}),
+          (this.decorators = c || {}),
+          i.registerDefaultHelpers(this),
           j.registerDefaultDecorators(this);
       }
       var e = c(1)["default"];
@@ -167,32 +169,32 @@
         constructor: d,
         logger: l["default"],
         log: l["default"].log,
-        registerHelper: function(a, b) {
+        registerHelper: function (a, b) {
           if (f.toString.call(a) === r) {
             if (b)
               throw new h["default"]("Arg not supported with multiple helpers");
             f.extend(this.helpers, a);
           } else this.helpers[a] = b;
         },
-        unregisterHelper: function(a) {
+        unregisterHelper: function (a) {
           delete this.helpers[a];
         },
-        registerPartial: function(a, b) {
+        registerPartial: function (a, b) {
           if (f.toString.call(a) === r) f.extend(this.partials, a);
           else {
             if ("undefined" == typeof b)
               throw new h["default"](
                 'Attempting to register a partial called "' +
-                a +
-                '" as undefined',
+                  a +
+                  '" as undefined',
               );
             this.partials[a] = b;
           }
         },
-        unregisterPartial: function(a) {
+        unregisterPartial: function (a) {
           delete this.partials[a];
         },
-        registerDecorator: function(a, b) {
+        registerDecorator: function (a, b) {
           if (f.toString.call(a) === r) {
             if (b)
               throw new h["default"](
@@ -201,17 +203,17 @@
             f.extend(this.decorators, a);
           } else this.decorators[a] = b;
         },
-        unregisterDecorator: function(a) {
+        unregisterDecorator: function (a) {
           delete this.decorators[a];
         },
-        resetLoggedPropertyAccesses: function() {
+        resetLoggedPropertyAccesses: function () {
           m.resetLoggedProperties();
         },
       };
       var s = l["default"].log;
       (b.log = s), (b.createFrame = f.createFrame), (b.logger = l["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
 
       function c(a) {
@@ -222,13 +224,12 @@
         for (var b = 1; b < arguments.length; b++)
           for (var c in arguments[b])
             Object.prototype.hasOwnProperty.call(arguments[b], c) &&
-            (a[c] = arguments[b][c]);
+              (a[c] = arguments[b][c]);
         return a;
       }
 
       function e(a, b) {
-        for (var c = 0, d = a.length; c < d; c++)
-          if (a[c] === b) return c;
+        for (var c = 0, d = a.length; c < d; c++) if (a[c] === b) return c;
         return -1;
       }
 
@@ -259,13 +260,13 @@
         return (a ? a + "." : "") + b;
       }
       (b.__esModule = !0),
-      (b.extend = d),
-      (b.indexOf = e),
-      (b.escapeExpression = f),
-      (b.isEmpty = g),
-      (b.createFrame = h),
-      (b.blockParams = i),
-      (b.appendContextPath = j);
+        (b.extend = d),
+        (b.indexOf = e),
+        (b.escapeExpression = f),
+        (b.isEmpty = g),
+        (b.createFrame = h),
+        (b.blockParams = i),
+        (b.appendContextPath = j);
       var k = {
           "&": "&amp;",
           "<": "&lt;",
@@ -279,25 +280,25 @@
         m = /[&<>"'`=]/,
         n = Object.prototype.toString;
       b.toString = n;
-      var o = function(a) {
+      var o = function (a) {
         return "function" == typeof a;
       };
       o(/x/) &&
         (b.isFunction = o =
-          function(a) {
+          function (a) {
             return "function" == typeof a && "[object Function]" === n.call(a);
           }),
         (b.isFunction = o);
       var p =
         Array.isArray ||
-        function(a) {
+        function (a) {
           return (
             !(!a || "object" != typeof a) && "[object Array]" === n.call(a)
           );
         };
       b.isArray = p;
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b) {
@@ -308,29 +309,31 @@
           j = void 0;
         c &&
           ((g = c.start.line),
-            (h = c.end.line),
-            (i = c.start.column),
-            (j = c.end.column),
-            (a += " - " + g + ":" + i));
+          (h = c.end.line),
+          (i = c.start.column),
+          (j = c.end.column),
+          (a += " - " + g + ":" + i));
         for (
-          var k = Error.prototype.constructor.call(this, a), l = 0; l < f.length; l++
+          var k = Error.prototype.constructor.call(this, a), l = 0;
+          l < f.length;
+          l++
         )
           this[f[l]] = k[f[l]];
         Error.captureStackTrace && Error.captureStackTrace(this, d);
         try {
           c &&
             ((this.lineNumber = g),
-              (this.endLineNumber = h),
-              e ?
-              (Object.defineProperty(this, "column", {
+            (this.endLineNumber = h),
+            e
+              ? (Object.defineProperty(this, "column", {
                   value: i,
                   enumerable: !0,
                 }),
                 Object.defineProperty(this, "endColumn", {
                   value: j,
                   enumerable: !0,
-                })) :
-              ((this.column = i), (this.endColumn = j)));
+                }))
+              : ((this.column = i), (this.endColumn = j)));
         } catch (m) {}
       }
       var e = c(7)["default"];
@@ -346,22 +349,22 @@
         "stack",
       ];
       (d.prototype = new Error()),
-      (b["default"] = d),
-      (a.exports = b["default"]);
+        (b["default"] = d),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(8),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9);
-      a.exports = function(a, b, c) {
+      a.exports = function (a, b, c) {
         return d.setDesc(a, b, c);
       };
     },
-    function(a, b) {
+    function (a, b) {
       var c = Object;
       a.exports = {
         create: c.create,
@@ -376,7 +379,7 @@
         each: [].forEach,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -394,8 +397,8 @@
       }
       var f = c(1)["default"];
       (b.__esModule = !0),
-      (b.registerDefaultHelpers = d),
-      (b.moveHelperToHooks = e);
+        (b.registerDefaultHelpers = d),
+        (b.moveHelperToHooks = e);
       var g = c(11),
         h = f(g),
         i = c(12),
@@ -411,33 +414,33 @@
         s = c(69),
         t = f(s);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       b.__esModule = !0;
       var d = c(5);
-      (b["default"] = function(a) {
-        a.registerHelper("blockHelperMissing", function(b, c) {
+      (b["default"] = function (a) {
+        a.registerHelper("blockHelperMissing", function (b, c) {
           var e = c.inverse,
             f = c.fn;
           if (b === !0) return f(this);
           if (b === !1 || null == b) return e(this);
           if (d.isArray(b))
-            return b.length > 0 ?
-              (c.ids && (c.ids = [c.name]), a.helpers.each(b, c)) :
-              e(this);
+            return b.length > 0
+              ? (c.ids && (c.ids = [c.name]), a.helpers.each(b, c))
+              : e(this);
           if (c.data && c.ids) {
             var g = d.createFrame(c.data);
             (g.contextPath = d.appendContextPath(c.data.contextPath, c.name)),
-            (c = {
-              data: g
-            });
+              (c = {
+                data: g,
+              });
           }
           return f(b, c);
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(13)["default"],
         e = c(43)["default"],
@@ -448,15 +451,15 @@
       var i = c(5),
         j = c(6),
         k = h(j);
-      (b["default"] = function(a) {
-        a.registerHelper("each", function(a, b) {
+      (b["default"] = function (a) {
+        a.registerHelper("each", function (a, b) {
           function c(b, c, d) {
             n &&
               ((n.key = b),
-                (n.index = c),
-                (n.first = 0 === c),
-                (n.last = !!d),
-                o && (n.contextPath = o + b)),
+              (n.index = c),
+              (n.first = 0 === c),
+              (n.last = !!d),
+              o && (n.contextPath = o + b)),
               (m += h(a[b], {
                 data: n,
                 blockParams: i.blockParams([a[b], b], [o + b, null]),
@@ -473,41 +476,41 @@
             (b.data &&
               b.ids &&
               (o = i.appendContextPath(b.data.contextPath, b.ids[0]) + "."),
-              i.isFunction(a) && (a = a.call(this)),
-              b.data && (n = i.createFrame(b.data)),
-              a && "object" == typeof a)
+            i.isFunction(a) && (a = a.call(this)),
+            b.data && (n = i.createFrame(b.data)),
+            a && "object" == typeof a)
           )
             if (i.isArray(a))
               for (var p = a.length; l < p; l++)
                 l in a && c(l, l, l === a.length - 1);
             else if ("function" == typeof d && a[e]) {
-            for (var q = [], r = f(a), s = r.next(); !s.done; s = r.next())
-              q.push(s.value);
-            a = q;
-            for (var p = a.length; l < p; l++) c(l, l, l === a.length - 1);
-          } else
-            !(function() {
-              var b = void 0;
-              g(a).forEach(function(a) {
+              for (var q = [], r = f(a), s = r.next(); !s.done; s = r.next())
+                q.push(s.value);
+              a = q;
+              for (var p = a.length; l < p; l++) c(l, l, l === a.length - 1);
+            } else
+              !(function () {
+                var b = void 0;
+                g(a).forEach(function (a) {
                   void 0 !== b && c(b, l - 1), (b = a), l++;
                 }),
-                void 0 !== b && c(b, l - 1, !0);
-            })();
+                  void 0 !== b && c(b, l - 1, !0);
+              })();
           return 0 === l && (m = j(this)), m;
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(14),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(15), c(42), (a.exports = c(21).Symbol);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(9),
         e = c(16),
@@ -542,156 +545,159 @@
         H = "function" == typeof z,
         I = Object.prototype,
         J =
-        g &&
-        j(function() {
-          return (
-            7 !=
-            x(
-              w({}, "a", {
-                get: function() {
-                  return w(this, "a", {
-                    value: 7
-                  }).a;
-                },
-              }),
-            ).a
-          );
-        }) ?
-        function(a, b, c) {
-          var d = v(I, b);
-          d && delete I[b], w(a, b, c), d && a !== I && w(I, b, d);
-        } :
-        w,
-        K = function(a) {
+          g &&
+          j(function () {
+            return (
+              7 !=
+              x(
+                w({}, "a", {
+                  get: function () {
+                    return w(this, "a", {
+                      value: 7,
+                    }).a;
+                  },
+                }),
+              ).a
+            );
+          })
+            ? function (a, b, c) {
+                var d = v(I, b);
+                d && delete I[b], w(a, b, c), d && a !== I && w(I, b, d);
+              }
+            : w,
+        K = function (a) {
           var b = (G[a] = x(z.prototype));
           return (
             (b._k = a),
             g &&
-            C &&
-            J(I, a, {
-              configurable: !0,
-              set: function(b) {
-                f(this, D) && f(this[D], a) && (this[D][a] = !1),
-                  J(this, a, u(1, b));
-              },
-            }),
+              C &&
+              J(I, a, {
+                configurable: !0,
+                set: function (b) {
+                  f(this, D) && f(this[D], a) && (this[D][a] = !1),
+                    J(this, a, u(1, b));
+                },
+              }),
             b
           );
         },
-        L = function(a) {
+        L = function (a) {
           return "symbol" == typeof a;
         },
-        M = function(a, b, c) {
-          return c && f(G, b) ?
-            (c.enumerable ?
-              (f(a, D) && a[D][b] && (a[D][b] = !1),
-                (c = x(c, {
-                  enumerable: u(0, !1)
-                }))) :
-              (f(a, D) || w(a, D, u(1, {})), (a[D][b] = !0)),
-              J(a, b, c)) :
-            w(a, b, c);
+        M = function (a, b, c) {
+          return c && f(G, b)
+            ? (c.enumerable
+                ? (f(a, D) && a[D][b] && (a[D][b] = !1),
+                  (c = x(c, {
+                    enumerable: u(0, !1),
+                  })))
+                : (f(a, D) || w(a, D, u(1, {})), (a[D][b] = !0)),
+              J(a, b, c))
+            : w(a, b, c);
         },
-        N = function(a, b) {
+        N = function (a, b) {
           s(a);
-          for (var c, d = q((b = t(b))), e = 0, f = d.length; f > e;)
+          for (var c, d = q((b = t(b))), e = 0, f = d.length; f > e; )
             M(a, (c = d[e++]), b[c]);
           return a;
         },
-        O = function(a, b) {
+        O = function (a, b) {
           return void 0 === b ? x(a) : N(x(a), b);
         },
-        P = function(a) {
+        P = function (a) {
           var b = E.call(this, a);
           return (
             !(b || !f(this, a) || !f(G, a) || (f(this, D) && this[D][a])) || b
           );
         },
-        Q = function(a, b) {
+        Q = function (a, b) {
           var c = v((a = t(a)), b);
           return (
             !c || !f(G, b) || (f(a, D) && a[D][b]) || (c.enumerable = !0), c
           );
         },
-        R = function(a) {
-          for (var b, c = y(t(a)), d = [], e = 0; c.length > e;)
+        R = function (a) {
+          for (var b, c = y(t(a)), d = [], e = 0; c.length > e; )
             f(G, (b = c[e++])) || b == D || d.push(b);
           return d;
         },
-        S = function(a) {
-          for (var b, c = y(t(a)), d = [], e = 0; c.length > e;)
+        S = function (a) {
+          for (var b, c = y(t(a)), d = [], e = 0; c.length > e; )
             f(G, (b = c[e++])) && d.push(G[b]);
           return d;
         },
-        T = function(a) {
+        T = function (a) {
           if (void 0 !== a && !L(a)) {
-            for (var b, c, d = [a], e = 1, f = arguments; f.length > e;)
+            for (var b, c, d = [a], e = 1, f = arguments; f.length > e; )
               d.push(f[e++]);
             return (
               (b = d[1]),
               "function" == typeof b && (c = b),
               (!c && r(b)) ||
-              (b = function(a, b) {
-                if ((c && (b = c.call(this, a, b)), !L(b))) return b;
-              }),
+                (b = function (a, b) {
+                  if ((c && (b = c.call(this, a, b)), !L(b))) return b;
+                }),
               (d[1] = b),
               B.apply(A, d)
             );
           }
         },
-        U = j(function() {
+        U = j(function () {
           var a = z();
           return (
-            "[null]" != B([a]) || "{}" != B({
-              a: a
-            }) || "{}" != B(Object(a))
+            "[null]" != B([a]) ||
+            "{}" !=
+              B({
+                a: a,
+              }) ||
+            "{}" != B(Object(a))
           );
         });
       H ||
-        ((z = function() {
-            if (L(this)) throw TypeError("Symbol is not a constructor");
-            return K(m(arguments.length > 0 ? arguments[0] : void 0));
-          }),
-          i(z.prototype, "toString", function() {
-            return this._k;
-          }),
-          (L = function(a) {
-            return a instanceof z;
-          }),
-          (d.create = O),
-          (d.isEnum = P),
-          (d.getDesc = Q),
-          (d.setDesc = M),
-          (d.setDescs = N),
-          (d.getNames = p.get = R),
-          (d.getSymbols = S),
-          g && !c(41) && i(I, "propertyIsEnumerable", P, !0));
+        ((z = function () {
+          if (L(this)) throw TypeError("Symbol is not a constructor");
+          return K(m(arguments.length > 0 ? arguments[0] : void 0));
+        }),
+        i(z.prototype, "toString", function () {
+          return this._k;
+        }),
+        (L = function (a) {
+          return a instanceof z;
+        }),
+        (d.create = O),
+        (d.isEnum = P),
+        (d.getDesc = Q),
+        (d.setDesc = M),
+        (d.setDescs = N),
+        (d.getNames = p.get = R),
+        (d.getSymbols = S),
+        g && !c(41) && i(I, "propertyIsEnumerable", P, !0));
       var V = {
-        for: function(a) {
+        for: function (a) {
           return f(F, (a += "")) ? F[a] : (F[a] = z(a));
         },
-        keyFor: function(a) {
+        keyFor: function (a) {
           return o(F, a);
         },
-        useSetter: function() {
+        useSetter: function () {
           C = !0;
         },
-        useSimple: function() {
+        useSimple: function () {
           C = !1;
         },
       };
       d.each.call(
-          "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(
-            ",",
-          ),
-          function(a) {
-            var b = n(a);
-            V[a] = H ? b : K(b);
-          },
+        "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(
+          ",",
         ),
+        function (a) {
+          var b = n(a);
+          V[a] = H ? b : K(b);
+        },
+      ),
         (C = !0),
         h(h.G + h.W, {
-          Symbol: z
+          Symbol: z,
         }),
         h(h.S, "Symbol", V),
         h(h.S + h.F * !H, "Object", {
@@ -702,42 +708,43 @@
           getOwnPropertyNames: R,
           getOwnPropertySymbols: S,
         }),
-        A && h(h.S + h.F * (!H || U), "JSON", {
-          stringify: T
-        }),
+        A &&
+          h(h.S + h.F * (!H || U), "JSON", {
+            stringify: T,
+          }),
         l(z, "Symbol"),
         l(Math, "Math", !0),
         l(e.JSON, "JSON", !0);
     },
-    function(a, b) {
+    function (a, b) {
       var c = (a.exports =
-        "undefined" != typeof window && window.Math == Math ?
-        window :
-        "undefined" != typeof self && self.Math == Math ?
-        self :
-        Function("return this")());
+        "undefined" != typeof window && window.Math == Math
+          ? window
+          : "undefined" != typeof self && self.Math == Math
+            ? self
+            : Function("return this")());
       "number" == typeof __g && (__g = c);
     },
-    function(a, b) {
+    function (a, b) {
       var c = {}.hasOwnProperty;
-      a.exports = function(a, b) {
+      a.exports = function (a, b) {
         return c.call(a, b);
       };
     },
-    function(a, b, c) {
-      a.exports = !c(19)(function() {
+    function (a, b, c) {
+      a.exports = !c(19)(function () {
         return (
           7 !=
           Object.defineProperty({}, "a", {
-            get: function() {
+            get: function () {
               return 7;
             },
           }).a
         );
       });
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         try {
           return !!a();
         } catch (b) {
@@ -745,12 +752,12 @@
         }
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(16),
         e = c(21),
         f = c(22),
         g = "prototype",
-        h = function(a, b, c) {
+        h = function (a, b, c) {
           var i,
             j,
             k,
@@ -765,84 +772,84 @@
           m && (c = b);
           for (i in c)
             (j = !l && s && i in s),
-            (j && i in r) ||
-            ((k = j ? s[i] : c[i]),
-              (r[i] =
-                m && "function" != typeof s[i] ?
-                c[i] :
-                p && j ?
-                f(k, d) :
-                q && s[i] == k ?
-                (function(a) {
-                  var b = function(b) {
-                    return this instanceof a ? new a(b) : a(b);
-                  };
-                  return (b[g] = a[g]), b;
-                })(k) :
-                o && "function" == typeof k ?
-                f(Function.call, k) :
-                k),
-              o && ((r[g] || (r[g] = {}))[i] = k));
+              (j && i in r) ||
+                ((k = j ? s[i] : c[i]),
+                (r[i] =
+                  m && "function" != typeof s[i]
+                    ? c[i]
+                    : p && j
+                      ? f(k, d)
+                      : q && s[i] == k
+                        ? (function (a) {
+                            var b = function (b) {
+                              return this instanceof a ? new a(b) : a(b);
+                            };
+                            return (b[g] = a[g]), b;
+                          })(k)
+                        : o && "function" == typeof k
+                          ? f(Function.call, k)
+                          : k),
+                o && ((r[g] || (r[g] = {}))[i] = k));
         };
       (h.F = 1),
-      (h.G = 2),
-      (h.S = 4),
-      (h.P = 8),
-      (h.B = 16),
-      (h.W = 32),
-      (a.exports = h);
+        (h.G = 2),
+        (h.S = 4),
+        (h.P = 8),
+        (h.B = 16),
+        (h.W = 32),
+        (a.exports = h);
     },
-    function(a, b) {
+    function (a, b) {
       var c = (a.exports = {
-        version: "1.2.6"
+        version: "1.2.6",
       });
       "number" == typeof __e && (__e = c);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(23);
-      a.exports = function(a, b, c) {
+      a.exports = function (a, b, c) {
         if ((d(a), void 0 === b)) return a;
         switch (c) {
           case 1:
-            return function(c) {
+            return function (c) {
               return a.call(b, c);
             };
           case 2:
-            return function(c, d) {
+            return function (c, d) {
               return a.call(b, c, d);
             };
           case 3:
-            return function(c, d, e) {
+            return function (c, d, e) {
               return a.call(b, c, d, e);
             };
         }
-        return function() {
+        return function () {
           return a.apply(b, arguments);
         };
       };
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         if ("function" != typeof a) throw TypeError(a + " is not a function!");
         return a;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = c(25);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9),
         e = c(26);
-      a.exports = c(18) ?
-        function(a, b, c) {
-          return d.setDesc(a, b, e(1, c));
-        } :
-        function(a, b, c) {
-          return (a[b] = c), a;
-        };
+      a.exports = c(18)
+        ? function (a, b, c) {
+            return d.setDesc(a, b, e(1, c));
+          }
+        : function (a, b, c) {
+            return (a[b] = c), a;
+          };
     },
-    function(a, b) {
-      a.exports = function(a, b) {
+    function (a, b) {
+      a.exports = function (a, b) {
         return {
           enumerable: !(1 & a),
           configurable: !(2 & a),
@@ -851,39 +858,39 @@
         };
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(16),
         e = "__core-js_shared__",
         f = d[e] || (d[e] = {});
-      a.exports = function(a) {
+      a.exports = function (a) {
         return f[a] || (f[a] = {});
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9).setDesc,
         e = c(17),
         f = c(29)("toStringTag");
-      a.exports = function(a, b, c) {
+      a.exports = function (a, b, c) {
         a &&
           !e((a = c ? a : a.prototype), f) &&
           d(a, f, {
             configurable: !0,
-            value: b
+            value: b,
           });
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(27)("wks"),
         e = c(30),
         f = c(16).Symbol;
-      a.exports = function(a) {
+      a.exports = function (a) {
         return d[a] || (d[a] = (f && f[a]) || (f || e)("Symbol." + a));
       };
     },
-    function(a, b) {
+    function (a, b) {
       var c = 0,
         d = Math.random();
-      a.exports = function(a) {
+      a.exports = function (a) {
         return "Symbol(".concat(
           void 0 === a ? "" : a,
           ")_",
@@ -891,166 +898,168 @@
         );
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9),
         e = c(32);
-      a.exports = function(a, b) {
-        for (var c, f = e(a), g = d.getKeys(f), h = g.length, i = 0; h > i;)
+      a.exports = function (a, b) {
+        for (var c, f = e(a), g = d.getKeys(f), h = g.length, i = 0; h > i; )
           if (f[(c = g[i++])] === b) return c;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(33),
         e = c(35);
-      a.exports = function(a) {
+      a.exports = function (a) {
         return d(e(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(34);
-      a.exports = Object("z").propertyIsEnumerable(0) ?
-        Object :
-        function(a) {
-          return "String" == d(a) ? a.split("") : Object(a);
-        };
+      a.exports = Object("z").propertyIsEnumerable(0)
+        ? Object
+        : function (a) {
+            return "String" == d(a) ? a.split("") : Object(a);
+          };
     },
-    function(a, b) {
+    function (a, b) {
       var c = {}.toString;
-      a.exports = function(a) {
+      a.exports = function (a) {
         return c.call(a).slice(8, -1);
       };
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         if (void 0 == a) throw TypeError("Can't call method on  " + a);
         return a;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(32),
         e = c(9).getNames,
         f = {}.toString,
         g =
-        "object" == typeof window && Object.getOwnPropertyNames ?
-        Object.getOwnPropertyNames(window) :
-        [],
-        h = function(a) {
+          "object" == typeof window && Object.getOwnPropertyNames
+            ? Object.getOwnPropertyNames(window)
+            : [],
+        h = function (a) {
           try {
             return e(a);
           } catch (b) {
             return g.slice();
           }
         };
-      a.exports.get = function(a) {
+      a.exports.get = function (a) {
         return g && "[object Window]" == f.call(a) ? h(a) : e(d(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9);
-      a.exports = function(a) {
+      a.exports = function (a) {
         var b = d.getKeys(a),
           c = d.getSymbols;
         if (c)
-          for (var e, f = c(a), g = d.isEnum, h = 0; f.length > h;)
+          for (var e, f = c(a), g = d.isEnum, h = 0; f.length > h; )
             g.call(a, (e = f[h++])) && b.push(e);
         return b;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(34);
       a.exports =
         Array.isArray ||
-        function(a) {
+        function (a) {
           return "Array" == d(a);
         };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(40);
-      a.exports = function(a) {
+      a.exports = function (a) {
         if (!d(a)) throw TypeError(a + " is not an object!");
         return a;
       };
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         return "object" == typeof a ? null !== a : "function" == typeof a;
       };
     },
-    function(a, b) {
+    function (a, b) {
       a.exports = !0;
     },
-    function(a, b) {},
-    function(a, b, c) {
+    function (a, b) {},
+    function (a, b, c) {
       a.exports = {
         default: c(44),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(45), c(51), (a.exports = c(29)("iterator"));
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(46)(!0);
       c(48)(
         String,
         "String",
-        function(a) {
+        function (a) {
           (this._t = String(a)), (this._i = 0);
         },
-        function() {
+        function () {
           var a,
             b = this._t,
             c = this._i;
-          return c >= b.length ?
-            {
-              value: void 0,
-              done: !0
-            } :
-            ((a = d(b, c)), (this._i += a.length), {
-              value: a,
-              done: !1
-            });
+          return c >= b.length
+            ? {
+                value: void 0,
+                done: !0,
+              }
+            : ((a = d(b, c)),
+              (this._i += a.length),
+              {
+                value: a,
+                done: !1,
+              });
         },
       );
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(47),
         e = c(35);
-      a.exports = function(a) {
-        return function(b, c) {
+      a.exports = function (a) {
+        return function (b, c) {
           var f,
             g,
             h = String(e(b)),
             i = d(c),
             j = h.length;
-          return i < 0 || i >= j ?
-            a ?
-            "" :
-            void 0 :
-            ((f = h.charCodeAt(i)),
+          return i < 0 || i >= j
+            ? a
+              ? ""
+              : void 0
+            : ((f = h.charCodeAt(i)),
               f < 55296 ||
               f > 56319 ||
               i + 1 === j ||
               (g = h.charCodeAt(i + 1)) < 56320 ||
-              g > 57343 ?
-              a ?
-              h.charAt(i) :
-              f :
-              a ?
-              h.slice(i, i + 2) :
-              ((f - 55296) << 10) + (g - 56320) + 65536);
+              g > 57343
+                ? a
+                  ? h.charAt(i)
+                  : f
+                : a
+                  ? h.slice(i, i + 2)
+                  : ((f - 55296) << 10) + (g - 56320) + 65536);
         };
       };
     },
-    function(a, b) {
+    function (a, b) {
       var c = Math.ceil,
         d = Math.floor;
-      a.exports = function(a) {
+      a.exports = function (a) {
         return isNaN((a = +a)) ? 0 : (a > 0 ? d : c)(a);
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(41),
         e = c(20),
@@ -1066,26 +1075,26 @@
         o = "@@iterator",
         p = "keys",
         q = "values",
-        r = function() {
+        r = function () {
           return this;
         };
-      a.exports = function(a, b, c, s, t, u, v) {
+      a.exports = function (a, b, c, s, t, u, v) {
         j(c, b, s);
         var w,
           x,
-          y = function(a) {
+          y = function (a) {
             if (!n && a in C) return C[a];
             switch (a) {
               case p:
-                return function() {
+                return function () {
                   return new c(this, a);
                 };
               case q:
-                return function() {
+                return function () {
                   return new c(this, a);
                 };
             }
-            return function() {
+            return function () {
               return new c(this, a);
             };
           },
@@ -1100,55 +1109,56 @@
           k(F, z, !0),
             !d && h(C, o) && g(F, m, r),
             A &&
-            D.name !== q &&
-            ((B = !0),
-              (E = function() {
+              D.name !== q &&
+              ((B = !0),
+              (E = function () {
                 return D.call(this);
               }));
         }
         if (
           ((d && !v) || (!n && !B && C[m]) || g(C, m, E),
-            (i[b] = E),
-            (i[z] = r),
-            t)
+          (i[b] = E),
+          (i[z] = r),
+          t)
         )
           if (
             ((w = {
-                values: A ? E : y(q),
-                keys: u ? E : y(p),
-                entries: A ? y("entries") : E,
-              }),
-              v)
+              values: A ? E : y(q),
+              keys: u ? E : y(p),
+              entries: A ? y("entries") : E,
+            }),
+            v)
           )
             for (x in w) x in C || f(C, x, w[x]);
           else e(e.P + e.F * (n || B), b, w);
         return w;
       };
     },
-    function(a, b) {
+    function (a, b) {
       a.exports = {};
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(9),
         e = c(26),
         f = c(28),
         g = {};
-      c(25)(g, c(29)("iterator"), function() {
-          return this;
-        }),
-        (a.exports = function(a, b, c) {
+      c(25)(g, c(29)("iterator"), function () {
+        return this;
+      }),
+        (a.exports = function (a, b, c) {
           (a.prototype = d.create(g, {
-            next: e(1, c)
-          })), f(a, b + " Iterator");
+            next: e(1, c),
+          })),
+            f(a, b + " Iterator");
         });
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(52);
       var d = c(49);
       d.NodeList = d.HTMLCollection = d.Array;
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(53),
         e = c(54),
@@ -1157,167 +1167,167 @@
       (a.exports = c(48)(
         Array,
         "Array",
-        function(a, b) {
+        function (a, b) {
           (this._t = g(a)), (this._i = 0), (this._k = b);
         },
-        function() {
+        function () {
           var a = this._t,
             b = this._k,
             c = this._i++;
-          return !a || c >= a.length ?
-            ((this._t = void 0), e(1)) :
-            "keys" == b ?
-            e(0, c) :
-            "values" == b ?
-            e(0, a[c]) :
-            e(0, [c, a[c]]);
+          return !a || c >= a.length
+            ? ((this._t = void 0), e(1))
+            : "keys" == b
+              ? e(0, c)
+              : "values" == b
+                ? e(0, a[c])
+                : e(0, [c, a[c]]);
         },
         "values",
       )),
-      (f.Arguments = f.Array),
-      d("keys"),
+        (f.Arguments = f.Array),
+        d("keys"),
         d("values"),
         d("entries");
     },
-    function(a, b) {
-      a.exports = function() {};
+    function (a, b) {
+      a.exports = function () {};
     },
-    function(a, b) {
-      a.exports = function(a, b) {
+    function (a, b) {
+      a.exports = function (a, b) {
         return {
           value: b,
-          done: !!a
+          done: !!a,
         };
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(56),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(51), c(45), (a.exports = c(57));
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(39),
         e = c(58);
-      a.exports = c(21).getIterator = function(a) {
+      a.exports = c(21).getIterator = function (a) {
         var b = e(a);
         if ("function" != typeof b) throw TypeError(a + " is not iterable!");
         return d(b.call(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(59),
         e = c(29)("iterator"),
         f = c(49);
-      a.exports = c(21).getIteratorMethod = function(a) {
+      a.exports = c(21).getIteratorMethod = function (a) {
         if (void 0 != a) return a[e] || a["@@iterator"] || f[d(a)];
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(34),
         e = c(29)("toStringTag"),
         f =
-        "Arguments" ==
-        d(
-          (function() {
-            return arguments;
-          })(),
-        );
-      a.exports = function(a) {
+          "Arguments" ==
+          d(
+            (function () {
+              return arguments;
+            })(),
+          );
+      a.exports = function (a) {
         var b, c, g;
-        return void 0 === a ?
-          "Undefined" :
-          null === a ?
-          "Null" :
-          "string" == typeof(c = (b = Object(a))[e]) ?
-          c :
-          f ?
-          d(b) :
-          "Object" == (g = d(b)) && "function" == typeof b.callee ?
-          "Arguments" :
-          g;
+        return void 0 === a
+          ? "Undefined"
+          : null === a
+            ? "Null"
+            : "string" == typeof (c = (b = Object(a))[e])
+              ? c
+              : f
+                ? d(b)
+                : "Object" == (g = d(b)) && "function" == typeof b.callee
+                  ? "Arguments"
+                  : g;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(61),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(62), (a.exports = c(21).Object.keys);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(63);
-      c(64)("keys", function(a) {
-        return function(b) {
+      c(64)("keys", function (a) {
+        return function (b) {
           return a(d(b));
         };
       });
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(35);
-      a.exports = function(a) {
+      a.exports = function (a) {
         return Object(d(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(20),
         e = c(21),
         f = c(19);
-      a.exports = function(a, b) {
+      a.exports = function (a, b) {
         var c = (e.Object || {})[a] || Object[a],
           g = {};
         (g[a] = b(c)),
-        d(
-          d.S +
-          d.F *
-          f(function() {
-            c(1);
-          }),
-          "Object",
-          g,
-        );
+          d(
+            d.S +
+              d.F *
+                f(function () {
+                  c(1);
+                }),
+            "Object",
+            g,
+          );
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(1)["default"];
       b.__esModule = !0;
       var e = c(6),
         f = d(e);
-      (b["default"] = function(a) {
-        a.registerHelper("helperMissing", function() {
+      (b["default"] = function (a) {
+        a.registerHelper("helperMissing", function () {
           if (1 !== arguments.length)
             throw new f["default"](
               'Missing helper: "' + arguments[arguments.length - 1].name + '"',
             );
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(1)["default"];
       b.__esModule = !0;
       var e = c(5),
         f = c(6),
         g = d(f);
-      (b["default"] = function(a) {
-        a.registerHelper("if", function(a, b) {
-            if (2 != arguments.length)
-              throw new g["default"]("#if requires exactly one argument");
-            return (
-              e.isFunction(a) && (a = a.call(this)),
-              (!b.hash.includeZero && !a) || e.isEmpty(a) ?
-              b.inverse(this) :
-              b.fn(this)
-            );
-          }),
-          a.registerHelper("unless", function(b, c) {
+      (b["default"] = function (a) {
+        a.registerHelper("if", function (a, b) {
+          if (2 != arguments.length)
+            throw new g["default"]("#if requires exactly one argument");
+          return (
+            e.isFunction(a) && (a = a.call(this)),
+            (!b.hash.includeZero && !a) || e.isEmpty(a)
+              ? b.inverse(this)
+              : b.fn(this)
+          );
+        }),
+          a.registerHelper("unless", function (b, c) {
             if (2 != arguments.length)
               throw new g["default"]("#unless requires exactly one argument");
             return a.helpers["if"].call(this, b, {
@@ -1327,46 +1337,48 @@
             });
           });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       (b.__esModule = !0),
-      (b["default"] = function(a) {
-        a.registerHelper("log", function() {
-          for (
-            var b = [void 0], c = arguments[arguments.length - 1], d = 0; d < arguments.length - 1; d++
-          )
-            b.push(arguments[d]);
-          var e = 1;
-          null != c.hash.level ?
-            (e = c.hash.level) :
-            c.data && null != c.data.level && (e = c.data.level),
-            (b[0] = e),
-            a.log.apply(a, b);
-        });
-      }),
-      (a.exports = b["default"]);
+        (b["default"] = function (a) {
+          a.registerHelper("log", function () {
+            for (
+              var b = [void 0], c = arguments[arguments.length - 1], d = 0;
+              d < arguments.length - 1;
+              d++
+            )
+              b.push(arguments[d]);
+            var e = 1;
+            null != c.hash.level
+              ? (e = c.hash.level)
+              : c.data && null != c.data.level && (e = c.data.level),
+              (b[0] = e),
+              a.log.apply(a, b);
+          });
+        }),
+        (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       (b.__esModule = !0),
-      (b["default"] = function(a) {
-        a.registerHelper("lookup", function(a, b, c) {
-          return a ? c.lookupProperty(a, b) : a;
-        });
-      }),
-      (a.exports = b["default"]);
+        (b["default"] = function (a) {
+          a.registerHelper("lookup", function (a, b, c) {
+            return a ? c.lookupProperty(a, b) : a;
+          });
+        }),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(1)["default"];
       b.__esModule = !0;
       var e = c(5),
         f = c(6),
         g = d(f);
-      (b["default"] = function(a) {
-        a.registerHelper("with", function(a, b) {
+      (b["default"] = function (a) {
+        a.registerHelper("with", function (a, b) {
           if (2 != arguments.length)
             throw new g["default"]("#with requires exactly one argument");
           e.isFunction(a) && (a = a.call(this));
@@ -1375,8 +1387,8 @@
           var d = b.data;
           return (
             b.data &&
-            b.ids &&
-            ((d = e.createFrame(b.data)),
+              b.ids &&
+              ((d = e.createFrame(b.data)),
               (d.contextPath = e.appendContextPath(
                 b.data.contextPath,
                 b.ids[0],
@@ -1388,9 +1400,9 @@
           );
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -1401,17 +1413,17 @@
       var f = c(71),
         g = e(f);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       b.__esModule = !0;
       var d = c(5);
-      (b["default"] = function(a) {
-        a.registerDecorator("inline", function(a, b, c, e) {
+      (b["default"] = function (a) {
+        a.registerDecorator("inline", function (a, b, c, e) {
           var f = a;
           return (
             b.partials ||
-            ((b.partials = {}),
-              (f = function(e, f) {
+              ((b.partials = {}),
+              (f = function (e, f) {
                 var g = c.partials;
                 c.partials = d.extend({}, g, b.partials);
                 var h = a(e, f);
@@ -1422,31 +1434,33 @@
           );
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       b.__esModule = !0;
       var d = c(5),
         e = {
           methodMap: ["debug", "info", "warn", "error"],
           level: "info",
-          lookupLevel: function(a) {
+          lookupLevel: function (a) {
             if ("string" == typeof a) {
               var b = d.indexOf(e.methodMap, a.toLowerCase());
               a = b >= 0 ? b : parseInt(a, 10);
             }
             return a;
           },
-          log: function(a) {
+          log: function (a) {
             if (
               ((a = e.lookupLevel(a)),
-                "undefined" != typeof console && e.lookupLevel(e.level) <= a)
+              "undefined" != typeof console && e.lookupLevel(e.level) <= a)
             ) {
               var b = e.methodMap[a];
               console[b] || (b = "log");
               for (
-                var c = arguments.length, d = Array(c > 1 ? c - 1 : 0), f = 1; f < c; f++
+                var c = arguments.length, d = Array(c > 1 ? c - 1 : 0), f = 1;
+                f < c;
+                f++
               )
                 d[f - 1] = arguments[f];
               console[b].apply(console, d);
@@ -1455,18 +1469,19 @@
         };
       (b["default"] = e), (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
         var b = i(null);
         (b.constructor = !1),
-        (b.__defineGetter__ = !1),
-        (b.__defineSetter__ = !1),
-        (b.__lookupGetter__ = !1);
+          (b.__defineGetter__ = !1),
+          (b.__defineSetter__ = !1),
+          (b.__lookupGetter__ = !1);
         var c = i(null);
         return (
-          (c.__proto__ = !1), {
+          (c.__proto__ = !1),
+          {
             properties: {
               whitelist: l.createNewLookupObject(c, a.allowedProtoProperties),
               defaultValue: a.allowProtoPropertiesByDefault,
@@ -1484,26 +1499,26 @@
       }
 
       function f(a, b) {
-        return void 0 !== a.whitelist[b] ?
-          a.whitelist[b] === !0 :
-          void 0 !== a.defaultValue ?
-          a.defaultValue :
-          (g(b), !1);
+        return void 0 !== a.whitelist[b]
+          ? a.whitelist[b] === !0
+          : void 0 !== a.defaultValue
+            ? a.defaultValue
+            : (g(b), !1);
       }
 
       function g(a) {
         o[a] !== !0 &&
           ((o[a] = !0),
-            n["default"].log(
-              "error",
-              'Handlebars: Access has been denied to resolve the property "' +
+          n["default"].log(
+            "error",
+            'Handlebars: Access has been denied to resolve the property "' +
               a +
               '" because it is not an "own property" of its parent.\nYou can add a runtime option to disable the check or this warning:\nSee https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details',
-            ));
+          ));
       }
 
       function h() {
-        j(o).forEach(function(a) {
+        j(o).forEach(function (a) {
           delete o[a];
         });
       }
@@ -1511,27 +1526,27 @@
         j = c(60)["default"],
         k = c(1)["default"];
       (b.__esModule = !0),
-      (b.createProtoAccessControl = d),
-      (b.resultIsAllowed = e),
-      (b.resetLoggedProperties = h);
+        (b.createProtoAccessControl = d),
+        (b.resultIsAllowed = e),
+        (b.resetLoggedProperties = h);
       var l = c(76),
         m = c(72),
         n = k(m),
         o = i(null);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(75),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9);
-      a.exports = function(a, b) {
+      a.exports = function (a, b) {
         return d.create(a, b);
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -1543,21 +1558,21 @@
       (b.__esModule = !0), (b.createNewLookupObject = d);
       var f = c(5);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
 
       function c(a) {
         this.string = a;
       }
       (b.__esModule = !0),
-      (c.prototype.toString = c.prototype.toHTML =
-        function() {
-          return "" + this.string;
-        }),
-      (b["default"] = c),
-      (a.exports = b["default"]);
+        (c.prototype.toString = c.prototype.toHTML =
+          function () {
+            return "" + this.string;
+          }),
+        (b["default"] = c),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -1573,16 +1588,16 @@
               e = v.REVISION_CHANGES[b];
             throw new u["default"](
               "Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version (" +
-              d +
-              ") or downgrade your runtime to an older version (" +
-              e +
-              ").",
+                d +
+                ") or downgrade your runtime to an older version (" +
+                e +
+                ").",
             );
           }
           throw new u["default"](
             "Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version (" +
-            a[1] +
-            ").",
+              a[1] +
+              ").",
           );
         }
       }
@@ -1600,12 +1615,14 @@
             (null == g &&
               b.compile &&
               ((e.partials[e.name] = b.compile(c, a.compilerOptions, b)),
-                (g = e.partials[e.name](d, f))),
-              null != g)
+              (g = e.partials[e.name](d, f))),
+            null != g)
           ) {
             if (e.indent) {
               for (
-                var h = g.split("\n"), i = 0, j = h.length; i < j && (h[i] || i + 1 !== j); i++
+                var h = g.split("\n"), i = 0, j = h.length;
+                i < j && (h[i] || i + 1 !== j);
+                i++
               )
                 h[i] = e.indent + h[i];
               g = h.join("\n");
@@ -1614,8 +1631,8 @@
           }
           throw new u["default"](
             "The partial " +
-            e.name +
-            " could not be compiled when running in runtime-only mode",
+              e.name +
+              " could not be compiled when running in runtime-only mode",
           );
         }
 
@@ -1624,20 +1641,20 @@
             return "" + a.main(g, b, g.helpers, g.partials, f, i, h);
           }
           var e =
-            arguments.length <= 1 || void 0 === arguments[1] ?
-            {} :
-            arguments[1],
+              arguments.length <= 1 || void 0 === arguments[1]
+                ? {}
+                : arguments[1],
             f = e.data;
           d._setup(e), !e.partial && a.useData && (f = j(b, f));
           var h = void 0,
             i = a.useBlockParams ? [] : void 0;
           return (
             a.useDepths &&
-            (h = e.depths ?
-              b != e.depths[0] ?
-              [b].concat(e.depths) :
-              e.depths :
-              [b]),
+              (h = e.depths
+                ? b != e.depths[0]
+                  ? [b].concat(e.depths)
+                  : e.depths
+                : [b]),
             (c = k(a.main, c, g, e.depths || [], f, i))(b, e)
           );
         }
@@ -1647,54 +1664,54 @@
         (a.main.decorator = a.main_d), b.VM.checkRevision(a.compiler);
         var e = a.compiler && 7 === a.compiler[0],
           g = {
-            strict: function(a, b, c) {
+            strict: function (a, b, c) {
               if (!(a && b in a))
                 throw new u["default"]('"' + b + '" not defined in ' + a, {
                   loc: c,
                 });
               return g.lookupProperty(a, b);
             },
-            lookupProperty: function(a, b) {
+            lookupProperty: function (a, b) {
               var c = a[b];
-              return null == c ?
-                c :
-                Object.prototype.hasOwnProperty.call(a, b) ?
-                c :
-                y.resultIsAllowed(c, g.protoAccessControl, b) ?
-                c :
-                void 0;
+              return null == c
+                ? c
+                : Object.prototype.hasOwnProperty.call(a, b)
+                  ? c
+                  : y.resultIsAllowed(c, g.protoAccessControl, b)
+                    ? c
+                    : void 0;
             },
-            lookup: function(a, b) {
+            lookup: function (a, b) {
               for (var c = a.length, d = 0; d < c; d++) {
                 var e = a[d] && g.lookupProperty(a[d], b);
                 if (null != e) return a[d][b];
               }
             },
-            lambda: function(a, b) {
+            lambda: function (a, b) {
               return "function" == typeof a ? a.call(b) : a;
             },
             escapeExpression: s.escapeExpression,
             invokePartial: c,
-            fn: function(b) {
+            fn: function (b) {
               var c = a[b];
               return (c.decorator = a[b + "_d"]), c;
             },
             programs: [],
-            program: function(a, b, c, d, e) {
+            program: function (a, b, c, d, e) {
               var g = this.programs[a],
                 h = this.fn(a);
               return (
-                b || e || d || c ?
-                (g = f(this, a, h, b, c, d, e)) :
-                g || (g = this.programs[a] = f(this, a, h)),
+                b || e || d || c
+                  ? (g = f(this, a, h, b, c, d, e))
+                  : g || (g = this.programs[a] = f(this, a, h)),
                 g
               );
             },
-            data: function(a, b) {
-              for (; a && b--;) a = a._parent;
+            data: function (a, b) {
+              for (; a && b--; ) a = a._parent;
               return a;
             },
-            mergeIfNeeded: function(a, b) {
+            mergeIfNeeded: function (a, b) {
               var c = a || b;
               return a && b && a !== b && (c = s.extend({}, b, a)), c;
             },
@@ -1704,21 +1721,21 @@
           };
         return (
           (d.isTop = !0),
-          (d._setup = function(c) {
+          (d._setup = function (c) {
             if (c.partial)
               (g.protoAccessControl = c.protoAccessControl),
-              (g.helpers = c.helpers),
-              (g.partials = c.partials),
-              (g.decorators = c.decorators),
-              (g.hooks = c.hooks);
+                (g.helpers = c.helpers),
+                (g.partials = c.partials),
+                (g.decorators = c.decorators),
+                (g.hooks = c.hooks);
             else {
               var d = s.extend({}, b.helpers, c.helpers);
               l(d, g),
                 (g.helpers = d),
                 a.usePartial &&
-                (g.partials = g.mergeIfNeeded(c.partials, b.partials)),
+                  (g.partials = g.mergeIfNeeded(c.partials, b.partials)),
                 (a.usePartial || a.useDecorators) &&
-                (g.decorators = s.extend({}, b.decorators, c.decorators)),
+                  (g.decorators = s.extend({}, b.decorators, c.decorators)),
                 (g.hooks = {}),
                 (g.protoAccessControl = y.createProtoAccessControl(c));
               var f = c.allowCallsToHelperMissing || e;
@@ -1726,7 +1743,7 @@
                 w.moveHelperToHooks(g, "blockHelperMissing", f);
             }
           }),
-          (d._child = function(b, c, d, e) {
+          (d._child = function (b, c, d, e) {
             if (a.useBlockParams && !d)
               throw new u["default"]("must pass block params");
             if (a.useDepths && !e)
@@ -1740,15 +1757,15 @@
       function f(a, b, c, d, e, f, g) {
         function h(b) {
           var e =
-            arguments.length <= 1 || void 0 === arguments[1] ?
-            {} :
-            arguments[1],
+              arguments.length <= 1 || void 0 === arguments[1]
+                ? {}
+                : arguments[1],
             h = g;
           return (
             !g ||
-            b == g[0] ||
-            (b === a.nullContext && null === g[0]) ||
-            (h = [b].concat(g)),
+              b == g[0] ||
+              (b === a.nullContext && null === g[0]) ||
+              (h = [b].concat(g)),
             c(
               a,
               b,
@@ -1771,12 +1788,12 @@
 
       function g(a, b, c) {
         return (
-          a ?
-          a.call || c.name || ((c.name = a), (a = c.partials[a])) :
-          (a =
-            "@partial-block" === c.name ?
-            c.data["partial-block"] :
-            c.partials[c.name]),
+          a
+            ? a.call || c.name || ((c.name = a), (a = c.partials[a]))
+            : (a =
+                "@partial-block" === c.name
+                  ? c.data["partial-block"]
+                  : c.partials[c.name]),
           a
         );
       }
@@ -1784,31 +1801,31 @@
       function h(a, b, c) {
         var d = c.data && c.data["partial-block"];
         (c.partial = !0),
-        c.ids && (c.data.contextPath = c.ids[0] || c.data.contextPath);
+          c.ids && (c.data.contextPath = c.ids[0] || c.data.contextPath);
         var e = void 0;
         if (
           (c.fn &&
             c.fn !== i &&
-            !(function() {
+            !(function () {
               c.data = v.createFrame(c.data);
               var a = c.fn;
               (e = c.data["partial-block"] =
-                function(b) {
+                function (b) {
                   var c =
-                    arguments.length <= 1 || void 0 === arguments[1] ?
-                    {} :
-                    arguments[1];
+                    arguments.length <= 1 || void 0 === arguments[1]
+                      ? {}
+                      : arguments[1];
                   return (
                     (c.data = v.createFrame(c.data)),
                     (c.data["partial-block"] = d),
                     a(b, c)
                   );
                 }),
-              a.partials &&
-                (c.partials = s.extend({}, c.partials, a.partials));
+                a.partials &&
+                  (c.partials = s.extend({}, c.partials, a.partials));
             })(),
-            void 0 === a && e && (a = e),
-            void 0 === a)
+          void 0 === a && e && (a = e),
+          void 0 === a)
         )
           throw new u["default"](
             "The partial " + c.name + " could not be found",
@@ -1836,7 +1853,7 @@
       }
 
       function l(a, b) {
-        o(a).forEach(function(c) {
+        o(a).forEach(function (c) {
           var d = a[c];
           a[c] = m(d, b);
         });
@@ -1844,10 +1861,13 @@
 
       function m(a, b) {
         var c = b.lookupProperty;
-        return x.wrapHelper(a, function(a) {
-          return s.extend({
-            lookupProperty: c
-          }, a);
+        return x.wrapHelper(a, function (a) {
+          return s.extend(
+            {
+              lookupProperty: c,
+            },
+            a,
+          );
         });
       }
       var n = c(79)["default"],
@@ -1855,12 +1875,12 @@
         p = c(3)["default"],
         q = c(1)["default"];
       (b.__esModule = !0),
-      (b.checkRevision = d),
-      (b.template = e),
-      (b.wrapProgram = f),
-      (b.resolvePartial = g),
-      (b.invokePartial = h),
-      (b.noop = i);
+        (b.checkRevision = d),
+        (b.template = e),
+        (b.wrapProgram = f),
+        (b.resolvePartial = g),
+        (b.invokePartial = h),
+        (b.noop = i);
       var r = c(5),
         s = p(r),
         t = c(6),
@@ -1870,29 +1890,29 @@
         x = c(82),
         y = c(73);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(80),
-        __esModule: !0
+        __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(81), (a.exports = c(21).Object.seal);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(40);
-      c(64)("seal", function(a) {
-        return function(b) {
+      c(64)("seal", function (a) {
+        return function (b) {
           return a && d(b) ? a(b) : b;
         };
       });
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
 
       function c(a, b) {
         if ("function" != typeof a) return a;
-        var c = function() {
+        var c = function () {
           var c = arguments[arguments.length - 1];
           return (
             (arguments[arguments.length - 1] = b(c)), a.apply(this, arguments)
@@ -1902,59 +1922,59 @@
       }
       (b.__esModule = !0), (b.wrapHelper = c);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       (b.__esModule = !0),
-      (b["default"] = function(a) {
-        !(function() {
-          "object" != typeof globalThis &&
-            (Object.prototype.__defineGetter__("__magic__", function() {
+        (b["default"] = function (a) {
+          !(function () {
+            "object" != typeof globalThis &&
+              (Object.prototype.__defineGetter__("__magic__", function () {
                 return this;
               }),
               (__magic__.globalThis = __magic__),
               delete Object.prototype.__magic__);
-        })();
-        var b = globalThis.Handlebars;
-        a.noConflict = function() {
-          return (
-            globalThis.Handlebars === a && (globalThis.Handlebars = b), a
-          );
-        };
-      }),
-      (a.exports = b["default"]);
+          })();
+          var b = globalThis.Handlebars;
+          a.noConflict = function () {
+            return (
+              globalThis.Handlebars === a && (globalThis.Handlebars = b), a
+            );
+          };
+        }),
+        (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       b.__esModule = !0;
       var c = {
         helpers: {
-          helperExpression: function(a) {
+          helperExpression: function (a) {
             return (
               "SubExpression" === a.type ||
               (("MustacheStatement" === a.type ||
-                  "BlockStatement" === a.type) &&
+                "BlockStatement" === a.type) &&
                 !!((a.params && a.params.length) || a.hash))
             );
           },
-          scopedId: function(a) {
+          scopedId: function (a) {
             return /^\.|this\b/.test(a.original);
           },
-          simpleId: function(a) {
+          simpleId: function (a) {
             return 1 === a.parts.length && !c.helpers.scopedId(a) && !a.depth;
           },
         },
       };
       (b["default"] = c), (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b) {
         if ("Program" === a.type) return a;
         (i["default"].yy = o),
-        (o.locInfo = function(a) {
-          return new o.SourceLocation(b && b.srcName, a);
-        });
+          (o.locInfo = function (a) {
+            return new o.SourceLocation(b && b.srcName, a);
+          });
         var c = i["default"].parse(a);
         return c;
       }
@@ -1978,15 +1998,15 @@
       var o = {};
       n.extend(o, m);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       b.__esModule = !0;
-      var c = (function() {
+      var c = (function () {
         function a() {
           this.yy = {};
         }
         var b = {
-            trace: function() {},
+            trace: function () {},
             yy: {},
             symbols_: {
               error: 2,
@@ -2215,7 +2235,7 @@
               [76, 1],
               [76, 2],
             ],
-            performAction: function(a, b, c, d, e, f, g) {
+            performAction: function (a, b, c, d, e, f, g) {
               var h = f.length - 1;
               switch (e) {
                 case 1:
@@ -2264,7 +2284,7 @@
                   this.$ = {
                     path: f[h - 3],
                     params: f[h - 2],
-                    hash: f[h - 1]
+                    hash: f[h - 1],
                   };
                   break;
                 case 13:
@@ -2332,11 +2352,11 @@
                     ),
                     j = d.prepareProgram([i], f[h - 1].loc);
                   (j.chained = !0),
-                  (this.$ = {
-                    strip: f[h - 2].strip,
-                    program: j,
-                    chain: !0
-                  });
+                    (this.$ = {
+                      strip: f[h - 2].strip,
+                      program: j,
+                      chain: !0,
+                    });
                   break;
                 case 20:
                   this.$ = f[h];
@@ -2487,17 +2507,19 @@
                   break;
                 case 44:
                   f[h - 2].push({
-                      part: d.id(f[h]),
-                      original: f[h],
-                      separator: f[h - 1],
-                    }),
+                    part: d.id(f[h]),
+                    original: f[h],
+                    separator: f[h - 1],
+                  }),
                     (this.$ = f[h - 2]);
                   break;
                 case 45:
-                  this.$ = [{
-                    part: d.id(f[h]),
-                    original: f[h]
-                  }];
+                  this.$ = [
+                    {
+                      part: d.id(f[h]),
+                      original: f[h],
+                    },
+                  ];
                   break;
                 case 46:
                   this.$ = [];
@@ -2578,7 +2600,8 @@
                   f[h - 1].push(f[h]);
               }
             },
-            table: [{
+            table: [
+              {
                 3: 1,
                 4: 2,
                 5: [2, 46],
@@ -2594,10 +2617,10 @@
                 60: [2, 46],
               },
               {
-                1: [3]
+                1: [3],
               },
               {
-                5: [1, 4]
+                5: [1, 4],
               },
               {
                 5: [2, 2],
@@ -2626,7 +2649,7 @@
                 60: [1, 24],
               },
               {
-                1: [2, 1]
+                1: [2, 1],
               },
               {
                 5: [2, 47],
@@ -2808,7 +2831,7 @@
               {
                 15: [2, 48],
                 17: 39,
-                18: [2, 48]
+                18: [2, 48],
               },
               {
                 20: 41,
@@ -3046,7 +3069,7 @@
               },
               {
                 72: [1, 35],
-                86: 51
+                86: 51,
               },
               {
                 23: [2, 45],
@@ -3089,12 +3112,12 @@
                 28: 59,
                 43: 60,
                 44: [1, 58],
-                47: [2, 56]
+                47: [2, 56],
               },
               {
                 13: 62,
                 15: [1, 20],
-                18: [1, 61]
+                18: [1, 61],
               },
               {
                 33: [2, 86],
@@ -3145,7 +3168,7 @@
               },
               {
                 26: 65,
-                47: [1, 66]
+                47: [1, 66],
               },
               {
                 30: 67,
@@ -3219,7 +3242,7 @@
                 86: 33,
               },
               {
-                72: [1, 79]
+                72: [1, 79],
               },
               {
                 23: [2, 42],
@@ -3260,10 +3283,10 @@
               },
               {
                 26: 83,
-                47: [1, 66]
+                47: [1, 66],
               },
               {
-                47: [2, 55]
+                47: [2, 55],
               },
               {
                 4: 84,
@@ -3282,7 +3305,7 @@
                 60: [2, 46],
               },
               {
-                47: [2, 20]
+                47: [2, 20],
               },
               {
                 20: 85,
@@ -3313,10 +3336,10 @@
               },
               {
                 26: 87,
-                47: [1, 66]
+                47: [1, 66],
               },
               {
-                47: [2, 57]
+                47: [2, 57],
               },
               {
                 5: [2, 11],
@@ -3335,7 +3358,7 @@
               },
               {
                 15: [2, 49],
-                18: [2, 49]
+                18: [2, 49],
               },
               {
                 20: 74,
@@ -3485,7 +3508,7 @@
                 86: 33,
               },
               {
-                33: [1, 105]
+                33: [1, 105],
               },
               {
                 33: [2, 79],
@@ -3499,7 +3522,7 @@
                 85: [2, 79],
               },
               {
-                33: [2, 81]
+                33: [2, 81],
               },
               {
                 23: [2, 27],
@@ -3582,7 +3605,7 @@
                 87: [2, 44],
               },
               {
-                54: [1, 109]
+                54: [1, 109],
               },
               {
                 54: [2, 83],
@@ -3596,7 +3619,7 @@
                 85: [2, 83],
               },
               {
-                54: [2, 85]
+                54: [2, 85],
               },
               {
                 5: [2, 13],
@@ -3636,7 +3659,7 @@
                 85: [2, 70],
               },
               {
-                47: [2, 18]
+                47: [2, 18],
               },
               {
                 5: [2, 14],
@@ -3654,7 +3677,7 @@
                 60: [2, 14],
               },
               {
-                33: [1, 113]
+                33: [1, 113],
               },
               {
                 33: [2, 87],
@@ -3668,7 +3691,7 @@
                 85: [2, 87],
               },
               {
-                33: [2, 89]
+                33: [2, 89],
               },
               {
                 20: 74,
@@ -3692,13 +3715,13 @@
                 86: 33,
               },
               {
-                33: [1, 117]
+                33: [1, 117],
               },
               {
                 32: 118,
                 33: [2, 62],
                 74: 119,
-                75: [1, 120]
+                75: [1, 120],
               },
               {
                 33: [2, 59],
@@ -3714,13 +3737,13 @@
               },
               {
                 33: [2, 61],
-                75: [2, 61]
+                75: [2, 61],
               },
               {
                 33: [2, 68],
                 37: 121,
                 74: 122,
-                75: [1, 120]
+                75: [1, 120],
               },
               {
                 33: [2, 65],
@@ -3736,10 +3759,10 @@
               },
               {
                 33: [2, 67],
-                75: [2, 67]
+                75: [2, 67],
               },
               {
-                23: [1, 123]
+                23: [1, 123],
               },
               {
                 23: [2, 51],
@@ -3753,10 +3776,10 @@
                 85: [2, 51],
               },
               {
-                23: [2, 53]
+                23: [2, 53],
               },
               {
-                33: [1, 124]
+                33: [1, 124],
               },
               {
                 33: [2, 91],
@@ -3770,7 +3793,7 @@
                 85: [2, 91],
               },
               {
-                33: [2, 93]
+                33: [2, 93],
               },
               {
                 5: [2, 22],
@@ -3796,7 +3819,7 @@
                 75: [2, 99],
               },
               {
-                73: [1, 108]
+                73: [1, 108],
               },
               {
                 20: 74,
@@ -3830,10 +3853,10 @@
                 60: [2, 23],
               },
               {
-                47: [2, 19]
+                47: [2, 19],
               },
               {
-                47: [2, 77]
+                47: [2, 77],
               },
               {
                 20: 74,
@@ -3873,7 +3896,7 @@
                 60: [2, 24],
               },
               {
-                68: [1, 129]
+                68: [1, 129],
               },
               {
                 65: [2, 95],
@@ -3887,7 +3910,7 @@
                 85: [2, 95],
               },
               {
-                68: [2, 97]
+                68: [2, 97],
               },
               {
                 5: [2, 21],
@@ -3905,24 +3928,24 @@
                 60: [2, 21],
               },
               {
-                33: [1, 130]
+                33: [1, 130],
               },
               {
-                33: [2, 63]
+                33: [2, 63],
               },
               {
                 72: [1, 132],
-                76: 131
+                76: 131,
               },
               {
-                33: [1, 133]
+                33: [1, 133],
               },
               {
-                33: [2, 69]
+                33: [2, 69],
               },
               {
                 15: [2, 12],
-                18: [2, 12]
+                18: [2, 12],
               },
               {
                 14: [2, 26],
@@ -3948,7 +3971,7 @@
                 33: [2, 74],
                 42: 134,
                 74: 135,
-                75: [1, 120]
+                75: [1, 120],
               },
               {
                 33: [2, 71],
@@ -3964,7 +3987,7 @@
               },
               {
                 33: [2, 73],
-                75: [2, 73]
+                75: [2, 73],
               },
               {
                 23: [2, 29],
@@ -3997,11 +4020,11 @@
               },
               {
                 72: [1, 137],
-                77: [1, 136]
+                77: [1, 136],
               },
               {
                 72: [2, 100],
-                77: [2, 100]
+                77: [2, 100],
               },
               {
                 14: [2, 16],
@@ -4017,17 +4040,17 @@
                 60: [2, 16],
               },
               {
-                33: [1, 138]
+                33: [1, 138],
               },
               {
-                33: [2, 75]
+                33: [2, 75],
               },
               {
-                33: [2, 32]
+                33: [2, 32],
               },
               {
                 72: [2, 101],
-                77: [2, 101]
+                77: [2, 101],
               },
               {
                 14: [2, 17],
@@ -4063,10 +4086,10 @@
               135: [2, 75],
               136: [2, 32],
             },
-            parseError: function(a, b) {
+            parseError: function (a, b) {
               throw new Error(a);
             },
-            parse: function(a) {
+            parse: function (a) {
               function b() {
                 var a;
                 return (
@@ -4089,59 +4112,59 @@
                 (this.yy.lexer = this.lexer),
                 (this.yy.parser = this),
                 "undefined" == typeof this.lexer.yylloc &&
-                (this.lexer.yylloc = {});
+                  (this.lexer.yylloc = {});
               var l = this.lexer.yylloc;
               f.push(l);
               var m = this.lexer.options && this.lexer.options.ranges;
               "function" == typeof this.yy.parseError &&
                 (this.parseError = this.yy.parseError);
-              for (var n, o, p, q, r, s, t, u, v, w = {};;) {
+              for (var n, o, p, q, r, s, t, u, v, w = {}; ; ) {
                 if (
                   ((p = d[d.length - 1]),
-                    this.defaultActions[p] ?
-                    (q = this.defaultActions[p]) :
-                    ((null !== n && "undefined" != typeof n) || (n = b()),
+                  this.defaultActions[p]
+                    ? (q = this.defaultActions[p])
+                    : ((null !== n && "undefined" != typeof n) || (n = b()),
                       (q = g[p] && g[p][n])),
-                    "undefined" == typeof q || !q.length || !q[0])
+                  "undefined" == typeof q || !q.length || !q[0])
                 ) {
                   var x = "";
                   if (!k) {
                     v = [];
                     for (s in g[p])
                       this.terminals_[s] &&
-                      s > 2 &&
-                      v.push("'" + this.terminals_[s] + "'");
-                    (x = this.lexer.showPosition ?
-                      "Parse error on line " +
-                      (i + 1) +
-                      ":\n" +
-                      this.lexer.showPosition() +
-                      "\nExpecting " +
-                      v.join(", ") +
-                      ", got '" +
-                      (this.terminals_[n] || n) +
-                      "'" :
-                      "Parse error on line " +
-                      (i + 1) +
-                      ": Unexpected " +
-                      (1 == n ?
-                        "end of input" :
-                        "'" + (this.terminals_[n] || n) + "'")),
-                    this.parseError(x, {
-                      text: this.lexer.match,
-                      token: this.terminals_[n] || n,
-                      line: this.lexer.yylineno,
-                      loc: l,
-                      expected: v,
-                    });
+                        s > 2 &&
+                        v.push("'" + this.terminals_[s] + "'");
+                    (x = this.lexer.showPosition
+                      ? "Parse error on line " +
+                        (i + 1) +
+                        ":\n" +
+                        this.lexer.showPosition() +
+                        "\nExpecting " +
+                        v.join(", ") +
+                        ", got '" +
+                        (this.terminals_[n] || n) +
+                        "'"
+                      : "Parse error on line " +
+                        (i + 1) +
+                        ": Unexpected " +
+                        (1 == n
+                          ? "end of input"
+                          : "'" + (this.terminals_[n] || n) + "'")),
+                      this.parseError(x, {
+                        text: this.lexer.match,
+                        token: this.terminals_[n] || n,
+                        line: this.lexer.yylineno,
+                        loc: l,
+                        expected: v,
+                      });
                   }
                 }
                 if (q[0] instanceof Array && q.length > 1)
                   throw new Error(
                     "Parse Error: multiple actions possible at state: " +
-                    p +
-                    ", token: " +
-                    n,
+                      p +
+                      ", token: " +
+                      n,
                   );
                 switch (q[0]) {
                   case 1:
@@ -4150,46 +4173,46 @@
                       f.push(this.lexer.yylloc),
                       d.push(q[1]),
                       (n = null),
-                      o ?
-                      ((n = o), (o = null)) :
-                      ((j = this.lexer.yyleng),
-                        (h = this.lexer.yytext),
-                        (i = this.lexer.yylineno),
-                        (l = this.lexer.yylloc),
-                        k > 0 && k--);
+                      o
+                        ? ((n = o), (o = null))
+                        : ((j = this.lexer.yyleng),
+                          (h = this.lexer.yytext),
+                          (i = this.lexer.yylineno),
+                          (l = this.lexer.yylloc),
+                          k > 0 && k--);
                     break;
                   case 2:
                     if (
                       ((t = this.productions_[q[1]][1]),
-                        (w.$ = e[e.length - t]),
-                        (w._$ = {
-                          first_line: f[f.length - (t || 1)].first_line,
-                          last_line: f[f.length - 1].last_line,
-                          first_column: f[f.length - (t || 1)].first_column,
-                          last_column: f[f.length - 1].last_column,
-                        }),
-                        m &&
+                      (w.$ = e[e.length - t]),
+                      (w._$ = {
+                        first_line: f[f.length - (t || 1)].first_line,
+                        last_line: f[f.length - 1].last_line,
+                        first_column: f[f.length - (t || 1)].first_column,
+                        last_column: f[f.length - 1].last_column,
+                      }),
+                      m &&
                         (w._$.range = [
                           f[f.length - (t || 1)].range[0],
                           f[f.length - 1].range[1],
                         ]),
-                        (r = this.performAction.call(
-                          w,
-                          h,
-                          j,
-                          i,
-                          this.yy,
-                          q[1],
-                          e,
-                          f,
-                        )),
-                        "undefined" != typeof r)
+                      (r = this.performAction.call(
+                        w,
+                        h,
+                        j,
+                        i,
+                        this.yy,
+                        q[1],
+                        e,
+                        f,
+                      )),
+                      "undefined" != typeof r)
                     )
                       return r;
                     t &&
                       ((d = d.slice(0, -1 * t * 2)),
-                        (e = e.slice(0, -1 * t)),
-                        (f = f.slice(0, -1 * t))),
+                      (e = e.slice(0, -1 * t)),
+                      (f = f.slice(0, -1 * t))),
                       d.push(this.productions_[q[1]][0]),
                       e.push(w.$),
                       f.push(w._$),
@@ -4203,14 +4226,14 @@
               return !0;
             },
           },
-          c = (function() {
+          c = (function () {
             var a = {
               EOF: 1,
-              parseError: function(a, b) {
+              parseError: function (a, b) {
                 if (!this.yy.parser) throw new Error(a);
                 this.yy.parser.parseError(a, b);
               },
-              setInput: function(a) {
+              setInput: function (a) {
                 return (
                   (this._input = a),
                   (this._more = this._less = this.done = !1),
@@ -4228,63 +4251,63 @@
                   this
                 );
               },
-              input: function() {
+              input: function () {
                 var a = this._input[0];
                 (this.yytext += a),
-                this.yyleng++,
+                  this.yyleng++,
                   this.offset++,
                   (this.match += a),
                   (this.matched += a);
                 var b = a.match(/(?:\r\n?|\n).*/g);
                 return (
-                  b ?
-                  (this.yylineno++, this.yylloc.last_line++) :
-                  this.yylloc.last_column++,
+                  b
+                    ? (this.yylineno++, this.yylloc.last_line++)
+                    : this.yylloc.last_column++,
                   this.options.ranges && this.yylloc.range[1]++,
                   (this._input = this._input.slice(1)),
                   a
                 );
               },
-              unput: function(a) {
+              unput: function (a) {
                 var b = a.length,
                   c = a.split(/(?:\r\n?|\n)/g);
                 (this._input = a + this._input),
-                (this.yytext = this.yytext.substr(
-                  0,
-                  this.yytext.length - b - 1,
-                )),
-                (this.offset -= b);
+                  (this.yytext = this.yytext.substr(
+                    0,
+                    this.yytext.length - b - 1,
+                  )),
+                  (this.offset -= b);
                 var d = this.match.split(/(?:\r\n?|\n)/g);
                 (this.match = this.match.substr(0, this.match.length - 1)),
-                (this.matched = this.matched.substr(
-                  0,
-                  this.matched.length - 1,
-                )),
-                c.length - 1 && (this.yylineno -= c.length - 1);
+                  (this.matched = this.matched.substr(
+                    0,
+                    this.matched.length - 1,
+                  )),
+                  c.length - 1 && (this.yylineno -= c.length - 1);
                 var e = this.yylloc.range;
                 return (
                   (this.yylloc = {
                     first_line: this.yylloc.first_line,
                     last_line: this.yylineno + 1,
                     first_column: this.yylloc.first_column,
-                    last_column: c ?
-                      (c.length === d.length ? this.yylloc.first_column : 0) +
-                      d[d.length - c.length].length -
-                      c[0].length :
-                      this.yylloc.first_column - b,
+                    last_column: c
+                      ? (c.length === d.length ? this.yylloc.first_column : 0) +
+                        d[d.length - c.length].length -
+                        c[0].length
+                      : this.yylloc.first_column - b,
                   }),
                   this.options.ranges &&
-                  (this.yylloc.range = [e[0], e[0] + this.yyleng - b]),
+                    (this.yylloc.range = [e[0], e[0] + this.yyleng - b]),
                   this
                 );
               },
-              more: function() {
+              more: function () {
                 return (this._more = !0), this;
               },
-              less: function(a) {
+              less: function (a) {
                 this.unput(this.match.slice(a));
               },
-              pastInput: function() {
+              pastInput: function () {
                 var a = this.matched.substr(
                   0,
                   this.matched.length - this.match.length,
@@ -4294,7 +4317,7 @@
                   a.substr(-20).replace(/\n/g, "")
                 );
               },
-              upcomingInput: function() {
+              upcomingInput: function () {
                 var a = this.match;
                 return (
                   a.length < 20 && (a += this._input.substr(0, 20 - a.length)),
@@ -4304,44 +4327,46 @@
                   )
                 );
               },
-              showPosition: function() {
+              showPosition: function () {
                 var a = this.pastInput(),
                   b = new Array(a.length + 1).join("-");
                 return a + this.upcomingInput() + "\n" + b + "^";
               },
-              next: function() {
+              next: function () {
                 if (this.done) return this.EOF;
                 this._input || (this.done = !0);
                 var a, b, c, d, e;
                 this._more || ((this.yytext = ""), (this.match = ""));
                 for (
-                  var f = this._currentRules(), g = 0; g < f.length &&
+                  var f = this._currentRules(), g = 0;
+                  g < f.length &&
                   ((c = this._input.match(this.rules[f[g]])),
-                    !c ||
+                  !c ||
                     (b && !(c[0].length > b[0].length)) ||
-                    ((b = c), (d = g), this.options.flex)); g++
+                    ((b = c), (d = g), this.options.flex));
+                  g++
                 );
-                return b ?
-                  ((e = b[0].match(/(?:\r\n?|\n).*/g)),
+                return b
+                  ? ((e = b[0].match(/(?:\r\n?|\n).*/g)),
                     e && (this.yylineno += e.length),
                     (this.yylloc = {
                       first_line: this.yylloc.last_line,
                       last_line: this.yylineno + 1,
                       first_column: this.yylloc.last_column,
-                      last_column: e ?
-                        e[e.length - 1].length -
-                        e[e.length - 1].match(/\r?\n?/)[0].length :
-                        this.yylloc.last_column + b[0].length,
+                      last_column: e
+                        ? e[e.length - 1].length -
+                          e[e.length - 1].match(/\r?\n?/)[0].length
+                        : this.yylloc.last_column + b[0].length,
                     }),
                     (this.yytext += b[0]),
                     (this.match += b[0]),
                     (this.matches = b),
                     (this.yyleng = this.yytext.length),
                     this.options.ranges &&
-                    (this.yylloc.range = [
-                      this.offset,
-                      (this.offset += this.yyleng),
-                    ]),
+                      (this.yylloc.range = [
+                        this.offset,
+                        (this.offset += this.yyleng),
+                      ]),
                     (this._more = !1),
                     (this._input = this._input.slice(b[0].length)),
                     (this.matched += b[0]),
@@ -4353,57 +4378,58 @@
                       this.conditionStack[this.conditionStack.length - 1],
                     )),
                     this.done && this._input && (this.done = !1),
-                    a ? a : void 0) :
-                  "" === this._input ?
-                  this.EOF :
-                  this.parseError(
-                    "Lexical error on line " +
-                    (this.yylineno + 1) +
-                    ". Unrecognized text.\n" +
-                    this.showPosition(), {
-                      text: "",
-                      token: null,
-                      line: this.yylineno
-                    },
-                  );
+                    a ? a : void 0)
+                  : "" === this._input
+                    ? this.EOF
+                    : this.parseError(
+                        "Lexical error on line " +
+                          (this.yylineno + 1) +
+                          ". Unrecognized text.\n" +
+                          this.showPosition(),
+                        {
+                          text: "",
+                          token: null,
+                          line: this.yylineno,
+                        },
+                      );
               },
-              lex: function() {
+              lex: function () {
                 var a = this.next();
                 return "undefined" != typeof a ? a : this.lex();
               },
-              begin: function(a) {
+              begin: function (a) {
                 this.conditionStack.push(a);
               },
-              popState: function() {
+              popState: function () {
                 return this.conditionStack.pop();
               },
-              _currentRules: function() {
+              _currentRules: function () {
                 return this.conditions[
                   this.conditionStack[this.conditionStack.length - 1]
                 ].rules;
               },
-              topState: function() {
+              topState: function () {
                 return this.conditionStack[this.conditionStack.length - 2];
               },
-              pushState: function(a) {
+              pushState: function (a) {
                 this.begin(a);
               },
             };
             return (
               (a.options = {}),
-              (a.performAction = function(a, b, c, d) {
+              (a.performAction = function (a, b, c, d) {
                 function e(a, c) {
                   return (b.yytext = b.yytext.substring(a, b.yyleng - c + a));
                 }
                 switch (c) {
                   case 0:
                     if (
-                      ("\\\\" === b.yytext.slice(-2) ?
-                        (e(0, 1), this.begin("mu")) :
-                        "\\" === b.yytext.slice(-1) ?
-                        (e(0, 1), this.begin("emu")) :
-                        this.begin("mu"),
-                        b.yytext)
+                      ("\\\\" === b.yytext.slice(-2)
+                        ? (e(0, 1), this.begin("mu"))
+                        : "\\" === b.yytext.slice(-1)
+                          ? (e(0, 1), this.begin("emu"))
+                          : this.begin("mu"),
+                      b.yytext)
                     )
                       return 15;
                     break;
@@ -4417,9 +4443,9 @@
                     return (
                       this.popState(),
                       "raw" ===
-                      this.conditionStack[this.conditionStack.length - 1] ?
-                      15 :
-                      (e(5, 9), "END_RAW_BLOCK")
+                      this.conditionStack[this.conditionStack.length - 1]
+                        ? 15
+                        : (e(5, 9), "END_RAW_BLOCK")
                     );
                   case 5:
                     return 15;
@@ -4564,19 +4590,19 @@
                 },
                 emu: {
                   rules: [2],
-                  inclusive: !1
+                  inclusive: !1,
                 },
                 com: {
                   rules: [6],
-                  inclusive: !1
+                  inclusive: !1,
                 },
                 raw: {
                   rules: [3, 4, 5],
-                  inclusive: !1
+                  inclusive: !1,
                 },
                 INITIAL: {
                   rules: [0, 1, 44],
-                  inclusive: !0
+                  inclusive: !0,
                 },
               }),
               a
@@ -4586,7 +4612,7 @@
       })();
       (b["default"] = c), (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -4599,22 +4625,22 @@
         void 0 === b && (b = a.length);
         var d = a[b - 1],
           e = a[b - 2];
-        return d ?
-          "ContentStatement" === d.type ?
-          (e || !c ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(d.original) :
-          void 0 :
-          c;
+        return d
+          ? "ContentStatement" === d.type
+            ? (e || !c ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(d.original)
+            : void 0
+          : c;
       }
 
       function f(a, b, c) {
         void 0 === b && (b = -1);
         var d = a[b + 1],
           e = a[b + 2];
-        return d ?
-          "ContentStatement" === d.type ?
-          (e || !c ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(d.original) :
-          void 0 :
-          c;
+        return d
+          ? "ContentStatement" === d.type
+            ? (e || !c ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(d.original)
+            : void 0
+          : c;
       }
 
       function g(a, b, c) {
@@ -4622,7 +4648,7 @@
         if (d && "ContentStatement" === d.type && (c || !d.rightStripped)) {
           var e = d.value;
           (d.value = d.value.replace(c ? /^\s+/ : /^[ \t]*\r?\n?/, "")),
-          (d.rightStripped = d.value !== e);
+            (d.rightStripped = d.value !== e);
         }
       }
 
@@ -4642,80 +4668,80 @@
       var j = c(88),
         k = i(j);
       (d.prototype = new k["default"]()),
-      (d.prototype.Program = function(a) {
-        var b = !this.options.ignoreStandalone,
-          c = !this.isRootSeen;
-        this.isRootSeen = !0;
-        for (var d = a.body, i = 0, j = d.length; i < j; i++) {
-          var k = d[i],
-            l = this.accept(k);
-          if (l) {
-            var m = e(d, i, c),
-              n = f(d, i, c),
-              o = l.openStandalone && m,
-              p = l.closeStandalone && n,
-              q = l.inlineStandalone && m && n;
-            l.close && g(d, i, !0),
-              l.open && h(d, i, !0),
-              b &&
-              q &&
-              (g(d, i),
-                h(d, i) &&
-                "PartialStatement" === k.type &&
-                (k.indent = /([ \t]+$)/.exec(d[i - 1].original)[1])),
-              b && o && (g((k.program || k.inverse).body), h(d, i)),
-              b && p && (g(d, i), h((k.inverse || k.program).body));
+        (d.prototype.Program = function (a) {
+          var b = !this.options.ignoreStandalone,
+            c = !this.isRootSeen;
+          this.isRootSeen = !0;
+          for (var d = a.body, i = 0, j = d.length; i < j; i++) {
+            var k = d[i],
+              l = this.accept(k);
+            if (l) {
+              var m = e(d, i, c),
+                n = f(d, i, c),
+                o = l.openStandalone && m,
+                p = l.closeStandalone && n,
+                q = l.inlineStandalone && m && n;
+              l.close && g(d, i, !0),
+                l.open && h(d, i, !0),
+                b &&
+                  q &&
+                  (g(d, i),
+                  h(d, i) &&
+                    "PartialStatement" === k.type &&
+                    (k.indent = /([ \t]+$)/.exec(d[i - 1].original)[1])),
+                b && o && (g((k.program || k.inverse).body), h(d, i)),
+                b && p && (g(d, i), h((k.inverse || k.program).body));
+            }
           }
-        }
-        return a;
-      }),
-      (d.prototype.BlockStatement =
-        d.prototype.DecoratorBlock =
-        d.prototype.PartialBlockStatement =
-        function(a) {
-          this.accept(a.program), this.accept(a.inverse);
-          var b = a.program || a.inverse,
-            c = a.program && a.inverse,
-            d = c,
-            i = c;
-          if (c && c.chained)
-            for (d = c.body[0].program; i.chained;)
-              i = i.body[i.body.length - 1].program;
-          var j = {
-            open: a.openStrip.open,
-            close: a.closeStrip.close,
-            openStandalone: f(b.body),
-            closeStandalone: e((d || b).body),
-          };
-          if ((a.openStrip.close && g(b.body, null, !0), c)) {
-            var k = a.inverseStrip;
-            k.open && h(b.body, null, !0),
-              k.close && g(d.body, null, !0),
-              a.closeStrip.open && h(i.body, null, !0),
-              !this.options.ignoreStandalone &&
-              e(b.body) &&
-              f(d.body) &&
-              (h(b.body), g(d.body));
-          } else a.closeStrip.open && h(b.body, null, !0);
-          return j;
+          return a;
         }),
-      (d.prototype.Decorator = d.prototype.MustacheStatement =
-        function(a) {
-          return a.strip;
-        }),
-      (d.prototype.PartialStatement = d.prototype.CommentStatement =
-        function(a) {
-          var b = a.strip || {};
-          return {
-            inlineStandalone: !0,
-            open: b.open,
-            close: b.close
-          };
-        }),
-      (b["default"] = d),
-      (a.exports = b["default"]);
+        (d.prototype.BlockStatement =
+          d.prototype.DecoratorBlock =
+          d.prototype.PartialBlockStatement =
+            function (a) {
+              this.accept(a.program), this.accept(a.inverse);
+              var b = a.program || a.inverse,
+                c = a.program && a.inverse,
+                d = c,
+                i = c;
+              if (c && c.chained)
+                for (d = c.body[0].program; i.chained; )
+                  i = i.body[i.body.length - 1].program;
+              var j = {
+                open: a.openStrip.open,
+                close: a.closeStrip.close,
+                openStandalone: f(b.body),
+                closeStandalone: e((d || b).body),
+              };
+              if ((a.openStrip.close && g(b.body, null, !0), c)) {
+                var k = a.inverseStrip;
+                k.open && h(b.body, null, !0),
+                  k.close && g(d.body, null, !0),
+                  a.closeStrip.open && h(i.body, null, !0),
+                  !this.options.ignoreStandalone &&
+                    e(b.body) &&
+                    f(d.body) &&
+                    (h(b.body), g(d.body));
+              } else a.closeStrip.open && h(b.body, null, !0);
+              return j;
+            }),
+        (d.prototype.Decorator = d.prototype.MustacheStatement =
+          function (a) {
+            return a.strip;
+          }),
+        (d.prototype.PartialStatement = d.prototype.CommentStatement =
+          function (a) {
+            var b = a.strip || {};
+            return {
+              inlineStandalone: !0,
+              open: b.open,
+              close: b.close,
+            };
+          }),
+        (b["default"] = d),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -4746,30 +4772,30 @@
       (d.prototype = {
         constructor: d,
         mutating: !1,
-        acceptKey: function(a, b) {
+        acceptKey: function (a, b) {
           var c = this.accept(a[b]);
           if (this.mutating) {
             if (c && !d.prototype[c.type])
               throw new j["default"](
                 'Unexpected node type "' +
-                c.type +
-                '" found when accepting ' +
-                b +
-                " on " +
-                a.type,
+                  c.type +
+                  '" found when accepting ' +
+                  b +
+                  " on " +
+                  a.type,
               );
             a[b] = c;
           }
         },
-        acceptRequired: function(a, b) {
+        acceptRequired: function (a, b) {
           if ((this.acceptKey(a, b), !a[b]))
             throw new j["default"](a.type + " requires " + b);
         },
-        acceptArray: function(a) {
+        acceptArray: function (a) {
           for (var b = 0, c = a.length; b < c; b++)
             this.acceptKey(a, b), a[b] || (a.splice(b, 1), b--, c--);
         },
-        accept: function(a) {
+        accept: function (a) {
           if (a) {
             if (!this[a.type])
               throw new j["default"]("Unknown type: " + a.type, a);
@@ -4782,7 +4808,7 @@
             );
           }
         },
-        Program: function(a) {
+        Program: function (a) {
           this.acceptArray(a.body);
         },
         MustacheStatement: e,
@@ -4790,35 +4816,35 @@
         BlockStatement: f,
         DecoratorBlock: f,
         PartialStatement: g,
-        PartialBlockStatement: function(a) {
+        PartialBlockStatement: function (a) {
           g.call(this, a), this.acceptKey(a, "program");
         },
-        ContentStatement: function() {},
-        CommentStatement: function() {},
+        ContentStatement: function () {},
+        CommentStatement: function () {},
         SubExpression: e,
-        PathExpression: function() {},
-        StringLiteral: function() {},
-        NumberLiteral: function() {},
-        BooleanLiteral: function() {},
-        UndefinedLiteral: function() {},
-        NullLiteral: function() {},
-        Hash: function(a) {
+        PathExpression: function () {},
+        StringLiteral: function () {},
+        NumberLiteral: function () {},
+        BooleanLiteral: function () {},
+        UndefinedLiteral: function () {},
+        NullLiteral: function () {},
+        Hash: function (a) {
           this.acceptArray(a.pairs);
         },
-        HashPair: function(a) {
+        HashPair: function (a) {
           this.acceptRequired(a, "value");
         },
       }),
-      (b["default"] = d),
-      (a.exports = b["default"]);
+        (b["default"] = d),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b) {
         if (((b = b.path ? b.path.original : b), a.path.original !== b)) {
           var c = {
-            loc: a.path.loc
+            loc: a.path.loc,
           };
           throw new q["default"](a.path.original + " doesn't match " + b, c);
         }
@@ -4826,14 +4852,14 @@
 
       function e(a, b) {
         (this.source = a),
-        (this.start = {
-          line: b.first_line,
-          column: b.first_column
-        }),
-        (this.end = {
-          line: b.last_line,
-          column: b.last_column
-        });
+          (this.start = {
+            line: b.first_line,
+            column: b.first_column,
+          }),
+          (this.end = {
+            line: b.last_line,
+            column: b.last_column,
+          });
       }
 
       function f(a) {
@@ -4854,19 +4880,21 @@
       function i(a, b, c) {
         c = this.locInfo(c);
         for (
-          var d = a ? "@" : "", e = [], f = 0, g = 0, h = b.length; g < h; g++
+          var d = a ? "@" : "", e = [], f = 0, g = 0, h = b.length;
+          g < h;
+          g++
         ) {
           var i = b[g].part,
             j = b[g].original !== i;
           if (
             ((d += (b[g].separator || "") + i),
-              j || (".." !== i && "." !== i && "this" !== i))
+            j || (".." !== i && "." !== i && "this" !== i))
           )
             e.push(i);
           else {
             if (e.length > 0)
               throw new q["default"]("Invalid path: " + d, {
-                loc: c
+                loc: c,
               });
             ".." === i && f++;
           }
@@ -4902,7 +4930,7 @@
           type: "Program",
           body: b,
           strip: {},
-          loc: e
+          loc: e,
         };
         return {
           type: "BlockStatement",
@@ -4931,7 +4959,8 @@
             (i = c.program);
         }
         return (
-          f && ((f = i), (i = b), (b = f)), {
+          f && ((f = i), (i = b), (b = f)),
+          {
             type: h ? "DecoratorBlock" : "BlockStatement",
             path: a.path,
             params: a.params,
@@ -4956,11 +4985,11 @@
               source: c.source,
               start: {
                 line: c.start.line,
-                column: c.start.column
+                column: c.start.column,
               },
               end: {
                 line: d.end.line,
-                column: d.end.column
+                column: d.end.column,
               },
             });
         }
@@ -4968,13 +4997,14 @@
           type: "Program",
           body: a,
           strip: {},
-          loc: b
+          loc: b,
         };
       }
 
       function n(a, b, c, e) {
         return (
-          d(a, c), {
+          d(a, c),
+          {
             type: "PartialBlockStatement",
             name: a.path,
             params: a.params,
@@ -4988,20 +5018,20 @@
       }
       var o = c(1)["default"];
       (b.__esModule = !0),
-      (b.SourceLocation = e),
-      (b.id = f),
-      (b.stripFlags = g),
-      (b.stripComment = h),
-      (b.preparePath = i),
-      (b.prepareMustache = j),
-      (b.prepareRawBlock = k),
-      (b.prepareBlock = l),
-      (b.prepareProgram = m),
-      (b.preparePartialBlock = n);
+        (b.SourceLocation = e),
+        (b.id = f),
+        (b.stripFlags = g),
+        (b.stripComment = h),
+        (b.preparePath = i),
+        (b.prepareMustache = j),
+        (b.prepareRawBlock = k),
+        (b.prepareBlock = l),
+        (b.prepareProgram = m),
+        (b.preparePartialBlock = n);
       var p = c(6),
         q = o(p);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {}
@@ -5010,10 +5040,10 @@
         if (null == a || ("string" != typeof a && "Program" !== a.type))
           throw new l["default"](
             "You must pass a string or Handlebars AST to Handlebars.precompile. You passed " +
-            a,
+              a,
           );
         (b = b || {}),
-        "data" in b || (b.data = !0),
+          "data" in b || (b.data = !0),
           b.compat && (b.useDepths = !0);
         var d = c.parse(a, b),
           e = new c.Compiler().compile(d, b);
@@ -5033,21 +5063,21 @@
         }
         if (
           (void 0 === b && (b = {}),
-            null == a || ("string" != typeof a && "Program" !== a.type))
+          null == a || ("string" != typeof a && "Program" !== a.type))
         )
           throw new l["default"](
             "You must pass a string or Handlebars AST to Handlebars.compile. You passed " +
-            a,
+              a,
           );
         (b = m.extend({}, b)),
-        "data" in b || (b.data = !0),
+          "data" in b || (b.data = !0),
           b.compat && (b.useDepths = !0);
         var f = void 0;
         return (
-          (e._setup = function(a) {
+          (e._setup = function (a) {
             return f || (f = d()), f._setup(a);
           }),
-          (e._child = function(a, b, c, e) {
+          (e._child = function (a, b, c, e) {
             return f || (f = d()), f._child(a, b, c, e);
           }),
           e
@@ -5057,8 +5087,7 @@
       function g(a, b) {
         if (a === b) return !0;
         if (m.isArray(a) && m.isArray(b) && a.length === b.length) {
-          for (var c = 0; c < a.length; c++)
-            if (!g(a[c], b[c])) return !1;
+          for (var c = 0; c < a.length; c++) if (!g(a[c], b[c])) return !1;
           return !0;
         }
       }
@@ -5079,9 +5108,9 @@
       var i = c(74)["default"],
         j = c(1)["default"];
       (b.__esModule = !0),
-      (b.Compiler = d),
-      (b.precompile = e),
-      (b.compile = f);
+        (b.Compiler = d),
+        (b.precompile = e),
+        (b.compile = f);
       var k = c(6),
         l = j(k),
         m = c(5),
@@ -5090,7 +5119,7 @@
         p = [].slice;
       d.prototype = {
         compiler: d,
-        equals: function(a) {
+        equals: function (a) {
           var b = this.opcodes.length;
           if (a.opcodes.length !== b) return !1;
           for (var c = 0; c < b; c++) {
@@ -5104,7 +5133,7 @@
           return !0;
         },
         guid: 0,
-        compile: function(a, b) {
+        compile: function (a, b) {
           return (
             (this.sourceNode = []),
             (this.opcodes = []),
@@ -5114,7 +5143,8 @@
             (this.trackIds = b.trackIds),
             (b.blockParams = b.blockParams || []),
             (b.knownHelpers = m.extend(
-              i(null), {
+              i(null),
+              {
                 helperMissing: !0,
                 blockHelperMissing: !0,
                 each: !0,
@@ -5129,7 +5159,7 @@
             this.accept(a)
           );
         },
-        compileProgram: function(a) {
+        compileProgram: function (a) {
           var b = new this.compiler(),
             c = b.compile(a, this.options),
             d = this.guid++;
@@ -5140,14 +5170,14 @@
             d
           );
         },
-        accept: function(a) {
+        accept: function (a) {
           if (!this[a.type])
             throw new l["default"]("Unknown type: " + a.type, a);
           this.sourceNode.unshift(a);
           var b = this[a.type](a);
           return this.sourceNode.shift(), b;
         },
-        Program: function(a) {
+        Program: function (a) {
           this.options.blockParams.unshift(a.blockParams);
           for (var b = a.body, c = b.length, d = 0; d < c; d++)
             this.accept(b[d]);
@@ -5158,36 +5188,35 @@
             this
           );
         },
-        BlockStatement: function(a) {
+        BlockStatement: function (a) {
           h(a);
           var b = a.program,
             c = a.inverse;
           (b = b && this.compileProgram(b)), (c = c && this.compileProgram(c));
           var d = this.classifySexpr(a);
           "helper" === d
-            ?
-            this.helperSexpr(a, b, c) :
-            "simple" === d ?
-            (this.simpleSexpr(a),
-              this.opcode("pushProgram", b),
-              this.opcode("pushProgram", c),
-              this.opcode("emptyHash"),
-              this.opcode("blockValue", a.path.original)) :
-            (this.ambiguousSexpr(a, b, c),
-              this.opcode("pushProgram", b),
-              this.opcode("pushProgram", c),
-              this.opcode("emptyHash"),
-              this.opcode("ambiguousBlockValue")),
+            ? this.helperSexpr(a, b, c)
+            : "simple" === d
+              ? (this.simpleSexpr(a),
+                this.opcode("pushProgram", b),
+                this.opcode("pushProgram", c),
+                this.opcode("emptyHash"),
+                this.opcode("blockValue", a.path.original))
+              : (this.ambiguousSexpr(a, b, c),
+                this.opcode("pushProgram", b),
+                this.opcode("pushProgram", c),
+                this.opcode("emptyHash"),
+                this.opcode("ambiguousBlockValue")),
             this.opcode("append");
         },
-        DecoratorBlock: function(a) {
+        DecoratorBlock: function (a) {
           var b = a.program && this.compileProgram(a.program),
             c = this.setupFullMustacheParams(a, b, void 0),
             d = a.path;
           (this.useDecorators = !0),
-          this.opcode("registerDecorator", c.length, d.original);
+            this.opcode("registerDecorator", c.length, d.original);
         },
-        PartialStatement: function(a) {
+        PartialStatement: function (a) {
           this.usePartial = !0;
           var b = a.program;
           b && (b = this.compileProgram(a.program));
@@ -5198,13 +5227,13 @@
               a,
             );
           c.length ||
-            (this.options.explicitPartialContext ?
-              this.opcode("pushLiteral", "undefined") :
-              c.push({
-                type: "PathExpression",
-                parts: [],
-                depth: 0
-              }));
+            (this.options.explicitPartialContext
+              ? this.opcode("pushLiteral", "undefined")
+              : c.push({
+                  type: "PathExpression",
+                  parts: [],
+                  depth: 0,
+                }));
           var d = a.name.original,
             e = "SubExpression" === a.name.type;
           e && this.accept(a.name),
@@ -5216,33 +5245,32 @@
             this.opcode("invokePartial", e, d, f),
             this.opcode("append");
         },
-        PartialBlockStatement: function(a) {
+        PartialBlockStatement: function (a) {
           this.PartialStatement(a);
         },
-        MustacheStatement: function(a) {
+        MustacheStatement: function (a) {
           this.SubExpression(a),
-            a.escaped && !this.options.noEscape ?
-            this.opcode("appendEscaped") :
-            this.opcode("append");
+            a.escaped && !this.options.noEscape
+              ? this.opcode("appendEscaped")
+              : this.opcode("append");
         },
-        Decorator: function(a) {
+        Decorator: function (a) {
           this.DecoratorBlock(a);
         },
-        ContentStatement: function(a) {
+        ContentStatement: function (a) {
           a.value && this.opcode("appendContent", a.value);
         },
-        CommentStatement: function() {},
-        SubExpression: function(a) {
+        CommentStatement: function () {},
+        SubExpression: function (a) {
           h(a);
           var b = this.classifySexpr(a);
           "simple" === b
-            ?
-            this.simpleSexpr(a) :
-            "helper" === b ?
-            this.helperSexpr(a) :
-            this.ambiguousSexpr(a);
+            ? this.simpleSexpr(a)
+            : "helper" === b
+              ? this.helperSexpr(a)
+              : this.ambiguousSexpr(a);
         },
-        ambiguousSexpr: function(a, b, c) {
+        ambiguousSexpr: function (a, b, c) {
           var d = a.path,
             e = d.parts[0],
             f = null != b || null != c;
@@ -5253,11 +5281,11 @@
             this.accept(d),
             this.opcode("invokeAmbiguous", e, f);
         },
-        simpleSexpr: function(a) {
+        simpleSexpr: function (a) {
           var b = a.path;
           (b.strict = !0), this.accept(b), this.opcode("resolvePossibleLambda");
         },
-        helperSexpr: function(a, b, c) {
+        helperSexpr: function (a, b, c) {
           var d = this.setupFullMustacheParams(a, b, c),
             e = a.path,
             f = e.parts[0];
@@ -5267,12 +5295,12 @@
             if (this.options.knownHelpersOnly)
               throw new l["default"](
                 "You specified knownHelpersOnly, but used the unknown helper " +
-                f,
+                  f,
                 a,
               );
             (e.strict = !0),
-            (e.falsy = !0),
-            this.accept(e),
+              (e.falsy = !0),
+              this.accept(e),
               this.opcode(
                 "invokeHelper",
                 d.length,
@@ -5281,55 +5309,54 @@
               );
           }
         },
-        PathExpression: function(a) {
+        PathExpression: function (a) {
           this.addDepth(a.depth), this.opcode("getContext", a.depth);
           var b = a.parts[0],
             c = o["default"].helpers.scopedId(a),
             d = !a.depth && !c && this.blockParamIndex(b);
           d
-            ?
-            this.opcode("lookupBlockParam", d, a.parts) :
-            b ?
-            a.data ?
-            ((this.options.data = !0),
-              this.opcode("lookupData", a.depth, a.parts, a.strict)) :
-            this.opcode("lookupOnContext", a.parts, a.falsy, a.strict, c) :
-            this.opcode("pushContext");
+            ? this.opcode("lookupBlockParam", d, a.parts)
+            : b
+              ? a.data
+                ? ((this.options.data = !0),
+                  this.opcode("lookupData", a.depth, a.parts, a.strict))
+                : this.opcode("lookupOnContext", a.parts, a.falsy, a.strict, c)
+              : this.opcode("pushContext");
         },
-        StringLiteral: function(a) {
+        StringLiteral: function (a) {
           this.opcode("pushString", a.value);
         },
-        NumberLiteral: function(a) {
+        NumberLiteral: function (a) {
           this.opcode("pushLiteral", a.value);
         },
-        BooleanLiteral: function(a) {
+        BooleanLiteral: function (a) {
           this.opcode("pushLiteral", a.value);
         },
-        UndefinedLiteral: function() {
+        UndefinedLiteral: function () {
           this.opcode("pushLiteral", "undefined");
         },
-        NullLiteral: function() {
+        NullLiteral: function () {
           this.opcode("pushLiteral", "null");
         },
-        Hash: function(a) {
+        Hash: function (a) {
           var b = a.pairs,
             c = 0,
             d = b.length;
           for (this.opcode("pushHash"); c < d; c++) this.pushParam(b[c].value);
-          for (; c--;) this.opcode("assignToHash", b[c].key);
+          for (; c--; ) this.opcode("assignToHash", b[c].key);
           this.opcode("popHash");
         },
-        opcode: function(a) {
+        opcode: function (a) {
           this.opcodes.push({
             opcode: a,
             args: p.call(arguments, 1),
             loc: this.sourceNode[0].loc,
           });
         },
-        addDepth: function(a) {
+        addDepth: function (a) {
           a && (this.useDepths = !0);
         },
-        classifySexpr: function(a) {
+        classifySexpr: function (a) {
           var b = o["default"].helpers.simpleId(a.path),
             c = b && !!this.blockParamIndex(a.path.parts[0]),
             d = !c && o["default"].helpers.helperExpression(a),
@@ -5341,18 +5368,18 @@
           }
           return d ? "helper" : e ? "ambiguous" : "simple";
         },
-        pushParams: function(a) {
+        pushParams: function (a) {
           for (var b = 0, c = a.length; b < c; b++) this.pushParam(a[b]);
         },
-        pushParam: function(a) {
+        pushParam: function (a) {
           var b = null != a.value ? a.value : a.original || "";
           if (this.stringParams)
             b.replace &&
-            (b = b.replace(/^(\.?\.\/)*/g, "").replace(/\//g, ".")),
-            a.depth && this.addDepth(a.depth),
-            this.opcode("getContext", a.depth || 0),
-            this.opcode("pushStringParam", b, a.type),
-            "SubExpression" === a.type && this.accept(a);
+              (b = b.replace(/^(\.?\.\/)*/g, "").replace(/\//g, ".")),
+              a.depth && this.addDepth(a.depth),
+              this.opcode("getContext", a.depth || 0),
+              this.opcode("pushStringParam", b, a.type),
+              "SubExpression" === a.type && this.accept(a);
           else {
             if (this.trackIds) {
               var c = void 0;
@@ -5361,23 +5388,23 @@
                   o["default"].helpers.scopedId(a) ||
                   a.depth ||
                   (c = this.blockParamIndex(a.parts[0])),
-                  c)
+                c)
               ) {
                 var d = a.parts.slice(1).join(".");
                 this.opcode("pushId", "BlockParam", c, d);
               } else
                 (b = a.original || b),
-                b.replace &&
-                (b = b
-                  .replace(/^this(?:\.|$)/, "")
-                  .replace(/^\.\//, "")
-                  .replace(/^\.$/, "")),
-                this.opcode("pushId", a.type, b);
+                  b.replace &&
+                    (b = b
+                      .replace(/^this(?:\.|$)/, "")
+                      .replace(/^\.\//, "")
+                      .replace(/^\.$/, "")),
+                  this.opcode("pushId", a.type, b);
             }
             this.accept(a);
           }
         },
-        setupFullMustacheParams: function(a, b, c, d) {
+        setupFullMustacheParams: function (a, b, c, d) {
           var e = a.params;
           return (
             this.pushParams(e),
@@ -5387,7 +5414,7 @@
             e
           );
         },
-        blockParamIndex: function(a) {
+        blockParamIndex: function (a) {
           for (var b = 0, c = this.options.blockParams.length; b < c; b++) {
             var d = this.options.blockParams[b],
               e = d && m.indexOf(d, a);
@@ -5396,7 +5423,7 @@
         },
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -5409,18 +5436,18 @@
         var f = b.popStack(),
           g = c.length;
         for (a && g--; d < g; d++) f = b.nameLookup(f, c[d], e);
-        return a ?
-          [
-            b.aliasable("container.strict"),
-            "(",
-            f,
-            ", ",
-            b.quotedString(c[d]),
-            ", ",
-            JSON.stringify(b.source.currentLocation),
-            " )",
-          ] :
-          f;
+        return a
+          ? [
+              b.aliasable("container.strict"),
+              "(",
+              f,
+              ", ",
+              b.quotedString(c[d]),
+              ", ",
+              JSON.stringify(b.source.currentLocation),
+              " )",
+            ]
+          : f;
       }
       var g = c(60)["default"],
         h = c(1)["default"];
@@ -5432,10 +5459,10 @@
         m = c(92),
         n = h(m);
       (e.prototype = {
-        nameLookup: function(a, b) {
+        nameLookup: function (a, b) {
           return this.internalNameLookup(a, b);
         },
-        depthedLookup: function(a) {
+        depthedLookup: function (a) {
           return [
             this.aliasable("container.lookup"),
             "(depths, ",
@@ -5443,51 +5470,51 @@
             ")",
           ];
         },
-        compilerInfo: function() {
+        compilerInfo: function () {
           var a = i.COMPILER_REVISION,
             b = i.REVISION_CHANGES[a];
           return [a, b];
         },
-        appendToBuffer: function(a, b, c) {
+        appendToBuffer: function (a, b, c) {
           return (
             l.isArray(a) || (a = [a]),
             (a = this.source.wrap(a, b)),
-            this.environment.isSimple ?
-            ["return ", a, ";"] :
-            c ?
-            ["buffer += ", a, ";"] :
-            ((a.appendToBuffer = !0), a)
+            this.environment.isSimple
+              ? ["return ", a, ";"]
+              : c
+                ? ["buffer += ", a, ";"]
+                : ((a.appendToBuffer = !0), a)
           );
         },
-        initializeBuffer: function() {
+        initializeBuffer: function () {
           return this.quotedString("");
         },
-        internalNameLookup: function(a, b) {
+        internalNameLookup: function (a, b) {
           return (
             (this.lookupPropertyFunctionIsUsed = !0),
             ["lookupProperty(", a, ",", JSON.stringify(b), ")"]
           );
         },
         lookupPropertyFunctionIsUsed: !1,
-        compile: function(a, b, c, d) {
+        compile: function (a, b, c, d) {
           (this.environment = a),
-          (this.options = b),
-          (this.stringParams = this.options.stringParams),
-          (this.trackIds = this.options.trackIds),
-          (this.precompile = !d),
-          (this.name = this.environment.name),
-          (this.isChild = !!c),
-          (this.context = c || {
-            decorators: [],
-            programs: [],
-            environments: [],
-          }),
-          this.preamble(),
+            (this.options = b),
+            (this.stringParams = this.options.stringParams),
+            (this.trackIds = this.options.trackIds),
+            (this.precompile = !d),
+            (this.name = this.environment.name),
+            (this.isChild = !!c),
+            (this.context = c || {
+              decorators: [],
+              programs: [],
+              environments: [],
+            }),
+            this.preamble(),
             (this.stackSlot = 0),
             (this.stackVars = []),
             (this.aliases = {}),
             (this.registers = {
-              list: []
+              list: [],
             }),
             (this.hashes = []),
             (this.compileStack = []),
@@ -5507,49 +5534,49 @@
             i = void 0;
           for (h = 0, i = e.length; h < i; h++)
             (f = e[h]),
-            (this.source.currentLocation = f.loc),
-            (g = g || f.loc),
-            this[f.opcode].apply(this, f.args);
+              (this.source.currentLocation = f.loc),
+              (g = g || f.loc),
+              this[f.opcode].apply(this, f.args);
           if (
             ((this.source.currentLocation = g),
-              this.pushSource(""),
-              this.stackSlot ||
+            this.pushSource(""),
+            this.stackSlot ||
               this.inlineStack.length ||
               this.compileStack.length)
           )
             throw new k["default"](
               "Compile completed with content left on stack",
             );
-          this.decorators.isEmpty() ?
-            (this.decorators = void 0) :
-            ((this.useDecorators = !0),
+          this.decorators.isEmpty()
+            ? (this.decorators = void 0)
+            : ((this.useDecorators = !0),
               this.decorators.prepend([
                 "var decorators = container.decorators, ",
                 this.lookupPropertyFunctionVarDeclaration(),
                 ";\n",
               ]),
               this.decorators.push("return fn;"),
-              d ?
-              (this.decorators = Function.apply(this, [
-                "fn",
-                "props",
-                "container",
-                "depth0",
-                "data",
-                "blockParams",
-                "depths",
-                this.decorators.merge(),
-              ])) :
-              (this.decorators.prepend(
-                  "function(fn, props, container, depth0, data, blockParams, depths) {\n",
-                ),
-                this.decorators.push("}\n"),
-                (this.decorators = this.decorators.merge())));
+              d
+                ? (this.decorators = Function.apply(this, [
+                    "fn",
+                    "props",
+                    "container",
+                    "depth0",
+                    "data",
+                    "blockParams",
+                    "depths",
+                    this.decorators.merge(),
+                  ]))
+                : (this.decorators.prepend(
+                    "function(fn, props, container, depth0, data, blockParams, depths) {\n",
+                  ),
+                  this.decorators.push("}\n"),
+                  (this.decorators = this.decorators.merge())));
           var j = this.createFunctionContext(d);
           if (this.isChild) return j;
           var l = {
             compiler: this.compilerInfo(),
-            main: j
+            main: j,
           };
           this.decorators &&
             ((l.main_d = this.decorators), (l.useDecorators = !0));
@@ -5558,7 +5585,7 @@
             o = m.decorators;
           for (h = 0, i = n.length; h < i; h++)
             n[h] &&
-            ((l[h] = n[h]),
+              ((l[h] = n[h]),
               o[h] && ((l[h + "_d"] = o[h]), (l.useDecorators = !0)));
           return (
             this.environment.usePartial && (l.usePartial = !0),
@@ -5566,53 +5593,53 @@
             this.useDepths && (l.useDepths = !0),
             this.useBlockParams && (l.useBlockParams = !0),
             this.options.compat && (l.compat = !0),
-            d ?
-            (l.compilerOptions = this.options) :
-            ((l.compiler = JSON.stringify(l.compiler)),
-              (this.source.currentLocation = {
-                start: {
-                  line: 1,
-                  column: 0
-                },
-              }),
-              (l = this.objectLiteral(l)),
-              b.srcName ?
-              ((l = l.toStringWithSourceMap({
-                  file: b.destName
-                })),
-                (l.map = l.map && l.map.toString())) :
-              (l = l.toString())),
+            d
+              ? (l.compilerOptions = this.options)
+              : ((l.compiler = JSON.stringify(l.compiler)),
+                (this.source.currentLocation = {
+                  start: {
+                    line: 1,
+                    column: 0,
+                  },
+                }),
+                (l = this.objectLiteral(l)),
+                b.srcName
+                  ? ((l = l.toStringWithSourceMap({
+                      file: b.destName,
+                    })),
+                    (l.map = l.map && l.map.toString()))
+                  : (l = l.toString())),
             l
           );
         },
-        preamble: function() {
+        preamble: function () {
           (this.lastContext = 0),
-          (this.source = new n["default"](this.options.srcName)),
-          (this.decorators = new n["default"](this.options.srcName));
+            (this.source = new n["default"](this.options.srcName)),
+            (this.decorators = new n["default"](this.options.srcName));
         },
-        createFunctionContext: function(a) {
+        createFunctionContext: function (a) {
           var b = this,
             c = "",
             d = this.stackVars.concat(this.registers.list);
           d.length > 0 && (c += ", " + d.join(", "));
           var e = 0;
-          g(this.aliases).forEach(function(a) {
-              var d = b.aliases[a];
-              d.children &&
-                d.referenceCount > 1 &&
-                ((c += ", alias" + ++e + "=" + a), (d.children[0] = "alias" + e));
-            }),
+          g(this.aliases).forEach(function (a) {
+            var d = b.aliases[a];
+            d.children &&
+              d.referenceCount > 1 &&
+              ((c += ", alias" + ++e + "=" + a), (d.children[0] = "alias" + e));
+          }),
             this.lookupPropertyFunctionIsUsed &&
-            (c += ", " + this.lookupPropertyFunctionVarDeclaration());
+              (c += ", " + this.lookupPropertyFunctionVarDeclaration());
           var f = ["container", "depth0", "helpers", "partials", "data"];
           (this.useBlockParams || this.useDepths) && f.push("blockParams"),
             this.useDepths && f.push("depths");
           var h = this.mergeSource(c);
-          return a ?
-            (f.push(h), Function.apply(this, f)) :
-            this.source.wrap(["function(", f.join(","), ") {\n  ", h, "}"]);
+          return a
+            ? (f.push(h), Function.apply(this, f))
+            : this.source.wrap(["function(", f.join(","), ") {\n  ", h, "}"]);
         },
-        mergeSource: function(a) {
+        mergeSource: function (a) {
           var b = this.environment.isSimple,
             c = !this.forceBuffer,
             d = void 0,
@@ -5620,40 +5647,40 @@
             f = void 0,
             g = void 0;
           return (
-            this.source.each(function(a) {
-              a.appendToBuffer ?
-                (f ? a.prepend("  + ") : (f = a), (g = a)) :
-                (f &&
-                  (e ? f.prepend("buffer += ") : (d = !0),
+            this.source.each(function (a) {
+              a.appendToBuffer
+                ? (f ? a.prepend("  + ") : (f = a), (g = a))
+                : (f &&
+                    (e ? f.prepend("buffer += ") : (d = !0),
                     g.add(";"),
                     (f = g = void 0)),
                   (e = !0),
                   b || (c = !1));
             }),
-            c ?
-            f ?
-            (f.prepend("return "), g.add(";")) :
-            e || this.source.push('return "";') :
-            ((a += ", buffer = " + (d ? "" : this.initializeBuffer())),
-              f ?
-              (f.prepend("return buffer + "), g.add(";")) :
-              this.source.push("return buffer;")),
+            c
+              ? f
+                ? (f.prepend("return "), g.add(";"))
+                : e || this.source.push('return "";')
+              : ((a += ", buffer = " + (d ? "" : this.initializeBuffer())),
+                f
+                  ? (f.prepend("return buffer + "), g.add(";"))
+                  : this.source.push("return buffer;")),
             a &&
-            this.source.prepend("var " + a.substring(2) + (d ? "" : ";\n")),
+              this.source.prepend("var " + a.substring(2) + (d ? "" : ";\n")),
             this.source.merge()
           );
         },
-        lookupPropertyFunctionVarDeclaration: function() {
+        lookupPropertyFunctionVarDeclaration: function () {
           return "\n      lookupProperty = container.lookupProperty || function(parent, propertyName) {\n        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {\n          return parent[propertyName];\n        }\n        return undefined\n    }\n    ".trim();
         },
-        blockValue: function(a) {
+        blockValue: function (a) {
           var b = this.aliasable("container.hooks.blockHelperMissing"),
             c = [this.contextName(0)];
           this.setupHelperArgs(a, 0, c);
           var d = this.popStack();
           c.splice(1, 0, d), this.push(this.source.functionCall(b, "call", c));
         },
-        ambiguousBlockValue: function() {
+        ambiguousBlockValue: function () {
           var a = this.aliasable("container.hooks.blockHelperMissing"),
             b = [this.contextName(0)];
           this.setupHelperArgs("", 0, b, !0), this.flushInline();
@@ -5669,36 +5696,36 @@
               "}",
             ]);
         },
-        appendContent: function(a) {
-          this.pendingContent ?
-            (a = this.pendingContent + a) :
-            (this.pendingLocation = this.source.currentLocation),
+        appendContent: function (a) {
+          this.pendingContent
+            ? (a = this.pendingContent + a)
+            : (this.pendingLocation = this.source.currentLocation),
             (this.pendingContent = a);
         },
-        append: function() {
+        append: function () {
           if (this.isInline())
-            this.replaceStack(function(a) {
+            this.replaceStack(function (a) {
               return [" != null ? ", a, ' : ""'];
             }),
-            this.pushSource(this.appendToBuffer(this.popStack()));
+              this.pushSource(this.appendToBuffer(this.popStack()));
           else {
             var a = this.popStack();
             this.pushSource([
-                "if (",
-                a,
-                " != null) { ",
-                this.appendToBuffer(a, void 0, !0),
-                " }",
-              ]),
+              "if (",
+              a,
+              " != null) { ",
+              this.appendToBuffer(a, void 0, !0),
+              " }",
+            ]),
               this.environment.isSimple &&
-              this.pushSource([
-                "else { ",
-                this.appendToBuffer("''", void 0, !0),
-                " }",
-              ]);
+                this.pushSource([
+                  "else { ",
+                  this.appendToBuffer("''", void 0, !0),
+                  " }",
+                ]);
           }
         },
-        appendEscaped: function() {
+        appendEscaped: function () {
           this.pushSource(
             this.appendToBuffer([
               this.aliasable("container.escapeExpression"),
@@ -5708,42 +5735,41 @@
             ]),
           );
         },
-        getContext: function(a) {
+        getContext: function (a) {
           this.lastContext = a;
         },
-        pushContext: function() {
+        pushContext: function () {
           this.pushStackLiteral(this.contextName(this.lastContext));
         },
-        lookupOnContext: function(a, b, c, d) {
+        lookupOnContext: function (a, b, c, d) {
           var e = 0;
-          d || !this.options.compat || this.lastContext ?
-            this.pushContext() :
-            this.push(this.depthedLookup(a[e++])),
+          d || !this.options.compat || this.lastContext
+            ? this.pushContext()
+            : this.push(this.depthedLookup(a[e++])),
             this.resolvePath("context", a, e, b, c);
         },
-        lookupBlockParam: function(a, b) {
+        lookupBlockParam: function (a, b) {
           (this.useBlockParams = !0),
-          this.push(["blockParams[", a[0], "][", a[1], "]"]),
+            this.push(["blockParams[", a[0], "][", a[1], "]"]),
             this.resolvePath("context", b, 1);
         },
-        lookupData: function(a, b, c) {
+        lookupData: function (a, b, c) {
           a
-            ?
-            this.pushStackLiteral("container.data(data, " + a + ")") :
-            this.pushStackLiteral("data"),
+            ? this.pushStackLiteral("container.data(data, " + a + ")")
+            : this.pushStackLiteral("data"),
             this.resolvePath("data", b, 0, !0, c);
         },
-        resolvePath: function(a, b, c, d, e) {
+        resolvePath: function (a, b, c, d, e) {
           var g = this;
           if (this.options.strict || this.options.assumeObjects)
             return void this.push(f(this.options.strict && e, this, b, c, a));
           for (var h = b.length; c < h; c++)
-            this.replaceStack(function(e) {
+            this.replaceStack(function (e) {
               var f = g.nameLookup(e, b[c], a);
               return d ? [" && ", f] : [" != null ? ", f, " : ", e];
             });
         },
-        resolvePossibleLambda: function() {
+        resolvePossibleLambda: function () {
           this.push([
             this.aliasable("container.lambda"),
             "(",
@@ -5753,49 +5779,49 @@
             ")",
           ]);
         },
-        pushStringParam: function(a, b) {
+        pushStringParam: function (a, b) {
           this.pushContext(),
             this.pushString(b),
             "SubExpression" !== b &&
-            ("string" == typeof a ?
-              this.pushString(a) :
-              this.pushStackLiteral(a));
+              ("string" == typeof a
+                ? this.pushString(a)
+                : this.pushStackLiteral(a));
         },
-        emptyHash: function(a) {
+        emptyHash: function (a) {
           this.trackIds && this.push("{}"),
             this.stringParams && (this.push("{}"), this.push("{}")),
             this.pushStackLiteral(a ? "undefined" : "{}");
         },
-        pushHash: function() {
+        pushHash: function () {
           this.hash && this.hashes.push(this.hash),
             (this.hash = {
               values: {},
               types: [],
               contexts: [],
-              ids: []
+              ids: [],
             });
         },
-        popHash: function() {
+        popHash: function () {
           var a = this.hash;
           (this.hash = this.hashes.pop()),
-          this.trackIds && this.push(this.objectLiteral(a.ids)),
+            this.trackIds && this.push(this.objectLiteral(a.ids)),
             this.stringParams &&
-            (this.push(this.objectLiteral(a.contexts)),
+              (this.push(this.objectLiteral(a.contexts)),
               this.push(this.objectLiteral(a.types))),
             this.push(this.objectLiteral(a.values));
         },
-        pushString: function(a) {
+        pushString: function (a) {
           this.pushStackLiteral(this.quotedString(a));
         },
-        pushLiteral: function(a) {
+        pushLiteral: function (a) {
           this.pushStackLiteral(a);
         },
-        pushProgram: function(a) {
-          null != a ?
-            this.pushStackLiteral(this.programExpression(a)) :
-            this.pushStackLiteral(null);
+        pushProgram: function (a) {
+          null != a
+            ? this.pushStackLiteral(this.programExpression(a))
+            : this.pushStackLiteral(null);
         },
-        registerDecorator: function(a, b) {
+        registerDecorator: function (a, b) {
           var c = this.nameLookup("decorators", b, "decorator"),
             d = this.setupHelperArgs(b, a);
           this.decorators.push([
@@ -5809,29 +5835,29 @@
             " || fn;",
           ]);
         },
-        invokeHelper: function(a, b, c) {
+        invokeHelper: function (a, b, c) {
           var d = this.popStack(),
             e = this.setupHelper(a, b),
             f = [];
           c && f.push(e.name),
             f.push(d),
             this.options.strict ||
-            f.push(this.aliasable("container.hooks.helperMissing"));
+              f.push(this.aliasable("container.hooks.helperMissing"));
           var g = ["(", this.itemsSeparatedBy(f, "||"), ")"],
             h = this.source.functionCall(g, "call", e.callParams);
           this.push(h);
         },
-        itemsSeparatedBy: function(a, b) {
+        itemsSeparatedBy: function (a, b) {
           var c = [];
           c.push(a[0]);
           for (var d = 1; d < a.length; d++) c.push(b, a[d]);
           return c;
         },
-        invokeKnownHelper: function(a, b) {
+        invokeKnownHelper: function (a, b) {
           var c = this.setupHelper(a, b);
           this.push(this.source.functionCall(c.name, "call", c.callParams));
         },
-        invokeAmbiguous: function(a, b) {
+        invokeAmbiguous: function (a, b) {
           this.useRegister("helper");
           var c = this.popStack();
           this.emptyHash();
@@ -5840,10 +5866,10 @@
             f = ["(", "(helper = ", e, " || ", c, ")"];
           this.options.strict ||
             ((f[0] = "(helper = "),
-              f.push(
-                " != null ? helper : ",
-                this.aliasable("container.hooks.helperMissing"),
-              )),
+            f.push(
+              " != null ? helper : ",
+              this.aliasable("container.hooks.helperMissing"),
+            )),
             this.push([
               "(",
               f,
@@ -5856,7 +5882,7 @@
               " : helper))",
             ]);
         },
-        invokePartial: function(a, b, c) {
+        invokePartial: function (a, b, c) {
           var d = [],
             e = this.setupParams(b, 1, d);
           a && ((b = this.popStack()), delete e.name),
@@ -5864,9 +5890,9 @@
             (e.helpers = "helpers"),
             (e.partials = "partials"),
             (e.decorators = "container.decorators"),
-            a ?
-            d.unshift(b) :
-            d.unshift(this.nameLookup("partials", b, "partial")),
+            a
+              ? d.unshift(b)
+              : d.unshift(this.nameLookup("partials", b, "partial")),
             this.options.compat && (e.depths = "depths"),
             (e = this.objectLiteral(e)),
             d.push(e),
@@ -5874,7 +5900,7 @@
               this.source.functionCall("container.invokePartial", "", d),
             );
         },
-        assignToHash: function(a) {
+        assignToHash: function (a) {
           var b = this.popStack(),
             c = void 0,
             d = void 0,
@@ -5887,27 +5913,28 @@
             e && (f.ids[a] = e),
             (f.values[a] = b);
         },
-        pushId: function(a, b, c) {
+        pushId: function (a, b, c) {
           "BlockParam" === a
-            ?
-            this.pushStackLiteral(
-              "blockParams[" +
-              b[0] +
-              "].path[" +
-              b[1] +
-              "]" +
-              (c ? " + " + JSON.stringify("." + c) : ""),
-            ) :
-            "PathExpression" === a ?
-            this.pushString(b) :
-            "SubExpression" === a ?
-            this.pushStackLiteral("true") :
-            this.pushStackLiteral("null");
+            ? this.pushStackLiteral(
+                "blockParams[" +
+                  b[0] +
+                  "].path[" +
+                  b[1] +
+                  "]" +
+                  (c ? " + " + JSON.stringify("." + c) : ""),
+              )
+            : "PathExpression" === a
+              ? this.pushString(b)
+              : "SubExpression" === a
+                ? this.pushStackLiteral("true")
+                : this.pushStackLiteral("null");
         },
         compiler: e,
-        compileChildren: function(a, b) {
+        compileChildren: function (a, b) {
           for (
-            var c = a.children, d = void 0, e = void 0, f = 0, g = c.length; f < g; f++
+            var c = a.children, d = void 0, e = void 0, f = 0, g = c.length;
+            f < g;
+            f++
           ) {
             (d = c[f]), (e = new this.compiler());
             var h = this.matchExistingProgram(d);
@@ -5915,33 +5942,33 @@
               this.context.programs.push("");
               var i = this.context.programs.length;
               (d.index = i),
-              (d.name = "program" + i),
-              (this.context.programs[i] = e.compile(
-                d,
-                b,
-                this.context,
-                !this.precompile,
-              )),
-              (this.context.decorators[i] = e.decorators),
-              (this.context.environments[i] = d),
-              (this.useDepths = this.useDepths || e.useDepths),
-              (this.useBlockParams = this.useBlockParams || e.useBlockParams),
-              (d.useDepths = this.useDepths),
-              (d.useBlockParams = this.useBlockParams);
+                (d.name = "program" + i),
+                (this.context.programs[i] = e.compile(
+                  d,
+                  b,
+                  this.context,
+                  !this.precompile,
+                )),
+                (this.context.decorators[i] = e.decorators),
+                (this.context.environments[i] = d),
+                (this.useDepths = this.useDepths || e.useDepths),
+                (this.useBlockParams = this.useBlockParams || e.useBlockParams),
+                (d.useDepths = this.useDepths),
+                (d.useBlockParams = this.useBlockParams);
             } else
               (d.index = h.index),
-              (d.name = "program" + h.index),
-              (this.useDepths = this.useDepths || h.useDepths),
-              (this.useBlockParams = this.useBlockParams || h.useBlockParams);
+                (d.name = "program" + h.index),
+                (this.useDepths = this.useDepths || h.useDepths),
+                (this.useBlockParams = this.useBlockParams || h.useBlockParams);
           }
         },
-        matchExistingProgram: function(a) {
+        matchExistingProgram: function (a) {
           for (var b = 0, c = this.context.environments.length; b < c; b++) {
             var d = this.context.environments[b];
             if (d && d.equals(a)) return d;
           }
         },
-        programExpression: function(a) {
+        programExpression: function (a) {
           var b = this.environment.children[a],
             c = [b.index, "data", b.blockParams];
           return (
@@ -5950,32 +5977,32 @@
             "container.program(" + c.join(", ") + ")"
           );
         },
-        useRegister: function(a) {
+        useRegister: function (a) {
           this.registers[a] ||
             ((this.registers[a] = !0), this.registers.list.push(a));
         },
-        push: function(a) {
+        push: function (a) {
           return (
             a instanceof d || (a = this.source.wrap(a)),
             this.inlineStack.push(a),
             a
           );
         },
-        pushStackLiteral: function(a) {
+        pushStackLiteral: function (a) {
           this.push(new d(a));
         },
-        pushSource: function(a) {
+        pushSource: function (a) {
           this.pendingContent &&
             (this.source.push(
-                this.appendToBuffer(
-                  this.source.quotedString(this.pendingContent),
-                  this.pendingLocation,
-                ),
+              this.appendToBuffer(
+                this.source.quotedString(this.pendingContent),
+                this.pendingLocation,
               ),
-              (this.pendingContent = void 0)),
+            ),
+            (this.pendingContent = void 0)),
             a && this.source.push(a);
         },
-        replaceStack: function(a) {
+        replaceStack: function (a) {
           var b = ["("],
             c = void 0,
             e = void 0,
@@ -5983,7 +6010,7 @@
           if (!this.isInline())
             throw new k["default"]("replaceStack on non-inline");
           var g = this.popStack(!0);
-          if (g instanceof d)(c = [g.value]), (b = ["(", c]), (f = !0);
+          if (g instanceof d) (c = [g.value]), (b = ["(", c]), (f = !0);
           else {
             e = !0;
             var h = this.incrStack();
@@ -5994,18 +6021,18 @@
             e && this.stackSlot--,
             this.push(b.concat(i, ")"));
         },
-        incrStack: function() {
+        incrStack: function () {
           return (
             this.stackSlot++,
             this.stackSlot > this.stackVars.length &&
-            this.stackVars.push("stack" + this.stackSlot),
+              this.stackVars.push("stack" + this.stackSlot),
             this.topStackName()
           );
         },
-        topStackName: function() {
+        topStackName: function () {
           return "stack" + this.stackSlot;
         },
-        flushInline: function() {
+        flushInline: function () {
           var a = this.inlineStack;
           this.inlineStack = [];
           for (var b = 0, c = a.length; b < c; b++) {
@@ -6017,10 +6044,10 @@
             }
           }
         },
-        isInline: function() {
+        isInline: function () {
           return this.inlineStack.length;
         },
-        popStack: function(a) {
+        popStack: function (a) {
           var b = this.isInline(),
             c = (b ? this.inlineStack : this.compileStack).pop();
           if (!a && c instanceof d) return c.value;
@@ -6030,38 +6057,38 @@
           }
           return c;
         },
-        topStack: function() {
+        topStack: function () {
           var a = this.isInline() ? this.inlineStack : this.compileStack,
             b = a[a.length - 1];
           return b instanceof d ? b.value : b;
         },
-        contextName: function(a) {
+        contextName: function (a) {
           return this.useDepths && a ? "depths[" + a + "]" : "depth" + a;
         },
-        quotedString: function(a) {
+        quotedString: function (a) {
           return this.source.quotedString(a);
         },
-        objectLiteral: function(a) {
+        objectLiteral: function (a) {
           return this.source.objectLiteral(a);
         },
-        aliasable: function(a) {
+        aliasable: function (a) {
           var b = this.aliases[a];
-          return b ?
-            (b.referenceCount++, b) :
-            ((b = this.aliases[a] = this.source.wrap(a)),
+          return b
+            ? (b.referenceCount++, b)
+            : ((b = this.aliases[a] = this.source.wrap(a)),
               (b.aliasable = !0),
               (b.referenceCount = 1),
               b);
         },
-        setupHelper: function(a, b, c) {
+        setupHelper: function (a, b, c) {
           var d = [],
             e = this.setupHelperArgs(b, a, d, c),
             f = this.nameLookup("helpers", b, "helper"),
             g = this.aliasable(
               this.contextName(0) +
-              " != null ? " +
-              this.contextName(0) +
-              " : (container.nullContext || {})",
+                " != null ? " +
+                this.contextName(0) +
+                " : (container.nullContext || {})",
             );
           return {
             params: d,
@@ -6070,7 +6097,7 @@
             callParams: [g].concat(d),
           };
         },
-        setupParams: function(a, b, c) {
+        setupParams: function (a, b, c) {
           var d = {},
             e = [],
             f = [],
@@ -6082,64 +6109,66 @@
             (d.hash = this.popStack()),
             this.trackIds && (d.hashIds = this.popStack()),
             this.stringParams &&
-            ((d.hashTypes = this.popStack()),
+              ((d.hashTypes = this.popStack()),
               (d.hashContexts = this.popStack()));
           var j = this.popStack(),
             k = this.popStack();
           (k || j) &&
-          ((d.fn = k || "container.noop"),
+            ((d.fn = k || "container.noop"),
             (d.inverse = j || "container.noop"));
-          for (var l = b; l--;)
+          for (var l = b; l--; )
             (i = this.popStack()),
-            (c[l] = i),
-            this.trackIds && (g[l] = this.popStack()),
-            this.stringParams &&
-            ((f[l] = this.popStack()), (e[l] = this.popStack()));
+              (c[l] = i),
+              this.trackIds && (g[l] = this.popStack()),
+              this.stringParams &&
+                ((f[l] = this.popStack()), (e[l] = this.popStack()));
           return (
             h && (d.args = this.source.generateArray(c)),
             this.trackIds && (d.ids = this.source.generateArray(g)),
             this.stringParams &&
-            ((d.types = this.source.generateArray(f)),
+              ((d.types = this.source.generateArray(f)),
               (d.contexts = this.source.generateArray(e))),
             this.options.data && (d.data = "data"),
             this.useBlockParams && (d.blockParams = "blockParams"),
             d
           );
         },
-        setupHelperArgs: function(a, b, c, d) {
+        setupHelperArgs: function (a, b, c, d) {
           var e = this.setupParams(a, b, c);
           return (
             (e.loc = JSON.stringify(this.source.currentLocation)),
             (e = this.objectLiteral(e)),
-            d ?
-            (this.useRegister("options"),
-              c.push("options"),
-              ["options=", e]) :
-            c ?
-            (c.push(e), "") :
-            e
+            d
+              ? (this.useRegister("options"),
+                c.push("options"),
+                ["options=", e])
+              : c
+                ? (c.push(e), "")
+                : e
           );
         },
       }),
-      (function() {
-        for (
-          var a =
-            "break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(
-              " ",
-            ),
-            b = (e.RESERVED_WORDS = {}),
-            c = 0,
-            d = a.length; c < d; c++
-        )
-          b[a[c]] = !0;
-      })(),
-      (e.isValidJavaScriptVariableName = function(a) {
-        return !e.RESERVED_WORDS[a] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(a);
-      }),
-      (b["default"] = e),
-      (a.exports = b["default"]);
+        (function () {
+          for (
+            var a =
+                "break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(
+                  " ",
+                ),
+              b = (e.RESERVED_WORDS = {}),
+              c = 0,
+              d = a.length;
+            c < d;
+            c++
+          )
+            b[a[c]] = !0;
+        })(),
+        (e.isValidJavaScriptVariableName = function (a) {
+          return !e.RESERVED_WORDS[a] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(a);
+        }),
+        (b["default"] = e),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b, c) {
@@ -6158,103 +6187,104 @@
       b.__esModule = !0;
       var g = c(5),
         h = void 0;
-      try {} catch (i) {}
+      try {
+      } catch (i) {}
       h ||
-        ((h = function(a, b, c, d) {
-            (this.src = ""), d && this.add(d);
-          }),
-          (h.prototype = {
-            add: function(a) {
-              g.isArray(a) && (a = a.join("")), (this.src += a);
-            },
-            prepend: function(a) {
-              g.isArray(a) && (a = a.join("")), (this.src = a + this.src);
-            },
-            toStringWithSourceMap: function() {
-              return {
-                code: this.toString()
-              };
-            },
-            toString: function() {
-              return this.src;
-            },
-          })),
+        ((h = function (a, b, c, d) {
+          (this.src = ""), d && this.add(d);
+        }),
+        (h.prototype = {
+          add: function (a) {
+            g.isArray(a) && (a = a.join("")), (this.src += a);
+          },
+          prepend: function (a) {
+            g.isArray(a) && (a = a.join("")), (this.src = a + this.src);
+          },
+          toStringWithSourceMap: function () {
+            return {
+              code: this.toString(),
+            };
+          },
+          toString: function () {
+            return this.src;
+          },
+        })),
         (e.prototype = {
-          isEmpty: function() {
+          isEmpty: function () {
             return !this.source.length;
           },
-          prepend: function(a, b) {
+          prepend: function (a, b) {
             this.source.unshift(this.wrap(a, b));
           },
-          push: function(a, b) {
+          push: function (a, b) {
             this.source.push(this.wrap(a, b));
           },
-          merge: function() {
+          merge: function () {
             var a = this.empty();
             return (
-              this.each(function(b) {
+              this.each(function (b) {
                 a.add(["  ", b, "\n"]);
               }),
               a
             );
           },
-          each: function(a) {
+          each: function (a) {
             for (var b = 0, c = this.source.length; b < c; b++)
               a(this.source[b]);
           },
-          empty: function() {
+          empty: function () {
             var a = this.currentLocation || {
-              start: {}
+              start: {},
             };
             return new h(a.start.line, a.start.column, this.srcFile);
           },
-          wrap: function(a) {
+          wrap: function (a) {
             var b =
-              arguments.length <= 1 || void 0 === arguments[1] ?
-              this.currentLocation || {
-                start: {}
-              } :
-              arguments[1];
-            return a instanceof h ?
-              a :
-              ((a = d(a, this, b)),
+              arguments.length <= 1 || void 0 === arguments[1]
+                ? this.currentLocation || {
+                    start: {},
+                  }
+                : arguments[1];
+            return a instanceof h
+              ? a
+              : ((a = d(a, this, b)),
                 new h(b.start.line, b.start.column, this.srcFile, a));
           },
-          functionCall: function(a, b, c) {
+          functionCall: function (a, b, c) {
             return (
               (c = this.generateList(c)),
               this.wrap([a, b ? "." + b + "(" : "(", c, ")"])
             );
           },
-          quotedString: function(a) {
+          quotedString: function (a) {
             return (
               '"' +
               (a + "")
-              .replace(/\\/g, "\\\\")
-              .replace(/"/g, '\\"')
-              .replace(/\n/g, "\\n")
-              .replace(/\r/g, "\\r")
-              .replace(/\u2028/g, "\\u2028")
-              .replace(/\u2029/g, "\\u2029") +
+                .replace(/\\/g, "\\\\")
+                .replace(/"/g, '\\"')
+                .replace(/\n/g, "\\n")
+                .replace(/\r/g, "\\r")
+                .replace(/\u2028/g, "\\u2028")
+                .replace(/\u2029/g, "\\u2029") +
               '"'
             );
           },
-          objectLiteral: function(a) {
+          objectLiteral: function (a) {
             var b = this,
               c = [];
-            f(a).forEach(function(e) {
+            f(a).forEach(function (e) {
               var f = d(a[e], b);
               "undefined" !== f && c.push([b.quotedString(e), ":", f]);
             });
             var e = this.generateList(c);
             return e.prepend("{"), e.add("}"), e;
           },
-          generateList: function(a) {
+          generateList: function (a) {
             for (var b = this.empty(), c = 0, e = a.length; c < e; c++)
               c && b.add(","), b.add(d(a[c], this));
             return b;
           },
-          generateArray: function(a) {
+          generateArray: function (a) {
             var b = this.generateList(a);
             return b.prepend("["), b.add("]"), b;
           },
@@ -6264,12 +6294,12 @@
     },
   ]);
 });
-Handlebars.registerHelper("debug", function(obj) {
+Handlebars.registerHelper("debug", function (obj) {
   return new Handlebars.SafeString(
     "<pre>" + JSON.stringify(obj, null, 2) + "</pre>",
   );
 });
-Handlebars.registerHelper("desktopbackground", function(opt) {
+Handlebars.registerHelper("desktopbackground", function (opt) {
   var html = 'style="';
   if (!opt) {
     return "";
@@ -6292,12 +6322,12 @@ Handlebars.registerHelper("desktopbackground", function(opt) {
   html += '"';
   return new Handlebars.SafeString(html);
 });
-Handlebars.registerHelper("humandate", function(value) {
+Handlebars.registerHelper("humandate", function (value) {
   var dte = new Date(value);
   var dteStr = dte.toLocaleDateString() + " " + dte.toLocaleTimeString();
   return new Handlebars.SafeString(dteStr);
 });
-Handlebars.registerHelper("humandateonly", function(value) {
+Handlebars.registerHelper("humandateonly", function (value) {
   var dte = new Date(value);
   var dteStr = dte.toLocaleDateString("en-GB", {
     weekday: "short",
@@ -6306,7 +6336,7 @@ Handlebars.registerHelper("humandateonly", function(value) {
   });
   return new Handlebars.SafeString(dteStr);
 });
-Handlebars.registerHelper("isempty", function(field, options) {
+Handlebars.registerHelper("isempty", function (field, options) {
   if (field) {
     if (field === "") {
       return options.fn(this);
@@ -6315,7 +6345,7 @@ Handlebars.registerHelper("isempty", function(field, options) {
   }
   return options.fn(this);
 });
-Handlebars.registerHelper("isnotempty", function(field, options) {
+Handlebars.registerHelper("isnotempty", function (field, options) {
   if (field) {
     if (field === "") {
       return options.inverse(this);
@@ -6324,13 +6354,13 @@ Handlebars.registerHelper("isnotempty", function(field, options) {
   }
   return options.inverse(this);
 });
-Handlebars.registerHelper("label", function(key, context) {
+Handlebars.registerHelper("label", function (key, context) {
   if (context.Config.Labels[key]) {
     return new Handlebars.SafeString(context.Config.Labels[key]);
   }
   return new Handlebars.SafeString("");
 });
-Handlebars.registerHelper("map", function(array, iter) {
+Handlebars.registerHelper("map", function (array, iter) {
   if (!Array.isArray(array)) return "";
   var len = array.length;
   var res = new Array(len);
@@ -6344,14 +6374,14 @@ Handlebars.registerHelper("map", function(array, iter) {
   }
   return res;
 });
-Handlebars.registerHelper("now", function() {
+Handlebars.registerHelper("now", function () {
   var dte = new Date();
   var dteStr = dte.toLocaleDateString() + " " + dte.toLocaleTimeString();
   return new Handlebars.SafeString(dteStr);
 });
 Handlebars.registerHelper(
   "service",
-  function(name, services, parent, opacity, settings) {
+  function (name, services, parent, opacity, settings) {
     var html = "";
     var template = "";
     var p = parent;
@@ -6387,7 +6417,7 @@ Handlebars.registerHelper(
             if (f) {
               html = f({
                 settings: settings,
-                parent: p
+                parent: p,
               });
             }
             break;
@@ -6400,7 +6430,7 @@ Handlebars.registerHelper(
             var f = Handlebars.partials[template];
             html = f({
               service: s,
-              parent: p
+              parent: p,
             });
             return;
           }
@@ -6433,144 +6463,144 @@ Handlebars.registerHelper(
     return new Handlebars.SafeString(html);
   },
 );
-Handlebars.registerHelper("stringify", function(obj) {
+Handlebars.registerHelper("stringify", function (obj) {
   return new Handlebars.SafeString(JSON.stringify(obj, null, 0));
 });
 this["app"] = this["app"] || {};
 this["app"]["templates"] = this["app"]["templates"] || {};
 this["app"]["templates"]["compose"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<div class="container">\n  <div class="mb-3">\n    <label for="txtRun" class="form-label">Run command:</label><br />\n    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtRun"></textarea><br />\n    <button type="button" class="btn btn-primary" onclick="doComposerise(\'#txtRun\', \'#txtCompose\'); return false;">Convert to Compose</button>\n    <hr />\n    <label for="txtCompose" class="form-label">Docker compose definition:</label><br />\n    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtCompose"></textarea><br />\n    <button type="button" class="btn btn-primary" onclick="doDeComposerise(\'#txtCompose\', \'#txtRun\'); return false;">Convert to run</button>\n    <hr />\n\n  </div>\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["containerinfo"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     var helper,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       ((helper =
-          (helper =
-            lookupProperty(helpers, "icon_slug") ||
-            (depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0)) !=
-          null ?
-          helper :
-          container.hooks.helperMissing),
-        typeof helper === "function" ?
-        helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
-          name: "icon_slug",
-          hash: {},
-          data: data,
-          loc: {
-            start: {
-              line: 10,
-              column: 121
+        (helper =
+          lookupProperty(helpers, "icon_slug") ||
+          (depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0)) !=
+        null
+          ? helper
+          : container.hooks.helperMissing),
+      typeof helper === "function"
+        ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+            name: "icon_slug",
+            hash: {},
+            data: data,
+            loc: {
+              start: {
+                line: 10,
+                column: 121,
+              },
+              end: {
+                line: 10,
+                column: 134,
+              },
             },
-            end: {
-              line: 10,
-              column: 134
-            },
-          },
-        }) :
-        helper),
+          })
+        : helper),
     );
   },
-  3: function(container, depth0, helpers, partials, data) {
+  3: function (container, depth0, helpers, partials, data) {
     var helper,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       ((helper =
-          (helper =
-            lookupProperty(helpers, "Name") ||
-            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-          helper :
-          container.hooks.helperMissing),
-        typeof helper === "function" ?
-        helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
-          name: "Name",
-          hash: {},
-          data: data,
-          loc: {
-            start: {
-              line: 10,
-              column: 142
-            },
-            end: {
-              line: 10,
-              column: 150
-            },
-          },
-        }) :
-        helper),
-    );
-  },
-  5: function(container, depth0, helpers, partials, data) {
-    return "Update Available";
-  },
-  7: function(container, depth0, helpers, partials, data) {
-    return "Up-to-date";
-  },
-  9: function(container, depth0, helpers, partials, data) {
-    var stack1,
-      helper,
-      alias1 = container.escapeExpression,
-      lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
-    return (
-      '          <button onclick="composeEdit(this); return false;" data-containerid="' +
-      alias1(
-        ((helper =
-            (helper =
-              lookupProperty(helpers, "Name") ||
-              (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-            helper :
-            container.hooks.helperMissing),
-          typeof helper === "function" ?
-          helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+        (helper =
+          lookupProperty(helpers, "Name") ||
+          (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+          ? helper
+          : container.hooks.helperMissing),
+      typeof helper === "function"
+        ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
             name: "Name",
             hash: {},
             data: data,
             loc: {
               start: {
-                line: 52,
-                column: 79
+                line: 10,
+                column: 142,
               },
               end: {
-                line: 52,
-                column: 87
+                line: 10,
+                column: 150,
               },
             },
-          }) :
-          helper),
+          })
+        : helper),
+    );
+  },
+  5: function (container, depth0, helpers, partials, data) {
+    return "Update Available";
+  },
+  7: function (container, depth0, helpers, partials, data) {
+    return "Up-to-date";
+  },
+  9: function (container, depth0, helpers, partials, data) {
+    var stack1,
+      helper,
+      alias1 = container.escapeExpression,
+      lookupProperty =
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
+    return (
+      '          <button onclick="composeEdit(this); return false;" data-containerid="' +
+      alias1(
+        ((helper =
+          (helper =
+            lookupProperty(helpers, "Name") ||
+            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+            ? helper
+            : container.hooks.helperMissing),
+        typeof helper === "function"
+          ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+              name: "Name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 52,
+                  column: 79,
+                },
+                end: {
+                  line: 52,
+                  column: 87,
+                },
+              },
+            })
+          : helper),
       ) +
       '" data-project="' +
       alias1(
         container.lambda(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ?
-          lookupProperty(stack1, "project") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null
+            ? lookupProperty(stack1, "project")
+            : stack1,
           depth0,
         ),
       ) +
@@ -6578,7 +6608,7 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
@@ -6587,70 +6617,71 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       alias4 = container.escapeExpression,
       alias5 = container.lambda,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<div class="modal fade" id="containerInfoModal" tabindex="-1" aria-label>\n  <div class="modal-dialog modal-dialog-scrollable modal-lg">\n    <div class="modal-content">\n      <div class="modal-header">\n        <h1 class="modal-title fs-5" id="containerInfoLabel">' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "Name") ||
-              (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "Name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 61
+          (helper =
+            lookupProperty(helpers, "Name") ||
+            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "Name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 5,
+                  column: 61,
+                },
+                end: {
+                  line: 5,
+                  column: 69,
+                },
               },
-              end: {
-                line: 5,
-                column: 69
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '</h1>\n        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n      </div>\n      <div class="modal-body">\n        <div style="text-align:center;margin-top:5px" class="card">\n          <img class="card-img-top" style="padding:5px;width:10rem;height:10rem;" src="/api/icons/query/' +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.program(3, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 10,
-                column: 104
-              },
-              end: {
-                line: 10,
-                column: 157
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.program(3, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 10,
+              column: 104,
+            },
+            end: {
+              line: 10,
+              column: 157,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" />\n        </div>\n        <div class="card-body">\n          <p class="card-text">\n          <table border="0" cellpadding="2" cellspacing="0">\n            <tr>\n              <td>Hostname:</td>\n              <td>' +
       alias4(
         alias5(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null ?
-          lookupProperty(stack1, "Hostname") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null
+            ? lookupProperty(stack1, "Hostname")
+            : stack1,
           depth0,
         ),
       ) +
@@ -6658,47 +6689,48 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       alias4(
         alias5(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null ?
-          lookupProperty(stack1, "Image") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null
+            ? lookupProperty(stack1, "Image")
+            : stack1,
           depth0,
         ),
       ) +
       "</td>\n            </tr>\n            <tr>\n              <td></td>\n              <td>" +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          (stack1 =
-            depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0) !=
-          null ?
-          lookupProperty(stack1, "updateDue") :
-          stack1, {
-            name: "if",
-            hash: {},
-            fn: container.program(5, data, 0),
-            inverse: container.program(7, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 25,
-                column: 18
-              },
-              end: {
-                line: 25,
-                column: 89
-              },
+        alias1,
+        (stack1 =
+          depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0) !=
+          null
+          ? lookupProperty(stack1, "updateDue")
+          : stack1,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(5, data, 0),
+          inverse: container.program(7, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 25,
+              column: 18,
+            },
+            end: {
+              line: 25,
+              column: 89,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "</td>\n            </tr>\n            <tr>\n              <td>Created:</td>\n              <td>" +
       alias4(
         alias5(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0) !=
-          null ?
-          lookupProperty(stack1, "imageCreated") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "imageCreated")
+            : stack1,
           depth0,
         ),
       ) +
@@ -6707,9 +6739,9 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         alias5(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0) !=
-          null ?
-          lookupProperty(stack1, "latestBuildDate") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "latestBuildDate")
+            : stack1,
           depth0,
         ),
       ) +
@@ -6717,9 +6749,9 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       alias4(
         alias5(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "State") : depth0) != null ?
-          lookupProperty(stack1, "Status") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "State") : depth0) != null
+            ? lookupProperty(stack1, "Status")
+            : stack1,
           depth0,
         ),
       ) +
@@ -6728,144 +6760,145 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         alias5(
           (stack1 =
             (stack1 =
-              depth0 != null ? lookupProperty(depth0, "State") : depth0) != null ?
-            lookupProperty(stack1, "Health") :
-            stack1) != null ?
-          lookupProperty(stack1, "Status") :
-          stack1,
+              depth0 != null ? lookupProperty(depth0, "State") : depth0) != null
+              ? lookupProperty(stack1, "Health")
+              : stack1) != null
+            ? lookupProperty(stack1, "Status")
+            : stack1,
           depth0,
         ),
       ) +
       '</td>\n            </tr>\n          </table>\n        </div>\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-danger" data-containerid="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "Name") ||
-              (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "Name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 47,
-                column: 71
+          (helper =
+            lookupProperty(helpers, "Name") ||
+            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "Name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 47,
+                  column: 71,
+                },
+                end: {
+                  line: 47,
+                  column: 79,
+                },
               },
-              end: {
-                line: 47,
-                column: 79
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" data-command="container-stop">Stop</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "Name") ||
-              (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "Name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 48,
-                column: 74
+          (helper =
+            lookupProperty(helpers, "Name") ||
+            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "Name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 48,
+                  column: 74,
+                },
+                end: {
+                  line: 48,
+                  column: 82,
+                },
               },
-              end: {
-                line: 48,
-                column: 82
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" data-command="container-start">Start</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "Name") ||
-              (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "Name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 49,
-                column: 74
+          (helper =
+            lookupProperty(helpers, "Name") ||
+            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "Name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 49,
+                  column: 74,
+                },
+                end: {
+                  line: 49,
+                  column: 82,
+                },
               },
-              end: {
-                line: 49,
-                column: 82
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" data-command="container-restart">Restart</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "Name") ||
-              (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "Name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 50,
-                column: 74
+          (helper =
+            lookupProperty(helpers, "Name") ||
+            (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "Name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 50,
+                  column: 74,
+                },
+                end: {
+                  line: 50,
+                  column: 82,
+                },
               },
-              end: {
-                line: 50,
-                column: 82
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" onclick="startContainerMonitor(this); return false;">Monitor</button>\n' +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) !=
-          null ?
-          lookupProperty(stack1, "editable") :
-          stack1, {
-            name: "if",
-            hash: {},
-            fn: container.program(9, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 51,
-                column: 8
-              },
-              end: {
-                line: 53,
-                column: 15
-              },
+        alias1,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) !=
+          null
+          ? lookupProperty(stack1, "editable")
+          : stack1,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(9, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 51,
+              column: 8,
+            },
+            end: {
+              line: 53,
+              column: 15,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n'
     );
   },
@@ -6873,38 +6906,39 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
 });
 this["app"]["templates"]["desktopfooter"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<footer class="fixed-bottom bg-body-tertiary text-muted" style="height:40px">\n  <div class="container" style="padding-top:5px" id="footer">\n  </div>\n</footer>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["desktopheader"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<nav class="navbar navbar-expand-lg sticky-top bg-brand">\n  <div class="container-fluid">\n    <a class="navbar-brand" href="/"><img width="38px" height=38px" src="/assets/img/logo.png" />&nbsp; DiscovrNinja!</a>\n\n    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\n      <span class="navbar-toggler-icon"></span>\n    </button>\n    <div class="collapse navbar-collapse" id="navbarNavDropdown">\n      <ul class="navbar-nav">\n        <li class="nav-item">\n          <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" href="/admin/index"><i class="fa-solid fa-toolbox"></i> Administration</a>\n        </li>\n        <li class="nav-item">\n' +
       ((stack1 = container.invokePartial(
-          lookupProperty(partials, "themechooser"),
-          depth0, {
-            name: "themechooser",
-            data: data,
-            indent: "          ",
-            helpers: helpers,
-            partials: partials,
-            decorators: container.decorators,
-          },
-        )) != null ?
-        stack1 :
-        "") +
+        lookupProperty(partials, "themechooser"),
+        depth0,
+        {
+          name: "themechooser",
+          data: data,
+          indent: "          ",
+          helpers: helpers,
+          partials: partials,
+          decorators: container.decorators,
+        },
+      )) != null
+        ? stack1
+        : "") +
       "        </li>\n      </ul>\n\n    </div>\n  </div>\n</nav>\n"
     );
   },
@@ -6912,7 +6946,7 @@ this["app"]["templates"]["desktopheader"] = Handlebars.template({
   useData: true,
 });
 this["app"]["templates"]["dockerps"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
@@ -6920,599 +6954,611 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       alias3 = "function",
       alias4 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "      <tr>\n        <td>\n          <a " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(2, data, 0),
-            inverse: container.program(4, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 17,
-                column: 13
-              },
-              end: {
-                line: 17,
-                column: 173
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(2, data, 0),
+          inverse: container.program(4, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 17,
+              column: 13,
+            },
+            end: {
+              line: 17,
+              column: 173,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '><i class="fa-solid fa-link"></i></a>\n          <a href="#" data-containerid="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "name") ||
-              (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 18,
-                column: 40
+          (helper =
+            lookupProperty(helpers, "name") ||
+            (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 18,
+                  column: 40,
+                },
+                end: {
+                  line: 18,
+                  column: 48,
+                },
               },
-              end: {
-                line: 18,
-                column: 48
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" ' +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(6, data, 0),
-            inverse: container.program(8, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 18,
-                column: 50
-              },
-              end: {
-                line: 18,
-                column: 216
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(6, data, 0),
+          inverse: container.program(8, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 18,
+              column: 50,
+            },
+            end: {
+              line: 18,
+              column: 216,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '><i class="fa-regular fa-font-awesome"></i></a>\n        </td>\n        <td><a href="#" data-containerid="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "id") ||
-              (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "id",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 20,
-                column: 42
+          (helper =
+            lookupProperty(helpers, "id") ||
+            (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "id",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 20,
+                  column: 42,
+                },
+                end: {
+                  line: 20,
+                  column: 48,
+                },
               },
-              end: {
-                line: 20,
-                column: 48
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" ' +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(10, data, 0),
-            inverse: container.program(12, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 20,
-                column: 50
-              },
-              end: {
-                line: 20,
-                column: 109
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "healthy") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(10, data, 0),
+          inverse: container.program(12, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 20,
+              column: 50,
+            },
+            end: {
+              line: 20,
+              column: 109,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' onclick="containerInfo(this);return false;">' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "name") ||
-              (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "name",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 20,
-                column: 154
+          (helper =
+            lookupProperty(helpers, "name") ||
+            (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "name",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 20,
+                  column: 154,
+                },
+                end: {
+                  line: 20,
+                  column: 162,
+                },
               },
-              end: {
-                line: 20,
-                column: 162
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</a></td>\n        <td " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(10, data, 0),
-            inverse: container.program(12, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 21,
-                column: 12
-              },
-              end: {
-                line: 21,
-                column: 71
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "healthy") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(10, data, 0),
+          inverse: container.program(12, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 21,
+              column: 12,
+            },
+            end: {
+              line: 21,
+              column: 71,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ">" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "status") ||
-              (depth0 != null ? lookupProperty(depth0, "status") : depth0)) !=
-            null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "status",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 21,
-                column: 72
+          (helper =
+            lookupProperty(helpers, "status") ||
+            (depth0 != null ? lookupProperty(depth0, "status") : depth0)) !=
+          null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "status",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 21,
+                  column: 72,
+                },
+                end: {
+                  line: 21,
+                  column: 82,
+                },
               },
-              end: {
-                line: 21,
-                column: 82
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n        <td " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(14, data, 0),
-            inverse: container.program(12, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 22,
-                column: 12
-              },
-              end: {
-                line: 22,
-                column: 114
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "healthy") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(14, data, 0),
+          inverse: container.program(12, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 22,
+              column: 12,
+            },
+            end: {
+              line: 22,
+              column: 114,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ">\n          " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "shutdown") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(17, data, 0),
-            inverse: container.program(19, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 23,
-                column: 10
-              },
-              end: {
-                line: 23,
-                column: 66
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "shutdown") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(17, data, 0),
+          inverse: container.program(19, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 23,
+              column: 10,
+            },
+            end: {
+              line: 23,
+              column: 66,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "\n        </td>\n        <td " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(10, data, 0),
-            inverse: container.program(12, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 25,
-                column: 12
-              },
-              end: {
-                line: 25,
-                column: 71
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "healthy") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(10, data, 0),
+          inverse: container.program(12, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 25,
+              column: 12,
+            },
+            end: {
+              line: 25,
+              column: 71,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ">" +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "shutdown") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(17, data, 0),
-            inverse: container.program(21, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 25,
-                column: 72
-              },
-              end: {
-                line: 25,
-                column: 128
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "shutdown") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(17, data, 0),
+          inverse: container.program(21, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 25,
+              column: 72,
+            },
+            end: {
+              line: 25,
+              column: 128,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "</td>\n        <td " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(23, data, 0),
-            inverse: container.program(12, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 26,
-                column: 12
-              },
-              end: {
-                line: 26,
-                column: 117
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "healthy") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(23, data, 0),
+          inverse: container.program(12, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 26,
+              column: 12,
+            },
+            end: {
+              line: 26,
+              column: 117,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ">" +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "shutdown") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(17, data, 0),
-            inverse: container.program(25, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 26,
-                column: 118
-              },
-              end: {
-                line: 26,
-                column: 180
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "shutdown") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(17, data, 0),
+          inverse: container.program(25, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 26,
+              column: 118,
+            },
+            end: {
+              line: 26,
+              column: 180,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "</td>\n      </tr>\n"
     );
   },
-  2: function(container, depth0, helpers, partials, data) {
+  2: function (container, depth0, helpers, partials, data) {
     var helper,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       'href="' +
       container.escapeExpression(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "publicUrl") ||
-              (depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0)) !=
-            null ?
-            helper :
-            container.hooks.helperMissing),
-          typeof helper === "function" ?
-          helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
-            name: "publicUrl",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 17,
-                column: 36
+          (helper =
+            lookupProperty(helpers, "publicUrl") ||
+            (depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0)) !=
+          null
+            ? helper
+            : container.hooks.helperMissing),
+        typeof helper === "function"
+          ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+              name: "publicUrl",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 17,
+                  column: 36,
+                },
+                end: {
+                  line: 17,
+                  column: 49,
+                },
               },
-              end: {
-                line: 17,
-                column: 49
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" target="_new" class="btn btn-outline-secondary btn-sm" '
     );
   },
-  4: function(container, depth0, helpers, partials, data) {
+  4: function (container, depth0, helpers, partials, data) {
     return ' class="btn btn-outline-secondary btn-sm  disabled" ';
   },
-  6: function(container, depth0, helpers, partials, data) {
+  6: function (container, depth0, helpers, partials, data) {
     return ' onclick="changeIcon(this); return false;" class="btn btn-outline-secondary btn-sm" ';
   },
-  8: function(container, depth0, helpers, partials, data) {
+  8: function (container, depth0, helpers, partials, data) {
     return 'class="btn btn-outline-secondary btn-sm disabled" ';
   },
-  10: function(container, depth0, helpers, partials, data) {
+  10: function (container, depth0, helpers, partials, data) {
     return "";
   },
-  12: function(container, depth0, helpers, partials, data) {
+  12: function (container, depth0, helpers, partials, data) {
     return 'class="text-danger-emphasis" ';
   },
-  14: function(container, depth0, helpers, partials, data) {
+  14: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (stack1 = lookupProperty(helpers, "if").call(
-        depth0 != null ? depth0 : container.nullContext || {},
-        depth0 != null ? lookupProperty(depth0, "cpuAlert") : depth0, {
-          name: "if",
-          hash: {},
-          fn: container.program(15, data, 0),
-          inverse: container.noop,
-          data: data,
-          loc: {
-            start: {
-              line: 22,
-              column: 27
-            },
-            end: {
-              line: 22,
-              column: 70
-            }
+      depth0 != null ? depth0 : container.nullContext || {},
+      depth0 != null ? lookupProperty(depth0, "cpuAlert") : depth0,
+      {
+        name: "if",
+        hash: {},
+        fn: container.program(15, data, 0),
+        inverse: container.noop,
+        data: data,
+        loc: {
+          start: {
+            line: 22,
+            column: 27,
+          },
+          end: {
+            line: 22,
+            column: 70,
           },
         },
-      )) != null ?
-      stack1 :
-      "";
+      },
+    )) != null
+      ? stack1
+      : "";
   },
-  15: function(container, depth0, helpers, partials, data) {
+  15: function (container, depth0, helpers, partials, data) {
     return 'class="text-danger" ';
   },
-  17: function(container, depth0, helpers, partials, data) {
+  17: function (container, depth0, helpers, partials, data) {
     return "-";
   },
-  19: function(container, depth0, helpers, partials, data) {
+  19: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "stats") : depth0) !=
-        null ?
-        lookupProperty(stack1, "cpuPercentStr") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "cpuPercentStr")
+          : stack1,
         depth0,
       ),
     );
   },
-  21: function(container, depth0, helpers, partials, data) {
+  21: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "stats") : depth0) !=
-        null ?
-        lookupProperty(stack1, "memoryUsageStr") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "memoryUsageStr")
+          : stack1,
         depth0,
       ),
     );
   },
-  23: function(container, depth0, helpers, partials, data) {
+  23: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (stack1 = lookupProperty(helpers, "if").call(
-        depth0 != null ? depth0 : container.nullContext || {},
-        depth0 != null ? lookupProperty(depth0, "memoryAlert") : depth0, {
-          name: "if",
-          hash: {},
-          fn: container.program(15, data, 0),
-          inverse: container.noop,
-          data: data,
-          loc: {
-            start: {
-              line: 26,
-              column: 27
-            },
-            end: {
-              line: 26,
-              column: 73
-            }
+      depth0 != null ? depth0 : container.nullContext || {},
+      depth0 != null ? lookupProperty(depth0, "memoryAlert") : depth0,
+      {
+        name: "if",
+        hash: {},
+        fn: container.program(15, data, 0),
+        inverse: container.noop,
+        data: data,
+        loc: {
+          start: {
+            line: 26,
+            column: 27,
+          },
+          end: {
+            line: 26,
+            column: 73,
           },
         },
-      )) != null ?
-      stack1 :
-      "";
+      },
+    )) != null
+      ? stack1
+      : "";
   },
-  25: function(container, depth0, helpers, partials, data) {
+  25: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "stats") : depth0) !=
-        null ?
-        lookupProperty(stack1, "memoryFreePercentStr") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "memoryFreePercentStr")
+          : stack1,
         depth0,
       ),
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<table class="table table-striped table-sm">\n  <caption>Container States<caption>\n    <thead>\n  <tr>\n    <th></th>\n    <th>Name</th>\n    <th>Status</th>\n    <th>CPU</th>\n    <th>Memory</th>\n    <th>% Free</th>\n  </tr>\n  </thead>\n  <tbody>\n' +
       ((stack1 = lookupProperty(helpers, "each").call(alias1, depth0, {
-          name: "each",
-          hash: {},
-          fn: container.program(1, data, 0),
-          inverse: container.noop,
-          data: data,
-          loc: {
-            start: {
-              line: 14,
-              column: 4
-            },
-            end: {
-              line: 28,
-              column: 15
-            }
+        name: "each",
+        hash: {},
+        fn: container.program(1, data, 0),
+        inverse: container.noop,
+        data: data,
+        loc: {
+          start: {
+            line: 14,
+            column: 4,
           },
-        })) != null ?
-        stack1 :
-        "") +
+          end: {
+            line: 28,
+            column: 15,
+          },
+        },
+      })) != null
+        ? stack1
+        : "") +
       "  </tbody>\n  <tfoot>\n  </tfoot>\n</table>\n" +
       container.escapeExpression(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "now") ||
-              (depth0 != null ? lookupProperty(depth0, "now") : depth0)) != null ?
-            helper :
-            container.hooks.helperMissing),
-          typeof helper === "function" ?
-          helper.call(alias1, {
-            name: "now",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 33,
-                column: 0
+          (helper =
+            lookupProperty(helpers, "now") ||
+            (depth0 != null ? lookupProperty(depth0, "now") : depth0)) != null
+            ? helper
+            : container.hooks.helperMissing),
+        typeof helper === "function"
+          ? helper.call(alias1, {
+              name: "now",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 33,
+                  column: 0,
+                },
+                end: {
+                  line: 33,
+                  column: 7,
+                },
               },
-              end: {
-                line: 33,
-                column: 7
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "\n"
     );
@@ -7521,38 +7567,39 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
 });
 this["app"]["templates"]["footer"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<div style="margin-top: 50px;"></div>\n<div style="height:30px;" class="p-2 bg-secondary bg-gradient text-white fixed-bottom">\n  &nbsp;\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["header"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<nav class="navbar navbar-expand-lg sticky-top bg-brand">\n  <div class="container-fluid">\n    <a class="navbar-brand" href="/admin/index"><img width="38px" height=38px" src="/assets/img/logo.png" />&nbsp; DiscovrNinja!</a>\n\n    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\n      <span class="navbar-toggler-icon"></span>\n    </button>\n    <div class="collapse navbar-collapse" id="navbarNavDropdown">\n      <ul class="navbar-nav">\n        <li class="nav-item">\n          <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" href="/"><i class="fa-solid fa-book"></i> Desktop</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" onclick="iconSearch(); return false;" href="#"><i class="fa-solid fa-icons"></i> Icons</a>\n        </li>\n        <li class="nav-item dropdown">\n          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\n            <i class="fa-solid fa-screwdriver-wrench"></i> Tools\n          </a>\n          <ul class="dropdown-menu">\n            <li><a class="dropdown-item" href="#" onclick="scanDocker(); return false;"><i class="fa-solid fa-map"></i> Scan</a></li>\n            <li><a class="dropdown-item" href="#" onclick="updateDNS(); return false;"><i class="fa-solid fa-server"></i> Update DNS</a></li>\n            <li>\n              <hr class="dropdown-divider">\n            </li>\n            <li><a class="dropdown-item" href="#" onclick="composerise(); return false;"><i class="fa-solid fa-box"></i> Composerise</a></li>\n          </ul>\n        </li>\n        <li class="nav-item">\n' +
       ((stack1 = container.invokePartial(
-          lookupProperty(partials, "themechooser"),
-          depth0, {
-            name: "themechooser",
-            data: data,
-            indent: "          ",
-            helpers: helpers,
-            partials: partials,
-            decorators: container.decorators,
-          },
-        )) != null ?
-        stack1 :
-        "") +
+        lookupProperty(partials, "themechooser"),
+        depth0,
+        {
+          name: "themechooser",
+          data: data,
+          indent: "          ",
+          helpers: helpers,
+          partials: partials,
+          decorators: container.decorators,
+        },
+      )) != null
+        ? stack1
+        : "") +
       "        </li>\n      </ul>\n\n    </div>\n  </div>\n</nav>\n"
     );
   },
@@ -7561,27 +7608,27 @@ this["app"]["templates"]["header"] = Handlebars.template({
 });
 this["app"]["templates"]["iconsearch"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<div class="modal fade" id="iconSearchModal" tabindex="-1" aria-label>\n  <div class="modal-dialog modal-dialog-scrollable modal-lg">\n    <div class="modal-content">\n      <div class="modal-header">\n        <h1 class="modal-title fs-5">Icon Search</h1>\n        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n      </div>\n      <div class="modal-body">\n        <div class="mb-1">\n          <label for="iconSearchQuery" class="form-label">Search Query</label>\n          <input type="text" class="form-control" id="iconSearchQuery" placeholder="search" onkeyup="respondEnter">\n        </div>\n        <div id="iconSearchResults" style="height:256px;overflow:scroll;"></div>\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-secondary" id="btnSearch" onclick="performIconSearch(); return false;" data-selectable="false">Search</button>\n        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["messagebox"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<div class="modal fade" id="msgboxModal" tabindex="-1" aria-label>\n  <div class="modal-dialog modal-dialog-scrollable modal-lg">\n    <div class="modal-content">\n      <div class="modal-header">\n        <h1 class="modal-title fs-5" id="msgboxLabel"></h1>\n        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n      </div>\n      <div class="modal-body" id="msgboxBody">\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["monitor"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<h1>\n  <div id="monitorContainerName">Container</div>\n</h1>\n<table border="0" cellpadding="0" cellspacing="5">\n  <tr>\n    <td>\n      <div id="cpuchart"></div>\n    </td>\n    <td></td>\n    <td>\n      <div id="memorychart"></div>\n    </td>\n  </tr>\n</table>\n<div id="containerLogs" class="terminal">\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["projects"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
@@ -7589,511 +7636,516 @@ this["app"]["templates"]["projects"] = Handlebars.template({
       alias3 = "function",
       alias4 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '    <div class="accordion-item">\n      <h2 class="accordion-header">\n        <button class="accordion-button' +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          data && lookupProperty(data, "first"), {
-            name: "if",
-            hash: {},
-            fn: container.program(2, data, 0),
-            inverse: container.program(4, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 39
-              },
-              end: {
-                line: 5,
-                column: 78
-              }
+        alias1,
+        data && lookupProperty(data, "first"),
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(2, data, 0),
+          inverse: container.program(4, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 5,
+              column: 39,
+            },
+            end: {
+              line: 5,
+              column: 78,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "index") ||
-              (data && lookupProperty(data, "index"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "index",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 146
+          (helper =
+            lookupProperty(helpers, "index") ||
+            (data && lookupProperty(data, "index"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "index",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 5,
+                  column: 146,
+                },
+                end: {
+                  line: 5,
+                  column: 156,
+                },
               },
-              end: {
-                line: 5,
-                column: 156
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" aria-expanded="true" aria-controls="collapse-' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "index") ||
-              (data && lookupProperty(data, "index"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "index",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 203
+          (helper =
+            lookupProperty(helpers, "index") ||
+            (data && lookupProperty(data, "index"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "index",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 5,
+                  column: 203,
+                },
+                end: {
+                  line: 5,
+                  column: 213,
+                },
               },
-              end: {
-                line: 5,
-                column: 213
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '">\n          ' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "key") ||
-              (data && lookupProperty(data, "key"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "key",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 6,
-                column: 10
+          (helper =
+            lookupProperty(helpers, "key") ||
+            (data && lookupProperty(data, "key"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "key",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 6,
+                  column: 10,
+                },
+                end: {
+                  line: 6,
+                  column: 18,
+                },
               },
-              end: {
-                line: 6,
-                column: 18
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '\n        </button>\n      </h2>\n      <div id="collapse-' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "index") ||
-              (data && lookupProperty(data, "index"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "index",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 9,
-                column: 24
+          (helper =
+            lookupProperty(helpers, "index") ||
+            (data && lookupProperty(data, "index"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "index",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 9,
+                  column: 24,
+                },
+                end: {
+                  line: 9,
+                  column: 34,
+                },
               },
-              end: {
-                line: 9,
-                column: 34
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" class="accordion-collapse collapse' +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          data && lookupProperty(data, "first"), {
-            name: "if",
-            hash: {},
-            fn: container.program(6, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 9,
-                column: 70
-              },
-              end: {
-                line: 9,
-                column: 96
-              }
+        alias1,
+        data && lookupProperty(data, "first"),
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(6, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 9,
+              column: 70,
+            },
+            end: {
+              line: 9,
+              column: 96,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" data-bs-parent="#projects">\n        <div class="accordion-body">\n          <div class="container text-left">\n            <div class="row justify-content-md-left">\n              <div class="col col-lg-2">\n                <img style="max-width:128px;" src="/api/icons/query/' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "key") ||
-              (data && lookupProperty(data, "key"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "key",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 14,
-                column: 68
+          (helper =
+            lookupProperty(helpers, "key") ||
+            (data && lookupProperty(data, "key"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "key",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 14,
+                  column: 68,
+                },
+                end: {
+                  line: 14,
+                  column: 76,
+                },
               },
-              end: {
-                line: 14,
-                column: 76
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" />\n              </div>\n              <div class="col-md-auto">\n                <table class="table table-bordered">\n                  <tbody>\n                    <tr>\n                      <td>Compose file:</td>\n                      <td>' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "config") ||
-              (depth0 != null ? lookupProperty(depth0, "config") : depth0)) !=
-            null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "config",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 21,
-                column: 26
+          (helper =
+            lookupProperty(helpers, "config") ||
+            (depth0 != null ? lookupProperty(depth0, "config") : depth0)) !=
+          null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "config",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 21,
+                  column: 26,
+                },
+                end: {
+                  line: 21,
+                  column: 36,
+                },
               },
-              end: {
-                line: 21,
-                column: 36
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n                    </tr>\n                    <tr>\n                      <td>Environment file:</td>\n                      <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "environment") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "environment") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "environment",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 25,
-                column: 26
+          (helper =
+            lookupProperty(helpers, "environment") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "environment")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "environment",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 25,
+                  column: 26,
+                },
+                end: {
+                  line: 25,
+                  column: 41,
+                },
               },
-              end: {
-                line: 25,
-                column: 41
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n                    </tr>\n                    <tr>\n                      <td>Project Folder :</td>\n                      <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "workingFolder") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "workingFolder") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "workingFolder",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 29,
-                column: 26
+          (helper =
+            lookupProperty(helpers, "workingFolder") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "workingFolder")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "workingFolder",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 29,
+                  column: 26,
+                },
+                end: {
+                  line: 29,
+                  column: 43,
+                },
               },
-              end: {
-                line: 29,
-                column: 43
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '</td>\n                    </tr>\n                  </tbody>\n                </table>\n\n                <table class="table">\n                  <thead>\n                    <tr>\n                      <th>Container Name</th>\n                      <th>Hostname</th>\n                    </tr>\n                  </thead>\n                  <tbody>\n' +
       ((stack1 = lookupProperty(helpers, "each").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "containers") : depth0, {
-            name: "each",
-            hash: {},
-            fn: container.program(8, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 42,
-                column: 20
-              },
-              end: {
-                line: 47,
-                column: 29
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "containers") : depth0,
+        {
+          name: "each",
+          hash: {},
+          fn: container.program(8, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 42,
+              column: 20,
+            },
+            end: {
+              line: 47,
+              column: 29,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "                  </tbody>\n                </table>\n" +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "editable") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(10, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 50,
-                column: 16
-              },
-              end: {
-                line: 52,
-                column: 23
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "editable") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(10, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 50,
+              column: 16,
+            },
+            end: {
+              line: 52,
+              column: 23,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n"
     );
   },
-  2: function(container, depth0, helpers, partials, data) {
+  2: function (container, depth0, helpers, partials, data) {
     return "";
   },
-  4: function(container, depth0, helpers, partials, data) {
+  4: function (container, depth0, helpers, partials, data) {
     return " collapsed";
   },
-  6: function(container, depth0, helpers, partials, data) {
+  6: function (container, depth0, helpers, partials, data) {
     return " show";
   },
-  8: function(container, depth0, helpers, partials, data) {
+  8: function (container, depth0, helpers, partials, data) {
     var helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       alias2 = container.hooks.helperMissing,
       alias3 = "function",
       alias4 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "                      <tr>\n                        <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "containerName") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "containerName") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "containerName",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 44,
-                column: 28
+          (helper =
+            lookupProperty(helpers, "containerName") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "containerName")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "containerName",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 44,
+                  column: 28,
+                },
+                end: {
+                  line: 44,
+                  column: 45,
+                },
               },
-              end: {
-                line: 44,
-                column: 45
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n                        <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "hostname") ||
-              (depth0 != null ? lookupProperty(depth0, "hostname") : depth0)) !=
-            null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "hostname",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 45,
-                column: 28
+          (helper =
+            lookupProperty(helpers, "hostname") ||
+            (depth0 != null ? lookupProperty(depth0, "hostname") : depth0)) !=
+          null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "hostname",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 45,
+                  column: 28,
+                },
+                end: {
+                  line: 45,
+                  column: 40,
+                },
               },
-              end: {
-                line: 45,
-                column: 40
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n                      </tr>\n"
     );
   },
-  10: function(container, depth0, helpers, partials, data) {
+  10: function (container, depth0, helpers, partials, data) {
     var helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       alias2 = container.hooks.helperMissing,
       alias3 = "function",
       alias4 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '                  <button onclick="composeEdit(this); return false;" data-projectpath="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "projectPath") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "projectPath") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "projectPath",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 51,
-                column: 87
+          (helper =
+            lookupProperty(helpers, "projectPath") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "projectPath")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "projectPath",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 51,
+                  column: 87,
+                },
+                end: {
+                  line: 51,
+                  column: 102,
+                },
               },
-              end: {
-                line: 51,
-                column: 102
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" data-project="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "key") ||
-              (data && lookupProperty(data, "key"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "key",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 51,
-                column: 118
+          (helper =
+            lookupProperty(helpers, "key") ||
+            (data && lookupProperty(data, "key"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "key",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 51,
+                  column: 118,
+                },
+                end: {
+                  line: 51,
+                  column: 126,
+                },
               },
-              end: {
-                line: 51,
-                column: 126
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" type="button" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i> Edit</button>\n'
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<div class="accordion" id="projects">\n' +
       ((stack1 = lookupProperty(helpers, "each").call(
-          depth0 != null ? depth0 : container.nullContext || {},
-          depth0, {
-            name: "each",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 2,
-                column: 2
-              },
-              end: {
-                line: 59,
-                column: 11
-              }
+        depth0 != null ? depth0 : container.nullContext || {},
+        depth0,
+        {
+          name: "each",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 2,
+              column: 2,
+            },
+            end: {
+              line: 59,
+              column: 11,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "</div>\n"
     );
   },
@@ -8101,88 +8153,88 @@ this["app"]["templates"]["projects"] = Handlebars.template({
 });
 this["app"]["templates"]["search"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return "\n";
   },
   useData: true,
 });
 this["app"]["templates"]["service"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     return "";
   },
-  3: function(container, depth0, helpers, partials, data) {
+  3: function (container, depth0, helpers, partials, data) {
     return "disabled";
   },
-  5: function(container, depth0, helpers, partials, data) {
+  5: function (container, depth0, helpers, partials, data) {
     return "btn-secondary";
   },
-  7: function(container, depth0, helpers, partials, data) {
+  7: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-        null ?
-        lookupProperty(stack1, "buttonclass") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
         depth0,
       ),
     );
   },
-  9: function(container, depth0, helpers, partials, data) {
+  9: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "opacity:" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null ?
-          lookupProperty(stack1, "opacity") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null
+            ? lookupProperty(stack1, "opacity")
+            : stack1,
           depth0,
         ),
       ) +
       " !important;"
     );
   },
-  11: function(container, depth0, helpers, partials, data) {
+  11: function (container, depth0, helpers, partials, data) {
     return "/api/icons/question";
   },
-  13: function(container, depth0, helpers, partials, data) {
+  13: function (container, depth0, helpers, partials, data) {
     var stack1,
       alias1 = container.lambda,
       alias2 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "/api/icons/r/" +
       alias2(
         alias1(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "iconCatalog") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+            ? lookupProperty(stack1, "iconCatalog")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8190,9 +8242,9 @@ this["app"]["templates"]["service"] = Handlebars.template({
       alias2(
         alias1(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "iconSlug") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+            ? lookupProperty(stack1, "iconSlug")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8200,54 +8252,55 @@ this["app"]["templates"]["service"] = Handlebars.template({
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       alias2 = container.lambda,
       alias3 = container.escapeExpression,
       alias4 = container.hooks.helperMissing,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "<button " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "available") :
-          stack1, {
-            name: "if",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.program(3, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 8
-              },
-              end: {
-                line: 1,
-                column: 56
-              }
+        alias1,
+        (stack1 =
+          depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+          ? lookupProperty(stack1, "available")
+          : stack1,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.program(3, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 8,
+            },
+            end: {
+              line: 1,
+              column: 56,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' data-name="' +
       alias3(
         alias2(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "containerName") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+            ? lookupProperty(stack1, "containerName")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8255,109 +8308,112 @@ this["app"]["templates"]["service"] = Handlebars.template({
       alias3(
         alias2(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "public") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+            ? lookupProperty(stack1, "public")
+            : stack1,
           depth0,
         ),
       ) +
       '" onclick="navigateTo(this); return false;" type="button" class="btn ' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias4
-        ).call(
-          alias1,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "buttonclass") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(5, data, 0),
-            inverse: container.program(7, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 192
-              },
-              end: {
-                line: 1,
-                column: 279
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias4
+      ).call(
+        alias1,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(5, data, 0),
+          inverse: container.program(7, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 192,
+            },
+            end: {
+              line: 1,
+              column: 279,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' widget" style="' +
       ((stack1 = (
-          lookupProperty(helpers, "isnotempty") ||
-          (depth0 && lookupProperty(depth0, "isnotempty")) ||
-          alias4
-        ).call(
-          alias1,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "opacity") :
-          stack1, {
-            name: "isnotempty",
-            hash: {},
-            fn: container.program(9, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 295
-              },
-              end: {
-                line: 1,
-                column: 378
-              },
+        lookupProperty(helpers, "isnotempty") ||
+        (depth0 && lookupProperty(depth0, "isnotempty")) ||
+        alias4
+      ).call(
+        alias1,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "opacity")
+          : stack1,
+        {
+          name: "isnotempty",
+          hash: {},
+          fn: container.program(9, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 295,
+            },
+            end: {
+              line: 1,
+              column: 378,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '">\n  <img style="padding:10px;max-width:64px;max-height:64px" src="' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias4
-        ).call(
-          alias1,
-          (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "iconSlug") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(11, data, 0),
-            inverse: container.program(13, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 2,
-                column: 64
-              },
-              end: {
-                line: 2,
-                column: 199
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias4
+      ).call(
+        alias1,
+        (stack1 =
+          depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+          ? lookupProperty(stack1, "iconSlug")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(11, data, 0),
+          inverse: container.program(13, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 2,
+              column: 64,
+            },
+            end: {
+              line: 2,
+              column: 199,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" />\n  <br /> ' +
       alias3(
         alias2(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ?
-          lookupProperty(stack1, "name") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "service") : depth0) != null
+            ? lookupProperty(stack1, "name")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8368,60 +8424,60 @@ this["app"]["templates"]["service"] = Handlebars.template({
 });
 this["app"]["templates"]["themechooser"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<div class="dropdown" data-hb-component="themechooser">\n  <button class="btn dropdown-toggle" style="color:white!important" type="button" data-bs-toggle="dropdown" aria-expanded="false">\n    <i style="color:white!important" id="activeTheme" class="bi bi-circle-half"></i> Theme\n  </button>\n  <ul class="dropdown-menu dropdown-menu-end">\n    <li><button type="button" class="dropdown-item d-flex align-items-center" aria-pressed="false" onclick="ui().themeChooser().chooseTheme(\'light\');">\n        <i id="light" class="bi bi-sun"></i> Light</button>\n    </li>\n    <li> <button type="button" class="dropdown-item d-flex align-items-center" aria-pressed="false" onclick="ui().themeChooser().chooseTheme(\'dark\');">\n        <i id="dark" class="bi bi-moon-stars"></i> Dark</button>\n    </li>\n    <li><button type="button" class="dropdown-item d-flex align-items-center" aria-pressed="false" onclick="ui().themeChooser().chooseTheme(\'auto\')">\n        <i id="auto" class="bi bi-circle-half"></i> Auto</button>\n    </li>\n  </ul>\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["toast"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     return '<div class="toast-container position-fixed bottom-0 end-0 p-3">\n  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">\n    <div class="toast-header">\n      <i class="fa-solid fa-square"></i>\n      <strong class="me-auto" id="toastLabel"></strong>\n      <small id="toastSmall"></small>\n      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>\n    </div>\n    <div class="toast-body" id="toastBody">\n      Hello, world! This is a toast message.\n    </div>\n  </div>\n</div>\n';
   },
   useData: true,
 });
 this["app"]["templates"]["widget-discovrninja"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     return "btn-secondary";
   },
-  3: function(container, depth0, helpers, partials, data) {
+  3: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-        null ?
-        lookupProperty(stack1, "buttonclass") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
         depth0,
       ),
     );
   },
-  5: function(container, depth0, helpers, partials, data) {
+  5: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "opacity:" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null ?
-          lookupProperty(stack1, "opacity") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null
+            ? lookupProperty(stack1, "opacity")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8429,178 +8485,180 @@ this["app"]["templates"]["widget-discovrninja"] = Handlebars.template({
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       alias2 = container.hooks.helperMissing,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<button data-name="" data-url="" onclick="window.location.href=\'/admin/index\'; return false;" type="button" class="btn ' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias2
-        ).call(
-          alias1,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "buttonclass") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.program(3, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 119
-              },
-              end: {
-                line: 1,
-                column: 206
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias2
+      ).call(
+        alias1,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.program(3, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 119,
+            },
+            end: {
+              line: 1,
+              column: 206,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' widget" style="' +
       ((stack1 = (
-          lookupProperty(helpers, "isnotempty") ||
-          (depth0 && lookupProperty(depth0, "isnotempty")) ||
-          alias2
-        ).call(
-          alias1,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "opacity") :
-          stack1, {
-            name: "isnotempty",
-            hash: {},
-            fn: container.program(5, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 222
-              },
-              end: {
-                line: 1,
-                column: 305
-              },
+        lookupProperty(helpers, "isnotempty") ||
+        (depth0 && lookupProperty(depth0, "isnotempty")) ||
+        alias2
+      ).call(
+        alias1,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "opacity")
+          : stack1,
+        {
+          name: "isnotempty",
+          hash: {},
+          fn: container.program(5, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 222,
+            },
+            end: {
+              line: 1,
+              column: 305,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '">\n  <img style="padding:10px;max-width:64px;max-height:64px" src="/assets/img/logo.png" />\n  <br /> Administration\n</button>\n'
     );
   },
   useData: true,
 });
 this["app"]["templates"]["widget-link"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     return "btn-secondary";
   },
-  3: function(container, depth0, helpers, partials, data) {
+  3: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-        null ?
-        lookupProperty(stack1, "buttonclass") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
         depth0,
       ),
     );
   },
-  5: function(container, depth0, helpers, partials, data) {
+  5: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "opacity:" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null ?
-          lookupProperty(stack1, "opacity") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null
+            ? lookupProperty(stack1, "opacity")
+            : stack1,
           depth0,
         ),
       ) +
       " !important;"
     );
   },
-  7: function(container, depth0, helpers, partials, data) {
+  7: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "https://www.google.com/s2/favicons?domain=" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "domainUrl") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "domainUrl")
+            : stack1,
           depth0,
         ),
       ) +
       "&sz=64"
     );
   },
-  9: function(container, depth0, helpers, partials, data) {
+  9: function (container, depth0, helpers, partials, data) {
     var stack1,
       alias1 = container.lambda,
       alias2 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "/api/icons/r/" +
       alias2(
         alias1(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "iconCatalog") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "iconCatalog")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8609,9 +8667,9 @@ this["app"]["templates"]["widget-link"] = Handlebars.template({
         alias1(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "iconSlug") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "iconSlug")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8619,130 +8677,133 @@ this["app"]["templates"]["widget-link"] = Handlebars.template({
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       alias1 = container.lambda,
       alias2 = container.escapeExpression,
       alias3 = depth0 != null ? depth0 : container.nullContext || {},
       alias4 = container.hooks.helperMissing,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<button data-url="' +
       alias2(
         alias1(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "url") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "url")
+            : stack1,
           depth0,
         ),
       ) +
       '" onclick="navigateTo(this); return false;" type="button" class="btn ' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias4
-        ).call(
-          alias3,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "buttonclass") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.program(3, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 103
-              },
-              end: {
-                line: 1,
-                column: 190
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias4
+      ).call(
+        alias3,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.program(3, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 103,
+            },
+            end: {
+              line: 1,
+              column: 190,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' widget" style="' +
       ((stack1 = (
-          lookupProperty(helpers, "isnotempty") ||
-          (depth0 && lookupProperty(depth0, "isnotempty")) ||
-          alias4
-        ).call(
-          alias3,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "opacity") :
-          stack1, {
-            name: "isnotempty",
-            hash: {},
-            fn: container.program(5, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 206
-              },
-              end: {
-                line: 1,
-                column: 289
-              },
+        lookupProperty(helpers, "isnotempty") ||
+        (depth0 && lookupProperty(depth0, "isnotempty")) ||
+        alias4
+      ).call(
+        alias3,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "opacity")
+          : stack1,
+        {
+          name: "isnotempty",
+          hash: {},
+          fn: container.program(5, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 206,
+            },
+            end: {
+              line: 1,
+              column: 289,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '">\n  <img style="padding:10px;max-width:64px;max-height:64px" src="' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias4
-        ).call(
-          alias3,
-          (stack1 =
-            depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ?
-          lookupProperty(stack1, "iconSlug") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(7, data, 0),
-            inverse: container.program(9, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 2,
-                column: 64
-              },
-              end: {
-                line: 2,
-                column: 253
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias4
+      ).call(
+        alias3,
+        (stack1 =
+          depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null
+          ? lookupProperty(stack1, "iconSlug")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(7, data, 0),
+          inverse: container.program(9, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 2,
+              column: 64,
+            },
+            end: {
+              line: 2,
+              column: 253,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" />\n  <br /> ' +
       alias2(
         alias1(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "name") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "name")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8752,223 +8813,226 @@ this["app"]["templates"]["widget-link"] = Handlebars.template({
   useData: true,
 });
 this["app"]["templates"]["widget-news"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     return "btn-secondary";
   },
-  3: function(container, depth0, helpers, partials, data) {
+  3: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-        null ?
-        lookupProperty(stack1, "buttonclass") :
-        stack1,
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
         depth0,
       ),
     );
   },
-  5: function(container, depth0, helpers, partials, data) {
+  5: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "opacity:" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null ?
-          lookupProperty(stack1, "opacity") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null
+            ? lookupProperty(stack1, "opacity")
+            : stack1,
           depth0,
         ),
       ) +
       " !important;"
     );
   },
-  7: function(container, depth0, helpers, partials, data) {
+  7: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "https://www.google.com/s2/favicons?domain=" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "domainUrl") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "domainUrl")
+            : stack1,
           depth0,
         ),
       ) +
       "&sz=64"
     );
   },
-  9: function(container, depth0, helpers, partials, data) {
+  9: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 =
-          depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ?
-        lookupProperty(stack1, "iconUrl") :
-        stack1,
+          depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null
+          ? lookupProperty(stack1, "iconUrl")
+          : stack1,
         depth0,
       ),
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       alias1 = container.lambda,
       alias2 = container.escapeExpression,
       alias3 = depth0 != null ? depth0 : container.nullContext || {},
       alias4 = container.hooks.helperMissing,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<button data-url="' +
       alias2(
         alias1(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "url") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "url")
+            : stack1,
           depth0,
         ),
       ) +
       '" onclick="navigateToNews(this); return false;" type="button" class="btn ' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias4
-        ).call(
-          alias3,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "buttonclass") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.program(3, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 107
-              },
-              end: {
-                line: 1,
-                column: 194
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias4
+      ).call(
+        alias3,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.program(3, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 107,
+            },
+            end: {
+              line: 1,
+              column: 194,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' widget" style="' +
       ((stack1 = (
-          lookupProperty(helpers, "isnotempty") ||
-          (depth0 && lookupProperty(depth0, "isnotempty")) ||
-          alias4
-        ).call(
-          alias3,
-          (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
-          null ?
-          lookupProperty(stack1, "opacity") :
-          stack1, {
-            name: "isnotempty",
-            hash: {},
-            fn: container.program(5, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 1,
-                column: 210
-              },
-              end: {
-                line: 1,
-                column: 293
-              },
+        lookupProperty(helpers, "isnotempty") ||
+        (depth0 && lookupProperty(depth0, "isnotempty")) ||
+        alias4
+      ).call(
+        alias3,
+        (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) !=
+          null
+          ? lookupProperty(stack1, "opacity")
+          : stack1,
+        {
+          name: "isnotempty",
+          hash: {},
+          fn: container.program(5, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 1,
+              column: 210,
+            },
+            end: {
+              line: 1,
+              column: 293,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '">\n  <img style="object-fit:contain;padding:10px;max-width:64px;height:64px" src="' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias4
-        ).call(
-          alias3,
-          (stack1 =
-            depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ?
-          lookupProperty(stack1, "iconUrl") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(7, data, 0),
-            inverse: container.program(9, data, 0),
-            data: data,
-            loc: {
-              start: {
-                line: 2,
-                column: 79
-              },
-              end: {
-                line: 2,
-                column: 218
-              },
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias4
+      ).call(
+        alias3,
+        (stack1 =
+          depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null
+          ? lookupProperty(stack1, "iconUrl")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(7, data, 0),
+          inverse: container.program(9, data, 0),
+          data: data,
+          loc: {
+            start: {
+              line: 2,
+              column: 79,
+            },
+            end: {
+              line: 2,
+              column: 218,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" />\n  <br /> ' +
       alias2(
         alias1(
           (stack1 =
             depth0 != null ? lookupProperty(depth0, "settings") : depth0) !=
-          null ?
-          lookupProperty(stack1, "name") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "name")
+            : stack1,
           depth0,
         ),
       ) +
@@ -8978,7 +9042,7 @@ this["app"]["templates"]["widget-news"] = Handlebars.template({
   useData: true,
 });
 this["app"]["templates"]["widget-weather"] = Handlebars.template({
-  1: function(
+  1: function (
     container,
     depth0,
     helpers,
@@ -8995,91 +9059,93 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
       alias4 = container.escapeExpression,
       alias5 = "function",
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '    <div class="col">\n      <center>\n        <button type="button" class="btn ' +
       ((stack1 = (
-          lookupProperty(helpers, "isempty") ||
-          (depth0 && lookupProperty(depth0, "isempty")) ||
-          alias2
-        ).call(
-          alias1,
+        lookupProperty(helpers, "isempty") ||
+        (depth0 && lookupProperty(depth0, "isempty")) ||
+        alias2
+      ).call(
+        alias1,
+        (stack1 =
           (stack1 =
-            (stack1 =
-              depths[1] != null ? lookupProperty(depths[1], "_s") : depths[1]) !=
-            null ?
-            lookupProperty(stack1, "p") :
-            stack1) != null ?
-          lookupProperty(stack1, "buttonclass") :
-          stack1, {
-            name: "isempty",
-            hash: {},
-            fn: container.program(2, data, 0, blockParams, depths),
-            inverse: container.program(4, data, 0, blockParams, depths),
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 41
-              },
-              end: {
-                line: 5,
-                column: 130
-              },
+            depths[1] != null ? lookupProperty(depths[1], "_s") : depths[1]) !=
+          null
+            ? lookupProperty(stack1, "p")
+            : stack1) != null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
+        {
+          name: "isempty",
+          hash: {},
+          fn: container.program(2, data, 0, blockParams, depths),
+          inverse: container.program(4, data, 0, blockParams, depths),
+          data: data,
+          loc: {
+            start: {
+              line: 5,
+              column: 41,
+            },
+            end: {
+              line: 5,
+              column: 130,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       ' widget" style="white-space:nowrap;' +
       ((stack1 = (
-          lookupProperty(helpers, "isnotempty") ||
-          (depth0 && lookupProperty(depth0, "isnotempty")) ||
-          alias2
-        ).call(
-          alias1,
+        lookupProperty(helpers, "isnotempty") ||
+        (depth0 && lookupProperty(depth0, "isnotempty")) ||
+        alias2
+      ).call(
+        alias1,
+        (stack1 =
           (stack1 =
-            (stack1 =
-              depths[1] != null ? lookupProperty(depths[1], "_s") : depths[1]) !=
-            null ?
-            lookupProperty(stack1, "p") :
-            stack1) != null ?
-          lookupProperty(stack1, "opacity") :
-          stack1, {
-            name: "isnotempty",
-            hash: {},
-            fn: container.program(6, data, 0, blockParams, depths),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 165
-              },
-              end: {
-                line: 5,
-                column: 250
-              },
+            depths[1] != null ? lookupProperty(depths[1], "_s") : depths[1]) !=
+          null
+            ? lookupProperty(stack1, "p")
+            : stack1) != null
+          ? lookupProperty(stack1, "opacity")
+          : stack1,
+        {
+          name: "isnotempty",
+          hash: {},
+          fn: container.program(6, data, 0, blockParams, depths),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 5,
+              column: 165,
+            },
+            end: {
+              line: 5,
+              column: 250,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '" onclick="viewWeather(' +
       alias4(
         alias3(
           (stack1 =
-            depths[1] != null ?
-            lookupProperty(depths[1], "settings") :
-            depths[1]) != null ?
-          lookupProperty(stack1, "latitude") :
-          stack1,
+            depths[1] != null
+              ? lookupProperty(depths[1], "settings")
+              : depths[1]) != null
+            ? lookupProperty(stack1, "latitude")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9087,11 +9153,11 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
       alias4(
         alias3(
           (stack1 =
-            depths[1] != null ?
-            lookupProperty(depths[1], "settings") :
-            depths[1]) != null ?
-          lookupProperty(stack1, "longitude") :
-          stack1,
+            depths[1] != null
+              ? lookupProperty(depths[1], "settings")
+              : depths[1]) != null
+            ? lookupProperty(stack1, "longitude")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9099,109 +9165,109 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
       alias4(
         alias3(
           (stack1 =
-            depths[1] != null ?
-            lookupProperty(depths[1], "settings") :
-            depths[1]) != null ?
-          lookupProperty(stack1, "days") :
-          stack1,
+            depths[1] != null
+              ? lookupProperty(depths[1], "settings")
+              : depths[1]) != null
+            ? lookupProperty(stack1, "days")
+            : stack1,
           depth0,
         ),
       ) +
       ", " +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "index") ||
-              (data && lookupProperty(data, "index"))) != null ?
-            helper :
-            alias2),
-          typeof helper === alias5 ?
-          helper.call(alias1, {
-            name: "index",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 5,
-                column: 349
+          (helper =
+            lookupProperty(helpers, "index") ||
+            (data && lookupProperty(data, "index"))) != null
+            ? helper
+            : alias2),
+        typeof helper === alias5
+          ? helper.call(alias1, {
+              name: "index",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 5,
+                  column: 349,
+                },
+                end: {
+                  line: 5,
+                  column: 359,
+                },
               },
-              end: {
-                line: 5,
-                column: 359
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       ');return false;">\n          <img src="/assets/weather/' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "icon") ||
-              (depth0 != null ? lookupProperty(depth0, "icon") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias5 ?
-          helper.call(alias1, {
-            name: "icon",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 6,
-                column: 36
+          (helper =
+            lookupProperty(helpers, "icon") ||
+            (depth0 != null ? lookupProperty(depth0, "icon") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias5
+          ? helper.call(alias1, {
+              name: "icon",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 6,
+                  column: 36,
+                },
+                end: {
+                  line: 6,
+                  column: 44,
+                },
               },
-              end: {
-                line: 6,
-                column: 44
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" style="max-width:64px; max-height:64px;" alt="' +
       alias4(
         alias3(
           (stack1 = depth0 != null ? lookupProperty(depth0, "text") : depth0) !=
-          null ?
-          lookupProperty(stack1, "description") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "description")
+            : stack1,
           depth0,
         ),
       ) +
       '" /><br />\n          <small>' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "date") ||
-              (depth0 != null ? lookupProperty(depth0, "date") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias5 ?
-          helper.call(alias1, {
-            name: "date",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 7,
-                column: 17
+          (helper =
+            lookupProperty(helpers, "date") ||
+            (depth0 != null ? lookupProperty(depth0, "date") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias5
+          ? helper.call(alias1, {
+              name: "date",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 7,
+                  column: 17,
+                },
+                end: {
+                  line: 7,
+                  column: 25,
+                },
               },
-              end: {
-                line: 7,
-                column: 25
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</small>\n        </button>\n      </center>\n    </div>\n"
     );
   },
-  2: function(container, depth0, helpers, partials, data) {
+  2: function (container, depth0, helpers, partials, data) {
     return "btn-secondary";
   },
-  4: function(
+  4: function (
     container,
     depth0,
     helpers,
@@ -9212,28 +9278,28 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
   ) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return container.escapeExpression(
       container.lambda(
         (stack1 =
           (stack1 =
             depths[1] != null ? lookupProperty(depths[1], "_s") : depths[1]) !=
-          null ?
-          lookupProperty(stack1, "p") :
-          stack1) != null ?
-        lookupProperty(stack1, "buttonclass") :
-        stack1,
+          null
+            ? lookupProperty(stack1, "p")
+            : stack1) != null
+          ? lookupProperty(stack1, "buttonclass")
+          : stack1,
         depth0,
       ),
     );
   },
-  6: function(
+  6: function (
     container,
     depth0,
     helpers,
@@ -9244,26 +9310,26 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
   ) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       "opacity:" +
       container.escapeExpression(
         container.lambda(
           (stack1 =
             (stack1 =
-              depths[1] != null ?
-              lookupProperty(depths[1], "_s") :
-              depths[1]) != null ?
-            lookupProperty(stack1, "p") :
-            stack1) != null ?
-          lookupProperty(stack1, "opacity") :
-          stack1,
+              depths[1] != null
+                ? lookupProperty(depths[1], "_s")
+                : depths[1]) != null
+              ? lookupProperty(stack1, "p")
+              : stack1) != null
+            ? lookupProperty(stack1, "opacity")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9271,7 +9337,7 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(
+  main: function (
     container,
     depth0,
     helpers,
@@ -9284,48 +9350,49 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
       alias1 = container.lambda,
       alias2 = container.escapeExpression,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<div class="row">\n' +
       ((stack1 = lookupProperty(helpers, "each").call(
-          depth0 != null ? depth0 : container.nullContext || {},
-          depth0 != null ? lookupProperty(depth0, "weather") : depth0, {
-            name: "each",
-            hash: {},
-            fn: container.program(1, data, 0, blockParams, depths),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 2,
-                column: 2
-              },
-              end: {
-                line: 11,
-                column: 11
-              }
+        depth0 != null ? depth0 : container.nullContext || {},
+        depth0 != null ? lookupProperty(depth0, "weather") : depth0,
+        {
+          name: "each",
+          hash: {},
+          fn: container.program(1, data, 0, blockParams, depths),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 2,
+              column: 2,
+            },
+            end: {
+              line: 11,
+              column: 11,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       '</div>\n<div class="row">\n  <div class="col"><i>' +
       alias2(
         alias1(
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "quarter") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "quarter")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9335,11 +9402,11 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "city") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "city")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9349,11 +9416,11 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "county") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "county")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9363,11 +9430,11 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "country") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "country")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9378,147 +9445,148 @@ this["app"]["templates"]["widget-weather"] = Handlebars.template({
   useDepths: true,
 });
 this["app"]["templates"]["news"] = Handlebars.template({
-  1: function(container, depth0, helpers, partials, data) {
+  1: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       alias2 = container.hooks.helperMissing,
       alias3 = "function",
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '        <tr>\n          <td>\n            <p class="headline"><a href="' +
       container.escapeExpression(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "link") ||
-              (depth0 != null ? lookupProperty(depth0, "link") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "link",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 17,
-                column: 41
+          (helper =
+            lookupProperty(helpers, "link") ||
+            (depth0 != null ? lookupProperty(depth0, "link") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "link",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 17,
+                  column: 41,
+                },
+                end: {
+                  line: 17,
+                  column: 49,
+                },
               },
-              end: {
-                line: 17,
-                column: 49
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" target="_new" style="text-decoration: none !important;">' +
       ((stack1 =
-          ((helper =
-              (helper =
-                lookupProperty(helpers, "title") ||
-                (depth0 != null ? lookupProperty(depth0, "title") : depth0)) != null ?
-              helper :
-              alias2),
-            typeof helper === alias3 ?
-            helper.call(alias1, {
+        ((helper =
+          (helper =
+            lookupProperty(helpers, "title") ||
+            (depth0 != null ? lookupProperty(depth0, "title") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
               name: "title",
               hash: {},
               data: data,
               loc: {
                 start: {
                   line: 17,
-                  column: 107
+                  column: 107,
                 },
                 end: {
                   line: 17,
-                  column: 118
+                  column: 118,
                 },
               },
-            }) :
-            helper)) != null ?
-        stack1 :
-        "") +
+            })
+          : helper)) != null
+        ? stack1
+        : "") +
       "</a></p>\n            " +
       ((stack1 = lookupProperty(helpers, "if").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "image") : depth0, {
-            name: "if",
-            hash: {},
-            fn: container.program(2, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 18,
-                column: 12
-              },
-              end: {
-                line: 18,
-                column: 59
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "image") : depth0,
+        {
+          name: "if",
+          hash: {},
+          fn: container.program(2, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 18,
+              column: 12,
+            },
+            end: {
+              line: 18,
+              column: 59,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "\n            <p>" +
       ((stack1 =
-          ((helper =
-              (helper =
-                lookupProperty(helpers, "description") ||
-                (depth0 != null ?
-                  lookupProperty(depth0, "description") :
-                  depth0)) != null ?
-              helper :
-              alias2),
-            typeof helper === alias3 ?
-            helper.call(alias1, {
+        ((helper =
+          (helper =
+            lookupProperty(helpers, "description") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "description")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
               name: "description",
               hash: {},
               data: data,
               loc: {
                 start: {
                   line: 19,
-                  column: 15
+                  column: 15,
                 },
                 end: {
                   line: 19,
-                  column: 32
+                  column: 32,
                 },
               },
-            }) :
-            helper)) != null ?
-        stack1 :
-        "") +
+            })
+          : helper)) != null
+        ? stack1
+        : "") +
       "</p>\n          </td>\n        </tr>\n"
     );
   },
-  2: function(container, depth0, helpers, partials, data) {
+  2: function (container, depth0, helpers, partials, data) {
     var stack1,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<img src="' +
       container.escapeExpression(
         container.lambda(
           (stack1 =
-            depth0 != null ? lookupProperty(depth0, "image") : depth0) != null ?
-          lookupProperty(stack1, "url") :
-          stack1,
+            depth0 != null ? lookupProperty(depth0, "image") : depth0) != null
+            ? lookupProperty(stack1, "url")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9526,58 +9594,58 @@ this["app"]["templates"]["news"] = Handlebars.template({
     );
   },
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
       alias2 = container.escapeExpression,
       alias3 = container.lambda,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '<div id="news" class="newsprint">\n  <div class="content">\n    <table border="0" cellpadding="2" cellspacing="0">\n      <tr class="masthead">\n        <td>\n          <a href="#" onclick="newsPage(\'' +
       alias2(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "feedUrl") ||
-              (depth0 != null ? lookupProperty(depth0, "feedUrl") : depth0)) !=
-            null ?
-            helper :
-            container.hooks.helperMissing),
-          typeof helper === "function" ?
-          helper.call(alias1, {
-            name: "feedUrl",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 6,
-                column: 41
+          (helper =
+            lookupProperty(helpers, "feedUrl") ||
+            (depth0 != null ? lookupProperty(depth0, "feedUrl") : depth0)) !=
+          null
+            ? helper
+            : container.hooks.helperMissing),
+        typeof helper === "function"
+          ? helper.call(alias1, {
+              name: "feedUrl",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 6,
+                  column: 41,
+                },
+                end: {
+                  line: 6,
+                  column: 52,
+                },
               },
-              end: {
-                line: 6,
-                column: 52
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '\'); return false;"><img src="' +
       alias2(
         alias3(
           (stack1 =
             (stack1 =
-              depth0 != null ? lookupProperty(depth0, "meta") : depth0) != null ?
-            lookupProperty(stack1, "image") :
-            stack1) != null ?
-          lookupProperty(stack1, "url") :
-          stack1,
+              depth0 != null ? lookupProperty(depth0, "meta") : depth0) != null
+              ? lookupProperty(stack1, "image")
+              : stack1) != null
+            ? lookupProperty(stack1, "url")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9585,35 +9653,36 @@ this["app"]["templates"]["news"] = Handlebars.template({
       alias2(
         alias3(
           (stack1 = depth0 != null ? lookupProperty(depth0, "meta") : depth0) !=
-          null ?
-          lookupProperty(stack1, "pubDateStr") :
-          stack1,
+            null
+            ? lookupProperty(stack1, "pubDateStr")
+            : stack1,
           depth0,
         ),
       ) +
       "\n        </td>\n      </tr>\n" +
       ((stack1 = lookupProperty(helpers, "each").call(
-          alias1,
-          depth0 != null ? lookupProperty(depth0, "items") : depth0, {
-            name: "each",
-            hash: {},
-            fn: container.program(1, data, 0),
-            inverse: container.noop,
-            data: data,
-            loc: {
-              start: {
-                line: 14,
-                column: 6
-              },
-              end: {
-                line: 22,
-                column: 15
-              },
+        alias1,
+        depth0 != null ? lookupProperty(depth0, "items") : depth0,
+        {
+          name: "each",
+          hash: {},
+          fn: container.program(1, data, 0),
+          inverse: container.noop,
+          data: data,
+          loc: {
+            start: {
+              line: 14,
+              column: 6,
+            },
+            end: {
+              line: 22,
+              column: 15,
             },
           },
-        )) != null ?
-        stack1 :
-        "") +
+        },
+      )) != null
+        ? stack1
+        : "") +
       "    </table>\n  </div>\n</div>\n"
     );
   },
@@ -9621,7 +9690,7 @@ this["app"]["templates"]["news"] = Handlebars.template({
 });
 this["app"]["templates"]["weather"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
-  main: function(container, depth0, helpers, partials, data) {
+  main: function (container, depth0, helpers, partials, data) {
     var stack1,
       helper,
       alias1 = depth0 != null ? depth0 : container.nullContext || {},
@@ -9630,339 +9699,339 @@ this["app"]["templates"]["weather"] = Handlebars.template({
       alias4 = container.escapeExpression,
       alias5 = container.lambda,
       lookupProperty =
-      container.lookupProperty ||
-      function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined;
-      };
+        container.lookupProperty ||
+        function (parent, propertyName) {
+          if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+            return parent[propertyName];
+          }
+          return undefined;
+        };
     return (
       '  <div class="row">\n    <div class="col bg-secondary-subtle">\n      <center><small>' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "date") ||
-              (depth0 != null ? lookupProperty(depth0, "date") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "date",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 3,
-                column: 21
+          (helper =
+            lookupProperty(helpers, "date") ||
+            (depth0 != null ? lookupProperty(depth0, "date") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "date",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 3,
+                  column: 21,
+                },
+                end: {
+                  line: 3,
+                  column: 29,
+                },
               },
-              end: {
-                line: 3,
-                column: 29
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '</small><br /><img src="/assets/weather/' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "icon") ||
-              (depth0 != null ? lookupProperty(depth0, "icon") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "icon",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 3,
-                column: 69
+          (helper =
+            lookupProperty(helpers, "icon") ||
+            (depth0 != null ? lookupProperty(depth0, "icon") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "icon",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 3,
+                  column: 69,
+                },
+                end: {
+                  line: 3,
+                  column: 77,
+                },
               },
-              end: {
-                line: 3,
-                column: 77
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" style="max-width 100px; height:100px;" alt="' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "text") ||
-              (depth0 != null ? lookupProperty(depth0, "text") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "text",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 3,
-                column: 123
+          (helper =
+            lookupProperty(helpers, "text") ||
+            (depth0 != null ? lookupProperty(depth0, "text") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "text",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 3,
+                  column: 123,
+                },
+                end: {
+                  line: 3,
+                  column: 131,
+                },
               },
-              end: {
-                line: 3,
-                column: 131
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '" />\n        <br /><small>' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "text") ||
-              (depth0 != null ? lookupProperty(depth0, "text") : depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "text",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 4,
-                column: 21
+          (helper =
+            lookupProperty(helpers, "text") ||
+            (depth0 != null ? lookupProperty(depth0, "text") : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "text",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 4,
+                  column: 21,
+                },
+                end: {
+                  line: 4,
+                  column: 29,
+                },
               },
-              end: {
-                line: 4,
-                column: 29
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '</small>\n      </center>\n    </div>\n    <div class="col">\n      <table class="table">\n        <tr>\n          <td>Sunrise:</td>\n          <td>' +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "sunrise") ||
-              (depth0 != null ? lookupProperty(depth0, "sunrise") : depth0)) !=
-            null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "sunrise",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 11,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "sunrise") ||
+            (depth0 != null ? lookupProperty(depth0, "sunrise") : depth0)) !=
+          null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "sunrise",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 11,
+                  column: 14,
+                },
+                end: {
+                  line: 11,
+                  column: 25,
+                },
               },
-              end: {
-                line: 11,
-                column: 25
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n        </tr>\n        <tr>\n          <td>Sunset:</td>\n          <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "sunset") ||
-              (depth0 != null ? lookupProperty(depth0, "sunset") : depth0)) !=
-            null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "sunset",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 15,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "sunset") ||
+            (depth0 != null ? lookupProperty(depth0, "sunset") : depth0)) !=
+          null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "sunset",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 15,
+                  column: 14,
+                },
+                end: {
+                  line: 15,
+                  column: 24,
+                },
               },
-              end: {
-                line: 15,
-                column: 24
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "</td>\n        </tr>\n        <tr>\n          <td>Temperature:</td>\n          <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "temperature2m") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "temperature2m") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "temperature2m",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 19,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "temperature2m") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "temperature2m")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "temperature2m",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 19,
+                  column: 14,
+                },
+                end: {
+                  line: 19,
+                  column: 31,
+                },
               },
-              end: {
-                line: 19,
-                column: 31
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "&deg;C</td>\n        </tr>\n        <tr>\n          <td>Precipitation chance:</td>\n          <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "precipitationProbabilityMax") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "precipitationProbabilityMax") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "precipitationProbabilityMax",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 23,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "precipitationProbabilityMax") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "precipitationProbabilityMax")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "precipitationProbabilityMax",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 23,
+                  column: 14,
+                },
+                end: {
+                  line: 23,
+                  column: 45,
+                },
               },
-              end: {
-                line: 23,
-                column: 45
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "%</td>\n        </tr>\n        <tr>\n          <td>Wind speed: </td>\n          <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "windSpeed10mMax") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "windSpeed10mMax") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "windSpeed10mMax",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 27,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "windSpeed10mMax") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "windSpeed10mMax")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "windSpeed10mMax",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 27,
+                  column: 14,
+                },
+                end: {
+                  line: 27,
+                  column: 33,
+                },
               },
-              end: {
-                line: 27,
-                column: 33
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       " mph</td>\n        </tr>\n        <tr>\n          <td>Wind gusts: </td>\n          <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "windGusts10mMax") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "windGusts10mMax") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "windGusts10mMax",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 31,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "windGusts10mMax") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "windGusts10mMax")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "windGusts10mMax",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 31,
+                  column: 14,
+                },
+                end: {
+                  line: 31,
+                  column: 33,
+                },
               },
-              end: {
-                line: 31,
-                column: 33
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       " mph\n          </td>\n        </tr>\n        <tr>\n          <td>Wind direction: </td>\n          <td>" +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "windDirection10mDominant") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "windDirection10mDominant") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "windDirection10mDominant",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 36,
-                column: 14
+          (helper =
+            lookupProperty(helpers, "windDirection10mDominant") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "windDirection10mDominant")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "windDirection10mDominant",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 36,
+                  column: 14,
+                },
+                end: {
+                  line: 36,
+                  column: 42,
+                },
               },
-              end: {
-                line: 36,
-                column: 42
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       "&deg; " +
       alias4(
         ((helper =
-            (helper =
-              lookupProperty(helpers, "windDirection") ||
-              (depth0 != null ?
-                lookupProperty(depth0, "windDirection") :
-                depth0)) != null ?
-            helper :
-            alias2),
-          typeof helper === alias3 ?
-          helper.call(alias1, {
-            name: "windDirection",
-            hash: {},
-            data: data,
-            loc: {
-              start: {
-                line: 36,
-                column: 48
+          (helper =
+            lookupProperty(helpers, "windDirection") ||
+            (depth0 != null
+              ? lookupProperty(depth0, "windDirection")
+              : depth0)) != null
+            ? helper
+            : alias2),
+        typeof helper === alias3
+          ? helper.call(alias1, {
+              name: "windDirection",
+              hash: {},
+              data: data,
+              loc: {
+                start: {
+                  line: 36,
+                  column: 48,
+                },
+                end: {
+                  line: 36,
+                  column: 65,
+                },
               },
-              end: {
-                line: 36,
-                column: 65
-              },
-            },
-          }) :
-          helper),
+            })
+          : helper),
       ) +
       '</td>\n        </tr>\n      </table>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col"><i>' +
       alias4(
@@ -9970,11 +10039,11 @@ this["app"]["templates"]["weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "quarter") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "quarter")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9984,11 +10053,11 @@ this["app"]["templates"]["weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "city") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "city")
+            : stack1,
           depth0,
         ),
       ) +
@@ -9998,11 +10067,11 @@ this["app"]["templates"]["weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "county") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "county")
+            : stack1,
           depth0,
         ),
       ) +
@@ -10012,11 +10081,11 @@ this["app"]["templates"]["weather"] = Handlebars.template({
           (stack1 =
             (stack1 =
               depth0 != null ? lookupProperty(depth0, "location") : depth0) !=
-            null ?
-            lookupProperty(stack1, "address") :
-            stack1) != null ?
-          lookupProperty(stack1, "country") :
-          stack1,
+            null
+              ? lookupProperty(stack1, "address")
+              : stack1) != null
+            ? lookupProperty(stack1, "country")
+            : stack1,
           depth0,
         ),
       ) +
@@ -10025,7 +10094,7 @@ this["app"]["templates"]["weather"] = Handlebars.template({
   },
   useData: true,
 });
-window._render = function(template, args) {
+window._render = function (template, args) {
   return new Promise((resolve, reject) => {
     var url = template.getAttribute("data-url");
     var name = template.getAttribute("data-template");
@@ -10078,7 +10147,7 @@ window._render = function(template, args) {
       });
   });
 };
-window.ui = function(selector) {
+window.ui = function (selector) {
   var targets = [];
   if (selector) {
     targets = document.querySelectorAll(selector);
@@ -10087,7 +10156,7 @@ window.ui = function(selector) {
     window._stateStore = {};
   }
   return {
-    observe: function(target) {
+    observe: function (target) {
       var ev =
         "__OBS_" +
         target.getAttribute("data-template").split("/").pop() +
@@ -10095,7 +10164,8 @@ window.ui = function(selector) {
         name;
       window._stateStore[ev] = new MutationObserver(
         (mutationList, observer) => {
-          if (mutationList) {}
+          if (mutationList) {
+          }
         },
       );
       window._stateStore[ev].observe(target, {
@@ -10103,7 +10173,7 @@ window.ui = function(selector) {
         subtree: true,
       });
     },
-    template: function(args) {
+    template: function (args) {
       return new Promise((resolve, reject) => {
         if (targets.length > 0) {
           var promises = [];
@@ -10120,7 +10190,7 @@ window.ui = function(selector) {
         }
       });
     },
-    weather: function(args) {
+    weather: function (args) {
       var apiUrl =
         "api/resources/weather?latitude=" +
         args.latitude +
@@ -10140,7 +10210,7 @@ window.ui = function(selector) {
           });
       });
     },
-    geoLocation: function() {
+    geoLocation: function () {
       const apiLocation = new Promise((resolve, reject) => {
         var apiUrl = "/api/resources/location";
         axios
@@ -10156,10 +10226,10 @@ window.ui = function(selector) {
       return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentÿPosition(
-            function(position) {
+            function (position) {
               resolve(position);
             },
-            function(err) {
+            function (err) {
               apiLocation
                 .then((loc) => {
                   resolve(loc);
@@ -10180,12 +10250,12 @@ window.ui = function(selector) {
         }
       });
     },
-    messageBox: function(args) {
+    messageBox: function (args) {
       document.getElementById("msgboxLabel").innerHTML = args.label;
       document.getElementById("msgboxBody").innerHTML = args.body;
       var options = {
         focus: true,
-        backdrop: "static"
+        backdrop: "static",
       };
       window.msgboxModal = new bootstrap.Modal(
         document.getElementById("msgboxModal"),
@@ -10193,7 +10263,7 @@ window.ui = function(selector) {
       );
       window.msgboxModal.show();
     },
-    toast: function(args) {
+    toast: function (args) {
       document.getElementById("toastLabel").innerHTML = args.label;
       document.getElementById("toastBody").innerHTML = args.body;
       document.getElementById("toastSmall").innerHTML = args.small ?? "";
@@ -10208,24 +10278,24 @@ window.ui = function(selector) {
       );
       window.toast.show();
     },
-    themeChooser: function() {
+    themeChooser: function () {
       var instance = {
-        getStoredTheme: function() {
+        getStoredTheme: function () {
           return localStorage.getItem("theme");
         },
-        setStoredTheme: function(theme) {
+        setStoredTheme: function (theme) {
           localStorage.setItem("theme", theme);
         },
-        getPreferredTheme: function() {
+        getPreferredTheme: function () {
           const storedTheme = this.getStoredTheme();
           if (storedTheme) {
             return storedTheme;
           }
-          return window.matchMedia("(prefers-color-scheme: dark)").matches ?
-            "dark" :
-            "light";
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
         },
-        setTheme: function(value) {
+        setTheme: function (value) {
           var theme = this.getPreferredTheme();
           if (value) {
             theme = value;
@@ -10233,15 +10303,15 @@ window.ui = function(selector) {
           if (theme === "auto") {
             document.documentElement.setAttribute(
               "data-bs-theme",
-              window.matchMedia("(prefers-color-scheme: dark)").matches ?
-              "dark" :
-              "light",
+              window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light",
             );
           } else {
             document.documentElement.setAttribute("data-bs-theme", theme);
           }
         },
-        chooseTheme: function(theme) {
+        chooseTheme: function (theme) {
           var activeTheme = document.getElementById("activeTheme");
           var activeClass = document.getElementById(theme).className;
           activeTheme.className = activeClass;
@@ -10253,7 +10323,7 @@ window.ui = function(selector) {
     },
   };
 };
-String.prototype.format = function(tokens) {
+String.prototype.format = function (tokens) {
   var formatted = this;
   for (var token in tokens)
     if (tokens.hasOwnProperty(token))
@@ -10273,7 +10343,7 @@ function navigateToNews(sender) {
   var apiUrl = "/api/resources/feed?url=" + encodeURIComponent(url);
   var options = {
     focus: true,
-    backdrop: true
+    backdrop: true,
   };
   axios.get(apiUrl).then((response) => {
     var feed = response.data;
@@ -10291,13 +10361,13 @@ function navigateToNews(sender) {
 function viewWeather(lat, long, days, index) {
   var options = {
     focus: true,
-    backdrop: "static"
+    backdrop: "static",
   };
   ui()
     .weather({
       latitude: lat,
       longitude: long,
-      days: days
+      days: days,
     })
     .then((data) => {
       window.modal = new bootstrap.Modal(
@@ -10428,7 +10498,7 @@ function composeEdit(sender) {
 function iconSearch() {
   var options = {
     focus: true,
-    backdrop: "static"
+    backdrop: "static",
   };
   document.getElementById("iconSearchQuery").value = "";
   document.getElementById("iconSearchResults").innerHTML = "";
@@ -10512,7 +10582,7 @@ function doDeComposerise(src, target) {
   var txtRun = document.querySelector(src);
   var txtCompose = document.querySelector(target);
   var data = {
-    cmd: txtRun.value
+    cmd: txtRun.value,
   };
   axios
     .post("/api/compose/decomposerize", data)
@@ -10528,7 +10598,7 @@ function doComposerise(src, target) {
   var txtRun = document.querySelector(src);
   var txtCompose = document.querySelector(target);
   var data = {
-    cmd: txtRun.value
+    cmd: txtRun.value,
   };
   axios
     .post("/api/compose/composerize", data)
@@ -10545,7 +10615,7 @@ function scanDocker() {
     .then((response) => {
       ui().messageBox({
         label: "Scan",
-        body: "Service Discovery complete."
+        body: "Service Discovery complete.",
       });
     })
     .catch((err) => {
@@ -10560,7 +10630,7 @@ function updateDNS() {
     .then((response) => {
       ui().messageBox({
         label: "DNS",
-        body: "DNS Update complete."
+        body: "DNS Update complete.",
       });
     })
     .catch((err) => {
@@ -10582,7 +10652,7 @@ function changeIcon(target, action) {
     .then((response) => {
       var options = {
         focus: true,
-        backdrop: "static"
+        backdrop: "static",
       };
       document.getElementById("btnSearch").setAttribute("data-container", name);
       document
@@ -10642,7 +10712,7 @@ function getSeries(source, field) {
   source[field].forEach((s) => {
     result.push({
       x: new Date(source.periods[index]).getTime(),
-      y: s
+      y: s,
     });
     index += 1;
   });
@@ -10671,29 +10741,31 @@ function renderDashboard(id) {
           chart: {
             height: 300,
             width: 320,
-            type: "line"
+            type: "line",
           },
           title: {
-            text: "Historical Free Memory %"
+            text: "Historical Free Memory %",
           },
           stroke: {
-            curve: "smooth"
+            curve: "smooth",
           },
           markers: {
-            size: 5
+            size: 5,
           },
-          series: [{
-            name: "Load",
-            data: getSeries(response.data, "memoryFreePercent"),
-          }, ],
+          series: [
+            {
+              name: "Load",
+              data: getSeries(response.data, "memoryFreePercent"),
+            },
+          ],
           xaxis: {
             labels: {
-              show: false
-            }
+              show: false,
+            },
           },
           yaxis: {
             labels: {
-              formatter: function(val) {
+              formatter: function (val) {
                 return Number(val).toLocaleString(undefined, {
                   style: "percent",
                   minimumFractionDigits: 4,
@@ -10714,29 +10786,31 @@ function renderDashboard(id) {
           chart: {
             height: 300,
             width: 320,
-            type: "line"
+            type: "line",
           },
           title: {
-            text: "Historical CPU Load %"
+            text: "Historical CPU Load %",
           },
           stroke: {
-            curve: "smooth"
+            curve: "smooth",
           },
           markers: {
-            size: 5
+            size: 5,
           },
-          series: [{
-            name: "Load",
-            data: getSeries(response.data, "cpuPercent")
-          }, ],
+          series: [
+            {
+              name: "Load",
+              data: getSeries(response.data, "cpuPercent"),
+            },
+          ],
           xaxis: {
             labels: {
-              show: false
-            }
+              show: false,
+            },
           },
           yaxis: {
             labels: {
-              formatter: function(val) {
+              formatter: function (val) {
                 return Number(val).toLocaleString(undefined, {
                   style: "percent",
                   minimumFractionDigits: 0,
@@ -10774,14 +10848,14 @@ function startContainerMonitor(target) {
 function containerInfo(sender) {
   var options = {
     focus: true,
-    backdrop: "static"
+    backdrop: "static",
   };
   var containerId = sender.getAttribute("data-containerid");
   ui("#containerInfo")
     .template({
       query: {
-        id: containerId
-      }
+        id: containerId,
+      },
     })
     .then(() => {
       window.containerInfoModal = new bootstrap.Modal(
@@ -10792,7 +10866,7 @@ function containerInfo(sender) {
       const matches = document.querySelectorAll("[data-command]");
       if (matches) {
         matches.forEach((cmd) => {
-          cmd.onclick = function() {
+          cmd.onclick = function () {
             var apiUrl =
               "/api/docker/" +
               this.getAttribute("data-command").replace("-", "/") +
@@ -10832,7 +10906,7 @@ function changeIconFromEdit() {
   var iconSlug = document.getElementById("txticonSlug").value;
   var options = {
     focus: true,
-    backdrop: "static"
+    backdrop: "static",
   };
   document.getElementById("btnSearch").setAttribute("data-container", name);
   document
