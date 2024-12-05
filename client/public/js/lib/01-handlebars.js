@@ -24,16 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-!(function(a, b) {
-  "object" == typeof exports && "object" == typeof module ?
-    (module.exports = b()) :
-    "function" == typeof define && define.amd ?
-    define([], b) :
-    "object" == typeof exports ?
-    (exports.Handlebars = b()) :
-    (a.Handlebars = b());
-})(this, function() {
-  return (function(a) {
+!(function (a, b) {
+  "object" == typeof exports && "object" == typeof module
+    ? (module.exports = b())
+    : "function" == typeof define && define.amd
+      ? define([], b)
+      : "object" == typeof exports
+        ? (exports.Handlebars = b())
+        : (a.Handlebars = b());
+})(this, function () {
+  return (function (a) {
     function b(d) {
       if (c[d]) return c[d].exports;
       var e = (c[d] = {
@@ -46,16 +46,16 @@ THE SOFTWARE.
     var c = {};
     return (b.m = a), (b.c = c), (b.p = ""), b(0);
   })([
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
         var a = r();
         return (
-          (a.compile = function(b, c) {
+          (a.compile = function (b, c) {
             return k.compile(b, c, a);
           }),
-          (a.precompile = function(b, c) {
+          (a.precompile = function (b, c) {
             return k.precompile(b, c, a);
           }),
           (a.AST = i["default"]),
@@ -84,24 +84,24 @@ THE SOFTWARE.
         r = g["default"].create,
         s = d();
       (s.create = d),
-      q["default"](s),
+        q["default"](s),
         (s.Visitor = o["default"]),
         (s["default"] = s),
         (b["default"] = s),
         (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
-      (b["default"] = function(a) {
-        return a && a.__esModule ?
-          a :
-          {
-            default: a,
-          };
+      (b["default"] = function (a) {
+        return a && a.__esModule
+          ? a
+          : {
+              default: a,
+            };
       }),
-      (b.__esModule = !0);
+        (b.__esModule = !0);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -113,7 +113,7 @@ THE SOFTWARE.
           (a.Utils = n),
           (a.escapeExpression = n.escapeExpression),
           (a.VM = p),
-          (a.template = function(b) {
+          (a.template = function (b) {
             return p.template(b, a);
           }),
           a
@@ -136,14 +136,14 @@ THE SOFTWARE.
         r = f(q),
         s = d();
       (s.create = d),
-      r["default"](s),
+        r["default"](s),
         (s["default"] = s),
         (b["default"] = s),
         (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
-      (b["default"] = function(a) {
+      (b["default"] = function (a) {
         if (a && a.__esModule) return a;
         var b = {};
         if (null != a)
@@ -151,16 +151,16 @@ THE SOFTWARE.
             Object.prototype.hasOwnProperty.call(a, c) && (b[c] = a[c]);
         return (b["default"] = a), b;
       }),
-      (b.__esModule = !0);
+        (b.__esModule = !0);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b, c) {
         (this.helpers = a || {}),
-        (this.partials = b || {}),
-        (this.decorators = c || {}),
-        i.registerDefaultHelpers(this),
+          (this.partials = b || {}),
+          (this.decorators = c || {}),
+          i.registerDefaultHelpers(this),
           j.registerDefaultDecorators(this);
       }
       var e = c(1)["default"];
@@ -195,32 +195,32 @@ THE SOFTWARE.
         constructor: d,
         logger: l["default"],
         log: l["default"].log,
-        registerHelper: function(a, b) {
+        registerHelper: function (a, b) {
           if (f.toString.call(a) === r) {
             if (b)
               throw new h["default"]("Arg not supported with multiple helpers");
             f.extend(this.helpers, a);
           } else this.helpers[a] = b;
         },
-        unregisterHelper: function(a) {
+        unregisterHelper: function (a) {
           delete this.helpers[a];
         },
-        registerPartial: function(a, b) {
+        registerPartial: function (a, b) {
           if (f.toString.call(a) === r) f.extend(this.partials, a);
           else {
             if ("undefined" == typeof b)
               throw new h["default"](
                 'Attempting to register a partial called "' +
-                a +
-                '" as undefined',
+                  a +
+                  '" as undefined',
               );
             this.partials[a] = b;
           }
         },
-        unregisterPartial: function(a) {
+        unregisterPartial: function (a) {
           delete this.partials[a];
         },
-        registerDecorator: function(a, b) {
+        registerDecorator: function (a, b) {
           if (f.toString.call(a) === r) {
             if (b)
               throw new h["default"](
@@ -229,17 +229,17 @@ THE SOFTWARE.
             f.extend(this.decorators, a);
           } else this.decorators[a] = b;
         },
-        unregisterDecorator: function(a) {
+        unregisterDecorator: function (a) {
           delete this.decorators[a];
         },
-        resetLoggedPropertyAccesses: function() {
+        resetLoggedPropertyAccesses: function () {
           m.resetLoggedProperties();
         },
       };
       var s = l["default"].log;
       (b.log = s), (b.createFrame = f.createFrame), (b.logger = l["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
 
       function c(a) {
@@ -250,13 +250,12 @@ THE SOFTWARE.
         for (var b = 1; b < arguments.length; b++)
           for (var c in arguments[b])
             Object.prototype.hasOwnProperty.call(arguments[b], c) &&
-            (a[c] = arguments[b][c]);
+              (a[c] = arguments[b][c]);
         return a;
       }
 
       function e(a, b) {
-        for (var c = 0, d = a.length; c < d; c++)
-          if (a[c] === b) return c;
+        for (var c = 0, d = a.length; c < d; c++) if (a[c] === b) return c;
         return -1;
       }
 
@@ -287,13 +286,13 @@ THE SOFTWARE.
         return (a ? a + "." : "") + b;
       }
       (b.__esModule = !0),
-      (b.extend = d),
-      (b.indexOf = e),
-      (b.escapeExpression = f),
-      (b.isEmpty = g),
-      (b.createFrame = h),
-      (b.blockParams = i),
-      (b.appendContextPath = j);
+        (b.extend = d),
+        (b.indexOf = e),
+        (b.escapeExpression = f),
+        (b.isEmpty = g),
+        (b.createFrame = h),
+        (b.blockParams = i),
+        (b.appendContextPath = j);
       var k = {
           "&": "&amp;",
           "<": "&lt;",
@@ -307,25 +306,25 @@ THE SOFTWARE.
         m = /[&<>"'`=]/,
         n = Object.prototype.toString;
       b.toString = n;
-      var o = function(a) {
+      var o = function (a) {
         return "function" == typeof a;
       };
       o(/x/) &&
         (b.isFunction = o =
-          function(a) {
+          function (a) {
             return "function" == typeof a && "[object Function]" === n.call(a);
           }),
         (b.isFunction = o);
       var p =
         Array.isArray ||
-        function(a) {
+        function (a) {
           return (
             !(!a || "object" != typeof a) && "[object Array]" === n.call(a)
           );
         };
       b.isArray = p;
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b) {
@@ -336,29 +335,31 @@ THE SOFTWARE.
           j = void 0;
         c &&
           ((g = c.start.line),
-            (h = c.end.line),
-            (i = c.start.column),
-            (j = c.end.column),
-            (a += " - " + g + ":" + i));
+          (h = c.end.line),
+          (i = c.start.column),
+          (j = c.end.column),
+          (a += " - " + g + ":" + i));
         for (
-          var k = Error.prototype.constructor.call(this, a), l = 0; l < f.length; l++
+          var k = Error.prototype.constructor.call(this, a), l = 0;
+          l < f.length;
+          l++
         )
           this[f[l]] = k[f[l]];
         Error.captureStackTrace && Error.captureStackTrace(this, d);
         try {
           c &&
             ((this.lineNumber = g),
-              (this.endLineNumber = h),
-              e ?
-              (Object.defineProperty(this, "column", {
+            (this.endLineNumber = h),
+            e
+              ? (Object.defineProperty(this, "column", {
                   value: i,
                   enumerable: !0,
                 }),
                 Object.defineProperty(this, "endColumn", {
                   value: j,
                   enumerable: !0,
-                })) :
-              ((this.column = i), (this.endColumn = j)));
+                }))
+              : ((this.column = i), (this.endColumn = j)));
         } catch (m) {}
       }
       var e = c(7)["default"];
@@ -374,22 +375,22 @@ THE SOFTWARE.
         "stack",
       ];
       (d.prototype = new Error()),
-      (b["default"] = d),
-      (a.exports = b["default"]);
+        (b["default"] = d),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(8),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9);
-      a.exports = function(a, b, c) {
+      a.exports = function (a, b, c) {
         return d.setDesc(a, b, c);
       };
     },
-    function(a, b) {
+    function (a, b) {
       var c = Object;
       a.exports = {
         create: c.create,
@@ -404,7 +405,7 @@ THE SOFTWARE.
         each: [].forEach,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -422,8 +423,8 @@ THE SOFTWARE.
       }
       var f = c(1)["default"];
       (b.__esModule = !0),
-      (b.registerDefaultHelpers = d),
-      (b.moveHelperToHooks = e);
+        (b.registerDefaultHelpers = d),
+        (b.moveHelperToHooks = e);
       var g = c(11),
         h = f(g),
         i = c(12),
@@ -439,33 +440,33 @@ THE SOFTWARE.
         s = c(69),
         t = f(s);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       b.__esModule = !0;
       var d = c(5);
-      (b["default"] = function(a) {
-        a.registerHelper("blockHelperMissing", function(b, c) {
+      (b["default"] = function (a) {
+        a.registerHelper("blockHelperMissing", function (b, c) {
           var e = c.inverse,
             f = c.fn;
           if (b === !0) return f(this);
           if (b === !1 || null == b) return e(this);
           if (d.isArray(b))
-            return b.length > 0 ?
-              (c.ids && (c.ids = [c.name]), a.helpers.each(b, c)) :
-              e(this);
+            return b.length > 0
+              ? (c.ids && (c.ids = [c.name]), a.helpers.each(b, c))
+              : e(this);
           if (c.data && c.ids) {
             var g = d.createFrame(c.data);
             (g.contextPath = d.appendContextPath(c.data.contextPath, c.name)),
-            (c = {
-              data: g,
-            });
+              (c = {
+                data: g,
+              });
           }
           return f(b, c);
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(13)["default"],
         e = c(43)["default"],
@@ -476,15 +477,15 @@ THE SOFTWARE.
       var i = c(5),
         j = c(6),
         k = h(j);
-      (b["default"] = function(a) {
-        a.registerHelper("each", function(a, b) {
+      (b["default"] = function (a) {
+        a.registerHelper("each", function (a, b) {
           function c(b, c, d) {
             n &&
               ((n.key = b),
-                (n.index = c),
-                (n.first = 0 === c),
-                (n.last = !!d),
-                o && (n.contextPath = o + b)),
+              (n.index = c),
+              (n.first = 0 === c),
+              (n.last = !!d),
+              o && (n.contextPath = o + b)),
               (m += h(a[b], {
                 data: n,
                 blockParams: i.blockParams([a[b], b], [o + b, null]),
@@ -501,41 +502,41 @@ THE SOFTWARE.
             (b.data &&
               b.ids &&
               (o = i.appendContextPath(b.data.contextPath, b.ids[0]) + "."),
-              i.isFunction(a) && (a = a.call(this)),
-              b.data && (n = i.createFrame(b.data)),
-              a && "object" == typeof a)
+            i.isFunction(a) && (a = a.call(this)),
+            b.data && (n = i.createFrame(b.data)),
+            a && "object" == typeof a)
           )
             if (i.isArray(a))
               for (var p = a.length; l < p; l++)
                 l in a && c(l, l, l === a.length - 1);
             else if ("function" == typeof d && a[e]) {
-            for (var q = [], r = f(a), s = r.next(); !s.done; s = r.next())
-              q.push(s.value);
-            a = q;
-            for (var p = a.length; l < p; l++) c(l, l, l === a.length - 1);
-          } else
-            !(function() {
-              var b = void 0;
-              g(a).forEach(function(a) {
+              for (var q = [], r = f(a), s = r.next(); !s.done; s = r.next())
+                q.push(s.value);
+              a = q;
+              for (var p = a.length; l < p; l++) c(l, l, l === a.length - 1);
+            } else
+              !(function () {
+                var b = void 0;
+                g(a).forEach(function (a) {
                   void 0 !== b && c(b, l - 1), (b = a), l++;
                 }),
-                void 0 !== b && c(b, l - 1, !0);
-            })();
+                  void 0 !== b && c(b, l - 1, !0);
+              })();
           return 0 === l && (m = j(this)), m;
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(14),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(15), c(42), (a.exports = c(21).Symbol);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(9),
         e = c(16),
@@ -570,156 +571,156 @@ THE SOFTWARE.
         H = "function" == typeof z,
         I = Object.prototype,
         J =
-        g &&
-        j(function() {
-          return (
-            7 !=
-            x(
-              w({}, "a", {
-                get: function() {
-                  return w(this, "a", {
-                    value: 7,
-                  }).a;
-                },
-              }),
-            ).a
-          );
-        }) ?
-        function(a, b, c) {
-          var d = v(I, b);
-          d && delete I[b], w(a, b, c), d && a !== I && w(I, b, d);
-        } :
-        w,
-        K = function(a) {
+          g &&
+          j(function () {
+            return (
+              7 !=
+              x(
+                w({}, "a", {
+                  get: function () {
+                    return w(this, "a", {
+                      value: 7,
+                    }).a;
+                  },
+                }),
+              ).a
+            );
+          })
+            ? function (a, b, c) {
+                var d = v(I, b);
+                d && delete I[b], w(a, b, c), d && a !== I && w(I, b, d);
+              }
+            : w,
+        K = function (a) {
           var b = (G[a] = x(z.prototype));
           return (
             (b._k = a),
             g &&
-            C &&
-            J(I, a, {
-              configurable: !0,
-              set: function(b) {
-                f(this, D) && f(this[D], a) && (this[D][a] = !1),
-                  J(this, a, u(1, b));
-              },
-            }),
+              C &&
+              J(I, a, {
+                configurable: !0,
+                set: function (b) {
+                  f(this, D) && f(this[D], a) && (this[D][a] = !1),
+                    J(this, a, u(1, b));
+                },
+              }),
             b
           );
         },
-        L = function(a) {
+        L = function (a) {
           return "symbol" == typeof a;
         },
-        M = function(a, b, c) {
-          return c && f(G, b) ?
-            (c.enumerable ?
-              (f(a, D) && a[D][b] && (a[D][b] = !1),
-                (c = x(c, {
-                  enumerable: u(0, !1),
-                }))) :
-              (f(a, D) || w(a, D, u(1, {})), (a[D][b] = !0)),
-              J(a, b, c)) :
-            w(a, b, c);
+        M = function (a, b, c) {
+          return c && f(G, b)
+            ? (c.enumerable
+                ? (f(a, D) && a[D][b] && (a[D][b] = !1),
+                  (c = x(c, {
+                    enumerable: u(0, !1),
+                  })))
+                : (f(a, D) || w(a, D, u(1, {})), (a[D][b] = !0)),
+              J(a, b, c))
+            : w(a, b, c);
         },
-        N = function(a, b) {
+        N = function (a, b) {
           s(a);
-          for (var c, d = q((b = t(b))), e = 0, f = d.length; f > e;)
+          for (var c, d = q((b = t(b))), e = 0, f = d.length; f > e; )
             M(a, (c = d[e++]), b[c]);
           return a;
         },
-        O = function(a, b) {
+        O = function (a, b) {
           return void 0 === b ? x(a) : N(x(a), b);
         },
-        P = function(a) {
+        P = function (a) {
           var b = E.call(this, a);
           return (
             !(b || !f(this, a) || !f(G, a) || (f(this, D) && this[D][a])) || b
           );
         },
-        Q = function(a, b) {
+        Q = function (a, b) {
           var c = v((a = t(a)), b);
           return (
             !c || !f(G, b) || (f(a, D) && a[D][b]) || (c.enumerable = !0), c
           );
         },
-        R = function(a) {
-          for (var b, c = y(t(a)), d = [], e = 0; c.length > e;)
+        R = function (a) {
+          for (var b, c = y(t(a)), d = [], e = 0; c.length > e; )
             f(G, (b = c[e++])) || b == D || d.push(b);
           return d;
         },
-        S = function(a) {
-          for (var b, c = y(t(a)), d = [], e = 0; c.length > e;)
+        S = function (a) {
+          for (var b, c = y(t(a)), d = [], e = 0; c.length > e; )
             f(G, (b = c[e++])) && d.push(G[b]);
           return d;
         },
-        T = function(a) {
+        T = function (a) {
           if (void 0 !== a && !L(a)) {
-            for (var b, c, d = [a], e = 1, f = arguments; f.length > e;)
+            for (var b, c, d = [a], e = 1, f = arguments; f.length > e; )
               d.push(f[e++]);
             return (
               (b = d[1]),
               "function" == typeof b && (c = b),
               (!c && r(b)) ||
-              (b = function(a, b) {
-                if ((c && (b = c.call(this, a, b)), !L(b))) return b;
-              }),
+                (b = function (a, b) {
+                  if ((c && (b = c.call(this, a, b)), !L(b))) return b;
+                }),
               (d[1] = b),
               B.apply(A, d)
             );
           }
         },
-        U = j(function() {
+        U = j(function () {
           var a = z();
           return (
             "[null]" != B([a]) ||
             "{}" !=
-            B({
-              a: a,
-            }) ||
+              B({
+                a: a,
+              }) ||
             "{}" != B(Object(a))
           );
         });
       H ||
-        ((z = function() {
-            if (L(this)) throw TypeError("Symbol is not a constructor");
-            return K(m(arguments.length > 0 ? arguments[0] : void 0));
-          }),
-          i(z.prototype, "toString", function() {
-            return this._k;
-          }),
-          (L = function(a) {
-            return a instanceof z;
-          }),
-          (d.create = O),
-          (d.isEnum = P),
-          (d.getDesc = Q),
-          (d.setDesc = M),
-          (d.setDescs = N),
-          (d.getNames = p.get = R),
-          (d.getSymbols = S),
-          g && !c(41) && i(I, "propertyIsEnumerable", P, !0));
+        ((z = function () {
+          if (L(this)) throw TypeError("Symbol is not a constructor");
+          return K(m(arguments.length > 0 ? arguments[0] : void 0));
+        }),
+        i(z.prototype, "toString", function () {
+          return this._k;
+        }),
+        (L = function (a) {
+          return a instanceof z;
+        }),
+        (d.create = O),
+        (d.isEnum = P),
+        (d.getDesc = Q),
+        (d.setDesc = M),
+        (d.setDescs = N),
+        (d.getNames = p.get = R),
+        (d.getSymbols = S),
+        g && !c(41) && i(I, "propertyIsEnumerable", P, !0));
       var V = {
-        for: function(a) {
+        for: function (a) {
           return f(F, (a += "")) ? F[a] : (F[a] = z(a));
         },
-        keyFor: function(a) {
+        keyFor: function (a) {
           return o(F, a);
         },
-        useSetter: function() {
+        useSetter: function () {
           C = !0;
         },
-        useSimple: function() {
+        useSimple: function () {
           C = !1;
         },
       };
       d.each.call(
-          "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(
-            ",",
-          ),
-          function(a) {
-            var b = n(a);
-            V[a] = H ? b : K(b);
-          },
+        "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(
+          ",",
         ),
+        function (a) {
+          var b = n(a);
+          V[a] = H ? b : K(b);
+        },
+      ),
         (C = !0),
         h(h.G + h.W, {
           Symbol: z,
@@ -734,42 +735,42 @@ THE SOFTWARE.
           getOwnPropertySymbols: S,
         }),
         A &&
-        h(h.S + h.F * (!H || U), "JSON", {
-          stringify: T,
-        }),
+          h(h.S + h.F * (!H || U), "JSON", {
+            stringify: T,
+          }),
         l(z, "Symbol"),
         l(Math, "Math", !0),
         l(e.JSON, "JSON", !0);
     },
-    function(a, b) {
+    function (a, b) {
       var c = (a.exports =
-        "undefined" != typeof window && window.Math == Math ?
-        window :
-        "undefined" != typeof self && self.Math == Math ?
-        self :
-        Function("return this")());
+        "undefined" != typeof window && window.Math == Math
+          ? window
+          : "undefined" != typeof self && self.Math == Math
+            ? self
+            : Function("return this")());
       "number" == typeof __g && (__g = c);
     },
-    function(a, b) {
+    function (a, b) {
       var c = {}.hasOwnProperty;
-      a.exports = function(a, b) {
+      a.exports = function (a, b) {
         return c.call(a, b);
       };
     },
-    function(a, b, c) {
-      a.exports = !c(19)(function() {
+    function (a, b, c) {
+      a.exports = !c(19)(function () {
         return (
           7 !=
           Object.defineProperty({}, "a", {
-            get: function() {
+            get: function () {
               return 7;
             },
           }).a
         );
       });
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         try {
           return !!a();
         } catch (b) {
@@ -777,12 +778,12 @@ THE SOFTWARE.
         }
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(16),
         e = c(21),
         f = c(22),
         g = "prototype",
-        h = function(a, b, c) {
+        h = function (a, b, c) {
           var i,
             j,
             k,
@@ -797,84 +798,84 @@ THE SOFTWARE.
           m && (c = b);
           for (i in c)
             (j = !l && s && i in s),
-            (j && i in r) ||
-            ((k = j ? s[i] : c[i]),
-              (r[i] =
-                m && "function" != typeof s[i] ?
-                c[i] :
-                p && j ?
-                f(k, d) :
-                q && s[i] == k ?
-                (function(a) {
-                  var b = function(b) {
-                    return this instanceof a ? new a(b) : a(b);
-                  };
-                  return (b[g] = a[g]), b;
-                })(k) :
-                o && "function" == typeof k ?
-                f(Function.call, k) :
-                k),
-              o && ((r[g] || (r[g] = {}))[i] = k));
+              (j && i in r) ||
+                ((k = j ? s[i] : c[i]),
+                (r[i] =
+                  m && "function" != typeof s[i]
+                    ? c[i]
+                    : p && j
+                      ? f(k, d)
+                      : q && s[i] == k
+                        ? (function (a) {
+                            var b = function (b) {
+                              return this instanceof a ? new a(b) : a(b);
+                            };
+                            return (b[g] = a[g]), b;
+                          })(k)
+                        : o && "function" == typeof k
+                          ? f(Function.call, k)
+                          : k),
+                o && ((r[g] || (r[g] = {}))[i] = k));
         };
       (h.F = 1),
-      (h.G = 2),
-      (h.S = 4),
-      (h.P = 8),
-      (h.B = 16),
-      (h.W = 32),
-      (a.exports = h);
+        (h.G = 2),
+        (h.S = 4),
+        (h.P = 8),
+        (h.B = 16),
+        (h.W = 32),
+        (a.exports = h);
     },
-    function(a, b) {
+    function (a, b) {
       var c = (a.exports = {
         version: "1.2.6",
       });
       "number" == typeof __e && (__e = c);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(23);
-      a.exports = function(a, b, c) {
+      a.exports = function (a, b, c) {
         if ((d(a), void 0 === b)) return a;
         switch (c) {
           case 1:
-            return function(c) {
+            return function (c) {
               return a.call(b, c);
             };
           case 2:
-            return function(c, d) {
+            return function (c, d) {
               return a.call(b, c, d);
             };
           case 3:
-            return function(c, d, e) {
+            return function (c, d, e) {
               return a.call(b, c, d, e);
             };
         }
-        return function() {
+        return function () {
           return a.apply(b, arguments);
         };
       };
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         if ("function" != typeof a) throw TypeError(a + " is not a function!");
         return a;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = c(25);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9),
         e = c(26);
-      a.exports = c(18) ?
-        function(a, b, c) {
-          return d.setDesc(a, b, e(1, c));
-        } :
-        function(a, b, c) {
-          return (a[b] = c), a;
-        };
+      a.exports = c(18)
+        ? function (a, b, c) {
+            return d.setDesc(a, b, e(1, c));
+          }
+        : function (a, b, c) {
+            return (a[b] = c), a;
+          };
     },
-    function(a, b) {
-      a.exports = function(a, b) {
+    function (a, b) {
+      a.exports = function (a, b) {
         return {
           enumerable: !(1 & a),
           configurable: !(2 & a),
@@ -883,19 +884,19 @@ THE SOFTWARE.
         };
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(16),
         e = "__core-js_shared__",
         f = d[e] || (d[e] = {});
-      a.exports = function(a) {
+      a.exports = function (a) {
         return f[a] || (f[a] = {});
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9).setDesc,
         e = c(17),
         f = c(29)("toStringTag");
-      a.exports = function(a, b, c) {
+      a.exports = function (a, b, c) {
         a &&
           !e((a = c ? a : a.prototype), f) &&
           d(a, f, {
@@ -904,18 +905,18 @@ THE SOFTWARE.
           });
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(27)("wks"),
         e = c(30),
         f = c(16).Symbol;
-      a.exports = function(a) {
+      a.exports = function (a) {
         return d[a] || (d[a] = (f && f[a]) || (f || e)("Symbol." + a));
       };
     },
-    function(a, b) {
+    function (a, b) {
       var c = 0,
         d = Math.random();
-      a.exports = function(a) {
+      a.exports = function (a) {
         return "Symbol(".concat(
           void 0 === a ? "" : a,
           ")_",
@@ -923,167 +924,168 @@ THE SOFTWARE.
         );
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9),
         e = c(32);
-      a.exports = function(a, b) {
-        for (var c, f = e(a), g = d.getKeys(f), h = g.length, i = 0; h > i;)
+      a.exports = function (a, b) {
+        for (var c, f = e(a), g = d.getKeys(f), h = g.length, i = 0; h > i; )
           if (f[(c = g[i++])] === b) return c;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(33),
         e = c(35);
-      a.exports = function(a) {
+      a.exports = function (a) {
         return d(e(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(34);
-      a.exports = Object("z").propertyIsEnumerable(0) ?
-        Object :
-        function(a) {
-          return "String" == d(a) ? a.split("") : Object(a);
-        };
+      a.exports = Object("z").propertyIsEnumerable(0)
+        ? Object
+        : function (a) {
+            return "String" == d(a) ? a.split("") : Object(a);
+          };
     },
-    function(a, b) {
+    function (a, b) {
       var c = {}.toString;
-      a.exports = function(a) {
+      a.exports = function (a) {
         return c.call(a).slice(8, -1);
       };
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         if (void 0 == a) throw TypeError("Can't call method on  " + a);
         return a;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(32),
         e = c(9).getNames,
         f = {}.toString,
         g =
-        "object" == typeof window && Object.getOwnPropertyNames ?
-        Object.getOwnPropertyNames(window) :
-        [],
-        h = function(a) {
+          "object" == typeof window && Object.getOwnPropertyNames
+            ? Object.getOwnPropertyNames(window)
+            : [],
+        h = function (a) {
           try {
             return e(a);
           } catch (b) {
             return g.slice();
           }
         };
-      a.exports.get = function(a) {
+      a.exports.get = function (a) {
         return g && "[object Window]" == f.call(a) ? h(a) : e(d(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9);
-      a.exports = function(a) {
+      a.exports = function (a) {
         var b = d.getKeys(a),
           c = d.getSymbols;
         if (c)
-          for (var e, f = c(a), g = d.isEnum, h = 0; f.length > h;)
+          for (var e, f = c(a), g = d.isEnum, h = 0; f.length > h; )
             g.call(a, (e = f[h++])) && b.push(e);
         return b;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(34);
       a.exports =
         Array.isArray ||
-        function(a) {
+        function (a) {
           return "Array" == d(a);
         };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(40);
-      a.exports = function(a) {
+      a.exports = function (a) {
         if (!d(a)) throw TypeError(a + " is not an object!");
         return a;
       };
     },
-    function(a, b) {
-      a.exports = function(a) {
+    function (a, b) {
+      a.exports = function (a) {
         return "object" == typeof a ? null !== a : "function" == typeof a;
       };
     },
-    function(a, b) {
+    function (a, b) {
       a.exports = !0;
     },
-    function(a, b) {},
-    function(a, b, c) {
+    function (a, b) {},
+    function (a, b, c) {
       a.exports = {
         default: c(44),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(45), c(51), (a.exports = c(29)("iterator"));
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(46)(!0);
       c(48)(
         String,
         "String",
-        function(a) {
+        function (a) {
           (this._t = String(a)), (this._i = 0);
         },
-        function() {
+        function () {
           var a,
             b = this._t,
             c = this._i;
-          return c >= b.length ?
-            {
-              value: void 0,
-              done: !0,
-            } :
-            ((a = d(b, c)),
-              (this._i += a.length), {
+          return c >= b.length
+            ? {
+                value: void 0,
+                done: !0,
+              }
+            : ((a = d(b, c)),
+              (this._i += a.length),
+              {
                 value: a,
                 done: !1,
               });
         },
       );
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(47),
         e = c(35);
-      a.exports = function(a) {
-        return function(b, c) {
+      a.exports = function (a) {
+        return function (b, c) {
           var f,
             g,
             h = String(e(b)),
             i = d(c),
             j = h.length;
-          return i < 0 || i >= j ?
-            a ?
-            "" :
-            void 0 :
-            ((f = h.charCodeAt(i)),
+          return i < 0 || i >= j
+            ? a
+              ? ""
+              : void 0
+            : ((f = h.charCodeAt(i)),
               f < 55296 ||
               f > 56319 ||
               i + 1 === j ||
               (g = h.charCodeAt(i + 1)) < 56320 ||
-              g > 57343 ?
-              a ?
-              h.charAt(i) :
-              f :
-              a ?
-              h.slice(i, i + 2) :
-              ((f - 55296) << 10) + (g - 56320) + 65536);
+              g > 57343
+                ? a
+                  ? h.charAt(i)
+                  : f
+                : a
+                  ? h.slice(i, i + 2)
+                  : ((f - 55296) << 10) + (g - 56320) + 65536);
         };
       };
     },
-    function(a, b) {
+    function (a, b) {
       var c = Math.ceil,
         d = Math.floor;
-      a.exports = function(a) {
+      a.exports = function (a) {
         return isNaN((a = +a)) ? 0 : (a > 0 ? d : c)(a);
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(41),
         e = c(20),
@@ -1099,26 +1101,26 @@ THE SOFTWARE.
         o = "@@iterator",
         p = "keys",
         q = "values",
-        r = function() {
+        r = function () {
           return this;
         };
-      a.exports = function(a, b, c, s, t, u, v) {
+      a.exports = function (a, b, c, s, t, u, v) {
         j(c, b, s);
         var w,
           x,
-          y = function(a) {
+          y = function (a) {
             if (!n && a in C) return C[a];
             switch (a) {
               case p:
-                return function() {
+                return function () {
                   return new c(this, a);
                 };
               case q:
-                return function() {
+                return function () {
                   return new c(this, a);
                 };
             }
-            return function() {
+            return function () {
               return new c(this, a);
             };
           },
@@ -1133,56 +1135,56 @@ THE SOFTWARE.
           k(F, z, !0),
             !d && h(C, o) && g(F, m, r),
             A &&
-            D.name !== q &&
-            ((B = !0),
-              (E = function() {
+              D.name !== q &&
+              ((B = !0),
+              (E = function () {
                 return D.call(this);
               }));
         }
         if (
           ((d && !v) || (!n && !B && C[m]) || g(C, m, E),
-            (i[b] = E),
-            (i[z] = r),
-            t)
+          (i[b] = E),
+          (i[z] = r),
+          t)
         )
           if (
             ((w = {
-                values: A ? E : y(q),
-                keys: u ? E : y(p),
-                entries: A ? y("entries") : E,
-              }),
-              v)
+              values: A ? E : y(q),
+              keys: u ? E : y(p),
+              entries: A ? y("entries") : E,
+            }),
+            v)
           )
             for (x in w) x in C || f(C, x, w[x]);
           else e(e.P + e.F * (n || B), b, w);
         return w;
       };
     },
-    function(a, b) {
+    function (a, b) {
       a.exports = {};
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(9),
         e = c(26),
         f = c(28),
         g = {};
-      c(25)(g, c(29)("iterator"), function() {
-          return this;
-        }),
-        (a.exports = function(a, b, c) {
+      c(25)(g, c(29)("iterator"), function () {
+        return this;
+      }),
+        (a.exports = function (a, b, c) {
           (a.prototype = d.create(g, {
             next: e(1, c),
           })),
-          f(a, b + " Iterator");
+            f(a, b + " Iterator");
         });
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(52);
       var d = c(49);
       d.NodeList = d.HTMLCollection = d.Array;
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(53),
         e = c(54),
@@ -1191,167 +1193,167 @@ THE SOFTWARE.
       (a.exports = c(48)(
         Array,
         "Array",
-        function(a, b) {
+        function (a, b) {
           (this._t = g(a)), (this._i = 0), (this._k = b);
         },
-        function() {
+        function () {
           var a = this._t,
             b = this._k,
             c = this._i++;
-          return !a || c >= a.length ?
-            ((this._t = void 0), e(1)) :
-            "keys" == b ?
-            e(0, c) :
-            "values" == b ?
-            e(0, a[c]) :
-            e(0, [c, a[c]]);
+          return !a || c >= a.length
+            ? ((this._t = void 0), e(1))
+            : "keys" == b
+              ? e(0, c)
+              : "values" == b
+                ? e(0, a[c])
+                : e(0, [c, a[c]]);
         },
         "values",
       )),
-      (f.Arguments = f.Array),
-      d("keys"),
+        (f.Arguments = f.Array),
+        d("keys"),
         d("values"),
         d("entries");
     },
-    function(a, b) {
-      a.exports = function() {};
+    function (a, b) {
+      a.exports = function () {};
     },
-    function(a, b) {
-      a.exports = function(a, b) {
+    function (a, b) {
+      a.exports = function (a, b) {
         return {
           value: b,
           done: !!a,
         };
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(56),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(51), c(45), (a.exports = c(57));
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(39),
         e = c(58);
-      a.exports = c(21).getIterator = function(a) {
+      a.exports = c(21).getIterator = function (a) {
         var b = e(a);
         if ("function" != typeof b) throw TypeError(a + " is not iterable!");
         return d(b.call(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(59),
         e = c(29)("iterator"),
         f = c(49);
-      a.exports = c(21).getIteratorMethod = function(a) {
+      a.exports = c(21).getIteratorMethod = function (a) {
         if (void 0 != a) return a[e] || a["@@iterator"] || f[d(a)];
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(34),
         e = c(29)("toStringTag"),
         f =
-        "Arguments" ==
-        d(
-          (function() {
-            return arguments;
-          })(),
-        );
-      a.exports = function(a) {
+          "Arguments" ==
+          d(
+            (function () {
+              return arguments;
+            })(),
+          );
+      a.exports = function (a) {
         var b, c, g;
-        return void 0 === a ?
-          "Undefined" :
-          null === a ?
-          "Null" :
-          "string" == typeof(c = (b = Object(a))[e]) ?
-          c :
-          f ?
-          d(b) :
-          "Object" == (g = d(b)) && "function" == typeof b.callee ?
-          "Arguments" :
-          g;
+        return void 0 === a
+          ? "Undefined"
+          : null === a
+            ? "Null"
+            : "string" == typeof (c = (b = Object(a))[e])
+              ? c
+              : f
+                ? d(b)
+                : "Object" == (g = d(b)) && "function" == typeof b.callee
+                  ? "Arguments"
+                  : g;
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(61),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(62), (a.exports = c(21).Object.keys);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(63);
-      c(64)("keys", function(a) {
-        return function(b) {
+      c(64)("keys", function (a) {
+        return function (b) {
           return a(d(b));
         };
       });
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(35);
-      a.exports = function(a) {
+      a.exports = function (a) {
         return Object(d(a));
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(20),
         e = c(21),
         f = c(19);
-      a.exports = function(a, b) {
+      a.exports = function (a, b) {
         var c = (e.Object || {})[a] || Object[a],
           g = {};
         (g[a] = b(c)),
-        d(
-          d.S +
-          d.F *
-          f(function() {
-            c(1);
-          }),
-          "Object",
-          g,
-        );
+          d(
+            d.S +
+              d.F *
+                f(function () {
+                  c(1);
+                }),
+            "Object",
+            g,
+          );
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(1)["default"];
       b.__esModule = !0;
       var e = c(6),
         f = d(e);
-      (b["default"] = function(a) {
-        a.registerHelper("helperMissing", function() {
+      (b["default"] = function (a) {
+        a.registerHelper("helperMissing", function () {
           if (1 !== arguments.length)
             throw new f["default"](
               'Missing helper: "' + arguments[arguments.length - 1].name + '"',
             );
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(1)["default"];
       b.__esModule = !0;
       var e = c(5),
         f = c(6),
         g = d(f);
-      (b["default"] = function(a) {
-        a.registerHelper("if", function(a, b) {
-            if (2 != arguments.length)
-              throw new g["default"]("#if requires exactly one argument");
-            return (
-              e.isFunction(a) && (a = a.call(this)),
-              (!b.hash.includeZero && !a) || e.isEmpty(a) ?
-              b.inverse(this) :
-              b.fn(this)
-            );
-          }),
-          a.registerHelper("unless", function(b, c) {
+      (b["default"] = function (a) {
+        a.registerHelper("if", function (a, b) {
+          if (2 != arguments.length)
+            throw new g["default"]("#if requires exactly one argument");
+          return (
+            e.isFunction(a) && (a = a.call(this)),
+            (!b.hash.includeZero && !a) || e.isEmpty(a)
+              ? b.inverse(this)
+              : b.fn(this)
+          );
+        }),
+          a.registerHelper("unless", function (b, c) {
             if (2 != arguments.length)
               throw new g["default"]("#unless requires exactly one argument");
             return a.helpers["if"].call(this, b, {
@@ -1361,46 +1363,48 @@ THE SOFTWARE.
             });
           });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       (b.__esModule = !0),
-      (b["default"] = function(a) {
-        a.registerHelper("log", function() {
-          for (
-            var b = [void 0], c = arguments[arguments.length - 1], d = 0; d < arguments.length - 1; d++
-          )
-            b.push(arguments[d]);
-          var e = 1;
-          null != c.hash.level ?
-            (e = c.hash.level) :
-            c.data && null != c.data.level && (e = c.data.level),
-            (b[0] = e),
-            a.log.apply(a, b);
-        });
-      }),
-      (a.exports = b["default"]);
+        (b["default"] = function (a) {
+          a.registerHelper("log", function () {
+            for (
+              var b = [void 0], c = arguments[arguments.length - 1], d = 0;
+              d < arguments.length - 1;
+              d++
+            )
+              b.push(arguments[d]);
+            var e = 1;
+            null != c.hash.level
+              ? (e = c.hash.level)
+              : c.data && null != c.data.level && (e = c.data.level),
+              (b[0] = e),
+              a.log.apply(a, b);
+          });
+        }),
+        (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       (b.__esModule = !0),
-      (b["default"] = function(a) {
-        a.registerHelper("lookup", function(a, b, c) {
-          return a ? c.lookupProperty(a, b) : a;
-        });
-      }),
-      (a.exports = b["default"]);
+        (b["default"] = function (a) {
+          a.registerHelper("lookup", function (a, b, c) {
+            return a ? c.lookupProperty(a, b) : a;
+          });
+        }),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       var d = c(1)["default"];
       b.__esModule = !0;
       var e = c(5),
         f = c(6),
         g = d(f);
-      (b["default"] = function(a) {
-        a.registerHelper("with", function(a, b) {
+      (b["default"] = function (a) {
+        a.registerHelper("with", function (a, b) {
           if (2 != arguments.length)
             throw new g["default"]("#with requires exactly one argument");
           e.isFunction(a) && (a = a.call(this));
@@ -1409,8 +1413,8 @@ THE SOFTWARE.
           var d = b.data;
           return (
             b.data &&
-            b.ids &&
-            ((d = e.createFrame(b.data)),
+              b.ids &&
+              ((d = e.createFrame(b.data)),
               (d.contextPath = e.appendContextPath(
                 b.data.contextPath,
                 b.ids[0],
@@ -1422,9 +1426,9 @@ THE SOFTWARE.
           );
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -1435,17 +1439,17 @@ THE SOFTWARE.
       var f = c(71),
         g = e(f);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       b.__esModule = !0;
       var d = c(5);
-      (b["default"] = function(a) {
-        a.registerDecorator("inline", function(a, b, c, e) {
+      (b["default"] = function (a) {
+        a.registerDecorator("inline", function (a, b, c, e) {
           var f = a;
           return (
             b.partials ||
-            ((b.partials = {}),
-              (f = function(e, f) {
+              ((b.partials = {}),
+              (f = function (e, f) {
                 var g = c.partials;
                 c.partials = d.extend({}, g, b.partials);
                 var h = a(e, f);
@@ -1456,31 +1460,33 @@ THE SOFTWARE.
           );
         });
       }),
-      (a.exports = b["default"]);
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
       b.__esModule = !0;
       var d = c(5),
         e = {
           methodMap: ["debug", "info", "warn", "error"],
           level: "info",
-          lookupLevel: function(a) {
+          lookupLevel: function (a) {
             if ("string" == typeof a) {
               var b = d.indexOf(e.methodMap, a.toLowerCase());
               a = b >= 0 ? b : parseInt(a, 10);
             }
             return a;
           },
-          log: function(a) {
+          log: function (a) {
             if (
               ((a = e.lookupLevel(a)),
-                "undefined" != typeof console && e.lookupLevel(e.level) <= a)
+              "undefined" != typeof console && e.lookupLevel(e.level) <= a)
             ) {
               var b = e.methodMap[a];
               console[b] || (b = "log");
               for (
-                var c = arguments.length, d = Array(c > 1 ? c - 1 : 0), f = 1; f < c; f++
+                var c = arguments.length, d = Array(c > 1 ? c - 1 : 0), f = 1;
+                f < c;
+                f++
               )
                 d[f - 1] = arguments[f];
               console[b].apply(console, d);
@@ -1489,18 +1495,19 @@ THE SOFTWARE.
         };
       (b["default"] = e), (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
         var b = i(null);
         (b.constructor = !1),
-        (b.__defineGetter__ = !1),
-        (b.__defineSetter__ = !1),
-        (b.__lookupGetter__ = !1);
+          (b.__defineGetter__ = !1),
+          (b.__defineSetter__ = !1),
+          (b.__lookupGetter__ = !1);
         var c = i(null);
         return (
-          (c.__proto__ = !1), {
+          (c.__proto__ = !1),
+          {
             properties: {
               whitelist: l.createNewLookupObject(c, a.allowedProtoProperties),
               defaultValue: a.allowProtoPropertiesByDefault,
@@ -1518,26 +1525,26 @@ THE SOFTWARE.
       }
 
       function f(a, b) {
-        return void 0 !== a.whitelist[b] ?
-          a.whitelist[b] === !0 :
-          void 0 !== a.defaultValue ?
-          a.defaultValue :
-          (g(b), !1);
+        return void 0 !== a.whitelist[b]
+          ? a.whitelist[b] === !0
+          : void 0 !== a.defaultValue
+            ? a.defaultValue
+            : (g(b), !1);
       }
 
       function g(a) {
         o[a] !== !0 &&
           ((o[a] = !0),
-            n["default"].log(
-              "error",
-              'Handlebars: Access has been denied to resolve the property "' +
+          n["default"].log(
+            "error",
+            'Handlebars: Access has been denied to resolve the property "' +
               a +
               '" because it is not an "own property" of its parent.\nYou can add a runtime option to disable the check or this warning:\nSee https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details',
-            ));
+          ));
       }
 
       function h() {
-        j(o).forEach(function(a) {
+        j(o).forEach(function (a) {
           delete o[a];
         });
       }
@@ -1545,27 +1552,27 @@ THE SOFTWARE.
         j = c(60)["default"],
         k = c(1)["default"];
       (b.__esModule = !0),
-      (b.createProtoAccessControl = d),
-      (b.resultIsAllowed = e),
-      (b.resetLoggedProperties = h);
+        (b.createProtoAccessControl = d),
+        (b.resultIsAllowed = e),
+        (b.resetLoggedProperties = h);
       var l = c(76),
         m = c(72),
         n = k(m),
         o = i(null);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(75),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(9);
-      a.exports = function(a, b) {
+      a.exports = function (a, b) {
         return d.create(a, b);
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -1577,21 +1584,21 @@ THE SOFTWARE.
       (b.__esModule = !0), (b.createNewLookupObject = d);
       var f = c(5);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
 
       function c(a) {
         this.string = a;
       }
       (b.__esModule = !0),
-      (c.prototype.toString = c.prototype.toHTML =
-        function() {
-          return "" + this.string;
-        }),
-      (b["default"] = c),
-      (a.exports = b["default"]);
+        (c.prototype.toString = c.prototype.toHTML =
+          function () {
+            return "" + this.string;
+          }),
+        (b["default"] = c),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -1607,16 +1614,16 @@ THE SOFTWARE.
               e = v.REVISION_CHANGES[b];
             throw new u["default"](
               "Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version (" +
-              d +
-              ") or downgrade your runtime to an older version (" +
-              e +
-              ").",
+                d +
+                ") or downgrade your runtime to an older version (" +
+                e +
+                ").",
             );
           }
           throw new u["default"](
             "Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version (" +
-            a[1] +
-            ").",
+              a[1] +
+              ").",
           );
         }
       }
@@ -1634,12 +1641,14 @@ THE SOFTWARE.
             (null == g &&
               b.compile &&
               ((e.partials[e.name] = b.compile(c, a.compilerOptions, b)),
-                (g = e.partials[e.name](d, f))),
-              null != g)
+              (g = e.partials[e.name](d, f))),
+            null != g)
           ) {
             if (e.indent) {
               for (
-                var h = g.split("\n"), i = 0, j = h.length; i < j && (h[i] || i + 1 !== j); i++
+                var h = g.split("\n"), i = 0, j = h.length;
+                i < j && (h[i] || i + 1 !== j);
+                i++
               )
                 h[i] = e.indent + h[i];
               g = h.join("\n");
@@ -1648,8 +1657,8 @@ THE SOFTWARE.
           }
           throw new u["default"](
             "The partial " +
-            e.name +
-            " could not be compiled when running in runtime-only mode",
+              e.name +
+              " could not be compiled when running in runtime-only mode",
           );
         }
 
@@ -1658,20 +1667,20 @@ THE SOFTWARE.
             return "" + a.main(g, b, g.helpers, g.partials, f, i, h);
           }
           var e =
-            arguments.length <= 1 || void 0 === arguments[1] ?
-            {} :
-            arguments[1],
+              arguments.length <= 1 || void 0 === arguments[1]
+                ? {}
+                : arguments[1],
             f = e.data;
           d._setup(e), !e.partial && a.useData && (f = j(b, f));
           var h = void 0,
             i = a.useBlockParams ? [] : void 0;
           return (
             a.useDepths &&
-            (h = e.depths ?
-              b != e.depths[0] ?
-              [b].concat(e.depths) :
-              e.depths :
-              [b]),
+              (h = e.depths
+                ? b != e.depths[0]
+                  ? [b].concat(e.depths)
+                  : e.depths
+                : [b]),
             (c = k(a.main, c, g, e.depths || [], f, i))(b, e)
           );
         }
@@ -1681,54 +1690,54 @@ THE SOFTWARE.
         (a.main.decorator = a.main_d), b.VM.checkRevision(a.compiler);
         var e = a.compiler && 7 === a.compiler[0],
           g = {
-            strict: function(a, b, c) {
+            strict: function (a, b, c) {
               if (!(a && b in a))
                 throw new u["default"]('"' + b + '" not defined in ' + a, {
                   loc: c,
                 });
               return g.lookupProperty(a, b);
             },
-            lookupProperty: function(a, b) {
+            lookupProperty: function (a, b) {
               var c = a[b];
-              return null == c ?
-                c :
-                Object.prototype.hasOwnProperty.call(a, b) ?
-                c :
-                y.resultIsAllowed(c, g.protoAccessControl, b) ?
-                c :
-                void 0;
+              return null == c
+                ? c
+                : Object.prototype.hasOwnProperty.call(a, b)
+                  ? c
+                  : y.resultIsAllowed(c, g.protoAccessControl, b)
+                    ? c
+                    : void 0;
             },
-            lookup: function(a, b) {
+            lookup: function (a, b) {
               for (var c = a.length, d = 0; d < c; d++) {
                 var e = a[d] && g.lookupProperty(a[d], b);
                 if (null != e) return a[d][b];
               }
             },
-            lambda: function(a, b) {
+            lambda: function (a, b) {
               return "function" == typeof a ? a.call(b) : a;
             },
             escapeExpression: s.escapeExpression,
             invokePartial: c,
-            fn: function(b) {
+            fn: function (b) {
               var c = a[b];
               return (c.decorator = a[b + "_d"]), c;
             },
             programs: [],
-            program: function(a, b, c, d, e) {
+            program: function (a, b, c, d, e) {
               var g = this.programs[a],
                 h = this.fn(a);
               return (
-                b || e || d || c ?
-                (g = f(this, a, h, b, c, d, e)) :
-                g || (g = this.programs[a] = f(this, a, h)),
+                b || e || d || c
+                  ? (g = f(this, a, h, b, c, d, e))
+                  : g || (g = this.programs[a] = f(this, a, h)),
                 g
               );
             },
-            data: function(a, b) {
-              for (; a && b--;) a = a._parent;
+            data: function (a, b) {
+              for (; a && b--; ) a = a._parent;
               return a;
             },
-            mergeIfNeeded: function(a, b) {
+            mergeIfNeeded: function (a, b) {
               var c = a || b;
               return a && b && a !== b && (c = s.extend({}, b, a)), c;
             },
@@ -1738,21 +1747,21 @@ THE SOFTWARE.
           };
         return (
           (d.isTop = !0),
-          (d._setup = function(c) {
+          (d._setup = function (c) {
             if (c.partial)
               (g.protoAccessControl = c.protoAccessControl),
-              (g.helpers = c.helpers),
-              (g.partials = c.partials),
-              (g.decorators = c.decorators),
-              (g.hooks = c.hooks);
+                (g.helpers = c.helpers),
+                (g.partials = c.partials),
+                (g.decorators = c.decorators),
+                (g.hooks = c.hooks);
             else {
               var d = s.extend({}, b.helpers, c.helpers);
               l(d, g),
                 (g.helpers = d),
                 a.usePartial &&
-                (g.partials = g.mergeIfNeeded(c.partials, b.partials)),
+                  (g.partials = g.mergeIfNeeded(c.partials, b.partials)),
                 (a.usePartial || a.useDecorators) &&
-                (g.decorators = s.extend({}, b.decorators, c.decorators)),
+                  (g.decorators = s.extend({}, b.decorators, c.decorators)),
                 (g.hooks = {}),
                 (g.protoAccessControl = y.createProtoAccessControl(c));
               var f = c.allowCallsToHelperMissing || e;
@@ -1760,7 +1769,7 @@ THE SOFTWARE.
                 w.moveHelperToHooks(g, "blockHelperMissing", f);
             }
           }),
-          (d._child = function(b, c, d, e) {
+          (d._child = function (b, c, d, e) {
             if (a.useBlockParams && !d)
               throw new u["default"]("must pass block params");
             if (a.useDepths && !e)
@@ -1774,15 +1783,15 @@ THE SOFTWARE.
       function f(a, b, c, d, e, f, g) {
         function h(b) {
           var e =
-            arguments.length <= 1 || void 0 === arguments[1] ?
-            {} :
-            arguments[1],
+              arguments.length <= 1 || void 0 === arguments[1]
+                ? {}
+                : arguments[1],
             h = g;
           return (
             !g ||
-            b == g[0] ||
-            (b === a.nullContext && null === g[0]) ||
-            (h = [b].concat(g)),
+              b == g[0] ||
+              (b === a.nullContext && null === g[0]) ||
+              (h = [b].concat(g)),
             c(
               a,
               b,
@@ -1805,12 +1814,12 @@ THE SOFTWARE.
 
       function g(a, b, c) {
         return (
-          a ?
-          a.call || c.name || ((c.name = a), (a = c.partials[a])) :
-          (a =
-            "@partial-block" === c.name ?
-            c.data["partial-block"] :
-            c.partials[c.name]),
+          a
+            ? a.call || c.name || ((c.name = a), (a = c.partials[a]))
+            : (a =
+                "@partial-block" === c.name
+                  ? c.data["partial-block"]
+                  : c.partials[c.name]),
           a
         );
       }
@@ -1818,31 +1827,31 @@ THE SOFTWARE.
       function h(a, b, c) {
         var d = c.data && c.data["partial-block"];
         (c.partial = !0),
-        c.ids && (c.data.contextPath = c.ids[0] || c.data.contextPath);
+          c.ids && (c.data.contextPath = c.ids[0] || c.data.contextPath);
         var e = void 0;
         if (
           (c.fn &&
             c.fn !== i &&
-            !(function() {
+            !(function () {
               c.data = v.createFrame(c.data);
               var a = c.fn;
               (e = c.data["partial-block"] =
-                function(b) {
+                function (b) {
                   var c =
-                    arguments.length <= 1 || void 0 === arguments[1] ?
-                    {} :
-                    arguments[1];
+                    arguments.length <= 1 || void 0 === arguments[1]
+                      ? {}
+                      : arguments[1];
                   return (
                     (c.data = v.createFrame(c.data)),
                     (c.data["partial-block"] = d),
                     a(b, c)
                   );
                 }),
-              a.partials &&
-                (c.partials = s.extend({}, c.partials, a.partials));
+                a.partials &&
+                  (c.partials = s.extend({}, c.partials, a.partials));
             })(),
-            void 0 === a && e && (a = e),
-            void 0 === a)
+          void 0 === a && e && (a = e),
+          void 0 === a)
         )
           throw new u["default"](
             "The partial " + c.name + " could not be found",
@@ -1870,7 +1879,7 @@ THE SOFTWARE.
       }
 
       function l(a, b) {
-        o(a).forEach(function(c) {
+        o(a).forEach(function (c) {
           var d = a[c];
           a[c] = m(d, b);
         });
@@ -1878,8 +1887,9 @@ THE SOFTWARE.
 
       function m(a, b) {
         var c = b.lookupProperty;
-        return x.wrapHelper(a, function(a) {
-          return s.extend({
+        return x.wrapHelper(a, function (a) {
+          return s.extend(
+            {
               lookupProperty: c,
             },
             a,
@@ -1891,12 +1901,12 @@ THE SOFTWARE.
         p = c(3)["default"],
         q = c(1)["default"];
       (b.__esModule = !0),
-      (b.checkRevision = d),
-      (b.template = e),
-      (b.wrapProgram = f),
-      (b.resolvePartial = g),
-      (b.invokePartial = h),
-      (b.noop = i);
+        (b.checkRevision = d),
+        (b.template = e),
+        (b.wrapProgram = f),
+        (b.resolvePartial = g),
+        (b.invokePartial = h),
+        (b.noop = i);
       var r = c(5),
         s = p(r),
         t = c(6),
@@ -1906,29 +1916,29 @@ THE SOFTWARE.
         x = c(82),
         y = c(73);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       a.exports = {
         default: c(80),
         __esModule: !0,
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       c(81), (a.exports = c(21).Object.seal);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       var d = c(40);
-      c(64)("seal", function(a) {
-        return function(b) {
+      c(64)("seal", function (a) {
+        return function (b) {
           return a && d(b) ? a(b) : b;
         };
       });
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
 
       function c(a, b) {
         if ("function" != typeof a) return a;
-        var c = function() {
+        var c = function () {
           var c = arguments[arguments.length - 1];
           return (
             (arguments[arguments.length - 1] = b(c)), a.apply(this, arguments)
@@ -1938,59 +1948,59 @@ THE SOFTWARE.
       }
       (b.__esModule = !0), (b.wrapHelper = c);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       (b.__esModule = !0),
-      (b["default"] = function(a) {
-        !(function() {
-          "object" != typeof globalThis &&
-            (Object.prototype.__defineGetter__("__magic__", function() {
+        (b["default"] = function (a) {
+          !(function () {
+            "object" != typeof globalThis &&
+              (Object.prototype.__defineGetter__("__magic__", function () {
                 return this;
               }),
               (__magic__.globalThis = __magic__),
               delete Object.prototype.__magic__);
-        })();
-        var b = globalThis.Handlebars;
-        a.noConflict = function() {
-          return (
-            globalThis.Handlebars === a && (globalThis.Handlebars = b), a
-          );
-        };
-      }),
-      (a.exports = b["default"]);
+          })();
+          var b = globalThis.Handlebars;
+          a.noConflict = function () {
+            return (
+              globalThis.Handlebars === a && (globalThis.Handlebars = b), a
+            );
+          };
+        }),
+        (a.exports = b["default"]);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       b.__esModule = !0;
       var c = {
         helpers: {
-          helperExpression: function(a) {
+          helperExpression: function (a) {
             return (
               "SubExpression" === a.type ||
               (("MustacheStatement" === a.type ||
-                  "BlockStatement" === a.type) &&
+                "BlockStatement" === a.type) &&
                 !!((a.params && a.params.length) || a.hash))
             );
           },
-          scopedId: function(a) {
+          scopedId: function (a) {
             return /^\.|this\b/.test(a.original);
           },
-          simpleId: function(a) {
+          simpleId: function (a) {
             return 1 === a.parts.length && !c.helpers.scopedId(a) && !a.depth;
           },
         },
       };
       (b["default"] = c), (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b) {
         if ("Program" === a.type) return a;
         (i["default"].yy = o),
-        (o.locInfo = function(a) {
-          return new o.SourceLocation(b && b.srcName, a);
-        });
+          (o.locInfo = function (a) {
+            return new o.SourceLocation(b && b.srcName, a);
+          });
         var c = i["default"].parse(a);
         return c;
       }
@@ -2014,15 +2024,15 @@ THE SOFTWARE.
       var o = {};
       n.extend(o, m);
     },
-    function(a, b) {
+    function (a, b) {
       "use strict";
       b.__esModule = !0;
-      var c = (function() {
+      var c = (function () {
         function a() {
           this.yy = {};
         }
         var b = {
-            trace: function() {},
+            trace: function () {},
             yy: {},
             symbols_: {
               error: 2,
@@ -2251,7 +2261,7 @@ THE SOFTWARE.
               [76, 1],
               [76, 2],
             ],
-            performAction: function(a, b, c, d, e, f, g) {
+            performAction: function (a, b, c, d, e, f, g) {
               var h = f.length - 1;
               switch (e) {
                 case 1:
@@ -2368,11 +2378,11 @@ THE SOFTWARE.
                     ),
                     j = d.prepareProgram([i], f[h - 1].loc);
                   (j.chained = !0),
-                  (this.$ = {
-                    strip: f[h - 2].strip,
-                    program: j,
-                    chain: !0,
-                  });
+                    (this.$ = {
+                      strip: f[h - 2].strip,
+                      program: j,
+                      chain: !0,
+                    });
                   break;
                 case 20:
                   this.$ = f[h];
@@ -2523,17 +2533,19 @@ THE SOFTWARE.
                   break;
                 case 44:
                   f[h - 2].push({
-                      part: d.id(f[h]),
-                      original: f[h],
-                      separator: f[h - 1],
-                    }),
+                    part: d.id(f[h]),
+                    original: f[h],
+                    separator: f[h - 1],
+                  }),
                     (this.$ = f[h - 2]);
                   break;
                 case 45:
-                  this.$ = [{
-                    part: d.id(f[h]),
-                    original: f[h],
-                  }, ];
+                  this.$ = [
+                    {
+                      part: d.id(f[h]),
+                      original: f[h],
+                    },
+                  ];
                   break;
                 case 46:
                   this.$ = [];
@@ -2614,7 +2626,8 @@ THE SOFTWARE.
                   f[h - 1].push(f[h]);
               }
             },
-            table: [{
+            table: [
+              {
                 3: 1,
                 4: 2,
                 5: [2, 46],
@@ -4099,10 +4112,10 @@ THE SOFTWARE.
               135: [2, 75],
               136: [2, 32],
             },
-            parseError: function(a, b) {
+            parseError: function (a, b) {
               throw new Error(a);
             },
-            parse: function(a) {
+            parse: function (a) {
               function b() {
                 var a;
                 return (
@@ -4125,59 +4138,59 @@ THE SOFTWARE.
                 (this.yy.lexer = this.lexer),
                 (this.yy.parser = this),
                 "undefined" == typeof this.lexer.yylloc &&
-                (this.lexer.yylloc = {});
+                  (this.lexer.yylloc = {});
               var l = this.lexer.yylloc;
               f.push(l);
               var m = this.lexer.options && this.lexer.options.ranges;
               "function" == typeof this.yy.parseError &&
                 (this.parseError = this.yy.parseError);
-              for (var n, o, p, q, r, s, t, u, v, w = {};;) {
+              for (var n, o, p, q, r, s, t, u, v, w = {}; ; ) {
                 if (
                   ((p = d[d.length - 1]),
-                    this.defaultActions[p] ?
-                    (q = this.defaultActions[p]) :
-                    ((null !== n && "undefined" != typeof n) || (n = b()),
+                  this.defaultActions[p]
+                    ? (q = this.defaultActions[p])
+                    : ((null !== n && "undefined" != typeof n) || (n = b()),
                       (q = g[p] && g[p][n])),
-                    "undefined" == typeof q || !q.length || !q[0])
+                  "undefined" == typeof q || !q.length || !q[0])
                 ) {
                   var x = "";
                   if (!k) {
                     v = [];
                     for (s in g[p])
                       this.terminals_[s] &&
-                      s > 2 &&
-                      v.push("'" + this.terminals_[s] + "'");
-                    (x = this.lexer.showPosition ?
-                      "Parse error on line " +
-                      (i + 1) +
-                      ":\n" +
-                      this.lexer.showPosition() +
-                      "\nExpecting " +
-                      v.join(", ") +
-                      ", got '" +
-                      (this.terminals_[n] || n) +
-                      "'" :
-                      "Parse error on line " +
-                      (i + 1) +
-                      ": Unexpected " +
-                      (1 == n ?
-                        "end of input" :
-                        "'" + (this.terminals_[n] || n) + "'")),
-                    this.parseError(x, {
-                      text: this.lexer.match,
-                      token: this.terminals_[n] || n,
-                      line: this.lexer.yylineno,
-                      loc: l,
-                      expected: v,
-                    });
+                        s > 2 &&
+                        v.push("'" + this.terminals_[s] + "'");
+                    (x = this.lexer.showPosition
+                      ? "Parse error on line " +
+                        (i + 1) +
+                        ":\n" +
+                        this.lexer.showPosition() +
+                        "\nExpecting " +
+                        v.join(", ") +
+                        ", got '" +
+                        (this.terminals_[n] || n) +
+                        "'"
+                      : "Parse error on line " +
+                        (i + 1) +
+                        ": Unexpected " +
+                        (1 == n
+                          ? "end of input"
+                          : "'" + (this.terminals_[n] || n) + "'")),
+                      this.parseError(x, {
+                        text: this.lexer.match,
+                        token: this.terminals_[n] || n,
+                        line: this.lexer.yylineno,
+                        loc: l,
+                        expected: v,
+                      });
                   }
                 }
                 if (q[0] instanceof Array && q.length > 1)
                   throw new Error(
                     "Parse Error: multiple actions possible at state: " +
-                    p +
-                    ", token: " +
-                    n,
+                      p +
+                      ", token: " +
+                      n,
                   );
                 switch (q[0]) {
                   case 1:
@@ -4186,46 +4199,46 @@ THE SOFTWARE.
                       f.push(this.lexer.yylloc),
                       d.push(q[1]),
                       (n = null),
-                      o ?
-                      ((n = o), (o = null)) :
-                      ((j = this.lexer.yyleng),
-                        (h = this.lexer.yytext),
-                        (i = this.lexer.yylineno),
-                        (l = this.lexer.yylloc),
-                        k > 0 && k--);
+                      o
+                        ? ((n = o), (o = null))
+                        : ((j = this.lexer.yyleng),
+                          (h = this.lexer.yytext),
+                          (i = this.lexer.yylineno),
+                          (l = this.lexer.yylloc),
+                          k > 0 && k--);
                     break;
                   case 2:
                     if (
                       ((t = this.productions_[q[1]][1]),
-                        (w.$ = e[e.length - t]),
-                        (w._$ = {
-                          first_line: f[f.length - (t || 1)].first_line,
-                          last_line: f[f.length - 1].last_line,
-                          first_column: f[f.length - (t || 1)].first_column,
-                          last_column: f[f.length - 1].last_column,
-                        }),
-                        m &&
+                      (w.$ = e[e.length - t]),
+                      (w._$ = {
+                        first_line: f[f.length - (t || 1)].first_line,
+                        last_line: f[f.length - 1].last_line,
+                        first_column: f[f.length - (t || 1)].first_column,
+                        last_column: f[f.length - 1].last_column,
+                      }),
+                      m &&
                         (w._$.range = [
                           f[f.length - (t || 1)].range[0],
                           f[f.length - 1].range[1],
                         ]),
-                        (r = this.performAction.call(
-                          w,
-                          h,
-                          j,
-                          i,
-                          this.yy,
-                          q[1],
-                          e,
-                          f,
-                        )),
-                        "undefined" != typeof r)
+                      (r = this.performAction.call(
+                        w,
+                        h,
+                        j,
+                        i,
+                        this.yy,
+                        q[1],
+                        e,
+                        f,
+                      )),
+                      "undefined" != typeof r)
                     )
                       return r;
                     t &&
                       ((d = d.slice(0, -1 * t * 2)),
-                        (e = e.slice(0, -1 * t)),
-                        (f = f.slice(0, -1 * t))),
+                      (e = e.slice(0, -1 * t)),
+                      (f = f.slice(0, -1 * t))),
                       d.push(this.productions_[q[1]][0]),
                       e.push(w.$),
                       f.push(w._$),
@@ -4239,14 +4252,14 @@ THE SOFTWARE.
               return !0;
             },
           },
-          c = (function() {
+          c = (function () {
             var a = {
               EOF: 1,
-              parseError: function(a, b) {
+              parseError: function (a, b) {
                 if (!this.yy.parser) throw new Error(a);
                 this.yy.parser.parseError(a, b);
               },
-              setInput: function(a) {
+              setInput: function (a) {
                 return (
                   (this._input = a),
                   (this._more = this._less = this.done = !1),
@@ -4264,63 +4277,63 @@ THE SOFTWARE.
                   this
                 );
               },
-              input: function() {
+              input: function () {
                 var a = this._input[0];
                 (this.yytext += a),
-                this.yyleng++,
+                  this.yyleng++,
                   this.offset++,
                   (this.match += a),
                   (this.matched += a);
                 var b = a.match(/(?:\r\n?|\n).*/g);
                 return (
-                  b ?
-                  (this.yylineno++, this.yylloc.last_line++) :
-                  this.yylloc.last_column++,
+                  b
+                    ? (this.yylineno++, this.yylloc.last_line++)
+                    : this.yylloc.last_column++,
                   this.options.ranges && this.yylloc.range[1]++,
                   (this._input = this._input.slice(1)),
                   a
                 );
               },
-              unput: function(a) {
+              unput: function (a) {
                 var b = a.length,
                   c = a.split(/(?:\r\n?|\n)/g);
                 (this._input = a + this._input),
-                (this.yytext = this.yytext.substr(
-                  0,
-                  this.yytext.length - b - 1,
-                )),
-                (this.offset -= b);
+                  (this.yytext = this.yytext.substr(
+                    0,
+                    this.yytext.length - b - 1,
+                  )),
+                  (this.offset -= b);
                 var d = this.match.split(/(?:\r\n?|\n)/g);
                 (this.match = this.match.substr(0, this.match.length - 1)),
-                (this.matched = this.matched.substr(
-                  0,
-                  this.matched.length - 1,
-                )),
-                c.length - 1 && (this.yylineno -= c.length - 1);
+                  (this.matched = this.matched.substr(
+                    0,
+                    this.matched.length - 1,
+                  )),
+                  c.length - 1 && (this.yylineno -= c.length - 1);
                 var e = this.yylloc.range;
                 return (
                   (this.yylloc = {
                     first_line: this.yylloc.first_line,
                     last_line: this.yylineno + 1,
                     first_column: this.yylloc.first_column,
-                    last_column: c ?
-                      (c.length === d.length ? this.yylloc.first_column : 0) +
-                      d[d.length - c.length].length -
-                      c[0].length :
-                      this.yylloc.first_column - b,
+                    last_column: c
+                      ? (c.length === d.length ? this.yylloc.first_column : 0) +
+                        d[d.length - c.length].length -
+                        c[0].length
+                      : this.yylloc.first_column - b,
                   }),
                   this.options.ranges &&
-                  (this.yylloc.range = [e[0], e[0] + this.yyleng - b]),
+                    (this.yylloc.range = [e[0], e[0] + this.yyleng - b]),
                   this
                 );
               },
-              more: function() {
+              more: function () {
                 return (this._more = !0), this;
               },
-              less: function(a) {
+              less: function (a) {
                 this.unput(this.match.slice(a));
               },
-              pastInput: function() {
+              pastInput: function () {
                 var a = this.matched.substr(
                   0,
                   this.matched.length - this.match.length,
@@ -4330,7 +4343,7 @@ THE SOFTWARE.
                   a.substr(-20).replace(/\n/g, "")
                 );
               },
-              upcomingInput: function() {
+              upcomingInput: function () {
                 var a = this.match;
                 return (
                   a.length < 20 && (a += this._input.substr(0, 20 - a.length)),
@@ -4340,44 +4353,46 @@ THE SOFTWARE.
                   )
                 );
               },
-              showPosition: function() {
+              showPosition: function () {
                 var a = this.pastInput(),
                   b = new Array(a.length + 1).join("-");
                 return a + this.upcomingInput() + "\n" + b + "^";
               },
-              next: function() {
+              next: function () {
                 if (this.done) return this.EOF;
                 this._input || (this.done = !0);
                 var a, b, c, d, e;
                 this._more || ((this.yytext = ""), (this.match = ""));
                 for (
-                  var f = this._currentRules(), g = 0; g < f.length &&
+                  var f = this._currentRules(), g = 0;
+                  g < f.length &&
                   ((c = this._input.match(this.rules[f[g]])),
-                    !c ||
+                  !c ||
                     (b && !(c[0].length > b[0].length)) ||
-                    ((b = c), (d = g), this.options.flex)); g++
+                    ((b = c), (d = g), this.options.flex));
+                  g++
                 );
-                return b ?
-                  ((e = b[0].match(/(?:\r\n?|\n).*/g)),
+                return b
+                  ? ((e = b[0].match(/(?:\r\n?|\n).*/g)),
                     e && (this.yylineno += e.length),
                     (this.yylloc = {
                       first_line: this.yylloc.last_line,
                       last_line: this.yylineno + 1,
                       first_column: this.yylloc.last_column,
-                      last_column: e ?
-                        e[e.length - 1].length -
-                        e[e.length - 1].match(/\r?\n?/)[0].length :
-                        this.yylloc.last_column + b[0].length,
+                      last_column: e
+                        ? e[e.length - 1].length -
+                          e[e.length - 1].match(/\r?\n?/)[0].length
+                        : this.yylloc.last_column + b[0].length,
                     }),
                     (this.yytext += b[0]),
                     (this.match += b[0]),
                     (this.matches = b),
                     (this.yyleng = this.yytext.length),
                     this.options.ranges &&
-                    (this.yylloc.range = [
-                      this.offset,
-                      (this.offset += this.yyleng),
-                    ]),
+                      (this.yylloc.range = [
+                        this.offset,
+                        (this.offset += this.yyleng),
+                      ]),
                     (this._more = !1),
                     (this._input = this._input.slice(b[0].length)),
                     (this.matched += b[0]),
@@ -4389,57 +4404,58 @@ THE SOFTWARE.
                       this.conditionStack[this.conditionStack.length - 1],
                     )),
                     this.done && this._input && (this.done = !1),
-                    a ? a : void 0) :
-                  "" === this._input ?
-                  this.EOF :
-                  this.parseError(
-                    "Lexical error on line " +
-                    (this.yylineno + 1) +
-                    ". Unrecognized text.\n" +
-                    this.showPosition(), {
-                      text: "",
-                      token: null,
-                      line: this.yylineno,
-                    },
-                  );
+                    a ? a : void 0)
+                  : "" === this._input
+                    ? this.EOF
+                    : this.parseError(
+                        "Lexical error on line " +
+                          (this.yylineno + 1) +
+                          ". Unrecognized text.\n" +
+                          this.showPosition(),
+                        {
+                          text: "",
+                          token: null,
+                          line: this.yylineno,
+                        },
+                      );
               },
-              lex: function() {
+              lex: function () {
                 var a = this.next();
                 return "undefined" != typeof a ? a : this.lex();
               },
-              begin: function(a) {
+              begin: function (a) {
                 this.conditionStack.push(a);
               },
-              popState: function() {
+              popState: function () {
                 return this.conditionStack.pop();
               },
-              _currentRules: function() {
+              _currentRules: function () {
                 return this.conditions[
                   this.conditionStack[this.conditionStack.length - 1]
                 ].rules;
               },
-              topState: function() {
+              topState: function () {
                 return this.conditionStack[this.conditionStack.length - 2];
               },
-              pushState: function(a) {
+              pushState: function (a) {
                 this.begin(a);
               },
             };
             return (
               (a.options = {}),
-              (a.performAction = function(a, b, c, d) {
+              (a.performAction = function (a, b, c, d) {
                 function e(a, c) {
                   return (b.yytext = b.yytext.substring(a, b.yyleng - c + a));
                 }
                 switch (c) {
                   case 0:
                     if (
-                      ("\\\\" === b.yytext.slice(-2) ?
-                        (e(0, 1), this.begin("mu")) :
-                        "\\" === b.yytext.slice(-1) ?
-                        (e(0, 1), this.begin("emu")) :
-                        this.begin("mu"),
-                        b.yytext)
+                      ("\\\\" === b.yytext.slice(-2)
+                        ? (e(0, 1), this.begin("mu"))
+                        : "\\" === b.yytext.slice(-1)
+                          ? (e(0, 1), this.begin("emu"))
+                          : this.begin("mu"),
+                      b.yytext)
                     )
                       return 15;
                     break;
@@ -4453,9 +4469,9 @@ THE SOFTWARE.
                     return (
                       this.popState(),
                       "raw" ===
-                      this.conditionStack[this.conditionStack.length - 1] ?
-                      15 :
-                      (e(5, 9), "END_RAW_BLOCK")
+                      this.conditionStack[this.conditionStack.length - 1]
+                        ? 15
+                        : (e(5, 9), "END_RAW_BLOCK")
                     );
                   case 5:
                     return 15;
@@ -4622,7 +4638,7 @@ THE SOFTWARE.
       })();
       (b["default"] = c), (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -4635,22 +4651,22 @@ THE SOFTWARE.
         void 0 === b && (b = a.length);
         var d = a[b - 1],
           e = a[b - 2];
-        return d ?
-          "ContentStatement" === d.type ?
-          (e || !c ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(d.original) :
-          void 0 :
-          c;
+        return d
+          ? "ContentStatement" === d.type
+            ? (e || !c ? /\r?\n\s*?$/ : /(^|\r?\n)\s*?$/).test(d.original)
+            : void 0
+          : c;
       }
 
       function f(a, b, c) {
         void 0 === b && (b = -1);
         var d = a[b + 1],
           e = a[b + 2];
-        return d ?
-          "ContentStatement" === d.type ?
-          (e || !c ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(d.original) :
-          void 0 :
-          c;
+        return d
+          ? "ContentStatement" === d.type
+            ? (e || !c ? /^\s*?\r?\n/ : /^\s*?(\r?\n|$)/).test(d.original)
+            : void 0
+          : c;
       }
 
       function g(a, b, c) {
@@ -4658,7 +4674,7 @@ THE SOFTWARE.
         if (d && "ContentStatement" === d.type && (c || !d.rightStripped)) {
           var e = d.value;
           (d.value = d.value.replace(c ? /^\s+/ : /^[ \t]*\r?\n?/, "")),
-          (d.rightStripped = d.value !== e);
+            (d.rightStripped = d.value !== e);
         }
       }
 
@@ -4678,80 +4694,80 @@ THE SOFTWARE.
       var j = c(88),
         k = i(j);
       (d.prototype = new k["default"]()),
-      (d.prototype.Program = function(a) {
-        var b = !this.options.ignoreStandalone,
-          c = !this.isRootSeen;
-        this.isRootSeen = !0;
-        for (var d = a.body, i = 0, j = d.length; i < j; i++) {
-          var k = d[i],
-            l = this.accept(k);
-          if (l) {
-            var m = e(d, i, c),
-              n = f(d, i, c),
-              o = l.openStandalone && m,
-              p = l.closeStandalone && n,
-              q = l.inlineStandalone && m && n;
-            l.close && g(d, i, !0),
-              l.open && h(d, i, !0),
-              b &&
-              q &&
-              (g(d, i),
-                h(d, i) &&
-                "PartialStatement" === k.type &&
-                (k.indent = /([ \t]+$)/.exec(d[i - 1].original)[1])),
-              b && o && (g((k.program || k.inverse).body), h(d, i)),
-              b && p && (g(d, i), h((k.inverse || k.program).body));
+        (d.prototype.Program = function (a) {
+          var b = !this.options.ignoreStandalone,
+            c = !this.isRootSeen;
+          this.isRootSeen = !0;
+          for (var d = a.body, i = 0, j = d.length; i < j; i++) {
+            var k = d[i],
+              l = this.accept(k);
+            if (l) {
+              var m = e(d, i, c),
+                n = f(d, i, c),
+                o = l.openStandalone && m,
+                p = l.closeStandalone && n,
+                q = l.inlineStandalone && m && n;
+              l.close && g(d, i, !0),
+                l.open && h(d, i, !0),
+                b &&
+                  q &&
+                  (g(d, i),
+                  h(d, i) &&
+                    "PartialStatement" === k.type &&
+                    (k.indent = /([ \t]+$)/.exec(d[i - 1].original)[1])),
+                b && o && (g((k.program || k.inverse).body), h(d, i)),
+                b && p && (g(d, i), h((k.inverse || k.program).body));
+            }
           }
-        }
-        return a;
-      }),
-      (d.prototype.BlockStatement =
-        d.prototype.DecoratorBlock =
-        d.prototype.PartialBlockStatement =
-        function(a) {
-          this.accept(a.program), this.accept(a.inverse);
-          var b = a.program || a.inverse,
-            c = a.program && a.inverse,
-            d = c,
-            i = c;
-          if (c && c.chained)
-            for (d = c.body[0].program; i.chained;)
-              i = i.body[i.body.length - 1].program;
-          var j = {
-            open: a.openStrip.open,
-            close: a.closeStrip.close,
-            openStandalone: f(b.body),
-            closeStandalone: e((d || b).body),
-          };
-          if ((a.openStrip.close && g(b.body, null, !0), c)) {
-            var k = a.inverseStrip;
-            k.open && h(b.body, null, !0),
-              k.close && g(d.body, null, !0),
-              a.closeStrip.open && h(i.body, null, !0),
-              !this.options.ignoreStandalone &&
-              e(b.body) &&
-              f(d.body) &&
-              (h(b.body), g(d.body));
-          } else a.closeStrip.open && h(b.body, null, !0);
-          return j;
+          return a;
         }),
-      (d.prototype.Decorator = d.prototype.MustacheStatement =
-        function(a) {
-          return a.strip;
-        }),
-      (d.prototype.PartialStatement = d.prototype.CommentStatement =
-        function(a) {
-          var b = a.strip || {};
-          return {
-            inlineStandalone: !0,
-            open: b.open,
-            close: b.close,
-          };
-        }),
-      (b["default"] = d),
-      (a.exports = b["default"]);
+        (d.prototype.BlockStatement =
+          d.prototype.DecoratorBlock =
+          d.prototype.PartialBlockStatement =
+            function (a) {
+              this.accept(a.program), this.accept(a.inverse);
+              var b = a.program || a.inverse,
+                c = a.program && a.inverse,
+                d = c,
+                i = c;
+              if (c && c.chained)
+                for (d = c.body[0].program; i.chained; )
+                  i = i.body[i.body.length - 1].program;
+              var j = {
+                open: a.openStrip.open,
+                close: a.closeStrip.close,
+                openStandalone: f(b.body),
+                closeStandalone: e((d || b).body),
+              };
+              if ((a.openStrip.close && g(b.body, null, !0), c)) {
+                var k = a.inverseStrip;
+                k.open && h(b.body, null, !0),
+                  k.close && g(d.body, null, !0),
+                  a.closeStrip.open && h(i.body, null, !0),
+                  !this.options.ignoreStandalone &&
+                    e(b.body) &&
+                    f(d.body) &&
+                    (h(b.body), g(d.body));
+              } else a.closeStrip.open && h(b.body, null, !0);
+              return j;
+            }),
+        (d.prototype.Decorator = d.prototype.MustacheStatement =
+          function (a) {
+            return a.strip;
+          }),
+        (d.prototype.PartialStatement = d.prototype.CommentStatement =
+          function (a) {
+            var b = a.strip || {};
+            return {
+              inlineStandalone: !0,
+              open: b.open,
+              close: b.close,
+            };
+          }),
+        (b["default"] = d),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {
@@ -4782,30 +4798,30 @@ THE SOFTWARE.
       (d.prototype = {
         constructor: d,
         mutating: !1,
-        acceptKey: function(a, b) {
+        acceptKey: function (a, b) {
           var c = this.accept(a[b]);
           if (this.mutating) {
             if (c && !d.prototype[c.type])
               throw new j["default"](
                 'Unexpected node type "' +
-                c.type +
-                '" found when accepting ' +
-                b +
-                " on " +
-                a.type,
+                  c.type +
+                  '" found when accepting ' +
+                  b +
+                  " on " +
+                  a.type,
               );
             a[b] = c;
           }
         },
-        acceptRequired: function(a, b) {
+        acceptRequired: function (a, b) {
           if ((this.acceptKey(a, b), !a[b]))
             throw new j["default"](a.type + " requires " + b);
         },
-        acceptArray: function(a) {
+        acceptArray: function (a) {
           for (var b = 0, c = a.length; b < c; b++)
             this.acceptKey(a, b), a[b] || (a.splice(b, 1), b--, c--);
         },
-        accept: function(a) {
+        accept: function (a) {
           if (a) {
             if (!this[a.type])
               throw new j["default"]("Unknown type: " + a.type, a);
@@ -4818,7 +4834,7 @@ THE SOFTWARE.
             );
           }
         },
-        Program: function(a) {
+        Program: function (a) {
           this.acceptArray(a.body);
         },
         MustacheStatement: e,
@@ -4826,29 +4842,29 @@ THE SOFTWARE.
         BlockStatement: f,
         DecoratorBlock: f,
         PartialStatement: g,
-        PartialBlockStatement: function(a) {
+        PartialBlockStatement: function (a) {
           g.call(this, a), this.acceptKey(a, "program");
         },
-        ContentStatement: function() {},
-        CommentStatement: function() {},
+        ContentStatement: function () {},
+        CommentStatement: function () {},
         SubExpression: e,
-        PathExpression: function() {},
-        StringLiteral: function() {},
-        NumberLiteral: function() {},
-        BooleanLiteral: function() {},
-        UndefinedLiteral: function() {},
-        NullLiteral: function() {},
-        Hash: function(a) {
+        PathExpression: function () {},
+        StringLiteral: function () {},
+        NumberLiteral: function () {},
+        BooleanLiteral: function () {},
+        UndefinedLiteral: function () {},
+        NullLiteral: function () {},
+        Hash: function (a) {
           this.acceptArray(a.pairs);
         },
-        HashPair: function(a) {
+        HashPair: function (a) {
           this.acceptRequired(a, "value");
         },
       }),
-      (b["default"] = d),
-      (a.exports = b["default"]);
+        (b["default"] = d),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b) {
@@ -4862,14 +4878,14 @@ THE SOFTWARE.
 
       function e(a, b) {
         (this.source = a),
-        (this.start = {
-          line: b.first_line,
-          column: b.first_column,
-        }),
-        (this.end = {
-          line: b.last_line,
-          column: b.last_column,
-        });
+          (this.start = {
+            line: b.first_line,
+            column: b.first_column,
+          }),
+          (this.end = {
+            line: b.last_line,
+            column: b.last_column,
+          });
       }
 
       function f(a) {
@@ -4890,13 +4906,15 @@ THE SOFTWARE.
       function i(a, b, c) {
         c = this.locInfo(c);
         for (
-          var d = a ? "@" : "", e = [], f = 0, g = 0, h = b.length; g < h; g++
+          var d = a ? "@" : "", e = [], f = 0, g = 0, h = b.length;
+          g < h;
+          g++
         ) {
           var i = b[g].part,
             j = b[g].original !== i;
           if (
             ((d += (b[g].separator || "") + i),
-              j || (".." !== i && "." !== i && "this" !== i))
+            j || (".." !== i && "." !== i && "this" !== i))
           )
             e.push(i);
           else {
@@ -4967,7 +4985,8 @@ THE SOFTWARE.
             (i = c.program);
         }
         return (
-          f && ((f = i), (i = b), (b = f)), {
+          f && ((f = i), (i = b), (b = f)),
+          {
             type: h ? "DecoratorBlock" : "BlockStatement",
             path: a.path,
             params: a.params,
@@ -5010,7 +5029,8 @@ THE SOFTWARE.
 
       function n(a, b, c, e) {
         return (
-          d(a, c), {
+          d(a, c),
+          {
             type: "PartialBlockStatement",
             name: a.path,
             params: a.params,
@@ -5024,20 +5044,20 @@ THE SOFTWARE.
       }
       var o = c(1)["default"];
       (b.__esModule = !0),
-      (b.SourceLocation = e),
-      (b.id = f),
-      (b.stripFlags = g),
-      (b.stripComment = h),
-      (b.preparePath = i),
-      (b.prepareMustache = j),
-      (b.prepareRawBlock = k),
-      (b.prepareBlock = l),
-      (b.prepareProgram = m),
-      (b.preparePartialBlock = n);
+        (b.SourceLocation = e),
+        (b.id = f),
+        (b.stripFlags = g),
+        (b.stripComment = h),
+        (b.preparePath = i),
+        (b.prepareMustache = j),
+        (b.prepareRawBlock = k),
+        (b.prepareBlock = l),
+        (b.prepareProgram = m),
+        (b.preparePartialBlock = n);
       var p = c(6),
         q = o(p);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d() {}
@@ -5046,10 +5066,10 @@ THE SOFTWARE.
         if (null == a || ("string" != typeof a && "Program" !== a.type))
           throw new l["default"](
             "You must pass a string or Handlebars AST to Handlebars.precompile. You passed " +
-            a,
+              a,
           );
         (b = b || {}),
-        "data" in b || (b.data = !0),
+          "data" in b || (b.data = !0),
           b.compat && (b.useDepths = !0);
         var d = c.parse(a, b),
           e = new c.Compiler().compile(d, b);
@@ -5069,21 +5089,21 @@ THE SOFTWARE.
         }
         if (
           (void 0 === b && (b = {}),
-            null == a || ("string" != typeof a && "Program" !== a.type))
+          null == a || ("string" != typeof a && "Program" !== a.type))
         )
           throw new l["default"](
             "You must pass a string or Handlebars AST to Handlebars.compile. You passed " +
-            a,
+              a,
           );
         (b = m.extend({}, b)),
-        "data" in b || (b.data = !0),
+          "data" in b || (b.data = !0),
           b.compat && (b.useDepths = !0);
         var f = void 0;
         return (
-          (e._setup = function(a) {
+          (e._setup = function (a) {
             return f || (f = d()), f._setup(a);
           }),
-          (e._child = function(a, b, c, e) {
+          (e._child = function (a, b, c, e) {
             return f || (f = d()), f._child(a, b, c, e);
           }),
           e
@@ -5093,8 +5113,7 @@ THE SOFTWARE.
       function g(a, b) {
         if (a === b) return !0;
         if (m.isArray(a) && m.isArray(b) && a.length === b.length) {
-          for (var c = 0; c < a.length; c++)
-            if (!g(a[c], b[c])) return !1;
+          for (var c = 0; c < a.length; c++) if (!g(a[c], b[c])) return !1;
           return !0;
         }
       }
@@ -5115,9 +5134,9 @@ THE SOFTWARE.
       var i = c(74)["default"],
         j = c(1)["default"];
       (b.__esModule = !0),
-      (b.Compiler = d),
-      (b.precompile = e),
-      (b.compile = f);
+        (b.Compiler = d),
+        (b.precompile = e),
+        (b.compile = f);
       var k = c(6),
         l = j(k),
         m = c(5),
@@ -5126,7 +5145,7 @@ THE SOFTWARE.
         p = [].slice;
       d.prototype = {
         compiler: d,
-        equals: function(a) {
+        equals: function (a) {
           var b = this.opcodes.length;
           if (a.opcodes.length !== b) return !1;
           for (var c = 0; c < b; c++) {
@@ -5140,7 +5159,7 @@ THE SOFTWARE.
           return !0;
         },
         guid: 0,
-        compile: function(a, b) {
+        compile: function (a, b) {
           return (
             (this.sourceNode = []),
             (this.opcodes = []),
@@ -5150,7 +5169,8 @@ THE SOFTWARE.
             (this.trackIds = b.trackIds),
             (b.blockParams = b.blockParams || []),
             (b.knownHelpers = m.extend(
-              i(null), {
+              i(null),
+              {
                 helperMissing: !0,
                 blockHelperMissing: !0,
                 each: !0,
@@ -5165,7 +5185,7 @@ THE SOFTWARE.
             this.accept(a)
           );
         },
-        compileProgram: function(a) {
+        compileProgram: function (a) {
           var b = new this.compiler(),
             c = b.compile(a, this.options),
             d = this.guid++;
@@ -5176,14 +5196,14 @@ THE SOFTWARE.
             d
           );
         },
-        accept: function(a) {
+        accept: function (a) {
           if (!this[a.type])
             throw new l["default"]("Unknown type: " + a.type, a);
           this.sourceNode.unshift(a);
           var b = this[a.type](a);
           return this.sourceNode.shift(), b;
         },
-        Program: function(a) {
+        Program: function (a) {
           this.options.blockParams.unshift(a.blockParams);
           for (var b = a.body, c = b.length, d = 0; d < c; d++)
             this.accept(b[d]);
@@ -5194,36 +5214,35 @@ THE SOFTWARE.
             this
           );
         },
-        BlockStatement: function(a) {
+        BlockStatement: function (a) {
           h(a);
           var b = a.program,
             c = a.inverse;
           (b = b && this.compileProgram(b)), (c = c && this.compileProgram(c));
           var d = this.classifySexpr(a);
           "helper" === d
-            ?
-            this.helperSexpr(a, b, c) :
-            "simple" === d ?
-            (this.simpleSexpr(a),
-              this.opcode("pushProgram", b),
-              this.opcode("pushProgram", c),
-              this.opcode("emptyHash"),
-              this.opcode("blockValue", a.path.original)) :
-            (this.ambiguousSexpr(a, b, c),
-              this.opcode("pushProgram", b),
-              this.opcode("pushProgram", c),
-              this.opcode("emptyHash"),
-              this.opcode("ambiguousBlockValue")),
+            ? this.helperSexpr(a, b, c)
+            : "simple" === d
+              ? (this.simpleSexpr(a),
+                this.opcode("pushProgram", b),
+                this.opcode("pushProgram", c),
+                this.opcode("emptyHash"),
+                this.opcode("blockValue", a.path.original))
+              : (this.ambiguousSexpr(a, b, c),
+                this.opcode("pushProgram", b),
+                this.opcode("pushProgram", c),
+                this.opcode("emptyHash"),
+                this.opcode("ambiguousBlockValue")),
             this.opcode("append");
         },
-        DecoratorBlock: function(a) {
+        DecoratorBlock: function (a) {
           var b = a.program && this.compileProgram(a.program),
             c = this.setupFullMustacheParams(a, b, void 0),
             d = a.path;
           (this.useDecorators = !0),
-          this.opcode("registerDecorator", c.length, d.original);
+            this.opcode("registerDecorator", c.length, d.original);
         },
-        PartialStatement: function(a) {
+        PartialStatement: function (a) {
           this.usePartial = !0;
           var b = a.program;
           b && (b = this.compileProgram(a.program));
@@ -5234,13 +5253,13 @@ THE SOFTWARE.
               a,
             );
           c.length ||
-            (this.options.explicitPartialContext ?
-              this.opcode("pushLiteral", "undefined") :
-              c.push({
-                type: "PathExpression",
-                parts: [],
-                depth: 0,
-              }));
+            (this.options.explicitPartialContext
+              ? this.opcode("pushLiteral", "undefined")
+              : c.push({
+                  type: "PathExpression",
+                  parts: [],
+                  depth: 0,
+                }));
           var d = a.name.original,
             e = "SubExpression" === a.name.type;
           e && this.accept(a.name),
@@ -5252,33 +5271,32 @@ THE SOFTWARE.
             this.opcode("invokePartial", e, d, f),
             this.opcode("append");
         },
-        PartialBlockStatement: function(a) {
+        PartialBlockStatement: function (a) {
           this.PartialStatement(a);
         },
-        MustacheStatement: function(a) {
+        MustacheStatement: function (a) {
           this.SubExpression(a),
-            a.escaped && !this.options.noEscape ?
-            this.opcode("appendEscaped") :
-            this.opcode("append");
+            a.escaped && !this.options.noEscape
+              ? this.opcode("appendEscaped")
+              : this.opcode("append");
         },
-        Decorator: function(a) {
+        Decorator: function (a) {
           this.DecoratorBlock(a);
         },
-        ContentStatement: function(a) {
+        ContentStatement: function (a) {
           a.value && this.opcode("appendContent", a.value);
         },
-        CommentStatement: function() {},
-        SubExpression: function(a) {
+        CommentStatement: function () {},
+        SubExpression: function (a) {
           h(a);
           var b = this.classifySexpr(a);
           "simple" === b
-            ?
-            this.simpleSexpr(a) :
-            "helper" === b ?
-            this.helperSexpr(a) :
-            this.ambiguousSexpr(a);
+            ? this.simpleSexpr(a)
+            : "helper" === b
+              ? this.helperSexpr(a)
+              : this.ambiguousSexpr(a);
         },
-        ambiguousSexpr: function(a, b, c) {
+        ambiguousSexpr: function (a, b, c) {
           var d = a.path,
             e = d.parts[0],
             f = null != b || null != c;
@@ -5289,11 +5307,11 @@ THE SOFTWARE.
             this.accept(d),
             this.opcode("invokeAmbiguous", e, f);
         },
-        simpleSexpr: function(a) {
+        simpleSexpr: function (a) {
           var b = a.path;
           (b.strict = !0), this.accept(b), this.opcode("resolvePossibleLambda");
         },
-        helperSexpr: function(a, b, c) {
+        helperSexpr: function (a, b, c) {
           var d = this.setupFullMustacheParams(a, b, c),
             e = a.path,
             f = e.parts[0];
@@ -5303,12 +5321,12 @@ THE SOFTWARE.
             if (this.options.knownHelpersOnly)
               throw new l["default"](
                 "You specified knownHelpersOnly, but used the unknown helper " +
-                f,
+                  f,
                 a,
               );
             (e.strict = !0),
-            (e.falsy = !0),
-            this.accept(e),
+              (e.falsy = !0),
+              this.accept(e),
               this.opcode(
                 "invokeHelper",
                 d.length,
@@ -5317,55 +5335,54 @@ THE SOFTWARE.
               );
           }
         },
-        PathExpression: function(a) {
+        PathExpression: function (a) {
           this.addDepth(a.depth), this.opcode("getContext", a.depth);
           var b = a.parts[0],
             c = o["default"].helpers.scopedId(a),
             d = !a.depth && !c && this.blockParamIndex(b);
           d
-            ?
-            this.opcode("lookupBlockParam", d, a.parts) :
-            b ?
-            a.data ?
-            ((this.options.data = !0),
-              this.opcode("lookupData", a.depth, a.parts, a.strict)) :
-            this.opcode("lookupOnContext", a.parts, a.falsy, a.strict, c) :
-            this.opcode("pushContext");
+            ? this.opcode("lookupBlockParam", d, a.parts)
+            : b
+              ? a.data
+                ? ((this.options.data = !0),
+                  this.opcode("lookupData", a.depth, a.parts, a.strict))
+                : this.opcode("lookupOnContext", a.parts, a.falsy, a.strict, c)
+              : this.opcode("pushContext");
         },
-        StringLiteral: function(a) {
+        StringLiteral: function (a) {
           this.opcode("pushString", a.value);
         },
-        NumberLiteral: function(a) {
+        NumberLiteral: function (a) {
           this.opcode("pushLiteral", a.value);
         },
-        BooleanLiteral: function(a) {
+        BooleanLiteral: function (a) {
           this.opcode("pushLiteral", a.value);
         },
-        UndefinedLiteral: function() {
+        UndefinedLiteral: function () {
           this.opcode("pushLiteral", "undefined");
         },
-        NullLiteral: function() {
+        NullLiteral: function () {
           this.opcode("pushLiteral", "null");
         },
-        Hash: function(a) {
+        Hash: function (a) {
           var b = a.pairs,
             c = 0,
             d = b.length;
           for (this.opcode("pushHash"); c < d; c++) this.pushParam(b[c].value);
-          for (; c--;) this.opcode("assignToHash", b[c].key);
+          for (; c--; ) this.opcode("assignToHash", b[c].key);
           this.opcode("popHash");
         },
-        opcode: function(a) {
+        opcode: function (a) {
           this.opcodes.push({
             opcode: a,
             args: p.call(arguments, 1),
             loc: this.sourceNode[0].loc,
           });
         },
-        addDepth: function(a) {
+        addDepth: function (a) {
           a && (this.useDepths = !0);
         },
-        classifySexpr: function(a) {
+        classifySexpr: function (a) {
           var b = o["default"].helpers.simpleId(a.path),
             c = b && !!this.blockParamIndex(a.path.parts[0]),
             d = !c && o["default"].helpers.helperExpression(a),
@@ -5377,18 +5394,18 @@ THE SOFTWARE.
           }
           return d ? "helper" : e ? "ambiguous" : "simple";
         },
-        pushParams: function(a) {
+        pushParams: function (a) {
           for (var b = 0, c = a.length; b < c; b++) this.pushParam(a[b]);
         },
-        pushParam: function(a) {
+        pushParam: function (a) {
           var b = null != a.value ? a.value : a.original || "";
           if (this.stringParams)
             b.replace &&
-            (b = b.replace(/^(\.?\.\/)*/g, "").replace(/\//g, ".")),
-            a.depth && this.addDepth(a.depth),
-            this.opcode("getContext", a.depth || 0),
-            this.opcode("pushStringParam", b, a.type),
-            "SubExpression" === a.type && this.accept(a);
+              (b = b.replace(/^(\.?\.\/)*/g, "").replace(/\//g, ".")),
+              a.depth && this.addDepth(a.depth),
+              this.opcode("getContext", a.depth || 0),
+              this.opcode("pushStringParam", b, a.type),
+              "SubExpression" === a.type && this.accept(a);
           else {
             if (this.trackIds) {
               var c = void 0;
@@ -5397,23 +5414,23 @@ THE SOFTWARE.
                   o["default"].helpers.scopedId(a) ||
                   a.depth ||
                   (c = this.blockParamIndex(a.parts[0])),
-                  c)
+                c)
               ) {
                 var d = a.parts.slice(1).join(".");
                 this.opcode("pushId", "BlockParam", c, d);
               } else
                 (b = a.original || b),
-                b.replace &&
-                (b = b
-                  .replace(/^this(?:\.|$)/, "")
-                  .replace(/^\.\//, "")
-                  .replace(/^\.$/, "")),
-                this.opcode("pushId", a.type, b);
+                  b.replace &&
+                    (b = b
+                      .replace(/^this(?:\.|$)/, "")
+                      .replace(/^\.\//, "")
+                      .replace(/^\.$/, "")),
+                  this.opcode("pushId", a.type, b);
             }
             this.accept(a);
           }
         },
-        setupFullMustacheParams: function(a, b, c, d) {
+        setupFullMustacheParams: function (a, b, c, d) {
           var e = a.params;
           return (
             this.pushParams(e),
@@ -5423,7 +5440,7 @@ THE SOFTWARE.
             e
           );
         },
-        blockParamIndex: function(a) {
+        blockParamIndex: function (a) {
           for (var b = 0, c = this.options.blockParams.length; b < c; b++) {
             var d = this.options.blockParams[b],
               e = d && m.indexOf(d, a);
@@ -5432,7 +5449,7 @@ THE SOFTWARE.
         },
       };
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a) {
@@ -5445,18 +5462,18 @@ THE SOFTWARE.
         var f = b.popStack(),
           g = c.length;
         for (a && g--; d < g; d++) f = b.nameLookup(f, c[d], e);
-        return a ?
-          [
-            b.aliasable("container.strict"),
-            "(",
-            f,
-            ", ",
-            b.quotedString(c[d]),
-            ", ",
-            JSON.stringify(b.source.currentLocation),
-            " )",
-          ] :
-          f;
+        return a
+          ? [
+              b.aliasable("container.strict"),
+              "(",
+              f,
+              ", ",
+              b.quotedString(c[d]),
+              ", ",
+              JSON.stringify(b.source.currentLocation),
+              " )",
+            ]
+          : f;
       }
       var g = c(60)["default"],
         h = c(1)["default"];
@@ -5468,10 +5485,10 @@ THE SOFTWARE.
         m = c(92),
         n = h(m);
       (e.prototype = {
-        nameLookup: function(a, b) {
+        nameLookup: function (a, b) {
           return this.internalNameLookup(a, b);
         },
-        depthedLookup: function(a) {
+        depthedLookup: function (a) {
           return [
             this.aliasable("container.lookup"),
             "(depths, ",
@@ -5479,46 +5496,46 @@ THE SOFTWARE.
             ")",
           ];
         },
-        compilerInfo: function() {
+        compilerInfo: function () {
           var a = i.COMPILER_REVISION,
             b = i.REVISION_CHANGES[a];
           return [a, b];
         },
-        appendToBuffer: function(a, b, c) {
+        appendToBuffer: function (a, b, c) {
           return (
             l.isArray(a) || (a = [a]),
             (a = this.source.wrap(a, b)),
-            this.environment.isSimple ?
-            ["return ", a, ";"] :
-            c ?
-            ["buffer += ", a, ";"] :
-            ((a.appendToBuffer = !0), a)
+            this.environment.isSimple
+              ? ["return ", a, ";"]
+              : c
+                ? ["buffer += ", a, ";"]
+                : ((a.appendToBuffer = !0), a)
           );
         },
-        initializeBuffer: function() {
+        initializeBuffer: function () {
           return this.quotedString("");
         },
-        internalNameLookup: function(a, b) {
+        internalNameLookup: function (a, b) {
           return (
             (this.lookupPropertyFunctionIsUsed = !0),
             ["lookupProperty(", a, ",", JSON.stringify(b), ")"]
           );
         },
         lookupPropertyFunctionIsUsed: !1,
-        compile: function(a, b, c, d) {
+        compile: function (a, b, c, d) {
           (this.environment = a),
-          (this.options = b),
-          (this.stringParams = this.options.stringParams),
-          (this.trackIds = this.options.trackIds),
-          (this.precompile = !d),
-          (this.name = this.environment.name),
-          (this.isChild = !!c),
-          (this.context = c || {
-            decorators: [],
-            programs: [],
-            environments: [],
-          }),
-          this.preamble(),
+            (this.options = b),
+            (this.stringParams = this.options.stringParams),
+            (this.trackIds = this.options.trackIds),
+            (this.precompile = !d),
+            (this.name = this.environment.name),
+            (this.isChild = !!c),
+            (this.context = c || {
+              decorators: [],
+              programs: [],
+              environments: [],
+            }),
+            this.preamble(),
             (this.stackSlot = 0),
             (this.stackVars = []),
             (this.aliases = {}),
@@ -5543,44 +5560,44 @@ THE SOFTWARE.
             i = void 0;
           for (h = 0, i = e.length; h < i; h++)
             (f = e[h]),
-            (this.source.currentLocation = f.loc),
-            (g = g || f.loc),
-            this[f.opcode].apply(this, f.args);
+              (this.source.currentLocation = f.loc),
+              (g = g || f.loc),
+              this[f.opcode].apply(this, f.args);
           if (
             ((this.source.currentLocation = g),
-              this.pushSource(""),
-              this.stackSlot ||
+            this.pushSource(""),
+            this.stackSlot ||
               this.inlineStack.length ||
               this.compileStack.length)
           )
             throw new k["default"](
               "Compile completed with content left on stack",
             );
-          this.decorators.isEmpty() ?
-            (this.decorators = void 0) :
-            ((this.useDecorators = !0),
+          this.decorators.isEmpty()
+            ? (this.decorators = void 0)
+            : ((this.useDecorators = !0),
               this.decorators.prepend([
                 "var decorators = container.decorators, ",
                 this.lookupPropertyFunctionVarDeclaration(),
                 ";\n",
               ]),
               this.decorators.push("return fn;"),
-              d ?
-              (this.decorators = Function.apply(this, [
-                "fn",
-                "props",
-                "container",
-                "depth0",
-                "data",
-                "blockParams",
-                "depths",
-                this.decorators.merge(),
-              ])) :
-              (this.decorators.prepend(
-                  "function(fn, props, container, depth0, data, blockParams, depths) {\n",
-                ),
-                this.decorators.push("}\n"),
-                (this.decorators = this.decorators.merge())));
+              d
+                ? (this.decorators = Function.apply(this, [
+                    "fn",
+                    "props",
+                    "container",
+                    "depth0",
+                    "data",
+                    "blockParams",
+                    "depths",
+                    this.decorators.merge(),
+                  ]))
+                : (this.decorators.prepend(
+                    "function(fn, props, container, depth0, data, blockParams, depths) {\n",
+                  ),
+                  this.decorators.push("}\n"),
+                  (this.decorators = this.decorators.merge())));
           var j = this.createFunctionContext(d);
           if (this.isChild) return j;
           var l = {
@@ -5594,7 +5611,7 @@ THE SOFTWARE.
             o = m.decorators;
           for (h = 0, i = n.length; h < i; h++)
             n[h] &&
-            ((l[h] = n[h]),
+              ((l[h] = n[h]),
               o[h] && ((l[h + "_d"] = o[h]), (l.useDecorators = !0)));
           return (
             this.environment.usePartial && (l.usePartial = !0),
@@ -5602,53 +5619,53 @@ THE SOFTWARE.
             this.useDepths && (l.useDepths = !0),
             this.useBlockParams && (l.useBlockParams = !0),
             this.options.compat && (l.compat = !0),
-            d ?
-            (l.compilerOptions = this.options) :
-            ((l.compiler = JSON.stringify(l.compiler)),
-              (this.source.currentLocation = {
-                start: {
-                  line: 1,
-                  column: 0,
-                },
-              }),
-              (l = this.objectLiteral(l)),
-              b.srcName ?
-              ((l = l.toStringWithSourceMap({
-                  file: b.destName,
-                })),
-                (l.map = l.map && l.map.toString())) :
-              (l = l.toString())),
+            d
+              ? (l.compilerOptions = this.options)
+              : ((l.compiler = JSON.stringify(l.compiler)),
+                (this.source.currentLocation = {
+                  start: {
+                    line: 1,
+                    column: 0,
+                  },
+                }),
+                (l = this.objectLiteral(l)),
+                b.srcName
+                  ? ((l = l.toStringWithSourceMap({
+                      file: b.destName,
+                    })),
+                    (l.map = l.map && l.map.toString()))
+                  : (l = l.toString())),
             l
           );
         },
-        preamble: function() {
+        preamble: function () {
           (this.lastContext = 0),
-          (this.source = new n["default"](this.options.srcName)),
-          (this.decorators = new n["default"](this.options.srcName));
+            (this.source = new n["default"](this.options.srcName)),
+            (this.decorators = new n["default"](this.options.srcName));
         },
-        createFunctionContext: function(a) {
+        createFunctionContext: function (a) {
           var b = this,
             c = "",
             d = this.stackVars.concat(this.registers.list);
           d.length > 0 && (c += ", " + d.join(", "));
           var e = 0;
-          g(this.aliases).forEach(function(a) {
-              var d = b.aliases[a];
-              d.children &&
-                d.referenceCount > 1 &&
-                ((c += ", alias" + ++e + "=" + a), (d.children[0] = "alias" + e));
-            }),
+          g(this.aliases).forEach(function (a) {
+            var d = b.aliases[a];
+            d.children &&
+              d.referenceCount > 1 &&
+              ((c += ", alias" + ++e + "=" + a), (d.children[0] = "alias" + e));
+          }),
             this.lookupPropertyFunctionIsUsed &&
-            (c += ", " + this.lookupPropertyFunctionVarDeclaration());
+              (c += ", " + this.lookupPropertyFunctionVarDeclaration());
           var f = ["container", "depth0", "helpers", "partials", "data"];
           (this.useBlockParams || this.useDepths) && f.push("blockParams"),
             this.useDepths && f.push("depths");
           var h = this.mergeSource(c);
-          return a ?
-            (f.push(h), Function.apply(this, f)) :
-            this.source.wrap(["function(", f.join(","), ") {\n  ", h, "}"]);
+          return a
+            ? (f.push(h), Function.apply(this, f))
+            : this.source.wrap(["function(", f.join(","), ") {\n  ", h, "}"]);
         },
-        mergeSource: function(a) {
+        mergeSource: function (a) {
           var b = this.environment.isSimple,
             c = !this.forceBuffer,
             d = void 0,
@@ -5656,40 +5673,40 @@ THE SOFTWARE.
             f = void 0,
             g = void 0;
           return (
-            this.source.each(function(a) {
-              a.appendToBuffer ?
-                (f ? a.prepend("  + ") : (f = a), (g = a)) :
-                (f &&
-                  (e ? f.prepend("buffer += ") : (d = !0),
+            this.source.each(function (a) {
+              a.appendToBuffer
+                ? (f ? a.prepend("  + ") : (f = a), (g = a))
+                : (f &&
+                    (e ? f.prepend("buffer += ") : (d = !0),
                     g.add(";"),
                     (f = g = void 0)),
                   (e = !0),
                   b || (c = !1));
             }),
-            c ?
-            f ?
-            (f.prepend("return "), g.add(";")) :
-            e || this.source.push('return "";') :
-            ((a += ", buffer = " + (d ? "" : this.initializeBuffer())),
-              f ?
-              (f.prepend("return buffer + "), g.add(";")) :
-              this.source.push("return buffer;")),
+            c
+              ? f
+                ? (f.prepend("return "), g.add(";"))
+                : e || this.source.push('return "";')
+              : ((a += ", buffer = " + (d ? "" : this.initializeBuffer())),
+                f
+                  ? (f.prepend("return buffer + "), g.add(";"))
+                  : this.source.push("return buffer;")),
             a &&
-            this.source.prepend("var " + a.substring(2) + (d ? "" : ";\n")),
+              this.source.prepend("var " + a.substring(2) + (d ? "" : ";\n")),
             this.source.merge()
           );
         },
-        lookupPropertyFunctionVarDeclaration: function() {
+        lookupPropertyFunctionVarDeclaration: function () {
           return "\n      lookupProperty = container.lookupProperty || function(parent, propertyName) {\n        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {\n          return parent[propertyName];\n        }\n        return undefined\n    }\n    ".trim();
         },
-        blockValue: function(a) {
+        blockValue: function (a) {
           var b = this.aliasable("container.hooks.blockHelperMissing"),
             c = [this.contextName(0)];
           this.setupHelperArgs(a, 0, c);
           var d = this.popStack();
           c.splice(1, 0, d), this.push(this.source.functionCall(b, "call", c));
         },
-        ambiguousBlockValue: function() {
+        ambiguousBlockValue: function () {
           var a = this.aliasable("container.hooks.blockHelperMissing"),
             b = [this.contextName(0)];
           this.setupHelperArgs("", 0, b, !0), this.flushInline();
@@ -5705,36 +5722,36 @@ THE SOFTWARE.
               "}",
             ]);
         },
-        appendContent: function(a) {
-          this.pendingContent ?
-            (a = this.pendingContent + a) :
-            (this.pendingLocation = this.source.currentLocation),
+        appendContent: function (a) {
+          this.pendingContent
+            ? (a = this.pendingContent + a)
+            : (this.pendingLocation = this.source.currentLocation),
             (this.pendingContent = a);
         },
-        append: function() {
+        append: function () {
           if (this.isInline())
-            this.replaceStack(function(a) {
+            this.replaceStack(function (a) {
               return [" != null ? ", a, ' : ""'];
             }),
-            this.pushSource(this.appendToBuffer(this.popStack()));
+              this.pushSource(this.appendToBuffer(this.popStack()));
           else {
             var a = this.popStack();
             this.pushSource([
-                "if (",
-                a,
-                " != null) { ",
-                this.appendToBuffer(a, void 0, !0),
-                " }",
-              ]),
+              "if (",
+              a,
+              " != null) { ",
+              this.appendToBuffer(a, void 0, !0),
+              " }",
+            ]),
               this.environment.isSimple &&
-              this.pushSource([
-                "else { ",
-                this.appendToBuffer("''", void 0, !0),
-                " }",
-              ]);
+                this.pushSource([
+                  "else { ",
+                  this.appendToBuffer("''", void 0, !0),
+                  " }",
+                ]);
           }
         },
-        appendEscaped: function() {
+        appendEscaped: function () {
           this.pushSource(
             this.appendToBuffer([
               this.aliasable("container.escapeExpression"),
@@ -5744,42 +5761,41 @@ THE SOFTWARE.
             ]),
           );
         },
-        getContext: function(a) {
+        getContext: function (a) {
           this.lastContext = a;
         },
-        pushContext: function() {
+        pushContext: function () {
           this.pushStackLiteral(this.contextName(this.lastContext));
         },
-        lookupOnContext: function(a, b, c, d) {
+        lookupOnContext: function (a, b, c, d) {
           var e = 0;
-          d || !this.options.compat || this.lastContext ?
-            this.pushContext() :
-            this.push(this.depthedLookup(a[e++])),
+          d || !this.options.compat || this.lastContext
+            ? this.pushContext()
+            : this.push(this.depthedLookup(a[e++])),
             this.resolvePath("context", a, e, b, c);
         },
-        lookupBlockParam: function(a, b) {
+        lookupBlockParam: function (a, b) {
           (this.useBlockParams = !0),
-          this.push(["blockParams[", a[0], "][", a[1], "]"]),
+            this.push(["blockParams[", a[0], "][", a[1], "]"]),
             this.resolvePath("context", b, 1);
         },
-        lookupData: function(a, b, c) {
+        lookupData: function (a, b, c) {
           a
-            ?
-            this.pushStackLiteral("container.data(data, " + a + ")") :
-            this.pushStackLiteral("data"),
+            ? this.pushStackLiteral("container.data(data, " + a + ")")
+            : this.pushStackLiteral("data"),
             this.resolvePath("data", b, 0, !0, c);
         },
-        resolvePath: function(a, b, c, d, e) {
+        resolvePath: function (a, b, c, d, e) {
           var g = this;
           if (this.options.strict || this.options.assumeObjects)
             return void this.push(f(this.options.strict && e, this, b, c, a));
           for (var h = b.length; c < h; c++)
-            this.replaceStack(function(e) {
+            this.replaceStack(function (e) {
               var f = g.nameLookup(e, b[c], a);
               return d ? [" && ", f] : [" != null ? ", f, " : ", e];
             });
         },
-        resolvePossibleLambda: function() {
+        resolvePossibleLambda: function () {
           this.push([
             this.aliasable("container.lambda"),
             "(",
@@ -5789,20 +5805,20 @@ THE SOFTWARE.
             ")",
           ]);
         },
-        pushStringParam: function(a, b) {
+        pushStringParam: function (a, b) {
           this.pushContext(),
             this.pushString(b),
             "SubExpression" !== b &&
-            ("string" == typeof a ?
-              this.pushString(a) :
-              this.pushStackLiteral(a));
+              ("string" == typeof a
+                ? this.pushString(a)
+                : this.pushStackLiteral(a));
         },
-        emptyHash: function(a) {
+        emptyHash: function (a) {
           this.trackIds && this.push("{}"),
             this.stringParams && (this.push("{}"), this.push("{}")),
             this.pushStackLiteral(a ? "undefined" : "{}");
         },
-        pushHash: function() {
+        pushHash: function () {
           this.hash && this.hashes.push(this.hash),
             (this.hash = {
               values: {},
@@ -5811,27 +5827,27 @@ THE SOFTWARE.
               ids: [],
             });
         },
-        popHash: function() {
+        popHash: function () {
           var a = this.hash;
           (this.hash = this.hashes.pop()),
-          this.trackIds && this.push(this.objectLiteral(a.ids)),
+            this.trackIds && this.push(this.objectLiteral(a.ids)),
             this.stringParams &&
-            (this.push(this.objectLiteral(a.contexts)),
+              (this.push(this.objectLiteral(a.contexts)),
               this.push(this.objectLiteral(a.types))),
             this.push(this.objectLiteral(a.values));
         },
-        pushString: function(a) {
+        pushString: function (a) {
           this.pushStackLiteral(this.quotedString(a));
         },
-        pushLiteral: function(a) {
+        pushLiteral: function (a) {
           this.pushStackLiteral(a);
         },
-        pushProgram: function(a) {
-          null != a ?
-            this.pushStackLiteral(this.programExpression(a)) :
-            this.pushStackLiteral(null);
+        pushProgram: function (a) {
+          null != a
+            ? this.pushStackLiteral(this.programExpression(a))
+            : this.pushStackLiteral(null);
         },
-        registerDecorator: function(a, b) {
+        registerDecorator: function (a, b) {
           var c = this.nameLookup("decorators", b, "decorator"),
             d = this.setupHelperArgs(b, a);
           this.decorators.push([
@@ -5845,29 +5861,29 @@ THE SOFTWARE.
             " || fn;",
           ]);
         },
-        invokeHelper: function(a, b, c) {
+        invokeHelper: function (a, b, c) {
           var d = this.popStack(),
             e = this.setupHelper(a, b),
             f = [];
           c && f.push(e.name),
             f.push(d),
             this.options.strict ||
-            f.push(this.aliasable("container.hooks.helperMissing"));
+              f.push(this.aliasable("container.hooks.helperMissing"));
           var g = ["(", this.itemsSeparatedBy(f, "||"), ")"],
             h = this.source.functionCall(g, "call", e.callParams);
           this.push(h);
         },
-        itemsSeparatedBy: function(a, b) {
+        itemsSeparatedBy: function (a, b) {
           var c = [];
           c.push(a[0]);
           for (var d = 1; d < a.length; d++) c.push(b, a[d]);
           return c;
         },
-        invokeKnownHelper: function(a, b) {
+        invokeKnownHelper: function (a, b) {
           var c = this.setupHelper(a, b);
           this.push(this.source.functionCall(c.name, "call", c.callParams));
         },
-        invokeAmbiguous: function(a, b) {
+        invokeAmbiguous: function (a, b) {
           this.useRegister("helper");
           var c = this.popStack();
           this.emptyHash();
@@ -5876,10 +5892,10 @@ THE SOFTWARE.
             f = ["(", "(helper = ", e, " || ", c, ")"];
           this.options.strict ||
             ((f[0] = "(helper = "),
-              f.push(
-                " != null ? helper : ",
-                this.aliasable("container.hooks.helperMissing"),
-              )),
+            f.push(
+              " != null ? helper : ",
+              this.aliasable("container.hooks.helperMissing"),
+            )),
             this.push([
               "(",
               f,
@@ -5892,7 +5908,7 @@ THE SOFTWARE.
               " : helper))",
             ]);
         },
-        invokePartial: function(a, b, c) {
+        invokePartial: function (a, b, c) {
           var d = [],
             e = this.setupParams(b, 1, d);
           a && ((b = this.popStack()), delete e.name),
@@ -5900,9 +5916,9 @@ THE SOFTWARE.
             (e.helpers = "helpers"),
             (e.partials = "partials"),
             (e.decorators = "container.decorators"),
-            a ?
-            d.unshift(b) :
-            d.unshift(this.nameLookup("partials", b, "partial")),
+            a
+              ? d.unshift(b)
+              : d.unshift(this.nameLookup("partials", b, "partial")),
             this.options.compat && (e.depths = "depths"),
             (e = this.objectLiteral(e)),
             d.push(e),
@@ -5910,7 +5926,7 @@ THE SOFTWARE.
               this.source.functionCall("container.invokePartial", "", d),
             );
         },
-        assignToHash: function(a) {
+        assignToHash: function (a) {
           var b = this.popStack(),
             c = void 0,
             d = void 0,
@@ -5923,27 +5939,28 @@ THE SOFTWARE.
             e && (f.ids[a] = e),
             (f.values[a] = b);
         },
-        pushId: function(a, b, c) {
+        pushId: function (a, b, c) {
           "BlockParam" === a
-            ?
-            this.pushStackLiteral(
-              "blockParams[" +
-              b[0] +
-              "].path[" +
-              b[1] +
-              "]" +
-              (c ? " + " + JSON.stringify("." + c) : ""),
-            ) :
-            "PathExpression" === a ?
-            this.pushString(b) :
-            "SubExpression" === a ?
-            this.pushStackLiteral("true") :
-            this.pushStackLiteral("null");
+            ? this.pushStackLiteral(
+                "blockParams[" +
+                  b[0] +
+                  "].path[" +
+                  b[1] +
+                  "]" +
+                  (c ? " + " + JSON.stringify("." + c) : ""),
+              )
+            : "PathExpression" === a
+              ? this.pushString(b)
+              : "SubExpression" === a
+                ? this.pushStackLiteral("true")
+                : this.pushStackLiteral("null");
         },
         compiler: e,
-        compileChildren: function(a, b) {
+        compileChildren: function (a, b) {
           for (
-            var c = a.children, d = void 0, e = void 0, f = 0, g = c.length; f < g; f++
+            var c = a.children, d = void 0, e = void 0, f = 0, g = c.length;
+            f < g;
+            f++
           ) {
             (d = c[f]), (e = new this.compiler());
             var h = this.matchExistingProgram(d);
@@ -5951,33 +5968,33 @@ THE SOFTWARE.
               this.context.programs.push("");
               var i = this.context.programs.length;
               (d.index = i),
-              (d.name = "program" + i),
-              (this.context.programs[i] = e.compile(
-                d,
-                b,
-                this.context,
-                !this.precompile,
-              )),
-              (this.context.decorators[i] = e.decorators),
-              (this.context.environments[i] = d),
-              (this.useDepths = this.useDepths || e.useDepths),
-              (this.useBlockParams = this.useBlockParams || e.useBlockParams),
-              (d.useDepths = this.useDepths),
-              (d.useBlockParams = this.useBlockParams);
+                (d.name = "program" + i),
+                (this.context.programs[i] = e.compile(
+                  d,
+                  b,
+                  this.context,
+                  !this.precompile,
+                )),
+                (this.context.decorators[i] = e.decorators),
+                (this.context.environments[i] = d),
+                (this.useDepths = this.useDepths || e.useDepths),
+                (this.useBlockParams = this.useBlockParams || e.useBlockParams),
+                (d.useDepths = this.useDepths),
+                (d.useBlockParams = this.useBlockParams);
             } else
               (d.index = h.index),
-              (d.name = "program" + h.index),
-              (this.useDepths = this.useDepths || h.useDepths),
-              (this.useBlockParams = this.useBlockParams || h.useBlockParams);
+                (d.name = "program" + h.index),
+                (this.useDepths = this.useDepths || h.useDepths),
+                (this.useBlockParams = this.useBlockParams || h.useBlockParams);
           }
         },
-        matchExistingProgram: function(a) {
+        matchExistingProgram: function (a) {
           for (var b = 0, c = this.context.environments.length; b < c; b++) {
             var d = this.context.environments[b];
             if (d && d.equals(a)) return d;
           }
         },
-        programExpression: function(a) {
+        programExpression: function (a) {
           var b = this.environment.children[a],
             c = [b.index, "data", b.blockParams];
           return (
@@ -5986,32 +6003,32 @@ THE SOFTWARE.
             "container.program(" + c.join(", ") + ")"
           );
         },
-        useRegister: function(a) {
+        useRegister: function (a) {
           this.registers[a] ||
             ((this.registers[a] = !0), this.registers.list.push(a));
         },
-        push: function(a) {
+        push: function (a) {
           return (
             a instanceof d || (a = this.source.wrap(a)),
             this.inlineStack.push(a),
             a
           );
         },
-        pushStackLiteral: function(a) {
+        pushStackLiteral: function (a) {
           this.push(new d(a));
         },
-        pushSource: function(a) {
+        pushSource: function (a) {
           this.pendingContent &&
             (this.source.push(
-                this.appendToBuffer(
-                  this.source.quotedString(this.pendingContent),
-                  this.pendingLocation,
-                ),
+              this.appendToBuffer(
+                this.source.quotedString(this.pendingContent),
+                this.pendingLocation,
               ),
-              (this.pendingContent = void 0)),
+            ),
+            (this.pendingContent = void 0)),
             a && this.source.push(a);
         },
-        replaceStack: function(a) {
+        replaceStack: function (a) {
           var b = ["("],
             c = void 0,
             e = void 0,
@@ -6019,7 +6036,7 @@ THE SOFTWARE.
           if (!this.isInline())
             throw new k["default"]("replaceStack on non-inline");
           var g = this.popStack(!0);
-          if (g instanceof d)(c = [g.value]), (b = ["(", c]), (f = !0);
+          if (g instanceof d) (c = [g.value]), (b = ["(", c]), (f = !0);
           else {
             e = !0;
             var h = this.incrStack();
@@ -6030,18 +6047,18 @@ THE SOFTWARE.
             e && this.stackSlot--,
             this.push(b.concat(i, ")"));
         },
-        incrStack: function() {
+        incrStack: function () {
           return (
             this.stackSlot++,
             this.stackSlot > this.stackVars.length &&
-            this.stackVars.push("stack" + this.stackSlot),
+              this.stackVars.push("stack" + this.stackSlot),
             this.topStackName()
           );
         },
-        topStackName: function() {
+        topStackName: function () {
           return "stack" + this.stackSlot;
         },
-        flushInline: function() {
+        flushInline: function () {
           var a = this.inlineStack;
           this.inlineStack = [];
           for (var b = 0, c = a.length; b < c; b++) {
@@ -6053,10 +6070,10 @@ THE SOFTWARE.
             }
           }
         },
-        isInline: function() {
+        isInline: function () {
           return this.inlineStack.length;
         },
-        popStack: function(a) {
+        popStack: function (a) {
           var b = this.isInline(),
             c = (b ? this.inlineStack : this.compileStack).pop();
           if (!a && c instanceof d) return c.value;
@@ -6066,38 +6083,38 @@ THE SOFTWARE.
           }
           return c;
         },
-        topStack: function() {
+        topStack: function () {
           var a = this.isInline() ? this.inlineStack : this.compileStack,
             b = a[a.length - 1];
           return b instanceof d ? b.value : b;
         },
-        contextName: function(a) {
+        contextName: function (a) {
           return this.useDepths && a ? "depths[" + a + "]" : "depth" + a;
         },
-        quotedString: function(a) {
+        quotedString: function (a) {
           return this.source.quotedString(a);
         },
-        objectLiteral: function(a) {
+        objectLiteral: function (a) {
           return this.source.objectLiteral(a);
         },
-        aliasable: function(a) {
+        aliasable: function (a) {
           var b = this.aliases[a];
-          return b ?
-            (b.referenceCount++, b) :
-            ((b = this.aliases[a] = this.source.wrap(a)),
+          return b
+            ? (b.referenceCount++, b)
+            : ((b = this.aliases[a] = this.source.wrap(a)),
               (b.aliasable = !0),
               (b.referenceCount = 1),
               b);
         },
-        setupHelper: function(a, b, c) {
+        setupHelper: function (a, b, c) {
           var d = [],
             e = this.setupHelperArgs(b, a, d, c),
             f = this.nameLookup("helpers", b, "helper"),
             g = this.aliasable(
               this.contextName(0) +
-              " != null ? " +
-              this.contextName(0) +
-              " : (container.nullContext || {})",
+                " != null ? " +
+                this.contextName(0) +
+                " : (container.nullContext || {})",
             );
           return {
             params: d,
@@ -6106,7 +6123,7 @@ THE SOFTWARE.
             callParams: [g].concat(d),
           };
         },
-        setupParams: function(a, b, c) {
+        setupParams: function (a, b, c) {
           var d = {},
             e = [],
             f = [],
@@ -6118,64 +6135,66 @@ THE SOFTWARE.
             (d.hash = this.popStack()),
             this.trackIds && (d.hashIds = this.popStack()),
             this.stringParams &&
-            ((d.hashTypes = this.popStack()),
+              ((d.hashTypes = this.popStack()),
               (d.hashContexts = this.popStack()));
           var j = this.popStack(),
             k = this.popStack();
           (k || j) &&
-          ((d.fn = k || "container.noop"),
+            ((d.fn = k || "container.noop"),
             (d.inverse = j || "container.noop"));
-          for (var l = b; l--;)
+          for (var l = b; l--; )
             (i = this.popStack()),
-            (c[l] = i),
-            this.trackIds && (g[l] = this.popStack()),
-            this.stringParams &&
-            ((f[l] = this.popStack()), (e[l] = this.popStack()));
+              (c[l] = i),
+              this.trackIds && (g[l] = this.popStack()),
+              this.stringParams &&
+                ((f[l] = this.popStack()), (e[l] = this.popStack()));
           return (
             h && (d.args = this.source.generateArray(c)),
             this.trackIds && (d.ids = this.source.generateArray(g)),
             this.stringParams &&
-            ((d.types = this.source.generateArray(f)),
+              ((d.types = this.source.generateArray(f)),
               (d.contexts = this.source.generateArray(e))),
             this.options.data && (d.data = "data"),
             this.useBlockParams && (d.blockParams = "blockParams"),
             d
           );
         },
-        setupHelperArgs: function(a, b, c, d) {
+        setupHelperArgs: function (a, b, c, d) {
           var e = this.setupParams(a, b, c);
           return (
             (e.loc = JSON.stringify(this.source.currentLocation)),
             (e = this.objectLiteral(e)),
-            d ?
-            (this.useRegister("options"),
-              c.push("options"),
-              ["options=", e]) :
-            c ?
-            (c.push(e), "") :
-            e
+            d
+              ? (this.useRegister("options"),
+                c.push("options"),
+                ["options=", e])
+              : c
+                ? (c.push(e), "")
+                : e
           );
         },
       }),
-      (function() {
-        for (
-          var a =
-            "break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(
-              " ",
-            ),
-            b = (e.RESERVED_WORDS = {}),
-            c = 0,
-            d = a.length; c < d; c++
-        )
-          b[a[c]] = !0;
-      })(),
-      (e.isValidJavaScriptVariableName = function(a) {
-        return !e.RESERVED_WORDS[a] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(a);
-      }),
-      (b["default"] = e),
-      (a.exports = b["default"]);
+        (function () {
+          for (
+            var a =
+                "break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(
+                  " ",
+                ),
+              b = (e.RESERVED_WORDS = {}),
+              c = 0,
+              d = a.length;
+            c < d;
+            c++
+          )
+            b[a[c]] = !0;
+        })(),
+        (e.isValidJavaScriptVariableName = function (a) {
+          return !e.RESERVED_WORDS[a] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(a);
+        }),
+        (b["default"] = e),
+        (a.exports = b["default"]);
     },
-    function(a, b, c) {
+    function (a, b, c) {
       "use strict";
 
       function d(a, b, c) {
@@ -6194,103 +6213,104 @@ THE SOFTWARE.
       b.__esModule = !0;
       var g = c(5),
         h = void 0;
-      try {} catch (i) {}
+      try {
+      } catch (i) {}
       h ||
-        ((h = function(a, b, c, d) {
-            (this.src = ""), d && this.add(d);
-          }),
-          (h.prototype = {
-            add: function(a) {
-              g.isArray(a) && (a = a.join("")), (this.src += a);
-            },
-            prepend: function(a) {
-              g.isArray(a) && (a = a.join("")), (this.src = a + this.src);
-            },
-            toStringWithSourceMap: function() {
-              return {
-                code: this.toString(),
-              };
-            },
-            toString: function() {
-              return this.src;
-            },
-          })),
+        ((h = function (a, b, c, d) {
+          (this.src = ""), d && this.add(d);
+        }),
+        (h.prototype = {
+          add: function (a) {
+            g.isArray(a) && (a = a.join("")), (this.src += a);
+          },
+          prepend: function (a) {
+            g.isArray(a) && (a = a.join("")), (this.src = a + this.src);
+          },
+          toStringWithSourceMap: function () {
+            return {
+              code: this.toString(),
+            };
+          },
+          toString: function () {
+            return this.src;
+          },
+        })),
         (e.prototype = {
-          isEmpty: function() {
+          isEmpty: function () {
             return !this.source.length;
           },
-          prepend: function(a, b) {
+          prepend: function (a, b) {
             this.source.unshift(this.wrap(a, b));
           },
-          push: function(a, b) {
+          push: function (a, b) {
             this.source.push(this.wrap(a, b));
           },
-          merge: function() {
+          merge: function () {
             var a = this.empty();
             return (
-              this.each(function(b) {
+              this.each(function (b) {
                 a.add(["  ", b, "\n"]);
               }),
               a
             );
           },
-          each: function(a) {
+          each: function (a) {
             for (var b = 0, c = this.source.length; b < c; b++)
               a(this.source[b]);
           },
-          empty: function() {
+          empty: function () {
             var a = this.currentLocation || {
               start: {},
             };
             return new h(a.start.line, a.start.column, this.srcFile);
           },
-          wrap: function(a) {
+          wrap: function (a) {
             var b =
-              arguments.length <= 1 || void 0 === arguments[1] ?
-              this.currentLocation || {
-                start: {},
-              } :
-              arguments[1];
-            return a instanceof h ?
-              a :
-              ((a = d(a, this, b)),
+              arguments.length <= 1 || void 0 === arguments[1]
+                ? this.currentLocation || {
+                    start: {},
+                  }
+                : arguments[1];
+            return a instanceof h
+              ? a
+              : ((a = d(a, this, b)),
                 new h(b.start.line, b.start.column, this.srcFile, a));
           },
-          functionCall: function(a, b, c) {
+          functionCall: function (a, b, c) {
             return (
               (c = this.generateList(c)),
               this.wrap([a, b ? "." + b + "(" : "(", c, ")"])
             );
           },
-          quotedString: function(a) {
+          quotedString: function (a) {
             return (
               '"' +
               (a + "")
-              .replace(/\\/g, "\\\\")
-              .replace(/"/g, '\\"')
-              .replace(/\n/g, "\\n")
-              .replace(/\r/g, "\\r")
-              .replace(/\u2028/g, "\\u2028")
-              .replace(/\u2029/g, "\\u2029") +
+                .replace(/\\/g, "\\\\")
+                .replace(/"/g, '\\"')
+                .replace(/\n/g, "\\n")
+                .replace(/\r/g, "\\r")
+                .replace(/\u2028/g, "\\u2028")
+                .replace(/\u2029/g, "\\u2029") +
               '"'
             );
           },
-          objectLiteral: function(a) {
+          objectLiteral: function (a) {
             var b = this,
               c = [];
-            f(a).forEach(function(e) {
+            f(a).forEach(function (e) {
               var f = d(a[e], b);
               "undefined" !== f && c.push([b.quotedString(e), ":", f]);
             });
             var e = this.generateList(c);
             return e.prepend("{"), e.add("}"), e;
           },
-          generateList: function(a) {
+          generateList: function (a) {
             for (var b = this.empty(), c = 0, e = a.length; c < e; c++)
               c && b.add(","), b.add(d(a[c], this));
             return b;
           },
-          generateArray: function(a) {
+          generateArray: function (a) {
             var b = this.generateList(a);
             return b.prepend("["), b.add("]"), b;
           },

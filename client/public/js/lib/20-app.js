@@ -429,10 +429,12 @@ function renderDashboard(id) {
           markers: {
             size: 5,
           },
-          series: [{
-            name: "Load",
-            data: getSeries(response.data, "memoryFreePercent"),
-          }, ],
+          series: [
+            {
+              name: "Load",
+              data: getSeries(response.data, "memoryFreePercent"),
+            },
+          ],
           xaxis: {
             labels: {
               show: false,
@@ -440,7 +442,7 @@ function renderDashboard(id) {
           },
           yaxis: {
             labels: {
-              formatter: function(val) {
+              formatter: function (val) {
                 return Number(val).toLocaleString(undefined, {
                   style: "percent",
                   minimumFractionDigits: 4,
@@ -473,10 +475,12 @@ function renderDashboard(id) {
           markers: {
             size: 5,
           },
-          series: [{
-            name: "Load",
-            data: getSeries(response.data, "cpuPercent"),
-          }, ],
+          series: [
+            {
+              name: "Load",
+              data: getSeries(response.data, "cpuPercent"),
+            },
+          ],
           xaxis: {
             labels: {
               show: false,
@@ -484,7 +488,7 @@ function renderDashboard(id) {
           },
           yaxis: {
             labels: {
-              formatter: function(val) {
+              formatter: function (val) {
                 return Number(val).toLocaleString(undefined, {
                   style: "percent",
                   minimumFractionDigits: 0,
@@ -544,7 +548,7 @@ function containerInfo(sender) {
       const matches = document.querySelectorAll("[data-command]");
       if (matches) {
         matches.forEach((cmd) => {
-          cmd.onclick = function() {
+          cmd.onclick = function () {
             var apiUrl =
               "/api/docker/" +
               this.getAttribute("data-command").replace("-", "/") +

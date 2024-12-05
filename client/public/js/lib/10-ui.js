@@ -1,4 +1,4 @@
-window._render = function(template, args) {
+window._render = function (template, args) {
   return new Promise((resolve, reject) => {
     var url = template.getAttribute("data-url");
     var name = template.getAttribute("data-template");
@@ -56,7 +56,7 @@ window._render = function(template, args) {
   });
 };
 
-window.ui = function(selector) {
+window.ui = function (selector) {
   var targets = [];
   if (selector) {
     targets = document.querySelectorAll(selector);
@@ -67,7 +67,7 @@ window.ui = function(selector) {
   }
 
   return {
-    observe: function(target) {
+    observe: function (target) {
       var ev =
         "__OBS_" +
         target.getAttribute("data-template").split("/").pop() +
@@ -75,7 +75,8 @@ window.ui = function(selector) {
         name;
       window._stateStore[ev] = new MutationObserver(
         (mutationList, observer) => {
-          if (mutationList) {}
+          if (mutationList) {
+          }
         },
       );
 
@@ -84,7 +85,7 @@ window.ui = function(selector) {
         subtree: true,
       });
     },
-    template: function(args) {
+    template: function (args) {
       return new Promise((resolve, reject) => {
         if (targets.length > 0) {
           var promises = [];
@@ -103,7 +104,7 @@ window.ui = function(selector) {
       });
     },
 
-    weather: function(args) {
+    weather: function (args) {
       var apiUrl =
         "api/resources/weather?latitude=" +
         args.latitude +
@@ -124,7 +125,7 @@ window.ui = function(selector) {
           });
       });
     },
-    geoLocation: function() {
+    geoLocation: function () {
       const apiLocation = new Promise((resolve, reject) => {
         var apiUrl = "/api/resources/location";
         axios
@@ -141,10 +142,10 @@ window.ui = function(selector) {
       return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentÿPosition(
-            function(position) {
+            function (position) {
               resolve(position);
             },
-            function(err) {
+            function (err) {
               apiLocation
                 .then((loc) => {
                   resolve(loc);
@@ -165,7 +166,7 @@ window.ui = function(selector) {
         }
       });
     },
-    messageBox: function(args) {
+    messageBox: function (args) {
       document.getElementById("msgboxLabel").innerHTML = args.label;
       document.getElementById("msgboxBody").innerHTML = args.body;
       var options = {
@@ -178,7 +179,7 @@ window.ui = function(selector) {
       );
       window.msgboxModal.show();
     },
-    toast: function(args) {
+    toast: function (args) {
       document.getElementById("toastLabel").innerHTML = args.label;
       document.getElementById("toastBody").innerHTML = args.body;
       document.getElementById("toastSmall").innerHTML = args.small ?? "";
@@ -193,24 +194,24 @@ window.ui = function(selector) {
       );
       window.toast.show();
     },
-    themeChooser: function() {
+    themeChooser: function () {
       var instance = {
-        getStoredTheme: function() {
+        getStoredTheme: function () {
           return localStorage.getItem("theme");
         },
-        setStoredTheme: function(theme) {
+        setStoredTheme: function (theme) {
           localStorage.setItem("theme", theme);
         },
-        getPreferredTheme: function() {
+        getPreferredTheme: function () {
           const storedTheme = this.getStoredTheme();
           if (storedTheme) {
             return storedTheme;
           }
-          return window.matchMedia("(prefers-color-scheme: dark)").matches ?
-            "dark" :
-            "light";
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
         },
-        setTheme: function(value) {
+        setTheme: function (value) {
           var theme = this.getPreferredTheme();
           if (value) {
             theme = value;
@@ -219,15 +220,15 @@ window.ui = function(selector) {
           if (theme === "auto") {
             document.documentElement.setAttribute(
               "data-bs-theme",
-              window.matchMedia("(prefers-color-scheme: dark)").matches ?
-              "dark" :
-              "light",
+              window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light",
             );
           } else {
             document.documentElement.setAttribute("data-bs-theme", theme);
           }
         },
-        chooseTheme: function(theme) {
+        chooseTheme: function (theme) {
           var activeTheme = document.getElementById("activeTheme");
           var activeClass = document.getElementById(theme).className;
           activeTheme.className = activeClass;
@@ -240,7 +241,7 @@ window.ui = function(selector) {
   };
 };
 
-String.prototype.format = function(tokens) {
+String.prototype.format = function (tokens) {
   var formatted = this;
   for (var token in tokens)
     if (tokens.hasOwnProperty(token))
