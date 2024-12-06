@@ -13,7 +13,7 @@ WORKDIR /home/app/build
 
 COPY . .
 
-RUN npm i && \
+RUN pnpm i && \
     apk del .build-deps && \
     npm run build
 

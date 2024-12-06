@@ -6,7 +6,6 @@
   "private": true,
   "license": "GNU",
   "scripts": {
-    "doc": "npx @compodoc/compodoc -d ./docs -p tsconfig.doc.json -n DiscovrNinja",
     "prebuild": "npx rimraf dist && mkdir -p ./dist/client/public/js/",
     "build": "npx nest build",
     "format": "npx prettier --write \"src/**/*.ts\" \"test/**/*.ts\" ",
@@ -61,7 +60,6 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "^1.1.26",
     "@eslint/js": "^9.14.0",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
