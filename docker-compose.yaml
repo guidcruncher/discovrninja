@@ -1,15 +1,21 @@
+name: discovrninja-dev
 
 services:
-  discovrninjadev :
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: base
+  discovrninja-dev:
+    image: guidcruncher/discovrninja:development
+    networks:
+      proxy:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    container_name: discovrninjadev
-    hostname: discovrninjadev
-    expose:
-      - 5001
-    ports:
-      - 5001:5001
+      - ./config/:/home/app/config/:ro
+      - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
+    container_name: discovrninja_dev
+    hostname: discovrninja-dev
+    restart: unless-stopped
+    extra_hosts:
+      host.docker.internal: 172.17.0.1
+      auth.thecrockers.localcert.net: 192.168.1.201
+
+networks:
+  proxy:
+    external: true
