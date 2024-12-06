@@ -16,7 +16,10 @@ COPY . .
 RUN pnpm i && \
     npm i @nestjs/core @nestjs/common && \
     apk del .build-deps && \
-    npm run build
+    npm run build && \
+    rm -r ./node_modules && \
+    pnpm i --prod && \
+    npm i @nestjs/core @nestjs/common
 
 # Assemble
 

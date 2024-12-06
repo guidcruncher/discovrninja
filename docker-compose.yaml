@@ -1,15 +1,14 @@
 
 services:
-  discovrninja:
+  discovrninjadev :
     build:
       context: .
       dockerfile: Dockerfile
       target: base
-    network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    container_name: discovrninja
-    hostname: discovrninja
+    container_name: discovrninjadev
+    hostname: discovrninjadev
     expose:
       - 5001
     ports:
