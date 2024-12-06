@@ -1,7 +1,7 @@
 module.exports = (Handlebars) => {
   Handlebars.registerHelper(
     "service",
-    function (obj, services, parent, opacity) {
+    function(obj, services, parent, opacity) {
       var html = "";
       var template = "";
       var p = {
@@ -53,7 +53,10 @@ module.exports = (Handlebars) => {
                 serviceUrl += "&days=" + settings.days;
               }
               var bstr = Buffer.from(
-                JSON.stringify({ s: settings, p: p }),
+                JSON.stringify({
+                  s: settings,
+                  p: p
+                }),
               ).toString("base64");
               html =
                 '<div data-settings="' +
@@ -66,7 +69,10 @@ module.exports = (Handlebars) => {
             default:
               f = Handlebars.partials[template];
               if (f) {
-                html = f({ settings: settings, parent: p });
+                html = f({
+                  settings: settings,
+                  parent: p
+                });
               }
               break;
           }
@@ -76,7 +82,10 @@ module.exports = (Handlebars) => {
           services.forEach((s) => {
             if (s.containerName.toLowerCase() == realName) {
               f = Handlebars.partials[template];
-              html = f({ service: s, parent: p });
+              html = f({
+                service: s,
+                parent: p
+              });
               return;
             }
           });

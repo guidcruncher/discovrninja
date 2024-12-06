@@ -1,5 +1,10 @@
-header: false
-footer: false
+header: 
+  visible: true
+  items: 
+    - search
+footer:
+  visible: false
+  items:
 background:
   type: "daily" # [none, daily, image, bgcolor, filter ]
   url: "bing"

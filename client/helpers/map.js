@@ -1,5 +1,5 @@
 module.exports = (Handlebars) => {
-  Handlebars.registerHelper("map", function (array, iter) {
+  Handlebars.registerHelper("map", function(array, iter) {
     if (!Array.isArray(array)) return "";
     var len = array.length;
     var res = new Array(len);

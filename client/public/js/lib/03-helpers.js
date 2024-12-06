@@ -1,11 +1,11 @@
 // var Handlebars = require("handlebars");
 
-Handlebars.registerHelper("debug", function (obj) {
+Handlebars.registerHelper("debug", function(obj) {
   return new Handlebars.SafeString(
     "<pre>" + JSON.stringify(obj, null, 2) + "</pre>",
   );
 });
-Handlebars.registerHelper("desktopbackground", function (opt) {
+Handlebars.registerHelper("desktopbackground", function(opt) {
   var html = 'style="';
 
   if (!opt) {
@@ -31,12 +31,12 @@ Handlebars.registerHelper("desktopbackground", function (opt) {
   html += '"';
   return new Handlebars.SafeString(html);
 });
-Handlebars.registerHelper("humandate", function (value) {
+Handlebars.registerHelper("humandate", function(value) {
   var dte = new Date(value);
   var dteStr = dte.toLocaleDateString() + " " + dte.toLocaleTimeString();
   return new Handlebars.SafeString(dteStr);
 });
-Handlebars.registerHelper("humandateonly", function (value) {
+Handlebars.registerHelper("humandateonly", function(value) {
   var dte = new Date(value);
   var dteStr = dte.toLocaleDateString("en-GB", {
     weekday: "short",
@@ -45,7 +45,7 @@ Handlebars.registerHelper("humandateonly", function (value) {
   });
   return new Handlebars.SafeString(dteStr);
 });
-Handlebars.registerHelper("isempty", function (field, options) {
+Handlebars.registerHelper("isempty", function(field, options) {
   if (field) {
     if (field === "") {
       return options.fn(this);
@@ -55,7 +55,7 @@ Handlebars.registerHelper("isempty", function (field, options) {
 
   return options.fn(this);
 });
-Handlebars.registerHelper("isnotempty", function (field, options) {
+Handlebars.registerHelper("isnotempty", function(field, options) {
   if (field) {
     if (field === "") {
       return options.inverse(this);
@@ -65,13 +65,13 @@ Handlebars.registerHelper("isnotempty", function (field, options) {
 
   return options.inverse(this);
 });
-Handlebars.registerHelper("label", function (key, context) {
+Handlebars.registerHelper("label", function(key, context) {
   if (context.Config.Labels[key]) {
     return new Handlebars.SafeString(context.Config.Labels[key]);
   }
   return new Handlebars.SafeString("");
 });
-Handlebars.registerHelper("map", function (array, iter) {
+Handlebars.registerHelper("map", function(array, iter) {
   if (!Array.isArray(array)) return "";
   var len = array.length;
   var res = new Array(len);
@@ -86,14 +86,14 @@ Handlebars.registerHelper("map", function (array, iter) {
   }
   return res;
 });
-Handlebars.registerHelper("now", function () {
+Handlebars.registerHelper("now", function() {
   var dte = new Date();
   var dteStr = dte.toLocaleDateString() + " " + dte.toLocaleTimeString();
   return new Handlebars.SafeString(dteStr);
 });
 Handlebars.registerHelper(
   "service",
-  function (name, services, parent, opacity, settings) {
+  function(name, services, parent, opacity, settings) {
     var html = "";
     var template = "";
     var p = parent;
@@ -177,7 +177,7 @@ Handlebars.registerHelper(
     return new Handlebars.SafeString(html);
   },
 );
-Handlebars.registerHelper("stringify", function (obj) {
+Handlebars.registerHelper("stringify", function(obj) {
   return new Handlebars.SafeString(JSON.stringify(obj, null, 0));
 });
 

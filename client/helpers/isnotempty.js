@@ -1,5 +1,5 @@
 module.exports = (Handlebars) => {
-  Handlebars.registerHelper("isnotempty", function (field, options) {
+  Handlebars.registerHelper("isnotempty", function(field, options) {
     if (field) {
       if (field === "") {
         return options.inverse(this);

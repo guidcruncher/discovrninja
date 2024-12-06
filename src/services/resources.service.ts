@@ -35,8 +35,8 @@ export class ResourcesService {
     });
   }
 
-  public fetchWikipediaPage(lang: string, page: string): Promise<Any> {
-    var apiUrl =
+  public fetchWikipediaPage(lang: string, page: string): Promise<any> {
+    const apiUrl =
       "https://" +
       lang.toLowerCase() +
       ".wikipedia.org/w/api.php?action=parse&section=0&prop=text&page=" +

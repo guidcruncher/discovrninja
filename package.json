@@ -9,7 +9,7 @@
     "doc": "npx @compodoc/compodoc -d ./docs -p tsconfig.doc.json -n DiscovrNinja",
     "prebuild": "npx rimraf dist && mkdir -p ./dist/client/public/js/",
     "build": "npx nest build",
-    "format": "npx prettier --write \"src/**/*.ts\" \"test/**/*.ts\" && npx prettier --parser babel --write \"client/**/*.js\" ",
+    "format": "npx prettier --write \"src/**/*.ts\" \"test/**/*.ts\" ",
     "start:dev": "NODE_CONFIG_DIR=/home/jcrocker/src/discovrninja/config/ && npx nest start --watch",
     "start:debug": "npx nest start --debug --watch",
     "start:prod": "px node dist/main",

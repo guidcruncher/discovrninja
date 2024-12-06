@@ -1,5 +1,5 @@
 module.exports = (Handlebars) => {
-  Handlebars.registerHelper("isempty", function (field, options) {
+  Handlebars.registerHelper("isempty", function(field, options) {
     if (field) {
       if (field === "") {
         return options.fn(this);

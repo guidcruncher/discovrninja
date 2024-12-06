@@ -1,5 +1,5 @@
 module.exports = (Handlebars) => {
-  Handlebars.registerHelper("desktopbackground", function (opt) {
+  Handlebars.registerHelper("desktopbackground", function(opt) {
     var html = 'style="';
 
     if (!opt) {

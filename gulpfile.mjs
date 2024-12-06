@@ -37,7 +37,7 @@ gulp.task("compile", task("npm run build"));
 gulp.task("formathtml", task("npx js-beautify -r --templating handlebars -s 2 -n -w 0 --type html -j ./client/**/*.html"));
 gulp.task("formathbs", task("npx js-beautify -r --templating handlebars -s 2 -n -w 0 --type html -j ./client/views/**/*.hbs"));
 gulp.task("formatcss", task('npx js-beautify -r -s 2 -n -w 0 --type css ./client/**/*.css'));
-gulp.task("formatjs", task('npx js-beautify -r -s 2 -n -w 0 --type js ./client/public/js/lib/*.js'));
+gulp.task("formatjs", task('npx js-beautify -r -s 2 -n -w 0 --type js ./client/public/js/lib/*.js ./client/helpers/*.js '));
 gulp.task("format", series(task("npm run format"), "formatcss", "formathbs", "formathtml"));
 gulp.task("startdev", task("npm run start:dev"));
 gulp.task("uglify", series(task("npm run uglify"), task("npx js-beautify -r -s 2 -n -w 0 --type js ./client/public/js/main.js")));

@@ -1,5 +1,5 @@
 module.exports = (Handlebars) => {
-  Handlebars.registerHelper("humandateonly", function (value) {
+  Handlebars.registerHelper("humandateonly", function(value) {
     var dte = new Date(value);
     var dteStr = dte.toLocaleDateString("en-GB", {
       weekday: "short",
