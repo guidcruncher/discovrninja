@@ -1,9 +1,8 @@
 FROM node:22.9.0-alpine3.20 AS base
 
-RUN apk add --no-cache nano bash curl sqlite tzdata bind-tools && \
+RUN apk add --no-cache nano curl tzdata bind-tools && \
     apk add --virtual .build-deps python3 make gcc g++  && \
-    mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /home/app/server /home/app/client /home/app/node_modules && \
-    npm update -g npm
+    mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /home/app/server /home/app/client /home/app/node_modules
 
 FROM base AS build
 
@@ -25,7 +24,9 @@ RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     cp ./build/dist/* ./server/ -R && \
     cp ./build/client/* /home/app/client/ -R && \
     cp ./build/start.sh /home/app/start.sh && \
-    cp ./build/config/config.yaml /home/app/config/config.yaml && \
+    cp ./build/config/config.example.yaml /home/app/config.default && \
+    cp ./build/config/desktop.example.yaml /home/app/desktop.default && \
+    cp ./build/config/services.example.yaml /home/app/services.default && \
     rm -r ./build && \
     mkdir -p /docker/stacks/ && \
     chmod +x /home/app/start.sh
