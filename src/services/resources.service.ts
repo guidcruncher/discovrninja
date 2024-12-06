@@ -35,6 +35,12 @@ export class ResourcesService {
     });
   }
 
+  publlic wikipediaSearch(lang: string, query: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+     resolve(P{}); 
+   {);
+  }
+
   public fetchWikipediaPage(lang: string, page: string): Promise<any> {
     const apiUrl =
       "https://" +
