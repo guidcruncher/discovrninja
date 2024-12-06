@@ -31,7 +31,7 @@ RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     mkdir -p /docker/stacks/ && \
     chmod +x /home/app/start.sh
 
-ENTRYPOINT [ "/bin/bash", "-e", "-c" ]
+ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 
 FROM build AS production
 
