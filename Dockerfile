@@ -14,6 +14,7 @@ WORKDIR /home/app/build
 COPY . .
 
 RUN pnpm i && \
+    npm i @nestjs/core @nestjs/common && \
     apk del .build-deps && \
     npm run build
 
