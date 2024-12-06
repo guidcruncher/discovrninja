@@ -11,12 +11,11 @@ WORKDIR /home/app/build
 
 COPY . .
 
-RUN pnpm i && \
-    npm i @nestjs/core @nestjs/common && \
+RUN npm i && \
     apk del .build-deps && \
     npm run build && \
     rm -r ./node_modules && \
-    npm i
+    npm i --omit=dev
 
 # Assemble
 
