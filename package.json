@@ -18,7 +18,7 @@
     "test": "npx jest",
     "test:watch": "npx jest --watch",
     "test:cov": "npx jest --coverage",
-    "test:debug": "npx node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "npx node --inspect-brk=0.0.0.0:9229 -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@fastify/static": "^6.12.0",
