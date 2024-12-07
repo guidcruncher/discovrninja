@@ -35,10 +35,10 @@ export class ResourcesService {
     });
   }
 
-  publlic wikipediaSearch(lang: string, query: string): Promise<any> {
+  public wikipediaSearch(lang: string, query: string): Promise<any> {
     return new Promise((resolve, reject) => {
-     resolve(P{}); 
-   {);
+      resolve({});
+    });
   }
 
   public fetchWikipediaPage(lang: string, page: string): Promise<any> {

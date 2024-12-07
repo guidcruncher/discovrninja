@@ -2,7 +2,9 @@ name: discovrninja-dev
 
 services:
   discovrninja-dev:
-    image: guidcruncher/discovrninja:development
+    build:
+      context: .
+      dockerfile: Dockerfile
     networks:
       proxy:
     volumes:
@@ -15,6 +17,8 @@ services:
     extra_hosts:
       host.docker.internal: 172.17.0.1
       auth.thecrockers.localcert.net: 192.168.1.201
+    ports:
+      - 5101:5001
 
 networks:
   proxy:

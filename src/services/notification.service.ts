@@ -8,7 +8,45 @@ export class NotificationService {
 
   constructor(private configService: ConfigService) {}
 
-  public send(recipients: string[], body: string): Promise<any> {
+  public sendUsingPushover(
+    users: string[],
+    title: string,
+    message: string,
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const client = new HttpUtilities();
+      const apiUrl = "https://api.pushover.net/1/messages.json";
+      const promises = [];
+      let userTokens: string[] = users;
+
+      if (user.length == 0) {
+        userTokens = this.configService.get("notifications.pushover.deliverTo");
+      }
+
+      userTokens.forEach((userToken) => {
+        let payload =
+          "token=" +
+          encodeURIComponent(
+            this.configService.get("notifications.pushover.apiToken"),
+          );
+        payload += "&user=" + encodeURIComponent(userToken);
+        payload += "&title=" + encodeURIComponent(title);
+        payload += "&message=" + encodeURIComponent(message);
+        promises.push(client.send("POST", apiUrl, payload));
+      });
+
+      Promise.allSettled(promises)
+        .then((result) => {
+          resolve(true);
+        })
+        .catch((err) => {
+          this.logger.error("Error sending Pushover notification", err);
+          reject(err);
+        });
+    });
+  }
+
+  public sendUsingApprise(recipients: string[], body: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const client = new HttpUtilities();
       const apiUrl =
@@ -22,7 +60,7 @@ export class NotificationService {
           resolve(true);
         })
         .catch((err) => {
-          this.logger.error("Error sending notification", err);
+          this.logger.error("Error sending Apprise notification", err);
           reject(err);
         });
     });

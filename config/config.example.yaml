@@ -54,3 +54,12 @@ dns:
     - name: "cloudflare"
       address: "1.1.1.1:53"
       transport: "udp"
+
+notifications:
+  apprise:
+    enabled: false
+    apiUrl:
+  pushover:
+    enabled: false
+    apiToken:
+    deliverTo:
