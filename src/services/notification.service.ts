@@ -19,7 +19,7 @@ export class NotificationService {
       const promises = [];
       let userTokens: string[] = users;
 
-      if (user.length == 0) {
+      if (users.length == 0) {
         userTokens = this.configService.get("notifications.pushover.deliverTo");
       }
 
