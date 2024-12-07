@@ -34,6 +34,12 @@ export class DesktopService {
   public renderDesktop(): any {
     return new Promise((resolve, reject) => {
       const desktop = this.readFile();
+      if (desktop.theme) {
+        if (!desktop.theme.toLowerCase().startsWith("http")) {
+          desktop.theme = "/assets/themes/"+desktop.theme;
+        }
+      }
+
       if (desktop.background) {
         if (desktop.background.type == "daily") {
           let p: Promise<string> = null;
