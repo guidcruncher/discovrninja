@@ -1,3 +1,4 @@
+import { Injectable, Logger } from "@nestjs/common";
 import { Param, Query, Controller, Get, Res } from "@nestjs/common";
 import { DockerService } from "@services/docker.service";
 import { IconService } from "@services/icon.service";
@@ -16,6 +17,8 @@ export class AppController {
     private readonly desktopService: DesktopService,
     private resourcesService: ResourcesService,
   ) {}
+
+  private readonly logger = new Logger(AppController.name);
 
   @Get()
   async homepage(@Res() res) {
@@ -46,7 +49,11 @@ export class AppController {
                   );
                   resolve();
                 })
-                .catch(() => {
+                .catch((err) => {
+                  this.logger.error(
+                    "Error in index getting container state",
+                    err,
+                  );
                   res.view(
                     "index.hbs",
                     { desktop: desktop, services: definitions },
@@ -56,6 +63,7 @@ export class AppController {
                 });
             })
             .catch((err) => {
+              this.logger.error("Error in index", err);
               res.status(500).send(err);
               reject();
             });

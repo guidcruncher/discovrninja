@@ -30,10 +30,13 @@ export class DockerService {
     return new Promise((resolve, reject) => {
       this.getContainer(sd.containerName)
         .then((ctr) => {
-          sd.available = true;
+          sd.available = !["exited", "dead", "paused"].includes(
+            ctr.State.Status,
+          );
           resolve(sd);
         })
         .catch((err) => {
+          this.logger.error("Error checking container state", err);
           sd.available = false;
           resolve(sd);
         });
