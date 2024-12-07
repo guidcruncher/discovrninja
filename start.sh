@@ -10,7 +10,7 @@ fi
 
 if [ ! -f /home/app/client/public/themes/bootstrap5.3.3/bootstrap.min.css ]; then
   mkdir -p /home/app/client/public/themes/bootstrap5.3.3/
-  cp /home/app/client/themes/bootstrap5.3.3/ /home/app/client/public/themes/bootstrap5.3.3/ -R
+  cp /home/app/client/themes/bootstrap5.3.3/* /home/app/client/public/themes/bootstrap5.3.3/ -R
 fi
 
 if [ ! -f /home/app/config/config.yaml ]; then
