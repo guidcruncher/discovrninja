@@ -35,9 +35,39 @@ export class ResourcesService {
     });
   }
 
-  public wikipediaSearch(lang: string, query: string): Promise<any> {
+  public wikipediaSearch(
+    lang: string,
+    query: string,
+    limit: number,
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
-      resolve({});
+      const apiUrl =
+        "https://" +
+        lang.toLowerCase() +
+        "wikipedia.org/w/api.php?action=opensearch&search=" +
+        encodeURIComponent(query) +
+        "&format=json&limit=" +
+        limit.toString();
+      const client: HttpUtilities = new HttpUtilities();
+      client
+        .retrieve("GET", apiUrl)
+        .then((jsonData) => {
+          const parsed: any = JSON.parse(jsonData);
+          const result = { searchTerm: parsed[0], results: [] };
+
+          parsed[1].forEach((url, i) => {
+            const entry = {
+              url: url,
+              description: parsed[2][i],
+              title: parsed[3][i],
+            };
+            result.results.push(entry);
+          });
+          resolve(result);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 
