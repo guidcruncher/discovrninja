@@ -1,4 +1,4 @@
-theme: "bootstrap5.3.3/dist/css/bootstrap.min.css"
+theme: "bootstrap5.3.3/bootstrap.min.css"
 header: 
   visible: true
   items: 
