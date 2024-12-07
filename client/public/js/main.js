@@ -6868,7 +6868,7 @@ String.prototype.format = function(tokens) {
 
 function doSearch(ctl) {
   var q = document.querySelector(ctl).value;
-  window.open("https://www.google.com/search?q=" + encodeURIComponent(q))
+  window.open("https://html.duckduckgo.com/html?q=" + encodeURIComponent(q))
 }
 
 function newsPage(url) {
