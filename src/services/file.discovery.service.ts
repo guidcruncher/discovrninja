@@ -39,11 +39,11 @@ export class FileDiscoveryService implements IDiscoveryAgent {
         return;
       }
       const filename = this.configService.get("discovery.file.filename");
-       result = this.readFile(filename);
-        if (!result.services) {
-          this.logger.warn("No services defined in file.");
-          reject();
-        }
+      result = this.readFile(filename);
+      if (!result.services) {
+        this.logger.warn("No services defined in file.");
+        reject();
+      }
       resolve(result);
     });
   }
