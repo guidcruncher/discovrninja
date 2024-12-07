@@ -49,7 +49,7 @@ describe("NotificationService", () => {
       expect(mockSend).toHaveBeenCalledWith(
         "POST",
         "https://api.pushover.net/1/messages.json",
-        expect.stringContaining("token=mockApiToken")
+        expect.stringContaining("token=mockApiToken"),
       );
     });
 
@@ -71,7 +71,7 @@ describe("NotificationService", () => {
       expect(mockSend).toHaveBeenCalledWith(
         "POST",
         "https://api.pushover.net/1/messages.json",
-        expect.stringContaining("user=defaultUser")
+        expect.stringContaining("user=defaultUser"),
       );
     });
 
@@ -85,12 +85,12 @@ describe("NotificationService", () => {
       const loggerErrorSpy = jest.spyOn(Logger.prototype, "error");
 
       await expect(
-        service.sendUsingPushover(["user1"], "Title", "Message")
+        service.sendUsingPushover(["user1"], "Title", "Message"),
       ).rejects.toThrow("Pushover Error");
 
       expect(loggerErrorSpy).toHaveBeenCalledWith(
         "Error sending Pushover notification",
-        expect.any(Error)
+        expect.any(Error),
       );
     });
   });
@@ -115,7 +115,7 @@ describe("NotificationService", () => {
       expect(mockSend).toHaveBeenCalledWith(
         "POST",
         "http://mock-apprise-url/notify",
-        expect.stringContaining("urls=recipient1,recipient2")
+        expect.stringContaining("urls=recipient1,recipient2"),
       );
     });
 
@@ -125,16 +125,18 @@ describe("NotificationService", () => {
         send: mockSend,
       }));
 
-      jest.spyOn(configService, "get").mockReturnValue("http://mock-apprise-url");
+      jest
+        .spyOn(configService, "get")
+        .mockReturnValue("http://mock-apprise-url");
       const loggerErrorSpy = jest.spyOn(Logger.prototype, "error");
 
       await expect(
-        service.sendUsingApprise(["recipient1"], "Body")
+        service.sendUsingApprise(["recipient1"], "Body"),
       ).rejects.toThrow("Apprise Error");
 
       expect(loggerErrorSpy).toHaveBeenCalledWith(
         "Error sending Apprise notification",
-        expect.any(Error)
+        expect.any(Error),
       );
     });
   });
