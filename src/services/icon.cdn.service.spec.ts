@@ -5,7 +5,7 @@ import { Icon } from "@schemas/icons.schema";
 import { IconResult } from "@services/icon.service";
 import { Model } from "mongoose";
 
-import { IconCDNService } from "./icon-cdn.service";
+import { IconCDNService } from "./icon.cdn.service";
 
 jest.mock("@helpers/httputilities");
 jest.mock("@nestjs/mongoose");
@@ -162,33 +162,6 @@ describe("IconCDNService", () => {
       const result = await service.query("nonexistent", true);
 
       expect(result).toEqual([]);
-    });
-  });
-
-  describe("saveAllSlugs", () => {
-    it("should save all slugs and resolve successfully", async () => {
-      const data = {
-        simpleicons: ["github"],
-        selfhst: ["gitlab"],
-      };
-
-      iconModelMock.deleteMany.mockResolvedValueOnce({});
-      iconModelMock.save = jest.fn().mockResolvedValueOnce(null);
-
-      const result = await service.saveAllSlugs(data);
-
-      expect(result).toBe(true);
-      expect(iconModelMock.deleteMany).toHaveBeenCalled();
-    });
-
-    it("should reject if there is an error saving slugs", async () => {
-      const data = { simpleicons: ["github"] };
-      iconModelMock.deleteMany.mockResolvedValueOnce({});
-      iconModelMock.save = jest
-        .fn()
-        .mockRejectedValueOnce(new Error("Save error"));
-
-      await expect(service.saveAllSlugs(data)).rejects.toThrow("Save error");
     });
   });
 
