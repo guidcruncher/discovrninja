@@ -84,6 +84,25 @@ window.ui = function(selector) {
         subtree: true,
       });
     },
+    enterCheck: function(args) {
+      const keyupfunc = function(e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+
+          e.preventDefault();
+          if (args.onEnterKey) {
+            args.onEnterKey(this);
+            return false;
+          }
+        }
+      }
+      targets.forEach((ctl) => {
+        if (window.attachEvent) {
+          ctl.attachEvent("onkeyup", keyupfunc);
+        } else {
+          ctl.addEventListener("keyup", keyupfunc, false);
+        }
+      });
+    },
     template: function(args) {
       return new Promise((resolve, reject) => {
         if (targets.length > 0) {

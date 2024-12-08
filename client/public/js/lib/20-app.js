@@ -184,6 +184,9 @@ function iconSearch() {
     document.getElementById("iconSearchModal"),
     options,
   );
+  ui("#iconSearchQuery").enterCheck({
+    onEnterKey: performIconSearch
+  });
   window.iconSearchModal.show();
   document.getElementById("iconSearchQuery").focus();
 }
@@ -301,26 +304,6 @@ function scanDocker() {
     });
 }
 
-function updateDNS() {
-  var apiUrl = "/api/discovery/scan/updatedns";
-  axios
-    .get(apiUrl)
-    .then((response) => {
-      ui().messageBox({
-        label: "DNS",
-        body: "DNS Update complete.",
-      });
-    })
-    .catch((err) => {
-      alert(err);
-    });
-}
-
-function respondEnter(e) {
-  if (e.key == "Enter" || e.keyCode == 13) {
-    document.getElementById("btnSearch").click();
-  }
-}
 
 function changeIcon(target, action) {
   var name = target.getAttribute("data-containerid");
@@ -359,6 +342,9 @@ function changeIcon(target, action) {
           }
         }
       }
+      ui("#iconSearchQuery").enterCheck({
+        onEnterKey: performIconSearch
+      });
       document.getElementById("btnSearch").setAttribute("data-container", name);
       window.iconSearchModal.show();
       document.getElementById("iconSearchQuery").focus();
@@ -610,6 +596,9 @@ function changeIconFromEdit() {
       performIconSearch();
     }
   }
+  ui("#iconSearchQuery").enterCheck({
+    onEnterKey: performIconSearch
+  });
   document.getElementById("btnSearch").setAttribute("data-container", name);
   window.iconSearchModal.show();
   document.getElementById("iconSearchQuery").focus();

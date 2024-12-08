@@ -5452,7 +5452,7 @@ this["app"]["templates"]["header"] = Handlebars.template({
       }
       return undefined
     };
-    return '<nav class="navbar navbar-expand-lg sticky-top bg-brand">\n  <div class="container-fluid">\n    <a class="navbar-brand" href="/admin/index"><img width="38px" height=38px" src="/assets/img/logo.png" />&nbsp; DiscovrNinja!</a>\n\n    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\n      <span class="navbar-toggler-icon"></span>\n    </button>\n    <div class="collapse navbar-collapse" id="navbarNavDropdown">\n      <ul class="navbar-nav">\n        <li class="nav-item">\n          <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" href="/"><i class="fa-solid fa-book"></i> Desktop</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" onclick="iconSearch(); return false;" href="#"><i class="fa-solid fa-icons"></i> Icons</a>\n        </li>\n        <li class="nav-item dropdown">\n          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\n            <i class="fa-solid fa-screwdriver-wrench"></i> Tools\n          </a>\n          <ul class="dropdown-menu">\n            <li><a class="dropdown-item" href="#" onclick="scanDocker(); return false;"><i class="fa-solid fa-map"></i> Scan</a></li>\n            <li><a class="dropdown-item" href="#" onclick="updateDNS(); return false;"><i class="fa-solid fa-server"></i> Update DNS</a></li>\n            <li>\n              <hr class="dropdown-divider">\n            </li>\n            <li><a class="dropdown-item" href="#" onclick="composerise(); return false;"><i class="fa-solid fa-box"></i> Composerise</a></li>\n          </ul>\n        </li>\n        <li class="nav-item">\n' + ((stack1 = container.invokePartial(lookupProperty(partials, "themechooser"), depth0, {
+    return '<nav class="navbar navbar-expand-lg sticky-top bg-brand">\n  <div class="container-fluid">\n    <a class="navbar-brand" href="/admin/index"><img width="38px" height=38px" src="/assets/img/logo.png" />&nbsp; DiscovrNinja!</a>\n\n    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\n      <span class="navbar-toggler-icon"></span>\n    </button>\n    <div class="collapse navbar-collapse" id="navbarNavDropdown">\n      <ul class="navbar-nav">\n        <li class="nav-item">\n          <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-house"></i> Home</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" href="/"><i class="fa-solid fa-book"></i> Desktop</a>\n        </li>\n        <li class="nav-item">\n          <a class="nav-link" onclick="iconSearch(); return false;" href="#"><i class="fa-solid fa-icons"></i> Icons</a>\n        </li>\n        <li class="nav-item dropdown">\n          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">\n            <i class="fa-solid fa-screwdriver-wrench"></i> Tools\n          </a>\n          <ul class="dropdown-menu">\n            <li><a class="dropdown-item" href="#" onclick="scanDocker(); return false;"><i class="fa-solid fa-map"></i> Scan</a></li>\n            <li>\n              <hr class="dropdown-divider">\n            </li>\n            <li><a class="dropdown-item" href="#" onclick="composerise(); return false;"><i class="fa-solid fa-box"></i> Composerise</a></li>\n          </ul>\n        </li>\n        <li class="nav-item">\n' + ((stack1 = container.invokePartial(lookupProperty(partials, "themechooser"), depth0, {
       name: "themechooser",
       data: data,
       indent: "          ",
@@ -5467,7 +5467,7 @@ this["app"]["templates"]["header"] = Handlebars.template({
 this["app"]["templates"]["iconsearch"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
-    return '<div class="modal fade" id="iconSearchModal" tabindex="-1" aria-label>\n  <div class="modal-dialog modal-dialog-scrollable modal-lg">\n    <div class="modal-content">\n      <div class="modal-header">\n        <h1 class="modal-title fs-5">Icon Search</h1>\n        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n      </div>\n      <div class="modal-body">\n        <div class="mb-1">\n          <label for="iconSearchQuery" class="form-label">Search Query</label>\n          <input type="text" class="form-control" id="iconSearchQuery" placeholder="search" onkeyup="respondEnter">\n        </div>\n        <div id="iconSearchResults" style="height:256px;overflow:scroll;"></div>\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-secondary" id="btnSearch" onclick="performIconSearch(); return false;" data-selectable="false">Search</button>\n        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n'
+    return '<div class="modal fade" id="iconSearchModal" tabindex="-1" aria-label>\n  <div class="modal-dialog modal-dialog-scrollable modal-lg">\n    <div class="modal-content">\n      <div class="modal-header">\n        <h1 class="modal-title fs-5">Icon Search</h1>\n        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n      </div>\n      <div class="modal-body">\n        <div class="mb-1">\n          <label for="iconSearchQuery" class="form-label">Search Query</label>\n          <input type="text" class="form-control" id="iconSearchQuery" placeholder="search">\n        </div>\n        <div id="iconSearchResults" style="height:256px;overflow:scroll;"></div>\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-secondary" id="btnSearch" onclick="performIconSearch(); return false;" data-selectable="false">Search</button>\n        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n'
   },
   useData: true
 });
@@ -6218,7 +6218,7 @@ this["app"]["templates"]["widget-news"] = Handlebars.template({
 this["app"]["templates"]["widget-search"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
-    return '    <form class="d-flex" role="search">\n      <input class="form-control me-2" id="q" type="search" placeholder="Search" aria-label="Search">\n      <button class="btn btn-primary" type="button" onclick="doSearch(\'#q\');return false;">Search</button>\n    </form>\n'
+    return '    <form class="d-flex" role="search">\n      <input class="form-control me-2" id="q" type="text" placeholder="Search" aria-label="Search">\n      <button class="btn btn-primary" type="button" onclick="doSearch(\'#q\');return false;">Search</button>\n    </form>\n    <script type="text/javascript">\n      ui("#q").enterCheck({\n        onEnterKey: function () {\n          doSearch(\'#q\')\n        }\n      });\n\n    <\/script>\n'
   },
   useData: true
 });
@@ -6743,6 +6743,24 @@ window.ui = function(selector) {
         subtree: true
       })
     },
+    enterCheck: function(args) {
+      const keyupfunc = function(e) {
+        if (e.key === "Enter" || e.keyCode === 13) {
+          e.preventDefault();
+          if (args.onEnterKey) {
+            args.onEnterKey(this);
+            return false
+          }
+        }
+      };
+      targets.forEach(ctl => {
+        if (window.attachEvent) {
+          ctl.attachEvent("onkeyup", keyupfunc)
+        } else {
+          ctl.addEventListener("keyup", keyupfunc, false)
+        }
+      })
+    },
     template: function(args) {
       return new Promise((resolve, reject) => {
         if (targets.length > 0) {
@@ -7018,6 +7036,9 @@ function iconSearch() {
   document.getElementById("btnSearch").setAttribute("data-container", "");
   document.getElementById("btnSearch").setAttribute("data-action", "");
   window.iconSearchModal = new bootstrap.Modal(document.getElementById("iconSearchModal"), options);
+  ui("#iconSearchQuery").enterCheck({
+    onEnterKey: performIconSearch
+  });
   window.iconSearchModal.show();
   document.getElementById("iconSearchQuery").focus()
 }
@@ -7083,24 +7104,6 @@ function scanDocker() {
   })
 }
 
-function updateDNS() {
-  var apiUrl = "/api/discovery/scan/updatedns";
-  axios.get(apiUrl).then(response => {
-    ui().messageBox({
-      label: "DNS",
-      body: "DNS Update complete."
-    })
-  }).catch(err => {
-    alert(err)
-  })
-}
-
-function respondEnter(e) {
-  if (e.key == "Enter" || e.keyCode == 13) {
-    document.getElementById("btnSearch").click()
-  }
-}
-
 function changeIcon(target, action) {
   var name = target.getAttribute("data-containerid");
   var apiUrl = "/api/discovery/definition/" + encodeURIComponent(name);
@@ -7125,6 +7128,9 @@ function changeIcon(target, action) {
         }
       }
     }
+    ui("#iconSearchQuery").enterCheck({
+      onEnterKey: performIconSearch
+    });
     document.getElementById("btnSearch").setAttribute("data-container", name);
     window.iconSearchModal.show();
     document.getElementById("iconSearchQuery").focus()
@@ -7321,6 +7327,9 @@ function changeIconFromEdit() {
       performIconSearch()
     }
   }
+  ui("#iconSearchQuery").enterCheck({
+    onEnterKey: performIconSearch
+  });
   document.getElementById("btnSearch").setAttribute("data-container", name);
   window.iconSearchModal.show();
   document.getElementById("iconSearchQuery").focus()
