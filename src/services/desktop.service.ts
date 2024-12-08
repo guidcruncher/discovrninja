@@ -36,7 +36,7 @@ export class DesktopService {
       const desktop = this.readFile();
       if (desktop.theme) {
         if (!desktop.theme.toLowerCase().startsWith("http")) {
-          desktop.theme = "/assets/themes/"+desktop.theme;
+          desktop.theme = "/assets/themes/" + desktop.theme;
         }
       }
 
