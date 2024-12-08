@@ -2,7 +2,7 @@ FROM node:22.9.0-alpine3.20 AS base
 
 RUN apk add --no-cache nano curl tzdata bind-tools && \
     apk add --virtual .build-deps build-base python3 make gcc g++  && \
-    apk add --virtual .canvas-deps libpng libpng-dev jpeg-dev pango-dev cairo-dev giflib-dev glibc-full && \
+    apk add --virtual .canvas-deps libpng libpng-dev jpeg-dev pango-dev cairo-dev giflib-dev gcompat libstdc++ && \
     mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /home/app/server /home/app/client /home/app/node_modules
 
 FROM base AS build

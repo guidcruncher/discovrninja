@@ -9,11 +9,6 @@ host:
   appServer:
     listenAddress: "0.0.0.0"
     listenPort: 5001
-  dnsServer:
-    endpoint:
-  webServer:
-    listenAddress: "0.0.0.0"
-    listenPort: 80
   mongo:
     url: mongodb://root:password@127.0.0.1:27017/
 
@@ -43,17 +38,6 @@ discovery:
 
 desktop:
   filename: "./config/desktop.yaml"
-
-dns:
-  useInternalServer: true
-  listenAddress: "0.0.0.0"
-  listenPort: 5353
-  maximumCacheEntries: 10000,
-  ttl: 10000,
-  upStreamDns:
-    - name: "cloudflare"
-      address: "1.1.1.1:53"
-      transport: "udp"
 
 notifications:
   apprise:
