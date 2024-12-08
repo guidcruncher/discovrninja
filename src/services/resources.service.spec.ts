@@ -1,8 +1,8 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { ResourcesService } from "./resources.service";
-import { ConfigService } from "@nestjs/config";
 import { HttpUtilities } from "@helpers/httputilities";
-import { Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Test, TestingModule } from "@nestjs/testing";
+
+import { ResourcesService } from "./resources.service";
 
 jest.mock("@helpers/httputilities");
 jest.mock("openmeteo", () => ({

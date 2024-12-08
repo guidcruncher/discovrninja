@@ -1,5 +1,3 @@
-import { ContainerStats } from "@schemas/containerstats.schema";
-
 export class ContainerStatsDto {
   name: string;
 

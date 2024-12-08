@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Test, TestingModule } from "@nestjs/testing";
 import { ConfigService } from "@nestjs/config";
+import { Test, TestingModule } from "@nestjs/testing";
 import { DiscoveryService } from "@services/discovery.service";
-import { ComposeService } from "./compose.service"; // Replace with your file path
 import fs from "fs";
 import path from "path";
+
+import { ComposeService } from "./compose.service"; // Replace with your file path
 
 jest.mock("fs");
 jest.mock("composerize", () => jest.fn(() => "mock-composerized-output"));

@@ -12,9 +12,9 @@ import {
 } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { apiReference } from "@scalar/nestjs-api-reference";
+import { TasksService } from "@services/tasks.service";
 import fs from "fs";
 import path from "path";
-import { TasksService } from "@services/tasks.service";
 
 import { AppModule } from "./app.module";
 

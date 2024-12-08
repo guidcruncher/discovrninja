@@ -1,9 +1,6 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { ServiceDefinitionList } from "@customtypes/servicedefinition";
+import { SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
-import {
-  ServiceDefinition,
-  ServiceDefinitionList,
-} from "@customtypes/servicedefinition";
 
 export type ServiceDefinitionListDocument =
   HydratedDocument<ServiceDefinitionList>;

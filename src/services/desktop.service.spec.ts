@@ -1,9 +1,8 @@
+import { ConfigService } from "@nestjs/config";
 import { Test, TestingModule } from "@nestjs/testing";
 import { DesktopService } from "@services/desktop.service";
-import { ConfigService } from "@nestjs/config";
 import * as fs from "fs";
 import * as yaml from "js-yaml";
-import { Logger } from "@nestjs/common";
 
 jest.mock("fs");
 jest.mock("js-yaml");

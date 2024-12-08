@@ -1,5 +1,6 @@
+import { ContainerCreateOptions, ContainerInspectInfo } from "dockerode";
+
 import { ContainerCreateOptionsHelper } from "./ContainerCreateOptionsHelper";
-import { ContainerInspectInfo, ContainerCreateOptions } from "dockerode";
 
 describe("ContainerCreateOptionsHelper", () => {
   describe("fromInspectInfo", () => {

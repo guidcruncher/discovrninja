@@ -1,7 +1,7 @@
 import { IpUtilities } from "@helpers/IpUtilities";
+import axios from "axios";
 import * as dns from "dns";
 import * as os from "os";
-import axios from "axios";
 
 jest.mock("dns");
 jest.mock("os");

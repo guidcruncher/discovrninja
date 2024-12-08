@@ -1,11 +1,10 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { DiscoveryService } from "@services/discovery.service";
 import { default as convertDockerRunToCompose } from "composerize";
 import { default as convertDockerComposeToRun } from "decomposerize";
 import fs from "fs";
 import path from "path";
-import { ContainerCreateOptionsHelper } from "@helpers/containercreateoptionshelper";
-import { DiscoveryService } from "@services/discovery.service";
 
 @Injectable()
 export class ComposeService {

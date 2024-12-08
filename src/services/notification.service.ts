@@ -1,6 +1,6 @@
+import { HttpUtilities } from "@helpers/httputilities";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { HttpUtilities } from "@helpers/httputilities";
 
 @Injectable()
 export class NotificationService {

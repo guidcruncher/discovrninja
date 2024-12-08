@@ -1,14 +1,14 @@
 import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
 import {
-  ServiceDefinitionList,
   ServiceDefinition,
+  ServiceDefinitionList,
 } from "@customtypes/servicedefinition";
+import { ServiceDefinitionDto } from "@dto/servicedefinition.dto";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
 import { Model } from "mongoose";
-import { InjectModel } from "@nestjs/mongoose";
-import { ServiceDefinitionDto } from "@dto/servicedefinition.dto";
 import * as mongoose from "mongoose";
 
 @Injectable()

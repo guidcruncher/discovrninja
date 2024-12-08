@@ -1,6 +1,6 @@
-import { Body, Param, Post, Query, Res, Get, Controller } from "@nestjs/common";
 import { ServiceDefinitionList } from "@customtypes/servicedefinition";
 import { HttpUtilities } from "@helpers/httputilities";
+import { Body, Controller, Get, Param, Post, Query, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { DiscoveryService } from "@services/discovery.service";
 

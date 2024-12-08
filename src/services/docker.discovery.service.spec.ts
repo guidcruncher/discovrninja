@@ -1,13 +1,13 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { DockerDiscoveryService } from "./docker-discovery.service"; // Adjust the path accordingly
-import { DockerService } from "@services/docker.service";
-import { ConfigService } from "@nestjs/config";
-import { DiscoveryScan } from "@customtypes/discoveryscan";
 import { DiscoveryEntry } from "@customtypes/discoveryentry";
+import { DiscoveryScan } from "@customtypes/discoveryscan";
 import { ServiceDefinitionList } from "@customtypes/servicedefinition";
 import { IpUtilities } from "@helpers/iputilities";
-import { createHash } from "node:crypto";
+import { ConfigService } from "@nestjs/config";
+import { Test, TestingModule } from "@nestjs/testing";
+import { DockerService } from "@services/docker.service";
 import Dockerode from "dockerode";
+
+import { DockerDiscoveryService } from "./docker-discovery.service"; // Adjust the path accordingly
 
 // Mock dependencies
 jest.mock("@services/docker.service");

@@ -1,10 +1,10 @@
+import { IconDto } from "@dto/icons.dto";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
 import { Icon } from "@schemas/icons.schema";
-import { IconDto } from "@dto/icons.dto";
 import { IconResult } from "@services/icon.service";
+import { Model } from "mongoose";
 
 @Injectable()
 export class IconCDNService {

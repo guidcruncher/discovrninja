@@ -1,8 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { DockerRepositoryService } from "./docker-repository.service";
-import { ConfigService } from "@nestjs/config";
 import { Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Test, TestingModule } from "@nestjs/testing";
 import * as fetchMock from "jest-fetch-mock";
+
+import { DockerRepositoryService } from "./docker-repository.service";
 
 jest.mock("jest-fetch-mock", () => require("jest-fetch-mock"));
 fetchMock.enableMocks();

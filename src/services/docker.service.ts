@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/prefer-for-of */
+import { ContainerCreateOptionsHelper } from "@helpers/containercreateoptionshelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ContainerCreateOptionsHelper } from "@helpers/containercreateoptionshelper";
 import Dockerode = require("dockerode");
-import { DockerRepositoryService } from "@services/docker.repository.service";
-import fs from "fs";
-import path from "path";
-import { ContainerStats } from "@schemas/containerstats.schema";
-import { ContainerStatsDto } from "@dto/containerstats.dto";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { ContainerStats } from "@schemas/containerstats.schema";
+import { DockerRepositoryService } from "@services/docker.repository.service";
 import { FancyAnsi } from "fancy-ansi";
+import fs from "fs";
+import { Model } from "mongoose";
+import path from "path";
 
 /**
  * Docker connection and management

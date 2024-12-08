@@ -1,8 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { NotificationService } from "./notification.service";
-import { ConfigService } from "@nestjs/config";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Test, TestingModule } from "@nestjs/testing";
+
+import { NotificationService } from "./notification.service";
 
 jest.mock("@helpers/httputilities");
 

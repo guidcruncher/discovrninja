@@ -1,6 +1,7 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { IconService } from "./icon.service"; // Replace with your file path
 import { HttpUtilities } from "@helpers/httputilities";
+import { Test, TestingModule } from "@nestjs/testing";
+
+import { IconService } from "./icon.service"; // Replace with your file path
 
 jest.mock("@helpers/httputilities", () => {
   return {

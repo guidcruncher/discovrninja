@@ -1,10 +1,9 @@
 import { Body, Controller, Get, Param, Post, Query, Res } from "@nestjs/common";
-import { ContainerCreateOptions, ContainerInspectInfo } from "dockerode";
+import { ContainerStats } from "@schemas/containerstats.schema";
+import { ComposeService } from "@services/compose.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
 import { DockerService } from "@services/docker.service";
-import { ComposeService } from "@services/compose.service";
-import { ContainerStats } from "@schemas/containerstats.schema";
-import { ContainerStatsDto } from "@dto/containerstats.dto";
+import { ContainerCreateOptions } from "dockerode";
 
 /**
  * The Docker service API

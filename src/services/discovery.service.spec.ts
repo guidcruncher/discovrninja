@@ -1,14 +1,11 @@
+import { ServiceDefinitionList } from "@customtypes/servicedefinition";
+import { ServiceDefinition } from "@customtypes/servicedefinition";
+import { getModelToken } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
 import { DiscoveryService } from "@services/discovery.service";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
 import { Model } from "mongoose";
-import { getModelToken } from "@nestjs/mongoose";
-import { Logger } from "@nestjs/common";
-import { ServiceDefinitionDto } from "@dto/servicedefinition.dto";
-import { ServiceDefinitionList } from "@customtypes/servicedefinition";
-import { ServiceDefinition } from "@customtypes/servicedefinition";
-import * as mongoose from "mongoose";
 
 jest.mock("@services/docker.discovery.service");
 jest.mock("@services/file.discovery.service");

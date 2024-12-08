@@ -1,9 +1,10 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { FileDiscoveryService } from "./file-discovery.service";
 import { ConfigService } from "@nestjs/config";
+import { Test, TestingModule } from "@nestjs/testing";
 import * as fs from "fs";
 import * as yaml from "js-yaml";
 import * as path from "path";
+
+import { FileDiscoveryService } from "./file-discovery.service";
 
 // Mock fs, yaml, path, and ConfigService
 jest.mock("fs");

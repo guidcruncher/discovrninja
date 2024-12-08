@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import Parser from "rss-parser";
+import { WeatherCodes } from "@customtypes/weathercodes";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { fetchWeatherApi } from "openmeteo";
-import { WeatherCodes } from "@customtypes/weathercodes";
 import FeedParser from "feedparser";
+import { fetchWeatherApi } from "openmeteo";
+import Parser from "rss-parser";
 
 @Injectable()
 export class ResourcesService {

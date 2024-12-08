@@ -1,5 +1,3 @@
-import { ServiceDefinition } from "@customtypes/servicedefinition";
-
 export class ServiceDefinitionDto {
   name: string;
 

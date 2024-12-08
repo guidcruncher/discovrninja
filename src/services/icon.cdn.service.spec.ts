@@ -1,11 +1,11 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { IconCDNService } from "./icon-cdn.service";
 import { HttpUtilities } from "@helpers/httputilities";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Test, TestingModule } from "@nestjs/testing";
 import { Icon } from "@schemas/icons.schema";
-import { IconDto } from "@dto/icons.dto";
 import { IconResult } from "@services/icon.service";
+import { Model } from "mongoose";
+
+import { IconCDNService } from "./icon-cdn.service";
 
 jest.mock("@helpers/httputilities");
 jest.mock("@nestjs/mongoose");

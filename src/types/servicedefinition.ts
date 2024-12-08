@@ -1,5 +1,5 @@
 import { DiscoveryScan } from "@customtypes/discoveryscan";
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema } from "@nestjs/mongoose";
 
 @Schema()
 class ServiceDefinition {

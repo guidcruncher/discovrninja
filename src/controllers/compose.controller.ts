@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, Query, Res } from "@nestjs/common";
+import { Body, Controller, Post, Res } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
-import { IconService } from "@services/icon.service";
 import { DiscoveryService } from "@services/discovery.service";
+import { IconService } from "@services/icon.service";
 
 /**
  * The Docker service API
