@@ -1,5 +1,10 @@
 // var Handlebars = require("handlebars");
 
+Handlebars.registerHelper("urlencode", function(obj) {
+  return new Handlebars.SafeString(
+    encodeURIComponent(obj)
+  );
+});
 Handlebars.registerHelper("debug", function(obj) {
   return new Handlebars.SafeString(
     "<pre>" + JSON.stringify(obj, null, 2) + "</pre>",

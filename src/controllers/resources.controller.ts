@@ -9,6 +9,11 @@ export class ResourcesController {
     private resourcesService: ResourcesService,
   ) {}
 
+  @Get("p")
+  async fetchProxiedUrl(@Query("u") url: string): Promise<any> {
+    return this.resourcesService.proxy(url);
+  }
+
   @Get("weather")
   async fetchWeather(
     @Query("latitude") lat: number,

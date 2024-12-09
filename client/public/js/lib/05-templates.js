@@ -1862,11 +1862,11 @@ this["app"]["templates"]["news"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 17,
+            "line": 34,
             "column": 41
           },
           "end": {
-            "line": 17,
+            "line": 34,
             "column": 49
           }
         }
@@ -1878,11 +1878,11 @@ this["app"]["templates"]["news"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 17,
+            "line": 34,
             "column": 107
           },
           "end": {
-            "line": 17,
+            "line": 34,
             "column": 118
           }
         }
@@ -1896,11 +1896,11 @@ this["app"]["templates"]["news"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 18,
+            "line": 35,
             "column": 12
           },
           "end": {
-            "line": 18,
+            "line": 35,
             "column": 59
           }
         }
@@ -1912,11 +1912,11 @@ this["app"]["templates"]["news"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 19,
+            "line": 36,
             "column": 15
           },
           "end": {
-            "line": 19,
+            "line": 36,
             "column": 32
           }
         }
@@ -1938,8 +1938,8 @@ this["app"]["templates"]["news"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
     var stack1, helper, alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
-      alias2 = container.escapeExpression,
-      alias3 = container.lambda,
+      alias2 = container.hooks.helperMissing,
+      alias3 = container.escapeExpression,
       lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -1947,26 +1947,40 @@ this["app"]["templates"]["news"] = Handlebars.template({
         return undefined
       };
 
-    return "<div id=\"news\" class=\"newsprint\">\n  <div class=\"content\">\n    <table border=\"0\" cellpadding=\"2\" cellspacing=\"0\">\n      <tr class=\"masthead\">\n        <td>\n          <a href=\"#\" onclick=\"newsPage('" +
-      alias2(((helper = (helper = lookupProperty(helpers, "feedUrl") || (depth0 != null ? lookupProperty(depth0, "feedUrl") : depth0)) != null ? helper : container.hooks.helperMissing), (typeof helper === "function" ? helper.call(alias1, {
+    return "<div id=\"news\" class=\"newsprint\">\n  <div class=\"content\">\n    <table border=\"0\" cellpadding=\"2\" cellspacing=\"0\">\n      <tr class=\"masthead\">\n        <td id=\"mastheadbanner\" style=\"width:100%;border-bottom: solid 1px black\">\n          <canvas id=\"mastheadcanvas\" style=\"display:none\"></canvas>\n          <a href=\"#\" onclick=\"newsPage('" +
+      alias3(((helper = (helper = lookupProperty(helpers, "feedUrl") || (depth0 != null ? lookupProperty(depth0, "feedUrl") : depth0)) != null ? helper : alias2), (typeof helper === "function" ? helper.call(alias1, {
         "name": "feedUrl",
         "hash": {},
         "data": data,
         "loc": {
           "start": {
-            "line": 6,
+            "line": 7,
             "column": 41
           },
           "end": {
-            "line": 6,
+            "line": 7,
             "column": 52
           }
         }
       }) : helper))) +
-      "'); return false;\"><img src=\"" +
-      alias2(alias3(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0, "meta") : depth0)) != null ? lookupProperty(stack1, "image") : stack1)) != null ? lookupProperty(stack1, "url") : stack1), depth0)) +
-      "\" /></a>\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border-bottom: solid 1px black\">\n          " +
-      alias2(alias3(((stack1 = (depth0 != null ? lookupProperty(depth0, "meta") : depth0)) != null ? lookupProperty(stack1, "pubDateStr") : stack1), depth0)) +
+      "'); return false;\">\n            <img id=\"mastheadimg\" src=\"/api/resources/p?u=" +
+      alias3((lookupProperty(helpers, "urlencode") || (depth0 && lookupProperty(depth0, "urlencode")) || alias2).call(alias1, ((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0, "meta") : depth0)) != null ? lookupProperty(stack1, "image") : stack1)) != null ? lookupProperty(stack1, "url") : stack1), {
+        "name": "urlencode",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 58
+          },
+          "end": {
+            "line": 8,
+            "column": 86
+          }
+        }
+      })) +
+      "\" />\n          </a>\n          <script type=\"text/javascript\">\n            const rgbToHex = function (r, g, b) {\n              if (r > 255 || g > 255 || b > 255) {\n                return \"\";\n              }\n              return ((r << 16) | (g << 8) | b).toString(16);\n            };\n            var ctx = document.getElementById(\"mastheadcanvas\").getContext(\"2d\");\n            ctx.drawImage(document.getElementById(\"mastheadimg\"), 0, 0);\n            var p = ctx.getImageData(0, 0, 1, 1).data;\n            var hex = \"#\" + (\"000000\" + rgbToHex(p[0], p[1], p[2])).slice(-6);\n            document.getElementById(\"mastheadbanner\").style.background = hex;\n\n          </script>\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border-bottom: solid 1px black\">\n          " +
+      alias3(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "meta") : depth0)) != null ? lookupProperty(stack1, "pubDateStr") : stack1), depth0)) +
       "\n        </td>\n      </tr>\n" +
       ((stack1 = lookupProperty(helpers, "each").call(alias1, (depth0 != null ? lookupProperty(depth0, "items") : depth0), {
         "name": "each",
@@ -1976,11 +1990,11 @@ this["app"]["templates"]["news"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 14,
+            "line": 31,
             "column": 6
           },
           "end": {
-            "line": 22,
+            "line": 39,
             "column": 15
           }
         }

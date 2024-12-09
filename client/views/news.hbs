@@ -31,8 +31,26 @@
   <div class="content">
     <table border="0" cellpadding="2" cellspacing="0">
       <tr class="masthead">
-        <td style="border-bottom: solid 1px black">
-          <img src="{{meta.image.url}}" />
+        <td id="mastheadbanner" style="border-bottom: solid 1px black">
+          <canvas id="mastheadcanvas" style="display:none"></canvas>
+          <img id="mastheadimg" src="/api/resources/p?u={{urlencode meta.image.url}}" />
+
+          <script type="text/javascript">
+            const rgbToHex = function (r, g, b) {
+              if (r > 255 || g > 255 || b > 255) {
+                return "";
+              }
+
+              return ((r << 16) | (g << 8) | b).toString(16);
+            };
+
+            var ctx = document.getElementById("mastheadcanvas").getContext("2d");
+            ctx.drawImage(document.getElementById("mastheadimg"), 0, 0);
+            var p = ctx.getImageData(0, 0, 1, 1).data;
+            var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+            document.getElementById("mastheadbanner").style.background = hex;
+
+          </script>
         </td>
       </tr>
       <tr>

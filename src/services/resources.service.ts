@@ -13,6 +13,20 @@ export class ResourcesService {
 
   constructor(private configService: ConfigService) {}
 
+  public proxy(url: string): Promise<any> {
+    const client = new HttpUtilities();
+    return new Promise<any>((resolve, reject) => {
+      client
+        .retrieveBinary("GET", url)
+        .then((blob) => {
+          resolve(blob);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
   public reverseGeoCodeLookup(lat: number, long: number): Promise<any> {
     const apiUrl =
       "https://nominatim.openstreetmap.org/reverse?lat=" +

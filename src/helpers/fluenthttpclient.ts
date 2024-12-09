@@ -3,7 +3,7 @@ class HttpClient {
 
   private _url: string;
 
-  private _headers: {} = null;
+  private _headers = null;
 
   private _timeout: number;
 
