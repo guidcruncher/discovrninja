@@ -1,4 +1,4 @@
-class HttpClient {
+class FluentHttpClient {
   private _method: string;
 
   private _url: string;
@@ -22,24 +22,24 @@ class HttpClient {
     };
   }
 
-  public static Get(url: string): HttpClient {
-    return new HttpClient("GET", url);
+  public static Get(url: string): FluentHttpClient {
+    return new FluentHttpClient("GET", url);
   }
 
-  public static Put(url: string): HttpClient {
-    return new HttpClient("PUT", url);
+  public static Put(url: string): FluentHttpClient {
+    return new FluentHttpClient("PUT", url);
   }
 
-  public static Post(url: string): HttpClient {
-    return new HttpClient("POST", url);
+  public static Post(url: string): FluentHttpClient {
+    return new FluentHttpClient("POST", url);
   }
 
-  public Body<Type>(body: Type): HttpClient {
+  public Body<Type>(body: Type): FluentHttpClient {
     this._body = body;
     return this;
   }
 
-  public Header(kvobj: any): HttpClient {
+  public Header(kvobj: any): FluentHttpClient {
     if (!this._headers) {
       this._headers = {};
     }
@@ -83,7 +83,7 @@ class HttpClient {
     });
   }
 
-  public Fetch<Type>(): Promise<Type> {
+  public Send<Type>(): Promise<Type> {
     return new Promise<Type>((resolve, reject) => {
       try {
         this.createFetch()
@@ -120,7 +120,7 @@ class HttpClient {
     });
   }
 
-  public FetchBinary(): Promise<Uint8Array> {
+  public Download(): Promise<Uint8Array> {
     return new Promise<Uint8Array>((resolve, reject) => {
       try {
         this.createFetch()
@@ -158,4 +158,4 @@ class HttpClient {
   }
 }
 
-export { HttpClient };
+export { FluentHttpClient };
