@@ -1,9 +1,14 @@
 class HttpClient {
   private _method: string;
+
   private _url: string;
+
   private _headers: {} = null;
+
   private _timeout: number;
+
   private _hasbody: boolean;
+
   private _body: any;
 
   private constructor(method: string, url: string) {
@@ -39,7 +44,7 @@ class HttpClient {
       this._headers = {};
     }
 
-    var self = this;
+    const self = this;
     Object.keys(kvobj).forEach((k) => {
       this._headers[k] = kvobj[k];
     });
@@ -47,14 +52,14 @@ class HttpClient {
   }
 
   private serializeBody(): string {
-    var contentType = this._headers["Content-Type"] ?? "application/json";
+    const contentType = this._headers["Content-Type"] ?? "application/json";
 
     if (contentType.contains("json")) {
       return JSON.stringify(this._body);
     }
 
     if (contentType.contains("xml")) {
-      var ser = new XmlSerializer();
+      const ser = new XMLSerializer();
       return ser.serializeToString(this._body);
     }
 
@@ -62,7 +67,7 @@ class HttpClient {
   }
 
   private createFetch(): Promise<Response> {
-    if (this._hadbody) {
+    if (this._hasbody) {
       return fetch(this._url, {
         method: this._method,
         signal: AbortSignal.timeout(this._timeout),
@@ -115,7 +120,7 @@ class HttpClient {
     });
   }
 
-  public Fetch(): Promise<Uint8Array> {
+  public FetchBinary(): Promise<Uint8Array> {
     return new Promise<Uint8Array>((resolve, reject) => {
       try {
         this.createFetch()
