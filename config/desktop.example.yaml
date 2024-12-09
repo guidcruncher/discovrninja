@@ -1,0 +1,26 @@
+theme: "bootstrap5.3.3/bootstrap.min.css"
+header: 
+  visible: false
+  items: 
+footer:
+  visible: false
+  items:
+background:
+  type: "none" # [none, daily, image, bgcolor, filter ]
+  url: ""
+  bgcolor: "#d6d3ff"
+  filter: "linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet)"
+  image:
+    filter: ""
+  foregroundOpacity: 0.85
+  buttonForegroundOpacity: 
+
+layout:
+  applications:
+    title: Applications
+    icon:
+    bgcolor:
+    buttonClass:
+    background:
+    items:
+      - widget.discovrninja:

@@ -1,0 +1,29 @@
+{{# each this.desktop.layout }}
+
+  <div class="card" style="{{#isnotempty ../this.desktop.background.foregroundOpacity}}opacity:{{../this.desktop.background.foregroundOpacity}};{{/isnotempty}}margin-bottom:10px;{{#isnotempty bgcolor}}background-color:{{bgcolor}};{{/isnotempty}}{{#isnotempty background}}background: {{background}} !important;{{/isnotempty}}">
+    <div class="card-header">{{title}}</div>
+    <div class="card-body">
+      {{#each this.items}}
+        {{service this ../../this.services ../this ../../this.desktop.background.buttonForegroundOpacity }}
+      {{/each}}
+    </div>
+  </div>
+  {{/each}}
+  <br><br><br>
+  <!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal fade modal-lg" id="modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalBody">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,43 @@
+  <div class="row">
+    <div class="col bg-secondary-subtle">
+      <center><small>{{date}}</small><br /><img src="/assets/weather/{{icon}}" style="max-width 100px; height:100px;" alt="{{text}}" />
+        <br /><small>{{text}}</small>
+      </center>
+    </div>
+    <div class="col">
+      <table class="table">
+        <tr>
+          <td>Sunrise:</td>
+          <td>{{sunrise}}</td>
+        </tr>
+        <tr>
+          <td>Sunset:</td>
+          <td>{{sunset}}</td>
+        </tr>
+        <tr>
+          <td>Temperature:</td>
+          <td>{{temperature2m}}&deg;C</td>
+        </tr>
+        <tr>
+          <td>Precipitation chance:</td>
+          <td>{{precipitationProbabilityMax}}%</td>
+        </tr>
+        <tr>
+          <td>Wind speed: </td>
+          <td>{{windSpeed10mMax}} mph</td>
+        </tr>
+        <tr>
+          <td>Wind gusts: </td>
+          <td>{{windGusts10mMax}} mph
+          </td>
+        </tr>
+        <tr>
+          <td>Wind direction: </td>
+          <td>{{windDirection10mDominant}}&deg; {{windDirection}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><i>{{location.address.quarter}}, {{location.address.city}}, {{location.address.county}}, {{location.address.country}}</i></i></div>
+  </div>

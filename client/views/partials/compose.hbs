@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="mb-3">
+    <label for="txtRun" class="form-label">Run command:</label><br />
+    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtRun"></textarea><br />
+    <button type="button" class="btn btn-primary" onclick="doComposerise('#txtRun', '#txtCompose'); return false;">Convert to Compose</button>
+    <hr />
+    <label for="txtCompose" class="form-label">Docker compose definition:</label><br />
+    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtCompose"></textarea><br />
+    <button type="button" class="btn btn-primary" onclick="doDeComposerise('#txtCompose', '#txtRun'); return false;">Convert to run</button>
+    <hr />
+
+  </div>
+</div>

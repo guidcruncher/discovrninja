@@ -1,0 +1,21 @@
+<div class="modal fade" id="iconSearchModal" tabindex="-1" aria-label>
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Icon Search</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-1">
+          <label for="iconSearchQuery" class="form-label">Search Query</label>
+          <input type="text" class="form-control" id="iconSearchQuery" placeholder="search">
+        </div>
+        <div id="iconSearchResults" style="height:256px;overflow:scroll;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnSearch" onclick="performIconSearch(); return false;" data-selectable="false">Search</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
