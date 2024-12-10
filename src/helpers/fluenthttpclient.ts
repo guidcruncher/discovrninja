@@ -1,25 +1,41 @@
+import { Logger } from "@nestjs/common";
+
 class DownloadResult {
   public contentType: string;
 
   public contentDisposition: string;
 
+  public url: URL;
+
   public data: Uint8Array;
 }
 
+class HttpClientResult {
+  public contentType: string;
+
+  public contentDisposition: string;
+
+  public url: URL;
+
+  public value: string;
+}
+
 class FluentHttpClient {
-  private _method: string;
+  private _method: string="";
 
-  private _url: string;
+  private _url: string="";
 
-  private _headers = null;
+  private _headers:any = {};
 
-  private _timeout: number;
+  private _timeout: number=1000;
 
   private _hasbody: boolean;
 
-  private _parameters: any;
+  private _parameters: any = {};
 
-  private _body: any;
+  private _body: any = {};
+
+  private readonly logger = new Logger(FluentHttpClient.name);
 
   private constructor(method: string, url: string) {
     this._method = method.toUpperCase();
@@ -38,7 +54,7 @@ class FluentHttpClient {
 
   public static Put(url: string): FluentHttpClient {
     return new FluentHttpClient("PUT", url);
-  } 
+  }
 
   public static Post(url: string): FluentHttpClient {
     return new FluentHttpClient("POST", url);
@@ -52,16 +68,16 @@ class FluentHttpClient {
   public AddParameters(name: string, value: any): FluentHttpClient {
     this._parameters[name] = value;
     return this;
-}
+  }
 
   public Body<Type>(body: Type, contentType: string): FluentHttpClient {
     this._body = body;
 
-     if (contentType) {
-       this.ContentType(contentType);
-     } else {
-       this.ContentType("application/json");
-     }
+    if (contentType) {
+      this.ContentType(contentType);
+    } else {
+      this.ContentType("application/json");
+    }
 
     return this;
   }
@@ -79,30 +95,46 @@ class FluentHttpClient {
   }
 
   public Authorization(scheme: string, credentials: string): FluentHttpClient {
-    return this.Header({"Authorization": scheme + " " + credentials});
+    return this.Header({ Authorization: scheme + " " + credentials });
   }
 
   public ContentType(type: string): FluentHttpClient {
-    return this.Header({"Content-Type": type.toLowerCase()});
+    return this.Header({ "Content-Type": type.toLowerCase() });
   }
 
   public Accepts(type: string): FluentHttpClient {
-    return this.Header({"Accepts": type.toLowerCase()});
+    return this.Header({ Accepts: type.toLowerCase() });
+  }
+
+  private deSerializeBody<Type>(contentType: string, body: string): Type {
+    if (contentType.toLowerCase().includes("json")) {
+      return JSON.parse(body) as Type;
+    }
+
+    if (contentType.toLowerCase().includes("xml")) {
+      const ser = new DOMParser();
+      return ser.parseFromString(
+        body,
+        contentType.toLowerCase() as DOMParserSupportedType,
+      ) as Type;
+    }
+
+    return body as Type;
   }
 
   private serializeBody(): string {
     const contentType = this._headers["Content-Type"];
 
-    if (contentType.contains("json")) {
+    if (contentType.includes("json")) {
       return JSON.stringify(this._body);
     }
 
-    if (contentType.contains("xml")) {
+    if (contentType.includes("xml")) {
       const ser = new XMLSerializer();
       return ser.serializeToString(this._body);
     }
 
-    if (contentType.contains("forms")) {
+    if (contentType.includes("forms")) {
       const items = [];
       Object.keys(this._body).forEach((k) => {
         items.push(k + "=" + encodeURIComponent(this._body[k]));
@@ -113,12 +145,12 @@ class FluentHttpClient {
   }
 
   private createUrl(): string {
-    var url = this._url;
-    Object.keys(this._parameters).forEach((k)=>{
-        var re = new RegExp("\\s{" + k + "}\\s", "g");
-        url = url.replace(re, this._parameters[k]);
-        re = new RegExp("\\s:" +k + "\\s", "g");
-        url = url.replace(re, this._parameters[k]);
+    let url = this._url;
+    Object.keys(this._parameters).forEach((k) => {
+      let re = new RegExp("\\s{" + k + "}\\s", "g");
+      url = url.replace(re, this._parameters[k]);
+      re = new RegExp("\\s:" + k + "\\s", "g");
+      url = url.replace(re, this._parameters[k]);
     });
     return url;
   }
@@ -140,9 +172,15 @@ class FluentHttpClient {
     });
   }
 
-  public Result<Type>(): Promise<Type> {
+  private getGenericType<Type>(): string {
+    let t: new () => Type;
+    return (t as any).constructor.name;
+  }
+
+  public Result<Type>(y): Promise<Type> {
     return new Promise<Type>((resolve, reject) => {
       try {
+        const result = new HttpClientResult();
         this.createFetch()
           .then((response) => {
             if (!response.ok) {
@@ -152,10 +190,22 @@ class FluentHttpClient {
                 error: null,
               });
             } else {
-              return response.json();
+              result.url = new URL(response.url);
+              result.contentDisposition = response.headers.get(
+                "Content-Disposition",
+              );
+              result.contentType = response.headers.get("Content-Type");
+              return response.text();
             }
           })
-          .then((result) => resolve(result as Type))
+          .then((data) => {
+            if (this.getGenericType<Type>() == "HttpClientResult") {
+              result.value = data;
+              resolve(result as Type);
+            } else {
+              resolve(JSON.parse(data) as Type);
+            }
+          })
           .catch((error) => {
             if (error instanceof Error) {
               reject({ statusText: error.message, status: 500, error: error });
@@ -180,7 +230,7 @@ class FluentHttpClient {
   public Download(): Promise<DownloadResult> {
     return new Promise<DownloadResult>((resolve, reject) => {
       try {
-        var result: DownloadResult = new DownloadResult();
+        const result: DownloadResult = new DownloadResult();
         this.createFetch()
           .then((response) => {
             if (!response.ok) {
@@ -190,14 +240,17 @@ class FluentHttpClient {
                 error: null,
               });
             } else {
-              result.contentDisposition = response.headers.get("Content-Disposition");
-              result.contentType = response.headers.get("Content-Type"); 
+              result.url = new URL(response.url);
+              result.contentDisposition = response.headers.get(
+                "Content-Disposition",
+              );
+              result.contentType = response.headers.get("Content-Type");
               return response.arrayBuffer();
             }
           })
           .then((buffer) => {
-             result.data = new Uint8Array(buffer);
-             resolve(result);
+            result.data = new Uint8Array(buffer);
+            resolve(result);
           })
           .catch((error) => {
             if (error instanceof Error) {
@@ -221,4 +274,4 @@ class FluentHttpClient {
   }
 }
 
-export { FluentHttpClient };
+export { DownloadResult, FluentHttpClient, HttpClientResult };

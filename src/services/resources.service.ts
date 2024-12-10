@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { WeatherCodes } from "@customtypes/weathercodes";
+import { DownloadResult, FluentHttpClient } from "@helpers/fluenthttpclient";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -13,13 +14,12 @@ export class ResourcesService {
 
   constructor(private configService: ConfigService) {}
 
-  public proxy(url: string): Promise<any> {
-    const client = new HttpUtilities();
-    return new Promise<any>((resolve, reject) => {
-      client
-        .retrieveBinary("GET", url)
-        .then((blob) => {
-          resolve(blob);
+  public proxy(url: string): Promise<DownloadResult> {
+    return new Promise<DownloadResult>((resolve, reject) => {
+      const client = FluentHttpClient.Get(url)
+        .Download()
+        .then((downloadResult) => {
+          resolve(downloadResult);
         })
         .catch((err) => {
           reject(err);

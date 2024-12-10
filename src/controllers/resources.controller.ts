@@ -10,8 +10,24 @@ export class ResourcesController {
   ) {}
 
   @Get("p")
-  async fetchProxiedUrl(@Query("u") url: string): Promise<any> {
-    return this.resourcesService.proxy(url);
+  async fetchProxiedUrl(@Query("u") url: string, @Res() res) {
+    return new Promise((resolve, reject) => {
+      this.resourcesService
+        .proxy(url)
+        .then((result) => {
+          res.status(200);
+          res.header("content-type", result.contentType);
+          res.header(
+            "content-disposition",
+            "inline; filename=" + result.url.pathname.split("/").pop(),
+          );
+          res.send(result.data);
+          resolve(true);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   @Get("weather")
