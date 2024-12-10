@@ -1,3 +1,21 @@
+function setBgColor(src, target) {
+  const rgbToHex = function(r, g, b) {
+    if (r > 255 || g > 255 || b > 255) {
+      return "";
+    }
+
+    return ((r << 16) | (g << 8) | b).toString(16);
+  };
+
+  var srcImg = document.getElementById(src);
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(document.getElementById(src), 0, 0);
+  var p = ctx.getImageData(5, 5, 1, 1).data;
+  var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+  document.getElementById(target).style.background = hex;
+}
+
 function doSearch(ctl) {
   var q = document.querySelector(ctl).value;
   window.open("https://html.duckduckgo.com/html?q=" + encodeURIComponent(q));
@@ -428,51 +446,50 @@ function renderDashboard(id) {
   axios
     .get(apiUrl)
     .then((response) => {
-        function memorychart() {
-          var options = {
-            chart: {
-              height: 300,
-              width: 320,
-              type: "line",
-            },
-            title: {
-              text: "Historical Free Memory %",
-            },
-            labels: getAxisLabel(response.data),
-            datasets: [{
-              name: "Load",
-              type: "line",
-              smooth: true,
-              fill: false,
-              tension: 0.1
-              data: getSeries(response.data, "memoryFreePercent"),
-            }, ],
-          };
+      function memorychart() {
+        var options = {
+          chart: {
+            height: 300,
+            width: 320,
+            type: "line",
+          },
+          title: {
+            text: "Historical Free Memory %",
+          },
+          labels: getAxisLabel(response.data),
+          datasets: [{
+            name: "Load",
+            type: "line",
+            smooth: true,
+            fill: false,
+            tension: 0.1,
+            data: getSeries(response.data, "memoryFreePercent"),
+          }, ],
+        };
 
-          var memoryChart = echarts.init(
-            document.querySelector("#memorychart"),
-          );
-          memoryChart.setOption(options);
-        }
+        var memoryChart = echarts.init(
+          document.querySelector("#memorychart"),
+        );
+        memoryChart.setOption(options);
+      }
 
-        function cpuchart() {
-          var options = {
-              chart: {
-                height: 300,
-                width: 320,
-                type: "line",
-              },
-              title: {
-                text: "Historical CPU Load %",
-              },
-              labels: getAxisLabel(response.data),
-              datasets: [{
-                name: "Load",
-                type: "line",
-                smooth: true,
-                data: getSeries(response.data, "cpuPercent"),
-              }, ],
-            },
+      function cpuchart() {
+        var options = {
+          chart: {
+            height: 300,
+            width: 320,
+            type: "line",
+          },
+          title: {
+            text: "Historical CPU Load %",
+          },
+          labels: getAxisLabel(response.data),
+          datasets: [{
+            name: "Load",
+            type: "line",
+            smooth: true,
+            data: getSeries(response.data, "cpuPercent"),
+          }, ]
         };
 
         var cpuChart = echarts.init(
@@ -481,11 +498,13 @@ function renderDashboard(id) {
         cpuChart.setOption(options);
       }
 
-      cpuchart(); memorychart(); window._monitor = setTimeout(async () => {
+      cpuchart();
+      memorychart();
+      window._monitor = setTimeout(async () => {
         renderDashboard(id);
       }, 5 * 60000);
     })
-.catch((err) => {});
+    .catch((err) => {});
 }
 
 function startContainerMonitor(target) {
