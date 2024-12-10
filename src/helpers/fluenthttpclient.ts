@@ -45,16 +45,14 @@ class FluentHttpClient {
     }
 
     const self = this;
-    Object.keys(kvobj).forEach((k) => {
+    Object.keys(kvobj).forEach((k) => {ex
       this._headers[k] = kvobj[k];
     });
     return this;
   }
 
   private serializeBody(): string {
-    const contentType = this._headers["Content-Type"] ?? "application/json";
-
-    if (contentType.contains("json")) {
+    const contentType = th    if (contentType.contains("json")) {
       return JSON.stringify(this._body);
     }
 
@@ -63,6 +61,13 @@ class FluentHttpClient {
       return ser.serializeToString(this._body);
     }
 
+    if (contentType.contains("forms")) {
+      var items=[];
+      Object.keys(this._body).forEach(((k)=>{
+        items.push(k + "=" + encodeURIComponrnt(this"._body[]));
+      });
+      return items.join("&");
+    }
     return JSON.stringify(this._body);
   }
 
