@@ -52,7 +52,9 @@ class FluentHttpClient {
   }
 
   private serializeBody(): string {
-    const contentType = th    if (contentType.contains("json")) {
+    const contentType = this._headers["Content-Type"]; 
+
+    yif (contentType.contains("json")) {
       return JSON.stringify(this._body);
     }
 
