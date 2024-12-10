@@ -393,10 +393,18 @@ function getSeries(source, field) {
   var result = [];
   var index = 0;
   source[field].forEach((s) => {
-    result.push({
-      x: new Date(source.periods[index]).getTime(),
-      y: s,
-    });
+    result.push(s);
+    index += 1;
+  });
+
+  return result;
+}
+
+function getAxisLabel(source) {
+  var result = [];
+  var index = 0;
+  source[field].forEach((s) => {
+    result.push(new Date(source.periods[index]).getTime());
     index += 1;
   });
 
@@ -420,100 +428,64 @@ function renderDashboard(id) {
   axios
     .get(apiUrl)
     .then((response) => {
-      function memorychart() {
-        var options = {
-          chart: {
-            height: 300,
-            width: 320,
-            type: "line",
-          },
-          title: {
-            text: "Historical Free Memory %",
-          },
-          stroke: {
-            curve: "smooth",
-          },
-          markers: {
-            size: 5,
-          },
-          series: [{
-            name: "Load",
-            data: getSeries(response.data, "memoryFreePercent"),
-          }, ],
-          xaxis: {
-            labels: {
-              show: false,
+        function memorychart() {
+          var options = {
+            chart: {
+              height: 300,
+              width: 320,
+              type: "line",
             },
-          },
-          yaxis: {
-            labels: {
-              formatter: function(val) {
-                return Number(val).toLocaleString(undefined, {
-                  style: "percent",
-                  minimumFractionDigits: 4,
-                });
+            title: {
+              text: "Historical Free Memory %",
+            },
+            labels: getAxisLabel(response.data),
+            datasets: [{
+              name: "Load",
+              type: "line",
+              smooth: true,
+              fill: false,
+              tension: 0.1
+              data: getSeries(response.data, "memoryFreePercent"),
+            }, ],
+          };
+
+          var memoryChart = echarts.init(
+            document.querySelector("#memorychart"),
+          );
+          memoryChart.setOption(options);
+        }
+
+        function cpuchart() {
+          var options = {
+              chart: {
+                height: 300,
+                width: 320,
+                type: "line",
               },
+              title: {
+                text: "Historical CPU Load %",
+              },
+              labels: getAxisLabel(response.data),
+              datasets: [{
+                name: "Load",
+                type: "line",
+                smooth: true,
+                data: getSeries(response.data, "cpuPercent"),
+              }, ],
             },
-          },
         };
 
-        var memoryChart = new ApexCharts(
-          document.querySelector("#memorychart"),
-          options,
-        );
-        memoryChart.render();
-      }
-
-      function cpuchart() {
-        var options = {
-          chart: {
-            height: 300,
-            width: 320,
-            type: "line",
-          },
-          title: {
-            text: "Historical CPU Load %",
-          },
-          stroke: {
-            curve: "smooth",
-          },
-          markers: {
-            size: 5,
-          },
-          series: [{
-            name: "Load",
-            data: getSeries(response.data, "cpuPercent"),
-          }, ],
-          xaxis: {
-            labels: {
-              show: false,
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function(val) {
-                return Number(val).toLocaleString(undefined, {
-                  style: "percent",
-                  minimumFractionDigits: 0,
-                });
-              },
-            },
-          },
-        };
-
-        var cpuChart = new ApexCharts(
+        var cpuChart = echarts.init(
           document.querySelector("#cpuchart"),
-          options,
         );
-        cpuChart.render();
+        cpuChart.setOption(options);
       }
-      cpuchart();
-      memorychart();
-      window._monitor = setTimeout(async () => {
+
+      cpuchart(); memorychart(); window._monitor = setTimeout(async () => {
         renderDashboard(id);
       }, 5 * 60000);
     })
-    .catch((err) => {});
+.catch((err) => {});
 }
 
 function startContainerMonitor(target) {

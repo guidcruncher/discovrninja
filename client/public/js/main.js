@@ -7185,10 +7185,17 @@ function getSeries(source, field) {
   var result = [];
   var index = 0;
   source[field].forEach(s => {
-    result.push({
-      x: new Date(source.periods[index]).getTime(),
-      y: s
-    });
+    result.push(s);
+    index += 1
+  });
+  return result
+}
+
+function getAxisLabel(source) {
+  var result = [];
+  var index = 0;
+  source[field].forEach(s => {
+    result.push(new Date(source.periods[index]).getTime());
     index += 1
   });
   return result
@@ -7216,34 +7223,15 @@ function renderDashboard(id) {
         title: {
           text: "Historical Free Memory %"
         },
-        stroke: {
-          curve: "smooth"
-        },
-        markers: {
-          size: 5
-        },
         series: [{
           name: "Load",
+          type: "line",
+          smooth: true,
           data: getSeries(response.data, "memoryFreePercent")
-        }],
-        xaxis: {
-          labels: {
-            show: false
-          }
-        },
-        yaxis: {
-          labels: {
-            formatter: function(val) {
-              return Number(val).toLocaleString(undefined, {
-                style: "percent",
-                minimumFractionDigits: 4
-              })
-            }
-          }
-        }
+        }]
       };
-      var memoryChart = new ApexCharts(document.querySelector("#memorychart"), options);
-      memoryChart.render()
+      var memoryChart = echarts.init(document.querySelector("#memorychart"));
+      memoryChart.setOption(options)
     }
 
     function cpuchart() {
@@ -7256,14 +7244,10 @@ function renderDashboard(id) {
         title: {
           text: "Historical CPU Load %"
         },
-        stroke: {
-          curve: "smooth"
-        },
-        markers: {
-          size: 5
-        },
         series: [{
           name: "Load",
+          type: "line",
+          smooth: true,
           data: getSeries(response.data, "cpuPercent")
         }],
         xaxis: {
@@ -7282,8 +7266,8 @@ function renderDashboard(id) {
           }
         }
       };
-      var cpuChart = new ApexCharts(document.querySelector("#cpuchart"), options);
-      cpuChart.render()
+      var cpuChart = echarts.init(document.querySelector("#cpuchart"));
+      cpuChart.setOption(options)
     }
     cpuchart();
     memorychart();
