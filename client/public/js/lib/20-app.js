@@ -11,8 +11,16 @@ function setBgColor(src, target) {
   var canvas = document.createElement("canvas");
   var ctx = canvas.getContext("2d");
   ctx.drawImage(document.getElementById(src), 0, 0);
-  var p = ctx.getImageData(5, 5, 1, 1).data;
+  var p = ctx.getImageData(0, 0, 1, 1).data;
   var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+
+  if (p.length > 3) {
+    var alpha = p[3];
+    if (alpha == 0) {
+      hex = "#ffffff";
+    }
+  }
+
   document.getElementById(target).style.background = hex;
 }
 
