@@ -1,4 +1,4 @@
-class FluentHttpClient {
+ class FluentHttpClient {
   private _method: string;
 
   private _url: string;
@@ -45,7 +45,7 @@ class FluentHttpClient {
     }
 
     const self = this;
-    Object.keys(kvobj).forEach((k) => {ex
+    Object.keys(kvobj).forEach((k) => {
       this._headers[k] = kvobj[k];
     });
     return this;
@@ -54,7 +54,7 @@ class FluentHttpClient {
   private serializeBody(): string {
     const contentType = this._headers["Content-Type"]; 
 
-    yif (contentType.contains("json")) {
+    if (contentType.contains("json")) {
       return JSON.stringify(this._body);
     }
 
@@ -64,9 +64,9 @@ class FluentHttpClient {
     }
 
     if (contentType.contains("forms")) {
-      var items=[];
-      Object.keys(this._body).forEach(((k)=>{
-        items.push(k + "=" + encodeURIComponrnt(this"._body[]));
+      const items=[];
+      Object.keys(this._body).forEach((k)=>{
+        items.push(k + "=" + encodeURIComponrnt(this._body[k]));
       });
       return items.join("&");
     }
