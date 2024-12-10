@@ -5484,7 +5484,7 @@ this["app"]["templates"]["messagebox"] = Handlebars.template({
 this["app"]["templates"]["monitor"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
-    return '<h1>\n  <div id="monitorContainerName">Container</div>\n</h1>\n<table border="0" cellpadding="0" cellspacing="5">\n  <tr>\n    <td>\n      <div id="cpuchart"></div>\n    </td>\n    <td></td>\n    <td>\n      <div id="memorychart"></div>\n    </td>\n  </tr>\n</table>\n<div id="containerLogs" class="terminal">\n</div>\n'
+    return '<h1>\n  <div id="monitorContainerName">Container</div>\n</h1>\n<table border="5 " cellpadding="0" cellspacing="5">\n<tr>  \n<td>Historical CPU Use %</td>\n<td></td>\n<td>Historical Memory Free %</td>\n</tr>\n\n  <tr>\n    <td>\n      <div id="cpuchart" style="width:320px;height:300px;"></div>\n    </td>\n    <td></td>\n    <td>\n      <div id="memorychart" style="width:320px;height:300px;"></div>\n    </td>\n  </tr>\n</table>\n<div id="containerLogs" class="terminal">\n</div>\n'
   },
   useData: true
 });
@@ -7213,7 +7213,7 @@ function getSeries(source, field) {
   return result
 }
 
-function getAxisLabel(source) {
+function getAxisLabel(source, field) {
   var result = [];
   var index = 0;
   source[field].forEach(s => {
@@ -7235,57 +7235,52 @@ function renderDashboard(id) {
   getLog(id);
   document.querySelector("#monitorContainerName").innerHTML = id;
   axios.get(apiUrl).then(response => {
-    function memorychart() {
+    const memorychart = function() {
       var options = {
-        chart: {
-          height: 300,
-          width: 320,
-          type: "line"
+        xAxis: {
+          type: "category",
+          data: getAxisLabel(response.data, "periods")
         },
-        title: {
-          text: "Historical Free Memory %"
+        yAxis: {
+          type: "value"
         },
-        labels: getAxisLabel(response.data),
-        datasets: [{
-          name: "Load",
+        series: [{
+          data: getSeries(response.data, "memoryFreePercent"),
           type: "line",
-          smooth: true,
-          fill: false,
-          tension: .1,
-          data: getSeries(response.data, "memoryFreePercent")
+          smooth: true
         }]
       };
-      var memoryChart = echarts.init(document.querySelector("#memorychart"));
-      memoryChart.setOption(options)
-    }
-
-    function cpuchart() {
+      var chartDom = document.getElementById("memorychart");
+      var myChart = echarts.init(chartDom);
+      myChart.setOption(options)
+    };
+    const cpuchart = function() {
       var options = {
-        chart: {
-          height: 300,
-          width: 320,
-          type: "line"
+        xAxis: {
+          type: "category",
+          data: getAxisLabel(response.data, "periods")
         },
-        title: {
-          text: "Historical CPU Load %"
+        yAxis: {
+          type: "value"
         },
-        labels: getAxisLabel(response.data),
-        datasets: [{
-          name: "Load",
+        series: [{
+          data: getSeries(response.data, "cpuPercent"),
           type: "line",
-          smooth: true,
-          data: getSeries(response.data, "cpuPercent")
+          smooth: true
         }]
       };
-      var cpuChart = echarts.init(document.querySelector("#cpuchart"));
-      cpuChart.setOption(options)
-    }
+      var chartDom = document.getElementById("cpuchart");
+      var myChart = echarts.init(chartDom);
+      myChart.setOption(options)
+    };
     cpuchart();
     memorychart();
     window._monitor = setTimeout(async () => {
       renderDashboard(id)
     }, 5 * 6e4)
-  }).catch(err => {})
+  }).catch(err => {
+    alert(err)
+  })
 }
 
 function startContainerMonitor(target) {

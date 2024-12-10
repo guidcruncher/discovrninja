@@ -418,6 +418,7 @@ function saveChangeIcon(name, catalog, slug) {
 function getSeries(source, field) {
   var result = [];
   var index = 0;
+
   source[field].forEach((s) => {
     result.push(s);
     index += 1;
@@ -426,7 +427,7 @@ function getSeries(source, field) {
   return result;
 }
 
-function getAxisLabel(source) {
+function getAxisLabel(source, field) {
   var result = [];
   var index = 0;
   source[field].forEach((s) => {
@@ -454,56 +455,47 @@ function renderDashboard(id) {
   axios
     .get(apiUrl)
     .then((response) => {
-      function memorychart() {
+      const memorychart = function() {
         var options = {
-          chart: {
-            height: 300,
-            width: 320,
-            type: "line",
+          xAxis: {
+            type: 'category',
+            data: getAxisLabel(response.data, "periods")
           },
-          title: {
-            text: "Historical Free Memory %",
+          yAxis: {
+            type: 'value'
           },
-          labels: getAxisLabel(response.data),
-          datasets: [{
-            name: "Load",
-            type: "line",
-            smooth: true,
-            fill: false,
-            tension: 0.1,
+          series: [{
             data: getSeries(response.data, "memoryFreePercent"),
-          }, ],
+            type: 'line',
+            smooth: true
+          }]
         };
 
-        var memoryChart = echarts.init(
-          document.querySelector("#memorychart"),
-        );
-        memoryChart.setOption(options);
+        var chartDom = document.getElementById("memorychart");
+        var myChart = echarts.init(chartDom);
+        myChart.setOption(options);
       }
 
-      function cpuchart() {
+
+      const cpuchart = function() {
         var options = {
-          chart: {
-            height: 300,
-            width: 320,
-            type: "line",
+          xAxis: {
+            type: 'category',
+            data: getAxisLabel(response.data, "periods")
           },
-          title: {
-            text: "Historical CPU Load %",
+          yAxis: {
+            type: 'value'
           },
-          labels: getAxisLabel(response.data),
-          datasets: [{
-            name: "Load",
-            type: "line",
-            smooth: true,
+          series: [{
             data: getSeries(response.data, "cpuPercent"),
-          }, ]
+            type: 'line',
+            smooth: true
+          }]
         };
 
-        var cpuChart = echarts.init(
-          document.querySelector("#cpuchart"),
-        );
-        cpuChart.setOption(options);
+        var chartDom = document.getElementById("cpuchart");
+        var myChart = echarts.init(chartDom);
+        myChart.setOption(options);
       }
 
       cpuchart();
@@ -512,7 +504,9 @@ function renderDashboard(id) {
         renderDashboard(id);
       }, 5 * 60000);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      alert(err);
+    });
 }
 
 function startContainerMonitor(target) {
