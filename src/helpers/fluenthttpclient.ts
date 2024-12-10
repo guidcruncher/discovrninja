@@ -21,13 +21,13 @@ class HttpClientResult {
 }
 
 class FluentHttpClient {
-  private _method: string="";
+  private _method = "";
 
-  private _url: string="";
+  private _url = "";
 
-  private _headers:any = {};
+  private _headers: any = {};
 
-  private _timeout: number=1000;
+  private _timeout = 1000;
 
   private _hasbody: boolean;
 
