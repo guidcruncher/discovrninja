@@ -1,4 +1,12 @@
- class FluentHttpClient {
+class DownloadResult {
+  public contentType: string;
+
+  public contentDisposition: string;
+
+  public data: Uint8Array;
+}
+
+class FluentHttpClient {
   private _method: string;
 
   private _url: string;
@@ -8,6 +16,8 @@
   private _timeout: number;
 
   private _hasbody: boolean;
+
+  private _parameters: any;
 
   private _body: any;
 
@@ -28,14 +38,31 @@
 
   public static Put(url: string): FluentHttpClient {
     return new FluentHttpClient("PUT", url);
-  }
+  } 
 
   public static Post(url: string): FluentHttpClient {
     return new FluentHttpClient("POST", url);
   }
 
-  public Body<Type>(body: Type): FluentHttpClient {
+  public Parameters(parameters: any): FluentHttpClient {
+    this._parameters = parameters;
+    return this;
+  }
+
+  public AddParameters(name: string, value: any): FluentHttpClient {
+    this._parameters[name] = value;
+    return this;
+}
+
+  public Body<Type>(body: Type, contentType: string): FluentHttpClient {
     this._body = body;
+
+     if (contentType) {
+       this.ContentType(contentType);
+     } else {
+       this.ContentType("application/json");
+     }
+
     return this;
   }
 
@@ -51,8 +78,20 @@
     return this;
   }
 
+  public Authorization(scheme: string, credentials: string): FluentHttpClient {
+    return this.Header({"Authorization": scheme + " " + credentials});
+  }
+
+  public ContentType(type: string): FluentHttpClient {
+    return this.Header({"Content-Type": type.toLowerCase()});
+  }
+
+  public Accepts(type: string): FluentHttpClient {
+    return this.Header({"Accepts": type.toLowerCase()});
+  }
+
   private serializeBody(): string {
-    const contentType = this._headers["Content-Type"]; 
+    const contentType = this._headers["Content-Type"];
 
     if (contentType.contains("json")) {
       return JSON.stringify(this._body);
@@ -64,18 +103,29 @@
     }
 
     if (contentType.contains("forms")) {
-      const items=[];
-      Object.keys(this._body).forEach((k)=>{
-        items.push(k + "=" + encodeURIComponrnt(this._body[k]));
+      const items = [];
+      Object.keys(this._body).forEach((k) => {
+        items.push(k + "=" + encodeURIComponent(this._body[k]));
       });
       return items.join("&");
     }
     return JSON.stringify(this._body);
   }
 
+  private createUrl(): string {
+    var url = this._url;
+    Object.keys(this._parameters).forEach((k)=>{
+        var re = new RegExp("\\s{" + k + "}\\s", "g");
+        url = url.replace(re, this._parameters[k]);
+        re = new RegExp("\\s:" +k + "\\s", "g");
+        url = url.replace(re, this._parameters[k]);
+    });
+    return url;
+  }
+
   private createFetch(): Promise<Response> {
     if (this._hasbody) {
-      return fetch(this._url, {
+      return fetch(this.createUrl(), {
         method: this._method,
         signal: AbortSignal.timeout(this._timeout),
         headers: this._headers,
@@ -83,14 +133,14 @@
       });
     }
 
-    return fetch(this._url, {
+    return fetch(this.createUrl(), {
       method: this._method,
       signal: AbortSignal.timeout(this._timeout),
       headers: this._headers,
     });
   }
 
-  public Send<Type>(): Promise<Type> {
+  public Result<Type>(): Promise<Type> {
     return new Promise<Type>((resolve, reject) => {
       try {
         this.createFetch()
@@ -127,9 +177,10 @@
     });
   }
 
-  public Download(): Promise<Uint8Array> {
-    return new Promise<Uint8Array>((resolve, reject) => {
+  public Download(): Promise<DownloadResult> {
+    return new Promise<DownloadResult>((resolve, reject) => {
       try {
+        var result: DownloadResult = new DownloadResult();
         this.createFetch()
           .then((response) => {
             if (!response.ok) {
@@ -139,10 +190,15 @@
                 error: null,
               });
             } else {
+              result.contentDisposition = response.headers.get("Content-Disposition");
+              result.contentType = response.headers.get("Content-Type"); 
               return response.arrayBuffer();
             }
           })
-          .then((result) => resolve(new Uint8Array(result)))
+          .then((buffer) => {
+             result.data = new Uint8Array(buffer);
+             resolve(result);
+          })
           .catch((error) => {
             if (error instanceof Error) {
               reject({ statusText: error.message, status: 500, error: error });
