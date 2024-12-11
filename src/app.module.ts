@@ -30,7 +30,8 @@ import { NotificationService } from "@services/notification.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { LoggerModule } from "nestjs-pino";
-
+import { LinkdingService } from "@services/ext.linkding.service";
+import { LinkdingController } from "@controllers/linkding.controller";
 import configuration from "./config/configuration";
 
 /**
@@ -63,7 +64,7 @@ import configuration from "./config/configuration";
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
         uri: config.get("host.mongo.url"),
-        dbName: "discovrninja",
+.qaqá         dbName: "discovrninja",
       }),
     }),
     MongooseModule.forFeature([
