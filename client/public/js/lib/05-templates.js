@@ -814,7 +814,7 @@ this["app"]["templates"]["messagebox"] = Handlebars.template({
 this["app"]["templates"]["monitor"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
-    return "<h1>\n  <div id=\"monitorContainerName\">Container</div>\n</h1>\n<table border=\"5 \" cellpadding=\"0\" cellspacing=\"5\">\n  <tr>\n    <td>Historical CPU Use %</td>\n    <td></td>\n    <td>Historical Memory Free %</td>\n  </tr>\n\n  <tr>\n    <td>\n      <div id=\"cpuchart\" style=\"width:320px;height:300px;\"></div>\n    </td>\n    <td></td>\n    <td>\n      <div id=\"memorychart\" style=\"width:320px;height:300px;\"></div>\n    </td>\n  </tr>\n</table>\n<div id=\"containerLogs\" class=\"terminal\">\n</div>\n";
+    return "<h1>\n  <div id=\"monitorContainerName\">Container</div>\n</h1>\n<table border=\"5 \" cellpadding=\"0\" cellspacing=\"5\">\n  <tr>\n    <td>Historical CPU Use %</td>\n  </tr>\n  <tr>\n    <td>\n      <div id=\"cpuchart\" style=\"width:600px;height:300px;\"></div>\n    </td>\n  </tr>\n  <tr>\n    <td>Historical Memory Free %</td>\n  </tr>\n  <tr>\n    <td>\n      <div id=\"memorychart\" style=\"width:600px;height:300px;\"></div>\n    </td>\n  </tr>\n</table>\n<div id=\"containerLogs\" class=\"terminal\">\n</div>\n";
   },
   "useData": true
 });

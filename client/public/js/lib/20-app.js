@@ -430,7 +430,7 @@ function getSeries(source, field) {
   var index = 0;
 
   source[field].forEach((s) => {
-    result.push(s);
+    result.push(s * 100);
     index += 1;
   });
 
