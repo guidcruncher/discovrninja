@@ -42,7 +42,15 @@ module.exports = (Handlebars) => {
                 parent: p,
               });
               break;
-
+            case "linkcloud":
+              f = Handlebars.partials["widget-tagcloud"];
+              if (f) {
+                html = f({
+                  settings: settings,
+                  parent: p
+                });
+              }
+              break;
             case "weather":
               serviceUrl =
                 "/api/resources/weather?latitude=" +

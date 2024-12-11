@@ -33,6 +33,16 @@ function newsPage(url) {
   window.open("/news?url=" + encodeURIComponent(url));
 }
 
+function tagCloud(id) {
+  var apiUrl = "/api/external/linkding/tags/count";
+  axios.get(apiUrl).then((response) => {
+    var feed = response.data;
+    document.getElementById(id).innerHTML = app.templates.tagcloud(feed);
+  }).catch((err) => {
+    alert(err);
+  });
+}
+
 function navigateToNews(sender) {
   var url = sender.getAttribute("data-url");
   var apiUrl = "/api/resources/feed?url=" + encodeURIComponent(url);

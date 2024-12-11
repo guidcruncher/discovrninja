@@ -15,7 +15,7 @@
     "lint": "npx eslint -c ./eslint.config.mjs '{src,apps,libs,test}/**/*.ts' --fix",
     "lint-client": "npx eslint -c ./eslint.config.client.mjs client/**/*.js --fix",
     "uglify": "npx uglifyjs ./client/public/js/lib/*.js -o ./client/public/js/main.js && npx uglifyjs ./client/public/js/main.js -c -m --source-map -o ./client/public/js/main.min.js",
-    "uglifycss": "npx uglifycss ./client/public/css/lib/*.css --output ./client/public/css/styles.css",
+    "uglifycss": "npx uglifycss ./client/public/css/lib/*.css --output ./client/public/css/style.css",
     "test": "npx jest",
     "test:watch": "npx jest --watch",
     "test:cov": "npx jest --coverage",
