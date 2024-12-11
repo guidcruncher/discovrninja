@@ -40,7 +40,7 @@ gulp.task("formatcss", task('npx js-beautify -r -s 2 -n -w 0 --type css ./client
 gulp.task("formatjs", task('npx js-beautify -r -s 2 -n -w 0 --type js ./client/public/js/lib/*.js ./client/helpers/*.js '));
 gulp.task("format", series(task("npm run format"), "formatcss", "formathbs", "formathtml"));
 gulp.task("startdev", task("npm run start:dev"));
-gulp.task("uglify", series(task("npm run uglify"), task("npx js-beautify -r -s 2 -n -w 0 --type js ./client/public/js/main.js")));
+gulp.task("uglify", series(task("npm run uglifycss"), task("npm run uglify"), task("npx js-beautify -r -s 2 -n -w 0 --type js ./client/public/js/main.js")));
 gulp.task("js", series( "templates", "formatjs", "uglify"));
 gulp.task("lint", task("npm run lint"));
 gulp.task("lint-client", task("npm run lint-client"));

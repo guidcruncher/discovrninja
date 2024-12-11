@@ -3,6 +3,7 @@ import { ComposeController } from "@controllers/compose.controller";
 import { DiscoveryController } from "@controllers/discovery.controller";
 import { DockerController } from "@controllers/docker.controller";
 import { IconsController } from "@controllers/icons.controller";
+import { LinkdingController } from "@controllers/linkding.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
@@ -23,6 +24,7 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
 import { DockerService } from "@services/docker.service";
+import { LinkdingService } from "@services/ext.linkding.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
 import { IconCDNService } from "@services/icon.cdn.service";
 import { IconService } from "@services/icon.service";
@@ -30,8 +32,7 @@ import { NotificationService } from "@services/notification.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { LoggerModule } from "nestjs-pino";
-import { LinkdingService } from "@services/ext.linkding.service";
-import { LinkdingController } from "@controllers/linkding.controller";
+
 import configuration from "./config/configuration";
 
 /**
@@ -64,7 +65,7 @@ import configuration from "./config/configuration";
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
         uri: config.get("host.mongo.url"),
-.qaqá         dbName: "discovrninja",
+        dbName: "discovrninja",
       }),
     }),
     MongooseModule.forFeature([
@@ -81,6 +82,7 @@ import configuration from "./config/configuration";
     AppController,
     ViewsController,
     ResourcesController,
+    LinkdingController,
     IconsController,
   ],
   providers: [
@@ -91,6 +93,7 @@ import configuration from "./config/configuration";
     DockerRepositoryService,
     DiscoveryService,
     ComposeService,
+    LinkdingService,
     NotificationService,
     FileDiscoveryService,
     DockerDiscoveryService,

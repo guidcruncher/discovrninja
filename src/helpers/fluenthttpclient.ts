@@ -18,6 +18,12 @@ class HttpClientResult {
   public url: URL;
 
   public value: string;
+
+  constructor() {
+    this.contentType = "";
+    this.contentDisposition = "";
+    this.value = "";
+  }
 }
 
 class FluentHttpClient {
@@ -172,13 +178,8 @@ class FluentHttpClient {
     });
   }
 
-  private getGenericType<Type>(): string {
-    let t: new () => Type;
-    return (t as any).constructor.name;
-  }
-
-  public Result<Type>(y): Promise<Type> {
-    return new Promise<Type>((resolve, reject) => {
+  public Execute(): Promise<HttpClientResult> {
+    return new Promise<HttpClientResult>((resolve, reject) => {
       try {
         const result = new HttpClientResult();
         this.createFetch()
@@ -199,12 +200,47 @@ class FluentHttpClient {
             }
           })
           .then((data) => {
-            if (this.getGenericType<Type>() == "HttpClientResult") {
-              result.value = data;
-              resolve(result as Type);
+            result.value = data;
+            resolve(result);
+          })
+          .catch((error) => {
+            if (error instanceof Error) {
+              reject({ statusText: error.message, status: 500, error: error });
             } else {
-              resolve(JSON.parse(data) as Type);
+              reject({
+                statusText: "Unexpected error",
+                status: 500,
+                error: null,
+              });
             }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          reject({ statusText: error.message, status: 500, error: error });
+        } else {
+          reject({ statusText: "Unexpected error", status: 500, error: null });
+        }
+      }
+    });
+  }
+
+  public Response<Type>(): Promise<Type> {
+    return new Promise<Type>((resolve, reject) => {
+      try {
+        this.createFetch()
+          .then((response) => {
+            if (!response.ok) {
+              reject({
+                statusText: response.statusText,
+                status: response.status,
+                error: null,
+              });
+            } else {
+              return response.text();
+            }
+          })
+          .then((data) => {
+            resolve(JSON.parse(data) as Type);
           })
           .catch((error) => {
             if (error instanceof Error) {

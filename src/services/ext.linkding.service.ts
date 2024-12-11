@@ -1,14 +1,76 @@
+import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { DownloadResult, FluentHttpClient, HttpClientResult } from "@helpers/fluenthttpclient";
-
+import Parser from "rss-parser";
 
 @Injectable()
 export class LinkdingService {
   private readonly logger = new Logger(LinkdingService.name);
 
-  constructor(
-    private configService: ConfigService,
-  ) {}
+  constructor(private configService: ConfigService) {}
 
+  public countTags(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const result: any = {};
+      const feedUrl = this.configService.get(
+        "externalservices.linkding.feedUrl",
+      );
+
+      this.getTags()
+        .then((tags) => {
+          tags.forEach((tag) => {
+            result[tag.trim()] = 0;
+          });
+          const parser = new Parser();
+          parser
+            .parseURL(feedUrl)
+            .then((feed) => {
+              feed.items.forEach((item) => {
+                if (item.categories) {
+                  item.categories.forEach((cat) => {
+                    result[cat.trim()] += 1;
+                  });
+                }
+              });
+              resolve(result);
+            })
+            .catch((err) => {
+              this.logger.error("Error parsing Linkding bookmark feed", err);
+              reject(err);
+            });
+        })
+        .catch((err) => {
+          this.logger.error("Error in counttTags", err);
+          reject(err);
+        });
+    });
+  }
+
+  public getTags(): Promise<string[]> {
+    return new Promise<any>((resolve, reject) => {
+      const result: any[] = [];
+      const url = this.configService.get("externalservices.linkding.apiUrl");
+      const apiKey = this.configService.get(
+        "externalservices.linkding.apiToken",
+      );
+      const feedUrl = this.configService.get(
+        "externalservices.linkding.feedUrl",
+      );
+
+      const client = FluentHttpClient.Get(url + "/tags")
+        .Authorization("Token", apiKey)
+        .Execute()
+        .then((response) => {
+          const obj: any = JSON.parse(response.value);
+          obj.results.forEach((tag) => {
+            result.push(tag.name);
+          });
+          resolve(result.sort());
+        })
+        .catch((err) => {
+          this.logger.error("Error in getTags", err);
+          reject(err);
+        });
+    });
+  }
 }
