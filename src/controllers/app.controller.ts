@@ -163,6 +163,10 @@ export class AppController {
             },
             { layout: "./layouts/layout.hbs" },
           );
+        })
+        .catch((err) => {
+          this.logger.error("Error invoking container edit", err);
+          res.status(500).send(err);
         });
     });
   }
