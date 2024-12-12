@@ -11,7 +11,6 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { apiReference } from "@scalar/nestjs-api-reference";
 import { TasksService } from "@services/tasks.service";
 import fs from "fs";
 import path from "path";
@@ -87,19 +86,7 @@ async function bootstrap() {
 
   const documentFactory = () =>
     SwaggerModule.createDocument(app, swaggerConfig);
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-
-  log.debug("Configuring API Documentation UI at /api/docs");
-  app.use(
-    "/api/docs",
-    apiReference({
-      withFastify: true,
-      theme: "purple",
-      spec: {
-        content: document,
-      },
-    }),
-  );
+  SwaggerModule.setup("api/docs", app, documentFactory);
 
   tasks.initalJobs().then((r) => {
     if (config.get("host.cluster.enabled") == true) {

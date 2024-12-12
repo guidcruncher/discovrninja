@@ -179,7 +179,7 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.iconSlug = service.iconSlug;
             dto.public = service.public;
             dto.edited = false;
-            dto.updated = dto.created;
+            dto.created = new Date();
             const ico = icons.find((f) => {
               return (
                 f.containerName.toLowerCase() == dto.containerName.toLowerCase()
@@ -190,6 +190,7 @@ export class DiscoveryService implements IDiscoveryAgent {
               dto.public = ico.public;
               dto.edited = ico.edited;
               dto.updated = new Date();
+              dto.created = ico.created;
               dto.iconSlug = ico.iconSlug;
               dto.iconCatalog = ico.iconCatalog;
               dto.archived = ico.archived;

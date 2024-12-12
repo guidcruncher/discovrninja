@@ -4843,6 +4843,30 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       }
     }) : helper)) + '" data-project="' + alias1(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "project") : stack1, depth0)) + '" type="button" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Edit</button>\n'
   },
+  11: function(container, depth0, helpers, partials, data) {
+    var stack1, helper, alias1 = container.escapeExpression,
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName]
+        }
+        return undefined
+      };
+    return '          <button onclick="composeEdit(this); return false;" data-containerid="' + alias1((helper = (helper = lookupProperty(helpers, "Name") || (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+      name: "Name",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 54,
+          column: 79
+        },
+        end: {
+          line: 54,
+          column: 87
+        }
+      }
+    }) : helper)) + '" data-project="' + alias1(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "project") : stack1, depth0)) + '" type="button" class="btn btn-secondary"><i class="fa-regular fa-square-plus"></i> Edit</button>\n'
+  },
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
     var stack1, helper, alias1 = depth0 != null ? depth0 : container.nullContext || {},
@@ -4962,7 +4986,7 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       name: "if",
       hash: {},
       fn: container.program(9, data, 0),
-      inverse: container.noop,
+      inverse: container.program(11, data, 0),
       data: data,
       loc: {
         start: {
@@ -4970,7 +4994,7 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
           column: 8
         },
         end: {
-          line: 53,
+          line: 55,
           column: 15
         }
       }

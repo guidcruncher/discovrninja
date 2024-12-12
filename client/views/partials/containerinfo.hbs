@@ -50,6 +50,8 @@
         <button type="button" class="btn btn-secondary" data-containerid="{{Name}}" onclick="startContainerMonitor(this); return false;">Monitor</button>
         {{#if editor.editable}}
           <button onclick="composeEdit(this); return false;" data-containerid="{{Name}}" data-project="{{editor.project}}" type="button" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+        {{else}}
+          <button onclick="composeEdit(this); return false;" data-containerid="{{Name}}" data-project="{{editor.project}}" type="button" class="btn btn-secondary"><i class="fa-regular fa-square-plus"></i> Edit</button>
         {{/if}}
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
       </div>

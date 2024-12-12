@@ -32,7 +32,6 @@
     "@nestjs/platform-fastify": "^10.4.6",
     "@nestjs/schedule": "^4.1.1",
     "@nestjs/swagger": "^7.4.2",
-    "@scalar/nestjs-api-reference": "^0.3.167",
     "axios": "^1.7.7",
     "composerize": "^1.6.12",
     "decomposerize": "^1.4.1",
