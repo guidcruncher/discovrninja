@@ -6,7 +6,7 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerService } from "@services/docker.service";
 import { IconService } from "@services/icon.service";
 import { ResourcesService } from "@services/resources.service";
-import { LinkdingService} from "@servides/ext.lingding.ts";
+import { LinkdingService} from "@services/ext.lingding.service";
 
 @Controller("/")
 export class AppController {
