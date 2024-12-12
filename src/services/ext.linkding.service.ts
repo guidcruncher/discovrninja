@@ -56,13 +56,18 @@ export class LinkdingService {
       const feedUrl = this.configService.get(
         "externalservices.linkding.feedUrl",
       );
-      const client = FluentHttpClient.Get(url + "/bookmarks?limit=65535&q=" + encodeURIComponent("#" + tag))
+      const client = FluentHttpClient.Get(
+        url + "/bookmarks?limit=65535&q=" + encodeURIComponent("#" + tag),
+      )
         .Authorization("Token", apiKey)
         .Execute()
         .then((response) => {
           const obj: any = JSON.parse(response.value);
           resolve(obj);
-        }).catch((err)=> { this.logger.error("Error in getbookmarks", err); reject(err);
+        })
+        .catch((err) => {
+          this.logger.error("Error in getbookmarks", err);
+          reject(err);
         });
     });
   }

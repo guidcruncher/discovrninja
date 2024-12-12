@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
+import { Query } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { LinkdingService } from "@services/ext.linkding.service";
-import { Body, Param, Post, Query, Res } from "@nestjs/common";
 
 @Controller("api/external/linkding")
 export class LinkdingController {
@@ -24,5 +24,4 @@ export class LinkdingController {
   async getbookmarks(@Query("tag") tag) {
     return this.linkdingService.getBookmarks(tag);
   }
-
 }
