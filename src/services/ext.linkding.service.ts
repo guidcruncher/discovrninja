@@ -46,6 +46,27 @@ export class LinkdingService {
     });
   }
 
+  public getBookmarks(tag: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const result: any[] = [];
+      const url = this.configService.get("externalservices.linkding.apiUrl");
+      const apiKey = this.configService.get(
+        "externalservices.linkding.apiToken",
+      );
+      const feedUrl = this.configService.get(
+        "externalservices.linkding.feedUrl",
+      );
+      const client = FluentHttpClient.Get(url + "/bookmarks?limit=65535&q=" + encodeURIComponent("#" + tag))
+        .Authorization("Token", apiKey)
+        .Execute()
+        .then((response) => {
+          const obj: any = JSON.parse(response.value);
+          resolve(obj);
+        }).catch((err)=> { this.logger.error("Error in getbookmarks", err); reject(err);
+        });
+    });
+  }
+
   public getTags(): Promise<string[]> {
     return new Promise<any>((resolve, reject) => {
       const result: any[] = [];
