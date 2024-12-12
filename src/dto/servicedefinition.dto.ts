@@ -21,6 +21,14 @@ export class ServiceDefinitionDto {
 
   updated: Date;
 
+  lastSeen: Date;
+
+  lastPolled: Date;
+
+  uptime: number;
+
+  available: boolean;
+
   edited: boolean;
 
   archived: boolean;

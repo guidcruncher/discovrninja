@@ -35,9 +35,13 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.ipaddress = r[0].ipaddress;
             dto.created = r[0].created;
             dto.archived = r[0].archived;
+            dto.lastSeen = r[0].lastSeen;
+            dto.lastPolled = r[0].lastPolled;
+            dto.uptime = r[0].uptime;
             dto.updated = new Date();
           } else {
             dto.created = new Date();
+            dto.uptime = 0;
           }
 
           dto.edited = true;
@@ -178,14 +182,19 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.iconCatalog = service.iconCatalog;
             dto.iconSlug = service.iconSlug;
             dto.public = service.public;
+            dto.available = service.available;
             dto.edited = false;
+            dto.lastSeen = new Date();
             dto.created = new Date();
+            dto.uptime = 0;
             const ico = icons.find((f) => {
               return (
                 f.containerName.toLowerCase() == dto.containerName.toLowerCase()
               );
             });
             if (ico) {
+              dto.uptime = ico.uptime;
+              dto.lastPolled = ico.lastPolled;
               dto.name = ico.name;
               dto.public = ico.public;
               dto.edited = ico.edited;
@@ -241,6 +250,12 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
+  private refreshUptime() {
+    return new Promise((resolve, reject)=>{
+      resolve(true);
+    });
+  }
+
   scan(): Promise<ServiceDefinitionList> {
     return new Promise<ServiceDefinitionList>((resolve, reject) => {
       const result: ServiceDefinitionList = new ServiceDefinitionList();
@@ -268,7 +283,12 @@ export class DiscoveryService implements IDiscoveryAgent {
 
           this.storeInMongo(result)
             .then((r) => {
+              this.refreshUptime().then(()=>{
               resolve(result);
+              }).catch((err)=>{
+                this.logger.error("Error updating uptime", err);
+                reject(err);
+              });
             })
             .catch((err) => {
               this.logger.error("Error saving scan data", err);
