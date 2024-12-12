@@ -22,7 +22,7 @@ export class LinkdingController {
 
   @Get("bookmarks")
   async getbookmarks(@Query("tag") tag) {
-    return this.linkdingService.getBookmarks(tag));
+    return this.linkdingService.getBookmarks(tag);
   }
 
 }
