@@ -6,6 +6,7 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerService } from "@services/docker.service";
 import { IconService } from "@services/icon.service";
 import { ResourcesService } from "@services/resources.service";
+import { LinkdingService} from "@servides/ext.lingding.ts";
 
 @Controller("/")
 export class AppController {
@@ -16,6 +17,7 @@ export class AppController {
     private readonly composeService: ComposeService,
     private readonly desktopService: DesktopService,
     private resourcesService: ResourcesService,
+    private linkdingService: LinkdingService,
   ) {}
 
   private readonly logger = new Logger(AppController.name);
@@ -74,6 +76,23 @@ export class AppController {
         });
     });
   }
+
+  @Get("/bookmarks")
+async getbookmarks(@Query("tag") tag, @Res() res) {
+return new Promise<void>((resolve, reject) => {
+this.linkdingService.getBookmarks(tag).then((bookmarks)=>{
+res.view(
+"bookmarks.hbs",
+{ tag: tag, bookmarks: bookmarks },
+{ layout: "./layouts/desktop.hbs" },
+);
+resolve();
+}).catch((err)=>{
+res.status(500).send(err);
+reject();
+});
+});
+}
 
   @Get("/news")
   async getnews(@Query("url") url, @Res() res) {
