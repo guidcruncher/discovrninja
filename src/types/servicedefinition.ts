@@ -46,7 +46,7 @@ class ServiceDefinition {
   lastPolled: Date;
 
   @Prop()
-  uptime: number;
+  downtime: number;
 
   @Prop()
   archived: boolean;
@@ -74,8 +74,15 @@ class ServiceDefinitionList {
           updated: new Date(),
           edited: false,
           archived: false,
-          available: false, lastSeen: null, uptime: 0,lastPolled: null
+          available: false,
+          lastSeen: null,
+          downtime: 0,
+          lastPolled: null,
         };
+        item.available = service.available;
+        if (item.available) {
+          item.lastSeen = new Date();
+        }
         item.name = service.name;
         item.containerName = service.containerName;
         item.hostname = service.hostname;
@@ -94,9 +101,9 @@ class ServiceDefinitionList {
         result.services.push(item);
       }
     });
-    result.created = new Date();hb
+    result.created = new Date();
     return result;
   }
 }
-o
+
 export { ServiceDefinition, ServiceDefinitionList };

@@ -196,6 +196,9 @@ export class DockerService {
         } else {
           data.Name = data.Name.substring(1);
           data.Config.Image = self.formatImage(data.Config.Image);
+          data.available = !["exited", "dead", "paused"].includes(
+            data.State.Status.toLowerCase(),
+          );
 
           if (data.Config.Labels["com.guidcruncher.discovrninja.icon_slug"]) {
             data.icon_slug =

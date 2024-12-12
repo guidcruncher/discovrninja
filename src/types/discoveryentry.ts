@@ -41,7 +41,10 @@ class DiscoveryEntry {
    */
   public ipAddresses: Address[];
 
+  public available: boolean;
+
   constructor() {
+    this.available = false;
     this.name = "";
     this.ports = [];
     this.sourceAddress = { network: "", address: "", preferred: false };

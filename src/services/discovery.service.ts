@@ -37,11 +37,12 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.archived = r[0].archived;
             dto.lastSeen = r[0].lastSeen;
             dto.lastPolled = r[0].lastPolled;
-            dto.uptime = r[0].uptime;
+            dto.downtime = r[0].downtime;
+            dto.available = r[0].available;
             dto.updated = new Date();
           } else {
             dto.created = new Date();
-            dto.uptime = 0;
+            dto.downtime = 0;
           }
 
           dto.edited = true;
@@ -53,6 +54,14 @@ export class DiscoveryService implements IDiscoveryAgent {
           dto.iconSlug = data.iconSlug;
           dto.iconCatalog = data.iconCatalog;
           dto.archived = data.archived;
+
+          if (data.available != null) {
+            if (data.avaiable == false && dto.available != data.available) {
+              data.lastSeen = new Date();
+            }
+            dto.available = data.available;
+          }
+
           this.serviceDefinitionModel
             .findOneAndUpdate(
               { containerName: dto.containerName.toLowerCase() },
@@ -184,16 +193,19 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.public = service.public;
             dto.available = service.available;
             dto.edited = false;
-            dto.lastSeen = new Date();
+            dto.downtime = 0;
+            if (service.available) {
+              dto.lastSeen = new Date();
+            }
+
             dto.created = new Date();
-            dto.uptime = 0;
             const ico = icons.find((f) => {
               return (
                 f.containerName.toLowerCase() == dto.containerName.toLowerCase()
               );
             });
             if (ico) {
-              dto.uptime = ico.uptime;
+              dto.downtime = ico.downtime ?? 0;
               dto.lastPolled = ico.lastPolled;
               dto.name = ico.name;
               dto.public = ico.public;
@@ -203,6 +215,15 @@ export class DiscoveryService implements IDiscoveryAgent {
               dto.iconSlug = ico.iconSlug;
               dto.iconCatalog = ico.iconCatalog;
               dto.archived = ico.archived;
+              if (!service.available) {
+                if (dto.lastPolled) {
+                  dto.downtime +=
+                    (new Date().getTime() - dto.lastPolled.getTime()) / 1000;
+                }
+              }
+
+              dto.lastPolled = new Date();
+              this.logger.debug(JSON.stringify(dto));
               promises.push(
                 this.serviceDefinitionModel.findOneAndUpdate(
                   { containerName: dto.containerName.toLowerCase() },
@@ -212,6 +233,7 @@ export class DiscoveryService implements IDiscoveryAgent {
               );
             } else {
               dto.created = new Date();
+              dto.lastPolled = new Date();
               promises.push(
                 this.serviceDefinitionModel.findOneAndUpdate(
                   { containerName: dto.containerName.toLowerCase() },
@@ -250,12 +272,6 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  private refreshUptime() {
-    return new Promise((resolve, reject)=>{
-      resolve(true);
-    });
-  }
-
   scan(): Promise<ServiceDefinitionList> {
     return new Promise<ServiceDefinitionList>((resolve, reject) => {
       const result: ServiceDefinitionList = new ServiceDefinitionList();
@@ -283,12 +299,7 @@ export class DiscoveryService implements IDiscoveryAgent {
 
           this.storeInMongo(result)
             .then((r) => {
-              this.refreshUptime().then(()=>{
               resolve(result);
-              }).catch((err)=>{
-                this.logger.error("Error updating uptime", err);
-                reject(err);
-              });
             })
             .catch((err) => {
               this.logger.error("Error saving scan data", err);

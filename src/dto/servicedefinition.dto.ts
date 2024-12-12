@@ -25,7 +25,7 @@ export class ServiceDefinitionDto {
 
   lastPolled: Date;
 
-  uptime: number;
+  downtime: number;
 
   available: boolean;
 

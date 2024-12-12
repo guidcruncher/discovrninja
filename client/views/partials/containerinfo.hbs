@@ -20,6 +20,12 @@
               <td>Image:</td>
               <td>{{Config.Image}}</td>
             </tr>
+            {{#if downtime}}
+              <tr>
+                <td>Downtime:</td>
+                <td>{{secondstotime downtime "long"}}</td>
+              </tr>
+            {{/if}}
             <tr>
               <td></td>
               <td>{{#if UpdateStatus.updateDue}}Update Available{{else}}Up-to-date{{/if}}</td>

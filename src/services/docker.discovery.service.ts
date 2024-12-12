@@ -70,6 +70,7 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
                   containerName: container.Name,
                   hostname: container.Config.Hostname,
                   iconSlug: "",
+                  available: container.available,
                   ports: this.resolvePorts(container.Config.ExposedPorts),
                   sourceAddress: { network: "", address: "", preferred: false },
                   targetAddress: container.Config.Labels["homepage.href"],

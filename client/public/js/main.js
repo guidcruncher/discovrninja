@@ -4814,34 +4814,33 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
     }) : helper))
   },
   5: function(container, depth0, helpers, partials, data) {
-    return "Update Available"
-  },
-  7: function(container, depth0, helpers, partials, data) {
-    return "Up-to-date"
-  },
-  9: function(container, depth0, helpers, partials, data) {
-    var stack1, helper, alias1 = container.escapeExpression,
-      lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName]
-        }
-        return undefined
-      };
-    return '          <button onclick="composeEdit(this); return false;" data-containerid="' + alias1((helper = (helper = lookupProperty(helpers, "Name") || (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
-      name: "Name",
+    var lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName]
+      }
+      return undefined
+    };
+    return "              <tr>\n                <td>Downtime:</td>\n                <td>" + container.escapeExpression((lookupProperty(helpers, "secondstotime") || depth0 && lookupProperty(depth0, "secondstotime") || container.hooks.helperMissing).call(depth0 != null ? depth0 : container.nullContext || {}, depth0 != null ? lookupProperty(depth0, "downtime") : depth0, "long", {
+      name: "secondstotime",
       hash: {},
       data: data,
       loc: {
         start: {
-          line: 52,
-          column: 79
+          line: 26,
+          column: 20
         },
         end: {
-          line: 52,
-          column: 87
+          line: 26,
+          column: 53
         }
       }
-    }) : helper)) + '" data-project="' + alias1(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "project") : stack1, depth0)) + '" type="button" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Edit</button>\n'
+    })) + "</td>\n              </tr>\n"
+  },
+  7: function(container, depth0, helpers, partials, data) {
+    return "Update Available"
+  },
+  9: function(container, depth0, helpers, partials, data) {
+    return "Up-to-date"
   },
   11: function(container, depth0, helpers, partials, data) {
     var stack1, helper, alias1 = container.escapeExpression,
@@ -4857,11 +4856,35 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 54,
+          line: 58,
           column: 79
         },
         end: {
-          line: 54,
+          line: 58,
+          column: 87
+        }
+      }
+    }) : helper)) + '" data-project="' + alias1(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "project") : stack1, depth0)) + '" type="button" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Edit</button>\n'
+  },
+  13: function(container, depth0, helpers, partials, data) {
+    var stack1, helper, alias1 = container.escapeExpression,
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName]
+        }
+        return undefined
+      };
+    return '          <button onclick="composeEdit(this); return false;" data-containerid="' + alias1((helper = (helper = lookupProperty(helpers, "Name") || (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
+      name: "Name",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 60,
+          column: 79
+        },
+        end: {
+          line: 60,
           column: 87
         }
       }
@@ -4910,19 +4933,35 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
           column: 157
         }
       }
-    })) != null ? stack1 : "") + '" />\n        </div>\n        <div class="card-body">\n          <p class="card-text">\n          <table border="0" cellpadding="2" cellspacing="0">\n            <tr>\n              <td>Hostname:</td>\n              <td>' + alias4(alias5((stack1 = depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null ? lookupProperty(stack1, "Hostname") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Image:</td>\n              <td>" + alias4(alias5((stack1 = depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null ? lookupProperty(stack1, "Image") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td></td>\n              <td>" + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0) != null ? lookupProperty(stack1, "updateDue") : stack1, {
+    })) != null ? stack1 : "") + '" />\n        </div>\n        <div class="card-body">\n          <p class="card-text">\n          <table border="0" cellpadding="2" cellspacing="0">\n            <tr>\n              <td>Hostname:</td>\n              <td>' + alias4(alias5((stack1 = depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null ? lookupProperty(stack1, "Hostname") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Image:</td>\n              <td>" + alias4(alias5((stack1 = depth0 != null ? lookupProperty(depth0, "Config") : depth0) != null ? lookupProperty(stack1, "Image") : stack1, depth0)) + "</td>\n            </tr>\n" + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "downtime") : depth0, {
       name: "if",
       hash: {},
       fn: container.program(5, data, 0),
-      inverse: container.program(7, data, 0),
+      inverse: container.noop,
       data: data,
       loc: {
         start: {
-          line: 25,
+          line: 23,
+          column: 12
+        },
+        end: {
+          line: 28,
+          column: 19
+        }
+      }
+    })) != null ? stack1 : "") + "            <tr>\n              <td></td>\n              <td>" + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0) != null ? lookupProperty(stack1, "updateDue") : stack1, {
+      name: "if",
+      hash: {},
+      fn: container.program(7, data, 0),
+      inverse: container.program(9, data, 0),
+      data: data,
+      loc: {
+        start: {
+          line: 31,
           column: 18
         },
         end: {
-          line: 25,
+          line: 31,
           column: 89
         }
       }
@@ -4932,11 +4971,11 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 47,
+          line: 53,
           column: 71
         },
         end: {
-          line: 47,
+          line: 53,
           column: 79
         }
       }
@@ -4946,11 +4985,11 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 48,
+          line: 54,
           column: 74
         },
         end: {
-          line: 48,
+          line: 54,
           column: 82
         }
       }
@@ -4960,11 +4999,11 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 49,
+          line: 55,
           column: 74
         },
         end: {
-          line: 49,
+          line: 55,
           column: 82
         }
       }
@@ -4974,27 +5013,27 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 50,
+          line: 56,
           column: 74
         },
         end: {
-          line: 50,
+          line: 56,
           column: 82
         }
       }
     }) : helper)) + '" onclick="startContainerMonitor(this); return false;">Monitor</button>\n' + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "editable") : stack1, {
       name: "if",
       hash: {},
-      fn: container.program(9, data, 0),
-      inverse: container.program(11, data, 0),
+      fn: container.program(11, data, 0),
+      inverse: container.program(13, data, 0),
       data: data,
       loc: {
         start: {
-          line: 51,
+          line: 57,
           column: 8
         },
         end: {
-          line: 55,
+          line: 61,
           column: 15
         }
       }
