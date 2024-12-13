@@ -54,4 +54,5 @@ externalservices:
     longitude:
   linkding:
     apiUrl: http://linkding:9090/api
+    hostname:
     apiToken:

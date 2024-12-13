@@ -56,6 +56,17 @@ export class LinkdingService {
       const feedUrl = this.configService.get(
         "externalservices.linkding.feedUrl",
       );
+      const hostname =this.configService.get(
+"externalservices.linkding.hostname",
+) ?? "";
+
+const applyHostName=function(url){
+if (url=="") {return "";}
+const u = new URL(url);
+u.host  = hostname;
+return u.href;
+};
+
       const client = FluentHttpClient.Get(
         url + "/bookmarks?limit=65535&q=" + encodeURIComponent("#" + tag),
       )
@@ -63,6 +74,17 @@ export class LinkdingService {
         .Execute()
         .then((response) => {
           const obj: any = JSON.parse(response.value);
+          if (hostname!="") {
+            obj.results.forEach((l)=>{
+              if (l.preview_image_url) {
+                l.preview_image_url = applyHostName(l.preview_image_url);
+              }
+
+              if (l.favicon_url) {
+                l.favicon_url = applyHostName(l.favicon_url);
+              }
+            });
+          }
           resolve(obj);
         })
         .catch((err) => {
