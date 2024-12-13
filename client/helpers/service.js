@@ -31,7 +31,8 @@ module.exports = (Handlebars) => {
           switch (realName) {
             case "video":
               f = Handlebars.partials["widget-video"];
-              html = f({  settings: settings,
+              html = f({
+                settings: settings,
                 parent: p,
               });
               break;

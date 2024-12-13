@@ -6365,6 +6365,95 @@ this["app"]["templates"]["widget-tagcloud"] = Handlebars.template({
   },
   useData: true
 });
+this["app"]["templates"]["widget-video"] = Handlebars.template({
+  1: function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName]
+      }
+      return undefined
+    };
+    return 'poster="' + container.escapeExpression(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "poster") : stack1, depth0)) + '" '
+  },
+  3: function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName]
+      }
+      return undefined
+    };
+    return '    <source src="' + container.escapeExpression(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "mp4video") : stack1, depth0)) + '" type="video/mp4" />\n'
+  },
+  5: function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName]
+      }
+      return undefined
+    };
+    return '    <source src="' + container.escapeExpression(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "webmvideo") : stack1, depth0)) + '" type="video/webm" />\n'
+  },
+  compiler: [8, ">= 4.3.0"],
+  main: function(container, depth0, helpers, partials, data) {
+    var stack1, alias1 = depth0 != null ? depth0 : container.nullContext || {},
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName]
+        }
+        return undefined
+      };
+    return '<video id="videoplayer" class="video-js" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "poster") : stack1, {
+      name: "if",
+      hash: {},
+      fn: container.program(1, data, 0),
+      inverse: container.noop,
+      data: data,
+      loc: {
+        start: {
+          line: 1,
+          column: 41
+        },
+        end: {
+          line: 1,
+          column: 100
+        }
+      }
+    })) != null ? stack1 : "") + ' controls preload="auto" data-setup="{}">\n' + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "mp4video") : stack1, {
+      name: "if",
+      hash: {},
+      fn: container.program(3, data, 0),
+      inverse: container.noop,
+      data: data,
+      loc: {
+        start: {
+          line: 2,
+          column: 2
+        },
+        end: {
+          line: 4,
+          column: 9
+        }
+      }
+    })) != null ? stack1 : "") + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "webmvideo") : stack1, {
+      name: "if",
+      hash: {},
+      fn: container.program(5, data, 0),
+      inverse: container.noop,
+      data: data,
+      loc: {
+        start: {
+          line: 5,
+          column: 2
+        },
+        end: {
+          line: 7,
+          column: 9
+        }
+      }
+    })) != null ? stack1 : "") + '  <p class="vjs-no-js">\n    To view this video please enable JavaScript, and consider upgrading to a\n    web browser that\n    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>\n  </p>\n</video>\n'
+  },
+  useData: true
+});
 this["app"]["templates"]["widget-weather"] = Handlebars.template({
   1: function(container, depth0, helpers, partials, data, blockParams, depths) {
     var stack1, helper, alias1 = depth0 != null ? depth0 : container.nullContext || {},
