@@ -63,7 +63,9 @@ export class LinkdingService {
 const applyHostName=function(url){
 if (url=="") {return "";}
 const u = new URL(url);
-u.host  = hostname;
+const s & new URL(hostname);
+u.host  = s.host;
+u.protocol = s.protocol;
 return u.href;
 };
 
