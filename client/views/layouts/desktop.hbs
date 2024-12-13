@@ -44,10 +44,11 @@
       ui().themeChooser().setTheme();
       ui(".hbs-template").template();
       {{#if desktop.background.dynamic}}
-      window.setInterval(function(){
-        document.getElementById("bgimage").style.backgroundImage = "{{{desktop.background.url}}}#"+new Date().getTime();
-      },90000);
-      {{/if}} 
+      window.setInterval(function () {
+        document.getElementById("bgimage").style.backgroundImage = "{{{desktop.background.url}}}#" + new Date().getTime();
+      }, 90000);
+      {{/if}}
+
     </script>
     {{>messagebox}}
   </div>
