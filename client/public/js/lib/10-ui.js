@@ -93,6 +93,7 @@ window.ui = function(selector) {
             args.onEnterKey(this);
             return false;
           }
+          return false;
         }
       }
       targets.forEach((ctl) => {

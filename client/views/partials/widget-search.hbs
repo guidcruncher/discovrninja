@@ -1,11 +1,12 @@
-    <form class="d-flex" role="search">
+    <div class="d-flex">
       <input class="form-control me-2" id="q" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-primary" type="button" onclick="doSearch('#q');return false;">Search</button>
-    </form>
+    </div>
     <script type="text/javascript">
       ui("#q").enterCheck({
         onEnterKey: function () {
-          doSearch('#q')
+          doSearch('#q');
+          return false;
         }
       });
 

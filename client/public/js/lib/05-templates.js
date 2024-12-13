@@ -1392,8 +1392,10 @@ this["app"]["templates"]["service"] = Handlebars.template({
   "useData": true
 });
 this["app"]["templates"]["tagcloud"] = Handlebars.template({
-  "1": function(container, depth0, helpers, partials, data) {
+  "1": function(container, depth0, helpers, partials, data, blockParams, depths) {
     var helper, alias1 = container.escapeExpression,
+      alias2 = depth0 != null ? depth0 : (container.nullContext || {}),
+      alias3 = container.hooks.helperMissing,
       lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -1403,26 +1405,42 @@ this["app"]["templates"]["tagcloud"] = Handlebars.template({
 
     return "    <li><a data-weight=\"" +
       alias1(container.lambda(depth0, depth0)) +
-      "\" href=\"#\">" +
-      alias1(((helper = (helper = lookupProperty(helpers, "key") || (data && lookupProperty(data, "key"))) != null ? helper : container.hooks.helperMissing), (typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}), {
+      "\" href=\"" +
+      alias1(((depths[1] && lookupProperty(depths[1], "tagfunc")) || alias3).call(alias2, (data && lookupProperty(data, "key")), {
+        "name": "../tagfunc",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 40
+          },
+          "end": {
+            "line": 3,
+            "column": 59
+          }
+        }
+      })) +
+      "\">" +
+      alias1(((helper = (helper = lookupProperty(helpers, "key") || (data && lookupProperty(data, "key"))) != null ? helper : alias3), (typeof helper === "function" ? helper.call(alias2, {
         "name": "key",
         "hash": {},
         "data": data,
         "loc": {
           "start": {
             "line": 3,
-            "column": 43
+            "column": 61
           },
           "end": {
             "line": 3,
-            "column": 51
+            "column": 69
           }
         }
       }) : helper))) +
       "</a></li>\n";
   },
   "compiler": [8, ">= 4.3.0"],
-  "main": function(container, depth0, helpers, partials, data) {
+  "main": function(container, depth0, helpers, partials, data, blockParams, depths) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -1431,10 +1449,10 @@ this["app"]["templates"]["tagcloud"] = Handlebars.template({
     };
 
     return "<ul class=\"cloud\" role=\"navigation\" aria-label=\"Tag cloud\">\n" +
-      ((stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : (container.nullContext || {}), depth0, {
+      ((stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : (container.nullContext || {}), (depth0 != null ? lookupProperty(depth0, "feed") : depth0), {
         "name": "each",
         "hash": {},
-        "fn": container.program(1, data, 0),
+        "fn": container.program(1, data, 0, blockParams, depths),
         "inverse": container.noop,
         "data": data,
         "loc": {
@@ -1450,7 +1468,8 @@ this["app"]["templates"]["tagcloud"] = Handlebars.template({
       })) != null ? stack1 : "") +
       "</ul>\n";
   },
-  "useData": true
+  "useData": true,
+  "useDepths": true
 });
 this["app"]["templates"]["themechooser"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
@@ -1798,14 +1817,14 @@ this["app"]["templates"]["widget-news"] = Handlebars.template({
 this["app"]["templates"]["widget-search"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
-    return "    <form class=\"d-flex\" role=\"search\">\n      <input class=\"form-control me-2\" id=\"q\" type=\"text\" placeholder=\"Search\" aria-label=\"Search\">\n      <button class=\"btn btn-primary\" type=\"button\" onclick=\"doSearch('#q');return false;\">Search</button>\n    </form>\n    <script type=\"text/javascript\">\n      ui(\"#q\").enterCheck({\n        onEnterKey: function () {\n          doSearch('#q')\n        }\n      });\n\n    </script>\n";
+    return "    <div class=\"d-flex\">\n      <input class=\"form-control me-2\" id=\"q\" type=\"text\" placeholder=\"Search\" aria-label=\"Search\">\n      <button class=\"btn btn-primary\" type=\"button\" onclick=\"doSearch('#q');return false;\">Search</button>\n    </div>\n    <script type=\"text/javascript\">\n      ui(\"#q\").enterCheck({\n        onEnterKey: function () {\n          doSearch('#q');\n          return false;\n        }\n      });\n\n    </script>\n";
   },
   "useData": true
 });
 this["app"]["templates"]["widget-tagcloud"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
-    return "<div class=\"container\" id=\"tags\"></div>\n<script type=\"text/javascript\">\n  tagCloud(\"tags\");\n\n</script>\n";
+    return "<div class=\"container\" id=\"tags\"></div>\n<script type=\"text/javascript\">\n  tagCloud(\"tags\", \"/bookmarks?tag={tag}\");\n\n</script>\n";
   },
   "useData": true
 });
