@@ -16,28 +16,45 @@ export class DesktopController {
     return new Promise((resolve, reject) => {
       let p: Promise<string> = null;
       const desktop = this.desktopService.readFile();
+      if (["daily", "image"].contains(desktop.background.type)) {
+        switch (desktop.background.url) {
+          case "bing":
+            p = this.resourcesService.getBingDailyImageUrl();
+            break;
+          case "nasa":
+            p = this.resourcesService.getNasaDailyImageUrl();
+            break;
+          case "globe":
+            p = this.resourcesService.getGlobeImageUrl(height);
+            break;
+          default:
+            p = new Promise<string>((resolve, reject) => {
+              resolve(desktop.background.url);
+            });
+            break;
+        }
 
-      switch (desktop.background.url) {
-        case "bing":
-          p = this.resourcesService.getBingDailyImageUrl();
-          break;
-        case "nasa":
-          p = this.resourcesService.getNasaDailyImageUrl();
-          break;
-        case "globe":
-          p = this.resourcesService.getGlobeImageUrl(height);
-          break;
-      }
-
-      if (p) {
-        p.then((response) => {
-          res.status(302).redirect(response);
-          resolve(response);
-        }).catch((err) => {
-          reject(err);
+        p.then((targetUrl) => {
+          this.resourcesService
+            .proxy(targetUrl)
+            .then((result) => {
+              res.status(200);
+              res.header("content-type", result.contentType);
+              res.header(
+                "content-disposition",
+                "inline; filename=" + result.url.pathname.split("/").pop(),
+              );
+              res.send(result.data);
+              resolve(true);
+            })
+            .catch((err) => {
+              res.status(500).send(err);
+              reject(err);
+            });
         });
       } else {
-        resolve(desktop);
+        res.status(404).send();
+        resolve(false);
       }
     });
   }

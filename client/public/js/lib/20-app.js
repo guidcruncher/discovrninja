@@ -2,7 +2,7 @@ function loadBackground(dynamic) {
   var dimensions = ui().desktop().screen;
   var url = "/api/desktop/background?w=" + dimensions.w + "&h=" + dimensions.h;
   document.getElementById("bgimage").style.backgroundImage = url;
-
+  document.body.style.background = "#000000";
   if (dynamic) {
     window.setInterval(function() {
       document.getElementById("bgimage").style.backgroundImage = url + "&d=" + new Date().getTime();
