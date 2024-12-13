@@ -66,7 +66,7 @@ export class LinkdingService {
         const u = new URL(url);
         const s = new URL(hostname);
         u.host = s.host;
-        u.port =s.port;
+        u.port = s.port;
         u.protocol = s.protocol;
         return u.href;
       };
