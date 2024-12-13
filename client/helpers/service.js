@@ -29,6 +29,12 @@ module.exports = (Handlebars) => {
         case "widget":
           template = name.toLowerCase().replace(".", "-").replace(/\//g, "_");
           switch (realName) {
+            case "video":
+              f = Handlebars.partials["widget-video"];
+              html = f({  settings: settings,
+                parent: p,
+              });
+              break;
             case "news":
               serviceUrl =
                 "/api/resources/news?u=" + encodeURIComponent(settings.url);
