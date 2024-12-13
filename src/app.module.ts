@@ -1,5 +1,6 @@
 import { AppController } from "@controllers/app.controller";
 import { ComposeController } from "@controllers/compose.controller";
+import { DesktopController } from "@controllers/desktop.controller";
 import { DiscoveryController } from "@controllers/discovery.controller";
 import { DockerController } from "@controllers/docker.controller";
 import { IconsController } from "@controllers/icons.controller";
@@ -77,6 +78,7 @@ import configuration from "./config/configuration";
   ],
   controllers: [
     ComposeController,
+    DesktopController,
     DockerController,
     DiscoveryController,
     AppController,

@@ -14,7 +14,7 @@ export class DesktopService {
     private resourcesService: ResourcesService,
   ) {}
 
-  private readFile(): any {
+  public readFile(): any {
     const filename = path.resolve(this.configService.get("desktop.filename"));
 
     this.logger.log("Reading desktop from", filename);
@@ -53,12 +53,13 @@ export class DesktopService {
               break;
             case "globe":
               dynamic = true;
-              p = this.resourcesService.getGlobeImageUrl();
+              p = this.resourcesService.getGlobeImageUrl(0);
               break;
           }
 
           if (p) {
             p.then((url) => {
+              desktop.background.isimage = true;
               if (dynamic) {
                 desktop.background.dynamic = true;
               }

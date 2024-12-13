@@ -30,7 +30,7 @@
       <script src="/assets/js/main.js"></script>
 </head>
 
-<body>
+<body {{#if desktop.background.isimage}} onload="loadBackground({{desktop.background.dynamic}});" {{/if}}>
   <div id="bgimage" class="bgimage" {{desktopbackground desktop.background}}>
     {{#if desktop.header.visible}} {{>desktopheader}}{{/if}}
     <div class="container" style="padding-top:5px; padding-bottom:5px">
@@ -41,13 +41,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
+      ui().desktop();
       ui().themeChooser().setTheme();
       ui(".hbs-template").template();
-      {{#if desktop.background.dynamic}}
-      window.setInterval(function () {
-        document.getElementById("bgimage").style.backgroundImage = "{{{desktop.background.url}}}#" + new Date().getTime();
-      }, 90000);
-      {{/if}}
 
     </script>
     {{>messagebox}}

@@ -84,7 +84,7 @@ export class ResourcesController {
 
   @Get("daily/globe")
   async getGlobeDailyImageUrl(): Promise<string> {
-    return this.resourcesService.getGlobeImageUrl();
+    return this.resourcesService.getGlobeImageUrl(0);
   }
 
   @Get("daily/nasa")

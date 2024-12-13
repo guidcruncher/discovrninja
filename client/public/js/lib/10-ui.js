@@ -67,6 +67,27 @@ window.ui = function(selector) {
   }
 
   return {
+    desktop: function() {
+      var desktop = {
+        screen: {
+          w: window.screen.width,
+          h: window.screen.height
+        },
+        window: {
+          w: document.documentElement.clientWidth,
+          h: document.documentElement.clientHeight
+        }
+      };
+      if (!window.screen) {
+        desktop.screen.w = 1500;
+        desktop.screen.h = 800;
+      }
+      var date = new Date();
+      date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+      document.cookie = "desktop=" + JSON.stringify(desktop) + expires + "; path=/";
+      return desktop;
+    },
     observe: function(target) {
       var ev =
         "__OBS_" +

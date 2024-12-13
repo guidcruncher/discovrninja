@@ -427,13 +427,19 @@ export class ResourcesService {
     });
   }
 
-  public getGlobeImageUrl(): Promise<string> {
+  public getGlobeImageUrl(h: any): Promise<string> {
     let url = "";
+    let height = h ?? 0;
+    if (height == 0) {
+      height = 800;
+    }
     return new Promise<string>((resolve, reject) => {
       this.determineLocation()
         .then((loc) => {
           url =
-            "https://www.fourmilab.ch/cgi-bin/Earth?img=learth.evif&imgsize=800&dynimg=y&gamma=1.32&opt=-l&lat=" +
+            "https://www.fourmilab.ch/cgi-bin/Earth?img=learth.evif&imgsize=" +
+            height +
+            "&dynimg=y&gamma=1.32&opt=-l&lat=" +
             loc.latitude +
             "&lon=" +
             loc.longitude +

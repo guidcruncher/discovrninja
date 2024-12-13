@@ -8,7 +8,7 @@ module.exports = (Handlebars) => {
 
     switch (opt.type) {
       case "image":
-        html += "background-image: url('" + opt.url + "');";
+        //        html += "background-image: url('" + opt.url + "');";
         var bgfilter = opt.image.filter ?? "";
         if (bgfilter != "") {
           html += "filter: " + bgfilter + ";";
@@ -23,6 +23,7 @@ module.exports = (Handlebars) => {
     }
 
     html += '"';
+
     return new Handlebars.SafeString(html);
   });
 };

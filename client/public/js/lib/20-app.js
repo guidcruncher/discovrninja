@@ -1,3 +1,15 @@
+function loadBackground(dynamic) {
+  var dimensions = ui().desktop().screen;
+  var url = "/api/desktop/background?w=" + dimensions.w + "&h=" + dimensions.h;
+  document.getElementById("bgimage").style.backgroundImage = url;
+
+  if (dynamic) {
+    window.setInterval(function() {
+      document.getElementById("bgimage").style.backgroundImage = url + "&d=" + new Date().getTime();
+    }, 90000);
+  }
+}
+
 function setBgColor(src, target) {
   const rgbToHex = function(r, g, b) {
     if (r > 255 || g > 255 || b > 255) {

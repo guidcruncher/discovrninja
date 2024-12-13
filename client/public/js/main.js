@@ -6890,6 +6890,27 @@ window.ui = function(selector) {
     window._stateStore = {}
   }
   return {
+    desktop: function() {
+      var desktop = {
+        screen: {
+          w: window.screen.width,
+          h: window.screen.height
+        },
+        window: {
+          w: document.documentElement.clientWidth,
+          h: document.documentElement.clientHeight
+        }
+      };
+      if (!window.screen) {
+        desktop.screen.w = 1500;
+        desktop.screen.h = 800
+      }
+      var date = new Date;
+      date.setTime(date.getTime() + 1 * 24 * 60 * 60 * 1e3);
+      expires = "; expires=" + date.toUTCString();
+      document.cookie = "desktop=" + JSON.stringify(desktop) + expires + "; path=/";
+      return desktop
+    },
     observe: function(target) {
       var ev = "__OBS_" + target.getAttribute("data-template").split("/").pop() + "_" + name;
       window._stateStore[ev] = new MutationObserver((mutationList, observer) => {
@@ -7041,6 +7062,17 @@ String.prototype.format = function(tokens) {
     if (tokens.hasOwnProperty(token)) formatted = formatted.replace(RegExp("{" + token + "}", "g"), tokens[token]);
   return formatted
 };
+
+function loadBackground(dynamic) {
+  var dimensions = ui().desktop().screen;
+  var url = "/api/desktop/background?w=" + dimensions.w + "&h=" + dimensions.h;
+  document.getElementById("bgimage").style.backgroundImage = url;
+  if (dynamic) {
+    window.setInterval(function() {
+      document.getElementById("bgimage").style.backgroundImage = url + "&d=" + (new Date).getTime()
+    }, 9e4)
+  }
+}
 
 function setBgColor(src, target) {
   const rgbToHex = function(r, g, b) {
