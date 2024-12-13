@@ -16,7 +16,7 @@ export class DesktopController {
     return new Promise((resolve, reject) => {
       let p: Promise<string> = null;
       const desktop = this.desktopService.readFile();
-      if (["daily", "image"].contains(desktop.background.type)) {
+      if (["daily", "image"].includes(desktop.background.type)) {
         switch (desktop.background.url) {
           case "bing":
             p = this.resourcesService.getBingDailyImageUrl();
