@@ -6897,8 +6897,8 @@ window.ui = function(selector) {
           h: window.screen.height
         },
         window: {
-          w: document.documentElement.clientWidth,
-          h: document.documentElement.clientHeight
+          w: window.innerWidth,
+          h: window.innerHeight
         }
       };
       if (!window.screen) {
@@ -7064,9 +7064,8 @@ String.prototype.format = function(tokens) {
 };
 
 function loadBackground(dynamic) {
-  var dimensions = ui().desktop().screen;
-  var url = "/api/desktop/background?w=" + dimensions.w + "&h=" + dimensions.h;
-  document.getElementById("bgimage").style.backgroundImage = url;
+  var url = "/api/desktop/background?w=" + window.innerWidth + "&h=" + window.innerHeight;
+  document.getElementById("bgimage").style.background = "url('" + url + "')";
   document.body.style.background = "#000000";
   if (dynamic) {
     window.setInterval(function() {

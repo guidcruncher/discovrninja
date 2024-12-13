@@ -74,8 +74,8 @@ window.ui = function(selector) {
           h: window.screen.height
         },
         window: {
-          w: document.documentElement.clientWidth,
-          h: document.documentElement.clientHeight
+          w: window.innerWidth,
+          h: window.innerHeight
         }
       };
       if (!window.screen) {
