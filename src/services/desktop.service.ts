@@ -40,7 +40,7 @@ export class DesktopService {
           desktop.theme = "/assets/themes/" + desktop.theme;
         }
       }
-
+      desktop.background.cssclass = "bgimage";
       if (desktop.background) {
         if (desktop.background.type == "daily") {
           let p: Promise<string> = null;
@@ -54,6 +54,7 @@ export class DesktopService {
             case "globe":
               dynamic = true;
               p = this.resourcesService.getGlobeImageUrl(0);
+              desktop.background.cssclass = "bgimage-globe";
               break;
           }
 
