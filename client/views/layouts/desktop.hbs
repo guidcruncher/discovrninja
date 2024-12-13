@@ -31,7 +31,7 @@
 </head>
 
 <body>
-  <div class="bgimage" {{desktopbackground desktop.background}}>
+  <div id="bgimage" class="bgimage" {{desktopbackground desktop.background}}>
     {{#if desktop.header.visible}} {{>desktopheader}}{{/if}}
     <div class="container" style="padding-top:5px; padding-bottom:5px">
       {{{body}}}
@@ -43,7 +43,11 @@
     <script type="text/javascript">
       ui().themeChooser().setTheme();
       ui(".hbs-template").template();
-
+      {{#if desktop.background.dynamic}}
+      window.setInterval(function(){
+        document.getElementById("bgimage").style.backgroundImage = "{{{desktop.background.url}}}#"+new Date().getTime();
+      },90000);
+      {{/if}} 
     </script>
     {{>messagebox}}
   </div>

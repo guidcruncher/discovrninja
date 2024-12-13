@@ -32,6 +32,7 @@ export class DesktopService {
   }
 
   public renderDesktop(): any {
+var dynamic=false;
     return new Promise((resolve, reject) => {
       const desktop = this.readFile();
       if (desktop.theme) {
@@ -50,10 +51,15 @@ export class DesktopService {
             case "bing":
               p = this.resourcesService.getBingDailyImageUrl();
               break;
+            case "globe":
+              dynamic = true;
+              p = this.resourcesService.getGlobeImageUrl();
+              break;
           }
 
           if (p) {
             p.then((url) => {
+              if (dynamic) {desktop.background.dynamic=true;}
               desktop.background.url = url;
               desktop.background.type = "image";
               resolve(desktop);

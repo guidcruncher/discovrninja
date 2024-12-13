@@ -427,6 +427,25 @@ export class ResourcesService {
     });
   }
 
+  public getGlobeImageUrl(): Promise<string> {
+    let url = "";
+    return new Promise<string>((resolve, reject) => {
+      this.determineLocation()
+        .then((loc) => {
+          url =
+            "https://www.fourmilab.ch/cgi-bin/Earth?img=learth.evif&imgsize=800&dynimg=y&gamma=1.32&opt=-l&lat=" +
+            loc.latitude +
+            "&lon=" +
+            loc.longitude +
+            "&alt=35785&tle=&date=0&utc=&jd=";
+          resolve(url);
+        })
+        .catch((err) => {
+          this.logger.error("Error in getGlobeImageUrl", err);
+        });
+    });
+  }
+
   public getBingDailyImageUrl(): Promise<string> {
     const apiUrl =
       "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
