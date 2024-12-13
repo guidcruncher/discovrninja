@@ -56,18 +56,19 @@ export class LinkdingService {
       const feedUrl = this.configService.get(
         "externalservices.linkding.feedUrl",
       );
-      const hostname =this.configService.get(
-"externalservices.linkding.hostname",
-) ?? "";
+      const hostname =
+        this.configService.get("externalservices.linkding.hostname") ?? "";
 
-const applyHostName=function(url){
-if (url=="") {return "";}
-const u = new URL(url);
-const s & new URL(hostname);
-u.host  = s.host;
-u.protocol = s.protocol;
-return u.href;
-};
+      const applyHostName = function (url) {
+        if (url == "") {
+          return "";
+        }
+        const u = new URL(url);
+        const s = new URL(hostname);
+        u.host = s.host;
+        u.protocol = s.protocol;
+        return u.href;
+      };
 
       const client = FluentHttpClient.Get(
         url + "/bookmarks?limit=65535&q=" + encodeURIComponent("#" + tag),
@@ -76,8 +77,8 @@ return u.href;
         .Execute()
         .then((response) => {
           const obj: any = JSON.parse(response.value);
-          if (hostname!="") {
-            obj.results.forEach((l)=>{
+          if (hostname != "") {
+            obj.results.forEach((l) => {
               if (l.preview_image_url) {
                 l.preview_image_url = applyHostName(l.preview_image_url);
               }
