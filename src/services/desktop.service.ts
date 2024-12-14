@@ -52,7 +52,7 @@ export class DesktopService {
               p = this.resourcesService.getBingDailyImageUrl();
               break;
             case "globe":
-              dynamic = true;
+              dynamic = desktop.background.dynamic ?? true;
               p = this.resourcesService.getGlobeImageUrl(0);
               desktop.background.cssclass = "bgimage-globe";
               break;
@@ -63,6 +63,9 @@ export class DesktopService {
               desktop.background.isimage = true;
               if (dynamic) {
                 desktop.background.dynamic = true;
+                if (!desktop.background.reloadIntervalMinutes) {
+                  desktop.background.reloadIntervalMinutes = 15;
+                }
               }
               desktop.background.url = url;
               desktop.background.type = "image";

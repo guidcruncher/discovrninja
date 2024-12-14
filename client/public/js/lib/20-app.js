@@ -1,11 +1,25 @@
-function loadBackground(dynamic) {
-  var url = "/api/desktop/background?w=" + window.innerWidth + "&h=" + window.innerHeight;
-  document.getElementById("bgimage").style.background = "url('" + url + "')";
-  document.body.style.background = "#000000";
+function loadBackground(dynamic, interval) {
+  window._loadBg = function() {
+    var url = "/api/desktop/background?w=" + window.innerWidth + "&h=" + window.innerHeight;
+    document.getElementById("bgimage").style.background = "url('" + url + "')";
+    document.body.style.background = "#000000";
+  }
+  window._loadBg();
+
   if (dynamic) {
-    window.setInterval(function() {
-      document.getElementById("bgimage").style.backgroundImage = url + "&d=" + new Date().getTime();
-    }, 90000);
+    window._bgInterval = window.setInterval(function() {
+      window._loadBg();
+    }, ((interval == 0 ? 15 : interval) * 60000));
+    window.onfocus = function() {
+      window._loadBg();
+      if (window._bgInterval) {
+        window.clearInterval(window._bgInterval);
+      }
+
+      window._bgInterval = window.setInterval(function() {
+        window._loadBg();
+      }, ((interval == 0 ? 15 : interval) * 60000));
+    }
   }
 }
 
