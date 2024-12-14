@@ -477,7 +477,9 @@ export class DockerService {
                 projects[project].containers.push({
                   containerName: container.Name,
                   hostname: container.Config.Hostname,
-                });
+                  projectName: project, 
+                  editable: (projects[project].editable),
+               });
               }
             });
 
