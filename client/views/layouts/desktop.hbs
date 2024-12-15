@@ -33,7 +33,19 @@
 
 <body {{#if desktop.background.isimage}} onload="loadBackground({{#if desktop.background.dynamic}}{{desktop.background.dynamic}}, {{desktop.background.reloadIntervalMinutes}}{{else}}false, 0{{/if}});" {{/if}}>
   <div id="bgimage" class="{{desktop.background.cssclass}}" {{desktopbackground desktop.background}}>
-    {{#if desktop.header.visible}} {{>desktopheader}}{{/if}}
+    {{#if desktop.header.visible}} {{>desktopheader}}{{else}}
+      <div class="desktop-themechooser">
+        <button data-theme="dark" onclick="chooseDesktopTheme(this);return false;" class="btn btn-sm btn-default text-secondary">
+          <i id="dark" class="bi bi-moon-stars"></i>
+        </button>
+        <button data-theme="light"  onclick="chooseDesktopTheme(this);return false;" class="btn btn-sm btn-default text-secondary">
+          <i id="light" class="bi bi-sun"></i>
+        </button>
+        <button data-theme="auto" onclick="chooseDesktopTheme(this);return false;" class="btn btn-sm btn-default text-secondary">
+          <i class="bi bi-display"></i>
+        </button>
+      </div>
+    {{/if}}
     <div class="container" style="padding-top:5px; padding-bottom:5px">
       {{{body}}}
     </div>
