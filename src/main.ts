@@ -21,6 +21,11 @@ async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");
   const serverPort: number = parseInt(config.get("host.appServer.listenPort"));
   const serverHost: string = config.get("host.appServer.listenAddress");
+  
+  if (process.env.IN_DOCKER) {
+    serverHost = "127.0.0.1";
+  }
+
   await app.listen(serverPort, serverHost);
   log.debug(`Application is running on: ${await app.getUrl()}`);
 }

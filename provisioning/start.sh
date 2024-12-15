@@ -26,8 +26,12 @@ if [ ! -f /home/app/config/services.yaml ]; then
 fi
 
 export NODE_CONFIG_DIR=/home/app/config
-
+export IN_DOCKER=false
 export NODE_ENV=production
+
+if [ -f /.dockerenv ]; then
+	export IN_DOCKER=true
+fi
 
 node server/main --config=/home/app/config/config.yaml
 

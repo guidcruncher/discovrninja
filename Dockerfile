@@ -1,10 +1,16 @@
 FROM guidcruncher/node-base:22.9.0-alpine3.20 AS base
 
-RUN mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /home/app/server /home/app/client /home/app/node_modules
+RUN apk add --no-cache dnsmasq caddy
+
+RUN mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /home/app/server /home/app/client /home/app/node_modules /etc/caddy/caddyfile.d	/etc/caddy/includes
 
 FROM base AS build
 
 WORKDIR /home/app/build
+
+COPY ./provisioning/start.sh /home/add/build/start.sh
+COPY ./provisioning/Caddyfile /etc/caddy/Caddyfile
+COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
 
 COPY . .
 
