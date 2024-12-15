@@ -35,5 +35,5 @@ fi
 
 dnsmasq --conf-file=/etc/dnsmasq.conf --listen-address=0.0.0.0 --pid-file=/home/dnsmasq.pid
 caddy start --config /etc/caddy/Caddyfile --pidfile /home/caddy.pid
-node server/main --config=/home/appp/confilg/config.yaml
+node server/main --config=/home/app/config/config.yaml
 
