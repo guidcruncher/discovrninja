@@ -14,8 +14,9 @@ export class HandlebarsFactory {
   }
 
   public static initialise() {
+    const clientBase = process.env.CLIENT_BASpE ?? path.join(__dirname, "..", "..", "client");
     const getPartials = () => {
-      const templatesPath = path.join(__dirname, "..", "..", "client", "views");
+      const templatesPath = path.join(clientBase, "views");
       const partialsDir = path.join(templatesPath, "partials");
       const partials = {};
       fs.readdirSync(partialsDir, { withFileTypes: true })
@@ -31,7 +32,8 @@ export class HandlebarsFactory {
     };
 
     const registerHelpers = (Handlebars) => {
-      const helpersDir = path.join(__dirname, "..", "client", "helpers");
+      const clientBase = process.env.CLIENT_BASE ?? path.join(__dirname, "..", "client");
+      const helpersDir = path.join(clientBase, "helpers");
       fs.readdirSync(helpersDir, { withFileTypes: true })
         .filter((file) => {
           return path.extname(file.name) === ".js";
@@ -45,11 +47,10 @@ export class HandlebarsFactory {
 
     this._instance = require("handlebars");
     //   this._instance.partials = getPartials();
+
+    const clientBaseDir = process.env.CLIENT_BASE ?? path.join(__dirname, "..", "..", "client"); 
     this._instance.templates = path.join(
-      __dirname,
-      "..",
-      "..",
-      "client",
+      clientBaseDir,
       "views",
     );
     this._instance.layout = "./templates/layout.hbs";
