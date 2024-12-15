@@ -21,7 +21,7 @@ async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");
   let serverPort: number = parseInt(config.get("host.appServer.listenPort"));
   let serverHost: string = config.get("host.appServer.listenAddress");
-  
+
   if (process.env.IN_DOCKER) {
     serverHost = "127.0.0.1";
     serverPort = 5001;
@@ -41,7 +41,8 @@ async function bootstrap() {
 
   app.enableCors();
 
-const clientBase = process.env.CLIENT_BASE ?? path.join(__dirname, "..", "client");
+  const clientBase =
+    process.env.CLIENT_BASE ?? path.join(__dirname, "..", "client");
 
   app.useStaticAssets({
     root: path.join(clientBase, "public"),
