@@ -9,6 +9,7 @@ RUN mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist 
 FROM base AS build
 
 WORKDIR /home/app/build
+COPY gulpfile.mjs ./gulpfile.mjs
 COPY package.json ./package.json
 COPY ./src/ ./src/
 COPY ./client/ ./client/
