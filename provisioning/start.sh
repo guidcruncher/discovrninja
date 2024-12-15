@@ -33,5 +33,6 @@ if [ -f /.dockerenv ]; then
 	export IN_DOCKER=true
 fi
 
+caddy start --config /etc/caddy/ --pidfile /home/caddy.pid
 node server/main --config=/home/app/config/config.yaml
 
