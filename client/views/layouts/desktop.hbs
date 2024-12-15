@@ -35,13 +35,13 @@
   <div id="bgimage" class="{{desktop.background.cssclass}}" {{desktopbackground desktop.background}}>
     {{#if desktop.header.visible}} {{>desktopheader}}{{else}}
       <div class="desktop-themechooser">
-        <button data-theme="dark" onclick="chooseDesktopTheme(this);return false;" class="btn btn-sm btn-default text-secondary">
+        <button data-theme="dark" onclick="chooseDesktopTheme('dark');return false;" class="btn btn-sm btn-default text-secondary">
           <i id="dark" class="bi bi-moon-stars"></i>
         </button>
-        <button data-theme="light"  onclick="chooseDesktopTheme(this);return false;" class="btn btn-sm btn-default text-secondary">
+        <button data-theme="light" onclick="chooseDesktopTheme('light');return false;" class="btn btn-sm btn-default text-secondary">
           <i id="light" class="bi bi-sun"></i>
         </button>
-        <button data-theme="auto" onclick="chooseDesktopTheme(this);return false;" class="btn btn-sm btn-default text-secondary">
+        <button data-theme="auto" onclick="chooseDesktopTheme('auto');return false;" class="btn btn-sm btn-default text-secondary">
           <i class="bi bi-display"></i>
         </button>
       </div>

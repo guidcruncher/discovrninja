@@ -7167,6 +7167,15 @@ String.prototype.format = function(tokens) {
   return formatted
 };
 
+function chooseDesktopTheme(obj) {
+  var theme = obj;
+  if (theme === "auto") {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  }
+  document.documentElement.setAttribute("data-bs-theme", theme);
+  localStorage.setItem("theme", theme)
+}
+
 function readLocalFile(src, target) {
   const file = document.querySelector(src).files[0];
   const reader = new FileReader;
