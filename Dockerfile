@@ -2,6 +2,8 @@ FROM guidcruncher/node-base:22.9.0-alpine3.20 AS base
 
 RUN apk add --no-cache dnsmasq caddy
 
+RUN npm i -g gulp-cli
+
 RUN mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /ho me/app/build/src /home/app/build/ config /home/app/server /home/app/client /home/app/node_modules /etc/caddy/caddyfile.d	/etc/caddy/includes
 
 FROM base AS build
@@ -9,12 +11,14 @@ FROM base AS build
 WORKDIR /home/app/build
 COPY package.json ./package.json
 COPY ./src/ ./src/
+COPY ./client/ ./client/
 COPY ./config/* ./config/
 COPY ./tsconfig.* .
 COPY nest-cli.json .
 
 RUN npm i && \
     apk del .build-deps && \
+    gulp js && \
     npm run build && \
     rm -r ./node_modules && \
     npm i --omit=dev
@@ -37,7 +41,7 @@ COPY ./provisioning/Caddyfile /etc/caddy/Caddyfile
 COPY ./provisioning/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
 RUN chmod +x /home/app/start.sh
-	
+
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 
 FROM build AS production
