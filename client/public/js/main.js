@@ -7167,6 +7167,17 @@ String.prototype.format = function(tokens) {
   return formatted
 };
 
+function readLocalFile(src, target) {
+  const file = document.querySelector(src).files[0];
+  const reader = new FileReader;
+  const ctl = document.querySelector(target);
+  reader.onload = res => {
+    ctl.value = res.target.result
+  };
+  reader.onerror = err => ctl.value = err;
+  reader.readAsText(file)
+}
+
 function exportContainer(target) {
   var container = target.getAttribute("data-containerid");
   var url = "/api/docker/container/" + encodeURIComponent(container) + "/createoptions";
