@@ -37,8 +37,8 @@ export class DockerController {
       .then((cfg) => {
         res
           .status(200)
-          .header("Content-Disposition", "attachment; filename=" + id + ".json")
-          .header("Content-Type", "application/json")
+          .header("Content-Disposition", "attachment; filename=" + id + ".json.container")
+          .header("Content-Type", "text/plain")
           .send(JSON.stringify(cfg, null, 4));
       })
       .catch((err) => {
