@@ -19,7 +19,7 @@ services:
       host.docker.internal: 172.17.0.1
       auth.thecrockers.localcert.net: 192.168.1.201
     ports:
-      - 5101:5001
+      - 5101:3000
 
 networks:
   proxy:

@@ -8,8 +8,9 @@ FROM base AS build
 
 WORKDIR /home/app/build
 
-COPY ./provisioning/start.sh /home/add/build/start.sh
+COPY ./provisioning/start.sh /home/app/build/start.sh
 COPY ./provisioning/Caddyfile /etc/caddy/Caddyfile
+COPY ./provisioning/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
 
 COPY . .
@@ -46,7 +47,7 @@ ENV NODE_ENV=production
 ENV NODE_PATH=./build
 ENV TZ=UTC
 
-EXPOSE 5001
-
+EXPOSE 3000
+ 
 CMD [ "/home/app/start.sh" ]
 
