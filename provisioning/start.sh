@@ -25,6 +25,7 @@ if [ ! -f /home/app/config/services.yaml ]; then
   cp /home/app/services.default /home/app/config/services.yaml
 fi
 
+export CLIENT_BASE=/home/app/client/
 export NODE_CONFIG_DIR=/home/app/config
 export IN_DOCKER=false
 export NODE_ENV=production

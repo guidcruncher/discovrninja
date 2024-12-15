@@ -41,8 +41,10 @@ async function bootstrap() {
 
   app.enableCors();
 
+const clientBase = process.env.CLIENT_BASE ?? path.join(__dirname, "..", "client");
+
   app.useStaticAssets({
-    root: path.join(__dirname, "..", "client", "public"),
+    root: path.join(clientBase, "public"),
     prefix: "/assets/",
     cacheControl: false,
     etag: false,
@@ -55,7 +57,7 @@ async function bootstrap() {
   const nodeEnv: string = process.env.NODE_ENV ?? "development";
 
   const getPartials = () => {
-    const templatesPath = path.join(__dirname, "..", "client", "views");
+    const templatesPath = path.join(clientBase, "views");
     const partialsDir = path.join(templatesPath, "partials");
     const partials = {};
     fs.readdirSync(partialsDir, { withFileTypes: true })
@@ -76,10 +78,10 @@ async function bootstrap() {
     engine: {
       handlebars: Handlebars,
     },
-    templates: path.join(__dirname, "..", "client", "views"),
+    templates: path.join(clientBase, "views"),
     // layout: "./templates/layout.hbs",
     options: {
-      layoutsDir: path.join(__dirname, "..", "client", "views", "layouts"),
+      layoutsDir: path.join(clientBase, "views", "layouts"),
       partials: getPartials(),
     },
   });
