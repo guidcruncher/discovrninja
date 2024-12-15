@@ -3,7 +3,6 @@ import { ContainerStats } from "@schemas/containerstats.schema";
 import { ComposeService } from "@services/compose.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
 import { DockerService } from "@services/docker.service";
-import { ContainerCreateOptions } from "dockerode";
 
 /**
  * The Docker service API
@@ -32,8 +31,19 @@ export class DockerController {
   }
 
   @Get("container/:id/createoptions")
-  async getcontainerjson(@Param("id") id): Promise<ContainerCreateOptions> {
-    return this.dockerService.getContainerCreateJson(id);
+  async getcontainerjson(@Param("id") id, @Res() res) {
+    this.dockerService
+      .getContainerCreateJson(id)
+      .then((cfg) => {
+        res
+          .status(200)
+          .header("Content-Disposition", "attachment; filename=" + id + ".json")
+          .header("Content-Type", "application/json")
+          .send(JSON.stringify(cfg, null, 4));
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
   }
 
   @Get("container/:id/available")

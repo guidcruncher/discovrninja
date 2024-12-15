@@ -1,3 +1,9 @@
+function exportContainer(target) {
+  var container = target.getAttribute("data-containerid");
+  var url = "/api/docker/container/" + encodeURIComponent(container) + "/createoptions";
+  window.open(url);
+}
+
 function loadBackground(dynamic, interval) {
   window._loadBg = function() {
     var url = "/api/desktop/background?w=" + window.innerWidth + "&h=" + window.innerHeight;
