@@ -8,7 +8,11 @@ import { LinkdingController } from "@controllers/linkding.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
-import { PortainerTemplate, Templates, ContainerCatalog } from "@customtypes/portainer-template";
+import {
+  PortainerTemplate,
+  Templates,
+  ContainerCatalog,
+} from "@customtypes/portainer-template";
 import { Global, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
@@ -51,7 +55,7 @@ import configuration from "./config/configuration";
       load: [configuration],
     }),
     LoggerModule.forRootAsync({
-      imports: [ConfigModule], 
+      imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => {
         return {
