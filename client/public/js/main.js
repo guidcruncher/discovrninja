@@ -7266,6 +7266,10 @@ function tagCloud(id, targetUrl) {
 
 function navigateToNews(sender) {
   var url = sender.getAttribute("data-url");
+  if (window.innerWidth < 992) {
+    newsPage(url);
+    return false
+  }
   var apiUrl = "/api/resources/feed?url=" + encodeURIComponent(url);
   var options = {
     focus: true,
