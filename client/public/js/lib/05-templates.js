@@ -331,7 +331,49 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
 this["app"]["templates"]["desktopfooter"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
-    return "<footer class=\"fixed-bottom bg-body-tertiary text-muted\" style=\"height:40px\">\n  <div class=\"container\" style=\"padding-top:5px\" id=\"footer\">\n  </div>\n</footer>\n";
+    var alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
+      alias2 = container.hooks.helperMissing,
+      alias3 = container.escapeExpression,
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+      };
+
+    return "<footer class=\"fixed-bottom bg-body-tertiary text-muted\" style=\"height:40px\">\n  &nbsp; Version: " +
+      alias3((lookupProperty(helpers, "buildversion") || (depth0 && lookupProperty(depth0, "buildversion")) || alias2).call(alias1, "version", {
+        "name": "buildversion",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 18
+          },
+          "end": {
+            "line": 2,
+            "column": 44
+          }
+        }
+      })) +
+      " Date: " +
+      alias3((lookupProperty(helpers, "buildversion") || (depth0 && lookupProperty(depth0, "buildversion")) || alias2).call(alias1, "buildDateStr", {
+        "name": "buildversion",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 51
+          },
+          "end": {
+            "line": 2,
+            "column": 82
+          }
+        }
+      })) +
+      "\n  <div class=\"container\" style=\"padding-top:5px\" id=\"footer\">\n  </div>\n</footer>\n";
   },
   "useData": true
 });
@@ -858,7 +900,49 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
 this["app"]["templates"]["footer"] = Handlebars.template({
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
-    return "<div style=\"margin-top: 50px;\"></div>\n<div style=\"height:30px;\" class=\"p-2 bg-secondary bg-gradient text-white fixed-bottom\">\n  &nbsp;\n</div>\n";
+    var alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
+      alias2 = container.hooks.helperMissing,
+      alias3 = container.escapeExpression,
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+      };
+
+    return "<div style=\"margin-top: 50px;\"></div>\n<div style=\"height:30px;\" class=\"p-2 bg-secondary bg-gradient text-white fixed-bottom\">\n  &nbsp; Version: " +
+      alias3((lookupProperty(helpers, "buildversion") || (depth0 && lookupProperty(depth0, "buildversion")) || alias2).call(alias1, "version", {
+        "name": "buildversion",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 18
+          },
+          "end": {
+            "line": 3,
+            "column": 44
+          }
+        }
+      })) +
+      " Date: " +
+      alias3((lookupProperty(helpers, "buildversion") || (depth0 && lookupProperty(depth0, "buildversion")) || alias2).call(alias1, "buildDateStr", {
+        "name": "buildversion",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 51
+          },
+          "end": {
+            "line": 3,
+            "column": 82
+          }
+        }
+      })) +
+      "\n</div>\n";
   },
   "useData": true
 });
