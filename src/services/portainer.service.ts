@@ -1,6 +1,4 @@
-import {
-  Template,
-} from "@customtypes/portainer-template";
+import { Template } from "@customtypes/portainer-template";
 import { StringBuilder } from "@customtypes/stringbuilder";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
