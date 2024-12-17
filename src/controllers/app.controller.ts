@@ -22,6 +22,20 @@ export class AppController {
 
   private readonly logger = new Logger(AppController.name);
 
+  @Get("api/version")
+  getversion(@Res() res) {
+    const buildDate = new Date(0);
+    buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE));
+
+    res
+      .status(200)
+      .send({
+        version: process.env.PACKAGE_VERSION,
+        epochBuildate: parseInt(process.env.BUILDDATE),
+        buildDate: buildDate,
+      });
+  }
+
   @Get()
   async homepage(@Res() res) {
     return new Promise<void>((resolve, reject) => {
