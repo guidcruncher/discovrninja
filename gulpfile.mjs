@@ -45,7 +45,7 @@ gulp.task("js", series( "templates", "formatjs", "uglify"));
 gulp.task("lint", task("npm run lint"));
 gulp.task("lint-client", task("npm run lint-client"));
 
-gulp.task("docker", task("docker compose up --build"));
+gulp.task("docker", series(task("docker compose up --build")));
 gulp.task("dockerbuild", series(task('docker buildx build . -t guidcruncher/discovrninja:development  --no-cache --pull --push --platform linux/arm64')));
 
 gulp.task(
