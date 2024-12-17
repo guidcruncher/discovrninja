@@ -27,13 +27,11 @@ export class AppController {
     const buildDate = new Date(0);
     buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE));
 
-    res
-      .status(200)
-      .send({
-        version: process.env.PACKAGE_VERSION,
-        epochBuildate: parseInt(process.env.BUILDDATE),
-        buildDate: buildDate,
-      });
+    res.status(200).send({
+      version: process.env.PACKAGE_VERSION,
+      epochBuildate: parseInt(process.env.BUILDDATE),
+      buildDate: buildDate,
+    });
   }
 
   @Get()

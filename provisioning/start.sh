@@ -38,7 +38,7 @@ if [ -f /home/app/server/package.json ]; then
  export PACKAGE_VERSION=$(cat /home/app/server/package.json | jq ".version" -r)
 fi
 
-export BUILDDATE=$(cat /home/apps/server/builddate)
+export BUILDDATE=$(cat /home/app/server/builddate)
 
 dnsmasq --conf-file=/etc/dnsmasq.conf --listen-address=0.0.0.0 --pid-file=/home/dnsmasq.pid
 caddy start --config /etc/caddy/Caddyfile --pidfile /home/caddy.pid
