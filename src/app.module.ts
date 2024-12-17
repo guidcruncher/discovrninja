@@ -2,8 +2,8 @@
 import { ContainerCatalog } from "@customtypes/portainer-template";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { Global, Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";z c
-import { ConfigService } from "@nestjs/config";  .
+import { ConfigModule } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
