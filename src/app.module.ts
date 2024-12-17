@@ -1,17 +1,9 @@
-import { AppController } from "@controllers/app.controller";
-import { ComposeController } from "@controllers/compose.controller";
-import { DesktopController } from "@controllers/desktop.controller";
-import { DiscoveryController } from "@controllers/discovery.controller";
-import { DockerController } from "@controllers/docker.controller";
-import { IconsController } from "@controllers/icons.controller";
-import { LinkdingController } from "@controllers/linkding.controller";
-import { ResourcesController } from "@controllers/resources.controller";
-import { ViewsController } from "@controllers/views.controller";
+
 import { ContainerCatalog } from "@customtypes/portainer-template";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { Global, Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { ConfigService } from "@nestjs/config";
+import { ConfigModule } from "@nestjs/config";z c
+import { ConfigService } from "@nestjs/config";  .
 import { MongooseModule } from "@nestjs/mongoose";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
@@ -27,7 +19,7 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
 import { DockerService } from "@services/docker.service";
-import { LinkdingService } from "@services/ext.linkding.service";
+	import { PortainerTemplate, Templates } from "@customtypes/portainer-template";import { LinkdingService } from "@services/ext.linkding.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
 import { IconCDNService } from "@services/icon.cdn.service";
 import { IconService } from "@services/icon.service";
