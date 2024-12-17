@@ -1,6 +1,6 @@
 FROM guidcruncher/node-base:22.9.0-alpine3.20 AS base
 
-RUN apk add --no-cache dnsmasq caddy
+RUN apk add --no-cache dnsmasq caddy jq
 
 RUN npm i -g gulp-cli
 
@@ -30,6 +30,7 @@ WORKDIR /home/app
 
 RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     cp ./build/dist/* ./server/ -R && \
+    cp ./build/package.json /server/package.json && \
     cp ./build/client/* /home/app/client/ -R && \
     cp ./build/config/config.example.yaml /home/app/config.default && \
     cp ./build/config/desktop.example.yaml /home/app/desktop.default && \
