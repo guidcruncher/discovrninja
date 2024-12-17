@@ -96,6 +96,6 @@ export class PortainerService {
     );
 
     sb.appendFormat("{0}", t.image);
-    return sb.toStringDelimited(" && \/n");
+    return sb.toStringDelimited(" \/n");
   }
 }
