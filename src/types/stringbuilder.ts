@@ -32,6 +32,10 @@ export class StringBuilder {
   }
 
   public toString(): string {
-    return this.strings.join("");
+    return this.toStringDelimited("");
+  }
+
+  public toStringDelimited(seperator: string): string {
+    return this.strings.join(seperator);
   }
 }

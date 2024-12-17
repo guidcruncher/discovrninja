@@ -1,9 +1,7 @@
 import {
-  ContainerCatalog,
-  PortainerTemplate,
-  Templates,
+  Template,
 } from "@customtypes/portainer-template";
-import { DownloadResult, FluentHttpClient } from "@helpers/fluenthttpclient";
+import { StringBuilder } from "@customtypes/stringbuilder";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
@@ -12,4 +10,9 @@ export class PortainerService {
   private readonly logger = new Logger(PortainerService.name);
 
   constructor(private configService: ConfigService) {}
+
+  public toDockerRun(t: Template) {
+    const sb: StringBuilder = new StringBuilder();
+    return sb.toStringDelimited(" && \/n");
+  }
 }

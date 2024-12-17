@@ -7,28 +7,22 @@ import { IconsController } from "@controllers/icons.controller";
 import { LinkdingController } from "@controllers/linkding.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
+import { ContainerCatalog } from "@customtypes/portainer-template";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
-import {
-  PortainerTemplate,
-  Templates,
-  ContainerCatalog,
-} from "@customtypes/portainer-template";
 import { Global, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ScheduleModule } from "@nestjs/schedule";
+import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
 import {
   ContainerStats,
   ContainerStatsSchema,
 } from "@schemas/containerstats.schema";
-
 import { Icon, IconSchema } from "@schemas/icons.schema";
 import { ServiceDefinitionSchema } from "@schemas/servicedefinition.schema";
-import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
 import { ComposeService } from "@services/compose.service";
 import { DesktopService } from "@services/desktop.service";
-import { PortainerService } from "@services/portainer.service";
 import { DiscoveryService } from "@services/discovery.service";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
@@ -38,6 +32,7 @@ import { FileDiscoveryService } from "@services/file.discovery.service";
 import { IconCDNService } from "@services/icon.cdn.service";
 import { IconService } from "@services/icon.service";
 import { NotificationService } from "@services/notification.service";
+import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { LoggerModule } from "nestjs-pino";

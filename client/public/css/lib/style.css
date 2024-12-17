@@ -6,10 +6,11 @@
 }
 
 .desktop-themechooser-item {
-  background: silver !important;
-  color: black !important;
+  background-color: #6f42c1 !important;
+  color: white !important;
   width: 110px !important;
-  border: solid 1px;
+  padding 5px;
+  border: solid 1px #6f42c1;
   border-radius: 5px !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
@@ -136,7 +137,7 @@ textarea {
   overflow-x: scroll !important;
 }
 
-.bg-brand {
+bg-brand {
   background-color: #6f42c1 !important;
   color: white !important;
 }
