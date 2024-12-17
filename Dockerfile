@@ -30,7 +30,7 @@ WORKDIR /home/app
 
 RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     cp ./build/dist/* ./server/ -R && \
-    cp ./build/package.json /server/package.json && \
+    cp ./build/package.json /home/app/server/package.json && \
     cp ./build/client/* /home/app/client/ -R && \
     cp ./build/config/config.example.yaml /home/app/config.default && \
     cp ./build/config/desktop.example.yaml /home/app/desktop.default && \
