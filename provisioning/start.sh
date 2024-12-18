@@ -30,6 +30,18 @@ if [ ! -f /home/app/config/Caddyfile ]; then
   cp /home/defaults/Caddyfile.default /home/app/config/Caddyfile
 fi
 
+if [ ! -f /home/app/config/dns-resolv.conf ]; then
+  cp /home/defaults/dns-resolv.conf.default /home/app/config/dns-resolv.conf
+fi
+
+if [ ! -f /home/app/config/dnsmasq.conf ]; then
+  cp /home/defaults/dnsmasq.conf.default /home/app/config/dnsmasq.conf
+fi
+
+if [ ! -f /home/app/config/dns-hosts ]; then
+  echo "" > /home/app/config/dns-hosts
+fi
+
 export CLIENT_BASE=/home/app/client/
 export NODE_CONFIG_DIR=/home/app/config
 export IN_DOCKER=false
@@ -46,7 +58,7 @@ fi
 
 export BUILDDATE=$(cat /home/app/server/builddate)
 
-dnsmasq --conf-file=/etc/dnsmasq.conf --listen-address=0.0.0.0 --pid-file=/home/dnsmasq.pid
+dnsmasq --conf-file=/home/app/config/dnsmasq.conf --listen-address=0.0.0.0 --pid-file=/home/dnsmasq.pid
 caddy start --config /etc/caddy/Caddyfile --pidfile /home/caddy.pid
 node server/main --config=/home/app/config/config.yaml
 

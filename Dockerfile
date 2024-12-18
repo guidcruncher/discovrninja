@@ -43,6 +43,8 @@ COPY ./provisioning/start.sh /home/app/start.sh
 COPY ./provisioning/caddyreload.sh /home/app/caddyreload.sh
 COPY ./provisioning/dnsmasqreload.sh /home/app/dnsmasqreload.sh
 COPY ./provisioning/Caddyfile /etc/caddy/Caddyfile
+COPY ./provisioning/dns-resolv.conf /home/defaults/dns-resolv.conf.default
+COPY ./provisioning/dnsmasq.conf /home/defaults/dnsmasq.conf.default 
 COPY ./provisioning/Caddyfile-user /home/defaults/Caddyfile.default
 COPY ./provisioning/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
