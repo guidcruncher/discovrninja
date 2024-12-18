@@ -1,18 +1,18 @@
-import { StringBuilder } from "@customtypes/stringbuilder";
 import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
 import {
   ServiceDefinition,
   ServiceDefinitionList,
 } from "@customtypes/servicedefinition";
+import { StringBuilder } from "@customtypes/stringbuilder";
 import { ServiceDefinitionDto } from "@dto/servicedefinition.dto";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
-import { ConfigService } from "@nestjs/config";
+import * as fs from "fs";
 import { Model } from "mongoose";
 import * as mongoose from "mongoose";
-import * as fs from "fs";
 import * as path from "path";
 
 @Injectable()
@@ -278,7 +278,7 @@ export class DiscoveryService implements IDiscoveryAgent {
   }
 
   private updateCaddy(services: ServiceDefinitionList) {
-    var baseDir = process.env.CADDY_CFG ?? "";
+    const baseDir = process.env.CADDY_CFG ?? "";
 
     if (baseDir == "") {
       return;
@@ -289,12 +289,12 @@ export class DiscoveryService implements IDiscoveryAgent {
     }
 
     services.services.forEach((sd) => {
-      var valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
+      const valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
       if (valid) {
-        var sb: StringBuilder = new StringBuilder();
-        var publicurl: URL = new URL(sd.public);
-        var proxy: URL = new URL(sd.proxy);
-        var filename = path.join(baseDir, publicurl.hostname + ".conf");
+        const sb: StringBuilder = new StringBuilder();
+        const publicurl: URL = new URL(sd.public);
+        const proxy: URL = new URL(sd.proxy);
+        const filename = path.join(baseDir, publicurl.hostname + ".conf");
         sb.appendLine(publicurl.host + "{");
         sb.appendLine("        reverse_proxy " + proxy.href);
         sb.appendLine("        import /etc/caddy/includes/cors.conf");
