@@ -296,7 +296,7 @@ export class DiscoveryService implements IDiscoveryAgent {
         const proxy: URL = new URL(sd.proxy);
         const filename = path.join(baseDir, publicurl.hostname + ".conf");
         var port=""; 
-        if (publicurl.protocol=="https:") {port=":443":}
+        if (publicurl.protocol=="https:") {port=":443";}
         sb.appendLine(publicurl.host + port + " {");
         sb.appendLine("        reverse_proxy " + proxy.href);
         sb.appendLine("        import /etc/caddy/includes/cors.conf");
