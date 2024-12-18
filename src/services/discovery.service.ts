@@ -1,4 +1,4 @@
-cimport { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
+import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
 import {
   ServiceDefinition,
   ServiceDefinitionList,
@@ -277,29 +277,32 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  private updateDNS(services: ServiceDefinitionList) { 
- const filename = process.env.DNS_CFG ?? "";
-  const sb: StringBuilder = new StringBuilder();
+  private updateDNS(services: ServiceDefinitionList) {
+    const filename = process.env.DNS_CFG ?? "";
+    const sb: StringBuilder = new StringBuilder();
 
-    if (baseDir == "") {
+    if (filename == "") {
       return;
     }
     if (!this.configService.get("webProxy.autoUpdate")) {
       return;
     }
 
-    services.forEach((sd) => {
+    services.services.forEach((sd) => {
       const valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
       if (valid) {
         const publicurl: URL = new URL(sd.public);
         const proxy: URL = new URL(sd.proxy);
-
-       sb.appenndFormat("{0}    {1}", this.configService.get("webProxy.publicIpAddress"), publicurl.host);
+        sb.appendFormat(
+          "{0}    {1}",
+          this.configService.get("webProxy.publicIpAddress"),
+          publicurl.host,
+        );
       }
-   }
+    });
 
-     fs.writeFileSync(filename, sb.toStringDelimited("\n"));
-}
+    fs.writeFileSync(filename, sb.toStringDelimited("\n"));
+  }
 
   private updateCaddy(services: ServiceDefinitionList) {
     const baseDir = process.env.CADDY_CFG ?? "";
