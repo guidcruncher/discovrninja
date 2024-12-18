@@ -1,5 +1,4 @@
 import {
-  TemplateCreateRequest,
   PortainerTemplate,
   Templates,
 } from "@customtypes/portainer-template";
