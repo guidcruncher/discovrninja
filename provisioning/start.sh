@@ -47,6 +47,7 @@ export NODE_CONFIG_DIR=/home/app/config
 export IN_DOCKER=false
 export NODE_ENV=production
 export CADDY_CFG=/etc/caddy/caddyfile.d/
+export DNS_CFG=/home/app/config/dns-hosts
 
 if [ -f /.dockerenv ]; then
 	export IN_DOCKER=true

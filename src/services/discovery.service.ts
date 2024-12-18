@@ -1,4 +1,4 @@
-import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
+cimport { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
 import {
   ServiceDefinition,
   ServiceDefinitionList,
@@ -277,6 +277,30 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
+  private updateDNS(services: ServiceDefinitionList) { 
+ const filename = process.env.DNS_CFG ?? "";
+  const sb: StringBuilder = new StringBuilder();
+
+    if (baseDir == "") {
+      return;
+    }
+    if (!this.configService.get("webProxy.autoUpdate")) {
+      return;
+    }
+
+    services.forEach((sd) => {
+      const valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
+      if (valid) {
+        const publicurl: URL = new URL(sd.public);
+        const proxy: URL = new URL(sd.proxy);
+
+       sb.appenndFormat("{0}    {1}", this.configService.get("webProxy.publicIpAddress"), publicurl.host);
+      }
+   }
+
+     fs.writeFileSync(filename, sb.toStringDelimited("\n"));
+}
+
   private updateCaddy(services: ServiceDefinitionList) {
     const baseDir = process.env.CADDY_CFG ?? "";
 
@@ -335,6 +359,7 @@ export class DiscoveryService implements IDiscoveryAgent {
           this.storeInMongo(result)
             .then((r) => {
               this.updateCaddy(result);
+              this.updateDNS(result);
               resolve(result);
             })
             .catch((err) => {
