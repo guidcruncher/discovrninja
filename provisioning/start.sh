@@ -1,6 +1,6 @@
 #!/bin/sh
 cd /home/app
-
+mkdir -p /home/app/config/dnsmasq.d
 
 if [ ! -z "$TZ" ]; then
 target="/usr/share/zoneinfo/$TZ"
