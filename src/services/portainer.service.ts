@@ -1,10 +1,11 @@
 import {
   TemplateCreateRequest,
-  TemplateCreateResponse,
+  TemplateCreateResponse, PortainerTemplate, Templates
 } from "@customtypes/portainer-template";
 import { StringBuilder } from "@customtypes/stringbuilder";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { PortainerHelper } from "@helpers/portainerhelper";
 
 @Injectable()
 export class PortainerService {
@@ -12,7 +13,21 @@ export class PortainerService {
 
   constructor(private configService: ConfigService) {}
 
+  public downloadFeed(url: string): Promise<PortainerTemplate> {
+    return new Promise<PortainerTemplate>((resolve, reject) { 
+      const client = FluentHttpClient.Get(url)
+        .Execute()
+        .then((response) => {
+          resolve(PortainerHelper.parse(response));
+        }).catch((err) => {
+           this.logger.error("Error downloading template feed", err);
+           reject(err);
+        });
+    });
+  }
+
   public toDockerRun(cfg: TemplateCreateRequest): TemplateCreateResponse {
+    try {
     const res: TemplateCreateResponse = { cmd: "", environment: "" };
     const t = cfg.template;
     const environment = cfg.environment;
@@ -96,5 +111,9 @@ export class PortainerService {
     res.cmd = sb.toStringDelimited(" \\\n");
     res.environment = sbenv.toStringDelimited("\n");
     return res;
+    } catch (err) {
+       this.logger.error("Error creating Docker run command from template", err);
+       throw(err);
+    }
   }
 }
