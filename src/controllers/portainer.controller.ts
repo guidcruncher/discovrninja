@@ -17,13 +17,14 @@ export class PortainerController {
   @Post("docker/run")
   todockerrun(@Body() cfg: TemplateCreateRequest, @Res() res) {
     var result = this.portainerService.toDockerRun(cfg);
-    res.status(200).type("text/plain").send(result);
+    res.status(200).send(result);
   }
 
   @Post("docker/compose")
   todockercompose(@Body() cfg: TemplateCreateRequest, @Res() res) {
-    var cmd = this.portainerService.toDockerRun(cfg);
-    var result = this.composeService.composerize(cmd);
-    res.status(200).type("text/plain").send(result);
+    var result = this.portainerService.toDockerRun(cfg);
+    var composed = this.composeService.composerize(result.cmd);
+    result.cmd = composed;
+    res.status(200).send(result);
   }
 }

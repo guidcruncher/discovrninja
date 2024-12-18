@@ -4,6 +4,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {
   TemplateCreateRequest,
+  TemplateCreateResponse,
   PortainerTemplate,
   Templates,
 } from "@customtypes/portainer-template";
@@ -14,22 +15,12 @@ export class PortainerService {
 
   constructor(private configService: ConfigService) {}
 
-  private createRandomMACAddress(): string {
-    const hexDigits = "0123456789ABCDEF";
-    let macAddress = "";
-    for (let i = 0; i < 6; i++) {
-      macAddress += hexDigits.charAt(Math.round(Math.random() * 15));
-      macAddress += hexDigits.charAt(Math.round(Math.random() * 15));
-      if (i != 5) macAddress += ":";
-    }
-
-    return macAddress;
-  }
-
-  public toDockerRun(cfg: TemplateCreateRequest) {
+  public toDockerRun(cfg: TemplateCreateRequest): TemplateCreateResponse {
+    var res: TemplateCreateResponse = { cmd: "", environment: "" };
     var t = cfg.template;
     var environment = cfg.environment;
     const sb: StringBuilder = new StringBuilder();
+    const sbenv: StringBuilder = new StringBuilder();
     let publicUrl = this.configService.get("webProxy.publicUrlFormat") ?? "";
     let serviceUrl = this.configService.get("webProxy.serviceUrlFormat") ?? "";
     sb.appendFormat("docker run --name {0}", t.name);
@@ -55,13 +46,15 @@ export class PortainerService {
       sb.appendFormat("--restart {0}", t.restart_policy);
     }
 
+    sb.append("--env-file ./stack.env");
+
     if (t.env) {
       t.env.forEach((env) => {
         if (environment[env.name]) {
-          sb.appendFormat("-e {0}='{1}'", env.name, environment[env.name]);
+          sbenv.appendFormat("{0}='{1}'", env.name, environment[env.name]);
         } else {
           if (env.default) {
-            sb.appendFormat("-e {0}='{1}'", env.name, env.default);
+            sbenv.appendFormat("{0}='{1}'", env.name, env.default);
           }
         }
       });
@@ -103,6 +96,8 @@ export class PortainerService {
     );
 
     sb.appendFormat("{0}", t.image);
-    return sb.toStringDelimited(" \/n");
+    res.cmd = sb.toStringDelimited(" \\\n");
+    res.environment = sbenv.toStringDelimited("\n");
+    return res;
   }
 }

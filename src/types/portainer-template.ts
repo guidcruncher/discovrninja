@@ -70,6 +70,12 @@ export class TemplateCreateRequest {
   environment: any = {};
 }
 
+export class TemplateCreateResponse {
+  cmd: string;
+
+  environment: string;
+}
+
 @Schema()
 export class ContainerCatalog {
   @Prop()
