@@ -1,6 +1,7 @@
 #!/bin/sh
 cd /home/app
 
+
 if [ ! -z "$TZ" ]; then
 target="/usr/share/zoneinfo/$TZ"
   if [ -f "$target" ]; then
@@ -25,10 +26,15 @@ if [ ! -f /home/app/config/services.yaml ]; then
   cp /home/app/services.default /home/app/config/services.yaml
 fi
 
+if [ ! -f /etc/caddy/CaddyfileUser ]; then
+  echo "" > /etc/caddy/CaddyfileUser
+fi
+
 export CLIENT_BASE=/home/app/client/
 export NODE_CONFIG_DIR=/home/app/config
 export IN_DOCKER=false
 export NODE_ENV=production
+export CADDY_CFG=/etc/caddy/caddyfile.d/
 
 if [ -f /.dockerenv ]; then
 	export IN_DOCKER=true

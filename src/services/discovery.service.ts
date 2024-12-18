@@ -1,3 +1,4 @@
+import { StringBuilder } from "@customtypes/stringbuilder";
 import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
 import {
   ServiceDefinition,
@@ -8,14 +9,18 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
+import { ConfigService } from "@nestjs/config";
 import { Model } from "mongoose";
 import * as mongoose from "mongoose";
+import * as fs from "fs";
+import * as path from "path";
 
 @Injectable()
 export class DiscoveryService implements IDiscoveryAgent {
   private readonly logger = new Logger(DiscoveryService.name);
 
   constructor(
+    private configService: ConfigService,
     private dockerDiscoveryService: DockerDiscoveryService,
     private fileDiscoveryService: FileDiscoveryService,
     @InjectModel(ServiceDefinition.name)
@@ -272,12 +277,38 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
+  private updateCaddy(services: ServiceDefinitionList) {
+    var baseDir = process.env.CADDY_CFG ?? "";
+
+    if (baseDir == "") {
+      return;
+    }
+
+    if (!this.configService.get("webProxy.autoUpdate")) {
+      return;
+    }
+
+    services.services.forEach((sd) => {
+      var valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
+      if (valid) {
+        var sb: StringBuilder = new StringBuilder();
+        var publicurl: URL = new URL(sd.public);
+        var proxy: URL = new URL(sd.proxy);
+        var filename = path.join(baseDir, publicurl.hostname + ".conf");
+        sb.appendLine(publicurl.host + "{");
+        sb.appendLine("        reverse_proxy " + proxy.href);
+        sb.appendLine("        import /etc/caddy/includes/cors.conf");
+        sb.appendLine("}");
+        fs.writeFileSync(filename, sb.toString());
+      }
+    });
+  }
+
   scan(): Promise<ServiceDefinitionList> {
     return new Promise<ServiceDefinitionList>((resolve, reject) => {
       const result: ServiceDefinitionList = new ServiceDefinitionList();
       const promises = [];
       result.created = new Date();
-
       promises.push(this.dockerDiscoveryService.scan());
       promises.push(this.fileDiscoveryService.scan());
       Promise.allSettled(promises)
@@ -299,6 +330,7 @@ export class DiscoveryService implements IDiscoveryAgent {
 
           this.storeInMongo(result)
             .then((r) => {
+              this.updateCaddy(result);
               resolve(result);
             })
             .catch((err) => {

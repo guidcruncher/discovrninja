@@ -1,6 +1,4 @@
-import {
-  TemplateCreateRequest,
-} from "@customtypes/portainer-template";
+import { TemplateCreateRequest } from "@customtypes/portainer-template";
 import { Body, Controller, Post, Res } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
 import { PortainerService } from "@services/portainer.service";
