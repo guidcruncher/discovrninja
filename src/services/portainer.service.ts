@@ -1,11 +1,12 @@
 import {
+  PortainerTemplate,
   TemplateCreateRequest,
-  TemplateCreateResponse, PortainerTemplate, Templates
+  TemplateCreateResponse,
 } from "@customtypes/portainer-template";
 import { StringBuilder } from "@customtypes/stringbuilder";
+import { PortainerHelper } from "@helpers/portainerhelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { PortainerHelper } from "@helpers/portainerhelper";
 
 @Injectable()
 export class PortainerService {
@@ -14,106 +15,114 @@ export class PortainerService {
   constructor(private configService: ConfigService) {}
 
   public downloadFeed(url: string): Promise<PortainerTemplate> {
-    return new Promise<PortainerTemplate>((resolve, reject) { 
+    return new Promise<PortainerTemplate>((resolve, reject) => {
       const client = FluentHttpClient.Get(url)
         .Execute()
         .then((response) => {
           resolve(PortainerHelper.parse(response));
-        }).catch((err) => {
-           this.logger.error("Error downloading template feed", err);
-           reject(err);
+        })
+        .catch((err) => {
+          this.logger.error("Error downloading template feed", err);
+          reject(err);
         });
     });
   }
 
   public toDockerRun(cfg: TemplateCreateRequest): TemplateCreateResponse {
     try {
-    const res: TemplateCreateResponse = { cmd: "", environment: "" };
-    const t = cfg.template;
-    const environment = cfg.environment;
-    const sb: StringBuilder = new StringBuilder();
-    const sbenv: StringBuilder = new StringBuilder();
-    let publicUrl = this.configService.get("webProxy.publicUrlFormat") ?? "";
-    let serviceUrl = this.configService.get("webProxy.serviceUrlFormat") ?? "";
-    sb.appendFormat("docker run --name {0}", t.name);
-    sb.appendFormat("--hostname {0}", t.name);
-    publicUrl = publicUrl.replace("{name}", t.name);
-    serviceUrl = serviceUrl.replace("{name}", t.name);
+      const res: TemplateCreateResponse = { cmd: "", environment: "" };
+      const t = cfg.template;
+      const environment = cfg.environment;
+      const sb: StringBuilder = new StringBuilder();
+      const sbenv: StringBuilder = new StringBuilder();
+      let publicUrl = this.configService.get("webProxy.publicUrlFormat") ?? "";
+      let serviceUrl =
+        this.configService.get("webProxy.serviceUrlFormat") ?? "";
+      sb.appendFormat("docker run --name {0}", t.name);
+      sb.appendFormat("--hostname {0}", t.name);
+      publicUrl = publicUrl.replace("{name}", t.name);
+      serviceUrl = serviceUrl.replace("{name}", t.name);
 
-    if (t.ports) {
-      if (t.ports.length == 1) {
-        const port = t.ports[0].split(":");
-        serviceUrl = serviceUrl.replace("{port}", port[0]);
-        publicUrl = publicUrl.replace("{port}", port[0]);
+      if (t.ports) {
+        if (t.ports.length == 1) {
+          const port = t.ports[0].split(":");
+          serviceUrl = serviceUrl.replace("{port}", port[0]);
+          publicUrl = publicUrl.replace("{port}", port[0]);
+        } else {
+          serviceUrl = serviceUrl.replace(":{port}", "");
+          publicUrl = publicUrl.replace(":{port}", "");
+        }
       } else {
         serviceUrl = serviceUrl.replace(":{port}", "");
         publicUrl = publicUrl.replace(":{port}", "");
       }
-    } else {
-      serviceUrl = serviceUrl.replace(":{port}", "");
-      publicUrl = publicUrl.replace(":{port}", "");
-    }
 
-    if (t.restart_policy != "") {
-      sb.appendFormat("--restart {0}", t.restart_policy);
-    }
+      if (t.restart_policy != "") {
+        sb.appendFormat("--restart {0}", t.restart_policy);
+      }
 
-    sb.append("--env-file ./stack.env");
+      sb.append("--env-file ./stack.env");
 
-    if (t.env) {
-      t.env.forEach((env) => {
-        if (environment[env.name]) {
-          sbenv.appendFormat("{0}='{1}'", env.name, environment[env.name]);
-        } else {
-          if (env.default) {
-            sbenv.appendFormat("{0}='{1}'", env.name, env.default);
+      if (t.env) {
+        t.env.forEach((env) => {
+          if (environment[env.name]) {
+            sbenv.appendFormat("{0}='{1}'", env.name, environment[env.name]);
+          } else {
+            if (env.default) {
+              sbenv.appendFormat("{0}='{1}'", env.name, env.default);
+            }
           }
-        }
-      });
-    }
+        });
+      }
 
-    if (t.ports) {
-      t.ports.forEach((port) => {
-        sb.appendFormat("-p {0}", port);
-      });
-    }
+      if (t.ports) {
+        t.ports.forEach((port) => {
+          sb.appendFormat("-p {0}", port);
+        });
+      }
 
-    if (t.volumes) {
-      t.volumes.forEach((volume) => {
-        sb.appendFormat("-v {0}:{1}", volume.bind, volume.container);
-      });
-    }
+      if (t.volumes) {
+        t.volumes.forEach((volume) => {
+          sb.appendFormat("-v {0}:{1}", volume.bind, volume.container);
+        });
+      }
 
-    sb.appendFormat(
-      "--label com.guidcruncher.discovrninja.title='{0}'",
-      t.title,
-    );
-    sb.appendFormat(
-      "--label com.guidcruncher.discovrninja.description='{0}'",
-      t.description,
-    );
-    sb.appendFormat("--label com.guidcruncher.discovrninja.name='{0}'", t.name);
-    sb.appendFormat("--label com.guidcruncher.discovrninja.logo='{0}'", t.logo);
-    sb.appendFormat(
-      "--label com.guidcruncher.discovrninja.icon_slug='{0}'",
-      t.name,
-    );
-    sb.appendFormat(
-      "--label com.guidcruncher.discovrninja.public='{0}'",
-      publicUrl,
-    );
-    sb.appendFormat(
-      "--label com.guidcruncher.discovrninja.proxy='{0}'",
-      serviceUrl,
-    );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.title='{0}'",
+        t.title,
+      );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.description='{0}'",
+        t.description,
+      );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.name='{0}'",
+        t.name,
+      );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.logo='{0}'",
+        t.logo,
+      );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.icon_slug='{0}'",
+        t.name,
+      );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.public='{0}'",
+        publicUrl,
+      );
+      sb.appendFormat(
+        "--label com.guidcruncher.discovrninja.proxy='{0}'",
+        serviceUrl,
+      );
 
-    sb.appendFormat("{0}", t.image);
-    res.cmd = sb.toStringDelimited(" \\\n");
-    res.environment = sbenv.toStringDelimited("\n");
-    return res;
+      sb.appendFormat("{0}", t.image);
+      res.cmd = sb.toStringDelimited(" \\\n");
+      res.environment = sbenv.toStringDelimited("\n");
+      return res;
     } catch (err) {
-       this.logger.error("Error creating Docker run command from template", err);
-       throw(err);
+      this.logger.error("Error creating Docker run command from template", err);
+      throw err;
     }
   }
 }
