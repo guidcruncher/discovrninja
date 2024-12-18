@@ -2,6 +2,11 @@ import { Template } from "@customtypes/portainer-template";
 import { StringBuilder } from "@customtypes/stringbuilder";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import {
+  TemplateCreateRequest,
+  PortainerTemplate,
+  Templates,
+} from "@customtypes/portainer-template";
 
 @Injectable()
 export class PortainerService {
@@ -21,7 +26,9 @@ export class PortainerService {
     return macAddress;
   }
 
-  public toDockerRun(t: Template, environment: any) {
+  public toDockerRun(cfg: TemplateCreateRequest) {
+    var t = cfg.template;
+    var environment = cfg.environment;
     const sb: StringBuilder = new StringBuilder();
     let publicUrl = this.configService.get("webProxy.publicUrlFormat") ?? "";
     let serviceUrl = this.configService.get("webProxy.serviceUrlFormat") ?? "";

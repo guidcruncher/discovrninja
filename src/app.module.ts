@@ -5,7 +5,6 @@ import { DiscoveryController } from "@controllers/discovery.controller";
 import { DockerController } from "@controllers/docker.controller";
 import { IconsController } from "@controllers/icons.controller";
 import { LinkdingController } from "@controllers/linkding.controller";
-import { PortainerController } from "@controllers/portainer.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { ContainerCatalog } from "@customtypes/portainer-template";

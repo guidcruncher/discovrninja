@@ -341,39 +341,39 @@ this["app"]["templates"]["desktopfooter"] = Handlebars.template({
         return undefined
       };
 
-    return "<footer class=\"fixed-bottom bg-body-tertiary text-muted\" style=\"height:40px\">\n  &nbsp; Version: " +
+    return "<footer class=\"fixed-bottom bg-body-tertiary text-muted\" style=\"height:40px\">\n  <div class=\"container\" style=\"padding-top:5px\">\n    Version " +
       alias3((lookupProperty(helpers, "buildversion") || (depth0 && lookupProperty(depth0, "buildversion")) || alias2).call(alias1, "version", {
         "name": "buildversion",
         "hash": {},
         "data": data,
         "loc": {
           "start": {
-            "line": 2,
-            "column": 18
+            "line": 3,
+            "column": 12
           },
           "end": {
-            "line": 2,
-            "column": 44
+            "line": 3,
+            "column": 38
           }
         }
       })) +
-      " Date: " +
+      ", Build " +
       alias3((lookupProperty(helpers, "buildversion") || (depth0 && lookupProperty(depth0, "buildversion")) || alias2).call(alias1, "buildDateStr", {
         "name": "buildversion",
         "hash": {},
         "data": data,
         "loc": {
           "start": {
-            "line": 2,
-            "column": 51
+            "line": 3,
+            "column": 46
           },
           "end": {
-            "line": 2,
-            "column": 82
+            "line": 3,
+            "column": 77
           }
         }
       })) +
-      "\n  <div class=\"container\" style=\"padding-top:5px\" id=\"footer\">\n  </div>\n</footer>\n";
+      "\n    <div id=\"footer\">\n    </div>\n  </div>\n</footer>\n";
   },
   "useData": true
 });

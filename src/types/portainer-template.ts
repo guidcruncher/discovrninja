@@ -64,6 +64,12 @@ export class RepositorySetting {
   url: string;
 }
 
+export class TemplateCreateRequest {
+  template: Template;
+
+  environment: any = {};
+}
+
 @Schema()
 export class ContainerCatalog {
   @Prop()

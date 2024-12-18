@@ -3,10 +3,10 @@ module.exports = (Handlebars) => {
     const buildDate = new Date(0);
     buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE));
     var buildVersion = {
-      version: process.env.PACKAGE_VERSION,
-      epochBuildate: parseInt(process.env.BUILDDATE),
+      version: process.env.PACKAGE_VERSION ?? "0.0.0",
+      epochBuildate: parseInt(process.env.BUILDDATE) ?? 0,
       buildDate: buildDate,
-      buildDateStr: buildDate.toLocaleDateString() + " " + buildDate.toLocaleTimeString()
+      buildDateStr: buildDate ? buildDate.toLocaleDateString() + " " + buildDate.toLocaleTimeString() : ""
     };
     var result = "";
 
