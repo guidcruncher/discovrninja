@@ -15,23 +15,19 @@ if [ ! -f /home/app/client/public/themes/bootstrap5.3.3/bootstrap.min.css ]; the
 fi
 
 if [ ! -f /home/app/config/config.yaml ]; then
-  cp /home/app/config.default /home/app/config/config.yaml
+  cp /home/defaults/config.default /home/app/config/config.yaml
 fi
 
 if [ ! -f /home/app/config/desktop.yaml ]; then
-  cp /home/app/desktop.default /home/app/config/desktop.yaml
+  cp /home/defaults/desktop.default /home/app/config/desktop.yaml
 fi
 
 if [ ! -f /home/app/config/services.yaml ]; then
-  cp /home/app/services.default /home/app/config/services.yaml
+  cp /home/defaults/services.default /home/app/config/services.yaml
 fi
 
 if [ ! -f /home/app/config/Caddyfile ]; then
-  cp /home/app/Caddyfile-user /home/app/config/Caddyfile
-fi
-
-if [ ! -f /etc/caddy/CaddyfileUser ]; then
-  echo "" > /etc/caddy/CaddyfileUser
+  cp /home/defaults/Caddyfile.default /home/app/config/Caddyfile
 fi
 
 export CLIENT_BASE=/home/app/client/

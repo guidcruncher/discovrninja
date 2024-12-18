@@ -4,7 +4,7 @@ RUN apk add --no-cache dnsmasq caddy jq
 
 RUN npm i -g gulp-cli
 
-RUN mkdir -p /home/app/config/ /home/app/build/dist /home/app/build/client/dist /ho me/app/build/src /home/app/build/ config /home/app/server /home/app/client /home/app/node_modules /etc/caddy/caddyfile.d	/etc/caddy/includes
+RUN mkdir -p /home/defaults/ /home/app/config/ /home/app/build/dist /home/app/build/client/dist /ho me/app/build/src /home/app/build/ config /home/app/server /home/app/client /home/app/node_modules /etc/caddy/caddyfile.d	/etc/caddy/includes
 
 FROM base AS build
 
@@ -33,15 +33,15 @@ RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     date +"%s" > ./server/builddate && \
     cp ./build/package.json /home/app/server/package.json && \
     cp ./build/client/* /home/app/client/ -R && \
-    cp ./build/config/config.example.yaml /home/app/config.default && \
-    cp ./build/config/desktop.example.yaml /home/app/desktop.default && \
-    cp ./build/config/services.example.yaml /home/app/services.default && \
+    cp ./build/config/config.example.yaml /home/defaults/config.default && \
+    cp ./build/config/desktop.example.yaml /home/defaults/desktop.default && \
+    cp ./build/config/services.example.yaml /home/defaults/services.default && \
     rm -r ./build && \
     mkdir -p /docker/stacks/
 
 COPY ./provisioning/start.sh /home/app/start.sh
 COPY ./provisioning/Caddyfile /etc/caddy/Caddyfile
-COPY ./provisioning/Caddyfile-user /home/app/Caddyfile-user
+COPY ./provisioning/Caddyfile-user /home/defaults/Caddyfile.default
 COPY ./provisioning/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
 RUN chmod +x /home/app/start.sh

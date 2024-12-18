@@ -300,7 +300,7 @@ export class DiscoveryService implements IDiscoveryAgent {
           port = ":443";
         }
         sb.appendLine(publicurl.host + port + " {");
-        sb.appendLine("        reverse_proxy " + proxy.href);
+        sb.appendLine("        reverse_proxy " + proxy.href.slice(0, -1));
         sb.appendLine("        import /etc/caddy/includes/cors.conf");
         sb.appendLine("}");
         fs.writeFileSync(filename, sb.toString());
