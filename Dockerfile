@@ -41,6 +41,7 @@ RUN cp ./build/node_modules/* /home/app/node_modules -R && \
 
 COPY ./provisioning/start.sh /home/app/start.sh
 COPY ./provisioning/Caddyfile /etc/caddy/Caddyfile
+COPY ./provisioning/Caddyfile-user /home/app/Caddyfile-user
 COPY ./provisioning/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
 RUN chmod +x /home/app/start.sh

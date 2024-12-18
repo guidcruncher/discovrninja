@@ -26,6 +26,10 @@ if [ ! -f /home/app/config/services.yaml ]; then
   cp /home/app/services.default /home/app/config/services.yaml
 fi
 
+if [ ! -f /home/app/config/Caddyfile ]; then
+  cp /home/app/Caddyfile-user /home/app/config/Caddyfile
+fi
+
 if [ ! -f /etc/caddy/CaddyfileUser ]; then
   echo "" > /etc/caddy/CaddyfileUser
 fi

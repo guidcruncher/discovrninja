@@ -10,6 +10,6 @@
 	import /etc/caddy/includes/cors.conf
 }
 
-import /etc/caddy/CaddyfileUser
+import /home/app/config/Caddyfile
 
 import /etc/caddy/caddyfile.d/*.conf
