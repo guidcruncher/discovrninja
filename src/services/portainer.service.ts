@@ -1,9 +1,11 @@
 import {
+  ContainerCatalog,
   PortainerTemplate,
   TemplateCreateRequest,
   TemplateCreateResponse,
 } from "@customtypes/portainer-template";
 import { StringBuilder } from "@customtypes/stringbuilder";
+import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { PortainerHelper } from "@helpers/portainerhelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -14,12 +16,19 @@ export class PortainerService {
 
   constructor(private configService: ConfigService) {}
 
+  public getCatalogs(): Promise<ContainerCatalog[]> {
+    return new Promise<ContainerCatalog[]>((resolve, reject) => {
+      const result: ContainerCatalog[] = [];
+      resolve(result);
+    });
+  }
+
   public downloadFeed(url: string): Promise<PortainerTemplate> {
     return new Promise<PortainerTemplate>((resolve, reject) => {
       const client = FluentHttpClient.Get(url)
         .Execute()
         .then((response) => {
-          resolve(PortainerHelper.parse(response));
+          resolve(PortainerHelper.Parse(response.value));
         })
         .catch((err) => {
           this.logger.error("Error downloading template feed", err);

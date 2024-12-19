@@ -6,6 +6,7 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerService } from "@services/docker.service";
 import { LinkdingService } from "@services/ext.linkding.service";
 import { IconService } from "@services/icon.service";
+import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 
 @Controller("/")
@@ -16,8 +17,9 @@ export class AppController {
     private readonly iconService: IconService,
     private readonly composeService: ComposeService,
     private readonly desktopService: DesktopService,
-    private resourcesService: ResourcesService,
-    private linkdingService: LinkdingService,
+    private readonly resourcesService: ResourcesService,
+    private readonly linkdingService: LinkdingService,
+    private readonly portainerService: PortainerService,
   ) {}
 
   private readonly logger = new Logger(AppController.name);
@@ -168,6 +170,22 @@ export class AppController {
       })
       .catch((err) => {
         res.status(500).send(err);
+      });
+  }
+
+  @Get("/admin/catalog")
+  catalogpage(@Res() res) {
+    this.portainerService
+      .getCatalogs()
+      .then((catalogs) => {
+        res.view(
+          "catalog.hbs",
+          { catalogs: catalogs },
+          { layout: "./layouts/layout.hbs" },
+        );
+      })
+      .catch((err) => {
+        res.statue(500).send(err);
       });
   }
 
