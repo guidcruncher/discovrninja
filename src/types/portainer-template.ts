@@ -1,4 +1,5 @@
 import { Prop, Schema } from "@nestjs/mongoose";
+import * as crypto from "crypto";
 
 export type Templates = Template[];
 
@@ -79,6 +80,9 @@ export class TemplateCreateResponse {
 @Schema()
 export class ContainerCatalog {
   @Prop()
+  id: string;
+
+  @Prop()
   name: string;
 
   @Prop()
@@ -89,4 +93,12 @@ export class ContainerCatalog {
 
   @Prop()
   dateUpdated: Date;
+
+  constructor() {
+    this.name = "";
+    this.url = "";
+    this.dateCreated = new Date();
+    this.dateUpdated = this.dateCreated;
+    this.id = crypto.randomBytes(16).toString("hex");
+  }
 }

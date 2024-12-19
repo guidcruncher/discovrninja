@@ -1,3 +1,9 @@
+import {
+  ContainerCatalog,
+  PortainerTemplate,
+  TemplateCreateRequest,
+  TemplateCreateResponse,
+} from "@customtypes/portainer-template";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
@@ -178,11 +184,32 @@ export class AppController {
     this.portainerService
       .getCatalogs()
       .then((catalogs) => {
-        res.view(
-          "catalog.hbs",
-          { catalogs: catalogs },
-          { layout: "./layouts/layout.hbs" },
-        );
+        if (catalogs.length == 0) {
+          var c: ContainerCatalog = new ContainerCatalog();
+          c.name = "Qballjos' templates";
+          c.url =
+            "https://raw.githubusercontent.com/Qballjos/portainer_templates/refs/heads/master/Template/template.json";
+          this.portainerService
+            .writeCatalog(c)
+            .then((r) => {
+              catalogs = [];
+              catalogs.push(r);
+              res.view(
+                "catalog.hbs",
+                { catalogs: catalogs },
+                { layout: "./layouts/layout.hbs" },
+              );
+            })
+            .catch((err) => {
+              res.status(500).send(err);
+            });
+        } else {
+          res.view(
+            "catalog.hbs",
+            { catalogs: catalogs },
+            { layout: "./layouts/layout.hbs" },
+          );
+        }
       })
       .catch((err) => {
         res.statue(500).send(err);

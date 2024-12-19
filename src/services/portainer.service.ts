@@ -9,17 +9,69 @@ import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { PortainerHelper } from "@helpers/portainerhelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { InjectModel } from "@nestjs/mongoose";
+import * as crypto from "crypto";
+import { Model } from "mongoose";
 
 @Injectable()
 export class PortainerService {
   private readonly logger = new Logger(PortainerService.name);
 
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    @InjectModel(ContainerCatalog.name)
+    private containerCatalogModel: Model<ContainerCatalog>,
+  ) {}
 
   public getCatalogs(): Promise<ContainerCatalog[]> {
     return new Promise<ContainerCatalog[]>((resolve, reject) => {
-      const result: ContainerCatalog[] = [];
-      resolve(result);
+      let result: ContainerCatalog[] = [];
+      const data = this.containerCatalogModel
+        .find()
+        .lean()
+        .exec()
+        .then((r) => {
+          result = r as ContainerCatalog[];
+          resolve(result);
+        })
+        .catch((err) => {
+          this.logger.error("Error in getcatalogs", err);
+          reject(err);
+        });
+    });
+  }
+
+  public readCatalog(id: string): Promise<ContainerCatalog> {
+    return new Promise<ContainerCatalog>((resolve, reject) => {
+      this.containerCatalogModel
+        .findOne({ id: id })
+        .lean()
+        .exec()
+        .then((result) => {
+          resolve(result as ContainerCatalog);
+        })
+        .catch((err) => {
+          this.logger.error("Error reading catalog", err);
+          reject(err);
+        });
+    });
+  }
+
+  public writeCatalog(catalog: ContainerCatalog): Promise<ContainerCatalog> {
+    return new Promise<ContainerCatalog>((resolve, reject) => {
+      if ((catalog.id ?? "") == "") {
+        catalog.id = crypto.randomBytes(16).toString("hex");
+      }
+
+      this.containerCatalogModel
+        .findOneAndUpdate({ id: catalog.id }, catalog, { upsert: true })
+        .then((result) => {
+          resolve(result as ContainerCatalog);
+        })
+        .catch((err) => {
+          this.logger.error("Error saving catalog", err);
+          reject(err);
+        });
     });
   }
 
