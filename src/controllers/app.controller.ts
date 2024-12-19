@@ -1,6 +1,4 @@
-import {
-  ContainerCatalog,
-} from "@customtypes/portainer-template";
+import { ContainerCatalog } from "@customtypes/portainer-template";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";

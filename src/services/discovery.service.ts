@@ -289,7 +289,7 @@ export class DiscoveryService implements IDiscoveryAgent {
       return;
     }
 
-var filename=path.join(basedir,"hosts.conf");
+    const filename = path.join(basedir, "hosts.conf");
     services.services.forEach((sd) => {
       const valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
       if (valid) {
