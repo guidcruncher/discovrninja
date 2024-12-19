@@ -1,10 +1,18 @@
 <div class="container">
-  <select class="form-select" aria-label="Catalogs">
+<div class="mb-3">
+  <label for="templates">Template catalog</label>
+  <select class="form-select" aria-label="Catalogs" id="templates">
+<option>Choose a template catalog to load.</option>
     {{#each this.catalogs}}
       <option value="{{id}}">{{name}}</option>
     {{/each}}
   </select>
-
+</div>
+<div class="mb-3"><button class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</button>
+&nbsp;
+<button class="btn btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
+</div>
+<hr/>
   <div class="row">
     {{#each this.feed.templates}}
       <div class="col-sm-6 mb-3 mb-sm-0" style="padding-bottom:5px;">
