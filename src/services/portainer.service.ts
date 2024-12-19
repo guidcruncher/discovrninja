@@ -129,8 +129,12 @@ export class PortainerService {
           if (environment[env.name]) {
             sbenv.appendFormat("{0}='{1}'", env.name, environment[env.name]);
           } else {
-            if (env.default) {
-              sbenv.appendFormat("{0}='{1}'", env.name, env.default);
+            if (env.set) {
+              sbenv.appendFormat("{0}='{1}'", env.name, env.set);
+            } else {
+              if (env.default) {
+                sbenv.appendFormat("{0}='{1}'", env.name, env.default);
+              }
             }
           }
         });

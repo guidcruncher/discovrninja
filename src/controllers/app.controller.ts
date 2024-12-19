@@ -194,21 +194,35 @@ export class AppController {
             .then((r) => {
               catalogs = [];
               catalogs.push(r);
+              this.portainerService
+                .downloadFeed(catalogs[0].url)
+                .then((feed) => {
+                  res.view(
+                    "catalog.hbs",
+                    { catalogs: catalogs, feed: feed },
+                    { layout: "./layouts/layout.hbs" },
+                  );
+                })
+                .catch((err) => {
+                  res.status(500).send(err);
+                });
+            })
+            .catch((err) => {
+              res.status(500).send(err);
+            });
+        } else {
+          this.portainerService
+            .downloadFeed(catalogs[0].url)
+            .then((feed) => {
               res.view(
                 "catalog.hbs",
-                { catalogs: catalogs },
+                { catalogs: catalogs, feed: feed },
                 { layout: "./layouts/layout.hbs" },
               );
             })
             .catch((err) => {
               res.status(500).send(err);
             });
-        } else {
-          res.view(
-            "catalog.hbs",
-            { catalogs: catalogs },
-            { layout: "./layouts/layout.hbs" },
-          );
         }
       })
       .catch((err) => {
