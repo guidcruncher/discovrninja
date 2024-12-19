@@ -278,25 +278,27 @@ export class DiscoveryService implements IDiscoveryAgent {
   }
 
   private updateDNS(services: ServiceDefinitionList) {
-    const filename = process.env.DNS_CFG ?? "";
+    const basedir = process.env.DNS_CFG ?? "";
     const sb: StringBuilder = new StringBuilder();
 
-    if (filename == "") {
+    if (basedir == "") {
       return;
     }
+
     if (!this.configService.get("webProxy.autoUpdate")) {
       return;
     }
 
+var filename=path.join(basedir,"hosts.conf");
     services.services.forEach((sd) => {
       const valid = (sd.public ?? "") != "" && (sd.proxy ?? "") != "";
       if (valid) {
         const publicurl: URL = new URL(sd.public);
         const proxy: URL = new URL(sd.proxy);
         sb.appendFormat(
-          "{0}    {1}",
+          "host-record={1},{0}",
           this.configService.get("webProxy.publicIpAddress"),
-          publicurl.host,
+          publicurl.hostname,
         );
       }
     });

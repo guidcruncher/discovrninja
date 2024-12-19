@@ -38,8 +38,8 @@ if [ ! -f /home/app/config/dnsmasq.conf ]; then
   cp /home/defaults/dnsmasq.conf.default /home/app/config/dnsmasq.conf
 fi
 
-if [ ! -f /home/app/config/dns-hosts ]; then
-  echo "" > /home/app/config/dns-hosts
+if [ ! -f /home/app/config/dnsmasq.d/hosts.conf ]; then
+  echo "" > /home/app/config/dnsmasq.d/hosts.conf
 fi
 
 export CLIENT_BASE=/home/app/client/
@@ -47,7 +47,7 @@ export NODE_CONFIG_DIR=/home/app/config
 export IN_DOCKER=false
 export NODE_ENV=production
 export CADDY_CFG=/etc/caddy/caddyfile.d/
-export DNS_CFG=/home/app/config/dns-hosts
+export DNS_CFG=/home/app/config/dnsmasq.d/
 
 if [ -f /.dockerenv ]; then
 	export IN_DOCKER=true
