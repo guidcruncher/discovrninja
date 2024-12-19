@@ -1,8 +1,5 @@
 import {
   ContainerCatalog,
-  PortainerTemplate,
-  TemplateCreateRequest,
-  TemplateCreateResponse,
 } from "@customtypes/portainer-template";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
@@ -185,7 +182,7 @@ export class AppController {
       .getCatalogs()
       .then((catalogs) => {
         if (catalogs.length == 0) {
-          var c: ContainerCatalog = new ContainerCatalog();
+          const c: ContainerCatalog = new ContainerCatalog();
           c.name = "Qballjos' templates";
           c.url =
             "https://raw.githubusercontent.com/Qballjos/portainer_templates/refs/heads/master/Template/template.json";
