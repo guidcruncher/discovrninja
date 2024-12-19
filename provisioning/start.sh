@@ -59,7 +59,7 @@ fi
 
 export BUILDDATE=$(cat /home/app/server/builddate)
 
-dnsmasq --conf-file=/home/app/config/dnsmasq.conf --listen-address=0.0.0.0 --pid-file=/home/dnsmasq.pid
+dnsmasq --conf-file=/home/app/config/dnsmasq.conf --pid-file=/home/dnsmasq.pid
 caddy start --config /etc/caddy/Caddyfile --pidfile /home/caddy.pid
 node server/main --config=/home/app/config/config.yaml
 
