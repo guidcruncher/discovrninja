@@ -1,6 +1,6 @@
 import {
-  Template,
   ContainerCatalog,
+  Template,
   TemplateCreateRequest,
   TemplateCreateResponse,
 } from "@customtypes/portainer-template";
