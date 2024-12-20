@@ -1,6 +1,5 @@
 import {
   ContainerCatalog,
-  PortainerTemplate,
   TemplateCreateRequest,
   TemplateCreateResponse,
 } from "@customtypes/portainer-template";
@@ -21,6 +20,8 @@ export class PortainerService {
     private configService: ConfigService,
     @InjectModel(ContainerCatalog.name)
     private containerCatalogModel: Model<ContainerCatalog>,
+    @InjectModel(Template.name)
+    private templateModel: Model<Template>,
   ) {}
 
   public getCatalogs(): Promise<ContainerCatalog[]> {
@@ -75,12 +76,37 @@ export class PortainerService {
     });
   }
 
-  public downloadFeed(url: string): Promise<PortainerTemplate> {
-    return new Promise<PortainerTemplate>((resolve, reject) => {
+  public fetchCatalog(id: string): Promise<Template[]> {
+    return new Promise<Template[]>((resolve, reject) => {
+      this.templateModel
+        .find({ catalogId: { $eq: aid } })
+        .lean()
+        .exec()
+        .then((r) => {
+          resolve(r as Template[]);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  public importCatalog(c: ContainerCatalog): Promise<Template[]> {
+    return new Promise<Template[]>((resolve, reject) => {
       const client = FluentHttpClient.Get(url)
         .Execute()
         .then((response) => {
-          resolve(PortainerHelper.Parse(response.value));
+          const catalog = PortainerHelper.Parse(response.value);
+          this.templateModel
+            .deleteMany({ catalogId: { $eq: c.id } })
+            .then(() => {
+              catalog.templates.forEach((t) => {
+                t.catalogId = c.id;
+              });
+              this.templateModel.insertMany(catalog.templates).then((r) => {
+                resolve(catalog.templates);
+              });
+            });
         })
         .catch((err) => {
           this.logger.error("Error downloading template feed", err);

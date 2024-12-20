@@ -1,4 +1,3 @@
-import { ContainerCatalog } from "@customtypes/portainer-template";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
@@ -181,63 +180,28 @@ export class AppController {
     this.portainerService
       .getCatalogs()
       .then((catalogs) => {
-        if (catalogs.length == 0) {
-          const c: ContainerCatalog = new ContainerCatalog();
-          c.name = "Qballjos' templates";
-          c.url =
-            "https://raw.githubusercontent.com/Qballjos/portainer_templates/refs/heads/master/Template/template.json";
-          this.portainerService
-            .writeCatalog(c)
-            .then((r) => {
-              catalogs = [];
-              catalogs.push(r);
-              if (catalogId == "") {
-                catalogId = catalogs[0].id;
-              }
-              const catalog =
-                catalogs.find((f) => {
-                  return f.id == catalogId;
-                }) ?? catalogs[0];
-              this.portainerService
-                .downloadFeed(catalog.url)
-                .then((feed) => {
-                  res.view(
-                    "catalog.hbs",
-                    { catalogs: catalogs, selected: catalog, feed: feed },
-                    { layout: "./layouts/layout.hbs" },
-                  );
-                })
-                .catch((err) => {
-                  res.status(500).send(err);
-                });
-            })
-            .catch((err) => {
-              res.status(500).send(err);
-            });
-        } else {
-          if (catalogId == "") {
-            catalogId = catalogs[0].id;
-          }
-          const catalog =
-            catalogs.find((f) => {
-              return f.id == catalogId;
-            }) ?? catalogs[0];
-          this.portainerService
-            .downloadFeed(catalog.url)
-            .then((feed) => {
-              res.view(
-                "catalog.hbs",
-                { catalogs: catalogs, selected: catalog, feed: feed },
-                { layout: "./layouts/layout.hbs" },
-              );
-            })
-            .catch((err) => {
-              res.status(500).send(err);
-            });
+        if (catalogId == "") {
+          catalogId = catalogs[0].id;
         }
+        const catalog =
+          catalogs.find((f) => {
+            return f.id == catalogId;
+          }) ?? catalogs[0];
+        this.portainerService
+          .downloadFeed(catalog.url)
+          .then((feed) => {
+            res.view(
+              "catalog.hbs",
+              { catalogs: catalogs, selected: catalog, feed: feed },
+              { layout: "./layouts/layout.hbs" },
+            );
+          })
+          .catch((err) => {
+            res.status(500).send(err);
+          });
       })
       .catch((err) => {
-        res.statue(500).send(err);
+        res.status(500).send(err);
       });
   }
 
