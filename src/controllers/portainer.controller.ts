@@ -22,7 +22,10 @@ export class PortainerController {
       this.portainerService
         .writeCatalog(catalog)
         .then((r) => {
-          resolve(r as ContainerCatalog);
+          const id = r.id;
+          this.portainerService.importCatalog(r).then((feed) => {
+            resolve(r as ContainerCatalog);
+          });
         })
         .catch((err) => {
           reject(err);

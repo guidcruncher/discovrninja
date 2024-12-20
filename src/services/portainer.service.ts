@@ -1,4 +1,5 @@
 import {
+  Template,
   ContainerCatalog,
   TemplateCreateRequest,
   TemplateCreateResponse,
@@ -67,7 +68,7 @@ export class PortainerService {
       this.containerCatalogModel
         .findOneAndUpdate({ id: catalog.id }, catalog, { upsert: true })
         .then((result) => {
-          resolve(result as ContainerCatalog);
+          resolve(catalog as ContainerCatalog);
         })
         .catch((err) => {
           this.logger.error("Error saving catalog", err);
@@ -79,7 +80,7 @@ export class PortainerService {
   public fetchCatalog(id: string): Promise<Template[]> {
     return new Promise<Template[]>((resolve, reject) => {
       this.templateModel
-        .find({ catalogId: { $eq: aid } })
+        .find({ catalogId: { $eq: id } })
         .lean()
         .exec()
         .then((r) => {
@@ -93,7 +94,7 @@ export class PortainerService {
 
   public importCatalog(c: ContainerCatalog): Promise<Template[]> {
     return new Promise<Template[]>((resolve, reject) => {
-      const client = FluentHttpClient.Get(url)
+      const client = FluentHttpClient.Get(c.url)
         .Execute()
         .then((response) => {
           const catalog = PortainerHelper.Parse(response.value);

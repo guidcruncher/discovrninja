@@ -180,6 +180,7 @@ export class AppController {
     this.portainerService
       .getCatalogs()
       .then((catalogs) => {
+if (catalogs.length>0){
         if (catalogId == "") {
           catalogId = catalogs[0].id;
         }
@@ -188,7 +189,7 @@ export class AppController {
             return f.id == catalogId;
           }) ?? catalogs[0];
         this.portainerService
-          .downloadFeed(catalog.url)
+          .fetchCatalog(catalog.id)
           .then((feed) => {
             res.view(
               "catalog.hbs",
@@ -199,6 +200,13 @@ export class AppController {
           .catch((err) => {
             res.status(500).send(err);
           });
+} else {
+res.view(
+"catalog.hbs",
+{ fcatalogs: [], selected: {}, feed: [] },
+{ layout: "./layouts/layout.hbs" },
+);
+}
       })
       .catch((err) => {
         res.status(500).send(err);
