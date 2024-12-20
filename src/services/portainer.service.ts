@@ -1,3 +1,5 @@
+import { default as convertDockerRunToCompose } from "composerize";
+import { default as convertDockerComposeToRun } from "decomposerize";
 import {
   ContainerCatalog,
   Template,
@@ -13,6 +15,8 @@ import { InjectModel } from "@nestjs/mongoose";
 import * as crypto from "crypto";
 import { Model } from "mongoose";
 import * as showdown from "showdown";
+import * as fs from "fs";
+import * as path from "path";
 
 @Injectable()
 export class PortainerService {
@@ -120,6 +124,31 @@ export class PortainerService {
           reject(err);
         });
     });
+  }
+
+  public createStack(project: string, workingDir: string, cfg: TemplateCreateRequest): TemplateCreateResponse {
+    let dockerRun: TemplateCreateResponse this.toDockerRun(cfg);
+    let baseDir = path.join(workingDir, project);
+    let sb: StringBuilder = new StringBuilder();
+
+    if (!fs.existsSync(baseDir)) {fs.mkDirSync(baseDir, {recursive: true});}
+    let filename - path.join(baseDir, "run.sh");
+    fs.writeFileSync(filename, "#!/bin/sh\n\n" + dockerRun.cmd);
+    filename = path.join(baseDir, "stack.env");
+    fs.writeFileSync(filename, dockerRun.environment);
+    filename = path.join(baseDir, "compose.yaml");
+    let compose =   convertDockerRunToCompose(run, null, "latest", 2);
+    compose = compose.replace("name: <your project name>", "name: "+project);
+    fs.writeFileSync(filename, compose);
+
+    sb.append("#!/bin/sh\n");
+    sb.appendFormat("docker compose -p \"{0}\" \\", project);
+    sb.append("    --env-file ./stack.env \\");
+    sb.append("    -f ./compose.yaml \\");
+    sb.append("    --project-directory . \\");
+    sb.append("    $@");
+    filename = path.join(baseDir, "compose.sh");
+    fs.writeFileSync(filenamae, sb.toStringDelimited("\n"));
   }
 
   public toDockerRun(cfg: TemplateCreateRequest): TemplateCreateResponse {
