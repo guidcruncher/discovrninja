@@ -5,11 +5,12 @@ import {
   VolumeSetting,
 } from "@customtypes/portainer-template";
 import { SchemaFactory } from "@nestjs/mongoose";
+import { HydratedDocument } from "mongoose";
 
-export type EnvSettingDocument = HydratedDocumemt<EnvSetting>;
-export type VolumeSettingDocument = HydratedDocumemt<VolumeSetting>;
-export type RepositorySettingDocument = HydratedDocumemt<RepositorySetting>;
-export type TemplateDocument = HydratedDocumemt<Template>;
+export type EnvSettingDocument = HydratedDocument<EnvSetting>;
+export type VolumeSettingDocument = HydratedDocument<VolumeSetting>;
+export type RepositorySettingDocument = HydratedDocument<RepositorySetting>;
+export type TemplateDocument = HydratedDocument<Template>;
 
 export const VolumeSettingSchema = SchemaFactory.createForClass(VolumeSetting);
 

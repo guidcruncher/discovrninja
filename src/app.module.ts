@@ -9,6 +9,9 @@ import { PortainerController } from "@controllers/portainer.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { ContainerCatalog } from "@customtypes/portainer-template";
+import {
+  Template,
+} from "@customtypes/portainer-template";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { Global, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
@@ -17,22 +20,13 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
 import {
-  EnvSetting,
-  RepositorySetting,
-  Template,
-  VolumeSetting,
-} from "@customtypes/portainer-template";
-import {
-  EnvSettingSchema,
-  RepositorySettingSchema,
-  TemplateSchema,
-  VolumeSettingSchema,
-} from "@schemas/portainer-schema";
-import {
   ContainerStats,
   ContainerStatsSchema,
 } from "@schemas/containerstats.schema";
 import { Icon, IconSchema } from "@schemas/icons.schema";
+import {
+  TemplateSchema,
+} from "@schemas/portainer.schema";
 import { ServiceDefinitionSchema } from "@schemas/servicedefinition.schema";
 import { ComposeService } from "@services/compose.service";
 import { DesktopService } from "@services/desktop.service";
