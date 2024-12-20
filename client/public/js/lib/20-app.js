@@ -1,3 +1,34 @@
+function clearImportCatalog() {
+  document.getElementById("templateUrl").value = "";
+  document.getElementById("templateTitle").value = "";
+}
+
+function importCatalog() {
+  var url = document.getElementById("templateUrl").value;
+  var title = document.getElementById("templateTitle").value;
+
+  axios
+    .post("/api/catalog/create", {
+      name: title,
+      url: url
+    })
+    .then((response) => {
+      window.location.reload(true);
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+}
+
+function viewCatalog() {
+  var id = document.getElementById("templates").value;
+
+  if (id != "") {
+    window.location.href = "/admin/catalog?id=" + encodeURIComponent(id);
+  }
+}
+
 function chooseDesktopTheme(obj) {
   var theme = obj;
   if (theme === "auto") {

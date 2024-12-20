@@ -175,7 +175,9 @@ export class AppController {
   }
 
   @Get("/admin/catalog")
-  catalogpage(@Res() res) {
+  catalogpage(@Query("id") id, @Res() res) {
+    let catalogId = id ?? "";
+    this.logger.debug("catalogid", catalogId);
     this.portainerService
       .getCatalogs()
       .then((catalogs) => {
@@ -189,12 +191,19 @@ export class AppController {
             .then((r) => {
               catalogs = [];
               catalogs.push(r);
+              if (catalogId == "") {
+                catalogId = catalogs[0].id;
+              }
+              const catalog =
+                catalogs.find((f) => {
+                  return f.id == catalogId;
+                }) ?? catalogs[0];
               this.portainerService
-                .downloadFeed(catalogs[0].url)
+                .downloadFeed(catalog.url)
                 .then((feed) => {
                   res.view(
                     "catalog.hbs",
-                    { catalogs: catalogs, feed: feed },
+                    { catalogs: catalogs, selected: catalog, feed: feed },
                     { layout: "./layouts/layout.hbs" },
                   );
                 })
@@ -206,12 +215,19 @@ export class AppController {
               res.status(500).send(err);
             });
         } else {
+          if (catalogId == "") {
+            catalogId = catalogs[0].id;
+          }
+          const catalog =
+            catalogs.find((f) => {
+              return f.id == catalogId;
+            }) ?? catalogs[0];
           this.portainerService
-            .downloadFeed(catalogs[0].url)
+            .downloadFeed(catalog.url)
             .then((feed) => {
               res.view(
                 "catalog.hbs",
-                { catalogs: catalogs, feed: feed },
+                { catalogs: catalogs, selected: catalog, feed: feed },
                 { layout: "./layouts/layout.hbs" },
               );
             })

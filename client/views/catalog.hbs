@@ -4,13 +4,13 @@
     <select class="form-select" aria-label="Catalogs" id="templates">
       <option>Choose a template catalog to load.</option>
       {{#each this.catalogs}}
-        <option value="{{id}}">{{name}}</option>
+        <option {{#when id "eq" ../selected.id}}selected{{/when}} value="{{id}}">{{name}}</option>
       {{/each}}
     </select>
   </div>
-  <div class="mb-3"><button class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</button>
+  <div class="mb-3"><button class="btn btn-primary" onclick="viewCatalog(); return false;"><i class="fa-solid fa-eye"></i> View</button>
     &nbsp;
-    <button class="btn btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
   </div>
   <hr />
   <div class="row">
@@ -26,5 +26,30 @@
         </div>
       </div>
     {{/each}}
+  </div>
+</div>
+
+<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="importModalLabel">Import catalog</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="templateTitle" class="form-label">Name</label>
+          <input type="text" class="form-control" id="templateTitle" placeholder="">
+        </div>
+        <div class="mb-3">
+          <label for="templateUrl" class="form-label">Catalog Web Address</label>
+          <input type="url" class="form-control" id="templateUrl" placeholder="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="clearImportCatalog();" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button onclick="importCatalog();" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
