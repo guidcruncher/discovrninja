@@ -126,23 +126,29 @@ export class PortainerService {
     });
   }
 
-  public createStack(project: string, workingDir: string, cfg: TemplateCreateRequest): TemplateCreateResponse {
-    let dockerRun: TemplateCreateResponse this.toDockerRun(cfg);
+  public createStack(
+    project: string,
+    workingDir: string,
+    cfg: TemplateCreateRequest,
+  ): TemplateCreateResponse {
+    let dockerRun: TemplateCreateResponse = this.toDockerRun(cfg);
     let baseDir = path.join(workingDir, project);
     let sb: StringBuilder = new StringBuilder();
 
-    if (!fs.existsSync(baseDir)) {fs.mkDirSync(baseDir, {recursive: true});}
-    let filename - path.join(baseDir, "run.sh");
+    if (!fs.existsSync(baseDir)) {
+      fs.mkDirSync(baseDir, { recursive: true });
+    }
+    let filename = path.join(baseDir, "run.sh");
     fs.writeFileSync(filename, "#!/bin/sh\n\n" + dockerRun.cmd);
     filename = path.join(baseDir, "stack.env");
     fs.writeFileSync(filename, dockerRun.environment);
     filename = path.join(baseDir, "compose.yaml");
-    let compose =   convertDockerRunToCompose(run, null, "latest", 2);
-    compose = compose.replace("name: <your project name>", "name: "+project);
+    let compose = convertDockerRunToCompose(run, null, "latest", 2);
+    compose = compose.replace("name: <your project name>", "name: " + project);
     fs.writeFileSync(filename, compose);
 
     sb.append("#!/bin/sh\n");
-    sb.appendFormat("docker compose -p \"{0}\" \\", project);
+    sb.appendFormat('docker compose -p "{0}" \\', project);
     sb.append("    --env-file ./stack.env \\");
     sb.append("    -f ./compose.yaml \\");
     sb.append("    --project-directory . \\");
