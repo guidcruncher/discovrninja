@@ -135,14 +135,14 @@ export class PortainerService {
     const sb: StringBuilder = new StringBuilder();
 
     if (!fs.existsSync(baseDir)) {
-      fs.mkDirSync(baseDir, { recursive: true });
+      fs.mkdirSync(baseDir, { recursive: true });
     }
     let filename = path.join(baseDir, "run.sh");
     fs.writeFileSync(filename, "#!/bin/sh\n\n" + dockerRun.cmd);
     filename = path.join(baseDir, "stack.env");
     fs.writeFileSync(filename, dockerRun.environment);
     filename = path.join(baseDir, "compose.yaml");
-    let compose = convertDockerRunToCompose(run, null, "latest", 2);
+    let compose = convertDockerRunToCompose(dockerRun.cmd, null, "latest", 2);
     compose = compose.replace("name: <your project name>", "name: " + project);
     fs.writeFileSync(filename, compose);
 
@@ -153,7 +153,8 @@ export class PortainerService {
     sb.append("    --project-directory . \\");
     sb.append("    $@");
     filename = path.join(baseDir, "compose.sh");
-    fs.writeFileSync(filenamae, sb.toStringDelimited("\n"));
+    fs.writeFileSync(filename, sb.toStringDelimited("\n"));
+    return dockerRun;
   }
 
   public toDockerRun(cfg: TemplateCreateRequest): TemplateCreateResponse {
