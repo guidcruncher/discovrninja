@@ -1,5 +1,3 @@
-import { default as convertDockerRunToCompose } from "composerize";
-import { default as convertDockerComposeToRun } from "decomposerize";
 import {
   ContainerCatalog,
   Template,
@@ -12,11 +10,12 @@ import { PortainerHelper } from "@helpers/portainerhelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
+import { default as convertDockerRunToCompose } from "composerize";
 import * as crypto from "crypto";
-import { Model } from "mongoose";
-import * as showdown from "showdown";
 import * as fs from "fs";
+import { Model } from "mongoose";
 import * as path from "path";
+import * as showdown from "showdown";
 
 @Injectable()
 export class PortainerService {
@@ -131,9 +130,9 @@ export class PortainerService {
     workingDir: string,
     cfg: TemplateCreateRequest,
   ): TemplateCreateResponse {
-    let dockerRun: TemplateCreateResponse = this.toDockerRun(cfg);
-    let baseDir = path.join(workingDir, project);
-    let sb: StringBuilder = new StringBuilder();
+    const dockerRun: TemplateCreateResponse = this.toDockerRun(cfg);
+    const baseDir = path.join(workingDir, project);
+    const sb: StringBuilder = new StringBuilder();
 
     if (!fs.existsSync(baseDir)) {
       fs.mkDirSync(baseDir, { recursive: true });
