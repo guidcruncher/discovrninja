@@ -1,68 +1,127 @@
 import { Prop, Schema } from "@nestjs/mongoose";
 import * as crypto from "crypto";
 
-export type Templates = Template[];
-
-export class PortainerTemplate {
-  version: string;
-
-  templates: Templates;
-}
-
-export class Template {
-  categories: string[];
-
-  description: string;
-
-  env?: EnvSetting[];
-
-  image?: string;
-
-  logo: string;
-
-  name?: string;
-
-  platform: string;
-
-  ports?: string[];
-
-  restart_policy?: string;
-
-  title: string;
-
-  type: number;
-
-  volumes?: VolumeSetting[];
-
-  note?: string;
-
-  repository?: RepositorySetting;
-
-  network?: string;
-}
-
+@Schema()
 export class EnvSetting {
+  @Prop()
   label: string;
 
+  @Prop()
   name: string;
 
-  default?: string;
+  @Prop()
+  default: string;
 
-  set?: string;
+  @Prop()
+  set: string;
 
-  description?: string;
+  @Prop()
+  description: string;
+
+  constructor() {
+    this.name = "";
+    this.description = "";
+    this["set"] = "";
+    this["default"] = "";
+  }
 }
 
+@Schema()
 export class VolumeSetting {
-  bind?: string;
+  @Prop()
+  bind: string;
 
+  @Prop()
   container: string;
+
+  constructor() {
+    this.bind = "";
+    this.container = "";
+  }
 }
 
+@Schema()
 export class RepositorySetting {
+  @Prop()
   stackfile: string;
 
+  @Prop()
   url: string;
+
+  constructor() {
+    this.stackfile = "";
+    this.url = "";
+  }
+}
+
+@Schema()
+export class Template {
+  @Prop({ index: true })
+  catalogId: string;
+
+  @Prop()
+  categories: string[];
+
+  @Prop()
+  description: string;
+
+  @Prop({ type: () => [EnvSetting] })
+  env: EnvSetting[];
+
+  @Prop()
+  image: string;
+
+  @Prop()
+  logo: string;
+
+  @Prop()
+  name: string;
+
+  @Prop()
+  platform: string;
+
+  @Prop()
+  ports: string[];
+
+  @Prop()
+  restart_policy: string;
+
+  @Prop()
+  title: string;
+
+  @Prop()
+  type: number;
+
+  @Prop({ type: () => [VolumeSetting] })
+  volumes: VolumeSetting[];
+
+  @Prop()
+  note: string;
+
+  @Prop({ type: () => RepositorySetting })
+  repository: RepositorySetting;
+
+  @Prop()
+  network: string;
+
+  constructor() {
+    this.catalogId = "";
+    this.categories = [];
+    this.description = "";
+    this.env = [];
+    this.image = "";
+    this.logo = "";
+    this.name = "";
+    this.platform = "";
+    this.ports = [];
+    this.restart_policy = "";
+    this.title = "";
+    this.type = 0;
+    this.volumes = [];
+    this.note = "";
+    this.repository = new RepositorySetting();
+    this.network = "";
+  }
 }
 
 export class TemplateCreateRequest {
@@ -77,9 +136,17 @@ export class TemplateCreateResponse {
   environment: string;
 }
 
+export type Templates = Template[];
+
+export class PortainerTemplate {
+  version: string;
+
+  templates: Templates;
+}
+
 @Schema()
 export class ContainerCatalog {
-  @Prop()
+  @Prop({ index: true, unique: true })
   id: string;
 
   @Prop()

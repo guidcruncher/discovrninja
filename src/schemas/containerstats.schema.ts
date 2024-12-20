@@ -3,10 +3,10 @@ import { HydratedDocument } from "mongoose";
 
 @Schema()
 export class ContainerStats {
-  @Prop()
+  @Prop({ index: true })
   name: string;
 
-  @Prop()
+  @Prop({ index: true })
   created: Date;
 
   @Prop()

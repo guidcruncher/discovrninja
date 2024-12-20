@@ -3,7 +3,7 @@ import { Prop, Schema } from "@nestjs/mongoose";
 
 @Schema()
 class ServiceDefinition {
-  @Prop()
+  @Prop({ index: true })
   name: string;
 
   @Prop()

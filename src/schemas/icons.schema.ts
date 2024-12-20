@@ -3,7 +3,7 @@ import { HydratedDocument } from "mongoose";
 
 @Schema()
 export class Icon {
-  @Prop()
+  @Prop({ index: true })
   catalog: string;
 
   @Prop()
