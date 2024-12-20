@@ -12,6 +12,7 @@ import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import * as crypto from "crypto";
 import { Model } from "mongoose";
+import * as showdown from "showdown";
 
 @Injectable()
 export class PortainerService {
@@ -84,8 +85,12 @@ export class PortainerService {
         .lean()
         .sort({ title: 1 })
         .exec()
-        .then((r) => {
-          resolve(r as Template[]);
+        .then((res) => {
+          const converter = new showdown.Converter();
+          res.forEach((r) => {
+            r.descriptinon = converter.makeHtml(r.description);
+          });
+          resolve(res as Template[]);
         })
         .catch((err) => {
           reject(err);
