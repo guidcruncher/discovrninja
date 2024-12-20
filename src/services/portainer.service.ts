@@ -88,7 +88,7 @@ export class PortainerService {
         .then((res) => {
           const converter = new showdown.Converter();
           res.forEach((r) => {
-            r.descriptinon = converter.makeHtml(r.description);
+            r.description = converter.makeHtml(r.description);
           });
           resolve(res as Template[]);
         })
