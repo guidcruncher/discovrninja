@@ -180,33 +180,33 @@ export class AppController {
     this.portainerService
       .getCatalogs()
       .then((catalogs) => {
-if (catalogs.length>0){
-        if (catalogId == "") {
-          catalogId = catalogs[0].id;
+        if (catalogs.length > 0) {
+          if (catalogId == "") {
+            catalogId = catalogs[0].id;
+          }
+          const catalog =
+            catalogs.find((f) => {
+              return f.id == catalogId;
+            }) ?? catalogs[0];
+          this.portainerService
+            .fetchCatalog(catalog.id)
+            .then((feed) => {
+              res.view(
+                "catalog.hbs",
+                { catalogs: catalogs, selected: catalog, feed: feed },
+                { layout: "./layouts/layout.hbs" },
+              );
+            })
+            .catch((err) => {
+              res.status(500).send(err);
+            });
+        } else {
+          res.view(
+            "catalog.hbs",
+            { fcatalogs: [], selected: {}, feed: [] },
+            { layout: "./layouts/layout.hbs" },
+          );
         }
-        const catalog =
-          catalogs.find((f) => {
-            return f.id == catalogId;
-          }) ?? catalogs[0];
-        this.portainerService
-          .fetchCatalog(catalog.id)
-          .then((feed) => {
-            res.view(
-              "catalog.hbs",
-              { catalogs: catalogs, selected: catalog, feed: feed },
-              { layout: "./layouts/layout.hbs" },
-            );
-          })
-          .catch((err) => {
-            res.status(500).send(err);
-          });
-} else {
-res.view(
-"catalog.hbs",
-{ fcatalogs: [], selected: {}, feed: [] },
-{ layout: "./layouts/layout.hbs" },
-);
-}
       })
       .catch((err) => {
         res.status(500).send(err);
