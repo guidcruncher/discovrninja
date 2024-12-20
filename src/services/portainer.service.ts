@@ -82,7 +82,7 @@ export class PortainerService {
       this.templateModel
         .find({ catalogId: { $eq: id } })
         .lean()
-        .sort({title:1})
+        .sort({ title: 1 })
         .exec()
         .then((r) => {
           resolve(r as Template[]);
