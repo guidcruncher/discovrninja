@@ -17,7 +17,7 @@
 </div>
 
 <div class="mb-3">
-  <label for="restartpolicy"   class="form-label">Restart Policy</label>
+  <label for="restartpolicy" class="form-label">Restart Policy</label>
   <input type="text" class="form-control" id="restartpolicy" placeholder="Restart policy" value="{{template.restart_policy}}">
 </div>
 
@@ -31,25 +31,25 @@
   {{/each}}
 </div>
 <div class="mb-3">
-<label>Port Mapping</label>
-{{#each this.template.ports}}
-  <div class="row g-3 align-items-center">
-    <div class="col-3 text-end"> <label for="Port-{{@index}}">{{cell this ":" 0}}:</label></div>
-<div class="col-auto"><input type="text" class="form-control" id="Port-{{@index}}" value="{{cell this ":" 1}}" data-port="{{this}}"></div>
-</div>
-{{/each}}
-</div>
-<div class="mb-3">
-<label>Volume Mapping</label>
-{{#each this.template.volumes}}
-  <div class="row g-3 align-items-center">
-    <div class="col-5"><input type="text" class="form-control" id="Volume-{{@index}}" value="{{this.bind}}" data-name="{{this.container}}"></div>
-    <div class="col-auto text-end"><label for="Volume-{{@index}}">{{this.container}}</label></div>
-  </div>
-{{/each}}
+  <label>Port Mapping</label>
+  {{#each this.template.ports}}
+    <div class="row g-3 align-items-center">
+      <div class="col-3 text-end"> <label for="Port-{{@index}}">{{cell this ":" 0}}:</label></div>
+      <div class="col-auto"><input type="text" class="form-control" id="Port-{{@index}}" value="{{cell this ":" 1}}" data-port="{{this}}"></div>
+    </div>
+  {{/each}}
 </div>
 <div class="mb-3">
-<button type="button" class="btn btn-primary">Save</button>
+  <label>Volume Mapping</label>
+  {{#each this.template.volumes}}
+    <div class="row g-3 align-items-center">
+      <div class="col-5"><input type="text" class="form-control" id="Volume-{{@index}}" value="{{this.bind}}" data-name="{{this.container}}"></div>
+      <div class="col-auto text-end"><label for="Volume-{{@index}}">{{this.container}}</label></div>
+    </div>
+  {{/each}}
+</div>
+<div class="mb-3">
+  <button type="button" class="btn btn-primary">Save</button>
 
-<a href="/admin/catalog?id={{catalogId}}" class="btn btn-secondary" tabindex="-1" role="button">Cancel</a>
+  <a href="/admin/catalog?id={{catalogId}}" class="btn btn-secondary" tabindex="-1" role="button">Cancel</a>
 </div>
