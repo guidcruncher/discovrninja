@@ -1,1 +1,45 @@
+<div class="mb-3">
+  <h1><img style="max-height:100px;max-width:100px;padding:5px;" src="{{template.logo}}" />
+    {{template.title}}
+  </h1>
+</div>
+<div class="mb-3">
+  <label for="projectname" class="form-label">Project name</label>
+  <input type="text" class="form-control" id="projectname" placeholder="Project name" value="{{template.name}}">
+</div>
+<div class="mb-3">
+  <label for="containername" class="form-label">Container name</label>
+  <input type="text" class="form-control" id="containername" placeholder="Container name" value="{{template.name}}">
+</div>
+<div class="mb-3">
+  <label for="hostname" class="form-label">Host name</label>
+  <input type="text" class="form-control" id="hostname" placeholder="Host name" value="{{template.name}}">
+</div>
+<div class="mb-3">
+  <label>Environment</label>
+  {{#each this.template.env}}
+    <div class="row g-3 align-items-center">
+      <div class="col-3 text-end"><label for="envValue-{{name}}">{{this.label}}:</label></div>
+      <div class="col-auto"><input type="text" class="form-control" id="envValue-{{name}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
+    </div>
+  {{/each}}
+</div>
+<label>Port Mapping</label>
+{{#each this.template.ports}}
+  <div class="row g-3 align-items-center">
+    <div class="col-3 text-end"><label for="envValue-{{name}}">{{this.label}}:</label></div>
+    <div class="col-auto"><input type="text" class="form-control" id="envValue-{{name}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
+  </div>
+{{/each}}
+</div>
+<label>Volume Mapping</label>
+{{#each this.template.volumes}}
+  <div class="row g-3 align-items-center">
+    <div class="col-3 text-end"><label for="envValue-{{name}}">{{this.label}}:</label></div>
+    <div class="col-auto"><input type="text" class="form-control" id="envValue-{{name}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
+  </div>
+{{/each}}
+</div>
+
+
 {{debug this}}
