@@ -15,6 +15,12 @@
   <label for="hostname" class="form-label">Host name</label>
   <input type="text" class="form-control" id="hostname" placeholder="Host name" value="{{template.name}}">
 </div>
+
+<div class="mb-3">
+  <label for="restartpolicy"   class="form-label">Restart Policy</label>
+  <input type="text" class="form-control" id="restartpolicy" placeholder="Restart policy" value="{{template.restart_policy}}">
+</div>
+
 <div class="mb-3">
   <label>Environment</label>
   {{#each this.template.env}}
