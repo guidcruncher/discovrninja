@@ -19,24 +19,26 @@
   <label>Environment</label>
   {{#each this.template.env}}
     <div class="row g-3 align-items-center">
-      <div class="col-3 text-end"><label for="envValue-{{name}}">{{this.label}}:</label></div>
-      <div class="col-auto"><input type="text" class="form-control" id="envValue-{{name}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
+      <div class="col-3 text-end"><label for="Env-{{@index}}">{{this.label}}:</label></div>
+      <div class="col-auto"><input type="text" class="form-control" id="Env-{{@index}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
     </div>
   {{/each}}
 </div>
+<div class="mb-3">
 <label>Port Mapping</label>
 {{#each this.template.ports}}
   <div class="row g-3 align-items-center">
-    <div class="col-3 text-end"><label for="envValue-{{name}}">{{this.label}}:</label></div>
-    <div class="col-auto"><input type="text" class="form-control" id="envValue-{{name}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
-  </div>
+    <div class="col-3 text-end"> <label for="Port-{{@index}}">{{cell this ":" 0}}:</label></div>
+<div class="col-auto"><input type="text" class="form-control" id="Port-{{@index}}" value="{{cell this ":" 1}}" data-port="{{this}}"></div>
+</div>
 {{/each}}
 </div>
+<div class="mb-3">
 <label>Volume Mapping</label>
 {{#each this.template.volumes}}
   <div class="row g-3 align-items-center">
-    <div class="col-3 text-end"><label for="envValue-{{name}}">{{this.label}}:</label></div>
-    <div class="col-auto"><input type="text" class="form-control" id="envValue-{{name}}" value="{{#if default}}{{default}}{{else}}{{#if set}}{{set}}{{/if}}{{/if}}" data-name="{{name}}"></div>
+    <div class="col-5"><input type="text" class="form-control" id="Volume-{{@index}}" value="{{this.bind}}" data-name="{{this.container}}"></div>
+    <div class="col-auto text-end"><label for="Volume-{{@index}}">{{this.container}}</label></div>
   </div>
 {{/each}}
 </div>
