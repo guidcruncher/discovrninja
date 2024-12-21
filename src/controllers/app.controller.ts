@@ -173,6 +173,22 @@ export class AppController {
       });
   }
 
+  @Get("/admin/createstack")
+  createstackpage(@Query("catalog") catalog, @Query("name") name, @Res() res) {
+    this.portainerService
+      .fetchTemplate(catalog, name)
+      .then((template) => {
+        res.view(
+          "createstack.hbs",
+          { catalogId: catalog, templateName: name, template: template },
+          { layout: "./layouts/layout.hbs" },
+        );
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  }
+
   @Get("/admin/catalog")
   catalogpage(@Query("id") id, @Res() res) {
     let catalogId = id ?? "";

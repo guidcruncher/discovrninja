@@ -81,6 +81,21 @@ export class PortainerService {
     });
   }
 
+  public fetchTemplate(id: string, name: string): Promise<Template> {
+    return new Promise<Template>((resolve, reject) => {
+      this.templateModel
+        .findOne({ name: { $eq: name }, catalogId: { $eq: id } })
+        .lean()
+        .exec()
+        .then((r) => {
+          resolve(r as Template);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
   public fetchCatalog(id: string): Promise<Template[]> {
     return new Promise<Template[]>((resolve, reject) => {
       this.templateModel

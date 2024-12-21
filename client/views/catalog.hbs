@@ -21,7 +21,7 @@
           <div class="card-body">
             <h5 class="card-title">{{title}}</h5>
             <p class="card-text">{{{description}}}</p>
-            <a href="#" data-name="{{name}}" class="btn btn-primary">Setup</a>
+            <a href="#" onclick="provisionTemplate(this);return false;" data-catalog="{{../selected.id}}" data-name="{{name}}" class="btn btn-primary">Setup</a>
           </div>
         </div>
       </div>

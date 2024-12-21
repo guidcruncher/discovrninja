@@ -7241,6 +7241,13 @@ String.prototype.format = function(tokens) {
   return formatted
 };
 
+function provisionTemplate(sender) {
+  var name = sender.getAttribute("data-name");
+  var catalog = sender.getAttribute("data-catalog");
+  var url = "/admin/createstack?catalog=" + encodeURIComponent(catalog) + "&name=" + encodeURIComponent(name);
+  window.location.href = url
+}
+
 function clearImportCatalog() {
   document.getElementById("templateUrl").value = "";
   document.getElementById("templateTitle").value = ""
