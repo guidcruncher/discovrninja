@@ -673,6 +673,9 @@ export class DockerService {
                   .then((serviceDef) => {
                     const sd = serviceDef[0];
                     if (sd) {
+                      if (sd.public != "") {
+                        record.publicUrl = sd.public;
+                      }
                       record.uptimeSeconds = this.calculateUptime(sd);
                       record.colorLevel = this.getColorLevel(sd);
                       record.uptimeSecondsPercent = this.calculateUptimePercent(
@@ -689,7 +692,9 @@ export class DockerService {
                             cntr.Config.Labels["com.docker.compose.project"] ??
                             "";
                           record.hostName = cntr.Config.Hostname;
-                          record.publicUrl = cntr.publicUrl;
+                          if (!record.publicUrl) {
+                            record.publicUrl = cntr.publicUrl;
+                          }
                           record.stats.cpuPercent =
                             this.calculateCpuPercent(detail);
                           record.cpuAlert = record.stats.cpuPercent > 1;
