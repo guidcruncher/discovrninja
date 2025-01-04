@@ -1,0 +1,58 @@
+host:
+  serviceGateway:
+    address: ""
+  logging:
+    level: "debug"
+  cluster:
+    enabled: false
+    workerProcessCount: 2
+  appServer:
+    listenAddress: "0.0.0.0"
+    listenPort: 5001
+  mongo:
+    url: mongodb://root:password@127.0.0.1:27017/
+
+docker:
+  connection:
+    socketPath: "/var/run/docker.sock"
+    hostUri: ""
+    ca: ""
+    cert: ""
+    key: ""
+  stackBasePath:
+  repositories:
+    docker_io:
+      username: ""
+      password: ""
+    ghcr_io:
+      username: ""
+      password: ""
+
+discovery:
+  file:
+    enabled: true
+    watch: true
+    filename: "./config/services.yaml"
+  docker:
+    enabled: true
+
+desktop:
+  filename: "./config/desktop.yaml"
+
+notifications:
+  apprise:
+    enabled: false
+    apiUrl:
+  pushover:
+    enabled: false
+    apiToken:
+    deliverTo:
+
+externalservices:
+  geoLocation:
+    latitude:
+    longitude:
+  linkding:
+    apiUrl: http://linkding:9090/api
+    hostname:
+    apiToken:

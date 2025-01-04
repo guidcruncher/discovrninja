@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg sticky-top bg-brand">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img width="38px" height=38px" src="/assets/img/logo.png" />&nbsp; DiscovrNinja!</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        {{#each this.desktop.header.items}}
+          <li class="nav-item">
+            {{toolbaritem this}}
+          </li>
+        {{/each}}
+        <li class="nav-item">
+          {{>themechooser }}
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

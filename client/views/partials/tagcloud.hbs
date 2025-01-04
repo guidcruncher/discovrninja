@@ -1,0 +1,5 @@
+<ul class="cloud" role="navigation" aria-label="Tag cloud">
+  {{#each this.feed}}
+    <li><a data-weight="{{this}}" href="{{../tagfunc @key}}">{{@key}}</a></li>
+  {{/each}}
+</ul>

@@ -1,0 +1,62 @@
+import { Logger } from "@nestjs/common";
+import * as spawn from "child-process";
+
+
+export class ProcessResponse {
+  stdout: string;
+  stderr: string;
+  exitcode: number;
+
+  constructor() {
+    this.stdout = "";
+    this.stderr = "";
+    this.exitcode = -1;
+  }
+}
+
+export class ProcessHelper { 
+
+private getGitEnv() {
+return {
+GIT_AUTHOR_NAME
+GIT_AUTHOR_EMAIL
+GIT_AUTHOR_DATE
+GIT_COMMITTER_NAME
+GIT_COMMITTER_EMAIL
+GIT_COMMITTER_DATE
+};
+}
+
+public static createGitRepo(cwd: string): Promise<ProcessResponse> {
+  return this.exec("git", ["init", "-b main"], {cwd:cwd});
+}
+
+public static gitCommit(cwd: string, user: string, message: string): Promise<ProcessResponse> {
+  return this.exec("git", ["commit", "-a", "-m '"+message+"'"], {cwd: cwd});
+}
+
+public static exec(cmd: string, args: string[], options: any) : Promise<ProcessResponse> {
+}
+  return new Promise<ProcessResponse>((resolve, reject) => { 
+    let response = new ProcessResponse();
+    const proc = spawn(cmd, args, options);
+
+    proc.stdout.on('data', (data) => {
+      response.stdout += data;
+    });
+
+    proc.stderr.on('data', (data) => {
+      response.stderr += data;
+    });
+
+    proc.on('error', (err) => {
+      reject({error: err, response: response});
+    });
+
+    proc.on('close', (code) => {
+      response.exitcode = code;
+      resolve(response);
+    });
+
+  });
+}

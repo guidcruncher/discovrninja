@@ -1,0 +1,4 @@
+<button data-url="{{settings.url}}" onclick="navigateToNews(this); return false;" type="button" class="btn {{# isempty parent.buttonclass}}btn-secondary{{else}}{{parent.buttonclass}}{{/isempty}} widget" style="{{#isnotempty parent.opacity}}opacity:{{parent.opacity}} !important;{{/isnotempty}}">
+  <img style="object-fit:contain;padding:10px;max-width:64px;height:64px" src="{{#isempty settings.iconUrl}}https://www.google.com/s2/favicons?domain={{settings.domainUrl}}&sz=64{{else}}{{settings.iconUrl}}{{/isempty}}" />
+  <br /> {{settings.name}}
+</button>

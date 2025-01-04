@@ -1,0 +1,66 @@
+<div class="modal fade" id="containerInfoModal" tabindex="-1" aria-label>
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="containerInfoLabel">{{Name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align:center;margin-top:5px" class="card">
+          <img class="card-img-top" style="padding:5px;width:10rem;height:10rem;" src="/api/icons/query/{{#if icon_slug}}{{icon_slug}}{{else}}{{Name}}{{/if}}" />
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+          <table border="0" cellpadding="2" cellspacing="0">
+            <tr>
+              <td>Hostname:</td>
+              <td>{{Config.Hostname}}</td>
+            </tr>
+            <tr>
+              <td>Image:</td>
+              <td>{{Config.Image}}</td>
+            </tr>
+            {{#if downtime}}
+              <tr>
+                <td>Downtime:</td>
+                <td>{{secondstotime downtime "long"}}</td>
+              </tr>
+            {{/if}}
+            <tr>
+              <td></td>
+              <td>{{#if UpdateStatus.updateDue}}Update Available{{else}}Up-to-date{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Created:</td>
+              <td>{{UpdateStatus.imageCreated}}</td>
+            </tr>
+            <tr>
+              <td>Latest Build:</td>
+              <td>{{UpdateStatus.latestBuildDate}}</td>
+            </tr>
+            <tr>
+              <td>Status:</td>
+              <td>{{State.Status}}</td>
+            </tr>
+            <tr>
+              <td>Health:</td>
+              <td>{{State.Health.Status}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-containerid="{{Name}}" data-command="container-stop">Stop</button>
+        <button type="button" class="btn btn-secondary" data-containerid="{{Name}}" data-command="container-start">Start</button>
+        <button type="button" class="btn btn-secondary" data-containerid="{{Name}}" data-command="container-restart">Restart</button>
+        <button type="button" class="btn btn-secondary" data-containerid="{{Name}}" onclick="startContainerMonitor(this); return false;">Monitor</button>
+        {{#if editor.editable}}
+          <button onclick="composeEdit(this); return false;" data-containerid="{{Name}}" data-project="{{editor.project}}" type="button" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+        {{else}}
+          <button onclick="composeEdit(this); return false;" data-containerid="{{Name}}" data-project="{{editor.project}}" type="button" class="btn btn-secondary"><i class="fa-regular fa-square-plus"></i> Edit</button>
+        {{/if}}
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

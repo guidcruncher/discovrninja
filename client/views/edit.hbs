@@ -1,0 +1,77 @@
+<form>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-desktop-tab" data-bs-toggle="tab" data-bs-target="#nav-desktop" type="button" role="tab" aria-controls="nav-desktop" aria-selected="true">Desktop</button>
+      <button class="nav-link" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="false">Configuration</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-desktop" role="tabpanel" aria-labelledby="nav-desktop-tab" tabindex="0">
+      <div class="container" style="padding-top:10px">
+        <div class="mb-3 row">
+          <label for="txtcontainerName" class="col-sm-2 col-form-label">Container:</label>
+          <div class="col sm-10">
+            <input type="text" class="form-control" id="txtcontainerName" value="{{def.containerName}}" disabled readonly>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="txthostname" class="col-sm-2 col-form-label">Container Hostname:</label>
+          <div class="col sm-10">
+            <input type="text" class="form-control" id="txthostname" value="{{def.hostname}}" {{#isempty def.hostname}}required{{else}}disabled readonly{{/isempty}}>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="txtname" class="col-sm-2 col-form-label">Display Name:</label>
+          <div class="col sm-10">
+            <input type="text" class="form-control" id="txtname" value="{{def.name}}" required>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="txtproxy" class="col-sm-2 col-form-label">Internal Address:</label>
+          <div class="col sm-10">
+            <input type="text" class="form-control" id="txtproxy" value="{{def.proxy}}" required>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="txtpublic" class="col-sm-2 col-form-label">Public Address:</label>
+          <div class="col sm-10">
+            <input type="text" class="form-control" id="txtpublic" value="{{def.public}}">
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="chkArchived" {{#if def.archived}}checked{{/if}}>
+            <label class="form-check-label" for="chkArchived">
+              Archived? (Hidden from Menu)
+            </label>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="txticonSlug" class="col-sm-2 col-form-label">Icon:</label>
+          <div class="col sm-10">
+            <button class="btn btn-outline-primary" style="width:90px;height:90px;" type="button" onclick="changeIconFromEdit(); return false;"><img id="imgIcon" src="{{def.iconUrl}}" style="max-width:64px;max-height:64px;" /></button>
+            <input type="hidden" id="txticonSlug" value="{{def.iconSlug}}">
+            <input type="hidden" id="txticonCatalog" value="{{def.iconCatalog}}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab" tabindex="0">
+      <div class="mb-3">
+        <label for="txtCompose" class="form-label">Project Compose file:</label><br />
+        <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" data-project="{{projectName}}" onchange="document.getElementById('changed')='true';" id="txtCompose"> {{project.compose}}</textarea>
+      </div>
+      <div class="mb-3">
+        <label for="txtEnv" class="form-label">Project Environment file:</label><br />
+        <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtEnv">{{project.env}}</textarea>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <input type="hidden" id="changed" value="false" />
+    <button class="btn btn-primary" type="button" onclick="saveConfiguration(); return false;">Save</button>
+    <button class="btn btn-secondary" type="button" onclick="window.location.href='/admin/index'; return false;">Cancel</button>
+  </div>
+</form>
+{{>messagebox}}
+{{>iconsearch}}

@@ -1,0 +1,142 @@
+<div class="mb-3">
+  <h1><img style="max-height:100px;max-width:100px;padding:5px;" src="{{template.logo}}" />
+    {{template.title}}
+  </h1>
+</div>
+<div class="mb-3">
+  {{{template.description}}}
+</div>
+<div class="mb-3">
+  <label for="projectname" class="form-label">Project name</label>
+  <input type="text" class="form-control" id="projectname" placeholder="Project name" value="{{template.projectname}}">
+</div>
+<div class="mb-3">
+  <label for="containername" class="form-label">Container name</label>
+  <input type="text" class="form-control" id="containername" placeholder="Container name" value="{{template.name}}">
+</div>
+<div class="mb-3">
+  <label for="hostname" class="form-label">Host name</label>
+  <input type="text" class="form-control" id="hostname" placeholder="Host name" value="{{template.hostname}}">
+</div>
+
+<div class="mb-3">
+  <label for="restartpolicy" class="form-label">Restart Policy</label>
+  <select class="form-select" id="restartpolicy">
+    <option value="" {{#when template.restart_policy "eq" "" }}selected{{/when}}></option>
+    <option value="no" {{#when template.restart_policy "eq" "no" }}selected{{/when}}>no</option>
+    <option value="always" {{#when template.restart_policy "eq" "always" }}selected{{/when}}>always</option>
+    <option value="on-failure" {{#when template.restart_policy "eq" "on-failure" }}selected{{/when}}>on-failure</option>
+    <option value="unless-stopped" {{#when template.restart_policy "eq" "unless-stopped" }}selected{{/when}}>unless-stopped</option>
+  </select>
+</div>
+
+<div class="mb-3">
+  <label for="network" class="form-label">Network</label>
+  <input type="text" class="form-control" id="network" placeholder="Network" value="{{template.network}}">
+</div>
+
+<div class="mb-3">
+  <label>Environment</label>
+  {{#each this.template.env}}
+    <div class="row g-3 align-items-center">
+      <div class="col-3 text-end"><label for="Env-{{@index}}">{{this.label}}:</label></div>
+      <div class="col-auto"><input type="text" class="form-control Env" id="Env-{{@index}}" value="{{#if set}}{{set}}{{else}}{{#if default}}{{default}}{{/if}}{{/if}}" data-name="{{name}}"> {{description}}</div>
+    </div>
+  {{/each}}
+</div>
+<div class="mb-3">
+  <label>Port Mapping</label>
+  {{#each this.template.ports}}
+    <div class="row g-3 align-items-center">
+      <div class="col-auto"><input type="text" class="form-control Port" id="Port-{{@index}}" value="{{cell this ":" 0}}" data-port="{{this}}"></div>
+      <div class="col-3"> <label for="Port-{{@index}}">{{cell this ":" 1}}:</label></div>
+    </div>
+  {{/each}}
+</div>
+<div class="mb-3">
+  <label>Volume Mapping</label>
+  {{#each this.template.volumes}}
+    <div class="row g-3 align-items-center">
+      <div class="col-5"><input type="text" class="form-control Volume" id="Volume-{{@index}}" value="{{this.bind}}" data-name="{{this.container}}"></div>
+      <div class="col-auto text-end"><label for="Volume-{{@index}}">{{this.container}}</label></div>
+    </div>
+  {{/each}}
+</div>
+<div class="mb-3">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="launchOnSave">
+    <label class="form-check-label" for="launchOnSave">
+      Launch {{template.title}} stack on save?
+    </label>
+  </div>
+</div>
+<hr />
+<div class="mb-3">
+  {{{template.note}}}
+</div>
+<div class="mb-3">
+  <button onclick="createStack(); return false;" type="button" class="btn btn-primary">Save</button>
+  <a href="/admin/catalog?id={{catalogId}}" class="btn btn-secondary" tabindex="-1" role="button">Cancel</a>
+</div>
+
+
+
+<script typ="text/javascript">
+  function createStack() {
+    var env = {};
+    var catalogId = '{{catalogId}}';
+    var template = {{minify this.template}};
+    template.projectname = document.getElementById("projectname").value;
+    template.name = document.getElementById("containername").value;
+    template.hostname = document.getElementById("hostname").value;
+    template.restart_policy = document.getElementById("restartpolicy").value;
+    template.network = document.getElementById("network").value;
+
+    template.ports = [];
+    document.querySelectorAll(".Port").forEach((ctl) => {
+      var name = ctl.getAttribute("data-port").split(":");
+      var value = ctl.value + ":" + name[1];
+      template.ports.push(value);
+    });
+
+    template.volumes = [];
+    document.querySelectorAll(".Volume").forEach((ctl) => {
+      var container = ctl.getAttribute("data-name");
+      var value = ctl.value;
+      template.volumes.push({
+        container: container,
+        bind: value
+      });
+    });
+
+    document.querySelectorAll(".Env").forEach((ctl) => {
+      var name = ctl.getAttribute("data-name");
+      var value = ctl.value;
+      env[name] = value;
+      var index = template.env.findIndex((e) => {
+        return e.name == name;
+      });
+      if (index > -1) {
+        template.env[index].set = value;
+      }
+    });
+
+    var data = {
+      template: template,
+      environment: env,
+      launchOnSave: document.getElementById("launchOnSave").checked ?? false,
+    };
+
+    axios
+      .post("/api/catalog/createstack", data)
+      .then((response) => {
+        window.location.href = "/admin/catalog?id={{catalogId}}";
+        return false;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+  }
+
+</script>

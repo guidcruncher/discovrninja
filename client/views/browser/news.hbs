@@ -1,0 +1,29 @@
+<div id="news" class="newsprint">
+  <div class="content">
+    <table border="0" cellpadding="2" cellspacing="0">
+      <tr class="masthead">
+        <td id="mastheadbanner" style="border-bottom: solid 1px black">
+          <canvas id="mastheadcanvas" style="display:none"></canvas>
+          <a href="#" onclick="newsPage('{{feedUrl}}'); return false;">
+            <img id="mastheadimg" onload="setBgColor('mastheadimg', 'mastheadbanner')" src="/api/resources/p?u={{urlencode meta.image.url}}" />
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td style="border-bottom: solid 1px black">
+          {{meta.pubDateStr}}
+        </td>
+      </tr>
+      {{#each items}}
+        <tr>
+          <td>
+            <p class="headline"><a href="{{link}}" target="_new" style="text-decoration: none !important;">{{{title}}}</a></p>
+            {{#if image}}<img src="{{image.url}}" />{{/if}}
+            <p>{{{description}}}</p>
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+  /
+</div>
