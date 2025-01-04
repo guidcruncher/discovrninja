@@ -5157,7 +5157,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         }
         return undefined
       };
-    return "      <tr>\n        <td>\n          <a " + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0, {
+    return '      <tr>\n        <td>\n          <a title="Navigate to" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0, {
       name: "if",
       hash: {},
       fn: container.program(2, data, 0),
@@ -5166,69 +5166,39 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       loc: {
         start: {
           line: 18,
-          column: 13
+          column: 33
         },
         end: {
           line: 18,
-          column: 173
+          column: 193
         }
       }
-    })) != null ? stack1 : "") + '><i class="fa-solid fa-link"></i></a>\n          <a href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+    })) != null ? stack1 : "") + '><i class="fa-solid fa-link"></i></a>\n          <a title="Export" href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
       name: "name",
       hash: {},
       data: data,
       loc: {
         start: {
           line: 19,
-          column: 40
+          column: 55
         },
         end: {
           line: 19,
-          column: 48
+          column: 63
         }
       }
-    }) : helper)) + '" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0, {
-      name: "if",
-      hash: {},
-      fn: container.program(6, data, 0),
-      inverse: container.program(8, data, 0),
-      data: data,
-      loc: {
-        start: {
-          line: 19,
-          column: 50
-        },
-        end: {
-          line: 19,
-          column: 216
-        }
-      }
-    })) != null ? stack1 : "") + '><i class="fa-regular fa-font-awesome"></i></a>\n          <a href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+    }) : helper)) + '" onclick="exportContainer(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export"></i></a>\n          <a title="Edit container" href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
       name: "name",
       hash: {},
       data: data,
       loc: {
         start: {
           line: 20,
-          column: 40
+          column: 63
         },
         end: {
           line: 20,
-          column: 48
-        }
-      }
-    }) : helper)) + '" onclick="exportContainer(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export"></i></a>\n          <a href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
-      name: "name",
-      hash: {},
-      data: data,
-      loc: {
-        start: {
-          line: 21,
-          column: 40
-        },
-        end: {
-          line: 21,
-          column: 48
+          column: 71
         }
       }
     }) : helper)) + '" data-project="' + alias4((helper = (helper = lookupProperty(helpers, "project") || (depth0 != null ? lookupProperty(depth0, "project") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
@@ -5237,42 +5207,42 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 21,
-          column: 64
+          line: 20,
+          column: 87
         },
         end: {
-          line: 21,
-          column: 75
+          line: 20,
+          column: 98
         }
       }
-    }) : helper)) + '" onclick="composeEdit(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>\n        </td>\n        <td><a href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+    }) : helper)) + '" onclick="composeEdit(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>\n        </td>\n        <td><a title="View properties" href="#" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
       name: "id",
       hash: {},
       data: data,
       loc: {
         start: {
-          line: 23,
-          column: 42
+          line: 22,
+          column: 66
         },
         end: {
-          line: 23,
-          column: 48
+          line: 22,
+          column: 72
         }
       }
     }) : helper)) + '" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(10, data, 0),
-      inverse: container.program(12, data, 0),
+      fn: container.program(6, data, 0),
+      inverse: container.program(8, data, 0),
       data: data,
       loc: {
         start: {
-          line: 23,
-          column: 50
+          line: 22,
+          column: 74
         },
         end: {
-          line: 23,
-          column: 109
+          line: 22,
+          column: 133
         }
       }
     })) != null ? stack1 : "") + ' onclick="containerInfo(this);return false;">' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
@@ -5281,27 +5251,27 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 23,
-          column: 154
+          line: 22,
+          column: 178
         },
         end: {
-          line: 23,
-          column: 162
+          line: 22,
+          column: 186
         }
       }
     }) : helper)) + '</a></td>\n        <td align="center" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(10, data, 0),
-      inverse: container.program(12, data, 0),
+      fn: container.program(6, data, 0),
+      inverse: container.program(8, data, 0),
       data: data,
       loc: {
         start: {
-          line: 24,
+          line: 23,
           column: 27
         },
         end: {
-          line: 24,
+          line: 23,
           column: 86
         }
       }
@@ -5311,121 +5281,135 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 24,
+          line: 23,
           column: 97
         },
         end: {
-          line: 24,
+          line: 23,
           column: 109
         }
       }
-    }) : helper)) + '" data-bs-toggle="tooltip" data-bs-title="' + alias4((helper = (helper = lookupProperty(helpers, "status") || (depth0 != null ? lookupProperty(depth0, "status") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+    }) : helper)) + '" data-bs-toggle="tooltip" title="' + alias4((helper = (helper = lookupProperty(helpers, "status") || (depth0 != null ? lookupProperty(depth0, "status") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
       name: "status",
       hash: {},
       data: data,
       loc: {
         start: {
-          line: 24,
-          column: 151
+          line: 23,
+          column: 143
         },
         end: {
-          line: 24,
-          column: 161
+          line: 23,
+          column: 153
+        }
+      }
+    }) : helper)) + '" data-bs-title="' + alias4((helper = (helper = lookupProperty(helpers, "status") || (depth0 != null ? lookupProperty(depth0, "status") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+      name: "status",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 23,
+          column: 170
+        },
+        end: {
+          line: 23,
+          column: 180
         }
       }
     }) : helper)) + '"></i>\n        </td>\n        <td ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(14, data, 0),
-      inverse: container.program(12, data, 0),
+      fn: container.program(10, data, 0),
+      inverse: container.program(8, data, 0),
       data: data,
       loc: {
         start: {
-          line: 26,
+          line: 25,
           column: 12
         },
         end: {
-          line: 26,
+          line: 25,
           column: 114
         }
       }
     })) != null ? stack1 : "") + ">\n          " + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "shutdown") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(17, data, 0),
-      inverse: container.program(19, data, 0),
+      fn: container.program(13, data, 0),
+      inverse: container.program(15, data, 0),
       data: data,
       loc: {
         start: {
-          line: 27,
+          line: 26,
           column: 10
         },
         end: {
-          line: 27,
+          line: 26,
           column: 66
         }
       }
     })) != null ? stack1 : "") + "\n        </td>\n        <td " + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(10, data, 0),
-      inverse: container.program(12, data, 0),
+      fn: container.program(6, data, 0),
+      inverse: container.program(8, data, 0),
       data: data,
       loc: {
         start: {
-          line: 29,
+          line: 28,
           column: 12
         },
         end: {
-          line: 29,
+          line: 28,
           column: 71
         }
       }
     })) != null ? stack1 : "") + ">" + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "shutdown") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(17, data, 0),
-      inverse: container.program(21, data, 0),
+      fn: container.program(13, data, 0),
+      inverse: container.program(17, data, 0),
       data: data,
       loc: {
         start: {
-          line: 29,
+          line: 28,
           column: 72
         },
         end: {
-          line: 29,
+          line: 28,
           column: 128
         }
       }
     })) != null ? stack1 : "") + "</td>\n        <td " + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "healthy") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(23, data, 0),
-      inverse: container.program(12, data, 0),
+      fn: container.program(19, data, 0),
+      inverse: container.program(8, data, 0),
       data: data,
       loc: {
         start: {
-          line: 30,
+          line: 29,
           column: 12
         },
         end: {
-          line: 30,
+          line: 29,
           column: 117
         }
       }
     })) != null ? stack1 : "") + ">" + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "shutdown") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(17, data, 0),
-      inverse: container.program(25, data, 0),
+      fn: container.program(13, data, 0),
+      inverse: container.program(21, data, 0),
       data: data,
       loc: {
         start: {
-          line: 30,
+          line: 29,
           column: 118
         },
         end: {
-          line: 30,
+          line: 29,
           column: 180
         }
       }
@@ -5435,11 +5419,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 31,
+          line: 30,
           column: 25
         },
         end: {
-          line: 31,
+          line: 30,
           column: 39
         }
       }
@@ -5449,11 +5433,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 31,
+          line: 30,
           column: 41
         },
         end: {
-          line: 31,
+          line: 30,
           column: 65
         }
       }
@@ -5473,11 +5457,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       loc: {
         start: {
           line: 18,
-          column: 36
+          column: 56
         },
         end: {
           line: 18,
-          column: 49
+          column: 69
         }
       }
     }) : helper)) + '" target="_new" class="btn btn-outline-secondary btn-sm" '
@@ -5486,18 +5470,12 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
     return ' class="btn btn-outline-secondary btn-sm  disabled" '
   },
   6: function(container, depth0, helpers, partials, data) {
-    return ' onclick="changeIcon(this); return false;" class="btn btn-outline-secondary btn-sm" '
-  },
-  8: function(container, depth0, helpers, partials, data) {
-    return 'class="btn btn-outline-secondary btn-sm disabled" '
-  },
-  10: function(container, depth0, helpers, partials, data) {
     return ""
   },
-  12: function(container, depth0, helpers, partials, data) {
+  8: function(container, depth0, helpers, partials, data) {
     return 'class="text-danger-emphasis" '
   },
-  14: function(container, depth0, helpers, partials, data) {
+  10: function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName]
@@ -5507,28 +5485,28 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
     return (stack1 = lookupProperty(helpers, "if").call(depth0 != null ? depth0 : container.nullContext || {}, depth0 != null ? lookupProperty(depth0, "cpuAlert") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(15, data, 0),
+      fn: container.program(11, data, 0),
       inverse: container.noop,
       data: data,
       loc: {
         start: {
-          line: 26,
+          line: 25,
           column: 27
         },
         end: {
-          line: 26,
+          line: 25,
           column: 70
         }
       }
     })) != null ? stack1 : ""
   },
-  15: function(container, depth0, helpers, partials, data) {
+  11: function(container, depth0, helpers, partials, data) {
     return 'class="text-danger" '
   },
-  17: function(container, depth0, helpers, partials, data) {
+  13: function(container, depth0, helpers, partials, data) {
     return "-"
   },
-  19: function(container, depth0, helpers, partials, data) {
+  15: function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName]
@@ -5537,7 +5515,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
     };
     return container.escapeExpression(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "stats") : depth0) != null ? lookupProperty(stack1, "cpuPercentStr") : stack1, depth0))
   },
-  21: function(container, depth0, helpers, partials, data) {
+  17: function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName]
@@ -5546,7 +5524,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
     };
     return container.escapeExpression(container.lambda((stack1 = depth0 != null ? lookupProperty(depth0, "stats") : depth0) != null ? lookupProperty(stack1, "memoryUsageStr") : stack1, depth0))
   },
-  23: function(container, depth0, helpers, partials, data) {
+  19: function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName]
@@ -5556,22 +5534,22 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
     return (stack1 = lookupProperty(helpers, "if").call(depth0 != null ? depth0 : container.nullContext || {}, depth0 != null ? lookupProperty(depth0, "memoryAlert") : depth0, {
       name: "if",
       hash: {},
-      fn: container.program(15, data, 0),
+      fn: container.program(11, data, 0),
       inverse: container.noop,
       data: data,
       loc: {
         start: {
-          line: 30,
+          line: 29,
           column: 27
         },
         end: {
-          line: 30,
+          line: 29,
           column: 73
         }
       }
     })) != null ? stack1 : ""
   },
-  25: function(container, depth0, helpers, partials, data) {
+  21: function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName]
@@ -5601,7 +5579,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           column: 4
         },
         end: {
-          line: 33,
+          line: 32,
           column: 15
         }
       }
@@ -5611,11 +5589,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 38,
+          line: 37,
           column: 0
         },
         end: {
-          line: 38,
+          line: 37,
           column: 7
         }
       }
