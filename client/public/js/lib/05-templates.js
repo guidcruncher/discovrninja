@@ -576,7 +576,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           }
         }
       }) : helper))) +
-      "</a></td>\n        <td " +
+      "</a></td>\n        <td align=\"center\" " +
       ((stack1 = lookupProperty(helpers, "if").call(alias1, (depth0 != null ? lookupProperty(depth0, "healthy") : depth0), {
         "name": "if",
         "hash": {},
@@ -586,15 +586,31 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 23,
-            "column": 12
+            "column": 27
           },
           "end": {
             "line": 23,
-            "column": 71
+            "column": 86
           }
         }
       })) != null ? stack1 : "") +
-      ">" +
+      "><i class=\"" +
+      alias4(((helper = (helper = lookupProperty(helpers, "stateCss") || (depth0 != null ? lookupProperty(depth0, "stateCss") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "stateCss",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 23,
+            "column": 97
+          },
+          "end": {
+            "line": 23,
+            "column": 109
+          }
+        }
+      }) : helper))) +
+      "\" data-bs-toggle=\"tooltip\" data-bs-title=\"" +
       alias4(((helper = (helper = lookupProperty(helpers, "status") || (depth0 != null ? lookupProperty(depth0, "status") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
         "name": "status",
         "hash": {},
@@ -602,15 +618,15 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 23,
-            "column": 72
+            "column": 151
           },
           "end": {
             "line": 23,
-            "column": 82
+            "column": 161
           }
         }
       }) : helper))) +
-      "</td>\n        <td " +
+      "\"></i>\n        </td>\n        <td " +
       ((stack1 = lookupProperty(helpers, "if").call(alias1, (depth0 != null ? lookupProperty(depth0, "healthy") : depth0), {
         "name": "if",
         "hash": {},
@@ -619,11 +635,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 24,
+            "line": 25,
             "column": 12
           },
           "end": {
-            "line": 24,
+            "line": 25,
             "column": 114
           }
         }
@@ -637,11 +653,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 25,
+            "line": 26,
             "column": 10
           },
           "end": {
-            "line": 25,
+            "line": 26,
             "column": 66
           }
         }
@@ -655,11 +671,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 27,
+            "line": 28,
             "column": 12
           },
           "end": {
-            "line": 27,
+            "line": 28,
             "column": 71
           }
         }
@@ -673,11 +689,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 27,
+            "line": 28,
             "column": 72
           },
           "end": {
-            "line": 27,
+            "line": 28,
             "column": 128
           }
         }
@@ -691,11 +707,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 28,
+            "line": 29,
             "column": 12
           },
           "end": {
-            "line": 28,
+            "line": 29,
             "column": 117
           }
         }
@@ -709,11 +725,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 28,
+            "line": 29,
             "column": 118
           },
           "end": {
-            "line": 28,
+            "line": 29,
             "column": 180
           }
         }
@@ -725,11 +741,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 29,
+            "line": 30,
             "column": 25
           },
           "end": {
-            "line": 29,
+            "line": 30,
             "column": 39
           }
         }
@@ -741,11 +757,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 29,
+            "line": 30,
             "column": 41
           },
           "end": {
-            "line": 29,
+            "line": 30,
             "column": 65
           }
         }
@@ -809,11 +825,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 24,
+          "line": 25,
           "column": 27
         },
         "end": {
-          "line": 24,
+          "line": 25,
           "column": 70
         }
       }
@@ -861,11 +877,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 28,
+          "line": 29,
           "column": 27
         },
         "end": {
-          "line": 28,
+          "line": 29,
           "column": 73
         }
       }
@@ -891,7 +907,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         return undefined
       };
 
-    return "<table class=\"table table-striped table-sm\">\n  <caption>Container States<caption>\n    <thead>\n  <tr>\n    <th></th>\n    <th>Name</th>\n    <th>Status</th>\n    <th>CPU</th>\n    <th>Memory</th>\n    <th>% Free</th>\n    <th>Uptime</th>\n  </tr>\n  </thead>\n  <tbody>\n" +
+    return "<table class=\"table table-striped table-sm\">\n  <caption>Container States<caption>\n    <thead>\n  <tr>\n    <th></th>\n    <th>Name</th>\n    <th>State</th>\n    <th>CPU</th>\n    <th>Memory</th>\n    <th>% Free</th>\n    <th>Uptime</th>\n  </tr>\n  </thead>\n  <tbody>\n" +
       ((stack1 = lookupProperty(helpers, "each").call(alias1, depth0, {
         "name": "each",
         "hash": {},
@@ -904,7 +920,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
             "column": 4
           },
           "end": {
-            "line": 31,
+            "line": 32,
             "column": 15
           }
         }
@@ -916,11 +932,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 36,
+            "line": 37,
             "column": 0
           },
           "end": {
-            "line": 36,
+            "line": 37,
             "column": 7
           }
         }

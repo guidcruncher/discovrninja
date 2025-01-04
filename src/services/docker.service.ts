@@ -595,6 +595,23 @@ export class DockerService {
     return ((totalTime - (sd.downtime ?? 0)) * ratio) / 100;
   }
 
+  private getStateCss(state: string): string {
+    switch (state) {
+      case "created":
+        return "dw-state fa-regular fa-square-plus";
+      case "running":
+        return "dw-state fa-solid fa-person-running";
+      case "restarting":
+        return "dw-state fa-solid fa-power-off";
+      case "exited":
+        return "dw-state fa-solid fa-arrow-right-from-bracket";
+      case "paused":
+        return "dw-state fa-solid fa-pause";
+      case "dead":
+        return "dw-state fa-solid fa-face-dizzy";
+    }
+  }
+
   /**
    * Gets statistics for all running containers
    */
@@ -618,6 +635,7 @@ export class DockerService {
               cmd: container.Command,
               created: new Date(container.Created * 1000),
               state: container.State,
+              stateCss: this.getStateCss(container.State),
               status: container.Status,
               shutdown: false,
               healthy: true,

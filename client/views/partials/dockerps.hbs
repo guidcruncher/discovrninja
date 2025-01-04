@@ -4,7 +4,7 @@
   <tr>
     <th></th>
     <th>Name</th>
-    <th>Status</th>
+    <th>State</th>
     <th>CPU</th>
     <th>Memory</th>
     <th>% Free</th>
@@ -20,7 +20,8 @@
           <a href="#" data-containerid="{{name}}" onclick="exportContainer(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export"></i></a>
         </td>
         <td><a href="#" data-containerid="{{id}}" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}} onclick="containerInfo(this);return false;">{{name}}</a></td>
-        <td {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}}>{{status}}</td>
+        <td align="center" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}}><i class="{{stateCss}}" data-bs-toggle="tooltip" data-bs-title="{{status}}"></i>
+        </td>
         <td {{#if healthy}}{{#if cpuAlert}}class="text-danger" {{/if}}{{else}}class="text-danger-emphasis" {{/if}}>
           {{#if shutdown }}-{{else}}{{stats.cpuPercentStr}}{{/if}}
         </td>

@@ -8,15 +8,17 @@
 .widgetglobe {
   padding 5px;
   border: solid 1px #000000;
-  border-radius: 5px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-  height: fit-content !important;
+  border-radius: 5px !imwaaàaza
 }
 
 .clock {
   font-family: monospace !important;
 }
 
+.dw-state {
+  height: 20px !important;
+  width: 20px !important;
+}
 
 .desktop-themechooser-item {
   background-color: #6f42c1 !important;
