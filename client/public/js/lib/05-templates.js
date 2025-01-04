@@ -526,18 +526,50 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           }
         }
       }) : helper))) +
-      "\" onclick=\"exportContainer(this); return false;\" class=\"btn btn-outline-secondary btn-sm\"><i class=\"fa-solid fa-file-export\"></i></a>\n        </td>\n        <td><a href=\"#\" data-containerid=\"" +
+      "\" onclick=\"exportContainer(this); return false;\" class=\"btn btn-outline-secondary btn-sm\"><i class=\"fa-solid fa-file-export\"></i></a>\n          <a href=\"#\" data-containerid=\"" +
+      alias4(((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "name",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 21,
+            "column": 40
+          },
+          "end": {
+            "line": 21,
+            "column": 48
+          }
+        }
+      }) : helper))) +
+      "\" data-project=\"" +
+      alias4(((helper = (helper = lookupProperty(helpers, "project") || (depth0 != null ? lookupProperty(depth0, "project") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "project",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 21,
+            "column": 64
+          },
+          "end": {
+            "line": 21,
+            "column": 75
+          }
+        }
+      }) : helper))) +
+      "\" onclick=\"composeEdit(this); return false;\" class=\"btn btn-outline-secondary btn-sm\"><i class=\"fa-regular fa-pen-to-square\"></i></a>\n        </td>\n        <td><a href=\"#\" data-containerid=\"" +
       alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
         "name": "id",
         "hash": {},
         "data": data,
         "loc": {
           "start": {
-            "line": 22,
+            "line": 23,
             "column": 42
           },
           "end": {
-            "line": 22,
+            "line": 23,
             "column": 48
           }
         }
@@ -551,11 +583,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 22,
+            "line": 23,
             "column": 50
           },
           "end": {
-            "line": 22,
+            "line": 23,
             "column": 109
           }
         }
@@ -567,11 +599,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 22,
+            "line": 23,
             "column": 154
           },
           "end": {
-            "line": 22,
+            "line": 23,
             "column": 162
           }
         }
@@ -585,11 +617,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 24,
             "column": 27
           },
           "end": {
-            "line": 23,
+            "line": 24,
             "column": 86
           }
         }
@@ -601,11 +633,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 24,
             "column": 97
           },
           "end": {
-            "line": 23,
+            "line": 24,
             "column": 109
           }
         }
@@ -617,11 +649,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 24,
             "column": 151
           },
           "end": {
-            "line": 23,
+            "line": 24,
             "column": 161
           }
         }
@@ -635,11 +667,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 25,
+            "line": 26,
             "column": 12
           },
           "end": {
-            "line": 25,
+            "line": 26,
             "column": 114
           }
         }
@@ -653,11 +685,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 26,
+            "line": 27,
             "column": 10
           },
           "end": {
-            "line": 26,
+            "line": 27,
             "column": 66
           }
         }
@@ -671,11 +703,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 28,
+            "line": 29,
             "column": 12
           },
           "end": {
-            "line": 28,
+            "line": 29,
             "column": 71
           }
         }
@@ -689,11 +721,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 28,
+            "line": 29,
             "column": 72
           },
           "end": {
-            "line": 28,
+            "line": 29,
             "column": 128
           }
         }
@@ -707,11 +739,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 29,
+            "line": 30,
             "column": 12
           },
           "end": {
-            "line": 29,
+            "line": 30,
             "column": 117
           }
         }
@@ -725,11 +757,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 29,
+            "line": 30,
             "column": 118
           },
           "end": {
-            "line": 29,
+            "line": 30,
             "column": 180
           }
         }
@@ -741,11 +773,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 30,
+            "line": 31,
             "column": 25
           },
           "end": {
-            "line": 30,
+            "line": 31,
             "column": 39
           }
         }
@@ -757,11 +789,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 30,
+            "line": 31,
             "column": 41
           },
           "end": {
-            "line": 30,
+            "line": 31,
             "column": 65
           }
         }
@@ -825,11 +857,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 25,
+          "line": 26,
           "column": 27
         },
         "end": {
-          "line": 25,
+          "line": 26,
           "column": 70
         }
       }
@@ -877,11 +909,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 29,
+          "line": 30,
           "column": 27
         },
         "end": {
-          "line": 29,
+          "line": 30,
           "column": 73
         }
       }
@@ -920,7 +952,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
             "column": 4
           },
           "end": {
-            "line": 32,
+            "line": 33,
             "column": 15
           }
         }
@@ -932,11 +964,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 37,
+            "line": 38,
             "column": 0
           },
           "end": {
-            "line": 37,
+            "line": 38,
             "column": 7
           }
         }

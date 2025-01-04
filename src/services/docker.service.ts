@@ -643,6 +643,7 @@ export class DockerService {
               memoryAlert: false,
               ports: container.Ports,
               publicUrl: null,
+              project: "",
               uptimeSeconds: 0,
               uptimeSecondsPercent: "",
               colorLevel: "text-body",
@@ -684,6 +685,9 @@ export class DockerService {
                     this.getContainer(container.Id).then((cntr) => {
                       this.getContainerStats(container.Id)
                         .then((detail) => {
+                          record.project =
+                            cntr.Config.Labels["com.docker.compose.project"] ??
+                            "";
                           record.hostName = cntr.Config.Hostname;
                           record.publicUrl = cntr.publicUrl;
                           record.stats.cpuPercent =
