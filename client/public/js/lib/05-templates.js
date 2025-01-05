@@ -467,11 +467,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 19,
+            "line": 20,
             "column": 35
           },
           "end": {
-            "line": 19,
+            "line": 20,
             "column": 195
           }
         }
@@ -483,11 +483,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 20,
+            "line": 21,
             "column": 57
           },
           "end": {
-            "line": 20,
+            "line": 21,
             "column": 65
           }
         }
@@ -499,11 +499,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 21,
+            "line": 22,
             "column": 65
           },
           "end": {
-            "line": 21,
+            "line": 22,
             "column": 73
           }
         }
@@ -515,11 +515,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 21,
+            "line": 22,
             "column": 89
           },
           "end": {
-            "line": 21,
+            "line": 22,
             "column": 100
           }
         }
@@ -531,11 +531,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 24,
             "column": 68
           },
           "end": {
-            "line": 23,
+            "line": 24,
             "column": 74
           }
         }
@@ -549,11 +549,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 24,
             "column": 76
           },
           "end": {
-            "line": 23,
+            "line": 24,
             "column": 135
           }
         }
@@ -565,11 +565,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 24,
             "column": 180
           },
           "end": {
-            "line": 23,
+            "line": 24,
             "column": 188
           }
         }
@@ -583,11 +583,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 24,
+            "line": 25,
             "column": 29
           },
           "end": {
-            "line": 24,
+            "line": 25,
             "column": 88
           }
         }
@@ -599,11 +599,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 24,
+            "line": 25,
             "column": 99
           },
           "end": {
-            "line": 24,
+            "line": 25,
             "column": 111
           }
         }
@@ -615,11 +615,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 24,
+            "line": 25,
             "column": 145
           },
           "end": {
-            "line": 24,
+            "line": 25,
             "column": 155
           }
         }
@@ -631,11 +631,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 24,
+            "line": 25,
             "column": 172
           },
           "end": {
-            "line": 24,
+            "line": 25,
             "column": 182
           }
         }
@@ -649,11 +649,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 26,
+            "line": 27,
             "column": 14
           },
           "end": {
-            "line": 26,
+            "line": 27,
             "column": 116
           }
         }
@@ -667,11 +667,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 27,
+            "line": 28,
             "column": 12
           },
           "end": {
-            "line": 27,
+            "line": 28,
             "column": 68
           }
         }
@@ -685,11 +685,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 29,
+            "line": 30,
             "column": 14
           },
           "end": {
-            "line": 29,
+            "line": 30,
             "column": 73
           }
         }
@@ -703,11 +703,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 29,
+            "line": 30,
             "column": 74
           },
           "end": {
-            "line": 29,
+            "line": 30,
             "column": 130
           }
         }
@@ -721,11 +721,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 30,
+            "line": 31,
             "column": 14
           },
           "end": {
-            "line": 30,
+            "line": 31,
             "column": 119
           }
         }
@@ -739,11 +739,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 30,
+            "line": 31,
             "column": 120
           },
           "end": {
-            "line": 30,
+            "line": 31,
             "column": 182
           }
         }
@@ -755,11 +755,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 31,
+            "line": 32,
             "column": 27
           },
           "end": {
-            "line": 31,
+            "line": 32,
             "column": 41
           }
         }
@@ -771,11 +771,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 31,
+            "line": 32,
             "column": 43
           },
           "end": {
-            "line": 31,
+            "line": 32,
             "column": 67
           }
         }
@@ -797,11 +797,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 19,
+            "line": 20,
             "column": 58
           },
           "end": {
-            "line": 19,
+            "line": 20,
             "column": 71
           }
         }
@@ -833,11 +833,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 26,
+          "line": 27,
           "column": 29
         },
         "end": {
-          "line": 26,
+          "line": 27,
           "column": 72
         }
       }
@@ -885,11 +885,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 30,
+          "line": 31,
           "column": 29
         },
         "end": {
-          "line": 30,
+          "line": 31,
           "column": 75
         }
       }
@@ -915,7 +915,23 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         return undefined
       };
 
-    return "<div class=\"table-responsive\">\n  <table class=\"table table-striped table-sm table-hover align-middle\">\n    <caption>Container States<caption>\n      <thead>\n    <tr>\n      <th></th>\n      <th>Name</th>\n      <th>State</th>\n      <th>CPU</th>\n      <th>Memory</th>\n      <th>% Free</th>\n      <th>Uptime</th>\n    </tr>\n    </thead>\n    <tbody>\n" +
+    return "<div class=\"table-responsive\">\n  <table class=\"table table-striped table-sm table-hover align-middle\">\n    <caption>" +
+      container.escapeExpression(((helper = (helper = lookupProperty(helpers, "now") || (depth0 != null ? lookupProperty(depth0, "now") : depth0)) != null ? helper : container.hooks.helperMissing), (typeof helper === "function" ? helper.call(alias1, {
+        "name": "now",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 13
+          },
+          "end": {
+            "line": 3,
+            "column": 20
+          }
+        }
+      }) : helper))) +
+      "\n      <caption>\n      <thead>\n    <tr>\n      <th></th>\n      <th>Name</th>\n      <th>State</th>\n      <th>CPU</th>\n      <th>Memory</th>\n      <th>% Free</th>\n      <th>Uptime</th>\n    </tr>\n    </thead>\n    <tbody>\n" +
       ((stack1 = lookupProperty(helpers, "each").call(alias1, depth0, {
         "name": "each",
         "hash": {},
@@ -924,32 +940,16 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 16,
+            "line": 17,
             "column": 6
           },
           "end": {
-            "line": 33,
+            "line": 34,
             "column": 17
           }
         }
       })) != null ? stack1 : "") +
-      "    </tbody>\n    <tfoot>\n    </tfoot>\n  </table>\n</div>\n" +
-      container.escapeExpression(((helper = (helper = lookupProperty(helpers, "now") || (depth0 != null ? lookupProperty(depth0, "now") : depth0)) != null ? helper : container.hooks.helperMissing), (typeof helper === "function" ? helper.call(alias1, {
-        "name": "now",
-        "hash": {},
-        "data": data,
-        "loc": {
-          "start": {
-            "line": 39,
-            "column": 0
-          },
-          "end": {
-            "line": 39,
-            "column": 7
-          }
-        }
-      }) : helper))) +
-      "\n";
+      "    </tbody>\n    <tfoot>\n    </tfoot>\n  </table>\n</div>\n";
   },
   "useData": true
 });

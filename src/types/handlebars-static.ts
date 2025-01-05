@@ -1,10 +1,68 @@
 import fs from "fs";
 import path from "path";
 
-export class HandlebarsFactory {
-  private static _instance: any;
+export class Handlebars {
+  public Engine: any;
 
-  public static getInstance() {
+  constructor() {
+    this.Engine = require("handlebars");
+  }
+
+  public getPartials() {
+    let instance = this;
+    const clientBase = path.join(process.cwd(), "client");
+    const templatesPath = path.join(clientBase, "views");
+    const partialsDir = path.join(templatesPath, "partials");
+    const partials = {};
+    fs.readdirSync(partialsDir, { withFileTypes: true })
+      .filter((file) => {
+        return path.extname(file.name) === ".hbs";
+      })
+      .forEach((file) => {
+        const basename = path.basename(file.name, ".hbs");
+        const filePath = path.join(partialsDir, file.name);
+        partials[basename] = path.relative(templatesPath, filePath);
+      });
+    //instance.Engine.partials = partials;
+    return partials;
+  }
+
+  public registerHelpers() {
+    let instance = this;
+    const clientBase = path.join(process.cwd(), "client");
+    const helpersDir = path.join(clientBase, "helpers");
+    fs.readdirSync(helpersDir, { withFileTypes: true })
+      .filter((file) => {
+        return path.extname(file.name) === ".js";
+      })
+      .forEach((file) => {
+        const filePath = path.join(helpersDir, file.name);
+        const r = require(filePath);
+        r(instance.Engine);
+      });
+  }
+
+  public setViewEngine(app) {
+    let instance = this;
+    const clientBase = path.join(process.cwd(), "client");
+    this.registerHelpers();
+    app.setViewEngine({
+      engine: {
+        handlebars: instance.Engine,
+      },
+      templates: path.join(clientBase, "views"),
+      options: {
+        layoutsDir: path.join(clientBase, "views", "layouts"),
+        partials: instance.getPartials(),
+      },
+    });
+  }
+}
+
+export class HandlebarsFactory {
+  private static _instance: Handlebars;
+
+  public static getInstance(): Handlebars {
     if (this._instance) {
       return this._instance;
     }
@@ -14,47 +72,9 @@ export class HandlebarsFactory {
   }
 
   public static initialise() {
-    const clientBase =
-      process.env.CLIENT_BASE ?? path.join(__dirname, "..", "..", "client");
-    const getPartials = () => {
-      const templatesPath = path.join(clientBase, "views");
-      const partialsDir = path.join(templatesPath, "partials");
-      const partials = {};
-      fs.readdirSync(partialsDir, { withFileTypes: true })
-        .filter((file) => {
-          return path.extname(file.name) === ".hbs";
-        })
-        .forEach((file) => {
-          const basename = path.basename(file.name, ".hbs");
-          const filePath = path.join(partialsDir, file.name);
-          partials[basename] = path.relative(templatesPath, filePath);
-        });
-      return partials;
-    };
-
-    const registerHelpers = (Handlebars) => {
-      const clientBase =
-        process.env.CLIENT_BASE ?? path.join(__dirname, "..", "client");
-      const helpersDir = path.join(clientBase, "helpers");
-      fs.readdirSync(helpersDir, { withFileTypes: true })
-        .filter((file) => {
-          return path.extname(file.name) === ".js";
-        })
-        .forEach((file) => {
-          const filePath = path.join(helpersDir, file.name);
-          const r = require(filePath);
-          r(Handlebars);
-        });
-    };
-
-    this._instance = require("handlebars");
-    //   this._instance.partials = getPartials();
-
-    const clientBaseDir =
-      process.env.CLIENT_BASE ?? path.join(__dirname, "..", "..", "client");
-    this._instance.templates = path.join(clientBaseDir, "views");
-    this._instance.layout = "./templates/layout.hbs";
-    registerHelpers(this._instance);
+    this._instance = new Handlebars();
+    this._instance.registerHelpers();
+    this._instance.getPartials();
     return this._instance;
   }
 }

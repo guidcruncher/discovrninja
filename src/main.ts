@@ -12,7 +12,6 @@ import {
 } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { TasksService } from "@services/tasks.service";
-import fs from "fs";
 import path from "path";
 
 import { AppModule } from "./app.module";
@@ -57,35 +56,8 @@ async function bootstrap() {
   const tasks: TasksService = app.get(TasksService);
   const nodeEnv: string = process.env.NODE_ENV ?? "development";
 
-  const getPartials = () => {
-    const templatesPath = path.join(clientBase, "views");
-    const partialsDir = path.join(templatesPath, "partials");
-    const partials = {};
-    fs.readdirSync(partialsDir, { withFileTypes: true })
-      .filter((file) => {
-        return path.extname(file.name) === ".hbs";
-      })
-      .forEach((file) => {
-        const basename = path.basename(file.name, ".hbs");
-        const filePath = path.join(partialsDir, file.name);
-        partials[basename] = path.relative(templatesPath, filePath);
-      });
-    return partials;
-  };
-
   const Handlebars = HandlebarsFactory.getInstance();
-
-  app.setViewEngine({
-    engine: {
-      handlebars: Handlebars,
-    },
-    templates: path.join(clientBase, "views"),
-    // layout: "./templates/layout.hbs",
-    options: {
-      layoutsDir: path.join(clientBase, "views", "layouts"),
-      partials: getPartials(),
-    },
-  });
+  Handlebars.setViewEngine(app);
 
   log.debug("Building Swagger API Documentation");
   const swaggerConfig = new DocumentBuilder()
