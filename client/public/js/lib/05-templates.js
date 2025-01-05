@@ -458,7 +458,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         return undefined
       };
 
-    return "        <tr>\n          <td>\n            <a title=\"Navigate to\" " +
+    return "        <tr class=\"nowrap\">\n          <td>\n            <a title=\"Navigate to\" " +
       ((stack1 = lookupProperty(helpers, "if").call(alias1, (depth0 != null ? lookupProperty(depth0, "publicUrl") : depth0), {
         "name": "if",
         "hash": {},
