@@ -119,13 +119,10 @@ export class ResourcesService {
   public fetchWeather(lat: number, long: number, days: number): Promise<any> {
     return new Promise((resolve, reject) => {
       if (isNaN(lat) || isNaN(long)) {
-        this.logger.debug("Determining location from IP");
         this.determineLocation(lat, long)
           .then((loc) => {
-            this.logger.debug("Determined location", loc);
             this._fetchWeather(loc.latitude, loc.longitude, days)
               .then((weather) => {
-                this.logger.debug("Got weather from determined location");
                 resolve(weather);
               })
               .catch((err) => {
@@ -140,7 +137,6 @@ export class ResourcesService {
       } else {
         return this._fetchWeather(lat, long, days)
           .then((weather) => {
-            this.logger.debug("Got weather from specified location");
             resolve(weather);
           })
           .catch((err) => {
@@ -183,11 +179,9 @@ export class ResourcesService {
       };
       const url = "https://api.open-meteo.com/v1/forecast";
 
-      this.logger.debug("Getting Weather");
       fetchWeatherApi(url, params)
         .then((responses) => {
           // Helper function to form time ranges
-          this.logger.debug("Got weather");
           const range = (start: number, stop: number, step: number) =>
             Array.from(
               { length: (stop - start) / step },
@@ -313,7 +307,6 @@ export class ResourcesService {
 
           this.reverseGeoCodeLookup(lat, long)
             .then((geoData) => {
-              this.logger.debug("Returning weather");
               const result = {
                 weather: results,
                 settings: weatherData.settings,
