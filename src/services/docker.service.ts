@@ -598,17 +598,17 @@ export class DockerService {
   private getStateCss(state: string): string {
     switch (state) {
       case "created":
-        return "dw-state fa-regular fa-square-plus";
+        return "dw-state text-warning fa-regular fa-square-plus";
       case "running":
-        return "dw-state fa-solid fa-person-running";
+        return "dw-state text-success fa-solid fa-person-running";
       case "restarting":
-        return "dw-state fa-solid fa-power-off";
+        return "dw-state text-warning fa-solid fa-power-off";
       case "exited":
-        return "dw-state fa-solid fa-arrow-right-from-bracket";
+        return "dw-state text-danger fa-solid fa-arrow-right-from-bracket";
       case "paused":
-        return "dw-state fa-solid fa-pause";
+        return "dw-state text-info fa-solid fa-pause";
       case "dead":
-        return "dw-state fa-solid fa-face-dizzy";
+        return "dw-state text-danger fa-solid fa-face-dizzy";
     }
   }
 
