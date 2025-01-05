@@ -7481,6 +7481,15 @@ String.prototype.format = function(tokens) {
   return formatted
 };
 
+function createEditor(ctl, value) {
+  CodeMirror(ctl, {
+    lineNumbers: true,
+    tabSize: 2,
+    value: value,
+    mode: "yaml"
+  })
+}
+
 function getBingBackground() {
   var apiUrl = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
   axios.get(apiUrl).then(response => {

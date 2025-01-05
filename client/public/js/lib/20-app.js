@@ -1,10 +1,10 @@
 function createEditor(ctl, value) {
-CodeMirror(ctl, {
-  lineNumbers: true,
-  tabSize: 2,
-  value: value,
-  mode: 'yaml'
-});
+  CodeMirror(ctl, {
+    lineNumbers: true,
+    tabSize: 2,
+    value: value,
+    mode: 'yaml'
+  });
 }
 
 function getBingBackground() {
