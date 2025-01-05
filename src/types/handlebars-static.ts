@@ -9,7 +9,7 @@ export class Handlebars {
   }
 
   public getPartials() {
-    let instance = this;
+    const instance = this;
     const clientBase = path.join(process.cwd(), "client");
     const templatesPath = path.join(clientBase, "views");
     const partialsDir = path.join(templatesPath, "partials");
@@ -28,7 +28,7 @@ export class Handlebars {
   }
 
   public registerHelpers() {
-    let instance = this;
+    const instance = this;
     const clientBase = path.join(process.cwd(), "client");
     const helpersDir = path.join(clientBase, "helpers");
     fs.readdirSync(helpersDir, { withFileTypes: true })
@@ -42,8 +42,12 @@ export class Handlebars {
       });
   }
 
+  public reloadViewEngine(app) {
+    // TODO
+  }
+
   public setViewEngine(app) {
-    let instance = this;
+    const instance = this;
     const clientBase = path.join(process.cwd(), "client");
     this.registerHelpers();
     app.setViewEngine({

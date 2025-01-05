@@ -2,6 +2,7 @@ import cluster from "node:cluster";
 import { availableParallelism } from "node:os";
 import process from "node:process";
 
+import { AppHost } from "@customtypes/apphost";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -15,6 +16,7 @@ import { TasksService } from "@services/tasks.service";
 import path from "path";
 
 import { AppModule } from "./app.module";
+import { AppHostModule } from "./apphost.module";
 
 async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");
@@ -37,7 +39,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({}),
   );
-
+  app.select(AppHostModule).get(AppHost).app = app;
   app.enableCors();
 
   const clientBase =
