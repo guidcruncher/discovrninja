@@ -60,6 +60,11 @@
       <div class="mb-3">
         <label for="txtCompose" class="form-label">Project Compose file:</label><br />
         <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" data-project="{{projectName}}" onchange="document.getElementById('changed')='true';" id="txtCompose"> {{project.compose}}</textarea>
+<div style="width:800px;height:200px;id="yamlEdit"></div>
+<script type="text/javascript">
+const initialState = cm6.createEditorState("function foo() {\n    console.log(123);\n}");
+        const view = cm6.createEditorView(initialState, document.getElementById("yamlEdit"));
+</script>
       </div>
       <div class="mb-3">
         <label for="txtEnv" class="form-label">Project Environment file:</label><br />
