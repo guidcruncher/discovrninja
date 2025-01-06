@@ -41,7 +41,9 @@ import { TasksService } from "@services/tasks.service";
 import { LoggerModule } from "nestjs-pino";
 
 import { AppHostModule } from "./apphost.module";
+import { AuthModule } from "./auth/auth.module";
 import configuration from "./config/configuration";
+import { UsersModule } from "./users/users.module";
 
 /**
  * This is the main application module
@@ -85,6 +87,8 @@ import configuration from "./config/configuration";
       { name: ContainerCatalog.name, schema: ContainerCatalogSchema },
     ]),
     ScheduleModule.forRoot(),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [
     ComposeController,
