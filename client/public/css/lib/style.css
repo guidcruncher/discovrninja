@@ -5,6 +5,17 @@
   z-index: 10 !important;
 }
 
+.editor {
+  height: 300px;
+  width: 700px;
+}
+
+/* Stretch editor to fit inside its containing div */
+.cm-editor {
+  height: 100%;
+  width: 100%;
+}
+
 .widgetglobe {
   padding 5px;
   p wborder: solid 1px #000000;

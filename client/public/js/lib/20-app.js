@@ -1,10 +1,27 @@
 function createEditor(ctl, value) {
-  CodeMirror(ctl, {
-    lineNumbers: true,
-    tabSize: 2,
-    value: value,
-    mode: 'yaml'
+  var target = document.getElementById(ctl);
+  const getTheme = () => document.documentElement.getAttribute('data-bs-theme');
+  var theme = getTheme();
+  const initialState = cm6.createEditorState(document.getElementById(value).value, {
+    dark: (theme == "dark")
   });
+  target.view = cm6.createEditorView(initialState, document.getElementById(ctl));
+
+  const observer = new MutationObserver(() => {
+    theme = getTheme();
+    onThemeChange(theme);
+  });
+  observer.observe(document.documentElement, {
+    attributeFilter: ["data-bs-theme"]
+  });
+
+  function onThemeChange(theme) {
+    var options = {
+      dark: (theme == "dark")
+    };
+    let newState = cm6.createEditorState(target.view.state.doc, options);
+    target.view.setState(newState);
+  }
 }
 
 function getBingBackground() {
@@ -327,8 +344,9 @@ function saveConfiguration() {
     iconCatalog: document.getElementById("txticonCatalog").value,
     archived: document.querySelector("#chkArchived").checked,
   };
+  var compose = document.getElementById("yamlEdit").view.state.doc;
   var project = {
-    compose: document.getElementById("txtCompose").value,
+    compose: compose,
     env: document.getElementById("txtEnv").value,
     changed: document.getElementById("changed").value,
     projectName: document

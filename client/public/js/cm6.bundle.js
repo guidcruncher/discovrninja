@@ -23348,113 +23348,251 @@ var cm6 = (function (exports) {
   ];
   const completionKeymapExt = /*@__PURE__*/Prec.highest(/*@__PURE__*/keymap.computeN([completionConfig], state => state.facet(completionConfig).defaultKeymap ? [completionKeymap] : []));
 
-  // Using https://github.com/one-dark/vscode-one-dark-theme/ as reference for the colors
-  const chalky = "#e5c07b", coral = "#e06c75", cyan = "#56b6c2", invalid = "#ffffff", ivory = "#abb2bf", stone = "#7d8799", // Brightened compared to original to increase contrast
-  malibu = "#61afef", sage = "#98c379", whiskey = "#d19a66", violet = "#c678dd", darkBackground = "#21252b", highlightBackground = "#2c313a", background = "#282c34", tooltipBackground = "#353a42", selection = "#3E4451", cursor = "#528bff";
-  /**
-  The editor theme styles for One Dark.
-  */
-  const oneDarkTheme = /*@__PURE__*/EditorView.theme({
-      "&": {
-          color: ivory,
-          backgroundColor: background
-      },
-      ".cm-content": {
-          caretColor: cursor
-      },
-      ".cm-cursor, .cm-dropCursor": { borderLeftColor: cursor },
-      "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": { backgroundColor: selection },
-      ".cm-panels": { backgroundColor: darkBackground, color: ivory },
-      ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
-      ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
-      ".cm-searchMatch": {
-          backgroundColor: "#72a1ff59",
-          outline: "1px solid #457dff"
-      },
-      ".cm-searchMatch.cm-searchMatch-selected": {
-          backgroundColor: "#6199ff2f"
-      },
-      ".cm-activeLine": { backgroundColor: "#6699ff0b" },
-      ".cm-selectionMatch": { backgroundColor: "#aafe661a" },
-      "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-          backgroundColor: "#bad0f847"
-      },
-      ".cm-gutters": {
-          backgroundColor: background,
-          color: stone,
-          border: "none"
-      },
-      ".cm-activeLineGutter": {
-          backgroundColor: highlightBackground
-      },
-      ".cm-foldPlaceholder": {
-          backgroundColor: "transparent",
-          border: "none",
-          color: "#ddd"
-      },
-      ".cm-tooltip": {
-          border: "none",
-          backgroundColor: tooltipBackground
-      },
-      ".cm-tooltip .cm-tooltip-arrow:before": {
-          borderTopColor: "transparent",
-          borderBottomColor: "transparent"
-      },
-      ".cm-tooltip .cm-tooltip-arrow:after": {
-          borderTopColor: tooltipBackground,
-          borderBottomColor: tooltipBackground
-      },
-      ".cm-tooltip-autocomplete": {
-          "& > ul > li[aria-selected]": {
-              backgroundColor: highlightBackground,
-              color: ivory
-          }
+  function _extends() {
+    return _extends = Object.assign ? Object.assign.bind() : function (n) {
+      for (var e = 1; e < arguments.length; e++) {
+        var t = arguments[e];
+        for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
       }
-  }, { dark: true });
-  /**
-  The highlighting style for code in the One Dark theme.
-  */
-  const oneDarkHighlightStyle = /*@__PURE__*/HighlightStyle.define([
-      { tag: tags.keyword,
-          color: violet },
-      { tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName],
-          color: coral },
-      { tag: [/*@__PURE__*/tags.function(tags.variableName), tags.labelName],
-          color: malibu },
-      { tag: [tags.color, /*@__PURE__*/tags.constant(tags.name), /*@__PURE__*/tags.standard(tags.name)],
-          color: whiskey },
-      { tag: [/*@__PURE__*/tags.definition(tags.name), tags.separator],
-          color: ivory },
-      { tag: [tags.typeName, tags.className, tags.number, tags.changed, tags.annotation, tags.modifier, tags.self, tags.namespace],
-          color: chalky },
-      { tag: [tags.operator, tags.operatorKeyword, tags.url, tags.escape, tags.regexp, tags.link, /*@__PURE__*/tags.special(tags.string)],
-          color: cyan },
-      { tag: [tags.meta, tags.comment],
-          color: stone },
-      { tag: tags.strong,
-          fontWeight: "bold" },
-      { tag: tags.emphasis,
-          fontStyle: "italic" },
-      { tag: tags.strikethrough,
-          textDecoration: "line-through" },
-      { tag: tags.link,
-          color: stone,
-          textDecoration: "underline" },
-      { tag: tags.heading,
-          fontWeight: "bold",
-          color: coral },
-      { tag: [tags.atom, tags.bool, /*@__PURE__*/tags.special(tags.variableName)],
-          color: whiskey },
-      { tag: [tags.processingInstruction, tags.string, tags.inserted],
-          color: sage },
-      { tag: tags.invalid,
-          color: invalid },
-  ]);
-  /**
-  Extension to enable the One Dark theme (both the editor theme and
-  the highlight style).
-  */
-  const oneDark = [oneDarkTheme, /*@__PURE__*/syntaxHighlighting(oneDarkHighlightStyle)];
+      return n;
+    }, _extends.apply(null, arguments);
+  }
+
+  var createTheme = _ref => {
+    var {
+      theme,
+      settings = {},
+      styles = []
+    } = _ref;
+    var themeOptions = {
+      '.cm-gutters': {}
+    };
+    var baseStyle = {};
+    if (settings.background) {
+      baseStyle.backgroundColor = settings.background;
+    }
+    if (settings.backgroundImage) {
+      baseStyle.backgroundImage = settings.backgroundImage;
+    }
+    if (settings.foreground) {
+      baseStyle.color = settings.foreground;
+    }
+    if (settings.fontSize) {
+      baseStyle.fontSize = settings.fontSize;
+    }
+    if (settings.background || settings.foreground) {
+      themeOptions['&'] = baseStyle;
+    }
+    if (settings.fontFamily) {
+      themeOptions['&.cm-editor .cm-scroller'] = {
+        fontFamily: settings.fontFamily
+      };
+    }
+    if (settings.gutterBackground) {
+      themeOptions['.cm-gutters'].backgroundColor = settings.gutterBackground;
+    }
+    if (settings.gutterForeground) {
+      themeOptions['.cm-gutters'].color = settings.gutterForeground;
+    }
+    if (settings.gutterBorder) {
+      themeOptions['.cm-gutters'].borderRightColor = settings.gutterBorder;
+    }
+    if (settings.caret) {
+      themeOptions['.cm-content'] = {
+        caretColor: settings.caret
+      };
+      themeOptions['.cm-cursor, .cm-dropCursor'] = {
+        borderLeftColor: settings.caret
+      };
+    }
+    var activeLineGutterStyle = {};
+    if (settings.gutterActiveForeground) {
+      activeLineGutterStyle.color = settings.gutterActiveForeground;
+    }
+    if (settings.lineHighlight) {
+      themeOptions['.cm-activeLine'] = {
+        backgroundColor: settings.lineHighlight
+      };
+      activeLineGutterStyle.backgroundColor = settings.lineHighlight;
+    }
+    themeOptions['.cm-activeLineGutter'] = activeLineGutterStyle;
+    if (settings.selection) {
+      themeOptions['&.cm-focused .cm-selectionBackground, & .cm-line::selection, & .cm-selectionLayer .cm-selectionBackground, .cm-content ::selection'] = {
+        background: settings.selection + ' !important'
+      };
+    }
+    if (settings.selectionMatch) {
+      themeOptions['& .cm-selectionMatch'] = {
+        backgroundColor: settings.selectionMatch
+      };
+    }
+    var themeExtension = EditorView.theme(themeOptions, {
+      dark: theme === 'dark'
+    });
+    var highlightStyle = HighlightStyle.define(styles);
+    var extension = [themeExtension, syntaxHighlighting(highlightStyle)];
+    return extension;
+  };
+
+  var defaultSettingsVscodeLight = {
+    background: '#ffffff',
+    foreground: '#383a42',
+    caret: '#000',
+    selection: '#add6ff',
+    selectionMatch: '#a8ac94',
+    lineHighlight: '#99999926',
+    gutterBackground: '#fff',
+    gutterForeground: '#237893',
+    gutterActiveForeground: '#0b216f',
+    fontFamily: 'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace'
+  };
+  var vscodeLightStyle = [{
+    tag: [tags.keyword, tags.operatorKeyword, tags.modifier, tags.color, tags.constant(tags.name), tags.standard(tags.name), tags.standard(tags.tagName), tags.special(tags.brace), tags.atom, tags.bool, tags.special(tags.variableName)],
+    color: '#0000ff'
+  }, {
+    tag: [tags.moduleKeyword, tags.controlKeyword],
+    color: '#af00db'
+  }, {
+    tag: [tags.name, tags.deleted, tags.character, tags.macroName, tags.propertyName, tags.variableName, tags.labelName, tags.definition(tags.name)],
+    color: '#0070c1'
+  }, {
+    tag: tags.heading,
+    fontWeight: 'bold',
+    color: '#0070c1'
+  }, {
+    tag: [tags.typeName, tags.className, tags.tagName, tags.number, tags.changed, tags.annotation, tags.self, tags.namespace],
+    color: '#267f99'
+  }, {
+    tag: [tags.function(tags.variableName), tags.function(tags.propertyName)],
+    color: '#795e26'
+  }, {
+    tag: [tags.number],
+    color: '#098658'
+  }, {
+    tag: [tags.operator, tags.punctuation, tags.separator, tags.url, tags.escape, tags.regexp],
+    color: '#383a42'
+  }, {
+    tag: [tags.regexp],
+    color: '#af00db'
+  }, {
+    tag: [tags.special(tags.string), tags.processingInstruction, tags.string, tags.inserted],
+    color: '#a31515'
+  }, {
+    tag: [tags.angleBracket],
+    color: '#383a42'
+  }, {
+    tag: tags.strong,
+    fontWeight: 'bold'
+  }, {
+    tag: tags.emphasis,
+    fontStyle: 'italic'
+  }, {
+    tag: tags.strikethrough,
+    textDecoration: 'line-through'
+  }, {
+    tag: [tags.meta, tags.comment],
+    color: '#008000'
+  }, {
+    tag: tags.link,
+    color: '#4078f2',
+    textDecoration: 'underline'
+  }, {
+    tag: tags.invalid,
+    color: '#e45649'
+  }];
+  function vscodeLightInit(options) {
+    var {
+      theme = 'light',
+      settings = {},
+      styles = []
+    } = {};
+    return createTheme({
+      theme: theme,
+      settings: _extends({}, defaultSettingsVscodeLight, settings),
+      styles: [...vscodeLightStyle, ...styles]
+    });
+  }
+  var vscodeLight = vscodeLightInit();
+
+  var defaultSettingsVscodeDark = {
+    background: '#1e1e1e',
+    foreground: '#9cdcfe',
+    caret: '#c6c6c6',
+    selection: '#6199ff2f',
+    selectionMatch: '#72a1ff59',
+    lineHighlight: '#ffffff0f',
+    gutterBackground: '#1e1e1e',
+    gutterForeground: '#838383',
+    gutterActiveForeground: '#fff',
+    fontFamily: 'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace'
+  };
+  var vscodeDarkStyle = [{
+    tag: [tags.keyword, tags.operatorKeyword, tags.modifier, tags.color, tags.constant(tags.name), tags.standard(tags.name), tags.standard(tags.tagName), tags.special(tags.brace), tags.atom, tags.bool, tags.special(tags.variableName)],
+    color: '#569cd6'
+  }, {
+    tag: [tags.controlKeyword, tags.moduleKeyword],
+    color: '#c586c0'
+  }, {
+    tag: [tags.name, tags.deleted, tags.character, tags.macroName, tags.propertyName, tags.variableName, tags.labelName, tags.definition(tags.name)],
+    color: '#9cdcfe'
+  }, {
+    tag: tags.heading,
+    fontWeight: 'bold',
+    color: '#9cdcfe'
+  }, {
+    tag: [tags.typeName, tags.className, tags.tagName, tags.number, tags.changed, tags.annotation, tags.self, tags.namespace],
+    color: '#4ec9b0'
+  }, {
+    tag: [tags.function(tags.variableName), tags.function(tags.propertyName)],
+    color: '#dcdcaa'
+  }, {
+    tag: [tags.number],
+    color: '#b5cea8'
+  }, {
+    tag: [tags.operator, tags.punctuation, tags.separator, tags.url, tags.escape, tags.regexp],
+    color: '#d4d4d4'
+  }, {
+    tag: [tags.regexp],
+    color: '#d16969'
+  }, {
+    tag: [tags.special(tags.string), tags.processingInstruction, tags.string, tags.inserted],
+    color: '#ce9178'
+  }, {
+    tag: [tags.angleBracket],
+    color: '#808080'
+  }, {
+    tag: tags.strong,
+    fontWeight: 'bold'
+  }, {
+    tag: tags.emphasis,
+    fontStyle: 'italic'
+  }, {
+    tag: tags.strikethrough,
+    textDecoration: 'line-through'
+  }, {
+    tag: [tags.meta, tags.comment],
+    color: '#6a9955'
+  }, {
+    tag: tags.link,
+    color: '#6a9955',
+    textDecoration: 'underline'
+  }, {
+    tag: tags.invalid,
+    color: '#ff0000'
+  }];
+  function vscodeDarkInit(options) {
+    var {
+      theme = 'dark',
+      settings = {},
+      styles = []
+    } = {};
+    return createTheme({
+      theme: theme,
+      settings: _extends({}, defaultSettingsVscodeDark, settings),
+      styles: [...vscodeDarkStyle, ...styles]
+    });
+  }
+  var vscodeDark = vscodeDarkInit();
 
   /**
   A parse stack. These are used internally by the parser to track
@@ -25796,8 +25934,9 @@ var cm6 = (function (exports) {
           syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
       ];
 
-      if (options.oneDark)
-          extensions.push(oneDark);
+  if (options.dark) {
+          extensions.push(vscodeDark);
+  } else {        extensions.push(vscodeLight);}
 
       return EditorState.create({
           doc: initialContents,
