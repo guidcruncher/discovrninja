@@ -478,7 +478,7 @@ function doDeComposerise(src, target) {
   var txtRun = document.querySelector(src);
   var txtCompose = document.querySelector(target);
   var data = {
-    cmd: txtRun.value,
+    cmd: document.getElementById("yamlEdit").view.state.doc,
   };
   axios
     .post("/api/compose/decomposerize", data)
@@ -493,13 +493,18 @@ function doDeComposerise(src, target) {
 function doComposerise(src, target) {
   var txtRun = document.querySelector(src);
   var txtCompose = document.querySelector(target);
+  var yaml = document.getElementById("yamlEdit");
   var data = {
     cmd: txtRun.value,
   };
 
   axios
     .post("/api/compose/composerize", data)
-    .then((response) => (txtCompose.value = response.data))
+    .then((response) => {
+      txtCompose.value = response.data;
+      let newState = cm6.createEditorState(response.data);
+      yaml.view.setState(newState);
+    })
     .catch((error) => {
       txtCompose.value = JSON.stringify(error);
     });

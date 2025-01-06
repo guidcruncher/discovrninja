@@ -4762,7 +4762,7 @@ this["app"]["templates"] = this["app"]["templates"] || {};
 this["app"]["templates"]["compose"] = Handlebars.template({
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
-    return '<div class="container">\n  <div class="mb-3">\n    <label for="txtRun" class="form-label">Run command:</label><br />\n    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtRun"></textarea><br />\n    <button type="button" class="btn btn-primary" onclick="doComposerise(\'#txtRun\', \'#txtCompose\'); return false;">Convert to Compose</button>\n    <hr />\n    <label for="txtCompose" class="form-label">Docker compose definition:</label><br />\n    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtCompose"></textarea><br />\n    <button type="button" class="btn btn-primary" onclick="doDeComposerise(\'#txtCompose\', \'#txtRun\'); return false;">Convert to run</button>\n    <hr />\n\n  </div>\n</div>\n'
+    return '<div class="container">\n  <div class="mb-3">\n    <label for="txtRun" class="form-label">Run command:</label><br />\n    <textarea style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtRun"></textarea><br />\n    <button type="button" class="btn btn-primary" onclick="doComposerise(\'#txtRun\', \'#txtCompose\'); return false;">Convert to Compose</button>\n    <hr />\n    <label for="txtCompose" class="form-label">Docker compose definition:</label><br />\n    <textarea style="display:none;white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtCompose"></textarea>\n    <div id="yamlEdit" class="editor"></div>\n    <script type="text/javascript">\n      createEditor("yamlEdit", "txtCompose");\n\n    <\/script>\n    <br />\n    <button type="button" class="btn btn-primary" onclick="doDeComposerise(\'#txtCompose\', \'#txtRun\'); return false;">Convert to run</button>\n    <hr />\n\n  </div>\n</div>\n'
   },
   useData: true
 });
@@ -7859,7 +7859,7 @@ function doDeComposerise(src, target) {
   var txtRun = document.querySelector(src);
   var txtCompose = document.querySelector(target);
   var data = {
-    cmd: txtRun.value
+    cmd: document.getElementById("yamlEdit").view.state.doc
   };
   axios.post("/api/compose/decomposerize", data).then(response => {
     txtCompose.value = response.data
@@ -7871,10 +7871,15 @@ function doDeComposerise(src, target) {
 function doComposerise(src, target) {
   var txtRun = document.querySelector(src);
   var txtCompose = document.querySelector(target);
+  var yaml = document.getElementById("yamlEdit");
   var data = {
     cmd: txtRun.value
   };
-  axios.post("/api/compose/composerize", data).then(response => txtCompose.value = response.data).catch(error => {
+  axios.post("/api/compose/composerize", data).then(response => {
+    txtCompose.value = response.data;
+    let newState = cm6.createEditorState(response.data);
+    yaml.view.setState(newState)
+  }).catch(error => {
     txtCompose.value = JSON.stringify(error)
   })
 }

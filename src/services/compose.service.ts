@@ -51,8 +51,8 @@ export class ComposeService {
     return convertDockerRunToCompose(run, null, "latest", 2);
   }
 
-  public deComposerize(compose: string): string {
-    return convertDockerComposeToRun(compose, {
+  public deComposerize(compose: any): string {
+    return convertDockerComposeToRun(compose.join("\n"), {
       command: "docker run",
       rm: true,
       detach: false,
