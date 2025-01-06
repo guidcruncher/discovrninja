@@ -4,6 +4,7 @@ import process from "node:process";
 
 import { AppHost } from "@customtypes/apphost";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
+import compression from "@fastify/compress";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -39,6 +40,9 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({}),
   );
+
+  await app.register(compression, { encodings: ["gzip", "deflate"] });
+
   app.select(AppHostModule).get(AppHost).app = app;
   app.enableCors();
 
