@@ -39,7 +39,7 @@ export class DiscoveryService implements IDiscoveryAgent {
         : workingDirMapped;
       let filename = path.join(workingDir, project, "compose.yaml");
       this.logger.debug("writing", filename);
-      fs.writeFileSync(filename, data.compose);
+      fs.writeFileSync(filename, data.compose.join("\n"));
       filename = path.join(workingDir, project, "stack.env");
       this.logger.debug("writing", filename);
       fs.writeFileSync(filename, data.env);
