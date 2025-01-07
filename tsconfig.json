@@ -21,6 +21,8 @@
     "paths": {
       "@controllers/*": [ "src/controllers/*" ],
       "@services/*": [ "src/services/*" ],
+      "@auth/*": [ "src/auth/*" ],
+      "@users/*": [ "src/users/*" ],
       "@customtypes/*": [ "src/types/*" ],
       "@helpers/*": [ "src/helpers/*" ],
       "@dto/*": [ "src/dto/*" ],

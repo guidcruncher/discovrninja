@@ -22,7 +22,7 @@ export class LocalAuthGuard extends AuthGuard("local") {
   ): TUser {
     const res = context.switchToHttp().getResponse();
 
-    const clientUrl = this.configService.get("allowedOrigin");
+    const clientUrl = this.configService.get("authentication.baseUrl");
 
     if (err || !user) {
       return res.redirect(clientUrl + "/login");

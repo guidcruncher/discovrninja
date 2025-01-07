@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Request, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Request,
+  Res,
+  UseGuards,
+} from "@nestjs/common";
 
 import { AuthService } from "./auth.service";
 import { Public } from "./constants";
@@ -11,9 +20,16 @@ export class AuthController {
 
   @Public()
   @UseGuards(LocalAuthGuard)
+  @Get("/login")
+  async loginForm(@Request() req, @Res() res) {
+    res.view("login.hbs", {}, { layout: "./layouts/login.hbs" });
+  }
+
+  @Public()
+  @UseGuards(LocalAuthGuard)
   @Post("api/auth/login")
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  async login(@Req() req, @Body() user: any) {
+    return this.authService.login(user);
   }
 
   @UseGuards(LocalAuthGuard)

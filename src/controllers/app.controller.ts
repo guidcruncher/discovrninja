@@ -1,5 +1,6 @@
+import { LocalAuthGuard } from "@auth/local-auth.guard";
 import { Logger } from "@nestjs/common";
-import { Controller, Get, Query, Res } from "@nestjs/common";
+import { Controller, Get, Query, Res, UseGuards } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
 import { DesktopService } from "@services/desktop.service";
 import { DiscoveryService } from "@services/discovery.service";
@@ -9,6 +10,7 @@ import { IconService } from "@services/icon.service";
 import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 
+@UseGuards(LocalAuthGuard)
 @Controller("/")
 export class AppController {
   constructor(
