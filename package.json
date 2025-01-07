@@ -36,6 +36,7 @@
     "@nestjs/schedule": "^4.1.2",
     "@nestjs/swagger": "^8.1.0",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "composerize": "^1.6.12",
     "decomposerize": "^1.4.1",
     "docker-compose": "^1.1.0",
