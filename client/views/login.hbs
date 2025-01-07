@@ -12,6 +12,7 @@
         var token = response.data ? response.data.access_token : "";
         if (token == "") {
           document.getElementById("error").style.display = "block";
+          return false;
         } else {}
         sessionStorage.setItem("jwt", token);
         window.location.href = "/auth/postlogin?t=" + encodeURIComponent(token) + "&redir=";
@@ -26,7 +27,7 @@
 
 </script>
 <form method="post" action="/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
-  <input type="hidden" id="redirect" value="" />
+  <input type="hidden" id="redirect" value="{{redir}}" />
   <div class="container">
 
     <div class="row g-3 align-items-center">

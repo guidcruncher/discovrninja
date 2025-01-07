@@ -15,7 +15,6 @@ import { ConfigService } from "@nestjs/config";
 import { AuthService } from "./auth.service";
 import { Public } from "./constants";
 import { JwtAuthGuard } from "./jwt-auth.guard";
-import { LocalAuthGuard } from "./local-auth.guard";
 
 @Controller()
 export class AuthController {
@@ -27,14 +26,18 @@ export class AuthController {
   ) {}
 
   @Public()
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get("/login")
-  async loginForm(@Request() req, @Res() res) {
-    res.view("login.hbs", {}, { layout: "./layouts/login.hbs" });
+  async loginForm(@Query("redir") redir, @Request() req, @Res() res) {
+    res.view(
+      "login.hbs",
+      { redir: redir ?? "" },
+      { layout: "./layouts/login.hbs" },
+    );
   }
 
   @Public()
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get("/auth/postlogin")
   async processLogin(
     @Query("t") token,
@@ -47,7 +50,7 @@ export class AuthController {
   }
 
   @Public()
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post("auth/login")
   async login(@Req() req, @Body() user: any, @Res({ passthrough: true }) res) {
     return new Promise<any>((resolve, reject) => {
@@ -70,7 +73,7 @@ export class AuthController {
     });
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post("auth/logout")
   async logout(@Request() req) {
     return req.logout();

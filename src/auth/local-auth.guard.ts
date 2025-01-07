@@ -1,34 +1,21 @@
-import { ExecutionContext, Injectable } from "@nestjs/common";
+import { ExecutionContext, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
+import { JwtService } from "@nestjs/jwt";
 import { AuthGuard } from "@nestjs/passport";
 
 import { IS_PUBLIC_KEY } from "./constants";
 
 @Injectable()
 export class LocalAuthGuard extends AuthGuard("local") {
+  private readonly logger = new Logger(LocalAuthGuard.name);
+
   constructor(
     private reflector: Reflector,
+    private jwtService: JwtService,
     private configService: ConfigService,
   ) {
     super();
-  }
-
-  handleRequest<TUser>(
-    err: Error | null,
-    user: TUser | false,
-    _info: never,
-    context: ExecutionContext,
-  ): TUser {
-    const res = context.switchToHttp().getResponse();
-
-    const clientUrl = this.configService.get("authentication.baseUrl");
-
-    if (err || !user) {
-      return res.redirect(clientUrl + "/login");
-    }
-
-    return user;
   }
 
   canActivate(context: ExecutionContext) {
@@ -40,5 +27,34 @@ export class LocalAuthGuard extends AuthGuard("local") {
       return true;
     }
     return super.canActivate(context);
+  }
+
+  handleRequest<TUser>(
+    err: Error | null,
+    user: TUser | false,
+    _info: never,
+    context: ExecutionContext,
+  ): TUser {
+    this.logger.debug("Local HandleRequest");
+
+    const res = context.switchToHttp().getResponse();
+    const req = context.switchToHttp().getRequest();
+    const jwt = req.cookies["jwt"];
+    const clientUrl = this.configService.get("authentication.baseUrl");
+    const jwtuser = this.jwtService.decode(jwt);
+
+    if (err) {
+      this.logger.error("Error in Local handleRequest", err);
+    }
+    this.logger.debug("state", err || !jwtuser);
+
+    if (err || !jwtuser) {
+      this.logger.warn("Local -> No user logged, redirecting to login page");
+      return res.redirect(
+        clientUrl + "/login?redir=" + encodeURIComponent(req.url),
+      );
+    }
+
+    return jwtuser;
   }
 }

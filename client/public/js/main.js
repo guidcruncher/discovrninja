@@ -7482,7 +7482,9 @@ String.prototype.format = function(tokens) {
 };
 axios.interceptors.request.use(function(config) {
   const token = sessionStorage.getItem("jwt");
-  config.headers.Authorization = "Bearer " + token;
+  if (token) {
+    config.headers.Authorization = "Bearer " + token
+  }
   return config
 });
 

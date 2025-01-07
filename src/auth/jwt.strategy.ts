@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
+
 import { jwtConstants } from "./constants";
 
 @Injectable()
@@ -17,11 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   private static extractJWT(req: any): string | null {
-    if (
-      req.cookies &&
-      'jwt' in req.cookies &&
-      req.cookies.jwt.length > 0
-    ) {
+    if (req.cookies && "jwt" in req.cookies && req.cookies.jwt.length > 0) {
       return req.cookies.jwt;
     }
     return null;
@@ -31,4 +28,3 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     return { userId: payload.id };
   }
 }
-
