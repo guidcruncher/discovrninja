@@ -12,9 +12,9 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  validateUser(username: string, pass: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const user = await this.usersService.findOne(username);
+      const user = this.usersService.findOne(username);
       if (user) {
         this.usersService
           .hashPasswordWithSalt(pass, user.salt)

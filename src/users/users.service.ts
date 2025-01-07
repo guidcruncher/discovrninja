@@ -12,14 +12,19 @@ export interface User {
   salt: string;
 }
 
+export interface HashResult {
+  hash: string;
+  salt: string;
+}
+
 @Injectable()
 export class UsersService {
   private readonly logger = new Logger(UsersService.name);
 
   constructor(private configService: ConfigService) {}
 
-  public hashPasswordWithSalt(userPassword: string, salt: string) {
-    return new Promise((resolve, reject) => {
+  public hashPasswordWithSalt(userPassword: string, salt: string):Promise<HashResult> {
+    return new Promise<HashResult>((resolve, reject) => {
       bcrypt.hash(userPassword, salt, (err, hash) => {
         if (err) {
           this.logger.error(
@@ -29,13 +34,14 @@ export class UsersService {
           reject(err);
           return;
         }
-        resolve({ hash: hash, salt: salt });
+var result:HashResult = {hash:hash, salt:salt};
+        resolve(result);
       });
     });
   }
 
-  private hashPassword(userPassword: string) {
-    return new Promise((resolve, reject) => {
+  private hashPassword(userPassword: string):Promise<HashResult> {
+    return new Promise<HashResult>((resolve, reject) => {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         if (err) {
@@ -51,34 +57,36 @@ export class UsersService {
             return;
           }
 
-          resolve({ hash: hash, salt: salt });
+var result:HashResult = {hash:hash, salt:salt};
+        resolve(result);
         });
       });
     });
   }
 
-  private loadUserFile() {
-    const filename = configService.get("authentication.authFile");
+  private loadUserFile():User[] {
+    const filename = this.configService.get("authentication.authFile");
 
     if (!fs.existsSync(filename)) {
       fs.writeFileSync(filename, "[]", "utf8");
     }
 
-    return JSON.parse(fs.readFileSync(filename, "utf8"));
+    var result:User[] = JSON.parse(fs.readFileSync(filename, "utf8"));
+return result;
   }
 
-  private saveUserFile(users: any) {
-    const filename = configService.get("authentication.authFile");
+  private saveUserFile(users: User[]) {
+    const filename = this.configService.get("authentication.authFile");
     fs.writeFileSync(filename, JSON.stringify(users), "utf8");
   }
 
-  private findOne(username: string): User {
-    const users = loadUserFile();
+  public findOne(username: string): User {
+    const users:User[] = this.loadUserFile();
     return users.find((user) => user.username === username);
   }
 
-  public addUser(username: string, password: string): User {
-    return new Promise((resolve, reject) => {
+  public addUser(username: string, password: string) {
+    return new Promise<User>((resolve, reject) => {
       this.hashPassword(password)
         .then((result) => {
           let user: User;
@@ -86,9 +94,9 @@ export class UsersService {
           user.username = username;
           user.password = result.hash;
           user.salt = result.salt;
-          const users: [] = loadUserFile();
+          const users:User[] = this.loadUserFile();
           users.push(user);
-          saveUserFile(users);
+          this.saveUserFile(users);
           resolve(user);
         })
         .catch((err) => {
@@ -98,24 +106,24 @@ export class UsersService {
   }
 
   public removeUser(username: string) {
-    const users: [] = loadUserFile();
+    const users:User[] = this.loadUserFile();
     const index = users.map((e) => e.username).indexOf(username);
     if (index >= 0) {
       users.splice(index, 1);
-      saveUserFile(user);
+      this.saveUserFile(users);
     }
   }
 
   public changePassword(username: string, password: string) {
     return new Promise((resolve, reject) => {
-      const users: [] = loadUserFile();
+      const users: User[] = this.loadUserFile();
       const index = users.map((e) => e.username).indexOf(username);
       if (index >= 0) {
         this.hashPassword(password)
           .then((result) => {
             users[index].password = result.hash;
             users[index].salt = result.salt;
-            saveUserFile(users);
+            this.saveUserFile(users);
             resolve(users[index]);
           })
           .catch((err) => {
