@@ -13,12 +13,23 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
+    return new Promise((resolve, reject) => {
+      const user = await this.usersService.findOne(username);
+      if (user) {
+        this.usersService
+          .hashPasswordWithSalt(pass, user.salt)
+          .then((result) => {
+            if (result.hash == user.password) {
+              const { password, ...result } = user;
+              resolve(result);
+            }
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      }
+      reject();
+    });
   }
 
   async login(user: any) {
