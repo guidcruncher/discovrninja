@@ -291,3 +291,10 @@ String.prototype.format = function(tokens) {
       );
   return formatted;
 };
+
+axios.interceptors.request.use(function(config) {
+  const token = sessionStorage.getItem("jwt");
+  config.headers.Authorization = "Bearer " + token;
+
+  return config;
+});

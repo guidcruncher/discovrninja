@@ -5,6 +5,7 @@ import process from "node:process";
 import { AppHost } from "@customtypes/apphost";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
+import fastifyCookie from "@fastify/cookie";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -40,6 +41,10 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({}),
   );
+
+  await app.register(fastifyCookie, {
+    secret: "71Ppe7mxs0qp8o3H2uMyNAME0XDQsbhUSZWN6HHCmBTQ", // for cookies signature
+  });
 
   await app.register(compression, { encodings: ["gzip", "deflate"] });
 

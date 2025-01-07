@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 
-import {UsersService } from "../users/users.service";
+import { UsersService } from "../users/users.service";
 
 @Injectable()
 export class AuthService {
@@ -15,9 +15,10 @@ export class AuthService {
   validateUser(username: string, pass: string): any {
     const user = this.usersService.findOne(username);
     if (user) {
-      this.logger.debug("Found user ", user);
+      this.logger.debug("Found user ", user.username);
       const result = this.usersService.hashPasswordWithSalt(pass, user.salt);
       if (result.hash == user.password) {
+        this.logger.debug("User valid", user.username);
         const userView = { userId: user.userId, username: user.username };
         return userView;
       } else {

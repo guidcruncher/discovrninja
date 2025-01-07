@@ -1,7 +1,9 @@
 import { ExecutionContext, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
+import { JwtService } from "@nestjs/jwt";
 import { AuthGuard } from "@nestjs/passport";
+import { jwtConstants } from "./constants";
 
 import { IS_PUBLIC_KEY } from "./constants";
 
@@ -9,6 +11,7 @@ import { IS_PUBLIC_KEY } from "./constants";
 export class JwtAuthGuard extends AuthGuard("jwt") {
   constructor(
     private reflector: Reflector,
+    private jwtService: JwtService,
     private configService: ConfigService,
   ) {
     super();
@@ -32,13 +35,14 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
     context: ExecutionContext,
   ): TUser {
     const res = context.switchToHttp().getResponse();
-
+    const req = context.switchToHttp().getRequest();
+    const jwt = req.cookies["jwt"];
     const clientUrl = this.configService.get("authentication.baseUrl");
-
-    if (err || !user) {
+    const jwtuser = this.jwtService.decode(jwt);
+    if (err || !jwtuser) {
       return res.redirect(clientUrl + "/login");
     }
 
-    return user;
+    return jwtuser;
   }
 }

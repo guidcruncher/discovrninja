@@ -13,6 +13,8 @@
         if (token == "") {
           document.getElementById("error").style.display = "block";
         } else {}
+        sessionStorage.setItem("jwt", token);
+        window.location.href = "/auth/postlogin?t=" + encodeURIComponent(token) + "&redir=";
         return false;
       })
       .catch((err) => {
