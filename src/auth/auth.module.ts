@@ -19,11 +19,10 @@ import { LocalStrategy } from "./local.strategy";
     }),
   ],
   providers: [
-    //
-    //    {
-    //      provide: APP_GUARD,
-    //      useClass: JwtAuthGuard,
-    //    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
     AuthService,
     LocalStrategy,
     JwtStrategy,

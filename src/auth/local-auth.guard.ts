@@ -19,7 +19,7 @@ export class LocalAuthGuard extends AuthGuard("local") {
     user: TUser | false,
     _info: never,
     context: ExecutionContext,
-  ): TUser  {
+  ): TUser {
     const res = context.switchToHttp().getResponse();
 
     const clientUrl = this.configService.get("allowedOrigin");
