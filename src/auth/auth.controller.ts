@@ -27,19 +27,19 @@ export class AuthController {
 
   @Public()
   @UseGuards(LocalAuthGuard)
-  @Post("api/auth/login")
+  @Post("auth/login")
   async login(@Req() req, @Body() user: any) {
     return this.authService.login(user);
   }
 
   @UseGuards(LocalAuthGuard)
-  @Post("api/auth/logout")
+  @Post("auth/logout")
   async logout(@Request() req) {
     return req.logout();
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get("api/auth/profile")
+  @Get("auth/profile")
   getProfile(@Request() req) {
     return req.user;
   }

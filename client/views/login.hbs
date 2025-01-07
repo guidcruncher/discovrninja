@@ -1,15 +1,18 @@
 <script type="text/javascript">
   function login() {
+    document.getElementById("error").style.display = "none";
     var payload = {
       username: document.getElementById("username").value,
       password: document.getElementById("password").value
     };
 
     axios
-      .post("/api/auth/login", payload)
+      .post("/auth/login", payload)
       .then((response) => {
-        var token = response.data;
-        alert(JSON.stringify(token));
+        var token = response.data ? response.data.access_token : "";
+        if (token == "") {
+          document.getElementById("error").style.display = "block";
+        } else {}
         return false;
       })
       .catch((err) => {
@@ -20,7 +23,7 @@
   }
 
 </script>
-<form method="post" action="/api/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
+<form method="post" action="/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
   <input type="hidden" id="redirect" value="" />
   <div class="container">
 
@@ -55,6 +58,8 @@
         <button class="btn btn-primary" type="submit">Login</button>
         &nbsp;
         <input class="btn btn-secondary" type="reset" value="Clear">
+        <br />
+        <span id="error" class="text-danger" style="display:none;">Invalid username or password</span>
       </div>
     </div>
   </div>
