@@ -48,6 +48,7 @@ export IN_DOCKER=false
 export NODE_ENV=production
 export CADDY_CFG=/etc/caddy/caddyfile.d/
 export DNS_CFG=/home/app/config/dnsmasq.d/
+export JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
 
 if [ -f /.dockerenv ]; then
 	export IN_DOCKER=true
