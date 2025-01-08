@@ -29,13 +29,12 @@ export class AuthController {
 
   @Get("/login")
   async loginForm(@Query("redir") redir, @Request() req, @Res() res) {
-
-res.cookie("token", "", {
-httpOnly: true,
- signed: true,
-sameSite: "strict",
- secure: process.env.NODE_ENV === "production",
- });
+    res.cookie("token", "", {
+      httpOnly: true,
+      signed: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+    });
 
     res.view(
       "login.hbs",
