@@ -1,9 +1,11 @@
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
   HttpCode,
   HttpStatus,
+  Logger,
   Post,
   Query,
   Request,
@@ -13,21 +15,28 @@ import {
 } from "@nestjs/common";
 import { User } from "@users/user";
 import { AuthUser } from "@users/user.decorator";
-
+import { TokenInterceptor } from "./interceptors/token.interceptor";
 import { AuthService } from "./auth.service";
 import { JWTAuthGuard } from "./guards/jwt-auth.guard";
-import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { SessionAuthGuard } from "./guards/session-auth.guard";
-import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
+
   constructor(private readonly authService: AuthService) {}
 
-  @UseInterceptors(TokenInterceptor)
   @Get("/login")
   async loginForm(@Query("redir") redir, @Request() req, @Res() res) {
+
+res.cookie("token", "", {
+httpOnly: true,
+ signed: true,
+sameSite: "strict",
+ secure: process.env.NODE_ENV === "production",
+ });
+
     res.view(
       "login.hbs",
       { redir: redir ?? "" },
@@ -39,7 +48,7 @@ export class AuthController {
   @Get("auth/postlogin")
   async processLogin(
     @Query("t") token,
-    @Query("redir") redir,
+    @Query("r") redir,
     @Request() req,
     @Res() res,
   ) {
@@ -49,7 +58,6 @@ export class AuthController {
       sameSite: "strict",
       secure: process.env.NODE_ENV === "production",
     });
-
     if ((redir ?? "") == "") {
       res.redirect("/", 301);
     } else {
@@ -58,11 +66,20 @@ export class AuthController {
   }
 
   @Post("auth/login")
-  @UseGuards(LocalAuthGuard)
+  //  @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(TokenInterceptor)
-  async login(@AuthUser() user: User): Promise<User> {
-    return user;
+  async login(@AuthUser() u, @Body() user: any): Promise<User> {
+    return new Promise<User>((resolve, reject) => {
+      this.authService
+        .login(user.username, user.password)
+        .then((user) => {
+          resolve(user);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   @Get("/me")

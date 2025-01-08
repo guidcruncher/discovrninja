@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@users/user";
 import { UsersService } from "@users/users.service";
@@ -7,6 +7,8 @@ import { JwtPayload } from "./interfaces/jwt-payload.interface";
 
 @Injectable()
 export class AuthService {
+  private logger: Logger = new Logger(AuthService.name);
+
   constructor(
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
@@ -14,16 +16,19 @@ export class AuthService {
 
   async login(username: string, password: string): Promise<User> {
     let user: User;
+    this.logger.debug("login", username);
 
     try {
       user = this.userService.findOne(username);
     } catch (err) {
+      this.logger.error(`There isn't any user with username: ${username}`, err);
       throw new UnauthorizedException(
         `There isn't any user with username: ${username}`,
       );
     }
 
     if (!this.userService.checkPassword(user, password)) {
+      this.logger.error(`Wrong password for user with username: ${username}`);
       throw new UnauthorizedException(
         `Wrong password for user with username: ${username}`,
       );
@@ -38,6 +43,10 @@ export class AuthService {
     try {
       user = await this.userService.findOneById(payload.sub);
     } catch (error) {
+      this.logger.error(
+        `There isn't any user with userId: ${payload.sub}`,
+        error,
+      );
       throw new UnauthorizedException(
         `There isn't any user with userId: ${payload.sub}`,
       );
@@ -47,11 +56,17 @@ export class AuthService {
   }
 
   signToken(user: User): string {
-    const payload = {
-      sub: user.userId,
-      username: user.username,
-    };
+    if (user) {
+      const payload = {
+        sub: user.userId,
+        username: user.username,
+      };
 
-    return this.jwtService.sign(payload);
+      this.logger.debug("signToken payload", payload);
+      return this.jwtService.sign(payload);
+    }
+
+    this.logger.warn("signToken: no user");
+    return "";
   }
 }

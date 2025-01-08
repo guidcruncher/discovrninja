@@ -2,6 +2,7 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
+  Logger,
   NestInterceptor,
 } from "@nestjs/common";
 import type { User } from "@users/user";
@@ -13,6 +14,8 @@ import { AuthService } from "../auth.service";
 
 @Injectable()
 export class TokenInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(TokenInterceptor.name);
+
   constructor(private readonly authService: AuthService) {}
 
   intercept(
@@ -23,8 +26,7 @@ export class TokenInterceptor implements NestInterceptor {
       map((user) => {
         const response = context.switchToHttp().getResponse<Response>();
         const token = this.authService.signToken(user);
-
-        response.setHeader("Authorization", `Bearer ${token}`);
+        response.header("Authorization", `Bearer ${token}`);
         response.cookie("token", token, {
           httpOnly: true,
           signed: true,

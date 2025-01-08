@@ -1,5 +1,7 @@
 <script type="text/javascript">
+sessionStorage.setItem("jwt","");
   function login() {
+    var redir = document.getElementById("redir").value;
     document.getElementById("error").style.display = "none";
     var payload = {
       username: document.getElementById("username").value,
@@ -9,13 +11,13 @@
     axios
       .post("/auth/login", payload)
       .then((response) => {
-        var token = response.data ? response.data.access_token : "";
-        if (token == "") {
+        var token = (response.headers["authorization"] ?? "").split(" ");
+        if (token.length != 2) {
           document.getElementById("error").style.display = "block";
           return false;
         } else {}
-        sessionStorage.setItem("jwt", token);
-        window.location.href = "/auth/postlogin?t=" + encodeURIComponent(token) + "&redir=";
+        sessionStorage.setItem("jwt", token[1]);
+        window.location.href = "/auth/postlogin?t=" + encodeURIComponent(token[1]) + "&r=" + encodeURIComponent(redir);
         return false;
       })
       .catch((err) => {
@@ -27,7 +29,7 @@
 
 </script>
 <form method="post" action="/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
-  <input type="hidden" id="redirect" value="{{redir}}" />
+  <input type="hidden" id="redir" value="{{redir}}" />
   <div class="container">
 
     <div class="row g-3 align-items-center">
@@ -35,7 +37,7 @@
         <label for="username" class="col-form-label">Username</label>
       </div>
       <div class="col-auto">
-        <input type="text" id="username" class="form-control" aria-describedby="usernameHelpInline">
+        <input type="text" value="admin" id="username" class="form-control" aria-describedby="usernameHelpInline">
       </div>
       <div class="col-auto">
         <span id="usernameHelpInline" class="form-text">
@@ -48,7 +50,7 @@
         <label for="password" class="col-form-label">Password</label>
       </div>
       <div class="col-auto">
-        <input type="password" id="password" class="form-control" aria-describedby="passwordHelpInline">
+        <input type="password" id="password" value="Password123" class="form-control" aria-describedby="passwordHelpInline">
       </div>
       <div class="col-auto">
         <span id="passwordHelpInline" class="form-text">
