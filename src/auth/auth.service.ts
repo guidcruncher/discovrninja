@@ -2,6 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@users/user";
 import { UsersService } from "@users/users.service";
+import { jwtConstants } from "./constants";
 
 export interface JwtPayload {
   sub: string;
@@ -28,7 +29,7 @@ export class AuthService {
   public async signIn(
     username: string,
     pass: string,
-  ): Promise<{ access_token: string, encoded_token: string }> {
+  ): Promise<{ access_token: string }> {
     this.logger.log("signIn " + username);
     const user: User = await this.usersService.findOne(username);
 
@@ -43,10 +44,11 @@ export class AuthService {
     }
 
     const payload = this.getPayload(user);
-    const token = await this.jwtService.signAsync(payload);
+    const token = await this.jwtService.signAsync(payload, {
+        secret: jwtConstants.secret,
+      });
     var response = {
-      access_token: token,
-      encoded_token: encodeURIComponent(token),
+      access_token: token
     };
     this.logger.log("response", response);
     return response;

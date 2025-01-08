@@ -12,7 +12,7 @@
     axios
       .post("/auth/login", payload)
       .then((response) => {
-        var token = response.data.encoded_token;
+        var token = response.data.access_token;
         if ((token ?? "") == "") {
           document.getElementById("error").style.display = "block";
           return false;
