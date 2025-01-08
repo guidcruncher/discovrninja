@@ -1,3 +1,4 @@
+import { AuthModule } from "@auth/auth.module";
 import { AppController } from "@controllers/app.controller";
 import { ComposeController } from "@controllers/compose.controller";
 import { DesktopController } from "@controllers/desktop.controller";
@@ -38,11 +39,10 @@ import { NotificationService } from "@services/notification.service";
 import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
+import { UsersModule } from "@users/users.module";
 import { LoggerModule } from "nestjs-pino";
 
-import { AuthModule } from "@auth/auth.module";
 import configuration from "./config/configuration";
-import { UsersModule } from "@users/users.module";
 
 /**
  * This is the main application module

@@ -1,13 +1,10 @@
 import { Body, Controller, Get, Post, Query, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 const axios = require("axios").default;
-import { HandlebarsFactory } from "@customtypes/handlebars-static";
 
 @Controller("api/views")
 export class ViewsController {
-  constructor(
-    private configService: ConfigService,
-  ) {}
+  constructor(private configService: ConfigService) {}
 
   /**
    * Renders a handlebars template given the passed "POST"ed data
