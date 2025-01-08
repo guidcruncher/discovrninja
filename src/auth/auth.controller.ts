@@ -1,6 +1,6 @@
 import {
-  Body,
   ClassSerializerInterceptor,
+  Res,Query,Request,
   Controller,
   Get,
   HttpCode,
@@ -8,17 +8,17 @@ import {
   Post,
   UseGuards,
   UseInterceptors,
-} from '@nestjs/common';
+} from "@nestjs/common";
+import { User } from "@users/user";
+import { AuthUser } from "@users/user.decorator";
 
-import { AuthUser } from '../user/decorators/user.decorator';
-import { User } from '../user/entities/user.entity';
-import { AuthService } from './auth.service';
-import { JWTAuthGuard } from './guards/jwt-auth.guard';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { SessionAuthGuard } from './guards/session-auth.guard';
-import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AuthService } from "./auth.service";
+import { JWTAuthGuard } from "./guards/jwt-auth.guard";
+import { LocalAuthGuard } from "./guards/local-auth.guard";
+import { SessionAuthGuard } from "./guards/session-auth.guard";
+import { TokenInterceptor } from "./interceptors/token.interceptor";
 
-@Controller('auth')
+@Controller("auth")
 @UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -46,7 +46,7 @@ export class AuthController {
     res.redirect("/", 301);
   }
 
-  @Post('login')
+  @Post("login")
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(TokenInterceptor)
@@ -54,7 +54,7 @@ export class AuthController {
     return user;
   }
 
-  @Get('/me')
+  @Get("/me")
   @UseGuards(SessionAuthGuard, JWTAuthGuard)
   me(@AuthUser() user: User): User {
     return user;

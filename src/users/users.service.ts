@@ -4,13 +4,7 @@ import * as bcrypt from "bcrypt";
 import * as crypto from "crypto";
 import * as fs from "fs";
 
-// This should be a real class/interface representing a user entity
-export interface User {
-  userId: string;
-  username: string;
-  password: string;
-  salt: string;
-}
+import { User } from "./user";
 
 export interface HashResult {
   hash: string;
@@ -27,6 +21,11 @@ export class UsersService {
     const hash = bcrypt.hashSync(userPassword, salt);
     const result: HashResult = { hash: hash, salt: salt };
     return result;
+  }
+
+  public checkPassword(user: User, password: string): boolean {
+    const newPassword = this.hashPasswordWithSalt(password, user.salt);
+    return newPassword.hash == user.password;
   }
 
   private hashPassword(userPassword: string): HashResult {
@@ -58,6 +57,11 @@ export class UsersService {
   public findOne(username: string): User {
     const users: User[] = this.loadUserFile();
     return users.find((user) => user.username === username);
+  }
+
+  public findOneById(userId: string): User {
+    const users: User[] = this.loadUserFile();
+    return users.find((user) => user.userId === userId);
   }
 
   private createInitialUser() {

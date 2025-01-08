@@ -1,39 +1,31 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { User } from "@users/user";
+import { UsersService } from "@users/users.service";
 
-import { User } from '../user/entities/user.entity';
-import { SignUp } from './dto/sign-up.dto';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { UserService } from '../user/services/user.service';
+import { JwtPayload } from "./interfaces/jwt-payload.interface";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(signUp: SignUp): Promise<User> {
-    const user = await this.userService.create(signUp);
-    delete user.password;
-
-    return user;
-  }
-
-  async login(email: string, password: string): Promise<User> {
+  async login(username: string, password: string): Promise<User> {
     let user: User;
 
     try {
-      user = await this.userService.findOne({ where: { email } });
+      user = this.userService.findOne(username);
     } catch (err) {
       throw new UnauthorizedException(
-        `There isn't any user with email: ${email}`,
+        `There isn't any user with username: ${username}`,
       );
     }
 
-    if (!(await user.checkPassword(password))) {
+    if (!this.userService.checkPassword(user, password)) {
       throw new UnauthorizedException(
-        `Wrong password for user with email: ${email}`,
+        `Wrong password for user with username: ${username}`,
       );
     }
 
@@ -44,10 +36,10 @@ export class AuthService {
     let user: User;
 
     try {
-      user = await this.userService.findOne({ where: { email: payload.sub } });
+      user = await this.userService.findOneById(payload.sub);
     } catch (error) {
       throw new UnauthorizedException(
-        `There isn't any user with email: ${payload.sub}`,
+        `There isn't any user with userId: ${payload.sub}`,
       );
     }
 
@@ -56,7 +48,8 @@ export class AuthService {
 
   signToken(user: User): string {
     const payload = {
-      sub: user.email,
+      sub: user.userId,
+      username: user.username,
     };
 
     return this.jwtService.sign(payload);

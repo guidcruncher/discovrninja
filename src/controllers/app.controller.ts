@@ -1,4 +1,4 @@
-import { LocalAuthGuard } from "@auth/local-auth.guard";
+import { LocalAuthGuard } from "@auth/guards/local-auth.guard";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res, UseGuards } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
