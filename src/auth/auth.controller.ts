@@ -15,10 +15,11 @@ import {
 } from "@nestjs/common";
 import { User } from "@users/user";
 import { AuthUser } from "@users/user.decorator";
-import { TokenInterceptor } from "./interceptors/token.interceptor";
+
 import { AuthService } from "./auth.service";
 import { JWTAuthGuard } from "./guards/jwt-auth.guard";
 import { SessionAuthGuard } from "./guards/session-auth.guard";
+import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

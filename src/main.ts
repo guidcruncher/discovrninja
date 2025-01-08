@@ -1,3 +1,4 @@
+import secureSession from '@fastify/secure-session';
 import cluster from "node:cluster";
 import { availableParallelism } from "node:os";
 import process from "node:process";
@@ -17,7 +18,6 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { TasksService } from "@services/tasks.service";
 import path from "path";
 
-import { AppModule } from "./app.module";
 import { AppHostModule } from "./apphost.module";
 
 async function startServers(app: any, config: any, log: any) {
@@ -38,7 +38,7 @@ async function bootstrap() {
   const { hideBin } = require("yargs/helpers");
 
   const app = await NestFactory.create<NestFastifyApplication>(
-    AppMlodule,
+    AppModule,
     new FastifyAdapter({}),
   );
 
