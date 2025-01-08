@@ -42,8 +42,10 @@ export class AuthController {
     let url = redir ?? "";
     if (url == "") {
       url = this.configService.get("authentication.baseUrl") ?? "/";
-    } else { url = decodeURIComponent(url); }
-this.logger.log("postlogin", token);
+    } else {
+      url = decodeURIComponent(url);
+    }
+    this.logger.log("postlogin", token);
 
     res.cookie("token", decodeURIComponent(token), {
       httpOnly: true,
