@@ -18,6 +18,7 @@ import { AuthUser } from "@users/user.decorator";
 
 import { AuthService } from "./auth.service";
 import { JWTAuthGuard } from "./guards/jwt-auth.guard";
+import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { SessionAuthGuard } from "./guards/session-auth.guard";
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 
@@ -44,9 +45,11 @@ export class AuthController {
     );
   }
 
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  @UseGuards(JWTAuthGuard)
   @Get("auth/postlogin")
+  @UseInterceptors(TokenInterceptor)
   async processLogin(
+    @AuthUser() user,
     @Query("t") token,
     @Query("r") redir,
     @Request() req,
@@ -66,7 +69,6 @@ export class AuthController {
   }
 
   @Post("auth/login")
-  //  @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(TokenInterceptor)
   async login(@AuthUser() u, @Body() user: any): Promise<User> {

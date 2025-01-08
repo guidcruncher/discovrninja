@@ -1,4 +1,3 @@
-import secureSession from '@fastify/secure-session';
 import cluster from "node:cluster";
 import { availableParallelism } from "node:os";
 import process from "node:process";
@@ -7,6 +6,7 @@ import { AppHost } from "@customtypes/apphost";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
 import fastifyCookie from "@fastify/cookie";
+import secureSession from "@fastify/secure-session";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -19,6 +19,7 @@ import { TasksService } from "@services/tasks.service";
 import path from "path";
 
 import { AppHostModule } from "./apphost.module";
+import { AppModule } from "./app.module";
 
 async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");
@@ -43,19 +44,17 @@ async function bootstrap() {
   );
 
   await app.register(secureSession, {
-    secret:
-      "89e197b0213b6c63147f8916153eaf8e87d72c1cd1a3b7b1dc0c1a249a7f9519737472854072b6df9ee55ad054676e38c7cddecd6b4cebe5ba0db85ba64e49d8a2afc6137dc0f8da6981d8c7efb19105eb945fdefc17424853bd73c79968b56ec913c80a16540f5cf34a5698b68c3390e2ac7e0c86de425f0f82846deb3225e1",
-    salt: "b079282eec307ca006b40f0ced8ea447e073aa7df686fada64ef80d58dd8e463",
+    secret: "89e197b0213b6c63147f8916153eaf8e87d72c1cd1a3b7b1dc0c1a249a7f9519737472854072b6df9ee55ad054676e38c7cddecd6b4cebe5ba0db85ba64e49d8a2afc6137dc0f8da6981d8c7efb19105eb945fdefc17424853bd73c79968b56ec913c80a16540f5cf34a5698b68c3390e2ac7e0c86de425f0f82846deb3225e1",
+    salt: "09282eec307cahtf",
   });
 
-  await app.register(fastifyCookie, {
-    secret:
-      " f7a4169f410ec82678c101af2a7b8b3799bd97599e47fb55aa38faca285c9d1f2215d989ef6331bb210e56a93729257cb31e695275f1815ad7e719ed0b58a936",
-  });
+ // await app.register(fastifyCookie, {
+ //   secret:
+ //    "f7a4169f410ec82678c101af2a7b8b3799bd97599e47fb55aa38faca285c9d1f2215d989ef6331bb210e56a93729257cb31e695275f1815ad7e719ed0b58a936",
+ // });
 
   await app.register(compression, { encodings: ["gzip", "deflate"] });
-
-  app.select(AppHostModule).get(AppHost).app = app;
+	
   app.enableCors();
 
   const clientBase =

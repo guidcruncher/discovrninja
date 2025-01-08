@@ -1,8 +1,7 @@
 import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { User } from "@users/user";
+import { User, UserStore } from "@users/user";
 import { UsersService } from "@users/users.service";
-
 import { JwtPayload } from "./interfaces/jwt-payload.interface";
 
 @Injectable()
@@ -15,7 +14,7 @@ export class AuthService {
   ) {}
 
   async login(username: string, password: string): Promise<User> {
-    let user: User;
+    let user: UserStore;
     this.logger.debug("login", username);
 
     try {
@@ -34,7 +33,8 @@ export class AuthService {
       );
     }
 
-    return user;
+let u : User ={userId: user.userId, username: user.username};
+    return u;
   }
 
   async verifyPayload(payload: JwtPayload): Promise<User> {
