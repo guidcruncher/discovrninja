@@ -35,19 +35,19 @@
 
 <body>
   <div>
-      <div class="desktop-themechooser">
-        <div class="desktop-themechooser-item">
-          <button data-theme="dark" onclick="chooseDesktopTheme('dark');return false;" class="btn btn-sm btn-outline-secondary text-white" text-secondary">
-            <i id="dark" class="bi bi-moon-stars"></i>
-          </button>
-          <button data-theme="light" onclick="chooseDesktopTheme('light');return false;" class="btn btn-sm btn-outline-secondary text-white">
-            <i id="light" class="bi bi-sun"></i>
-          </button>
-          <button data-theme="auto" onclick="chooseDesktopTheme('auto');return false;" class="btn btn-sm btn-outline-secondsry text-white">
-            <i class="bi bi-display"></i>
-          </button>
-        </div>
+    <div class="desktop-themechooser">
+      <div class="desktop-themechooser-item">
+        <button data-theme="dark" onclick="chooseDesktopTheme('dark');return false;" class="btn btn-sm btn-outline-secondary text-white" text-secondary">
+          <i id="dark" class="bi bi-moon-stars"></i>
+        </button>
+        <button data-theme="light" onclick="chooseDesktopTheme('light');return false;" class="btn btn-sm btn-outline-secondary text-white">
+          <i id="light" class="bi bi-sun"></i>
+        </button>
+        <button data-theme="auto" onclick="chooseDesktopTheme('auto');return false;" class="btn btn-sm btn-outline-secondsry text-white">
+          <i class="bi bi-display"></i>
+        </button>
       </div>
+    </div>
     <div class="container" style="padding-top:5px; padding-bottom:5px">
       {{{body}}}
     </div>
@@ -56,6 +56,7 @@
     <script type="text/javascript">
       ui().desktop();
       ui().themeChooser().setTheme();
+
     </script>
     {{>messagebox}}
   </div>

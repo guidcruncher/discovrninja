@@ -15,7 +15,7 @@ import {
 } from "@nestjs/common";
 import { User } from "@users/user";
 import { AuthUser } from "@users/user.decorator";
-
+import { Public } from "@users/user.decorator";
 import { AuthService } from "./auth.service";
 import { JWTAuthGuard } from "./guards/jwt-auth.guard";
 import { SessionAuthGuard } from "./guards/session-auth.guard";
@@ -29,6 +29,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Get("/login")
+  @Public()
   async loginForm(@Query("redir") redir, @Request() req, @Res() res) {
     res.cookie("token", "", {
       httpOnly: true,
@@ -44,7 +45,7 @@ export class AuthController {
     );
   }
 
-  @UseGuards(JWTAuthGuard)
+  @Public()
   @Get("auth/postlogin")
   @UseInterceptors(TokenInterceptor)
   async processLogin(
@@ -57,8 +58,8 @@ export class AuthController {
     res.cookie("token", token, {
       httpOnly: true,
       signed: true,
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === "production",
+      //      sameSite: "strict",
+      //      secure: process.env.NODE_ENV === "production",
     });
     if ((redir ?? "") == "") {
       res.redirect("/", 301);
@@ -68,6 +69,7 @@ export class AuthController {
   }
 
   @Post("auth/login")
+  @Public()
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(TokenInterceptor)
   async login(@AuthUser() u, @Body() user: any): Promise<User> {

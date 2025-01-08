@@ -1,6 +1,10 @@
 import { JwtPayload } from "@auth/interfaces/jwt-payload.interface";
 import { createParamDecorator, ExecutionContext, Logger } from "@nestjs/common";
 import { User } from "@users/user";
+import { SetMetadata } from "@nestjs/common";
+
+export const IS_PUBLIC_KEY = "isPublic";
+export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 
 export const AuthUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
