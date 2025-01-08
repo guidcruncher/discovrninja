@@ -1,13 +1,11 @@
 import { Body, Controller, Get, Post, Query, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 const axios = require("axios").default;
-import { AppHost } from "@customtypes/apphost";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 
 @Controller("api/views")
 export class ViewsController {
   constructor(
-    private appHost: AppHost,
     private configService: ConfigService,
   ) {}
 
@@ -22,13 +20,6 @@ export class ViewsController {
     @Res() res,
   ) {
     res.view(viewname + ".hbs", data, { layout: "layouts/blank.hbs" });
-  }
-
-  @Get("reset")
-  reset() {
-    HandlebarsFactory.initialise();
-    HandlebarsFactory.getInstance().reloadViewEngine(this.appHost.app);
-    return "OK";
   }
 
   @Get("render")
