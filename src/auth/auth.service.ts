@@ -2,6 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User, UserStore } from "@users/user";
 import { UsersService } from "@users/users.service";
+
 import { JwtPayload } from "./interfaces/jwt-payload.interface";
 
 @Injectable()
@@ -33,7 +34,7 @@ export class AuthService {
       );
     }
 
-let u : User ={userId: user.userId, username: user.username};
+    const u: User = { userId: user.userId, username: user.username };
     return u;
   }
 

@@ -67,7 +67,12 @@ export class UsersService {
   private createInitialUser() {
     const password = "Password123";
     const result = this.hashPassword(password);
-    const user: UserStore = { userId: "", username: "", password: "", salt: "" };
+    const user: UserStore = {
+      userId: "",
+      username: "",
+      password: "",
+      salt: "",
+    };
     user.userId = crypto.randomBytes(16).toString("hex");
     user.username = "admin";
     user.password = result.hash;

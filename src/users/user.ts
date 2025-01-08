@@ -4,8 +4,8 @@ export interface User {
 }
 
 export interface UserStore {
-userId: string;
-username: string;
-password: string;
-salt: string;
+  userId: string;
+  username: string;
+  password: string;
+  salt: string;
 }
