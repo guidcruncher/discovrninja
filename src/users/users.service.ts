@@ -4,7 +4,7 @@ import * as bcrypt from "bcrypt";
 import * as crypto from "crypto";
 import * as fs from "fs";
 
-import { UserStore } from "./user";
+import { User } from "./user";
 
 export interface HashResult {
   hash: string;
@@ -23,7 +23,7 @@ export class UsersService {
     return result;
   }
 
-  public checkPassword(user: UserStore, password: string): boolean {
+  public checkPassword(user: User, password: string): boolean {
     const newPassword = this.hashPasswordWithSalt(password, user.salt);
     return newPassword.hash == user.password;
   }
@@ -36,7 +36,7 @@ export class UsersService {
     return result;
   }
 
-  private loadUserFile(): UserStore[] {
+  private loadUserFile(): User[] {
     const filename = this.configService.get("authentication.authFile");
 
     if (!fs.existsSync(filename)) {
@@ -45,29 +45,29 @@ export class UsersService {
       fs.writeFileSync(filename, JSON.stringify(users), "utf8");
     }
 
-    const result: UserStore[] = JSON.parse(fs.readFileSync(filename, "utf8"));
+    const result: User[] = JSON.parse(fs.readFileSync(filename, "utf8"));
     return result;
   }
 
-  private saveUserFile(users: UserStore[]) {
+  private saveUserFile(users: User[]) {
     const filename = this.configService.get("authentication.authFile");
     fs.writeFileSync(filename, JSON.stringify(users), "utf8");
   }
 
-  public findOne(username: string): UserStore {
-    const users: UserStore[] = this.loadUserFile();
+  public findOne(username: string): User {
+    const users: User[] = this.loadUserFile();
     return users.find((user) => user.username === username);
   }
 
-  public findOneById(userId: string): UserStore {
-    const users: UserStore[] = this.loadUserFile();
+  public findOneById(userId: string): User {
+    const users: User[] = this.loadUserFile();
     return users.find((user) => user.userId === userId);
   }
 
   private createInitialUser() {
     const password = "Password123";
     const result = this.hashPassword(password);
-    const user: UserStore = {
+    const user: User = {
       userId: "",
       username: "",
       password: "",
@@ -82,19 +82,19 @@ export class UsersService {
 
   public addUser(username: string, password: string) {
     const result = this.hashPassword(password);
-    let user: UserStore;
+    let user: User;
     user.userId = crypto.randomBytes(16).toString("hex");
     user.username = username;
     user.password = result.hash;
     user.salt = result.salt;
-    const users: UserStore[] = this.loadUserFile();
+    const users: User[] = this.loadUserFile();
     users.push(user);
     this.saveUserFile(users);
     return user;
   }
 
   public removeUser(username: string) {
-    const users: UserStore[] = this.loadUserFile();
+    const users: User[] = this.loadUserFile();
     const index = users.map((e) => e.username).indexOf(username);
     if (index >= 0) {
       users.splice(index, 1);
@@ -103,7 +103,7 @@ export class UsersService {
   }
 
   public changePassword(username: string, password: string) {
-    const users: UserStore[] = this.loadUserFile();
+    const users: User[] = this.loadUserFile();
     const index = users.map((e) => e.username).indexOf(username);
     if (index >= 0) {
       const result = this.hashPassword(password);

@@ -1,9 +1,5 @@
-export interface User {
-  userId: string;
-  username: string;
-}
 
-export interface UserStore {
+export interface User {
   userId: string;
   username: string;
   password: string;
