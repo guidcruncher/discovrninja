@@ -1,32 +1,30 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
-  Logger,
+  HttpCode,
+  HttpStatus,
   Post,
-  Query,
-  Req,
-  Request,
-  Res,
   UseGuards,
-} from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+  UseInterceptors,
+} from '@nestjs/common';
 
-import { AuthService } from "./auth.service";
-import { Public } from "./constants";
-import { JwtAuthGuard } from "./jwt-auth.guard";
+import { AuthUser } from '../user/decorators/user.decorator';
+import { User } from '../user/entities/user.entity';
+import { AuthService } from './auth.service';
+import { JWTAuthGuard } from './guards/jwt-auth.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+import { SessionAuthGuard } from './guards/session-auth.guard';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
-@Controller()
+@Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
-  private readonly logger = new Logger(AuthController.name);
+  constructor(private readonly authService: AuthService) {}
 
-  constructor(
-    private authService: AuthService,
-    private configService: ConfigService,
-  ) {}
-
-  @Public()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(LocalAuthGuard)
+  @UseInterceptors(TokenInterceptor)
   @Get("/login")
   async loginForm(@Query("redir") redir, @Request() req, @Res() res) {
     res.view(
@@ -36,9 +34,8 @@ export class AuthController {
     );
   }
 
-  @Public()
-  @UseGuards(JwtAuthGuard)
-  @Get("/auth/postlogin")
+  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  @Get("postlogin")
   async processLogin(
     @Query("t") token,
     @Query("redir") redir,
@@ -49,39 +46,17 @@ export class AuthController {
     res.redirect("/", 301);
   }
 
-  @Public()
-  @UseGuards(JwtAuthGuard)
-  @Post("auth/login")
-  async login(@Req() req, @Body() user: any, @Res({ passthrough: true }) res) {
-    return new Promise<any>((resolve, reject) => {
-      this.authService
-        .login(user)
-        .then((r) => {
-          if (r.access_token != "") {
-            const domainValue = new URL(
-              this.configService.get("authentication.baseUrl"),
-            ).hostname;
-            resolve(r);
-          } else {
-            resolve({ access_token: "" });
-          }
-        })
-        .catch((err) => {
-          this.logger.error("Error logging in", err);
-          resolve({ access_token: "" });
-        });
-    });
+  @Post('login')
+  @UseGuards(LocalAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(TokenInterceptor)
+  async login(@AuthUser() user: User): Promise<User> {
+    return user;
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post("auth/logout")
-  async logout(@Request() req) {
-    return req.logout();
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get("auth/profile")
-  getProfile(@Request() req) {
-    return req.user;
+  @Get('/me')
+  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  me(@AuthUser() user: User): User {
+    return user;
   }
 }
