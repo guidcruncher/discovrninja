@@ -40,7 +40,6 @@ import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { LoggerModule } from "nestjs-pino";
 
-import { AppHostModule } from "./apphost.module";
 import { AuthModule } from "./auth/auth.module";
 import configuration from "./config/configuration";
 import { UsersModule } from "./users/users.module";
@@ -51,7 +50,6 @@ import { UsersModule } from "./users/users.module";
 @Global()
 @Module({
   imports: [
-    AppHostModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
