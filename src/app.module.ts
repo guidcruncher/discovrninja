@@ -40,9 +40,9 @@ import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { LoggerModule } from "nestjs-pino";
 
-import { AuthModule } from "./auth/auth.module";
+import { AuthModule } from "@auth/auth.module";
 import configuration from "./config/configuration";
-import { UsersModule } from "./users/users.module";
+import { UsersModule } from "@users/users.module";
 
 /**
  * This is the main application module
