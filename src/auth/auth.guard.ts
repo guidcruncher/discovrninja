@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   Injectable,
   UnauthorizedException,
+  Logger,
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { JwtService } from "@nestjs/jwt";
@@ -13,6 +14,9 @@ import { IS_PUBLIC_KEY } from "./decorators";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+
+  private logger: Logger = new Logger(AuthGuard.name);
+
   constructor(
     private jwtService: JwtService,
     private reflector: Reflector,
@@ -23,16 +27,22 @@ export class AuthGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
+
     if (isPublic) {
-      // 💡 See this condition
       return true;
     }
 
     const request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
+    let token = this.extractTokenFromHeader(request);
+
     if (!token) {
-      throw new UnauthorizedException();
+      token = request.cookies.token;
+      if (!token) {
+        this.logger.error("No token from header or cookie.");
+        throw new UnauthorizedException();
+      }
     }
+
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
@@ -40,9 +50,11 @@ export class AuthGuard implements CanActivate {
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request["user"] = payload;
-    } catch {
+    } catch (err) {
+      this.logger.error("Error verifying JWT token", err);
       throw new UnauthorizedException();
     }
+
     return true;
   }
 

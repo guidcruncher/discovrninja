@@ -28,8 +28,8 @@ export class AuthService {
   public async signIn(
     username: string,
     pass: string,
-  ): Promise<{ access_token: string }> {
-    this.logger.debug("signIn", username);
+  ): Promise<{ access_token: string, encoded_token: string }> {
+    this.logger.log("signIn " + username);
     const user: User = await this.usersService.findOne(username);
 
     if (!user) {
@@ -37,17 +37,18 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    this.logger.debug("User", user);
-
     if (!this.usersService.checkPassword(user, pass)) {
       this.logger.error("Invalid credentials for user " + username);
       throw new UnauthorizedException();
     }
 
     const payload = this.getPayload(user);
-    this.logger.debug("Payload", payload);
-    return {
-      access_token: await this.jwtService.signAsync(payload),
+    const token = await this.jwtService.signAsync(payload);
+    var response = {
+      access_token: token,
+      encoded_token: encodeURIComponent(token),
     };
+    this.logger.log("response", response);
+    return response;
   }
 }

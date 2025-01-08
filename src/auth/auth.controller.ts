@@ -42,15 +42,17 @@ export class AuthController {
     let url = redir ?? "";
     if (url == "") {
       url = this.configService.get("authentication.baseUrl") ?? "/";
-    }
+    } else { url = decodeURIComponent(url); }
+this.logger.log("postlogin", token);
 
-    res.cookie("token", token, {
+    res.cookie("token", decodeURIComponent(token), {
       httpOnly: true,
+      domain: this.configService.get("authentication.cookieDomain"),
+      path: "/",
       signed: true,
-      //      sameSite: "strict",
+      sameSite: "strict",
       //      secure: process.env.NODE_ENV === "production",
     });
-
     res.redirect(url, 302);
   }
 
@@ -58,7 +60,6 @@ export class AuthController {
   @Post("auth/login")
   @Public()
   signIn(@Body() signInDto: Record<string, any>) {
-    this.logger.debug("signIn", signInDto);
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
 

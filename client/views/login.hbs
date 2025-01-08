@@ -12,13 +12,13 @@
     axios
       .post("/auth/login", payload)
       .then((response) => {
-        var token = response.data.access_token;
+        var token = response.data.encoded_token;
         if ((token ?? "") == "") {
           document.getElementById("error").style.display = "block";
           return false;
         } else {}
         sessionStorage.setItem("jwt", token);
-        window.location.href = "/auth/postlogin?t=" + encodeURIComponent(token) + "&r=" + encodeURIComponent(redir);
+        window.location.href = "/auth/postlogin?t=" + token + "&r=" + encodeURIComponent(redir);
         return false;
       })
       .catch((err) => {
