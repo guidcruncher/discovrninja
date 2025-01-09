@@ -40,25 +40,34 @@ export class UsersService {
   }
 
   private loadUserFile(): User[] {
-    this.logger.log("loadUserFile");
-    const filename = this.configService.get("authentication.authFile");
-    this.logger.debug("authFile", filename);
+    try {
+      this.logger.log("loadUserFile");
+      const filename = this.configService.get("authentication.authFile");
+      this.logger.debug("authFile", filename);
 
-    if (!fs.existsSync(filename)) {
-      const users = [];
-      users.push(this.createInitialUser());
-      fs.writeFileSync(filename, JSON.stringify(users), "utf8");
+      if (!fs.existsSync(filename)) {
+        const users = [];
+        users.push(this.createInitialUser());
+        fs.writeFileSync(filename, JSON.stringify(users), "utf8");
+      }
+
+      const result: User[] = JSON.parse(fs.readFileSync(filename, "utf8"));
+      return result;
+    } catch (err) {
+      this.logger.error("Error in loadUserFile", err);
+      return [];
     }
-
-    const result: User[] = JSON.parse(fs.readFileSync(filename, "utf8"));
-    return result;
   }
 
   private saveUserFile(users: User[]) {
-    this.logger.log("saveUserFile");
-    const filename = this.configService.get("authentication.authFile");
-    this.logger.debug("authFile", filename);
-    fs.writeFileSync(filename, JSON.stringify(users), "utf8");
+    try {
+      this.logger.log("saveUserFile");
+      const filename = this.configService.get("authentication.authFile");
+      this.logger.debug("authFile", filename);
+      fs.writeFileSync(filename, JSON.stringify(users), "utf8");
+    } catch (err) {
+      this.logger.error("Error in saveUserFile", err);
+    }
   }
 
   public findOne(username: string): User {
