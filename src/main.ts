@@ -7,6 +7,7 @@ import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
 import secureSession from "@fastify/secure-session";
 import { ErrorExceptionFilter } from "@helpers/exception.filter";
+import { HttpExceptionFilter } from "@helpers/httpexception.filter";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -43,6 +44,7 @@ async function bootstrap() {
   );
 
   app.useGlobalFilters(new UnauthorizedFilter());
+app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalFilters(new ErrorExceptionFilter());
   await app.register(secureSession, {
     secret:

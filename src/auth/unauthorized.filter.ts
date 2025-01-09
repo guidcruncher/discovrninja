@@ -27,7 +27,7 @@ export class UnauthorizedFilter implements ExceptionFilter {
         path: request.url,
       });
     } else {
-      respomse.redirect("/login");
+       response.redirect("/login");
     }
   }
 }
