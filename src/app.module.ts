@@ -41,6 +41,11 @@ import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { UsersModule } from "@users/users.module";
 import { LoggerModule } from "nestjs-pino";
+import { DesktopModule } from './desktop/desktop.module';
+import { CatalogModule } from './catalog/catalog.module';
+import { ProjectModule } from './project/project.module';
+import { ContainerModule } from './container/container.module';
+import { ResourcesModule } from './resources/resources.module';
 
 import configuration from "./config/configuration";
 
@@ -87,6 +92,11 @@ import configuration from "./config/configuration";
     ScheduleModule.forRoot(),
     UsersModule,
     AuthModule,
+    DesktopModule,
+    CatalogModule,
+    ProjectModule,
+    ContainerModule,
+    ResourcesModule,
   ],
   controllers: [
     ComposeController,

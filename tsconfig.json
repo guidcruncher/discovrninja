@@ -28,6 +28,12 @@
       "@dto/*": [ "src/dto/*" ],
       "@schemas/*": [ "src/schemas/*" ],
       "@/*": ["src/*"],
+      "@projects/*": ["src/projects/*"],
+      "@desktop/*": ["src/desktop/*"],
+      "@container/*": ["src/container/*"],
+      "@catalog/*": [src/catalog/*"],
+      "@resources/*": [src/resources/*"],
     }
   }, "include": ["src/**/*"]
 }
+
