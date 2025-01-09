@@ -1,11 +1,9 @@
- import {
-  ExceptionFilter,
-  Catch,
+import {
   ArgumentsHost,
-  HttpException,
+  Catch,
+  ExceptionFilter,
   Logger,
 } from "@nestjs/common";
-import { Response } from "express";
 
 @Catch()
 export class ErrorExceptionFilter implements ExceptionFilter {
@@ -20,14 +18,12 @@ export class ErrorExceptionFilter implements ExceptionFilter {
 
     this.logger.error("Error on " + request.url, exception);
     if (uri.pathname.startsWith("/api")) {
-      response
-        .status(status)
-        .send({
-          status: status,
-          message: "Internal Server Error",
-          timestamp: new Date().toISOString(),
-          path: request.url,
-        });
+      response.status(status).send({
+        status: status,
+        message: "Internal Server Error",
+        timestamp: new Date().toISOString(),
+        path: request.url,
+      });
     } else {
       response.view(
         "error.hbs",

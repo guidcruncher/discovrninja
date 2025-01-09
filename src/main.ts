@@ -44,7 +44,7 @@ async function bootstrap() {
   );
 
   app.useGlobalFilters(new UnauthorizedFilter());
-app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalFilters(new ErrorExceptionFilter());
   await app.register(secureSession, {
     secret:

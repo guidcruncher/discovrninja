@@ -1,11 +1,10 @@
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  Catch,
+  ExceptionFilter,
   HttpException,
   Logger,
 } from "@nestjs/common";
-import { Response } from "express";
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -20,14 +19,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error("Error on " + request.url, exception);
     if (uri.pathname.startsWith("/api")) {
-      response
-        .status(status)
-        .send({
-          status: status,
-          message: exception.message,
-          timestamp: new Date().toISOString(),
-          path: request.url,
-        });
+      response.status(status).send({
+        status: status,
+        message: exception.message,
+        timestamp: new Date().toISOString(),
+        path: request.url,
+      });
     } else {
       response.view(
         "error.hbs",
