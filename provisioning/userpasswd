@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+var bcrypt = require("bcrypt");
+var crypto = require("crypto");
+
+if (process.argv.length < 3) {
+  console.log("Format: userpasswd [plaintextpassword]");
+  return
+}
+
+var pwd = process.argv[3] ?? "";
+var saltRounds = 10;
+var salt = bcrypt.genSaltSync(saltRounds);
+var hash = bcrypt.hashSync(pwd, salt);
+
+console.log("password: "+hash);
+console.log("salt :    "+salt);
+
+
