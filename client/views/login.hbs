@@ -33,6 +33,7 @@
 
 <div style="min-height:50vh" class="d-flex flex-column justify-content-center align-items-center">
   <img style="max-width:200px;" src="/assets/img/logo.png" />
+<p class="cardo-regular" style="font-size:48px;">Discovrninja</p>
   <form method="post" action="/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
     <input type="hidden" id="redir" value="{{redir}}" />
     <div class="container">
@@ -40,13 +41,13 @@
         <tr>
           <td><label for="username" class="col-form-label">Username</label>
           </td>
-          <td><input type="text" value="admin" id="username" class="form-control" aria-describedby="usernameHelpInline">
+          <td><input type="text" value="" id="username" class="form-control" aria-describedby="usernameHelpInline" required>
           </td>
         </tr>
         <tr>
           <td><label for="password" class="col-form-label">Password</label>
           </td>
-          <td><input type="password" id="password" value="Password123" class="form-control" aria-describedby="passwordHelpInline">
+          <td><input type="password" id="password" value="" class="form-control" aria-describedby="passwordHelpInline" required>
           </td>
         </tr>
         <tr>
