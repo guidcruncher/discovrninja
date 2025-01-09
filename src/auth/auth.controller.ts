@@ -29,6 +29,7 @@ export class AuthController {
   @Get("login")
   @Public()
   loginForm(@Query("redir") redir, @Res() res) {
+    this.authService.clearCookie(res);
     res.view(
       "login.hbs",
       { redir: redir ?? "" },
@@ -44,8 +45,6 @@ export class AuthController {
       url = this.configService.get("authentication.baseUrl") ?? "/";
     }
 
-    this.logger.log("postlogin", token);
-
     this.authService.setCookie(res, token);
     res.header("Authorization", "Bearer " + token);
     res.view("postlogin.hbs", { redir: url }, {});
@@ -54,14 +53,14 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post("auth/login")
   @Public()
-  async signIn(@Res() res, @Body() signInDto: Record<string, any>) {
-    const result = await this.authService.signIn(
+  signIn(@Res() res, @Body() signInDto: Record<string, any>) {
+    const result = this.authService.signIn(
       signInDto.username,
       signInDto.password,
     );
     this.authService.setCookie(res, result.access_token);
     res.header("Authorization", "Bearer " + result.access_token);
-    return result;
+    res.send(result);
   }
 
   @UseGuards(AuthGuard)

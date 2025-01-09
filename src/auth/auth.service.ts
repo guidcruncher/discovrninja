@@ -1,9 +1,9 @@
 import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@users/user";
 import { UsersService } from "@users/users.service";
-import { ConfigService } from "@nestjs/config";
-import { jwtConstants } from "./constants";
+
 
 export interface JwtPayload {
   sub: string;
@@ -17,7 +17,8 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private configService: ConfigService,  ) {}
+    private configService: ConfigService,
+  ) {}
 
   public getPayload(user: User): JwtPayload {
     const payload: JwtPayload = {
@@ -27,12 +28,9 @@ export class AuthService {
     return payload;
   }
 
-  public async signIn(
-    username: string,
-    pass: string,
-  ): Promise<{ access_token: string }> {
+  public signIn(username: string, pass: string): { access_token: string } {
     this.logger.log("signIn " + username);
-    const user: User = await this.usersService.findOne(username);
+    const user: User = this.usersService.findOne(username);
 
     if (!user) {
       this.logger.error("User not found. " + username);
@@ -45,14 +43,24 @@ export class AuthService {
     }
 
     const payload = this.getPayload(user);
-    const token = await this.jwtService.signAsync(payload, {
-      secret: jwtConstants.secret,
-    });
+    const token = this.jwtService.sign(payload);
     const response = {
       access_token: token,
     };
     this.logger.log("response", response);
     return response;
+  }
+
+  public clearCookie(res) {
+    this.setCookie(res, "");
+    res.clearCookie("token", {
+      httpOnly: true,
+      domain: this.configService.get("authentication.cookieDomain"),
+      path: "/",
+      signed: true,
+      sameSite: "strict",
+      secure: this.configService.get("authentication.cookieSecure"),
+    });
   }
 
   public setCookie(res, token) {
@@ -62,6 +70,7 @@ export class AuthService {
       path: "/",
       signed: true,
       sameSite: "strict",
+      secure: this.configService.get("authentication.cookieSecure"),
     });
   }
 }
