@@ -42,27 +42,26 @@ export class AuthController {
     let url = redir ?? "";
     if (url == "") {
       url = this.configService.get("authentication.baseUrl") ?? "/";
-    } else {
-      url = decodeURIComponent(url);
     }
+
     this.logger.log("postlogin", token);
 
-    res.cookie("token", decodeURIComponent(token), {
-      httpOnly: true,
-      domain: this.configService.get("authentication.cookieDomain"),
-      path: "/",
-      signed: true,
-      sameSite: "strict",
-      //      secure: process.env.NODE_ENV === "production",
-    });
-    res.redirect(url, 302);
+    this.authService.setCookie(res, token);
+    res.header("Authorization", "Bearer " + result.access_token);
+    res.view("postlogin.hbs", { redir: url }, {});
   }
 
   @HttpCode(HttpStatus.OK)
   @Post("auth/login")
   @Public()
-  signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.signIn(signInDto.username, signInDto.password);
+  signIn(@Res() res, @Body() signInDto: Record<string, any>) {
+    const result = this.authService.signIn(
+      signInDto.username,
+      signInDto.password,
+    );
+    this.authService.setCookie(res, result.access_token);
+    res.header("Authorization", "Bearer " + result.access_token);
+    return result;
   }
 
   @UseGuards(AuthGuard)

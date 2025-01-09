@@ -46,12 +46,22 @@ export class AuthService {
 
     const payload = this.getPayload(user);
     const token = await this.jwtService.signAsync(payload, {
-      secret: jwtConstants.secret,
+      secret: jwtConstants.psecret,
     });
     const response = {
       access_token: token,
     };
     this.logger.log("response", response);
     return response;
+  }
+
+  public setCookie(res, token) {
+    res.cookie("token", token, {
+      httpOnly: true,
+      domain: this.configService.get("authentication.cookieDomain"),
+      path: "/",
+      signed: true,
+      sameSite: "strict",
+    });
   }
 }
