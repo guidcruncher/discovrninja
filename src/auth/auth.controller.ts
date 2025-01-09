@@ -47,15 +47,15 @@ export class AuthController {
     this.logger.log("postlogin", token);
 
     this.authService.setCookie(res, token);
-    res.header("Authorization", "Bearer " + result.access_token);
+    res.header("Authorization", "Bearer " + token);
     res.view("postlogin.hbs", { redir: url }, {});
   }
 
   @HttpCode(HttpStatus.OK)
   @Post("auth/login")
   @Public()
-  signIn(@Res() res, @Body() signInDto: Record<string, any>) {
-    const result = this.authService.signIn(
+  async signIn(@Res() res, @Body() signInDto: Record<string, any>) {
+    const result = await this.authService.signIn(
       signInDto.username,
       signInDto.password,
     );

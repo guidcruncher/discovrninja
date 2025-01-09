@@ -2,7 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@users/user";
 import { UsersService } from "@users/users.service";
-
+import { ConfigService } from "@nestjs/config";
 import { jwtConstants } from "./constants";
 
 export interface JwtPayload {
@@ -17,7 +17,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+    private configService: ConfigService,  ) {}
 
   public getPayload(user: User): JwtPayload {
     const payload: JwtPayload = {
@@ -46,7 +46,7 @@ export class AuthService {
 
     const payload = this.getPayload(user);
     const token = await this.jwtService.signAsync(payload, {
-      secret: jwtConstants.psecret,
+      secret: jwtConstants.secret,
     });
     const response = {
       access_token: token,
