@@ -46,7 +46,6 @@ export class AuthService {
     const response = {
       access_token: token,
     };
-    this.logger.log("response", response);
     return response;
   }
 

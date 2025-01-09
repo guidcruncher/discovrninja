@@ -85,8 +85,8 @@ import configuration from "./config/configuration";
       { name: ContainerCatalog.name, schema: ContainerCatalogSchema },
     ]),
     ScheduleModule.forRoot(),
-    AuthModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [
     ComposeController,
