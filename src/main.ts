@@ -2,7 +2,6 @@ import cluster from "node:cluster";
 import { availableParallelism } from "node:os";
 import process from "node:process";
 
-import { UnauthorizedFilter } from "@auth/unauthorized.filter";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
 import secureSession from "@fastify/secure-session";
@@ -43,9 +42,6 @@ async function bootstrap() {
     new FastifyAdapter({}),
   );
 
-  app.useGlobalFilters(new UnauthorizedFilter());
-  app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalFilters(new ErrorExceptionFilter());
   await app.register(secureSession, {
     secret:
       "89e197b0213b6c63147f8916153eaf8e87d72c1cd1a3b7b1dc0c1a249a7f9519737472854072b6df9ee55ad054676e38c7cddecd6b4cebe5ba0db85ba64e49d8a2afc6137dc0f8da6981d8c7efb19105eb945fdefc17424853bd73c79968b56ec913c80a16540f5cf34a5698b68c3390e2ac7e0c86de425f0f82846deb3225e1",
@@ -76,6 +72,9 @@ async function bootstrap() {
   const config: ConfigService = app.get(ConfigService);
   const tasks: TasksService = app.get(TasksService);
   const nodeEnv: string = process.env.NODE_ENV ?? "development";
+
+app.useGlobalFilters(new HttpExceptionFilter());
+app.useGlobalFilters(new ErrorExceptionFilter());
 
   const Handlebars = HandlebarsFactory.getInstance();
   Handlebars.setViewEngine(app);

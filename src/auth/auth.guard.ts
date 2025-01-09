@@ -31,13 +31,14 @@ export class AuthGuard implements CanActivate {
     }
 
     const request = context.switchToHttp().getRequest();
+    const response = context.switchToHttp().getResponse(); 
     let token = this.extractTokenFromHeader(request);
 
     if (!token) {
       token = request.cookies.token;
       if (!token) {
         this.logger.error("No token from header or cookie.");
-        throw new UnauthorizedException();
+        response.redirect("/login", 302);
       }
     }
 

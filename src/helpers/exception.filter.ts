@@ -14,10 +14,10 @@ export class ErrorExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<any>();
     const request = ctx.getRequest<any>();
     const status = 500;
-    const uri: URL = new URL(request.url.toLowerCase());
 
-    this.logger.error("Error on " + request.url, exception);
-    if (uri.pathname.startsWith("/api")) {
+this.logger.error("Error on " + request.url, exception);
+
+    if (request.url.startsWith("/api")) {
       response.status(status).send({
         status: status,
         message: "Internal Server Error",
