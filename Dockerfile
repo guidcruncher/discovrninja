@@ -39,6 +39,8 @@ RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     rm -r ./build && \
     mkdir -p /docker/stacks/
 
+COPY ./provisioning/userpasswd /home/app/userpasswd
+COPY ./provisioning/useradd /home/app/useradd
 COPY ./provisioning/start.sh /home/app/start.sh
 COPY ./provisioning/caddyreload.sh /home/app/caddyreload.sh
 COPY ./provisioning/dnsmasqreload.sh /home/app/dnsmasqreload.sh
@@ -48,7 +50,7 @@ COPY ./provisioning/dnsmasq.conf /home/defaults/dnsmasq.conf.default
 COPY ./provisioning/Caddyfile-user /home/defaults/Caddyfile.default
 COPY ./provisioning/dnsmasq.conf /etc/dnsmasq.conf
 COPY ./provisioning/cors.conf /etc/caddy/includes/cors.conf
-RUN chmod +x /home/app/start.sh /home/app/caddyreload.sh /home/app/dnsmasqreload.sh
+RUN chmod +x /home/app/start.sh /home/app/caddyreload.sh /home/app/dnsmasqreload.sh /home/app/userpasswd /home/app/useradd
 
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 

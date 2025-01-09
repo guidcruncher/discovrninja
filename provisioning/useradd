@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+var bcrypt = require("bcrypt");
+var crypto = require("crypto");
+var fs = require("fs");
+var readline = require('node:readline');
+var { stdin: input, stdout: output } = require('node:process');
+
+if (process.argv.length < 4) {
+  console.log("Format: useradd [passwordfilename] [usermame] [password]");
+  return
+}
+
+var filename = process.argv[2];
+
+var user = {
+      userId: "",
+      username: "",
+      password: "",
+      salt: "",
+    };
+
+user.userId = crypto.randomBytes(16).toString("hex");
+user.username = process.argv[3];
+var pwd = process.argv[4];
+var users = [];
+
+if (fs.existsSync(filename)) {
+  users = JSON.parse(fs.readFileSync(filename, "utf8"));
+}
+
+var saltRounds = 10;
+user.salt = bcrypt.genSaltSync(saltRounds);
+user.password = bcrypt.hashSync(pwd, user.salt);
+
+users.push(user);
+
+if (fs.existsSync(filename)) {
+  fs.copyFileSync(filename, filename + ".bak");
+}
+
+fs.writeFileSync(filename, JSON.stringify(users), "utf8");
+
+console.log(JSON.stringify(user));
+
