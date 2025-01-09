@@ -32,7 +32,7 @@
 
 
 <div style="min-height:50vh" class="d-flex flex-column justify-content-center align-items-center">
-<img style="max-width:200px;" src="/assets/img/logo.png" / >
+  <img style="max-width:200px;" src="/assets/img/logo.png" />
   <form method="post" action="/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
     <input type="hidden" id="redir" value="{{redir}}" />
     <div class="container">
@@ -51,11 +51,11 @@
         </tr>
         <tr>
           <td colspan="2"><button class="btn btn-primary" type="submit">Login</button>
-             &nbsp;
+            &nbsp;
             <input class="btn btn-secondary" type="reset" value="Clear">
             <br />
             <span id="error" class="text-danger" style="display:none;">Invalid username or password</span>
-            </td>
+          </td>
         </tr>
       </table>
     </div>

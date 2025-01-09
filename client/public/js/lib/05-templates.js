@@ -1021,7 +1021,7 @@ this["app"]["templates"]["header"] = Handlebars.template({
         "partials": partials,
         "decorators": container.decorators
       })) != null ? stack1 : "") +
-      "        </li>\n<li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/auth/logout\"><i class=\"fa-solid fa-power-off\"></i> Logout</a></li>\n      </ul>\n\n    </div>\n  </div>\n</nav>\n";
+      "        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/auth/logout\"><i class=\"fa-solid fa-power-off\"></i> Logout</a>\n        </li>\n      </ul>\n\n    </div>\n  </div>\n</nav>\n";
   },
   "usePartial": true,
   "useData": true

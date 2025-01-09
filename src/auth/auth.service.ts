@@ -4,7 +4,6 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "@users/user";
 import { UsersService } from "@users/users.service";
 
-
 export interface JwtPayload {
   sub: string;
   username: string;

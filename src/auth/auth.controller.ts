@@ -39,7 +39,7 @@ export class AuthController {
 
   @Public()
   @Get("auth/logout")
-  logout(@Res() res) { 
+  logout(@Res() res) {
     this.authService.clearCookie(res);
     res.view("postlogin.hbs", { redir: "/login" }, {});
   }
