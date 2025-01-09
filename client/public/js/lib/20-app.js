@@ -1,3 +1,7 @@
+function logout() {
+  window.location.href = "/auth/logout";
+}
+
 function createEditor(ctl, value) {
   var target = document.getElementById(ctl);
   const getTheme = () => document.documentElement.getAttribute('data-bs-theme');

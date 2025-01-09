@@ -5661,7 +5661,7 @@ this["app"]["templates"]["header"] = Handlebars.template({
       helpers: helpers,
       partials: partials,
       decorators: container.decorators
-    })) != null ? stack1 : "") + "        </li>\n      </ul>\n\n    </div>\n  </div>\n</nav>\n"
+    })) != null ? stack1 : "") + '        </li>\n<li class="nav-item">\n          <a class="nav-link" href="/auth/logout"><i class="fa-solid fa-power-off"></i> Logout</a></li>\n      </ul>\n\n    </div>\n  </div>\n</nav>\n'
   },
   usePartial: true,
   useData: true
@@ -7487,6 +7487,10 @@ axios.interceptors.request.use(function(config) {
   }
   return config
 });
+
+function logout() {
+  window.location.href = "/auth/logout"
+}
 
 function createEditor(ctl, value) {
   var target = document.getElementById(ctl);

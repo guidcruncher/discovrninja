@@ -37,6 +37,13 @@ export class AuthController {
     );
   }
 
+  @Public()
+  @Get("auth/logout")
+  logout(@Res() res) { 
+    this.authService.clearCookie(res);
+    res.view("postlogin.hbs", { redir: "/login" }, {});
+  }
+
   @Get("auth/postlogin")
   @Public()
   postLogin(@Query("t") token, @Query("r") redir, @Res() res) {
