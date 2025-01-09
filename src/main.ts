@@ -73,8 +73,8 @@ async function bootstrap() {
   const tasks: TasksService = app.get(TasksService);
   const nodeEnv: string = process.env.NODE_ENV ?? "development";
 
-app.useGlobalFilters(new HttpExceptionFilter());
-app.useGlobalFilters(new ErrorExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new ErrorExceptionFilter());
 
   const Handlebars = HandlebarsFactory.getInstance();
   Handlebars.setViewEngine(app);

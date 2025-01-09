@@ -1,9 +1,4 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  Logger,
-} from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter, Logger } from "@nestjs/common";
 
 @Catch()
 export class ErrorExceptionFilter implements ExceptionFilter {
@@ -15,7 +10,7 @@ export class ErrorExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<any>();
     const status = 500;
 
-this.logger.error("Error on " + request.url, exception);
+    this.logger.error("Error on " + request.url, exception);
 
     if (request.url.startsWith("/api")) {
       response.status(status).send({

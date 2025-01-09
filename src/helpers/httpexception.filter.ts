@@ -16,7 +16,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<any>();
     const status = exception.getStatus();
 
-this.logger.error("Error on " + request.url, exception);
+    this.logger.error("Error on " + request.url, exception);
 
     if (request.url.startsWith("/api")) {
       response.status(status).send({
