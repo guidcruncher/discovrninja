@@ -4,11 +4,11 @@ import {
   TemplateCatalog,
   TemplateCreateRequest,
   TemplateCreateResponse,
-} from "@customtypes/portainer-template";
+} from "./portainer-template.types";
 import { StringBuilder } from "@customtypes/stringbuilder";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { GitHelper } from "@helpers/githelper";
-import { PortainerHelper } from "@helpers/portainerhelper";
+import { PortainerHelper } from "./portainer.helper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";

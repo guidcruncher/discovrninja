@@ -6,7 +6,6 @@ import { DiscoveryController } from "@controllers/discovery.controller";
 import { DockerController } from "@controllers/docker.controller";
 import { IconsController } from "@controllers/icons.controller";
 import { LinkdingController } from "@controllers/linkding.controller";
-import { PortainerController } from "@controllers/portainer.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { Global, Module } from "@nestjs/common";
@@ -22,7 +21,6 @@ import { FileDiscoveryService } from "@services/file.discovery.service";
 import { IconCDNService } from "@services/icon.cdn.service";
 import { IconService } from "@services/icon.service";
 import { NotificationService } from "@services/notification.service";
-import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { UsersModule } from "@users/users.module";
@@ -58,7 +56,6 @@ import { ResourcesModule } from "./resources/resources.module";
     DockerController,
     DiscoveryController,
     AppController,
-    PortainerController,
     ViewsController,
     ResourcesController,
     LinkdingController,
@@ -73,7 +70,6 @@ import { ResourcesModule } from "./resources/resources.module";
     DockerRepositoryService,
     DockerService,
     ResourcesService,
-    PortainerService,
     ComposeService,
     LinkdingService,
     NotificationService,

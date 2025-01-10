@@ -1,4 +1,4 @@
-import { PortainerTemplate, Templates } from "@customtypes/portainer-template";
+import { PortainerTemplate, Templates } from ".//portainer-template.types";
 
 export class PortainerHelper {
   public static identify(templates: string): string {

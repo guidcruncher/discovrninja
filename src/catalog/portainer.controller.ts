@@ -2,11 +2,11 @@ import {
   ContainerCatalog,
   TemplateCreateRequest,
   TemplateCreateResponse,
-} from "@customtypes/portainer-template";
+} from "./portainer-template.types";
 import { Body, Controller, Post, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ComposeService } from "@services/compose.service";
-import { PortainerService } from "@services/portainer.service";
+import { PortainerService } from "./portainer.service";
 
 @Controller("api/catalog")
 export class PortainerController {
