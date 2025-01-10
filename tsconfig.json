@@ -25,14 +25,17 @@
       "@users/*": [ "src/users/*" ],
       "@customtypes/*": [ "src/types/*" ],
       "@helpers/*": [ "src/helpers/*" ],
-      "@dto/*": [ "src/dto/*" ],
-      "@schemas/*": [ "src/schemas/*" ],
+      "@dto/*": [ "src/data/dto/*" ],
+      "@schemas/*": [ "src/data/schemas/*" ],
       "@/*": ["src/*"],
       "@projects/*": ["src/projects/*"],
       "@desktop/*": ["src/desktop/*"],
       "@container/*": ["src/container/*"],
-      "@catalog/*": [src/catalog/*"],
-      "@resources/*": [src/resources/*"],
+      "@catalog/*": ["src/catalog/*"],
+      "@resources/*": ["src/resources/*"],
+      "@configuration/*": ["src/configuration/*"],
+      "@data/*": ["src/data/*"],
+
     }
   }, "include": ["src/**/*"]
 }
