@@ -46,6 +46,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { ProjectModule } from './project/project.module';
 import { ContainerModule } from './container/container.module';
 import { ResourcesModule } from './resources/resources.module';
+import { ConfigurationModule } from './configuration/configuration.module';
 
 import configuration from "./config/configuration";
 
@@ -97,6 +98,7 @@ import configuration from "./config/configuration";
     ProjectModule,
     ContainerModule,
     ResourcesModule,
+    ConfigurationModule,
   ],
   controllers: [
     ComposeController,
