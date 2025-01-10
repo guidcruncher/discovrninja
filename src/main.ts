@@ -1,4 +1,4 @@
-import cluster from "node:cluster";
+ import cluster from "node:cluster";
 import { availableParallelism } from "node:os";
 import process from "node:process";
 
@@ -6,7 +6,6 @@ import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
 import secureSession from "@fastify/secure-session";
 import { ErrorExceptionFilter } from "@helpers/exception.filter";
-import { HttpExceptionFilter } from "@helpers/httpexception.filter";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -73,7 +72,6 @@ async function bootstrap() {
   const tasks: TasksService = app.get(TasksService);
   const nodeEnv: string = process.env.NODE_ENV ?? "development";
 
-  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalFilters(new ErrorExceptionFilter());
 
   const Handlebars = HandlebarsFactory.getInstance();

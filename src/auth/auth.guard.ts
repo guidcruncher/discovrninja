@@ -38,6 +38,8 @@ export class AuthGuard implements CanActivate {
       token = request.cookies.token;
       if (!token) {
         this.logger.error("No token from header or cookie.");
+if (request.url.toLowerCase().startsWith("/api")) { 
+throw new UnauthorizedException();}
         response.redirect("/login", 302);
       }
     }
@@ -50,7 +52,10 @@ export class AuthGuard implements CanActivate {
       request["user"] = payload;
     } catch (err) {
       this.logger.error("Error verifying JWT token", err);
-      throw new UnauthorizedException();
+if (request.url.toLowerCase().startsWith("/api")) { 
+throw new UnauthorizedException();}
+
+response.redirect("/login",302);
     }
 
     return true;
