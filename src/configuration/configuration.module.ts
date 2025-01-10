@@ -29,6 +29,6 @@ import { ConfigReader } from "./configuration.reader";
   ],
   controllers: [],
   providers: [],
-  exports: [ ConfigModule, LoggerModule ],
+  exports: [ConfigModule, LoggerModule],
 })
 export class ConfigurationModule {}

@@ -1,14 +1,6 @@
-import {
-  ContainerCatalog,
-  Template,
-  TemplateCatalog,
-  TemplateCreateRequest,
-  TemplateCreateResponse,
-} from "./portainer-template.types";
 import { StringBuilder } from "@customtypes/stringbuilder";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { GitHelper } from "@helpers/githelper";
-import { PortainerHelper } from "./portainer.helper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
@@ -19,6 +11,15 @@ import * as fs from "fs";
 import { Model } from "mongoose";
 import * as path from "path";
 import * as showdown from "showdown";
+
+import { PortainerHelper } from "./portainer.helper";
+import {
+  ContainerCatalog,
+  Template,
+  TemplateCatalog,
+  TemplateCreateRequest,
+  TemplateCreateResponse,
+} from "./portainer-template.types";
 
 @Injectable()
 export class PortainerService {

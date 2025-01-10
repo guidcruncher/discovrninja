@@ -1,5 +1,4 @@
-import { ContainerCatalog } from "@customtypes/portainer-template";
-import { Template } from "@customtypes/portainer-template";
+import { Template, ContainerCatalog } from "@catalog/portainer-template";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
