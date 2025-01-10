@@ -27,10 +27,10 @@ export class PortainerService {
 
   constructor(
     private configService: ConfigService,
-    @InjectModel(ContainerCatalog.name)
-    private containerCatalogModel: Model<ContainerCatalog>,
     @InjectModel(Template.name)
-    private templateModel: Model<Template>,
+    private readonly templateModel: Model<Template>,
+    @InjectModel(ContainerCatalog.name)
+    private readonly containerCatalogModel: Model<ContainerCatalog>,
   ) {}
 
   public getCatalogs(): Promise<ContainerCatalog[]> {

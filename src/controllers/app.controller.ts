@@ -1,3 +1,4 @@
+import { PortainerService } from "@catalog/portainer.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
 import { ComposeService } from "@services/compose.service";
@@ -6,7 +7,6 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerService } from "@services/docker.service";
 import { LinkdingService } from "@services/ext.linkding.service";
 import { IconService } from "@services/icon.service";
-import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 
 @Controller("/")

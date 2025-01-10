@@ -3,7 +3,7 @@ import {
   RepositorySetting,
   Template,
   VolumeSetting,
-} from "@catalog/portainer-template";
+} from "@catalog/portainer-template.types";
 import { SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 

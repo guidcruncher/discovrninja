@@ -1,9 +1,11 @@
+import { CompileModels } from "@data/data.schemas";
 import { Module } from "@nestjs/common";
+
+import { PortainerController } from "./portainer.controller";
 import { PortainerService } from "./portainer.service";
-import { PortaineroController } from "./portainer.controller";
 
 @Module({
-  imports: [],
+  imports: [CompileModels],
   controllers: [PortainerController],
   providers: [PortainerService],
   exports: [],

@@ -1,4 +1,4 @@
-import { ContainerCatalog } from "@customtypes/portainer-template";
+import { ContainerCatalog } from "@catalog/portainer-template.types";
 import { SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 
