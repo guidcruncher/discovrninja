@@ -1,9 +1,10 @@
+import { ContainerCatalog } from "@customtypes/portainer-template";
+import { Template } from "@customtypes/portainer-template";
+import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
-import { LoggerModule } from "nestjs-pino";
-
 import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
 import {
   ContainerStats,
@@ -12,9 +13,6 @@ import {
 import { Icon, IconSchema } from "@schemas/icons.schema";
 import { TemplateSchema } from "@schemas/portainer.schema";
 import { ServiceDefinitionSchema } from "@schemas/servicedefinition.schema";
-import { ContainerCatalog } from "@customtypes/portainer-template";
-import { Template } from "@customtypes/portainer-template";
-import { ServiceDefinition } from "@customtypes/servicedefinition";
 
 @Module({
   imports: [
@@ -36,5 +34,6 @@ import { ServiceDefinition } from "@customtypes/servicedefinition";
   ],
   controllers: [],
   providers: [],
+  exports: [MongooseModule],
 })
 export class DataModule {}

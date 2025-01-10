@@ -10,9 +10,6 @@ import { PortainerController } from "@controllers/portainer.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { Global, Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { ConfigService } from "@nestjs/config";
-import { MongooseModule } from "@nestjs/mongoose";
 import { ScheduleModule } from "@nestjs/schedule";
 import { ComposeService } from "@services/compose.service";
 import { DesktopService } from "@services/desktop.service";
@@ -29,14 +26,14 @@ import { PortainerService } from "@services/portainer.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
 import { UsersModule } from "@users/users.module";
-import { LoggerModule } from "nestjs-pino";
-import { DesktopModule } from "./desktop/desktop.module";
+
 import { CatalogModule } from "./catalog/catalog.module";
-import { ProjectModule } from "./project/project.module";
-import { ContainerModule } from "./container/container.module";
-import { ResourcesModule } from "./resources/resources.module";
 import { ConfigurationModule } from "./configuration/configuration.module";
+import { ContainerModule } from "./container/container.module";
 import { DataModule } from "./data/data.module";
+import { DesktopModule } from "./desktop/desktop.module";
+import { ProjectModule } from "./project/project.module";
+import { ResourcesModule } from "./resources/resources.module";
 
 /**
  * This is the main application module

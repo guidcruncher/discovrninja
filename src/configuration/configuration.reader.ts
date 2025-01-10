@@ -10,8 +10,8 @@ import yargs from "yargs";
  */
 export class ConfigReader {
   public static Read() {
+const log = new Logger(ConfigReader.name);
     try {
-      const log = new Logger(ConfigReader.name);
       const argv: any = yargs(process.argv.slice(2))
         .options({ c: { type: "string", alias: "config" } })
         .parse();
@@ -37,7 +37,6 @@ export class ConfigReader {
           any
         >;
       }
-      p;
 
       log.error(
         "Error loading configuration, File not found." + configFilename,

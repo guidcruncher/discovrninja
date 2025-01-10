@@ -1,8 +1,9 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
-import { ConfigReader } from "./configuration.reader";
 import { LoggerModule } from "nestjs-pino";
+
+import { ConfigReader } from "./configuration.reader";
 
 @Module({
   imports: [
@@ -28,5 +29,6 @@ import { LoggerModule } from "nestjs-pino";
   ],
   controllers: [],
   providers: [],
+  exports: [ ConfigModule, LoggerModule ],
 })
 export class ConfigurationModule {}
