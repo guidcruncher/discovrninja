@@ -64,6 +64,6 @@ import { ResourcesModule } from "./resources/resources.module";
     NotificationService,
     TasksService,
   ],
-  exports: [IconService, ResourcesService, DockerService],
+  exports: [IconCDNService, IconService, ResourcesService, DockerService],
 })
 export class AppModule {}

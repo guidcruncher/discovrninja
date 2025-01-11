@@ -3,9 +3,9 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
-  UnauthorizedException,
   HttpStatus,
   Logger,
+  UnauthorizedException,
 } from "@nestjs/common";
 
 @Catch()

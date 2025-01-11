@@ -620,6 +620,7 @@ export class DockerService {
     const self = this;
     return new Promise<any>((resolve, reject) => {
       const docker = this.createDocker();
+serviceDefinitionService.all((services)=>{
       docker.listContainers({ all: true, size: false }, (err, containers) => {
         if (err) {
           reject(err);
@@ -660,7 +661,7 @@ export class DockerService {
             };
 
             if (record.status.toLowerCase().includes("exited")) {
-              record.shutdown = true;
+             record.shutdown = true;
             }
 
             if (record.status.toLowerCase().includes("unhealthy")) {
@@ -669,8 +670,9 @@ export class DockerService {
             record.image = self.formatImage(record.image);
             promises.push(
               new Promise((resolve, reject) => {
-                this.getDefinition(record.name)
-                  .then((serviceDef) => {
+                
+var idx = services.findIndex((s)=>{return s.containerName==record.name;});
+if (idx>=0) { serviceDef=services[idx];
                     const sd = serviceDef[0];
                     if (sd) {
                       if (sd.public != "") {
@@ -733,18 +735,10 @@ export class DockerService {
                         })
                         .catch(() => {
                           resolve(record);
-                        });
                     });
-                  })
-                  .catch((err) => {
-                    this.logger.error("Error in getdefinition", err);
-                    record.uptimeSeconds = 0;
-                    record.uptimeSecondsPercent = "";
-                    resolve(record);
                   });
-              }),
-            );
-          });
+}
+}));
 
           Promise.allSettled(promises).then((promiseResults) => {
             promiseResults.forEach((promise) => {
@@ -759,8 +753,9 @@ export class DockerService {
               }),
             );
           });
-        }
-      });
-    });
+        });
   }
+});
+});
+}
 }

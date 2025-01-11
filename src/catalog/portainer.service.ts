@@ -5,12 +5,14 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { default as convertDockerRunToCompose } from "composerize";
+import { ServiceDefinitionService } from "@data/service-definition.service";
 import * as crypto from "crypto";
 import * as compose from "docker-compose";
 import * as fs from "fs";
 import { Model } from "mongoose";
 import * as path from "path";
 import * as showdown from "showdown";
+import { IconCDNService } from "@services/icon.cdn.service";
 
 import { PortainerHelper } from "./portainer.helper";
 import {
@@ -27,6 +29,8 @@ export class PortainerService {
 
   constructor(
     private configService: ConfigService,
+    private readonly serviceDefinitionService: ServiceDefinitionService,
+    private readonly iconCDNService: IconCDNService,
     @InjectModel(Template.name)
     private readonly templateModel: Model<Template>,
     @InjectModel(ContainerCatalog.name)
@@ -215,7 +219,36 @@ export class PortainerService {
 
       GitHelper.createGitRepo(baseDir, { name: "system" })
         .then((result) => {
-          resolve(dockerRun);
+          this.iconCDNService
+            .query(cfg.template.name, true)
+            .then((icon) => {
+              var def = {
+                name: cfg.template.name,
+                containerName: cfg.template.name,
+                hostname: cfg.template.name,
+                proxy: dockerRun.serviceUrl,
+                public: dockerRun.publicUrl,
+                iconSlug: cfg.template.name,
+                iconCatalog: "",
+                archived: false,
+                available: false,
+              };
+              if (icon) {
+                def.iconSlug = icon[0].slug;
+                def.iconCatalog = icon[0].catalog;
+              }
+              this.serviceDefinitionService
+                .save(cfg.template.name, def)
+                .then((r) => {
+                  resolve(dockerRun);
+                })
+                .catch((err) => {
+                  reject(err);
+                });
+            })
+            .catch((err) => {
+              reject(err);
+            });
         })
         .catch((err) => {
           reject(err);
@@ -244,7 +277,12 @@ export class PortainerService {
 
   public toDockerRun(cfg: TemplateCreateRequest): TemplateCreateResponse {
     try {
-      const res: TemplateCreateResponse = { cmd: "", environment: "" };
+      const res: TemplateCreateResponse = {
+        publicUrl: "",
+        serviceUrl: "",
+        cmd: "",
+        environment: "",
+      };
       const t = cfg.template;
       const environment = cfg.environment;
       const sb: StringBuilder = new StringBuilder();
@@ -270,6 +308,9 @@ export class PortainerService {
         serviceUrl = serviceUrl.replace(":{port}", "");
         publicUrl = publicUrl.replace(":{port}", "");
       }
+
+      res.serviceUrl = serviceUrl;
+      res.publicUrl = publicUrl;
 
       if (t.restart_policy != "") {
         sb.appendFormat("--restart {0}", t.restart_policy);
