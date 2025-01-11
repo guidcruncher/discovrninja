@@ -2,6 +2,10 @@ function logout() {
   window.location.href = "/auth/logout";
 }
 
+function admin() {
+  window.location.href = "/admin/index";
+}
+
 function createEditor(ctl, value) {
   var target = document.getElementById(ctl);
   const getTheme = () => document.documentElement.getAttribute('data-bs-theme');

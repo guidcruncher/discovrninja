@@ -1,7 +1,7 @@
-import { ComposeService } from "@catalog/compose.service";
 import { Body, Controller, Post, Res } from "@nestjs/common";
-import { DiscoveryService } from "@services/discovery.service";
 import { IconService } from "@services/icon.service";
+
+import { ComposeService } from "./compose.service";
 
 /**
  * The Docker service API
@@ -10,7 +10,6 @@ import { IconService } from "@services/icon.service";
 export class ComposeController {
   constructor(
     private readonly composeService: ComposeService,
-    private readonly discoveryService: DiscoveryService,
     private readonly iconService: IconService,
   ) {}
 

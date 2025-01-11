@@ -72,5 +72,6 @@ import { ResourcesModule } from "./resources/resources.module";
     TasksService,
     DesktopService,
   ],
+  exports: [IconService],
 })
 export class AppModule {}

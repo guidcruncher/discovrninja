@@ -21,13 +21,20 @@ export class ErrorExceptionFilter implements ExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     this.logger.error("Error on " + request.url, exception);
+    const buildDate = new Date(0);
+    buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE ?? "0"));
 
     if (request.url.startsWith("/api")) {
       response.status(status).send({
         status: status,
+        name: exception.name,
         message: exception.message ?? "Internal Server Error",
         timestamp: new Date().toISOString(),
         path: request.url,
+        production: (process.env.NODE_ENV ?? "") == "production",
+        insideDocker: process.env.IN_DOCKER ?? false,
+        version: process.env.PACKAGE_VERSION ?? "development",
+        buildDate: buildDate,
       });
     } else {
       response.view(
@@ -35,9 +42,14 @@ export class ErrorExceptionFilter implements ExceptionFilter {
         {
           status: status,
           exception: exception,
-          message: "Internal Server Error",
+          name: exception.name,
+          message: exception.message ?? "Internal Server Error",
           timestamp: new Date().toISOString(),
           path: request.url,
+          production: (process.env.NODE_ENV ?? "") == "production",
+          insideDocker: process.env.IN_DOCKER ?? false,
+          version: process.env.PACKAGE_VERSION ?? "development",
+          buildDate: buildDate,
         },
         { layout: "./layouts/login.hbs" },
       );

@@ -4,6 +4,8 @@ import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 
+import { ServiceDefinitionService } from "./service-definition.service";
+
 @Module({
   imports: [
     MongooseModule.forRootAsync({
@@ -17,7 +19,7 @@ import { MongooseModule } from "@nestjs/mongoose";
     Schemas.CompileModels(),
   ],
   controllers: [],
-  providers: [],
-  exports: [MongooseModule],
+  providers: [ServiceDefinitionService],
+  exports: [MongooseModule, ServiceDefinitionService],
 })
 export class DataModule {}

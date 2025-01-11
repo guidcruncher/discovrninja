@@ -1,7 +1,7 @@
+import { ComposeService } from "@catalog/compose.service";
 import { PortainerService } from "@catalog/portainer.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
-import { ComposeService } from "@services/compose.service";
 import { DesktopService } from "@services/desktop.service";
 import { DiscoveryService } from "@services/discovery.service";
 import { DockerService } from "@services/docker.service";
