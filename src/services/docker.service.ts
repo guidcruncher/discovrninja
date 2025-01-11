@@ -712,11 +712,11 @@ export class DockerService {
 
         for (const container of containers) {
           const record = this.createRecordFromContainer(container);
-          let idx = definitions.findIndex((s) => {
+          const idx = definitions.findIndex((s) => {
             return s.containerName == record.name;
           });
           if (idx >= 0) {
-            let sd = definitions[idx];
+            const sd = definitions[idx];
             record.publicUrl = sd.public;
             record.uptimeSeconds = this.calculateUptime(sd);
             record.colorLevel = this.getColorLevel(sd);
@@ -778,7 +778,6 @@ export class DockerService {
               const record = this.createRecordFromDefinition(definition);
               record.status = "configured";
               record.state = "configured";
-              3;
               record.stateCss = this.getStateCss(record.state);
               data.push(record);
             }
@@ -801,7 +800,8 @@ export class DockerService {
     r.cmd = c.Command;
     r.created = new Date(c.Created * 1000);
     r.state = c.State;
-    (r.stateCss = this.getStateCss(c.State)), (r.status = c.Status);
+    r.stateCss = this.getStateCss(c.State);
+    r.status = c.Status;
     r.ports = c.Ports;
     r.shutdown = r.status.toLowerCase().includes("exited");
     r.healthy = record.status.toLowerCase().includes("unhealthy");
