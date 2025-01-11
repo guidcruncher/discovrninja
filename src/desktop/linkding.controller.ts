@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 import { Query } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { LinkdingService } from "@services/ext.linkding.service";
+import { LinkdingService } from "./linkding.service";
 
 @Controller("api/external/linkding")
 export class LinkdingController {

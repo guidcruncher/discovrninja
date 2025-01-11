@@ -1,16 +1,15 @@
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { Controller, Get, Query, Req, Res } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { DesktopService } from "./desktop.service";
-import { ResourcesService } from "@services/resources.service"; 
-import { DockerService } from "@services/docker.service";
 import { Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { DockerService } from "@services/docker.service";
+import { ResourcesService } from "@services/resources.service";
 
+import { DesktopService } from "./desktop.service";
 
 @Controller("/")
 export class DesktopController {
-
-private logger: Logger=new Logger(DesktopController.name);
+  private logger: Logger = new Logger(DesktopController.name);
 
   constructor(
     private configService: ConfigService,
@@ -75,6 +74,27 @@ private logger: Logger=new Logger(DesktopController.name);
     });
   }
 
+@Get("/desktop.js")
+  async getdesktopjs(@Res() res) {
+    return new Promise<void>((resolve, reject) => {
+      this.desktopService
+        .renderDesktop()
+        .then((desktop) => {
+          const script =
+            "const desktop=" +
+            JSON.stringify(desktop, null, 0) +
+            ";\nlocalStorage.setItem('desktop', JSON.stringify(desktop,null,0));";
+          res.type("text/javascript");
+          res.send(script);
+          resolve();
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+          reject(err);
+        });
+    });
+  }
+
   @Get("api/desktop/background/globe")
   getGlobeImage(
     @Query("h") height,
@@ -107,7 +127,7 @@ private logger: Logger=new Logger(DesktopController.name);
         });
     });
   }
-	
+
   @Get("api/desktop/background")
   getBackground(@Query("w") width, @Query("h") height, @Req() req, @Res() res) {
     return new Promise((resolve, reject) => {

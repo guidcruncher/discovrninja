@@ -1,9 +1,9 @@
+
 import { AuthModule } from "@auth/auth.module";
 import { AppController } from "@controllers/app.controller";
 import { DiscoveryController } from "@controllers/discovery.controller";
 import { DockerController } from "@controllers/docker.controller";
 import { IconsController } from "@controllers/icons.controller";
-import { LinkdingController } from "@controllers/linkding.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { Global, Module } from "@nestjs/common";
@@ -12,7 +12,6 @@ import { DiscoveryService } from "@services/discovery.service";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
 import { DockerService } from "@services/docker.service";
-import { LinkdingService } from "@services/ext.linkding.service";
 import { FileDiscoveryService } from "@services/file.discovery.service";
 import { IconCDNService } from "@services/icon.cdn.service";
 import { IconService } from "@services/icon.service";
@@ -52,7 +51,6 @@ import { ResourcesModule } from "./resources/resources.module";
     AppController,
     ViewsController,
     ResourcesController,
-    LinkdingController,
     IconsController,
   ],
   providers: [
@@ -64,10 +62,9 @@ import { ResourcesModule } from "./resources/resources.module";
     DockerRepositoryService,
     DockerService,
     ResourcesService,
-    LinkdingService,
     NotificationService,
     TasksService,
   ],
-  exports: [IconService],
+  exports: [IconService, ResourcesService, DockerService ],
 })
 export class AppModule {}

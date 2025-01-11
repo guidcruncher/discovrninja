@@ -2,10 +2,8 @@ import { ComposeService } from "@catalog/compose.service";
 import { PortainerService } from "@catalog/portainer.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
-import { DesktopService } from "@services/desktop.service";
 import { DiscoveryService } from "@services/discovery.service";
 import { DockerService } from "@services/docker.service";
-import { LinkdingService } from "@services/ext.linkding.service";
 import { IconService } from "@services/icon.service";
 import { ResourcesService } from "@services/resources.service";
 
@@ -16,9 +14,7 @@ export class AppController {
     private readonly discoveryService: DiscoveryService,
     private readonly iconService: IconService,
     private readonly composeService: ComposeService,
-    private readonly desktopService: DesktopService,
     private readonly resourcesService: ResourcesService,
-    private readonly linkdingService: LinkdingService,
     private readonly portainerService: PortainerService,
   ) {}
 
@@ -33,72 +29,6 @@ export class AppController {
       version: process.env.PACKAGE_VERSION,
       epochBuildate: parseInt(process.env.BUILDDATE),
       buildDate: buildDate,
-    });
-  }
-
-  @Get("/bookmarks")
-  async getbookmarks(@Query("tag") tag, @Res() res) {
-    return new Promise<void>((resolve, reject) => {
-      this.linkdingService
-        .getBookmarks(tag)
-        .then((bookmarks) => {
-          this.desktopService
-            .renderDesktop()
-            .then((desktop) => {
-              res.view(
-                "bookmarks.hbs",
-                { tag: tag, desktop: desktop, bookmarks: bookmarks },
-                { layout: "./layouts/desktop.hbs" },
-              );
-              resolve();
-            })
-            .catch((err) => {
-              res.status(500).send(err);
-              reject();
-            });
-        })
-        .catch((err) => {
-          res.status(500).send(err);
-          reject();
-        });
-    });
-  }
-
-  @Get("/news")
-  async getnews(@Query("url") url, @Res() res) {
-    return new Promise<void>((resolve, reject) => {
-      this.resourcesService
-        .getFeed(url)
-        .then((feed) => {
-          feed.feedUrl = url;
-          res.view("news.hbs", feed, { layout: "" });
-          resolve();
-        })
-        .catch((err) => {
-          res.status(500).send(err);
-          reject(err);
-        });
-    });
-  }
-
-  @Get("/desktop.js")
-  async getdesktopjs(@Res() res) {
-    return new Promise<void>((resolve, reject) => {
-      this.desktopService
-        .renderDesktop()
-        .then((desktop) => {
-          const script =
-            "const desktop=" +
-            JSON.stringify(desktop, null, 0) +
-            ";\nlocalStorage.setItem('desktop', JSON.stringify(desktop,null,0));";
-          res.type("text/javascript");
-          res.send(script);
-          resolve();
-        })
-        .catch((err) => {
-          res.status(500).send(err);
-          reject(err);
-        });
     });
   }
 
