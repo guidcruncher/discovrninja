@@ -611,6 +611,8 @@ export class DockerService {
         return "dw-state text-info fa-solid fa-pause";
       case "dead":
         return "dw-state text-danger fa-solid fa-face-dizzy";
+      case "configured":
+        return "dw-state text-info fa-solid fa-gears";
     }
   }
 
@@ -670,17 +672,20 @@ export class DockerService {
         }
 
         for (const container of containers) {
-          const record = this.createRecordFromContiner(container);
+          const record = this.createRecordFromContainer(container);
           data.push(record);
         }
 
         for (const definition of definitions) {
           const i = data.findIndex((d) => {
-            return d.name == definition.name;
+            return d.name == definition.containerName;
           });
 
           if (i < 0) {
             const record = this.createRecordFromDefinition(definition);
+            record.status="configured";
+            record.state="configured";3
+            record.stateCss=this.getStateCss(record.state);
             data.push(record);
           }
 
@@ -696,12 +701,19 @@ export class DockerService {
 
   private createRecordFromContainer(c) {
     const r = this.createRecord(c.Id, c.Names[0].substring(1));
-
+    r.hostName="";
+    r.image=c.Image;
+              r.cmd= c.Command;
+              r.created= new Date(c.Created * 1000);
+              r.state= c.State;
+              r.stateCss= this.getStateCss(c.State),
+              r.status= c.Status;
+              r.ports= c.Ports;
     return r;
   }
 
   private createRecordFromDefinition(c) {
-    const r = this.createRecord("", c.name);
+    const r = this.createRecord("", c.containerName);
 
     return r;
   }
