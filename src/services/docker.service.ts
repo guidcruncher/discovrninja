@@ -616,6 +616,43 @@ export class DockerService {
     }
   }
 
+  private calculateUsage(record: any, container: any) {
+    return new Promise((resolve, reject) => {
+      this.getContainerStats(container.Id)
+        .then((detail) => {
+          record.stats.cpuPercent = this.calculateCpuPercent(detail);
+          record.cpuAlert = record.stats.cpuPercent > 1;
+          record.stats.cpuPercentStr = Intl.NumberFormat("default", {
+            style: "percent",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(record.stats.cpuPercent);
+          record.stats.memoryUsageStr = this.formatBytes(
+            detail.memory_stats.usage,
+          );
+          const memoryPercent =
+            (100 / detail.memory_stats.limit) *
+            (detail.memory_stats.limit - detail.memory_stats.usage);
+          record.stats.memoryFreePercent = memoryPercent;
+          record.memoryAlert = memoryPercent < 0.1;
+          record.stats.memoryFreePercentStr = Intl.NumberFormat("default", {
+            style: "percent",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(memoryPercent / 100);
+          record.stats.memoryUsage = detail.memory_stats.usage;
+          record.stats.memoryLimitStr = this.formatBytes(
+            detail.memory_stats.limit,
+          );
+          record.stats.memoryLimit = detail.memory_stats.limit;
+          resolve(record);
+        })
+        .catch(() => {
+          resolve(record);
+        });
+    });
+  }
+
   /**
    * Gets statistics for all running containers
    */
@@ -671,50 +708,117 @@ export class DockerService {
           }
         }
 
+        promises = [];
+
         for (const container of containers) {
           const record = this.createRecordFromContainer(container);
-          data.push(record);
-        }
-
-        for (const definition of definitions) {
-          const i = data.findIndex((d) => {
-            return d.name == definition.containerName;
+          let idx = definitions.findIndex((s) => {
+            return s.containerName == record.name;
           });
-
-          if (i < 0) {
-            const record = this.createRecordFromDefinition(definition);
-            record.status="configured";
-            record.state="configured";3
-            record.stateCss=this.getStateCss(record.state);
-            data.push(record);
+          if (idx >= 0) {
+            let sd = definitions[idx];
+            record.publicUrl = sd.public;
+            record.uptimeSeconds = this.calculateUptime(sd);
+            record.colorLevel = this.getColorLevel(sd);
+            record.uptimeSecondsPercent = this.calculateUptimePercent(
+              sd,
+            ).toLocaleString(undefined, {
+              style: "percent",
+              minimumFractionDigits: 2,
+            });
           }
 
-          resolve(
-            data.sort((a, b) => {
-              return a.name.localeCompare(b.name);
+          promises.push(
+            new Promise((resolve, reject) => {
+              this.getContainer(container.Id)
+                .then((detail) => {
+                  record.project =
+                    detail.Config.Labels["com.docker.compose.project"] ?? "";
+                  record.hostName = detail.Config.Hostname;
+                  if (record.publicUrl == "") {
+                    record.publicUrl = detail.publicUrl;
+                  }
+
+                  self
+                    .calculateUsage(record)
+                    .then((result) => {
+                      resolve(result);
+                    })
+                    .catch((err) => {
+                      resolve(record, container);
+                    });
+                })
+                .catch((err) => {
+                  self
+                    .calculateUsage(record)
+                    .then((result) => {
+                      resolve(result);
+                    })
+                    .catch((err) => {
+                      resolve(record, container);
+                    });
+                });
             }),
           );
         }
+
+        Promise.allSettled(promises).then((results) => {
+          for (const result of results) {
+            if (result.status == "fulfilled") {
+              data.push(result.value);
+            }
+          }
+
+          for (const definition of definitions) {
+            const i = data.findIndex((d) => {
+              return d.name == definition.containerName;
+            });
+
+            if (i < 0) {
+              const record = this.createRecordFromDefinition(definition);
+              record.status = "configured";
+              record.state = "configured";
+              3;
+              record.stateCss = this.getStateCss(record.state);
+              data.push(record);
+            }
+
+            resolve(
+              data.sort((a, b) => {
+                return a.name.localeCompare(b.name);
+              }),
+            );
+          }
+        });
       });
     });
   }
 
   private createRecordFromContainer(c) {
     const r = this.createRecord(c.Id, c.Names[0].substring(1));
-    r.hostName="";
-    r.image=c.Image;
-              r.cmd= c.Command;
-              r.created= new Date(c.Created * 1000);
-              r.state= c.State;
-              r.stateCss= this.getStateCss(c.State),
-              r.status= c.Status;
-              r.ports= c.Ports;
+    r.hostName = "";
+    r.image = this.formatImage(c.Image);
+    r.cmd = c.Command;
+    r.created = new Date(c.Created * 1000);
+    r.state = c.State;
+    (r.stateCss = this.getStateCss(c.State)), (r.status = c.Status);
+    r.ports = c.Ports;
+    r.shutdown = r.status.toLowerCase().includes("exited");
+    r.healthy = record.status.toLowerCase().includes("unhealthy");
     return r;
   }
 
   private createRecordFromDefinition(c) {
     const r = this.createRecord("", c.containerName);
-
+    r.shutdown = true;
+    r.healthy = false;
+    r.publicUrl = c.public;
+    r.uptimeSeconds = this.calculateUptime(c);
+    r.colorLevel = this.getColorLevel(c);
+    r.uptimeSecondsPercent = this.calculateUptimePercent(c).toLocaleString(
+      undefined,
+      { style: "percent", minimumFractionDigits: 2 },
+    );
     return r;
   }
 
