@@ -1,17 +1,81 @@
+import { ServiceDefinitionService } from "@data/service-definition.service";
 import { Controller, Get, Query, Req, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { DesktopService } from "@services/desktop.service";
-import { ResourcesService } from "@services/resources.service";
+import { DesktopService } from "./desktop.service";
+import { ResourcesService } from "@services/resources.service"; 
+import { DockerService } from "@services/docker.service";
+import { Logger } from "@nestjs/common";
 
-@Controller("api/desktop")
+
+@Controller("/")
 export class DesktopController {
+
+private logger: Logger=new Logger(DesktopController.name);
+
   constructor(
     private configService: ConfigService,
-    private resourcesService: ResourcesService,
-    private desktopService: DesktopService,
+    private readonly resourcesService: ResourcesService,
+    private readonly desktopService: DesktopService,
+    private readonly dockerService: DockerService,
+    private readonly serviceDefinitionService: ServiceDefinitionService,
   ) {}
 
-  @Get("background/globe")
+  @Get()
+  async homepage(@Res() res) {
+    return new Promise<void>((resolve, reject) => {
+      this.desktopService
+        .renderDesktop()
+        .then((desktop) => {
+          this.serviceDefinitionService
+            .all(true)
+            .then((definitions) => {
+              const promises = [];
+              definitions.forEach((d) => {
+                d.available = true;
+                promises.push(this.dockerService.isContainerAvailable(d));
+              });
+              Promise.allSettled(promises)
+                .then((results) => {
+                  definitions = [];
+                  results.forEach((r) => {
+                    if (r.status == "fulfilled") {
+                      definitions.push(r.value);
+                    }
+                  });
+                  res.view(
+                    "index.hbs",
+                    { desktop: desktop, services: definitions },
+                    { layout: "./layouts/desktop.hbs" },
+                  );
+                  resolve();
+                })
+                .catch((err) => {
+                  this.logger.error(
+                    "Error in index getting container state",
+                    err,
+                  );
+                  res.view(
+                    "index.hbs",
+                    { desktop: desktop, services: definitions },
+                    { layout: "./layouts/desktop.hbs" },
+                  );
+                  resolve();
+                });
+            })
+            .catch((err) => {
+              this.logger.error("Error in index", err);
+              res.status(500).send(err);
+              reject();
+            });
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+          reject();
+        });
+    });
+  }
+
+  @Get("api/desktop/background/globe")
   getGlobeImage(
     @Query("h") height,
     @Query("lat") lat,
@@ -43,8 +107,8 @@ export class DesktopController {
         });
     });
   }
-
-  @Get("background")
+	
+  @Get("api/desktop/background")
   getBackground(@Query("w") width, @Query("h") height, @Req() req, @Res() res) {
     return new Promise((resolve, reject) => {
       let p: Promise<string> = null;
@@ -97,12 +161,12 @@ export class DesktopController {
     });
   }
 
-  @Get("daily/globe")
+  @Get("api/desktop/daily/globe")
   async getGlobeDailyImageUrl(): Promise<string> {
     return this.resourcesService.getGlobeImageUrl(0, 0, 0, 0);
   }
 
-  @Get("daily/nasa")
+  @Get("api/desktop/daily/nasa")
   async getNasaDailyImageUrl(): Promise<string> {
     return this.resourcesService.getNasaDailyImageUrl();
   }

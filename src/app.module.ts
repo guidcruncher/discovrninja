@@ -1,6 +1,5 @@
 import { AuthModule } from "@auth/auth.module";
 import { AppController } from "@controllers/app.controller";
-import { DesktopController } from "@controllers/desktop.controller";
 import { DiscoveryController } from "@controllers/discovery.controller";
 import { DockerController } from "@controllers/docker.controller";
 import { IconsController } from "@controllers/icons.controller";
@@ -9,7 +8,6 @@ import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { Global, Module } from "@nestjs/common";
 import { ScheduleModule } from "@nestjs/schedule";
-import { DesktopService } from "@services/desktop.service";
 import { DiscoveryService } from "@services/discovery.service";
 import { DockerDiscoveryService } from "@services/docker.discovery.service";
 import { DockerRepositoryService } from "@services/docker.repository.service";
@@ -49,7 +47,6 @@ import { ResourcesModule } from "./resources/resources.module";
     ResourcesModule,
   ],
   controllers: [
-    DesktopController,
     DockerController,
     DiscoveryController,
     AppController,
@@ -70,7 +67,6 @@ import { ResourcesModule } from "./resources/resources.module";
     LinkdingService,
     NotificationService,
     TasksService,
-    DesktopService,
   ],
   exports: [IconService],
 })

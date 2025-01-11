@@ -36,61 +36,6 @@ export class AppController {
     });
   }
 
-  @Get()
-  async homepage(@Res() res) {
-    return new Promise<void>((resolve, reject) => {
-      this.desktopService
-        .renderDesktop()
-        .then((desktop) => {
-          this.discoveryService
-            .getAllDefinitions(true)
-            .then((definitions) => {
-              const promises = [];
-              definitions.forEach((d) => {
-                d.available = true;
-                promises.push(this.dockerService.isContainerAvailable(d));
-              });
-              Promise.allSettled(promises)
-                .then((results) => {
-                  definitions = [];
-                  results.forEach((r) => {
-                    if (r.status == "fulfilled") {
-                      definitions.push(r.value);
-                    }
-                  });
-                  res.view(
-                    "index.hbs",
-                    { desktop: desktop, services: definitions },
-                    { layout: "./layouts/desktop.hbs" },
-                  );
-                  resolve();
-                })
-                .catch((err) => {
-                  this.logger.error(
-                    "Error in index getting container state",
-                    err,
-                  );
-                  res.view(
-                    "index.hbs",
-                    { desktop: desktop, services: definitions },
-                    { layout: "./layouts/desktop.hbs" },
-                  );
-                  resolve();
-                });
-            })
-            .catch((err) => {
-              this.logger.error("Error in index", err);
-              res.status(500).send(err);
-              reject();
-            });
-        })
-        .catch((err) => {
-          res.status(500).send(err);
-          reject();
-        });
-    });
-  }
-
   @Get("/bookmarks")
   async getbookmarks(@Query("tag") tag, @Res() res) {
     return new Promise<void>((resolve, reject) => {
