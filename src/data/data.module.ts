@@ -1,4 +1,4 @@
-import { CompileModels } from "@data/data.schemas";
+import { Schemas } from "@data/data.schemas";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
@@ -14,7 +14,7 @@ import { MongooseModule } from "@nestjs/mongoose";
         dbName: "discovrninja",
       }),
     }),
-    CompileModels,
+    Schemas.CompileModels(),
   ],
   controllers: [],
   providers: [],
