@@ -150,8 +150,11 @@ export class TemplateCreateRequest {
 
 export class TemplateCreateResponse {
   cmd: string;
+
   serviceUrl: string;
+
   publicUrl: string;
+
   environment: string;
 }
 

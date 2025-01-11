@@ -1,18 +1,18 @@
 import { StringBuilder } from "@customtypes/stringbuilder";
+import { ServiceDefinitionService } from "@data/service-definition.service";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { GitHelper } from "@helpers/githelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
+import { IconCDNService } from "@services/icon.cdn.service";
 import { default as convertDockerRunToCompose } from "composerize";
-import { ServiceDefinitionService } from "@data/service-definition.service";
 import * as crypto from "crypto";
 import * as compose from "docker-compose";
 import * as fs from "fs";
 import { Model } from "mongoose";
 import * as path from "path";
 import * as showdown from "showdown";
-import { IconCDNService } from "@services/icon.cdn.service";
 
 import { PortainerHelper } from "./portainer.helper";
 import {
@@ -222,7 +222,7 @@ export class PortainerService {
           this.iconCDNService
             .query(cfg.template.name, true)
             .then((icon) => {
-              var def = {
+              const def = {
                 name: cfg.template.name,
                 containerName: cfg.template.name,
                 hostname: cfg.template.name,

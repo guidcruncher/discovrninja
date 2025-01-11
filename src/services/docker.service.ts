@@ -11,6 +11,7 @@ import { FancyAnsi } from "fancy-ansi";
 import fs from "fs";
 import { Model } from "mongoose";
 import path from "path";
+import { ServiceDefinitionService } from "@data/service-definition.service";
 
 /**
  * Docker connection and management
@@ -21,6 +22,7 @@ export class DockerService {
 
   constructor(
     private readonly dockerRepositoryService: DockerRepositoryService,
+    private readonly serviceDefinitionService: ServiceDefinitionService,
     private configService: ConfigService,
     @InjectModel(ContainerStats.name)
     private containerStatsModel: Model<ContainerStats>,
@@ -616,146 +618,59 @@ export class DockerService {
    * Gets statistics for all running containers
    */
   public getAllContainerStats(): Promise<any> {
-    const results = [];
+    const data = [];
     const self = this;
+
     return new Promise<any>((resolve, reject) => {
+      const promises = [];
+      let definitions = [];
+      let containers = [];
       const docker = this.createDocker();
-serviceDefinitionService.all((services)=>{
-      docker.listContainers({ all: true, size: false }, (err, containers) => {
-        if (err) {
-          reject(err);
-        } else {
-          const promises = [];
 
-          containers.forEach((container) => {
-            const record = {
-              id: container.Id,
-              name: container.Names[0].substring(1),
-              hostName: "",
-              image: container.Image,
-              cmd: container.Command,
-              created: new Date(container.Created * 1000),
-              state: container.State,
-              stateCss: this.getStateCss(container.State),
-              status: container.Status,
-              shutdown: false,
-              healthy: true,
-              cpuAlert: false,
-              memoryAlert: false,
-              ports: container.Ports,
-              publicUrl: null,
-              project: "",
-              uptimeSeconds: 0,
-              uptimeSecondsPercent: "",
-              colorLevel: "text-body",
-              stats: {
-                cpuPercent: 0.0,
-                cpuPercentStr: "",
-                memoryUsageStr: "",
-                memoryUsage: 0,
-                memoryFreePercentStr: "",
-                memoryFreePercent: 0,
-                memoryLimitStr: "",
-                memoryLimit: 0,
-              },
-            };
-
-            if (record.status.toLowerCase().includes("exited")) {
-             record.shutdown = true;
-            }
-
-            if (record.status.toLowerCase().includes("unhealthy")) {
-              record.healthy = false;
-            }
-            record.image = self.formatImage(record.image);
-            promises.push(
-              new Promise((resolve, reject) => {
-                
-var idx = services.findIndex((s)=>{return s.containerName==record.name;});
-if (idx>=0) { serviceDef=services[idx];
-                    const sd = serviceDef[0];
-                    if (sd) {
-                      if (sd.public != "") {
-                        record.publicUrl = sd.public;
-                      }
-                      record.uptimeSeconds = this.calculateUptime(sd);
-                      record.colorLevel = this.getColorLevel(sd);
-                      record.uptimeSecondsPercent = this.calculateUptimePercent(
-                        sd,
-                      ).toLocaleString(undefined, {
-                        style: "percent",
-                        minimumFractionDigits: 2,
-                      });
-                    }
-                    this.getContainer(container.Id).then((cntr) => {
-                      this.getContainerStats(container.Id)
-                        .then((detail) => {
-                          record.project =
-                            cntr.Config.Labels["com.docker.compose.project"] ??
-                            "";
-                          record.hostName = cntr.Config.Hostname;
-                          if (!record.publicUrl) {
-                            record.publicUrl = cntr.publicUrl;
-                          }
-                          record.stats.cpuPercent =
-                            this.calculateCpuPercent(detail);
-                          record.cpuAlert = record.stats.cpuPercent > 1;
-                          record.stats.cpuPercentStr = Intl.NumberFormat(
-                            "default",
-                            {
-                              style: "percent",
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            },
-                          ).format(record.stats.cpuPercent);
-                          record.stats.memoryUsageStr = this.formatBytes(
-                            detail.memory_stats.usage,
-                          );
-                          const memoryPercent =
-                            (100 / detail.memory_stats.limit) *
-                            (detail.memory_stats.limit -
-                              detail.memory_stats.usage);
-                          record.stats.memoryFreePercent = memoryPercent;
-                          record.memoryAlert = memoryPercent < 0.1;
-                          record.stats.memoryFreePercentStr = Intl.NumberFormat(
-                            "default",
-                            {
-                              style: "percent",
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            },
-                          ).format(memoryPercent / 100);
-                          record.stats.memoryUsage = detail.memory_stats.usage;
-                          record.stats.memoryLimitStr = this.formatBytes(
-                            detail.memory_stats.limit,
-                          );
-                          record.stats.memoryLimit = detail.memory_stats.limit;
-
-                          resolve(record);
-                        })
-                        .catch(() => {
-                          resolve(record);
-                    });
-                  });
-}
-}));
-
-          Promise.allSettled(promises).then((promiseResults) => {
-            promiseResults.forEach((promise) => {
-              if (promise.status == "fulfilled") {
-                results.push(promise.value);
-              }
+      promises.push(
+        new Promise((resolve, reject) => {
+          this.serviceDefinitionService
+            .all(true)
+            .then((definitions) => {
+              resolve({ source: "definitions", result: definitions });
+            })
+            .catch((err) => {
+              reject(err);
             });
+        }),
+      );
 
-            resolve(
-              results.sort((a, b) => {
-                return a.name.localeCompare(b.name);
-              }),
-            );
-          });
-        });
+      promises.push(
+        new Promise((resolve, reject) => {
+          docker.listContainers(
+            { all: true, size: false },
+            (err, containers) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve({ source: "containers", result: containers });
+              }
+            },
+          );
+        }),
+      );
+
+      Promise.allSettled(promises).then((results) => {
+        for (const result of results) {
+          if (result.status == "fulfilled") {
+            switch (result.value.source) {
+              case "definitions":
+                definitions = result.value.result;
+                break;
+              case "containers":
+                containers = result.value.result;
+                break;
+            }
+          }
+        }
+
+        resolve(data);
+      });
+    });
   }
-});
-});
-}
 }
