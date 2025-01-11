@@ -719,13 +719,13 @@ export class DockerService {
             const sd = definitions[idx];
             record.publicUrl = sd.public;
             record.uptimeSeconds = this.calculateUptime(sd);
-            record.colorLevel = this.getColorLevel(sd);
             record.uptimeSecondsPercent = this.calculateUptimePercent(
               sd,
             ).toLocaleString(undefined, {
               style: "percent",
               minimumFractionDigits: 2,
             });
+            record.colorLevel = this.getColorLevel(sd);
           }
 
           promises.push(
@@ -803,8 +803,14 @@ export class DockerService {
     r.stateCss = this.getStateCss(c.State);
     r.status = c.Status;
     r.ports = c.Ports;
-    r.shutdown = r.status.toLowerCase().includes("exited");
-    r.healthy = r.status.toLowerCase().includes("unhealthy");
+
+    if (r.status.toLowerCase().includes("exited")) {
+      r.shutdown = true;
+    }
+    if (r.status.toLowerCase().includes("unhealthy")) {
+      r.healthy = false;
+    }
+
     return r;
   }
 
@@ -814,11 +820,11 @@ export class DockerService {
     r.healthy = false;
     r.publicUrl = c.public;
     r.uptimeSeconds = this.calculateUptime(c);
-    r.colorLevel = this.getColorLevel(c);
     r.uptimeSecondsPercent = this.calculateUptimePercent(c).toLocaleString(
       undefined,
       { style: "percent", minimumFractionDigits: 2 },
     );
+    r.colorLevel = this.getColorLevel(c);
     return r;
   }
 
