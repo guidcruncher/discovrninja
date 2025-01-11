@@ -74,7 +74,7 @@ export class DesktopController {
     });
   }
 
-@Get("/desktop.js")
+  @Get("/desktop.js")
   async getdesktopjs(@Res() res) {
     return new Promise<void>((resolve, reject) => {
       this.desktopService

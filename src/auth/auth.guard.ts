@@ -37,11 +37,8 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       token = request.cookies.token;
       if (!token) {
-        this.logger.error("No token from header or cookie.");
-        if (request.url.toLowerCase().startsWith("/api")) {
-          throw new UnauthorizedException();
-        }
-        response.redirect("/login", 302);
+        this.logger.error("No token from header or cookie for " + request.url);
+        throw new UnauthorizedException();
       }
     }
 
@@ -49,15 +46,11 @@ export class AuthGuard implements CanActivate {
       const payload = this.jwtService.decode(token);
 
       // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
+      // so that we can access it in our route handlerso
       request["user"] = payload;
     } catch (err) {
-      this.logger.error("Error verifying JWT token", err);
-      if (request.url.toLowerCase().startsWith("/api")) {
-        throw new UnauthorizedException();
-      }
-
-      response.redirect("/login", 302);
+      this.logger.error("Error verifying JWT token for " + request.url, err);
+      throw new UnauthorizedException();
     }
 
     return true;

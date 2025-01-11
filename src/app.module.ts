@@ -1,4 +1,3 @@
-
 import { AuthModule } from "@auth/auth.module";
 import { AppController } from "@controllers/app.controller";
 import { DiscoveryController } from "@controllers/discovery.controller";
@@ -65,6 +64,6 @@ import { ResourcesModule } from "./resources/resources.module";
     NotificationService,
     TasksService,
   ],
-  exports: [IconService, ResourcesService, DockerService ],
+  exports: [IconService, ResourcesService, DockerService],
 })
 export class AppModule {}

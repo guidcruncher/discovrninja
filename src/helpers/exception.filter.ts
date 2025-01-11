@@ -3,6 +3,7 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  UnauthorizedException,
   HttpStatus,
   Logger,
 } from "@nestjs/common";
@@ -19,6 +20,23 @@ export class ErrorExceptionFilter implements ExceptionFilter {
       exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
+
+    if (exception instanceof UnauthorizedException) {
+      if (request.url.toLowerCase().startsWith("/api")) {
+        response.hijack();
+        response.raw.statusCode = 302;
+        response.raw.writeHead(302, { "Content-Type": "application/json" });
+        response.raw.write('{"status": 401, "message": "Unauthorized"}');
+        response.raw.end();
+      } else {
+        this.logger.error("Redirecting to login");
+        response.hijack();
+        response.raw.statusCode = 302;
+        response.raw.writeHead(302, { location: "/login" });
+        response.raw.end();
+      }
+      return;
+    }
 
     this.logger.error("Error on " + request.url, exception);
     const buildDate = new Date(0);

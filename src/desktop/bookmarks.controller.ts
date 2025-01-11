@@ -1,7 +1,8 @@
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
-import { LinkdingService } from "./linkding.service";
+
 import { DesktopService } from "./desktop.service";
+import { LinkdingService } from "./linkding.service";
 
 @Controller("/")
 export class BookmarksController {
@@ -39,5 +40,4 @@ export class BookmarksController {
         });
     });
   }
-
 }

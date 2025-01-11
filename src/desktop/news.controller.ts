@@ -4,9 +4,7 @@ import { ResourcesService } from "@services/resources.service";
 
 @Controller("/")
 export class NewsController {
-  constructor(
-    private readonly resourcesService: ResourcesService,
-  ) {}
+  constructor(private readonly resourcesService: ResourcesService) {}
 
   private readonly logger = new Logger(NewsController.name);
 
@@ -26,5 +24,4 @@ export class NewsController {
         });
     });
   }
-
 }
