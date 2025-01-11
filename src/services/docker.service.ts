@@ -661,7 +661,7 @@ export class DockerService {
     const self = this;
 
     return new Promise<any>((resolve, reject) => {
-      const promises = [];
+      let promises = [];
       let definitions = [];
       let containers = [];
       const docker = this.createDocker();
@@ -740,22 +740,22 @@ export class DockerService {
                   }
 
                   self
-                    .calculateUsage(record)
+                    .calculateUsage(record, container)
                     .then((result) => {
                       resolve(result);
                     })
                     .catch((err) => {
-                      resolve(record, container);
+                      resolve(record);
                     });
                 })
                 .catch((err) => {
                   self
-                    .calculateUsage(record)
+                    .calculateUsage(record, container)
                     .then((result) => {
                       resolve(result);
                     })
                     .catch((err) => {
-                      resolve(record, container);
+                      resolve(record);
                     });
                 });
             }),
@@ -804,7 +804,7 @@ export class DockerService {
     r.status = c.Status;
     r.ports = c.Ports;
     r.shutdown = r.status.toLowerCase().includes("exited");
-    r.healthy = record.status.toLowerCase().includes("unhealthy");
+    r.healthy = r.status.toLowerCase().includes("unhealthy");
     return r;
   }
 
