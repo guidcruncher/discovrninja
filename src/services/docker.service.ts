@@ -4,6 +4,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Dockerode = require("dockerode");
 import { ServiceDefinition } from "@customtypes/servicedefinition";
+import { ServiceDefinitionService } from "@data/service-definition.service";
 import { InjectModel } from "@nestjs/mongoose";
 import { ContainerStats } from "@schemas/containerstats.schema";
 import { DockerRepositoryService } from "@services/docker.repository.service";
@@ -11,7 +12,6 @@ import { FancyAnsi } from "fancy-ansi";
 import fs from "fs";
 import { Model } from "mongoose";
 import path from "path";
-import { ServiceDefinitionService } from "@data/service-definition.service";
 
 /**
  * Docker connection and management
@@ -669,8 +669,75 @@ export class DockerService {
           }
         }
 
-        resolve(data);
+        for (const container of containers) {
+          const record = this.createRecordFromContiner(container);
+          data.push(record);
+        }
+
+        for (const definition of definitions) {
+          const i = data.findIndex((d) => {
+            return d.name == definition.name;
+          });
+
+          if (i < 0) {
+            const record = this.createRecordFromDefinition(definition);
+            data.push(record);
+          }
+
+          resolve(
+            data.sort((a, b) => {
+              return a.name.localeCompare(b.name);
+            }),
+          );
+        }
       });
     });
+  }
+
+  private createRecordFromContainer(c) {
+    const r = this.createRecord(c.Id, c.Names[0].substring(1));
+
+    return r;
+  }
+
+  private createRecordFromDefinition(c) {
+    const r = this.createRecord("", c.name);
+
+    return r;
+  }
+
+  private createRecord(id, name) {
+    const record = {
+      id: id,
+      name: name,
+      hostName: "",
+      image: "",
+      cmd: "",
+      created: new Date(),
+      state: "",
+      stateCss: "",
+      status: "",
+      shutdown: false,
+      healthy: true,
+      cpuAlert: false,
+      memoryAlert: false,
+      ports: [],
+      publicUrl: "",
+      project: "",
+      uptimeSeconds: 0,
+      uptimeSecondsPercent: "",
+      colorLevel: "text-body",
+      stats: {
+        cpuPercent: 0.0,
+        cpuPercentStr: "",
+        memoryUsageStr: "",
+        memoryUsage: 0,
+        memoryFreePercentStr: "",
+        memoryFreePercent: 0,
+        memoryLimitStr: "",
+        memoryLimit: 0,
+      },
+    };
+    return record;
   }
 }
