@@ -12,7 +12,12 @@ import { LinkdingService } from "./linkding.service";
 import { NewsController } from "./news.controller";
 
 @Module({
-  imports: [ContainerModule, DataModule, Schemas.CompileModels(), ResourcesModule],
+  imports: [
+    ContainerModule,
+    DataModule,
+    Schemas.CompileModels(),
+    ResourcesModule,
+  ],
   controllers: [
     LinkdingController,
     DesktopController,

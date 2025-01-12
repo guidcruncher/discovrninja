@@ -35,7 +35,7 @@ import { ViewsController } from "./views.controller";
     DiscoveryModule,
   ],
   controllers: [AppController, ViewsController],
-  providers: [ NotificationService, TasksService],
+  providers: [NotificationService, TasksService],
   exports: [],
 })
 export class AppModule {}
