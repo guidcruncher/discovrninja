@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Dockerode = require("dockerode");
+import { DockerService } from "@container/docker.service";
 import { Address } from "@customtypes/address";
 import { DiscoveryEntry } from "@customtypes/discoveryentry";
 import { DiscoveryScan } from "@customtypes/discoveryscan";
 import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
 import { ServiceDefinitionList } from "@customtypes/servicedefinition";
 import { IpUtilities } from "@helpers/iputilities";
-import { DockerService } from "@services/docker.service";
 
 /**
  * Docker service discovery

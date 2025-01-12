@@ -1,16 +1,16 @@
+import { DockerService } from "@container/docker.service";
 import { DiscoveryEntry } from "@customtypes/discoveryentry";
 import { DiscoveryScan } from "@customtypes/discoveryscan";
 import { ServiceDefinitionList } from "@customtypes/servicedefinition";
 import { IpUtilities } from "@helpers/iputilities";
 import { ConfigService } from "@nestjs/config";
 import { Test, TestingModule } from "@nestjs/testing";
-import { DockerService } from "@services/docker.service";
 import Dockerode from "dockerode";
 
 import { DockerDiscoveryService } from "./docker-discovery.service"; // Adjust the path accordingly
 
 // Mock dependencies
-jest.mock("@services/docker.service");
+jest.mock("@container/docker.service");
 jest.mock("@helpers/iputilities");
 jest.mock("dockerode");
 

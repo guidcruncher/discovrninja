@@ -1,7 +1,7 @@
+import { DockerRepositoryService } from "@container/docker-repository.service";
 import { ConfigService } from "@nestjs/config";
 import { Test, TestingModule } from "@nestjs/testing";
 import { ContainerStats } from "@schemas/containerstats.schema";
-import { DockerRepositoryService } from "@services/docker.repository.service";
 import Dockerode from "dockerode";
 import { Model } from "mongoose";
 
@@ -11,7 +11,7 @@ import { DockerService } from "./docker.service";
 jest.mock("fs");
 jest.mock("path");
 jest.mock("@helpers/containercreateoptionshelper");
-jest.mock("@services/docker.repository.service");
+jest.mock("@container/docker-repository.service");
 jest.mock("@nestjs/config");
 
 describe("DockerService", () => {

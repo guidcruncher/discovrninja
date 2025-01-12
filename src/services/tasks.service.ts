@@ -1,3 +1,4 @@
+import { DockerService } from "@container/docker.service";
 import { ContainerStatsDto } from "@dto/containerstats.dto";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { Injectable, Logger } from "@nestjs/common";
@@ -6,7 +7,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Cron } from "@nestjs/schedule";
 import { ContainerStats } from "@schemas/containerstats.schema";
 import { DiscoveryService } from "@services/discovery.service";
-import { DockerService } from "@services/docker.service";
 import { Model } from "mongoose";
 import * as path from "path";
 

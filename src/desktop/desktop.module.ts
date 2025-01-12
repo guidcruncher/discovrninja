@@ -1,4 +1,5 @@
 import { DataModule } from "@data/data.module";
+import { ContainerModule } from "@container/container.module";
 import { Schemas } from "@data/data.schemas";
 import { Module } from "@nestjs/common";
 
@@ -10,7 +11,7 @@ import { LinkdingService } from "./linkding.service";
 import { NewsController } from "./news.controller";
 
 @Module({
-  imports: [DataModule, Schemas.CompileModels()],
+  imports: [ContainerModule, DataModule, Schemas.CompileModels()],
   controllers: [
     LinkdingController,
     DesktopController,

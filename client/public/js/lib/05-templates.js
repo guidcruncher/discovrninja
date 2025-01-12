@@ -525,8 +525,8 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         }
       }) : helper))) +
       "\" onclick=\"composeEdit(this); return false;\" class=\"btn btn-outline-secondary btn-sm\"><i class=\"fa-regular fa-pen-to-square\"></i></a>\n          </td>\n          <td><a title=\"View properties\" href=\"#\" data-containerid=\"" +
-      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-        "name": "id",
+      alias4(((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "name",
         "hash": {},
         "data": data,
         "loc": {
@@ -536,7 +536,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           },
           "end": {
             "line": 24,
-            "column": 74
+            "column": 76
           }
         }
       }) : helper))) +
@@ -550,11 +550,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 24,
-            "column": 76
+            "column": 78
           },
           "end": {
             "line": 24,
-            "column": 135
+            "column": 137
           }
         }
       })) != null ? stack1 : "") +
@@ -566,11 +566,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 24,
-            "column": 180
+            "column": 182
           },
           "end": {
             "line": 24,
-            "column": 188
+            "column": 190
           }
         }
       }) : helper))) +
