@@ -261,7 +261,17 @@ export class DockerService {
             data.editor.config,
           );
           data.editor.editable = data.editor.projectPath != "";
-          resolve(data);
+
+          this.serviceDefinitionService
+            .get(data.Name)
+            .then((sd) => {
+              data.icon_slug = sd.iconSlug;
+              data.icon_catalog = sd.iconCatalog;
+              resolve(data);
+            })
+            .catch((err) => {
+              resolve(data);
+            });
         }
       });
     });
