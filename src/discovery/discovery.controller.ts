@@ -2,7 +2,8 @@ import { ServiceDefinitionList } from "@customtypes/servicedefinition";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Body, Controller, Get, Param, Post, Query, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { DiscoveryService } from "@services/discovery.service";
+
+import { DiscoveryService } from "./discovery.service";
 
 /**
  * The Discovery service API

@@ -1,7 +1,7 @@
 import { ServiceDefinitionService } from "@data/service-definition.service";
+import { IconService } from "@icon/icon.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
-import { IconService } from "@services/icon.service";
 
 import { ComposeService } from "./compose.service";
 import { PortainerService } from "./portainer.service";

@@ -1,7 +1,8 @@
 import { Controller, Get, Param, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { IconCDNService } from "./icon-cdn.service";
+
 import { IconService } from "./icon.service";
+import { IconCDNService } from "./icon-cdn.service";
 
 @Controller("api/icons")
 export class IconController {

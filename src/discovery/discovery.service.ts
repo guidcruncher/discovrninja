@@ -9,13 +9,14 @@ import { GitHelper } from "@helpers/githelper";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
-import { DockerDiscoveryService } from "@services/docker.discovery.service";
-import { FileDiscoveryService } from "@services/file.discovery.service";
 import * as crypto from "crypto";
 import * as fs from "fs";
 import { Model } from "mongoose";
 import * as mongoose from "mongoose";
 import * as path from "path";
+
+import { DockerDiscoveryService } from "./docker-discovery.service";
+import { FileDiscoveryService } from "./file-discovery.service";
 
 @Injectable()
 export class DiscoveryService implements IDiscoveryAgent {

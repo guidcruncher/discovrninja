@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
-import { IconCDNService } from "./icon-cdn.service";
-import { IconService } from "./icon.service";
-import { IconController } from "./icon.controller";
 import { DataModule } from "@data/data.module";
 import { Schemas } from "@data/data.schemas";
+import { Module } from "@nestjs/common";
+
+import { IconController } from "./icon.controller";
+import { IconService } from "./icon.service";
+import { IconCDNService } from "./icon-cdn.service";
 
 @Module({
   imports: [DataModule, Schemas.CompileModels()],
-  controllers: [IconController]],
+  controllers: [IconController],
   providers: [IconService, IconCDNService],
-  exports: [IconService],
+  exports: [IconService, IconCDNService],
 })
-Module({})
 export class IconModule {}

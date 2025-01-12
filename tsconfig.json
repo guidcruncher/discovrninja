@@ -33,9 +33,10 @@
       "@container/*": ["src/container/*"],
       "@catalog/*": ["src/catalog/*"],
       "@resources/*": ["src/resources/*"],
+      "@icon/*": ["src/icon/*"],
+      "@discovery/*": ["src/discovery/*"],
       "@configuration/*": ["src/configuration/*"],
       "@data/*": ["src/data/*"],
-
     }
   }, "include": ["src/**/*"]
 }

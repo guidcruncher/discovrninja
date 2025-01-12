@@ -1,5 +1,5 @@
+import { IconService } from "@icon/icon.service";
 import { Body, Controller, Post, Res } from "@nestjs/common";
-import { IconService } from "@services/icon.service";
 
 import { ComposeService } from "./compose.service";
 

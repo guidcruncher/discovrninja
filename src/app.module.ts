@@ -1,16 +1,9 @@
 import { AuthModule } from "@auth/auth.module";
 import { AppController } from "@controllers/app.controller";
-import { DiscoveryController } from "@controllers/discovery.controller";
-import { IconsController } from "@controllers/icons.controller";
 import { ResourcesController } from "@controllers/resources.controller";
 import { ViewsController } from "@controllers/views.controller";
 import { Global, Module } from "@nestjs/common";
 import { ScheduleModule } from "@nestjs/schedule";
-import { DiscoveryService } from "@services/discovery.service";
-import { DockerDiscoveryService } from "@services/docker.discovery.service";
-import { FileDiscoveryService } from "@services/file.discovery.service";
-import { IconCDNService } from "@services/icon.cdn.service";
-import { IconService } from "@services/icon.service";
 import { NotificationService } from "@services/notification.service";
 import { ResourcesService } from "@services/resources.service";
 import { TasksService } from "@services/tasks.service";
@@ -21,9 +14,10 @@ import { ConfigurationModule } from "./configuration/configuration.module";
 import { ContainerModule } from "./container/container.module";
 import { DataModule } from "./data/data.module";
 import { DesktopModule } from "./desktop/desktop.module";
+import { DiscoveryModule } from "./discovery/discovery.module";
+import { IconModule } from "./icon/icon.module";
 import { ProjectModule } from "./project/project.module";
 import { ResourcesModule } from "./resources/resources.module";
-import { IconModule } from './icon/icon.module';
 
 /**
  * This is the main application module
@@ -42,24 +36,10 @@ import { IconModule } from './icon/icon.module';
     ContainerModule,
     ResourcesModule,
     IconModule,
+    DiscoveryModule,
   ],
-  controllers: [
-    DiscoveryController,
-    AppController,
-    ViewsController,
-    ResourcesController,
-    IconsController,
-  ],
-  providers: [
-    IconService,
-    IconCDNService,
-    FileDiscoveryService,
-    DockerDiscoveryService,
-    DiscoveryService,
-    ResourcesService,
-    NotificationService,
-    TasksService,
-  ],
-  exports: [IconCDNService, IconService, ResourcesService],
+  controllers: [AppController, ViewsController, ResourcesController],
+  providers: [ResourcesService, NotificationService, TasksService],
+  exports: [ResourcesService],
 })
 export class AppModule {}
