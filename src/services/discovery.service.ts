@@ -69,6 +69,8 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.lastSeen = r[0].lastSeen;
             dto.lastPolled = r[0].lastPolled;
             dto.downtime = r[0].downtime;
+            dto.project = r[0].project;
+            dto.firstSeen = r[0].firstSeen;
             dto.available = r[0].available;
             dto.updated = new Date();
           } else {
@@ -80,8 +82,11 @@ export class DiscoveryService implements IDiscoveryAgent {
           dto.containerName = data.containerName.toLowerCase();
           dto.hostname = data.hostname;
           dto.name = data.name;
+          dto.project = data.project;
           dto.proxy = data.proxy;
           dto.public = data.public;
+          dto.project = data.project;
+          dto.firstSeen = data.firstSeen;
           dto.iconSlug = data.iconSlug;
           dto.iconCatalog = data.iconCatalog;
           dto.archived = data.archived;
@@ -222,10 +227,15 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.iconCatalog = service.iconCatalog;
             dto.iconSlug = service.iconSlug;
             dto.public = service.public;
+            dto.project = service.project;
+            dto.firstSeen = service.firstSeen;
             dto.available = service.available;
             dto.edited = false;
             dto.downtime = 0;
             if (service.available) {
+              if (!dto.firstSeen) {
+                dto.firstSeen = new Date();
+              }
               dto.lastSeen = new Date();
             }
 
@@ -246,10 +256,15 @@ export class DiscoveryService implements IDiscoveryAgent {
               dto.iconSlug = ico.iconSlug;
               dto.iconCatalog = ico.iconCatalog;
               dto.archived = ico.archived;
+              dto.firstSeen = ico.firstSeen;
               if (!service.available) {
                 if (dto.lastPolled) {
                   dto.downtime +=
                     (new Date().getTime() - dto.lastPolled.getTime()) / 1000;
+                }
+              } else {
+                if (!dto.firstSeen) {
+                  dto.firstSeen = new Date();
                 }
               }
 

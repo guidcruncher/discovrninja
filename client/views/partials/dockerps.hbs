@@ -21,7 +21,14 @@
             <a title="Export" href="#" data-containerid="{{name}}" onclick="exportContainer(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export"></i></a>
             <a title="Edit container" href="#" data-containerid="{{name}}" data-project="{{project}}" onclick="composeEdit(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
           </td>
-          <td><a title="View properties" href="#" data-containerid="{{name}}" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}} onclick="containerInfo(this);return false;">{{name}}</a></td>
+          <td>
+            {{#if configured}}
+              <span class="text-info">{{name}}</span>
+            {{else}}
+              <a title="View properties" href="#" data-containerid="{{name}}" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}} onclick="containerInfo(this);return false;">{{name}}</a>
+            {{/if}}
+          </td>
+
           <td align="center" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}}><i class="{{stateCss}}" data-bs-toggle="tooltip" title="{{status}}" data-bs-title="{{status}}"></i>
           </td>
           <td {{#if healthy}}{{#if cpuAlert}}class="text-danger" {{/if}}{{else}}class="text-danger-emphasis" {{/if}}>

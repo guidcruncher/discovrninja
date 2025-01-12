@@ -13,6 +13,10 @@ export class ServiceDefinitionDto {
 
   iconUrl: string;
 
+  project: string;
+
+  firstSeen: Date;
+
   proxy: string;
 
   public: string;

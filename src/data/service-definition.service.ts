@@ -24,6 +24,8 @@ export class ServiceDefinitionService {
         .then((r) => {
           const dto: ServiceDefinitionDto = new ServiceDefinitionDto();
           if (r && r.length > 0) {
+            dto.project = r[0].project;
+            dto.firstSeen = r[0].firstSeen;
             dto.ipaddress = r[0].ipaddress;
             dto.created = r[0].created;
             dto.archived = r[0].archived;
@@ -46,6 +48,7 @@ export class ServiceDefinitionService {
           dto.iconSlug = data.iconSlug;
           dto.iconCatalog = data.iconCatalog;
           dto.archived = data.archived;
+          dto.project = data.project;
 
           if (data.available != null) {
             if (data.avaiable == false && dto.available != data.available) {

@@ -7,11 +7,12 @@ import Dockerode = require("dockerode");
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { InjectModel } from "@nestjs/mongoose";
 import { ContainerStats } from "@schemas/containerstats.schema";
-import { DockerRepositoryService } from "./docker-repository.service";
 import { FancyAnsi } from "fancy-ansi";
 import fs from "fs";
 import { Model } from "mongoose";
 import path from "path";
+
+import { DockerRepositoryService } from "./docker-repository.service";
 
 /**
  * Docker connection and management
@@ -23,7 +24,7 @@ export class DockerService {
   constructor(
     private readonly dockerRepositoryService: DockerRepositoryService,
     private configService: ConfigService,
-    private readonly serviceDefinitonService: ServiceDefinitionService,
+    private readonly serviceDefinitionService: ServiceDefinitionService,
     @InjectModel(ContainerStats.name)
     private containerStatsModel: Model<ContainerStats>,
     @Inject("ServiceDefinitionModel")
@@ -31,7 +32,7 @@ export class DockerService {
   ) {}
 
   private getColorLevel(sd: ServiceDefinition) {
-    const value = this.calculateUptimePercent(sd)  100;
+    const value = this.calculateUptimePercent(sd) * 100;
     let classname = "bg-danger.bg-gradient text-light";
     if (value >= 5) {
       classname = "text-danger";
@@ -215,7 +216,7 @@ export class DockerService {
     return new Promise<any>((resolve, reject) => {
       const docker = this.createDocker();
       const container = docker.getContainer(id);
-      container.inspect(function (err, data: any) {
+      container.inspect((err, data: any) => {
         if (err) {
           reject(err);
         } else {
@@ -270,7 +271,7 @@ export class DockerService {
     return new Promise<any>((resolve, reject) => {
       const docker = this.createDocker();
       const container = docker.getContainer(id);
-      container.inspect(function (err, data: any) {
+      container.inspect((err, data: any) => {
         if (err) {
           reject(err);
         } else {
@@ -415,7 +416,7 @@ export class DockerService {
     return new Promise<any>((resolve, reject) => {
       const docker = this.createDocker();
       const container = docker.getContainer(id);
-      container.stats({ stream: false }, function (err, data) {
+      container.stats({ stream: false }, (err, data) => {
         if (err) {
           reject(err);
         } else {
@@ -582,14 +583,20 @@ export class DockerService {
   }
 
   private calculateUptime(sd: ServiceDefinition): number {
+    if (!sd.firstSeen) {
+      return 0;
+    }
     const totalTime =
-      (new Date().getTime() - new Date(sd.created).getTime()) / 1000;
+      (new Date().getTime() - new Date(sd.firstSeen).getTime()) / 1000;
     return totalTime - (sd.downtime ?? 0);
   }
 
   private calculateUptimePercent(sd: ServiceDefinition): number {
+    if (!sd.firstSeen) {
+      return 0;
+    }
     const totalTime =
-      (new Date().getTime() - new Date(sd.created).getTime()) / 1000;
+      (new Date().getTime() - new Date(sd.firstSeen).getTime()) / 1000;
     const ratio = 100 / (totalTime == 0 ? 1 : totalTime);
     return ((totalTime - (sd.downtime ?? 0)) * ratio) / 100;
   }
@@ -615,39 +622,39 @@ export class DockerService {
 
   private calculateUsage(record: any, container: any) {
     return new Promise((resolve, reject) => {
-        this.getContainerStats(container.Id)
-          .then((detail) => {
-            record.stats.cpuPercent = this.calculateCpuPercent(detail);
-            record.cpuAlert = record.stats.cpuPercent > 1;
-            record.stats.cpuPercentStr = Intl.NumberFormat("default", {
-              style: "percent",
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }).format(record.stats.cpuPercent);
-            record.stats.memoryUsageStr = this.formatBytes(
-              detail.memory_stats.usage,
-            );
-            const memoryPercent =
-              (100 / detail.memory_stats.limit) *
-              (detail.memory_stats.limit - detail.memory_stats.usage);
-            record.stats.memoryFreePercent = memoryPercent;
-            record.memoryAlert = memoryPercent < 0.1;
-            record.stats.memoryFreePercentStr = Intl.NumberFormat("default", {
-              style: "percent",
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }).format(memoryPercent / 100);
-            record.stats.memoryUsage = detail.memory_stats.usage;
-            record.stats.memoryLimitStr = this.formatBytes(
-              detail.memory_stats.limit,
-            );
-            record.stats.memoryLimit = detail.memory_stats.limit;
-            resolve(record);
-          })
-          .catch(() => {
-            resolve(record);
-          });
-      });
+      this.getContainerStats(container.Id)
+        .then((detail) => {
+          record.stats.cpuPercent = this.calculateCpuPercent(detail);
+          record.cpuAlert = record.stats.cpuPercent > 1;
+          record.stats.cpuPercentStr = Intl.NumberFormat("default", {
+            style: "percent",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(record.stats.cpuPercent);
+          record.stats.memoryUsageStr = this.formatBytes(
+            detail.memory_stats.usage,
+          );
+          const memoryPercent =
+            (100 / detail.memory_stats.limit) *
+            (detail.memory_stats.limit - detail.memory_stats.usage);
+          record.stats.memoryFreePercent = memoryPercent;
+          record.memoryAlert = memoryPercent < 0.1;
+          record.stats.memoryFreePercentStr = Intl.NumberFormat("default", {
+            style: "percent",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(memoryPercent / 100);
+          record.stats.memoryUsage = detail.memory_stats.usage;
+          record.stats.memoryLimitStr = this.formatBytes(
+            detail.memory_stats.limit,
+          );
+          record.stats.memoryLimit = detail.memory_stats.limit;
+          resolve(record);
+        })
+        .catch(() => {
+          resolve(record);
+        });
+    });
   }
 
   /**
@@ -656,146 +663,142 @@ export class DockerService {
   public getAllContainerStats(): Promise<any> {
     const data = [];
     return new Promise((resolve, reject) => {
-        let promises = [];
-        let definitions = [];
-        let containers = [];
-        const docker = this.createDocker();
+      let promises = [];
+      let definitions = [];
+      let containers = [];
+      const docker = this.createDocker();
 
-        promises.push(
-          new Promise((resolve, reject) => {
-            this.serviceDefinitionService
-              .all(true)
-              .then((definitions) => {
-                resolve({ source: "definitions", result: definitions });
-              })
+      promises.push(
+        new Promise((resolve, reject) => {
+          this.serviceDefinitionService
+            .all(true)
+            .then((definitions) => {
+              resolve({ source: "definitions", result: definitions });
+            })
 
-              .catch((err) => {
+            .catch((err) => {
+              this.logger.error("Error in getcontainerstats definitions", err);
+              reject(err);
+            });
+        }),
+      );
+
+      promises.push(
+        new Promise((resolve, reject) => {
+          docker.listContainers(
+            { all: true, size: false },
+            (err, containers) => {
+              if (err) {
                 this.logger.error(
-                  "Error in getcontainerstats definitions",
+                  "Error in getcontainerststs listcontainers",
                   err,
                 );
                 reject(err);
-              });
-          }),
-        );
+              } else {
+                resolve({ source: "containers", result: containers });
+              }
+            },
+          );
+        }),
+      );
 
-        promises.push(
-          new Promise((resolve, reject) => {
-            docker.listContainers(
-              { all: true, size: false },
-              (err, containers) => {
-                if (err) {
-                  this.logger.error(
-                    "Error in getcontainerststs listcontainers",
-                    err,
-                  );
-                  reject(err);
-                } else {
-                  resolve({ source: "containers", result: containers });
-                }
-              },
-            );
-          }),
-        );
+      Promise.allSettled(promises).then((results) => {
+        for (const result of results) {
+          if (result.status == "fulfilled") {
+            switch (result.value.source) {
+              case "definitions":
+                definitions = result.value.result;
+                break;
+              case "containers":
+                containers = result.value.result;
+                break;
+            }
+          }
+        }
+
+        promises = [];
+
+        for (const container of containers) {
+          const record = this.createRecordFromContainer(container);
+          const idx = definitions.findIndex((s) => {
+            return s.containerName == record.name;
+          });
+          if (idx >= 0) {
+            const sd = definitions[idx];
+            record.publicUrl = sd.public;
+            record.uptimeSeconds = this.calculateUptime(sd);
+            record.uptimeSecondsPercent = this.calculateUptimePercent(
+              sd,
+            ).toLocaleString(undefined, {
+              style: "percent",
+              minimumFractionDigits: 2,
+            });
+            record.colorLevel = this.getColorLevel(sd);
+          }
+
+          promises.push(
+            new Promise((resolve, reject) => {
+              this.getContainer(container.Id)
+
+                .then((detail) => {
+                  record.project =
+                    detail.Config.Labels["com.docker.compose.project"] ?? "";
+                  record.hostName = detail.Config.Hostname;
+                  if (record.publicUrl == "") {
+                    record.publicUrl = detail.publicUrl;
+                  }
+
+                  this.calculateUsage(record, container)
+                    .then((result) => {
+                      resolve(result);
+                    })
+                    .catch((err) => {
+                      resolve(record);
+                    });
+                })
+                .catch((err) => {
+                  this.calculateUsage(record, container)
+                    .then((result) => {
+                      resolve(result);
+                    })
+                    .catch((err) => {
+                      resolve(record);
+                    });
+                });
+            }),
+          );
+        }
 
         Promise.allSettled(promises).then((results) => {
           for (const result of results) {
             if (result.status == "fulfilled") {
-              switch (result.value.source) {
-                case "definitions":
-                  definitions = result.value.result;
-                  break;
-                case "containers":
-                  containers = result.value.result;
-                  break;
-              }
+              data.push(result.value);
             }
           }
 
-          promises = [];
-
-          for (const container of containers) {
-            const record = this.createRecordFromContainer(container);
-            const idx = definitions.findIndex((s) => {
-              return s.containerName == record.name;
+          for (const definition of definitions) {
+            const i = data.findIndex((d) => {
+              return d.name == definition.containerName;
             });
-            if (idx >= 0) {
-              const sd = definitions[idx];
-              record.publicUrl = sd.public;
-              record.uptimeSeconds = this.calculateUptime(sd);
-              record.uptimeSecondsPercent = this.calculateUptimePercent(
-                sd,
-              ).toLocaleString(undefined, {
-                style: "percent",
-                minimumFractionDigits: 2,
-              });
-              record.colorLevel = this.getColorLevel(sd);
+
+            if (i < 0) {
+              const record = this.createRecordFromDefinition(definition);
+              record.status = "configured";
+              record.configured = true;
+              record.state = "configured";
+              record.stateCss = this.getStateCss(record.state);
+              data.push(record);
             }
 
-            promises.push(
-              new Promise((resolve, reject) => {
-                this.getContainer(container.Id)
-
-                  .then((detail) => {
-                    record.project =
-                      detail.Config.Labels["com.docker.compose.project"] ?? "";
-                    record.hostName = detail.Config.Hostname;
-                    if (record.publicUrl == "") {
-                      record.publicUrl = detail.publicUrl;
-                    }
-
-                    this
-                      .calculateUsage(record, container)
-                      .then((result) => {
-                        resolve(result);
-                      })
-                      .catch((err) => {
-                        resolve(record);
-                      });
-                  })
-                  .catch((err) => {
-                    this
-                      .calculateUsage(record, container)
-                      .then((result) => {
-                        resolve(result);
-                      })
-                      .catch((err) => {
-                        resolve(record);
-                      });
-                  });
+            resolve(
+              data.sort((a, b) => {
+                return a.name.localeCompare(b.name);
               }),
             );
           }
-
-          Promise.allSettled(promises).then((results) => {
-            for (const result of results) {
-              if (result.status == "fulfilled") {
-                data.push(result.value);
-              }
-            }
-
-            for (const definition of definitions) {
-              const i = data.findIndex((d) => {
-                return d.name == definition.containerName;
-              });
-
-              if (i < 0) {
-                const record = this.createRecordFromDefinition(definition);
-                record.status = "configured";
-                record.state = "configured";
-                record.stateCss = this.getStateCss(record.state);
-                data.push(record);
-              }
-
-              resolve(
-                data.sort((a, b) => {
-                  return a.name.localeCompare(b.name);
-                }),
-              );
-            }
-          });
         });
       });
+    });
   }
 
   private createRecordFromContainer(c) {
@@ -808,7 +811,6 @@ export class DockerService {
     r.stateCss = this.getStateCss(c.State);
     r.status = c.Status;
     r.ports = c.Ports;
-
     if (r.status.toLowerCase().includes("exited")) {
       r.shutdown = true;
     }
@@ -824,12 +826,10 @@ export class DockerService {
     r.shutdown = true;
     r.healthy = false;
     r.publicUrl = c.public;
-    r.uptimeSeconds = this.calculateUptime(c);
-    r.uptimeSecondsPercent = this.calculateUptimePercent(c).toLocaleString(
-      undefined,
-      { style: "percent", minimumFractionDigits: 2 },
-    );
+    r.uptimeSecondsPercent = "-";
     r.colorLevel = this.getColorLevel(c);
+    r.project = c.project;
+    r.firstSeen = c.firstSeen;
     return r;
   }
 
@@ -841,6 +841,7 @@ export class DockerService {
       image: "",
       cmd: "",
       created: new Date(),
+      firstSeen: null,
       state: "",
       stateCss: "",
       status: "",
@@ -848,6 +849,7 @@ export class DockerService {
       healthy: true,
       cpuAlert: false,
       memoryAlert: false,
+      configured: false,
       ports: [],
       publicUrl: "",
       project: "",
@@ -868,4 +870,3 @@ export class DockerService {
     return record;
   }
 }
-

@@ -28,6 +28,12 @@ class ServiceDefinition {
   public: string;
 
   @Prop()
+  project: string;
+
+  @Prop()
+  firstSeen: Date;
+
+  @Prop()
   created: Date;
 
   @Prop()
@@ -65,6 +71,8 @@ class ServiceDefinition {
     this.edited = false;
     this.archived = false;
     this.available = false;
+    this.project = "";
+    this.firstSeen = null;
     this.lastSeen = null;
     this.downtime = 0;
     this.lastPolled = null;
@@ -85,6 +93,7 @@ class ServiceDefinitionList {
         if (item.available) {
           item.lastSeen = new Date();
         }
+        item.project = service.project;
         item.name = service.name;
         item.containerName = service.containerName;
         item.hostname = service.hostname;

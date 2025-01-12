@@ -66,6 +66,7 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
                 const container = promise.value;
                 const networkMode = container.HostConfig.NetworkMode;
                 const record: DiscoveryEntry = {
+                  project: "",
                   name: container.Config.Labels["homepage.name"],
                   containerName: container.Name,
                   hostname: container.Config.Hostname,
@@ -110,6 +111,9 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
                       "com.guidcruncher.discovrninja.public"
                     ];
                 }
+
+                record.project =
+                  container.Config.Labels["com.docker.compose.project"] ?? "";
 
                 if (container.Config.Labels["homepage.targetaddress"]) {
                   record.targetAddress =

@@ -9,6 +9,7 @@ class DiscoveryEntry {
    */
   public name: string;
 
+  public project: string;
   /**
    * Container IP address
    */
