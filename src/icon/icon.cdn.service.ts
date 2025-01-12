@@ -2,8 +2,8 @@ import { IconDto } from "@dto/icons.dto";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Icon } from "@schemas/icons.schema";
-import { IconResult } from "@services/icon.service";
+import { Icon } from "@data/schemas/icons.schema";
+import { IconResult } from "./icon.service";
 import { Model } from "mongoose";
 
 @Injectable()

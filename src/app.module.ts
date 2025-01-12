@@ -23,6 +23,7 @@ import { DataModule } from "./data/data.module";
 import { DesktopModule } from "./desktop/desktop.module";
 import { ProjectModule } from "./project/project.module";
 import { ResourcesModule } from "./resources/resources.module";
+import { IconModule } from './icon/icon.module';
 
 /**
  * This is the main application module
@@ -40,6 +41,7 @@ import { ResourcesModule } from "./resources/resources.module";
     ProjectModule,
     ContainerModule,
     ResourcesModule,
+    IconModule,
   ],
   controllers: [
     DiscoveryController,
