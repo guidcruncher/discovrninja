@@ -14,7 +14,7 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { TasksService } from "@services/tasks.service";
+import { TasksService } from "@app/tasks.service";
 import path from "path";
 
 import { AppModule } from "@app/app.module";

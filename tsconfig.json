@@ -24,8 +24,6 @@
       "@users/*": [ "src/users/*" ],
       "@customtypes/*": [ "src/types/*" ],
       "@helpers/*": [ "src/helpers/*" ],
-      "@dto/*": [ "src/data/dto/*" ],
-      "@schemas/*": [ "src/data/schemas/*" ],
       "@/*": ["src/*"],
       "@projects/*": ["src/projects/*"],
       "@desktop/*": ["src/desktop/*"],
