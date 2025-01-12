@@ -6,7 +6,7 @@ import { ConfigService } from "@nestjs/config";
 import Dockerode = require("dockerode");
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { InjectModel } from "@nestjs/mongoose";
-import { ContainerStats } from "@schemas/containerstats.schema";
+import { ContainerStats } from "@data/schemas/containerstats.schema";
 import { FancyAnsi } from "fancy-ansi";
 import fs from "fs";
 import { Model } from "mongoose";

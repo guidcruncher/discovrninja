@@ -1,5 +1,5 @@
 import { Icon } from "@data/schemas/icons.schema";
-import { IconDto } from "@dto/icons.dto";
+import { IconDto } from "@data/dto/icons.dto";
 import { HttpUtilities } from "@helpers/httputilities";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";

@@ -1,12 +1,12 @@
 import { DockerService } from "@container/docker.service";
-import { DiscoveryService } from "@discovery/discovery.service";
 import { ContainerStatsDto } from "@data/dto/containerstats.dto";
+import { ContainerStats } from "@data/schemas/containerstats.schema";
+import { DiscoveryService } from "@discovery/discovery.service";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { Cron } from "@nestjs/schedule";
-import { ContainerStats } from "@data/schemas/containerstats.schema";
 import { Model } from "mongoose";
 import * as path from "path";
 

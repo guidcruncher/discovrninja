@@ -1,6 +1,6 @@
 import { ComposeService } from "@catalog/compose.service";
 import { Body, Controller, Get, Param, Post, Query, Res } from "@nestjs/common";
-import { ContainerStats } from "@schemas/containerstats.schema";
+import { ContainerStats } from "@data/schemas/containerstats.schema";
 
 import { DockerService } from "./docker.service";
 import { DockerRepositoryService } from "./docker-repository.service";

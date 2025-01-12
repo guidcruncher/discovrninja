@@ -1,14 +1,14 @@
 import { ContainerCatalog, Template } from "@catalog/portainer-template.types";
 import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { MongooseModule } from "@nestjs/mongoose";
-import { ContainerCatalogSchema } from "@schemas/containercatalog.schema";
+import { ContainerCatalogSchema } from "@data/schemas/containercatalog.schema";
 import {
   ContainerStats,
   ContainerStatsSchema,
-} from "@schemas/containerstats.schema";
-import { Icon, IconSchema } from "@schemas/icons.schema";
-import { TemplateSchema } from "@schemas/portainer.schema";
-import { ServiceDefinitionSchema } from "@schemas/servicedefinition.schema";
+} from "@data/schemas/containerstats.schema";
+import { Icon, IconSchema } from "@data/schemas/icons.schema";
+import { TemplateSchema } from "@data/schemas/portainer.schema";
+import { ServiceDefinitionSchema } from "@data/schemas/servicedefinition.schema";
 
 export class Schemas {
   public static CompileModels() {

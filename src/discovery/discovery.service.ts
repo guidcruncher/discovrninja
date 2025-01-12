@@ -4,7 +4,7 @@ import {
   ServiceDefinitionList,
 } from "@customtypes/servicedefinition";
 import { StringBuilder } from "@customtypes/stringbuilder";
-import { ServiceDefinitionDto } from "@dto/servicedefinition.dto";
+import { ServiceDefinitionDto } from "@data/dto/servicedefinition.dto";
 import { GitHelper } from "@helpers/githelper";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

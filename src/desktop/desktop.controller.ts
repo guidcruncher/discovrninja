@@ -3,7 +3,7 @@ import { ServiceDefinitionService } from "@data/service-definition.service";
 import { Controller, Get, Query, Req, Res } from "@nestjs/common";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ResourcesService } from "@services/resources.service";
+import { ResourcesService } from "@resources/resources.service";
 
 import { DesktopService } from "./desktop.service";
 

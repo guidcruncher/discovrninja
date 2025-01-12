@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ResourcesService } from "@services/resources.service";
+import { ResourcesService } from "@resources/resources.service";
 import * as fs from "fs";
 import * as yaml from "js-yaml";
 import * as path from "path";

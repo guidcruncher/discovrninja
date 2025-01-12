@@ -2,6 +2,8 @@ import cluster from "node:cluster";
 import { availableParallelism } from "node:os";
 import process from "node:process";
 
+import { AppModule } from "@app/app.module";
+import { TasksService } from "@app/tasks.service";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
 import secureSession from "@fastify/secure-session";
@@ -14,10 +16,7 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { TasksService } from "@app/tasks.service";
 import path from "path";
-
-import { AppModule } from "@app/app.module";
 
 async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");

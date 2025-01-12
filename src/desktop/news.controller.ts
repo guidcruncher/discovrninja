@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Query, Res } from "@nestjs/common";
-import { ResourcesService } from "@services/resources.service";
+import { ResourcesService } from "@resources/resources.service";
 
 @Controller("/")
 export class NewsController {
