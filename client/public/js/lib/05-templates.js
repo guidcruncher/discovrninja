@@ -9,54 +9,6 @@ this["app"]["templates"]["compose"] = Handlebars.template({
 });
 this["app"]["templates"]["containerinfo"] = Handlebars.template({
   "1": function(container, depth0, helpers, partials, data) {
-    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-        return parent[propertyName];
-      }
-      return undefined
-    };
-
-    return container.escapeExpression(((helper = (helper = lookupProperty(helpers, "icon_slug") || (depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0)) != null ? helper : container.hooks.helperMissing), (typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}), {
-      "name": "icon_slug",
-      "hash": {},
-      "data": data,
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 121
-        },
-        "end": {
-          "line": 10,
-          "column": 134
-        }
-      }
-    }) : helper)));
-  },
-  "3": function(container, depth0, helpers, partials, data) {
-    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-        return parent[propertyName];
-      }
-      return undefined
-    };
-
-    return container.escapeExpression(((helper = (helper = lookupProperty(helpers, "Name") || (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ? helper : container.hooks.helperMissing), (typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}), {
-      "name": "Name",
-      "hash": {},
-      "data": data,
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 142
-        },
-        "end": {
-          "line": 10,
-          "column": 150
-        }
-      }
-    }) : helper)));
-  },
-  "5": function(container, depth0, helpers, partials, data) {
     var lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -82,13 +34,13 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       })) +
       "</td>\n              </tr>\n";
   },
-  "7": function(container, depth0, helpers, partials, data) {
+  "3": function(container, depth0, helpers, partials, data) {
     return "Update Available";
   },
-  "9": function(container, depth0, helpers, partials, data) {
+  "5": function(container, depth0, helpers, partials, data) {
     return "Up-to-date";
   },
-  "11": function(container, depth0, helpers, partials, data) {
+  "7": function(container, depth0, helpers, partials, data) {
     var stack1, helper, alias1 = container.escapeExpression,
       lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -117,7 +69,7 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       alias1(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "editor") : depth0)) != null ? lookupProperty(stack1, "project") : stack1), depth0)) +
       "\" type=\"button\" class=\"btn btn-secondary\"><i class=\"fa-regular fa-pen-to-square\"></i> Edit</button>\n";
   },
-  "13": function(container, depth0, helpers, partials, data) {
+  "9": function(container, depth0, helpers, partials, data) {
     var stack1, helper, alias1 = container.escapeExpression,
       lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -176,25 +128,39 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
           }
         }
       }) : helper))) +
-      "</h1>\n        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n      </div>\n      <div class=\"modal-body\">\n        <div style=\"text-align:center;margin-top:5px\" class=\"card\">\n          <img class=\"card-img-top\" style=\"padding:5px;width:10rem;height:10rem;\" src=\"/api/icons/query/" +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, (depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0), {
-        "name": "if",
+      "</h1>\n        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n      </div>\n      <div class=\"modal-body\">\n        <div style=\"text-align:center;margin-top:5px\" class=\"card\">\n          <img class=\"card-img-top\" style=\"padding:5px;width:10rem;height:10rem;\" src=\"/api/icons/r/" +
+      alias4(((helper = (helper = lookupProperty(helpers, "icon_catalog") || (depth0 != null ? lookupProperty(depth0, "icon_catalog") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "icon_catalog",
         "hash": {},
-        "fn": container.program(1, data, 0),
-        "inverse": container.program(3, data, 0),
         "data": data,
         "loc": {
           "start": {
             "line": 10,
-            "column": 104
+            "column": 100
           },
           "end": {
             "line": 10,
-            "column": 157
+            "column": 116
           }
         }
-      })) != null ? stack1 : "") +
-      "\" />\n        </div>\n        <div class=\"card-body\">\n          <p class=\"card-text\">\n          <table border=\"0\" cellpadding=\"2\" cellspacing=\"0\">\n            <tr>\n              <td>Hostname:</td>\n              <td>" +
+      }) : helper))) +
+      "/" +
+      alias4(((helper = (helper = lookupProperty(helpers, "icon_slug") || (depth0 != null ? lookupProperty(depth0, "icon_slug") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "icon_slug",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 10,
+            "column": 117
+          },
+          "end": {
+            "line": 10,
+            "column": 130
+          }
+        }
+      }) : helper))) +
+      "/resource\" />\n        </div>\n        <div class=\"card-body\">\n          <p class=\"card-text\">\n          <table border=\"0\" cellpadding=\"2\" cellspacing=\"0\">\n            <tr>\n              <td>Hostname:</td>\n              <td>" +
       alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0, "Config") : depth0)) != null ? lookupProperty(stack1, "Hostname") : stack1), depth0)) +
       "</td>\n            </tr>\n            <tr>\n              <td>Image:</td>\n              <td>" +
       alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0, "Config") : depth0)) != null ? lookupProperty(stack1, "Image") : stack1), depth0)) +
@@ -202,7 +168,7 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       ((stack1 = lookupProperty(helpers, "if").call(alias1, (depth0 != null ? lookupProperty(depth0, "downtime") : depth0), {
         "name": "if",
         "hash": {},
-        "fn": container.program(5, data, 0),
+        "fn": container.program(1, data, 0),
         "inverse": container.noop,
         "data": data,
         "loc": {
@@ -220,8 +186,8 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "UpdateStatus") : depth0)) != null ? lookupProperty(stack1, "updateDue") : stack1), {
         "name": "if",
         "hash": {},
-        "fn": container.program(7, data, 0),
-        "inverse": container.program(9, data, 0),
+        "fn": container.program(3, data, 0),
+        "inverse": container.program(5, data, 0),
         "data": data,
         "loc": {
           "start": {
@@ -310,8 +276,8 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "editor") : depth0)) != null ? lookupProperty(stack1, "editable") : stack1), {
         "name": "if",
         "hash": {},
-        "fn": container.program(11, data, 0),
-        "inverse": container.program(13, data, 0),
+        "fn": container.program(7, data, 0),
+        "inverse": container.program(9, data, 0),
         "data": data,
         "loc": {
           "start": {

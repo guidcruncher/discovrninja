@@ -22,7 +22,9 @@ export class DockerController {
    */
   @Get("projects")
   async getprojects(): Promise<any> {
-    return await this.dockerService.getProjectTree();
+    const result = await this.dockerService.getProjectTree();
+    delete result._s;
+    return result;
   }
 
   @Post("composerize")

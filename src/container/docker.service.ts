@@ -265,8 +265,8 @@ export class DockerService {
           this.serviceDefinitionService
             .get(data.Name)
             .then((sd) => {
-              data.icon_slug = sd.iconSlug;
-              data.icon_catalog = sd.iconCatalog;
+              data.icon_slug = sd[0].iconSlug;
+              data.icon_catalog = sd[0].iconCatalog;
               resolve(data);
             })
             .catch((err) => {
