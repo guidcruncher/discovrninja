@@ -1,9 +1,9 @@
-import { DataModule } from "@data/data.module";
 import { CatalogModule } from "@catalog/catalog.module";
+import { DataModule } from "@data/data.module";
 import { Schemas } from "@data/data.schemas";
 import { Module } from "@nestjs/common";
-import { DockerController } from "./docker.controller";
 
+import { DockerController } from "./docker.controller";
 import { DockerService } from "./docker.service";
 import { DockerRepositoryService } from "./docker-repository.service";
 

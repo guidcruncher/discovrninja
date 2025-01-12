@@ -1,5 +1,5 @@
-import { DataModule } from "@data/data.module";
 import { ContainerModule } from "@container/container.module";
+import { DataModule } from "@data/data.module";
 import { Schemas } from "@data/data.schemas";
 import { Module } from "@nestjs/common";
 
