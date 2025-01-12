@@ -17,7 +17,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { TasksService } from "@services/tasks.service";
 import path from "path";
 
-import { AppModule } from "./app.module";
+import { AppModule } from "@app/app.module";
 
 async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");

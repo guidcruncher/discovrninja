@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ResourcesService } from "@services/resources.service";
+import { ResourcesService } from "./resources.service";
 
 @Controller("api/resources")
 export class ResourcesController {

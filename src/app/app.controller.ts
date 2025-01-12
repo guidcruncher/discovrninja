@@ -5,7 +5,7 @@ import { DiscoveryService } from "@discovery/discovery.service";
 import { IconService } from "@icon/icon.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Res } from "@nestjs/common";
-import { ResourcesService } from "@services/resources.service";
+import { ResourcesService } from "@resource/resources.service";
 
 @Controller("/")
 export class AppController {

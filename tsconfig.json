@@ -19,8 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "paths": {
-      "@controllers/*": [ "src/controllers/*" ],
-      "@services/*": [ "src/services/*" ],
+      "@app/*": [ "src/app/*" ],
       "@auth/*": [ "src/auth/*" ],
       "@users/*": [ "src/users/*" ],
       "@customtypes/*": [ "src/types/*" ],
