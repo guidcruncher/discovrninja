@@ -1,0 +1,49 @@
+<h2>Error {{status}}</h2>
+
+A runtime error has occured:
+<br /><br />
+<b>{{message}}</b>
+<br /><br />
+
+Please raise an Issue <a target="_blank" href="https://github.com/guidcruncher/discovrninja/issues">here</a> following all instructions.
+
+{{#if production}}
+  <br><br>
+  <div class="card">
+    <div class="card-body">
+      Additional information follows:
+
+      <table border="0" cellpadding="5" cellspacing="0">
+        <tr>
+          <td><b>Version:</b></td>
+          <td> {{version}}</td>
+        </tr>
+        <tr>
+          <td><b>Build Date</b></td>
+          <td> {{buildDate}}</td>
+        </tr>
+        <tr>
+          <td><b>Production:</b></td>
+          <td> {{production}}</td>
+        </tr>
+        <tr>
+          <td><b>Inside Docker:</b></td>
+          <td> {{insideDocker}}</td>
+        </tr>
+        <tr>
+          <td><b>Exception:</b></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            {{debug this.exception}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+{{else}}
+  <hr>
+  Additional information follows:
+  {{debug this}}
+{{/if}}

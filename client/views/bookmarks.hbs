@@ -1,0 +1,18 @@
+<div class="card" style="{{#isnotempty this.desktop.background.foregroundOpacity}}opacity:{{this.desktop.background.foregroundOpacity}};{{/isnotempty}}margin-bottom:10px;{{#isnotempty bgcolor}}background-color:{{bgcolor}};{{/isnotempty}}{{#isnotempty background}}background: {{background}} !important;{{/isnotempty}}">
+  <div class="card-header">Bookmarks - {{tag}}</div>
+  <div class="card-body">
+    <table border="0" cellpadding="5" cellspacing="0">
+      {{#each this.bookmarks.results}}
+        <tr>
+          <td style="width:105px;height:65px;">
+            {{#if preview_image_url}}<img src="{{preview_image_url}}" style="max-height:60px;max-width:100px;" />{{/if}}
+          </td>
+          <td>
+            <a href="{{url}}" target="_new">{{#if favicon_url}}<img src="{{favicon_url}}" style="border: none;max-height: 16px;max-width:16px;" />{{/if }} {{title}}</a><br />
+            {{description}}
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+</div>

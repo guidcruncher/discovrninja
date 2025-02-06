@@ -1,0 +1,88 @@
+<h3>{{#if create}}Create{{else}}Edit{{/if}} Volume</h3>
+<form>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input {{#when create "eq" false}}disabled{{/when}} type="text" class="form-control" value="{{volume.Name}}" id="name" onkeypress="switchNetworkMount(document.getElementById('mountPoint'), '{{mountRoot}}');">
+  </div>
+  <div class="mb-3">
+    <label for="driver" class="form-label">Driver</label>
+    <select class="form-select" id="driver">
+      <option {{#when volume.Driver "eq" "local"}}selected {{/when}} value="local">local</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="driver" class="form-label">Host Mountpoint</label>
+    <select class="form-select" id="mountPoint" onchange="switchNetworkMount(this, '{{mountRoot}}');">
+      <option value="docker" selected value="docker">Docker Default</option>
+      <option value="custom" value="custom">Custom host location</option>
+    </select>
+    <input type="text" class="form-control" value="{{Mountpoint}}" id="customMountPoint" disabled />
+  </div>
+
+  <div class="mb-3">
+    <label for="options" class="form-label">Options</label>
+    <table border="0" cellpadding="5" cellspacing="0">
+      {{#each volume.Options}}
+        <tr>
+          <td>
+            <input id="optionname_{{@imdex}}" data-index="{{@index}}" type="text" class="form-control" value="{{@key}}" />
+          </td>
+          <td>
+            <input id="optionvalue_{{@imdex}}" data-index="{{@index}}" type="text" class="form-control" value="{{this}}" />
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+
+  <div class="form-check">
+    <input {{#when volume.Labels  "contains" "noprune"}}checked{{/when}} class="form-check-input" type="checkbox" value="" id="noprune">
+    <label class="form-check-label" for="noprune">
+      Do not automatically Prune this volume
+    </label>
+  </div>
+  <div class="form-check">
+    <input {{#when volume.Labels  "contains" "discovrninja_excludebackup"}}checked{{/when}} class="form-check-input" type="checkbox" value="" id="excludebackup">
+    <label class="form-check-label" for="excludebackup"> Exclude from Backup
+    </label>
+  </div>
+
+  <br />
+  <button class="btn btn-primary" type="button" onclick="saveVolume(); return false;">Save</button>
+  <button class="btn btn-secondary" type="button" onclick="window.location.href='/admin/storage'; return false;">Cancel</button>
+  </div>
+
+  <input type="hidden" id="volumeid" value="{{volume.Id}}" />
+</form>
+
+<div class="modal fade" id="scriptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scriptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="scriptModalLabel">Volume update script</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>This script will create the Volume you have just modified.</p>
+        <pre><div id="script"/></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.href='/admin/storage';">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function switchNetworkMount(ctl, mountPoint) {
+    var customMountPoint = document.getElementById("customMountPoint");
+    if (ctl.value == "docker") {
+      customMountPoint.disabled = "disabled";
+      customMountPoint.value = mountPoint + "/" + document.getElementById("name").value.toLowerCase() + "/_data";
+    } else {
+      customMountPoint.disabled = "";
+    }
+  }
+  switchNetworkMount(document.getElementById("mountPoint"), "{{mountRoot}}");
+
+</script>

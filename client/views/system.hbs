@@ -1,0 +1,105 @@
+<h4>System Information</h4>
+
+<div class="container">
+  <div class="row p-3">
+    <div class="col">
+      <img src="https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/docker.svg" style="width:150px;height:150px;" />
+    </div>
+    <div class="col-8">
+      <h3>{{info.version.Platform.Name}}</h3>
+      <table class="table table-striped table-nowrap">
+        <tbody>
+          <tr>
+            <td>Version</td>
+            <td>{{info.version.Version}}</td>
+          </tr>
+          <tr>
+            <td>API Version</td>
+            <td>{{info.version.ApiVersion}}</td>
+          </tr>
+          <tr>
+            <td>Operating System</td>
+            <td>{{info.version.Os}} {{info.version.Arch}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row p-3">
+    <div class="col">
+      <img src="/assets/img/logo.png" style="width:150px;height:150px;" />
+    </div>
+    <div class="col-8">
+      <h3>Discovrninja</h3>
+      <table class="table table-striped table-nowrap">
+        <tbody>
+          <tr>
+            <td>Version</td>
+            <td>{{software.version}}</td>
+          </tr>
+          <tr>
+            <td>Build Date</td>
+            <td>{{format "datetime" software.epochBuildDate}}</td>
+          </tr>
+          <tr>
+            <td>Run Mode</td>
+            <td>{{software.runMode}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="rounded p-3 shadow mb-5 border">
+  {{> subtitle title="System Operations" icon="fa-solid fa-toolbox"}}
+  <div class="row p-1">
+    <div class="col">
+      <button class="btn btn-danger" onclick="updateIconCache(this); return false;">
+        <div class="float-start wait spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> &nbsp
+        Reload Icon Cache
+      </button>
+
+      <button class="btn btn-danger" onclick="runTask('dailyimages',this); return false;">
+        <div class="float-start wait spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> &nbsp;Refresh Backgrounds
+      </button>
+
+      <button class="btn btn-danger" onclick="runTask('storageststats', this); return false;">
+        <div class="float-start wait spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> &nbsp;Track Storage
+      </button>
+    </div>
+  </div>
+  <div class="row p-1 ">
+    <div class="col">
+      <button class="btn btn-danger" onclick="runTask('usagestats', this); return false;">
+        <div class="float-start wait spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> &nbsp;Track Usage
+      </button>
+
+      <button class="btn btn-danger" onclick="scanDocker(this); return false;">
+        <div class="float-start wait spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> &nbsp;Discover Services
+      </button>
+
+      <button class="btn btn-danger" onclick="pruneDocker(this);return false;">
+        <div class="float-start wait spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> &nbsp;Prune
+      </button>
+
+    </div>
+  </div>
+</div>

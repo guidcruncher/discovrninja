@@ -1,0 +1,46 @@
+ <div class="table-responsive">
+   <table id="dockerps" class="datatable table table-striped table-sm table-hover align-middle table-nowrap">
+     <caption>{{now}}
+       <caption>
+       <thead>
+     <tr>
+       <th></th>
+       <th>Name</th>
+       <th>State</th>
+       <th>CPU</th>
+       <th>Memory</th>
+       <th>% Free</th>
+       <th>Uptime</th>
+     </tr>
+     </thead>
+     <tbody>
+       {{# each this}}
+         <tr class="nowrap">
+           <td>
+             <a title="Navigate to" {{#if publicUrl}}href="{{publicUrl}}" target="_new" class="btn btn-outline-secondary btn-sm" {{else}} class="btn btn-outline-secondary btn-sm  disabled" {{/if}}><i class="fa-solid fa-link"></i></a>
+             <a title="Export" href="#" data-containerid="{{name}}" onclick="exportContainer(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export"></i></a>
+             <a title="Edit container" href="#" data-containerid="{{name}}" data-project="{{project}}" onclick="composeEdit(this, 1); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+           </td>
+           <td>
+             {{#if configured}}
+               <span class="text-info">{{name}}</span>
+             {{else}}
+               <a title="View properties" href="#" data-containerid="{{name}}" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}} onclick="containerInfo(this);return false;">{{name}}</a>
+             {{/if}}
+           </td>
+
+           <td align="center" {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}}><i class="{{stateCss}}" data-bs-toggle="tooltip" title="{{status}}" data-bs-title="{{status}}"></i>
+           </td>
+           <td {{#if healthy}}{{#if cpuAlert}}class="text-danger" {{/if}}{{else}}class="text-danger-emphasis" {{/if}}>
+             {{#if shutdown }}-{{else}}{{stats.cpuPercentStr}}{{/if}}
+           </td>
+           <td {{#if healthy}}{{else}}class="text-danger-emphasis" {{/if}}>{{#if shutdown}}-{{else}}{{stats.memoryUsageStr}}{{/if}}</td>
+           <td {{#if healthy}}{{#if memoryAlert}}class="text-danger" {{/if}}{{else}}class="text-danger-emphasis" {{/if}}>{{#if shutdown}}-{{else}}{{stats.memoryFreePercentStr}}{{/if}}</td>
+           <td>{{#if uptime}}<span class="{{colorLevel}}">{{uptimeSecondsPercent}}</span>{{else}}n/a{{/if}}</td>
+         </tr>
+         {{/each}}
+     </tbody>
+     <tfoot>
+     </tfoot>
+   </table>
+ </div>

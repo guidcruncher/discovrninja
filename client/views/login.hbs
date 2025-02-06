@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  sessionStorage.setItem("jwt", "");
+
+  function login() {
+    var redir = document.getElementById("redir").value;
+    document.getElementById("error").style.display = "none";
+    var payload = {
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    };
+
+    axios
+      .post("/auth/login", payload)
+      .then((response) => {
+        var token = response.data.access_token;
+        if ((token ?? "") == "") {
+          document.getElementById("error").style.display = "block";
+          return false;
+        } else {}
+        sessionStorage.setItem("jwt", token);
+        window.location.href = "/auth/postlogin?t=" + token + "&r=" + encodeURIComponent(redir);
+        return false;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+    return false;
+  }
+
+</script>
+
+
+<div style="min-height:50vh" class="d-flex flex-column justify-content-center align-items-center">
+  <img style="max-width:200px;" src="/assets/img/logo.png" />
+  <p class="cardo-regular" style="font-size:48px;">Discovrninja</p>
+  <form method="post" action="/auth/login" enctype="application/x-www-form-urlencoded" onsubmit="login(); return false;">
+    <input type="hidden" id="redir" value="{{redir}}" />
+    <div class="container">
+      <table border="0" cellpadding="5" cellspacing="0">
+        <tr>
+          <td><label for="username" class="col-form-label">Username</label>
+          </td>
+          <td><input type="text" autocomplete="useename" value="admin" id="username" class="form-control" aria-describedby="usernameHelpInline" required>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="password" class="col-form-labellłe">Password</label>
+          </td>
+          <td><input autocomplete="password" type="password" id="password" value="Password123" class="form-control" aria-describedby="passwordHelpInline" required>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><button class="btn btn-primary" type="submit">Login</button>
+            &nbsp;
+            <input class="btn btn-secondary" type="reset" value="Clear">
+            <br />
+            <span id="error" class="text-danger" style="display:none;">Invalid username or password</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+</div>

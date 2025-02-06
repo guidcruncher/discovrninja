@@ -1,0 +1,130 @@
+<h3>Network Configuration</h3>
+<div class="p-1 mb-3">
+  <a class="btn btn-primary" href="/admin/createnetwork" role="button">Create network</a>
+</div>
+<div class="accordion" id="projects">
+  {{#each this.networks }}
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button{{#if @first}}{{else}} collapsed{{/if}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{@index}}" aria-expanded="true" aria-controls="collapse-{{@index}}">
+          {{Name}}
+        </button>
+      </h2>
+      <div id="collapse-{{@index}}" class="accordion-collapse collapse{{#if @first}} show{{/if}}" data-bs-parent="#projects">
+        <div class="accordion-body">
+          {{> subtitle title="Network Settings" icon="fa-solid fa-network-wired"}}
+
+          <table class="table table-striped table-sm table-nowrap">
+            <tr>
+              <td>Driver</td>
+              <td>{{Driver}}</td>
+            </tr>
+            <tr>
+              <td>Scope</td>
+              <td>{{Scope}}</td>
+            </tr>
+            {{#each this.IPAM.Config}}
+              {{# each this}}
+                <tr>
+                  <td>{{@key}}</td>
+                  <td>{{this}}</td>
+                </tr>
+            {{/each}}
+  {{/each}}
+  </table>
+
+  {{> subtitle title="Used by Containers" icon="fa-solid fa-box"}}
+
+  <div class="table-responsive">
+    <table class="datatable table table-striped table-sm table-nowrap">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>MAC Address</th>
+          <th>DNS Names</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each Containers}}
+          <tr>
+            <td>{{Name}}</td>
+            <td>{{IPAddress}}</td>
+            <td>{{MacAddress}}</td>
+            <td>{{format "list" DNSNames}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  {{#when live "eq" true}}
+    {{#when changed "eq" true}}
+      <div class="bg-danger bg-gradient text-white mb-2 p-3">
+        This network has local settings not yet live but a network already exists with this name.</div>
+    {{/when}}
+    {{else}}
+      {{#when changed "eq" true}}
+        <div class="bg-danger bg-gradient text-white mb-2  p-3">
+          This network has local settings not yet live.</div>
+      {{/when}}
+  {{/when}}
+  <button {{#when Name "in" "bridge,host,none" }}disabled {{/when}}class="btn btn-primary" onclick="window.location.href='/admin/editnetwork?id={{Id}}'; return false;" role="button">Edit network</button>
+  &nbsp;
+  {{#when changed "eq" true}}
+    <button {{#when Name "in" "bridge,host,none" }}disabled {{/when}}class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="document.getElementById('opid').value='{{Id}}'; return false;" role="button">Delete changes</button>
+    &nbsp;
+    <button {{#when Name "in" "bridge,host,none" }}disabled {{/when}}class="btn btn-primary" onclick="showNetworkScript('{{Id}}', true); return false;" role="button">Script Changes</button>
+    &nbsp;
+    <a href="/admin/network/{{Id}}/script?preferdb=true" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
+    {{else}}
+      <button class="btn btn-primary" onclick="showNetworkScript('{{Id}}', false); return false;" role="button">Script Network</button>
+      &nbsp;
+      <a href="/admin/network/{{Id}}/script?preferdb=false" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
+  {{/when}}
+
+</div>
+</div>
+</div>
+{{/each}}
+</div>
+
+
+<div class="modal fade" id="scriptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scriptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="scriptModalLabel">Network update script</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>This script will create the Network you have just modified. For new networks it simply creates it.</p>
+        <p>For existing networks, it detaches associated containers, deletes the old network, creates then new one and reattaches the associated containers. Note however, affected containers will remain inaccessible while this script is run, and you will have to update any associated compose files (if required.).</p>
+        <pre><div id="script"/></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="opid" value="" />
+
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-bg-danger">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Deletion</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you wish to delete these network changes?</p>
+        <p>Note: Any existing networks of this name in Docker will remain until manually deleted</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button onclick="deleteNetwork(document.getElementById('opid').value);return false;" type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+# Caddy's configuration file
+# see: https://caddyserver.com/docs/caddyfile
+
+{
+	auto_https off
+}
+
+:3000 {
+	reverse_proxy http://127.0.0.1:5001
+	import /etc/caddy/includes/cors.conf
+}
+
+import /home/app/config/Caddyfile
+
+import /home/app/config/caddy.d/*.conf

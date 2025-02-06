@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="mb-3">
+    <h4>Template catalog</h4>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">
+        <i class="fa-solid fa-book"></i>
+      </span>
+      <select class="form-select" aria-label="Catalogs" onchange="resetCatalog();viewCatalog();" id="templates">
+        <option>Choose a template catalog to load.</option>
+        {{#each this.catalogs}}
+          <option {{#when id "eq" ../selected.id}}selected{{/when}} value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Filter" aria-label="Filter" id="filter" aria-describedby="basic-addon1" value="{{filter}}">
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">
+      <i class="fa-solid fa-list"></i>
+    </span>
+    <select onchange="viewCatalog();" id="category" class="form-select">
+      <option value=""></option>
+      {{#each this.feed.categoryList}}
+        <option {{#when ../category "eq" this}}selected{{/when}} value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mb-3">
+    <button class="btn btn-primary" onclick="viewCatalog(); return false;"><i class="fa-solid fa-eye"></i> View</button>
+    &nbsp;
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal"><i class="fa-solid fa-cloud-arrow-up"></i> Import</button>
+    &nbsp;
+    <button class="btn btn-primary" onclick="resetCatalog();viewCatalog(); return false;">Reset</button>
+  </div>
+  <hr />
+
+  <div class="row">
+    {{#each this.feed.templates}}
+      <div class="col-sm-6 mb-3 mb-sm-0" style="padding-bottom:5px;">
+        <div class="card" style="wi dth: 18rem;">
+          <img style="max-height:100px;max-width:100px;padding:5px;" src="{{logo}}" class="card-img-top" alt="{{title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{{description}}}</p>
+            <a href="#" onclick="provisionTemplate(this);return false;" data-catalog="{{../selected.id}}" data-name="{{name}}" class="btn btn-primary">Setup</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+
+  <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="importModalLabel">Import catalog</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="templateTitle" class="form-label">Name</label>
+            <input type="text" class="form-control" id="templateTitle" placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="templateUrl" class="form-label">Catalog Web Address</label>
+            <input type="url" class="form-control" id="templateUrl" placeholder="">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="clearImportCatalog();" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button onclick="importCatalog();" type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

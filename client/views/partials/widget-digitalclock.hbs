@@ -1,0 +1,18 @@
+<script type="text/javascript">
+  var digitalClockModal = document.getElementById("digitalClockModal{{settings.id}}");
+  if (digitalClockModal) {} else {
+    var digitalClockModal = app.templates.modaldigitalclock({
+      tz: "{{settings.tz}}",
+      id: "{{settings.id}}"
+    });
+    $(document.body).append(digitalClockModal);
+  }
+
+</script>
+<button style="background: rgb(159, 191 , 135) !important;" class="btn {{# isempty parent.buttonclass}}btn-secondary{{else}}{{parent.buttonclass}}{{/isempty}} widget" style="{{#isnotempty parent.opacity}}opacity:{{parent.opacity}} !important;{{/isnotempty}}" data-bs-toggle="modal" data-bs-target="#digitalClockModal{{settings.id}}">
+  <div class="digitalclock">
+    <object style="background:transparent;pointer-events:none;width:260px;height:80px" data="/assets/img/digitalclock.svg" type="image/svg+xml">
+      <param name="tz" value="{{settings.tz}}" />
+    </object>
+  </div>
+</button>

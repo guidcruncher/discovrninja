@@ -1,0 +1,115 @@
+<h3>{{#if create}}Create{{else}}Edit{{/if}} Network</h3>
+
+<form>
+  <input type="hidden" id="networkid" value="{{networkId}}">
+  {{#if create}}
+    <div class="mb-3">
+      <label for="copyfrom" class="form-label">Copy from Network</label>
+      <select id="copyfrom" onchange="getNetwork(this.value);" class="form-select">
+        <option value=""></option>
+        {{#each networks}}
+          <option value="{{Id}}">{{Name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  {{/if}}
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input {{#when create "eq" false}}disabled{{/when}} type="text" class="form-control" value="{{network.Name}}" id="name">
+  </div>
+  <div class="mb-3">
+    <label for="driver" class="form-label">Driver</label>
+    <select class="form-select" id="driver">
+      <option {{#when network.Driver "eq" "bridge"}}selected {{/when}} value="bridge">bridge</option>
+      <option {{#when network.Driver "eq" "host"}}selected {{/when}}value="host">host</option>
+      <option {{#when network.Driver "eq" "overlay"}}selected {{/when}}value="overlay">overlay</option>
+      <option {{#when network.Driver "eq" "ipvlan"}}selected {{/when}}value="ipvlan">ipvlan</option>
+      <option {{#when network.Driver "eq" "macvlan"}}selected {{/when}}value="macvlan">macvlan</option>
+      <option {{#when network.Driver "eq" "none"}}selected {{/when}}value="none">none</option>
+    </select>
+  </div>
+  {{#each network.IPAM.Config}}
+    <div class="mb-3">
+      <label for="ipsubnet{{@index}}" class="form-label">IP Subnet</label>
+      <input value="{{Subnet}}" type="text" class="form-control" id="ipsubnet{{@index}}" minlength="7" maxlength="19" 0size="19">
+      <div class="form-text">CIDR Address field</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="iprange{{@index}}" class="form-label">IP Range</label>
+      <input value="{{IPRange}}" type="text" class="form-control" id="iprange{{@index}}" minlength="7" ma&xlength="19" size="19">
+      <div class="form-text">CIDR Address field</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="ipgateway{{@index}}" class="form-label">Gateway</label>
+      <input value="{{Gateway}}" type="text" class="form-control" id="ipgateway{{@index}}" minlength="7" maxlength="19" size="19">
+    </div>
+  {{/each}}
+
+  <div class="mb-3">
+    <div class="form-check">
+      <input {{#when network.Internal "eq" true}}checked{{/when}} class="form-check-input" type="checkbox" value="" id="internal">
+      <label class="form-check-label" for="internal">
+        Restrict external access to the network.
+      </label>
+    </div>
+    <div class="form-check">
+      <input {{#when network.EnableIPv6  "eq" true}}checked{{/when}} class="form-check-input" type="checkbox" value="" id="enableipv6">
+      <label class="form-check-label" for="enableipv6">
+        Enable IPv6 on the network.
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input {{#when network.Labels  "contains" "noprune"}}checked{{/when}} class="form-check-input" type="checkbox" value="" id="noprune">
+      <label class="form-check-label" for="noprune">
+        Do not automatically Prune this network
+      </label>
+    </div>
+
+  </div>
+  <br />
+  <button class="btn btn-primary" type="button" onclick="saveNetwork(); return false;">Save</button>
+  <button class="btn btn-secondary" type="button" onclick="window.location.href='/admin/network'; return false;">Cancel</button>
+  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+
+
+  <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-bg-danger">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Deletion</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you wish to delete this Network?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button onclick="deleteNetwork('{{def.Name}}');return false;" type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<div class="modal fade" id="scriptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scriptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="scriptModalLabel">Network update script</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>This script will create the Network you have just modified. For new networks it simply creates it.</p>
+        <p>For existing networks, it detaches associated containers, deletes the old network, creates then new one and reattaches the associated containers. Note however, affected containers will remain inaccessible while this script is run, and you will have to update any associated compose files (if required.).</p>
+        <pre><div id="script"/></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.href='/admin/network';">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.digitalclock {
+  margin: 0;
+  background: rgb(159, 191, 135) !important;
+}
+
+.digitalclock object {
+  background: rgb(159, 191, 135) !important;
+}
+
+.digitalclock div {
+  display: flex;
+}
+
+.digitalclock svg {
+  flex: 1;
+  opacity: 0.8;
+}

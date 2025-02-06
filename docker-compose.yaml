@@ -1,0 +1,26 @@
+name: discovrninja-dev
+
+services:
+  discovrninja-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      proxy:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /home/jcrocker/docker/stacks/discovrninja/config/:/home/app/config/
+      - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
+      - ./themes:/home/app/client/public/themes
+    container_name: discovrninja_dev
+    hostname: discovrninja-dev
+    restart: unless-stopped
+    extra_hosts:
+      host.docker.internal: 172.17.0.1
+      auth.thecrockers.localcert.net: 192.168.1.201
+    ports:
+      - 5101:3000
+
+networks:
+  proxy:
+    external: true

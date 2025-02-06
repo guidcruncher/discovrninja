@@ -1,0 +1,17 @@
+<div class="dropdown" data-hb-component="themechooser">
+  <button style="height:33px !important;" class="btn dropdown-toggle" style="color:white!important" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i style="color:white!important" id="activeTheme" class="bi bi-circle-half"></i>
+    {{# when size.screen.w "lt" 768}}Theme{{/when}}
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center" aria-pressed="false" onclick="ui().themeChooser().chooseTheme('light');">
+        <i id="light" class="bi bi-sun"></i> Light</button>
+    </li>
+    <li> <button type="button" class="dropdown-item d-flex align-items-center" aria-pressed="false" onclick="ui().themeChooser().chooseTheme('dark');">
+        <i id="dark" class="bi bi-moon-stars"></i> Dark</button>
+    </li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center" aria-pressed="false" onclick="ui().themeChooser().chooseTheme('auto')">
+        <i id="auto" class="bi bi-circle-half"></i> Auto</button>
+    </li>
+  </ul>
+</div>

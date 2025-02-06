@@ -1,0 +1,41 @@
+  {
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
+    "paths": {
+      "@app/*": [ "src/app/*" ],
+      "@auth/*": [ "src/auth/*" ],
+      "@users/*": [ "src/users/*" ],
+      "@customtypes/*": [ "src/types/*" ],
+      "@helpers/*": [ "src/helpers/*" ],
+      "@/*": ["src/*"],
+      "@projects/*": ["src/projects/*"],
+      "@desktop/*": ["src/desktop/*"],
+      "@container/*": ["src/container/*"],
+      "@catalog/*": ["src/catalog/*"],
+      "@resources/*": ["src/resources/*"],
+      "@icon/*": ["src/icon/*"],
+      "@discovery/*": ["src/discovery/*"],
+      "@configuration/*": ["src/configuration/*"],
+      "@data/*": ["src/data/*"],
+      "@notification/*": ["src/notification/*"],
+    }
+  }, "include": ["src/**/*"]
+}
+

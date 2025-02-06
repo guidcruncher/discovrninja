@@ -1,0 +1,15 @@
+<div class="row">
+  {{#each weather}}
+    <div class="col">
+      <center>
+        <button type="button" class="btn {{# isempty ../_s.p.buttonclass}}btn-secondary{{else}}{{../_s.p.buttonclass}}{{/isempty}} widget" style="white-space:nowrap;{{#isnotempty ../_s.p.opacity}}opacity:{{../_s.p.opacity}} !important;{{/isnotempty}}" onclick="viewWeather({{../settings.latitude }}, {{../settings.longitude}}, {{../settings.days}}, {{@index}});return false;">
+          <img src="/assets/weather/{{icon}}" style="max-width:64px; max-height:64px;" alt="{{text.description}}" /><br />
+          <small>{{date}}</small>
+        </button>
+      </center>
+    </div>
+  {{/each}}
+</div>
+<div class="row">
+  <div class="col"><i>{{location.address.quarter}}, {{location.address.city}}, {{location.address.county}}, {{location.address.country}}</i></i></div>
+</div>

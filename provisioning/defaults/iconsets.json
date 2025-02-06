@@ -1,0 +1,36 @@
+
+[
+  {
+    "catalog": "dashboardicons",
+    "name": "Dashboard Icons",
+    "repo": "https://github.com/homarr-labs/dashboard-icons",
+    "mimeType": "image/png",
+    "iconUrl": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/refs/heads/main/png/{slug}.png",
+    "extn": "png",
+    "filename": "{slug}.png",
+    "indexUrl": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/refs/heads/main/tree.json", 
+    "indexPath": ""
+  },
+  {
+    "catalog": "simpleicons",
+    "name": "Simple-Icons",
+    "repo": "https://github.com/simple-icons/simple-icons",
+    "extn": "svg",
+    "mimeType": "image/svg+xml",
+    "iconUrl": "https://cdn.simpleicons.org/{slug}",
+    "filename": "{slug}.svg",
+    "indexUrl": "https://data.jsdelivr.com/v1/packages/npm/simple-icons@13.17.0",
+    "indexPath": "icons"
+  },
+  {
+    "catalog": "selfhst",
+    "name": "Selfhst Icons",
+    "repo": "https://github.com/selfhst/icons?ref=selfh.st",
+    "mimeType": "image/svg+xml",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/{filename}",
+    "extn": "svg",
+    "filename": "{slug}.svg",
+    "indexUrl": "https://data.jsdelivr.com/v1/packages/gh/selfhst/icons@master",
+    "indexPath": "svg"
+  }
+]

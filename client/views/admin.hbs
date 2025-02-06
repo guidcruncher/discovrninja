@@ -1,0 +1,23 @@
+ <nav>
+   <div class="nav nav-tabs" id="nav-tab" role="tablist">
+     <button class="nav-link {{#when tab "eq" 0}}active{{/when}}" id="nav-summary-tab" data-bs-toggle="tab" data-bs-target="#nav-summary" type="button" role="tab" aria-controls="nav-summary" aria-selected="{{bool tab "eq" 0}}">Dashboard</button>
+     <button class="nav-link {{#when tab "eq" 1}}active{{/when}}" id="nav-container-tab" data-bs-toggle="tab" data-bs-target="#nav-container" type="button" role="tab" aria-controls="nav-container" aria-selected="{{bool tab "eq" 1}}">Container</button>
+     <button class="nav-link {{#when tab "eq" 2}}active{{/when}}" id="nav-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-projects" type="button" role="tab" aria-controls="nav-projects" aria-selected="{{bool tab "eq" 2}}">Projects</button>
+   </div>
+ </nav>
+ <div class="tab-content" id="nav-tabContent">
+
+   <div class="tab-pane fade {{#when tab "eq" 0}}show active{{/when}}" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab" tabindex="0">
+     <div id="admindash" class="hbs-template" data-url="/api/admin/dashboard" data-template="admindash"></div>
+   </div>
+   <div class="tab-pane fade {{#when tab "eq" 1}}show active{{/when}}" id="nav-container" role="tabpanel" aria-labelledby="nav-container-tab" tabindex="0">
+     <div id="hbsps" class="hbs-template" data-url="/api/docker/ps" data-template="dockerps" data-refresh-interval="10"></div>
+   </div>
+   <div class="tab-pane fade {{#when tab "eq" 2}}show active{{/when}}" id="nav-projects" role="tabpanel" aria-labelledby="nav-projects-tab" tabindex="0">
+     <div id="hbsprojects" class="hbs-template" data-url="/api/docker/projects" data-template="projects"></div>
+   </div>
+ </div>
+ {{>messagebox}}
+ {{>search}}
+ <div id="containerInfo" data-url="/api/docker/container/{id}" data-template="containerinfo">
+ </div>

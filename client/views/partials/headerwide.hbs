@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg sticky-top bg-brand" style="background-color: #6f42c1 !important;color: white !important;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/admin/index"><img width="38px" height=38px" src="/assets/img/logo.png" />&nbsp; DiscovrNinja!</a>
+
+    <ul class="nav nav-pills nav-right">
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" aria-current="page" href="/admin/index"><i class="fa-solid fa-house"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" href="/"><i class="fa-solid fa-desktop"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" href="/admin/catalog"><i class="fa-solid fa-book"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" href="#" onclick="composerise(); return false;"><i class="fa-solid fa-box"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" href="/admin/storage"><i class="fa-solid fa-floppy-disk"></i></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" href="/admin/network"><i class="fa-solid fa-network-wired"></i></a>
+      </li>
+      <li class="nav-iten">
+        <a class="btn nav-link toolbar-item" href="/admin/system"><i class="fa-brands fa-docker"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link toolbar-item" href="/auth/logout"><i class="fa-solid fa-power-off"></i></a>
+      </li>
+      <li class="nav-item">
+        {{>themechooser }}
+      </li>
+    </ul>
+  </div>
+</nav>
