@@ -16,16 +16,11 @@ export class DiscoveryController {
     this.discoveryService = discoveryService;
   }
 
-  /**
-@Get("/all")
-async getAll() {
-return await this.discoveryService.getAll(false);
-}
+  @Get("/all")
+  async getAll(): Promise<any> {
+    return await this.discoveryService.getAll(false);
+  }
 
-
-   * Performs a service scan and returns the results.
-   * @returns (DiscoveryScan) results of scan
-   */
   @Get("/scan")
   async scan(): Promise<ServiceDefinitionList> {
     return await this.discoveryService.scan();
