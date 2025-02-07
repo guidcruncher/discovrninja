@@ -140,14 +140,12 @@ export class ServiceDefinitionService {
 
   public async all(excludeArchived: boolean): Promise<any> {
     return new Promise((resolve, reject) => {
+      try {
       let filter = {};
 
       if (excludeArchived) {
         filter = { archived: false };
       }
-
-      this.mongoConnection.connect();
-      this.connection.getClient().connect(); //this.configService.get("host.mongo.url") + "discovrninja");
 
       const old = this.serviceDefModel
         .find(filter)
@@ -160,6 +158,10 @@ export class ServiceDefinitionService {
           this.logger.error("Error retrieving all definition", err);
           reject(err);
         });
+      } catch (err) {
+        this.logger.error("Error Exception retrieving all definition", err);
+        reject(err);
+      }
     });
   }
 }
