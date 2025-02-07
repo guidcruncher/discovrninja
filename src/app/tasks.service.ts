@@ -168,9 +168,9 @@ export class TasksService {
         const promises = [];
 
         promises.push(this.crongetdailyimages());
-        //        promises.push(this.crontriggerTrackStats());
-        //        promises.push(this.crontriggerStorageStats());
-        //        promises.push(this.crontriggerDiscoveryService());
+        promises.push(this.crontriggerTrackStats());
+        promises.push(this.crontriggerStorageStats());
+        promises.push(this.crontriggerDiscoveryService());
         Promise.allSettled(promises)
           .then((r) => {
             this.logger.debug("Finished initial jobs run");

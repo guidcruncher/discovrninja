@@ -3,7 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { InjectConnection } from "@nestjs/mongoose";
-import { Connection } from "mongoose";
+import { Connection, ClientSession } from "mongoose";
 const mongoose = require("mongoose");
 
 @Injectable()
@@ -24,14 +24,24 @@ export class MongoConnection {
     });
   }
 
-  public connect(): Connection {
-    const url = this.configService.get("host.mongo.url");
-    const dbName =
-      this.configService.get("host.mongo.database") ?? "discovrninja";
-    let fullUrl = url + dbName;
-    if (!url.endsWith("/")) {
-      fullUrl = url + "/" + dbName;
-    }
-    return mongoose.connect(fullUrl, { authSource: "admin" });
-  }
+async transaction <T>(cb: (session: ClientSession) => Promise<T>): Promise<T> {
+const session = await this.connection.startSession();
+
+try {
+session.startTransaction();
+const result = await cb(session);
+await session.commitTransaction();
+return result;
+} catch (err) {
+await session.abortTransaction();
+throw err;
+} finally {
+await session.endSession();
 }
+}
+
+async getSession() : Promise<ClientSession> {
+return await this.connection.startSession();
+}
+}
+
