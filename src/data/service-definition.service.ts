@@ -139,29 +139,12 @@ export class ServiceDefinitionService {
   }
 
   public async all(excludeArchived: boolean): Promise<any> {
-    return new Promise((resolve, reject) => {
-      try {
-        let filter = {};
-
-        if (excludeArchived) {
-          filter = { archived: false };
-        }
-
-        const old = this.serviceDefModel
-          .find(filter)
-          .lean()
-          .exec()
-          .then((r) => {
-            resolve(r);
-          })
-          .catch((err) => {
-            this.logger.error("Error retrieving all definition", err);
-            reject(err);
-          });
-      } catch (err) {
-        this.logger.error("Error Exception retrieving all definition", err);
-        reject(err);
+    return this.mongoConnection.transaction<any>((session) => {
+      let filter = {};
+      if (excludeArchived) {
+        filter = { archived: false };
       }
+      return this.serviceDefModel.find(filter).lean().exec();
     });
   }
 }
