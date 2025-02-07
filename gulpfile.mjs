@@ -1,4 +1,4 @@
-import { src, dest, series, parallel, watch } from "gulp";
+import { src, dest, series, parallel } from "gulp";
 import gulp from "gulp";
 import { task, exec, stream } from "gulp-execa";
 import handlebars from 'gulp-handlebars';
