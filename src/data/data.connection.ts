@@ -3,7 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { InjectConnection } from "@nestjs/mongoose";
-import { Connection, ClientSession } from "mongoose";
+import { ClientSession,Connection } from "mongoose";
 const mongoose = require("mongoose");
 
 @Injectable()
@@ -24,24 +24,23 @@ export class MongoConnection {
     });
   }
 
-async transaction <T>(cb: (session: ClientSession) => Promise<T>): Promise<T> {
-const session = await this.connection.startSession();
+  async transaction<T>(cb: (session: ClientSession) => Promise<T>): Promise<T> {
+    const session = await this.connection.startSession();
 
-try {
-session.startTransaction();
-const result = await cb(session);
-await session.commitTransaction();
-return result;
-} catch (err) {
-await session.abortTransaction();
-throw err;
-} finally {
-await session.endSession();
-}
-}
+    try {
+      session.startTransaction();
+      const result = await cb(session);
+      await session.commitTransaction();
+      return result;
+    } catch (err) {
+      await session.abortTransaction();
+      throw err;
+    } finally {
+      await session.endSession();
+    }
+  }
 
-async getSession() : Promise<ClientSession> {
-return await this.connection.startSession();
+  async getSession(): Promise<ClientSession> {
+    return await this.connection.startSession();
+  }
 }
-}
-
