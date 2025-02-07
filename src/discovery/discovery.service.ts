@@ -36,6 +36,10 @@ export class DiscoveryService implements IDiscoveryAgent {
     private serviceDefModel: Model<ServiceDefinition>,
   ) {}
 
+  public async getAll(excludeArchived) {
+    return this.serviceDefinitionService.all(excludeArchived);
+  }
+
   public async saveProjectDefinition(project: string, data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const workingDirMapped = this.configService.get("docker.stackBasePath");

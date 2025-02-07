@@ -17,6 +17,11 @@ export class DiscoveryController {
   }
 
   /**
+@Get("/all")
+async getAll() {
+return await this.discoveryService.getAll(false);
+}
+
 
    * Performs a service scan and returns the results.
    * @returns (DiscoveryScan) results of scan
