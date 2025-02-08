@@ -1,0 +1,11 @@
+<video {{#if settings.autoplay}}autoplay muted{{/if}} preload="auto" controls id="video" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}">
+  i{{#if settings.dashvideo}}
+    <source src="{{settings.dashvideo}}" type="application/dash+xml" />
+  {{/if}}
+  {{#if settings.mp4video}}
+    <source src="{{settings.mp4video}}" type="video/mp4" />
+  {{/if}}
+  {{#if settings.webmvideo}}
+    <source src="{{settings.webmvideo}}" type="video/webm" />
+  {{/if}}
+</video>
