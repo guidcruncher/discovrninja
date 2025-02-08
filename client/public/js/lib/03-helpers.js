@@ -439,6 +439,20 @@
                    break;
                }
                break;
+             case "image":
+               f = Handlebars.partials["widget-image"];
+               html = f({
+                 settings: settings,
+                 parent: p,
+               });
+               break;
+             case "audio":
+               f = Handlebars.partials["widget-audio"];
+               html = f({
+                 settings: settings,
+                 parent: p,
+               });
+               break;
              case "video":
                f = Handlebars.partials["widget-video"];
                html = f({
