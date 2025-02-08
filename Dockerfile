@@ -4,7 +4,7 @@ RUN adduser -s /bin/sh -H -D admin
 
 RUN apk add --no-cache jq git
 
-RUN npm i -g gulp-cli
+RUN npm i -g gulp-cli wetty
 
 RUN mkdir -p /home/app/.defaults/ /home/app/config/ /home/app/build/dist /home/app/build/client/dist /ho me/app/build/src /home/app/build/ config /home/app/server /home/app/client /home/app/node_modules /etc/caddy/caddyfile.d	/etc/caddy/includes
 
