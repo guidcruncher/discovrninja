@@ -3586,23 +3586,7 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
           }
         }
       })) != null ? stack1 : "") +
-      "</video>\n" +
-      container.escapeExpression((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || container.hooks.helperMissing).call(alias1, depth0, {
-        "name": "debug",
-        "hash": {},
-        "data": data,
-        "loc": {
-          "start": {
-            "line": 12,
-            "column": 0
-          },
-          "end": {
-            "line": 12,
-            "column": 14
-          }
-        }
-      })) +
-      "\n";
+      "</video>\n";
   },
   "useData": true
 });
