@@ -1,5 +1,7 @@
 FROM guidcruncher/node-base:lts-alpine3.20 AS base
 
+RUN adduser -s /bin/sh -H -D admin
+
 RUN apk add --no-cache jq git
 
 RUN npm i -g gulp-cli
