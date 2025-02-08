@@ -446,6 +446,13 @@
                  parent: p,
                });
                break;
+             case "frame":
+               f = Handlebars.partials["widget-frame"];
+               html = f({
+                 settings: settings,
+                 parent: p,
+               });
+               break;
              case "news":
                serviceUrl =
                  "/api/resources/news?u=" + encodeURIComponent(settings.url);

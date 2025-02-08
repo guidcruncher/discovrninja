@@ -2755,6 +2755,82 @@ this["app"]["templates"]["widget-discovrninja"] = Handlebars.template({
   },
   "useData": true
 });
+this["app"]["templates"]["widget-frame"] = Handlebars.template({
+  "1": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
+    return "width:" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), depth0)) +
+      ";";
+  },
+  "3": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
+    return "height:" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), depth0)) +
+      ";";
+  },
+  "compiler": [8, ">= 4.3.0"],
+  "main": function(container, depth0, helpers, partials, data) {
+    var stack1, alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+      };
+
+    return "<iframe src=\"" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "url") : stack1), depth0)) +
+      "\" frameBorder=\"0\" style=\"border:none;" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(1, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 66
+          },
+          "end": {
+            "line": 1,
+            "column": 120
+          }
+        }
+      })) != null ? stack1 : "") +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(3, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 120
+          },
+          "end": {
+            "line": 1,
+            "column": 177
+          }
+        }
+      })) != null ? stack1 : "") +
+      "\">\n</iframe>\n";
+  },
+  "useData": true
+});
 this["app"]["templates"]["widget-globe"] = Handlebars.template({
   "1": function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -3260,11 +3336,35 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
       return undefined
     };
 
+    return "width:" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), depth0)) +
+      ";";
+  },
+  "5": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
+    return "height:" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), depth0)) +
+      ";";
+  },
+  "7": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
     return "    <source src=\"" +
       container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "mp4video") : stack1), depth0)) +
       "\" type=\"video/mp4\" />\n";
   },
-  "5": function(container, depth0, helpers, partials, data) {
+  "9": function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -3304,11 +3404,46 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
           }
         }
       })) != null ? stack1 : "") +
-      " controls preload=\"auto\" data-setup=\"{}\">\n" +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "mp4video") : stack1), {
+      " controls preload=\"auto\" data-setup=\"{}\"  style=\"" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(3, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 149
+          },
+          "end": {
+            "line": 1,
+            "column": 203
+          }
+        }
+      })) != null ? stack1 : "") +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "theight") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(5, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 203
+          },
+          "end": {
+            "line": 1,
+            "column": 261
+          }
+        }
+      })) != null ? stack1 : "") +
+      "\">\n" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "mp4video") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(7, data, 0),
         "inverse": container.noop,
         "data": data,
         "loc": {
@@ -3325,7 +3460,7 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
       ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "webmvideo") : stack1), {
         "name": "if",
         "hash": {},
-        "fn": container.program(5, data, 0),
+        "fn": container.program(9, data, 0),
         "inverse": container.noop,
         "data": data,
         "loc": {
