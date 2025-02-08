@@ -1,13 +1,12 @@
-<video id="videoplayer" class="video-js" {{#if settings.poster}}poster="{{settings.poster}}" {{/if}} controls preload="auto" data-setup="{}" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.theight}}height:{{settings.height}};{{/if}}">
+<video {{#if settings.autoplay}}autoplay muted{{/if}} preload="auto" controls id="video" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}">
+  i{{#if settings.dashvideo}}
+    <source src="{{settings.dashvideo}}" type="application/dash+xml" />
+  {{/if}}
   {{#if settings.mp4video}}
     <source src="{{settings.mp4video}}" type="video/mp4" />
   {{/if}}
   {{#if settings.webmvideo}}
     <source src="{{settings.webmvideo}}" type="video/webm" />
   {{/if}}
-  <p class="vjs-no-js">
-    To view this video please enable JavaScript, and consider upgrading to a
-    web browser that
-    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-  </p>
 </video>
+{{debug this}}

@@ -19,6 +19,13 @@ module.exports = (Handlebars) => {
       var settings = obj[name];
       p.opacity = opacity;
 
+      const extend = ((a, b) => {
+        for (var key in b)
+          if (b.hasOwnProperty(key))
+            a[key] = b[key];
+        return a;
+      });
+
       if (name.includes(".")) {
         var arr = name.toLowerCase().split(".");
         type = arr[0].toLowerCase();
@@ -55,6 +62,9 @@ module.exports = (Handlebars) => {
               });
               break;
             case "audio":
+              settings = extend({
+                autoplay: true
+              }, settings);
               f = Handlebars.partials["widget-audio"];
               html = f({
                 settings: settings,
@@ -62,6 +72,12 @@ module.exports = (Handlebars) => {
               });
               break;
             case "video":
+              settings = extend({
+                autoplay: true
+              }, settings);
+              if (settings.dashvideo) {
+                settings.autoplay = true;
+              }
               f = Handlebars.partials["widget-video"];
               html = f({
                 settings: settings,

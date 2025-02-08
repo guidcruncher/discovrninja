@@ -2512,7 +2512,7 @@ this["app"]["templates"]["widget-audio"] = Handlebars.template({
 
     return "<audio loop=\"true\" autoplay=\"true\" controls src=\"" +
       container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "url") : stack1), depth0)) +
-      "\" ></audio>\n \n";
+      "\"></audio>\n";
   },
   "useData": true
 });
@@ -3409,16 +3409,7 @@ this["app"]["templates"]["widget-tagcloud"] = Handlebars.template({
 });
 this["app"]["templates"]["widget-video"] = Handlebars.template({
   "1": function(container, depth0, helpers, partials, data) {
-    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-        return parent[propertyName];
-      }
-      return undefined
-    };
-
-    return "poster=\"" +
-      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "poster") : stack1), depth0)) +
-      "\" ";
+    return "autoplay muted";
   },
   "3": function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -3452,11 +3443,23 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
       return undefined
     };
 
+    return "\n    <source src=\"" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "dashvideo") : stack1), depth0)) +
+      "\" type=\"application/dash+xml\" />\n";
+  },
+  "9": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
     return "    <source src=\"" +
       container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "mp4video") : stack1), depth0)) +
       "\" type=\"video/mp4\" />\n";
   },
-  "9": function(container, depth0, helpers, partials, data) {
+  "11": function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -3478,8 +3481,8 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
         return undefined
       };
 
-    return "<video id=\"videoplayer\" class=\"video-js\" " +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "poster") : stack1), {
+    return "<video " +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "autoplay") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(1, data, 0),
@@ -3488,15 +3491,15 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 1,
-            "column": 41
+            "column": 7
           },
           "end": {
             "line": 1,
-            "column": 100
+            "column": 53
           }
         }
       })) != null ? stack1 : "") +
-      " controls preload=\"auto\" data-setup=\"{}\"  style=\"" +
+      " preload=\"auto\" controls id=\"video\" style=\"" +
       ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
         "name": "if",
         "hash": {},
@@ -3506,15 +3509,15 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 1,
-            "column": 149
+            "column": 96
           },
           "end": {
             "line": 1,
-            "column": 203
+            "column": 150
           }
         }
       })) != null ? stack1 : "") +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "theight") : stack1), {
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(5, data, 0),
@@ -3523,16 +3526,16 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 1,
-            "column": 203
+            "column": 150
           },
           "end": {
             "line": 1,
-            "column": 261
+            "column": 207
           }
         }
       })) != null ? stack1 : "") +
-      "\">\n" +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "mp4video") : stack1), {
+      "\">\n  i" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "dashvideo") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(7, data, 0),
@@ -3541,7 +3544,7 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 2,
-            "column": 2
+            "column": 3
           },
           "end": {
             "line": 4,
@@ -3549,7 +3552,7 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
           }
         }
       })) != null ? stack1 : "") +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "webmvideo") : stack1), {
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "mp4video") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(9, data, 0),
@@ -3566,7 +3569,40 @@ this["app"]["templates"]["widget-video"] = Handlebars.template({
           }
         }
       })) != null ? stack1 : "") +
-      "  <p class=\"vjs-no-js\">\n    To view this video please enable JavaScript, and consider upgrading to a\n    web browser that\n    <a href=\"https://videojs.com/html5-video-support/\" target=\"_blank\">supports HTML5 video</a>\n  </p>\n</video>\n";
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "webmvideo") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(11, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 2
+          },
+          "end": {
+            "line": 10,
+            "column": 9
+          }
+        }
+      })) != null ? stack1 : "") +
+      "</video>\n" +
+      container.escapeExpression((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || container.hooks.helperMissing).call(alias1, depth0, {
+        "name": "debug",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 0
+          },
+          "end": {
+            "line": 12,
+            "column": 14
+          }
+        }
+      })) +
+      "\n";
   },
   "useData": true
 });
