@@ -19,7 +19,9 @@ export class ResourcesController {
       this.resourcesService
         .proxy(url)
         .then((v) => {
-          const txt = new TextDecoder().decode(v.data.subarray(0, v.data.length));
+          const txt = new TextDecoder().decode(
+            v.data.subarray(0, v.data.length),
+          );
           const lines: string[] = txt.split("\n");
           if (lines.length <= 0) {
             resolve(result);
@@ -54,7 +56,7 @@ export class ResourcesController {
             result.push(curr);
           }
           resolve(
-             result.sort((a, b) => {
+            result.sort((a, b) => {
               return a.title.localeCompare(b.title);
             }),
           );

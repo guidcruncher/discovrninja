@@ -8196,7 +8196,7 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
     return ""
   },
   7: function(container, depth0, helpers, partials, data) {
-    return 'class="mw-100"'
+    return 'class="mw-100" '
   },
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
@@ -8254,10 +8254,10 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         },
         end: {
           line: 4,
-          column: 204
+          column: 205
         }
       }
-    })) != null ? stack1 : "") + '>\n  </div>\n  <script type="text/javascript">\n    var ch = document.getElementById("ch_' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "id") : stack1, depth0)) + '");\n    var vid = document.getElementById("vid_' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "id") : stack1, depth0)) + '");\n    loadPlaylist("' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "playlist") : stack1, depth0)) + '", ch, vid, function () {\n    });\n\n  <\/script>\n</div>\n'
+    })) != null ? stack1 : "") + '>\n  </div>\n  <script type="text/javascript">\n    var ch = document.getElementById("ch_' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "id") : stack1, depth0)) + '");\n    var vid = document.getElementById("vid_' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "id") : stack1, depth0)) + '");\n    loadPlaylist("' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "playlist") : stack1, depth0)) + '", ch, vid, function () {});\n\n  <\/script>\n</div>\n'
   },
   useData: true
 });
