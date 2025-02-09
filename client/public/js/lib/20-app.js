@@ -14,7 +14,6 @@ function loadPlaylist(url, ch, vid, cb) {
       ch.add(option);
     });
     ch.selectedIndex = 0;
-    changeVideo(ch);
     cb(pl);
   }).catch((err) => {
     alert(err);
@@ -25,15 +24,9 @@ function changeVideo(sender) {
   var id = sender.getAttribute("data-id");
   var ch = document.getElementById("ch_" + id);
   var vid = document.getElementById("vid_" + id);
-  var sources = vid.getElementsByTagName('source');
-  if (sources > 0) {
-    vid.pause();
-    vid.src = ch.value;
-    sources[0].setAttribute("src", ch.value);
-    sources[0].setAttribute("type", "video/mp4");
-    vid.load();
-    vid.play();
-  }
+
+  var html = '<video preload="auto" class="mw-100" controls="controls" autoplay="autoplay"><source src="' + ch.value + '" type="video/mp4"></video>';
+  $(vid).html(html);
 }
 
 

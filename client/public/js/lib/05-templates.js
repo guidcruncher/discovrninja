@@ -3409,9 +3409,6 @@ this["app"]["templates"]["widget-tagcloud"] = Handlebars.template({
 });
 this["app"]["templates"]["widget-tv"] = Handlebars.template({
   "1": function(container, depth0, helpers, partials, data) {
-    return "autoplay muted";
-  },
-  "3": function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -3423,7 +3420,7 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
       container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), depth0)) +
       ";";
   },
-  "5": function(container, depth0, helpers, partials, data) {
+  "3": function(container, depth0, helpers, partials, data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
       if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
         return parent[propertyName];
@@ -3434,6 +3431,12 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
     return "height:" +
       container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), depth0)) +
       ";";
+  },
+  "5": function(container, depth0, helpers, partials, data) {
+    return "";
+  },
+  "7": function(container, depth0, helpers, partials, data) {
+    return "class=\"mw-100\"";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
@@ -3449,30 +3452,14 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
 
     return "<div id=\"" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
-      "\">\n  " +
-      alias2((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || container.hooks.helperMissing).call(alias3, depth0, {
-        "name": "debug",
-        "hash": {},
-        "data": data,
-        "loc": {
-          "start": {
-            "line": 2,
-            "column": 2
-          },
-          "end": {
-            "line": 2,
-            "column": 16
-          }
-        }
-      })) +
-      "\n  <select class=\"form-select\" onchange=\"changeVideo(this);\" data-id=\"" +
+      "\">\n  <select class=\"form-select\" onchange=\"changeVideo(this);\" data-id=\"" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\" id=\"ch_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
-      "\"></select>\n  <video id=\"vid_" +
+      "\"></select>\n\n  <div id=\"vid_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
-      "\" " +
-      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "autoplay") : stack1), {
+      "\" style=\"" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(1, data, 0),
@@ -3481,16 +3468,15 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 34
+            "column": 39
           },
           "end": {
             "line": 4,
-            "column": 80
+            "column": 93
           }
         }
       })) != null ? stack1 : "") +
-      " preload=\"auto\" controls style=\"" +
-      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
+      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(3, data, 0),
@@ -3499,38 +3485,39 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 112
+            "column": 93
           },
           "end": {
             "line": 4,
-            "column": 166
+            "column": 150
           }
         }
       })) != null ? stack1 : "") +
-      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
+      "\" " +
+      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(5, data, 0),
-        "inverse": container.noop,
+        "inverse": container.program(7, data, 0),
         "data": data,
         "loc": {
           "start": {
             "line": 4,
-            "column": 166
+            "column": 152
           },
           "end": {
             "line": 4,
-            "column": 223
+            "column": 204
           }
         }
       })) != null ? stack1 : "") +
-      "\">\n    <source src=\"\" type=\"video/mp4\" />\n  </video>\n  <script type=\"text/javascript\">\n    var ch = document.getElementById(\"ch_" +
+      ">\n  </div>\n  <script type=\"text/javascript\">\n    var ch = document.getElementById(\"ch_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\");\n    var vid = document.getElementById(\"vid_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\");\n    loadPlaylist(\"" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "playlist") : stack1), depth0)) +
-      "\", ch, vid, function () {\n\n    });\n\n  </script>\n</div>\n";
+      "\", ch, vid, function () {\n    });\n\n  </script>\n</div>\n";
   },
   "useData": true
 });
