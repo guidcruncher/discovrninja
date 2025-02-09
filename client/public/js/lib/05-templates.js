@@ -3464,7 +3464,7 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
           }
         }
       }) : helper))) +
-      "\">\n" +
+      "\">\n  " +
       alias4((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || alias2).call(alias1, depth0, {
         "name": "debug",
         "hash": {},
@@ -3472,15 +3472,15 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 2,
-            "column": 0
+            "column": 2
           },
           "end": {
             "line": 2,
-            "column": 14
+            "column": 16
           }
         }
       })) +
-      "\n<select id=\"ch_" +
+      "\n  <select id=\"ch_" +
       alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
         "name": "id",
         "hash": {},
@@ -3488,15 +3488,15 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 3,
-            "column": 15
+            "column": 17
           },
           "end": {
             "line": 3,
-            "column": 21
+            "column": 23
           }
         }
       }) : helper))) +
-      "\"></select>\n<video id=\"vid_" +
+      "\"></select>\n  <video id=\"vid_" +
       alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
         "name": "id",
         "hash": {},
@@ -3504,11 +3504,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 15
+            "column": 17
           },
           "end": {
             "line": 4,
-            "column": 21
+            "column": 23
           }
         }
       }) : helper))) +
@@ -3522,11 +3522,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 23
+            "column": 25
           },
           "end": {
             "line": 4,
-            "column": 69
+            "column": 71
           }
         }
       })) != null ? stack1 : "") +
@@ -3540,11 +3540,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 112
+            "column": 114
           },
           "end": {
             "line": 4,
-            "column": 166
+            "column": 168
           }
         }
       })) != null ? stack1 : "") +
@@ -3557,17 +3557,17 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 166
+            "column": 168
           },
           "end": {
             "line": 4,
-            "column": 223
+            "column": 225
           }
         }
       })) != null ? stack1 : "") +
       "\">\n    <source src=\"" +
       alias4(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "url") : stack1), depth0)) +
-      "\" type=\"video/mp4\" />\n</video>\n</div>\n";
+      "\" type=\"video/mp4\" />\n  </video>\n</div>\n";
   },
   "useData": true
 });

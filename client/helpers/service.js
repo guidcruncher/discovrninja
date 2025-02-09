@@ -71,9 +71,8 @@ module.exports = (Handlebars) => {
                 parent: p,
               });
               break;
-
             case "television":
-              settings = extnppnd({
+              settings = extend({
                 autoplay: true
               }, settings);
               if (settings.dashvideo) {

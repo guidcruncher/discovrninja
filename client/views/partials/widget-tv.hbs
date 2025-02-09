@@ -1,7 +1,7 @@
 <div id="{{id}}">
-{{debug this}}
-<select id="ch_{{id}}"></select>
-<video id="vid_{{id}}" {{#if settings.autoplay}}autoplay muted{{/if}} preload="auto" controls id="video" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}">
+  {{debug this}}
+  <select id="ch_{{id}}"></select>
+  <video id="vid_{{id}}" {{#if settings.autoplay}}autoplay muted{{/if}} preload="auto" controls id="video" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}">
     <source src="{{settings.url}}" type="video/mp4" />
-</video>
+  </video>
 </div>
