@@ -1,5 +1,5 @@
 import { Public } from "@auth/decorators";
-import { Controller, Post, Body, Get, Param, Query, Res } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Res } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 import { ResourcesService } from "./resources.service";
@@ -13,14 +13,14 @@ export class ResourcesController {
 
   @Post("playlist")
   async getPlaylist(@Body() data): Promise<any[]> {
-    var url = data.playlist;
-    var result = [];
+    const url = data.playlist;
+    const result = [];
     return new Promise<any[]>((resolve, reject) => {
       this.resourcesService
         .proxy(url)
         .then((v) => {
-          var txt = new TextDecoder().decode(v.data.subarray(0, v.data.length));
-          var lines: string[] = txt.split("\n");
+          const txt = new TextDecoder().decode(v.data.subarray(0, v.data.length));
+          const lines: string[] = txt.split("\n");
           if (lines.length <= 0) {
             resolve(result);
             return;
@@ -30,14 +30,14 @@ export class ResourcesController {
             resolve(result);
             return;
           }
-          var curr = null;
-          for (var i = 1; i < lines.length; i++) {
-            var l = lines[i];
+          let curr = null;
+          for (let i = 1; i < lines.length; i++) {
+            const l = lines[i];
             if (l.startsWith("#EXTINF")) {
               if (curr) {
                 result.push(curr);
               }
-              var arr = l.split(",");
+              const arr = l.split(",");
               curr = { title: arr[1], url: "" };
             } else {
               if (l.endsWith(".m3u8") || l.endsWith(".mp4")) {
