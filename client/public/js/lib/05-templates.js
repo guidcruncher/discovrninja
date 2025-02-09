@@ -3437,10 +3437,9 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
-    var stack1, helper, alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
-      alias2 = container.hooks.helperMissing,
-      alias3 = "function",
-      alias4 = container.escapeExpression,
+    var stack1, alias1 = container.lambda,
+      alias2 = container.escapeExpression,
+      alias3 = depth0 != null ? depth0 : (container.nullContext || {}),
       lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -3449,23 +3448,9 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
       };
 
     return "<div id=\"" +
-      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-        "name": "id",
-        "hash": {},
-        "data": data,
-        "loc": {
-          "start": {
-            "line": 1,
-            "column": 9
-          },
-          "end": {
-            "line": 1,
-            "column": 15
-          }
-        }
-      }) : helper))) +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\">\n  " +
-      alias4((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || alias2).call(alias1, depth0, {
+      alias2((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || container.hooks.helperMissing).call(alias3, depth0, {
         "name": "debug",
         "hash": {},
         "data": data,
@@ -3480,40 +3465,14 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
           }
         }
       })) +
-      "\n  <select id=\"ch_" +
-      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-        "name": "id",
-        "hash": {},
-        "data": data,
-        "loc": {
-          "start": {
-            "line": 3,
-            "column": 17
-          },
-          "end": {
-            "line": 3,
-            "column": 23
-          }
-        }
-      }) : helper))) +
+      "\n  <select class=\"form-select\" onchange=\"changeVideo(this);\" data-id=\"" +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
+      "\" id=\"ch_" +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\"></select>\n  <video id=\"vid_" +
-      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-        "name": "id",
-        "hash": {},
-        "data": data,
-        "loc": {
-          "start": {
-            "line": 4,
-            "column": 17
-          },
-          "end": {
-            "line": 4,
-            "column": 23
-          }
-        }
-      }) : helper))) +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\" " +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "autoplay") : stack1), {
+      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "autoplay") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(1, data, 0),
@@ -3522,16 +3481,16 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 25
+            "column": 34
           },
           "end": {
             "line": 4,
-            "column": 71
+            "column": 80
           }
         }
       })) != null ? stack1 : "") +
-      " preload=\"auto\" controls id=\"video\" style=\"" +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
+      " preload=\"auto\" controls style=\"" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(3, data, 0),
@@ -3540,15 +3499,15 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 114
+            "column": 112
           },
           "end": {
             "line": 4,
-            "column": 168
+            "column": 166
           }
         }
       })) != null ? stack1 : "") +
-      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
+      ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
         "name": "if",
         "hash": {},
         "fn": container.program(5, data, 0),
@@ -3557,17 +3516,21 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 4,
-            "column": 168
+            "column": 166
           },
           "end": {
             "line": 4,
-            "column": 225
+            "column": 223
           }
         }
       })) != null ? stack1 : "") +
-      "\">\n    <source src=\"" +
-      alias4(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "url") : stack1), depth0)) +
-      "\" type=\"video/mp4\" />\n  </video>\n</div>\n";
+      "\">\n    <source src=\"\" type=\"video/mp4\" />\n  </video>\n  <script type=\"text/javascript\">\n    var ch = document.getElementById(\"ch_" +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
+      "\");\n    var vid = document.getElementById(\"vid_" +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
+      "\");\n    loadPlaylist(\"" +
+      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "playlist") : stack1), depth0)) +
+      "\", ch, vid, function () {\n\n    });\n\n  </script>\n</div>\n";
   },
   "useData": true
 });

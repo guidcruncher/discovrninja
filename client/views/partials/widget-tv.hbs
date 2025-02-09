@@ -1,7 +1,15 @@
-<div id="{{id}}">
+<div id="{{settings.id}}">
   {{debug this}}
-  <select id="ch_{{id}}"></select>
-  <video id="vid_{{id}}" {{#if settings.autoplay}}autoplay muted{{/if}} preload="auto" controls id="video" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}">
-    <source src="{{settings.url}}" type="video/mp4" />
+  <select class="form-select" onchange="changeVideo(this);" data-id="{{settings.id}}" id="ch_{{settings.id}}"></select>
+  <video id="vid_{{settings.id}}" {{#if settings.autoplay}}autoplay muted{{/if}} preload="auto" controls style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}">
+    <source src="" type="video/mp4" />
   </video>
+  <script type="text/javascript">
+    var ch = document.getElementById("ch_{{settings.id}}");
+    var vid = document.getElementById("vid_{{settings.id}}");
+    loadPlaylist("{{settings.playlist}}", ch, vid, function () {
+
+    });
+
+  </script>
 </div>

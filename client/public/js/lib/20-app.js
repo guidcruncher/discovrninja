@@ -1,3 +1,42 @@
+function loadPlaylist(url, ch, vid, cb) {
+  var apiUrl = "/api/resources/playlist";
+  axios.post(apiUrl, {
+    playlist: url
+  }).then((response) => {
+    var pl = response.data;
+    $(ch).empty();
+
+    for (a in ch.options) {
+      ch.options.remove(0);
+    }
+    pl.forEach((item) => {
+      const option = new Option(item.title, item.url);
+      ch.add(option);
+    });
+    ch.selectedIndex = 0;
+    changeVideo(ch);
+    cb(pl);
+  }).catch((err) => {
+    alert(err);
+  });
+}
+
+function changeVideo(sender) {
+  var id = sender.getAttribute("data-id");
+  var ch = document.getElementById("ch_" + id);
+  var vid = document.getElementById("vid_" + id);
+  var sources = vid.getElementsByTagName('source');
+  if (sources > 0) {
+    vid.pause();
+    vid.src = ch.value;
+    sources[0].setAttribute("src", ch.value);
+    sources[0].setAttribute("type", "video/mp4");
+    vid.load();
+    vid.play();
+  }
+}
+
+
 function saveVolume() {
   var id = document.getElementById("volumeid").value;
   const updateValues = ((vol) => {
