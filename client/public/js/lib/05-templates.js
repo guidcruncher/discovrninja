@@ -3407,6 +3407,170 @@ this["app"]["templates"]["widget-tagcloud"] = Handlebars.template({
   },
   "useData": true
 });
+this["app"]["templates"]["widget-tv"] = Handlebars.template({
+  "1": function(container, depth0, helpers, partials, data) {
+    return "autoplay muted";
+  },
+  "3": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
+    return "width:" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), depth0)) +
+      ";";
+  },
+  "5": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
+    return "height:" +
+      container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), depth0)) +
+      ";";
+  },
+  "compiler": [8, ">= 4.3.0"],
+  "main": function(container, depth0, helpers, partials, data) {
+    var stack1, helper, alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
+      alias2 = container.hooks.helperMissing,
+      alias3 = "function",
+      alias4 = container.escapeExpression,
+      lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+      };
+
+    return "<div id=\"" +
+      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "id",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 9
+          },
+          "end": {
+            "line": 1,
+            "column": 15
+          }
+        }
+      }) : helper))) +
+      "\">\n" +
+      alias4((lookupProperty(helpers, "debug") || (depth0 && lookupProperty(depth0, "debug")) || alias2).call(alias1, depth0, {
+        "name": "debug",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 14
+          }
+        }
+      })) +
+      "\n<select id=\"ch_" +
+      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "id",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 15
+          },
+          "end": {
+            "line": 3,
+            "column": 21
+          }
+        }
+      }) : helper))) +
+      "\"></select>\n<video id=\"vid_" +
+      alias4(((helper = (helper = lookupProperty(helpers, "id") || (depth0 != null ? lookupProperty(depth0, "id") : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+        "name": "id",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 15
+          },
+          "end": {
+            "line": 4,
+            "column": 21
+          }
+        }
+      }) : helper))) +
+      "\" " +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "autoplay") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(1, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 23
+          },
+          "end": {
+            "line": 4,
+            "column": 69
+          }
+        }
+      })) != null ? stack1 : "") +
+      " preload=\"auto\" controls id=\"video\" style=\"" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(3, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 112
+          },
+          "end": {
+            "line": 4,
+            "column": 166
+          }
+        }
+      })) != null ? stack1 : "") +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "height") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(5, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 166
+          },
+          "end": {
+            "line": 4,
+            "column": 223
+          }
+        }
+      })) != null ? stack1 : "") +
+      "\">\n    <source src=\"" +
+      alias4(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "url") : stack1), depth0)) +
+      "\" type=\"video/mp4\" />\n</video>\n</div>\n";
+  },
+  "useData": true
+});
 this["app"]["templates"]["widget-video"] = Handlebars.template({
   "1": function(container, depth0, helpers, partials, data) {
     return "autoplay muted";

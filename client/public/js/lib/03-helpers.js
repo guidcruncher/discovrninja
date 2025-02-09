@@ -463,6 +463,20 @@
                  parent: p,
                });
                break;
+
+             case "television":
+               settings = extnppnd({
+                 autoplay: true
+               }, settings);
+               if (settings.dashvideo) {
+                 settings.autoplay = true;
+               }
+               f = Handlebars.partials["widget-tv"];
+               html = f({
+                 settings: settings,
+                 parent: p,
+               });
+               break;
              case "video":
                settings = extend({
                  autoplay: true
