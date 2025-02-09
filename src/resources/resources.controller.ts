@@ -42,7 +42,7 @@ export class ResourcesController {
               const arr = l.split(",");
               curr = { title: arr[1], url: "" };
             } else {
-              if (l.endsWith(".m3u8") || l.endsWith(".mp4")) {
+              if (!l.endsWith(".mpd")) {
                 if (curr) {
                   curr.url = l;
                 }
