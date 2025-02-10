@@ -9,6 +9,7 @@ function loadPlaylist(url, ch, vid, cb) {
     for (a in ch.options) {
       ch.options.remove(0);
     }
+    ch.add(new Option("", ""));
     pl.forEach((item) => {
       const option = new Option(item.title, item.url);
       ch.add(option);
@@ -24,9 +25,10 @@ function changeVideo(sender) {
   var id = sender.getAttribute("data-id");
   var ch = document.getElementById("ch_" + id);
   var vid = document.getElementById("vid_" + id);
-
-  var html = '<video preload="auto" class="mw-100" controls="controls" autoplay="autoplay"><source src="' + ch.value + '" type="video/mp4"></video>';
-  $(vid).html(html);
+  if (ch.value != "") {
+    var html = '<video preload="auto" class="mw-100" controls="controls" autoplay="autoplay"><source src="' + ch.value + '" type="video/mp4"></video>';
+    $(vid).html(html);
+  }
 }
 
 
