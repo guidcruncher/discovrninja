@@ -6,7 +6,8 @@
   <script type="text/javascript">
     var ch = document.getElementById("ch_{{settings.id}}");
     var vid = document.getElementById("vid_{{settings.id}}");
-    loadPlaylist("{{settings.playlist}}", ch, vid, function () {});
+    var pl = {{stringify settings.playlist}}
+    loadPlaylist(pl, ch, vid, function () {});
 
   </script>
 </div>

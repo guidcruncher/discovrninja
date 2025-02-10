@@ -3515,9 +3515,23 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\");\n    var vid = document.getElementById(\"vid_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
-      "\");\n    loadPlaylist(\"" +
-      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "playlist") : stack1), depth0)) +
-      "\", ch, vid, function () {});\n\n  </script>\n</div>\n";
+      "\");\n    var pl = " +
+      alias2((lookupProperty(helpers, "stringify") || (depth0 && lookupProperty(depth0, "stringify")) || container.hooks.helperMissing).call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "playlist") : stack1), {
+        "name": "stringify",
+        "hash": {},
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 13
+          },
+          "end": {
+            "line": 9,
+            "column": 44
+          }
+        }
+      })) +
+      "\n    loadPlaylist(pl, ch, vid, function () {});\n\n  </script>\n</div>\n";
   },
   "useData": true
 });

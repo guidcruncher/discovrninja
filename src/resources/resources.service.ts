@@ -14,6 +14,93 @@ export class ResourcesService {
 
   constructor(private configService: ConfigService) {}
 
+  public async getPlaylist(playlists): Promise<any[]> {
+    const toArray = function (a) {
+      if (!!a && a.constructor === Array) {
+        return a;
+      }
+      const b = [];
+      b.push(a);
+      return b;
+    };
+    const urls = toArray(playlists);
+    return new Promise<any[]>((resolve, reject) => {
+      const promises = [];
+      urls.forEach((url) => {
+        promises.push(
+          new Promise<any[]>((resolve, reject) => {
+            this.proxy(url)
+              .then((v) => {
+                const result = [];
+                const txt = new TextDecoder().decode(
+                  v.data.subarray(0, v.data.length),
+                );
+                const lines: string[] = txt.split("\n");
+                if (lines.length <= 0) {
+                  this.logger.error("Empty response", url);
+                  resolve(result);
+                  return;
+                }
+
+                if (lines[0] != "#EXTM3U") {
+                  this.logger.error("Not a valid playlist", url);
+                  resolve(result);
+                  return;
+                }
+                let curr = null;
+                for (let i = 1; i < lines.length; i++) {
+                  const l = lines[i];
+                  if (l.startsWith("#EXTINF")) {
+                    if (curr) {
+                      result.push(curr);
+                    }
+                    const arr = l.split(",");
+                    curr = { title: arr[1], url: "" };
+                  } else {
+                    if (!l.endsWith(".mpd")) {
+                      if (curr) {
+                        curr.url = l;
+                      }
+                    } else {
+                      curr = null;
+                    }
+                  }
+                }
+
+                if (curr) {
+                  result.push(curr);
+                }
+                resolve(result);
+              })
+              .catch((err) => {
+                this.logger.error("Error processing " + url, err);
+                reject(err);
+              });
+          }),
+        );
+      });
+
+      Promise.allSettled(promises)
+        .then((r) => {
+          let data = [];
+          r.forEach((item) => {
+            if (item.status == "fulfilled") {
+              data = data.concat(item.value);
+            }
+          });
+          resolve(
+            data.sort((a, b) => {
+              return a.title.localeCompare(b.title);
+            }),
+          );
+        })
+        .catch((err) => {
+          this.logger.error("Error in getPlaylist", err);
+          reject(err);
+        });
+    });
+  }
+
   public proxy(url: string): Promise<DownloadResult> {
     return new Promise<DownloadResult>((resolve, reject) => {
       this.logger.debug("Proxying " + url);

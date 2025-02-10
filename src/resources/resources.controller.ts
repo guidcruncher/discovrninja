@@ -13,58 +13,7 @@ export class ResourcesController {
 
   @Post("playlist")
   async getPlaylist(@Body() data): Promise<any[]> {
-    const url = data.playlist;
-    const result = [];
-    return new Promise<any[]>((resolve, reject) => {
-      this.resourcesService
-        .proxy(url)
-        .then((v) => {
-          const txt = new TextDecoder().decode(
-            v.data.subarray(0, v.data.length),
-          );
-          const lines: string[] = txt.split("\n");
-          if (lines.length <= 0) {
-            resolve(result);
-            return;
-          }
-
-          if (lines[0] != "#EXTM3U") {
-            resolve(result);
-            return;
-          }
-          let curr = null;
-          for (let i = 1; i < lines.length; i++) {
-            const l = lines[i];
-            if (l.startsWith("#EXTINF")) {
-              if (curr) {
-                result.push(curr);
-              }
-              const arr = l.split(",");
-              curr = { title: arr[1], url: "" };
-            } else {
-              if (!l.endsWith(".mpd")) {
-                if (curr) {
-                  curr.url = l;
-                }
-              } else {
-                curr = null;
-              }
-            }
-          }
-
-          if (curr) {
-            result.push(curr);
-          }
-          resolve(
-            result.sort((a, b) => {
-              return a.title.localeCompare(b.title);
-            }),
-          );
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    return this.resourcesService.getPlaylist(data.playlist);
   }
 
   @Get("p")
