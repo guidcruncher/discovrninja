@@ -3456,7 +3456,7 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\" id=\"ch_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
-      "\"></select>\n\n  <div id=\"vid_" +
+      "\"></select>\n  <div id=\"vid_" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "id") : stack1), depth0)) +
       "\" style=\"" +
       ((stack1 = lookupProperty(helpers, "if").call(alias3, ((stack1 = (depth0 != null ? lookupProperty(depth0, "settings") : depth0)) != null ? lookupProperty(stack1, "width") : stack1), {
@@ -3467,11 +3467,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 4,
+            "line": 3,
             "column": 39
           },
           "end": {
-            "line": 4,
+            "line": 3,
             "column": 93
           }
         }
@@ -3484,11 +3484,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 4,
+            "line": 3,
             "column": 93
           },
           "end": {
-            "line": 4,
+            "line": 3,
             "column": 150
           }
         }
@@ -3502,11 +3502,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 4,
+            "line": 3,
             "column": 152
           },
           "end": {
-            "line": 4,
+            "line": 3,
             "column": 205
           }
         }
@@ -3522,11 +3522,11 @@ this["app"]["templates"]["widget-tv"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 9,
+            "line": 8,
             "column": 13
           },
           "end": {
-            "line": 9,
+            "line": 8,
             "column": 44
           }
         }

@@ -1,6 +1,5 @@
 <div id="{{settings.id}}">
   <select class="form-select" onchange="changeVideo(this);" data-id="{{settings.id}}" id="ch_{{settings.id}}"></select>
-
   <div id="vid_{{settings.id}}" style="{{#if settings.width}}width:{{settings.width}};{{/if}}{{#if settings.height}}height:{{settings.height}};{{/if}}" {{# if settings.width}}{{else}}class="mw-100" {{/if}}>
   </div>
   <script type="text/javascript">
