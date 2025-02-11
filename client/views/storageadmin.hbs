@@ -1,4 +1,4 @@
-<h3>Storage Volumes &amp; Images</h3>
+ <h3>Storage Volumes &amp; Images</h3>
 <div class="p-1 mb-3">
   <a class="btn btn-primary" href="/admin/createvolume" role="button">Create volume</a>
 </div>
@@ -97,18 +97,18 @@
             This volume has local settings not yet live.</div>
         {{/when}}
               {{/when}}
-              <button class="btn btn-primary" onclick="window.location.href='/admin/editvolume?id={{Id}}'; return false;" role="button">Edit volume</button>
+              <button class="btn btn-primary" onclick="window.location.href='/admin/editvolume?id={{Name}}'; return false;" role="button">Edit volume</button>
               &nbsp;
               {{#when changed "eq" true}}
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="document.getElementById('opid').value='{{Id}}'; return false;" role="button">Delete changes</button>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="document.getElementById('opid').value='{{Name}}'; return false;" role="button">Delete changes</button>
                 &nbsp;
-                <button class="btn btn-primary" onclick="showVolumeScript('{{Id}}', true); return false;" role="button">Script Changes</button>
+                <button class="btn btn-primary" onclick="showVolumeScript('{{Name}}', true); return false;" role="button">Script Changes</button>
                 &nbsp;
-                <a href="/admin/storage/volume/{{Id}}/script?preferdb=true" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
+                <a href="/admin/storage/volume/{{Name}}/script?preferdb=true" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
       {{else}}
-        <button class="btn btn-primary" onclick="showVolumeScript('{{Id}}', false); return false;" role="button">Script Volume</button>
+        <button class="btn btn-primary" onclick="showVolumeScript('{{Name}}', false); return false;" role="button">Script Volume</button>
         &nbsp;
-        <a href="/admin/storage/volume/{{Id}}/script?preferdb=false" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
+        <a href="/admin/storage/volume/{{Name}}/script?preferdb=false" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
               {{/when}}
             </div>
           </div>
@@ -150,7 +150,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="scriptModalLabel">volume update script</h1>
+        <h1 class="modal-title fs-5" id="scriptModalLabel">Volume create script</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

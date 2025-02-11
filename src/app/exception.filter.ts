@@ -41,7 +41,7 @@ export class ErrorExceptionFilter implements ExceptionFilter {
     this.logger.error(
       "Error in " + request.method + " " + request.url,
       exception,
-      exception.stack,
+      exception ? exception.stack : null,
     );
     const buildDate = new Date(0);
     buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE ?? "0"));
@@ -49,8 +49,10 @@ export class ErrorExceptionFilter implements ExceptionFilter {
     if (request.url.startsWith("/api")) {
       response.status(status).send({
         status: status,
-        name: exception.name,
-        message: exception.message ?? "Internal Server Error",
+        name: exception ? exception.name : "",
+        message: exception
+          ? (exception.message ?? "Internal Server Error")
+          : "Internal Server Error",
         timestamp: new Date().toISOString(),
         path: request.url,
         production: (process.env.NODE_ENV ?? "") == "production",
@@ -64,8 +66,10 @@ export class ErrorExceptionFilter implements ExceptionFilter {
         {
           status: status,
           exception: exception,
-          name: exception.name,
-          message: exception.message ?? "Internal Server Error",
+          name: exception ? exception.name : "",
+          message: exception
+            ? (exception.message ?? "Internal Server Error")
+            : "Internal Server Error",
           timestamp: new Date().toISOString(),
           path: request.url,
           production: (process.env.NODE_ENV ?? "") == "production",
