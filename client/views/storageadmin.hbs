@@ -1,186 +1,186 @@
  <h3>Storage Volumes &amp; Images</h3>
-<div class="p-1 mb-3">
-  <a class="btn btn-primary" href="/admin/createvolume" role="button">Create volume</a>
-</div>
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-volume-tab" data-bs-toggle="tab" data-bs-target="#nav-volume" type="button" role="tab" aria-controls="nav-volume" aria-selected="true">Volumes</button>
-    <button class="nav-link" id="nav-images-tab" data-bs-toggle="tab" data-bs-target="#nav-images" type="button" role="tab" aria-controls="nav-images" aria-selected="false">Images</button>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-volume" role="tabpanel" aria-labelledby="nav-volume-tab" tabindex="0">
-    <div class="accordion" id="projects">
-      {{#each this.volumes}}
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button{{#if @first}}{{else}} collapsed{{/if}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{@index}}" aria-expanded="true" aria-controls="collapse-{{@index}}">
-              {{Name}}
-            </button>
-          </h2>
-          <div id="collapse-{{@index}}" class="accordion-collapse collapse{{#if @first}} show{{/if}}" data-bs-parent="#projects">
-            <div class="accordion-body">
-              {{> subtitle title="Storage Settings" icon="fa-solid fa-floppy-disk"}}
-              <div class="table-responsive">
-                <table class="table table-striped table-sm table-nowrap">
-                  <tbody>
-                    <tr>
-                      <td>Driver</td>
-                      <td>{{Driver}}</td>
-                    </tr>
-                    <tr>
-                      <td>Mount point</td>
-                      <td>{{Mountpoint}}</td>
-                    </tr>
-                    <tr>
-                      <td>Volume Size</td>
-                      <td>{{format "bytes" SizeInBytes}}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" colspan="2">Options</th>
-                    </tr>
-                    {{#each Options}}
-                      <tr>
-                        <td>{{@key}}</td>
-                        <td>{{this}}</td>
-                      </tr>
-                    {{/each}}
-                    <tr>
-                      <th scope="row" colspan="2">Labels</th>
-                    </tr>
-                    {{#each Labels}}
-                      <tr>
-                        <td>{{@key}}</td>
-                        <td>{{this}}</td>
-                      </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-              {{> subtitle title="Used by Containers" icon="fa-solid fa-box"}}
+ <div class="p-1 mb-3">
+   <a class="btn btn-primary" href="/admin/createvolume" role="button">Create volume</a>
+ </div>
+ <nav>
+   <div class="nav nav-tabs" id="nav-tab" role="tablist">
+     <button class="nav-link active" id="nav-volume-tab" data-bs-toggle="tab" data-bs-target="#nav-volume" type="button" role="tab" aria-controls="nav-volume" aria-selected="true">Volumes</button>
+     <button class="nav-link" id="nav-images-tab" data-bs-toggle="tab" data-bs-target="#nav-images" type="button" role="tab" aria-controls="nav-images" aria-selected="false">Images</button>
+   </div>
+ </nav>
+ <div class="tab-content" id="nav-tabContent">
+   <div class="tab-pane fade show active" id="nav-volume" role="tabpanel" aria-labelledby="nav-volume-tab" tabindex="0">
+     <div class="accordion" id="projects">
+       {{#each this.volumes}}
+         <div class="accordion-item">
+           <h2 class="accordion-header">
+             <button class="accordion-button{{#if @first}}{{else}} collapsed{{/if}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{@index}}" aria-expanded="true" aria-controls="collapse-{{@index}}">
+               {{Name}}
+             </button>
+           </h2>
+           <div id="collapse-{{@index}}" class="accordion-collapse collapse{{#if @first}} show{{/if}}" data-bs-parent="#projects">
+             <div class="accordion-body">
+               {{> subtitle title="Storage Settings" icon="fa-solid fa-floppy-disk"}}
+               <div class="table-responsive">
+                 <table class="table table-striped table-sm table-nowrap">
+                   <tbody>
+                     <tr>
+                       <td>Driver</td>
+                       <td>{{Driver}}</td>
+                     </tr>
+                     <tr>
+                       <td>Mount point</td>
+                       <td>{{Mountpoint}}</td>
+                     </tr>
+                     <tr>
+                       <td>Volume Size</td>
+                       <td>{{format "bytes" SizeInBytes}}</td>
+                     </tr>
+                     <tr>
+                       <th scope="row" colspan="2">Options</th>
+                     </tr>
+                     {{#each Options}}
+                       <tr>
+                         <td>{{@key}}</td>
+                         <td>{{this}}</td>
+                       </tr>
+                     {{/each}}
+                     <tr>
+                       <th scope="row" colspan="2">Labels</th>
+                     </tr>
+                     {{#each Labels}}
+                       <tr>
+                         <td>{{@key}}</td>
+                         <td>{{this}}</td>
+                       </tr>
+                     {{/each}}
+                   </tbody>
+                 </table>
+               </div>
+               {{> subtitle title="Used by Containers" icon="fa-solid fa-box"}}
 
-              <div class="table-responsive">
-                <table class="table table-striped table-sm table-nowrap">
-                  <thead>
-                    <tr>
-                      <th>Container</th>
-                      <th>Mode</th>
-                      <th>Target</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each containers}}
-                      <tr>
-                        <td>{{ContainerName}}</td>
-                        <td>
-                          {{#if RW}}
-                            <i class="fa-solid fa-book-open-reader"></i>
-                            <i class="fa-solid fa-pencil"></i>
-                          {{else}}
-                            <i class="fa-solid fa-book-open-reader"></i>
-                          {{/if}}
-                        </td>
-                        <td>{{Destination}}</td>
-                      </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-              {{#when live "eq" true}}
-                {{#when changed "eq" true}}
-                  <div class="bg-danger bg-gradient text-white mb-2 p-3">
-                    This volume has local settings not yet live but a volume already exists with this name.</div>
-                {{/when}}
-      {{else}}
-        {{#when changed "eq" true}}
-          <div class="bg-danger bg-gradient text-white mb-2  p-3">
-            This volume has local settings not yet live.</div>
-        {{/when}}
-              {{/when}}
-              <button class="btn btn-primary" onclick="window.location.href='/admin/editvolume?id={{Name}}'; return false;" role="button">Edit volume</button>
-              &nbsp;
-              {{#when changed "eq" true}}
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="document.getElementById('opid').value='{{Name}}'; return false;" role="button">Delete changes</button>
-                &nbsp;
-                <button class="btn btn-primary" onclick="showVolumeScript('{{Name}}', true); return false;" role="button">Script Changes</button>
-                &nbsp;
-                <a href="/admin/storage/volume/{{Name}}/script?preferdb=true" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
-      {{else}}
-        <button class="btn btn-primary" onclick="showVolumeScript('{{Name}}', false); return false;" role="button">Script Volume</button>
-        &nbsp;
-        <a href="/admin/storage/volume/{{Name}}/script?preferdb=false" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
-              {{/when}}
-            </div>
-          </div>
-        </div>
-      {{/each}}
-    </div>
-  </div>
-  <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab" tabindex="0">
+               <div class="table-responsive">
+                 <table class="table table-striped table-sm table-nowrap">
+                   <thead>
+                     <tr>
+                       <th>Container</th>
+                       <th>Mode</th>
+                       <th>Target</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     {{#each containers}}
+                       <tr>
+                         <td>{{ContainerName}}</td>
+                         <td>
+                           {{#if RW}}
+                             <i class="fa-solid fa-book-open-reader"></i>
+                             <i class="fa-solid fa-pencil"></i>
+                           {{else}}
+                             <i class="fa-solid fa-book-open-reader"></i>
+                           {{/if}}
+                         </td>
+                         <td>{{Destination}}</td>
+                       </tr>
+                     {{/each}}
+                   </tbody>
+                 </table>
+               </div>
+               {{#when live "eq" true}}
+                 {{#when changed "eq" true}}
+                   <div class="bg-danger bg-gradient text-white mb-2 p-3">
+                     This volume has local settings not yet live but a volume already exists with this name.</div>
+                 {{/when}}
+       {{else}}
+         {{#when changed "eq" true}}
+           <div class="bg-danger bg-gradient text-white mb-2  p-3">
+             This volume has local settings not yet live.</div>
+         {{/when}}
+               {{/when}}
+               <button class="btn btn-primary" onclick="window.location.href='/admin/editvolume?id={{Name}}'; return false;" role="button">Edit volume</button>
+               &nbsp;
+               {{#when changed "eq" true}}
+                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="document.getElementById('opid').value='{{Name}}'; return false;" role="button">Delete changes</button>
+                 &nbsp;
+                 <button class="btn btn-primary" onclick="showVolumeScript('{{Name}}', true); return false;" role="button">Script Changes</button>
+                 &nbsp;
+                 <a href="/admin/storage/volume/{{Name}}/script?preferdb=true" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
+       {{else}}
+         <button class="btn btn-primary" onclick="showVolumeScript('{{Name}}', false); return false;" role="button">Script Volume</button>
+         &nbsp;
+         <a href="/admin/storage/volume/{{Name}}/script?preferdb=false" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="false">Download Script</a>
+               {{/when}}
+             </div>
+           </div>
+         </div>
+       {{/each}}
+     </div>
+   </div>
+   <div class="tab-pane fade" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab" tabindex="0">
 
-    <div class="table-responsive">
-      <table class="datatable table table-striped table-sm table-nowrap">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Image</th>
-            <th>Containers</th>
-            <th>Size</th>
-            <th>Shared</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each images}}
-            <tr>
-              <td>{{#when Documentation "eq" ""}}{{Title}}
-          {{else}}<a href="{{Documentation}}" target="_blank">{{Title}}</a>{{/when}}</td>
-              <td>{{Name}}</td>
-              <td>{{Containers}}</td>
-              <td>{{format "bytes" Size}}</td>
-              <td>{{format "bytes" SharedSize}}</td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+     <div class="table-responsive">
+       <table class="datatable table table-striped table-sm table-nowrap">
+         <thead>
+           <tr>
+             <th>Title</th>
+             <th>Image</th>
+             <th>Containers</th>
+             <th>Size</th>
+             <th>Shared</th>
+           </tr>
+         </thead>
+         <tbody>
+           {{#each images}}
+             <tr>
+               <td>{{#when Documentation "eq" ""}}{{Title}}
+           {{else}}<a href="{{Documentation}}" target="_blank">{{Title}}</a>{{/when}}</td>
+               <td>{{Name}}</td>
+               <td>{{Containers}}</td>
+               <td>{{format "bytes" Size}}</td>
+               <td>{{format "bytes" SharedSize}}</td>
+             </tr>
+           {{/each}}
+         </tbody>
+       </table>
+     </div>
+   </div>
+ </div>
 
-<div class="modal fade" id="scriptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scriptModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="scriptModalLabel">Volume create script</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>This script will create the Volune you have just modified.</p>
-        <pre><div id="script"/></pre>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+ <div class="modal fade" id="scriptModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="scriptModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h1 class="modal-title fs-5" id="scriptModalLabel">Volume create script</h1>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+         <p>This script will create the Volune you have just modified.</p>
+         <pre><div id="script"/></pre>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+       </div>
+     </div>
+   </div>
+ </div>
 
-<input type="hidden" id="opid" value="" />
+ <input type="hidden" id="opid" value="" />
 
-<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-bg-danger">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Deletion</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you wish to delete these volume changes?</p>
-        <p>Note: Any existing volumes of this name in Docker will remain until manually deleted</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button onclick="deleteVolume(document.getElementById('opid').value);return false;" type="button" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
+ <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header text-bg-danger">
+         <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Deletion</h1>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+         <p>Are you sure you wish to delete these volume changes?</p>
+         <p>Note: Any existing volumes of this name in Docker will remain until manually deleted</p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+         <button onclick="deleteVolume(document.getElementById('opid').value);return false;" type="button" class="btn btn-danger">Delete</button>
+       </div>
+     </div>
+   </div>
+ </div>

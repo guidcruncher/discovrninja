@@ -31,7 +31,7 @@ export class StorageScriptService {
 
   public getDelete(vol: Volume) {
     const result = [];
-    var mountPoint = vol.Mountpoint;
+    let mountPoint = vol.Mountpoint;
     if (vol.CustomMountpoint) {
       if (vol.CustomMountpoint!="") {mountPoint=vol.CustomMountpoint;}
     }
