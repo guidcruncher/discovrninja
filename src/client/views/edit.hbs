@@ -1,123 +1,123 @@
 <h3>Manage Container</h3>
 {{# if error }}
 
-<div class="card text-bg-danger gradient" style="width: 30rem;">
-  <div class="card-body">
-    <h5 class="card-title">Cannot edit this container</h5>
-    <p class="card-text">One or more project files required to edit this container cannot be found in the project directory.</p>
-    <a href="/admin/index?tab=1" class="btn btn-primary">Go Back</a>
-  </div>
-</div>
-
-{{ else}}
-<form>
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-desktop-tab" data-bs-toggle="tab" data-bs-target="#nav-desktop" type="button" role="tab" aria-controls="nav-desktop" aria-selected="true">Desktop</button>
-      <button class="nav-link" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="false">Configuration</button>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-desktop" role="tabpanel" aria-labelledby="nav-desktop-tab" tabindex="0">
-      <div class="container" style="padding-top:10px">
-        <div class=rWWwsstgtge"mb-3 t">
-          <label for="txtcontainerName" class="-form-label">Container:</label>
-          <input type="text" class="form-control" id="txtcontainerName" value="{{def.containerName}}" disabled readonly>
-        </div>
-        <div class="mb-3">
-          <label for="txthostname" class="-form-label">Container Hostname:</label>
-          <input type="text" class="form-control" id="txthostname" value="{{def.hostname}}" {{#isempty def.hostname}}required{{else}}disabled readonly{{/isempty}}>
-        </div>
-        <div class="mb-3">
-          <label for="txtname" class="-form-label">Display Name:</label>
-          <input type="text" class="form-control" id="txtname" value="{{def.name}}" required>
-        </div>
-        <div class="mb-3">
-          <label for="txtproxy" class="-form-label">Internal Address:</label>
-          <input type="text" class="form-control" id="txtproxy" value="{{def.proxy}}" required>
-        </div>
-        <div class="mb-3">
-          <label for="txtpublic" class="-form-label">Public Address:</label>
-          <div class="col sm-10">
-            <input type="text" class="form-control" id="txtpublic" value="{{def.public}}">
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="chkArchived" {{#if def.archived}}checked{{/if}}>
-            <label class="form-check-label" for="chkArchived">
-              Archived? (Hidden from Menu)
-            </label>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="txticonSlug" class="-form-label">Icon:</label>
-          <div class="col sm-10">
-            <button class="btn btn-outline-primary" style="width:90px;height:90px;" type="button" onclick="changeIconFromEdit(); return false;"><img id="imgIcon" src="{{def.iconUrl}}" style="max-width:64px;max-height:64px;" /></button>
-            <input type="hidden" id="txticonSlug" value="{{def.iconSlug}}">
-            <input type="hidden" id="txticonCatalog" value="{{def.iconCatalog}}">
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="uptime" {{#if def.uptime}}checked{{/if}}>
-            <label class="form-check-label" for="uptime">
-              Measure uptime?
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="monitor" {{#if def.monitor}}checked{{/if}}>
-            <label class="form-check-label" for="monitor">
-              Monitor?
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab" tabindex="0">
-      <div class="mb-3">
-        <label for="txtCompose" class="form-label">Project Compose file:</label><br />
-        <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace;display:none" data-project="{{projectName}}" onchange="document.getElementById('changed')='true';" id="txtCompose"> {{project.compose}}</textarea>
-        <div id="yamlEdit" class="editor"></div>
-        <script type="text/javascript">
-          createEditor("yamlEdit", "txtCompose");
-
-        </script>
-      </div>
-      <div class="mb-3">
-        <label for="txtEnv" class="form-label">Project Environment file:</label><br />
-        <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtEnv">{{project.env}}</textarea>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <input type="hidden" id="changed" value="false" />
-    <button class="btn btn-primary" type="button" onclick="saveConfiguration({{tab}}); return false;">Save</button>
-    <button class="btn btn-secondary" type="button" onclick="window.location.href='/admin/index?tab={{tab}}'; return false;">Cancel</button>
-    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-  </div>
-
-  <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header text-bg-danger">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Deletion</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you wish to delete this Stack?</p>
-          <p>Note: Any volumes, networks, images, container, binds or Compose files are not deleted</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button onclick="deleteStack('{{def.containerName}}');return false;" type="button" class="btn btn-danger">Delete</button>
-        </div>
-      </div>
+  <div class="card text-bg-danger gradient" style="width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Cannot edit this container</h5>
+      <p class="card-text">One or more project files required to edit this container cannot be found in the project directory.</p>
+      <a href="/admin/index?tab=1" class="btn btn-primary">Go Back</a>
     </div>
   </div>
 
-</form>
-{{>messagebox}}
-{{>iconsearch}}
-{{/if}}
+  {{ else}}
+  <form>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-desktop-tab" data-bs-toggle="tab" data-bs-target="#nav-desktop" type="button" role="tab" aria-controls="nav-desktop" aria-selected="true">Desktop</button>
+        <button class="nav-link" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="false">Configuration</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-desktop" role="tabpanel" aria-labelledby="nav-desktop-tab" tabindex="0">
+        <div class="container" style="padding-top:10px">
+          <div class=rWWwsstgtge"mb-3 t">
+            <label for="txtcontainerName" class="-form-label">Container:</label>
+            <input type="text" class="form-control" id="txtcontainerName" value="{{def.containerName}}" disabled readonly>
+          </div>
+          <div class="mb-3">
+            <label for="txthostname" class="-form-label">Container Hostname:</label>
+            <input type="text" class="form-control" id="txthostname" value="{{def.hostname}}" {{#isempty def.hostname}}required{{else}}disabled readonly{{/isempty}}>
+          </div>
+          <div class="mb-3">
+            <label for="txtname" class="-form-label">Display Name:</label>
+            <input type="text" class="form-control" id="txtname" value="{{def.name}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="txtproxy" class="-form-label">Internal Address:</label>
+            <input type="text" class="form-control" id="txtproxy" value="{{def.proxy}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="txtpublic" class="-form-label">Public Address:</label>
+            <div class="col sm-10">
+              <input type="text" class="form-control" id="txtpublic" value="{{def.public}}">
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="chkArchived" {{#if def.archived}}checked{{/if}}>
+              <label class="form-check-label" for="chkArchived">
+                Archived? (Hidden from Menu)
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="txticonSlug" class="-form-label">Icon:</label>
+            <div class="col sm-10">
+              <button class="btn btn-outline-primary" style="width:90px;height:90px;" type="button" onclick="changeIconFromEdit(); return false;"><img id="imgIcon" src="{{def.iconUrl}}" style="max-width:64px;max-height:64px;" /></button>
+              <input type="hidden" id="txticonSlug" value="{{def.iconSlug}}">
+              <input type="hidden" id="txticonCatalog" value="{{def.iconCatalog}}">
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="uptime" {{#if def.uptime}}checked{{/if}}>
+              <label class="form-check-label" for="uptime">
+                Measure uptime?
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="monitor" {{#if def.monitor}}checked{{/if}}>
+              <label class="form-check-label" for="monitor">
+                Monitor?
+              </label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab" tabindex="0">
+        <div class="mb-3">
+          <label for="txtCompose" class="form-label">Project Compose file:</label><br />
+          <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace;display:none" data-project="{{projectName}}" onchange="document.getElementById('changed')='true';" id="txtCompose"> {{project.compose}}</textarea>
+          <div id="yamlEdit" class="editor"></div>
+          <script type="text/javascript">
+            createEditor("yamlEdit", "txtCompose");
+
+          </script>
+        </div>
+        <div class="mb-3">
+          <label for="txtEnv" class="form-label">Project Environment file:</label><br />
+          <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtEnv">{{project.env}}</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <input type="hidden" id="changed" value="false" />
+      <button class="btn btn-primary" type="button" onclick="saveConfiguration({{tab}}); return false;">Save</button>
+      <button class="btn btn-secondary" type="button" onclick="window.location.href='/admin/index?tab={{tab}}'; return false;">Cancel</button>
+      <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+    </div>
+
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-bg-danger">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Deletion</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you wish to delete this Stack?</p>
+            <p>Note: Any volumes, networks, images, container, binds or Compose files are not deleted</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button onclick="deleteStack('{{def.containerName}}');return false;" type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  {{>messagebox}}
+  {{>iconsearch}}
+  {{/if}}

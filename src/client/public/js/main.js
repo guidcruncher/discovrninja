@@ -22268,7 +22268,7 @@ function _service(Handlebars) {
     p.opacity = opacity;
     const extend = (a, b) => {
       for (var key in b)
-        if (b.hasOwnProperty(key)) a[key] = b[key];
+        if (Object.prototype.hasOwnProperty.call(b, key)) a[key] = b[key];
       return a
     };
     if (name.includes(".")) {
