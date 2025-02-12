@@ -39,17 +39,19 @@ export class TasksService {
           .then((result) => {
             const parsed = JSON.parse(result.value);
             const imgurl = parsed[0].fullUrl;
-var baseDir = path.join(__dirname, "../", "client", "public", "img");
-
-if (process.env.IN_DOCKER == "true")
-{
-  baseDir = path.join("home","app","client","public","img");
-}
-
-            fs.mkdirSync(
-              baseDir,
-              { recursive: true },
+            let baseDir = path.join(
+              __dirname,
+              "../",
+              "client",
+              "public",
+              "img",
             );
+
+            if (process.env.IN_DOCKER == "true") {
+              baseDir = path.join("home", "app", "client", "public", "img");
+            }
+
+            fs.mkdirSync(baseDir, { recursive: true });
 
             FluentHttpClient.Get(imgurl)
               .DownloadTo(
