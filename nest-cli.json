@@ -11,7 +11,7 @@
         "watchAssets": true
       },
       {
-        "include": "./client/**",
+        "include": "./client/",
         "youtDir": "./dist/client/",
         "watchAssets": true
       }

@@ -141,6 +141,11 @@ export class DockerService {
       this.configService.get("docker.stackBasePath"),
       folder,
     );
+
+    if (!fs.existsSync(path.join(projectPath, "compose.yaml"))) {
+      return "";
+    }
+
     if (fs.existsSync(path.join(projectPath, config))) {
       return projectPath;
     }

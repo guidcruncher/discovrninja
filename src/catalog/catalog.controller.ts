@@ -145,7 +145,8 @@ export class CatalogController {
           })
           .catch((err) => {
             this.logger.error("Error invoking container edit", err);
-            res.status(500).send(err);
+            res.view("edit.hbs", {
+            size: size, error: true }, {layout: "./layouts/layout.hbs"},);
           });
       };
 
