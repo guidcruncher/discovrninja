@@ -33,11 +33,15 @@ export class StorageScriptService {
     const result = [];
     let mountPoint = vol.Mountpoint;
     if (vol.CustomMountpoint) {
-      if (vol.CustomMountpoint!="") {mountPoint=vol.CustomMountpoint;}
+      if (vol.CustomMountpoint != "") {
+        mountPoint = vol.CustomMountpoint;
+      }
     }
 
-    result.push("sudo tar -zcvpf ./" + vol.Name + ".tar.gz -C "+mountPoint + ".");
-    result.push(""); 
+    result.push(
+      "sudo tar -zcvpf ./" + vol.Name + ".tar.gz -C " + mountPoint + ".",
+    );
+    result.push("");
     result.push("docker volume rm " + vol.Name + " --force");
     return result;
   }
