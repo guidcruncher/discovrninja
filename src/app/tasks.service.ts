@@ -9,6 +9,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { Cron } from "@nestjs/schedule";
+import * as fs from "fs";
 import { Model } from "mongoose";
 import * as path from "path";
 
@@ -38,11 +39,15 @@ export class TasksService {
           .then((result) => {
             const parsed = JSON.parse(result.value);
             const imgurl = parsed[0].fullUrl;
+            fs.mkdirSync(
+              path.join(__dirname, "../", "client", "public", "img"),
+              { recursive: true },
+            );
+
             FluentHttpClient.Get(imgurl)
               .DownloadTo(
                 path.join(
                   __dirname,
-                  "../",
                   "../",
                   "client",
                   "public",

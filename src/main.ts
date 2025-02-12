@@ -55,7 +55,7 @@ async function bootstrap() {
   app.enableCors();
 
   const clientBase =
-    process.env.CLIENT_BASE ?? path.join(__dirname, "..", "client");
+    process.env.CLIENT_BASE ?? path.join(__dirname, "client");
 
   const log = new Logger("Bootstrap");
   const config: ConfigService = app.get(ConfigService);

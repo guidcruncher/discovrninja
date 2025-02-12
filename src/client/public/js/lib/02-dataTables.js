@@ -3208,8 +3208,7 @@
             colspan: colspan,
             rowspan: rowspan,
             title: titleSpan.length ?
-              titleSpan.html() :
-              $(cell).html()
+              titleSpan.html() : $(cell).html()
           };
         }
       }
@@ -5494,8 +5493,7 @@
     _fnBindAction(node, selector, function(e) {
       var run = false;
       var columns = column === undefined ?
-        _fnColumnsFromHeader(e.target) :
-        [column];
+        _fnColumnsFromHeader(e.target) : [column];
 
       if (columns.length) {
         for (var i = 0, ien = columns.length; i < ien; i++) {
@@ -5970,8 +5968,7 @@
       length: settings._iDisplayLength,
       order: sorting.map(function(sort) {
         // If a column name is available, use it
-        return columns[sort[0]] && columns[sort[0]].sName ?
-          [columns[sort[0]].sName, sort[1]] :
+        return columns[sort[0]] && columns[sort[0]].sName ? [columns[sort[0]].sName, sort[1]] :
           sort.slice();
       }),
       search: $.extend({}, settings.oPreviousSearch),
@@ -12727,8 +12724,7 @@
             .attr({
               id: val.id || null,
               "class": val.className ?
-                val.className :
-                classes.cell + ' ' + klass
+                val.className : classes.cell + ' ' + klass
             })
             .append(val.contents)
             .appendTo(row);
@@ -13109,10 +13105,8 @@
         'aria-label': ariaLabel,
         'data-dt-idx': button,
         'tabIndex': btnInfo.disabled ?
-          -1 :
-          settings.iTabIndex && btn.clicker[0].nodeName.toLowerCase() !== 'span' ?
-          settings.iTabIndex :
-          null, // `0` doesn't need a tabIndex since it is the default
+          -1 : settings.iTabIndex && btn.clicker[0].nodeName.toLowerCase() !== 'span' ?
+          settings.iTabIndex : null, // `0` doesn't need a tabIndex since it is the default
       });
 
       if (typeof button !== 'number') {

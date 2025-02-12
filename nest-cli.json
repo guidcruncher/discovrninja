@@ -11,8 +11,8 @@
         "watchAssets": true
       },
       {
-        "include": "./src/client/",
-        "outDir": "./dist/client/",
+        "include": "./client/**",
+        "youtDir": "./dist/client/",
         "watchAssets": true
       }
     ]
