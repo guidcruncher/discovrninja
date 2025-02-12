@@ -646,7 +646,9 @@ function navigateTo(target) {
       openErrorDialog();
     });
   } else {
-    window.open(url);
+    document.getElementById("loader").href = url;
+    document.getElementById("loader").click();
+    //window.open(url);
   }
 }
 
