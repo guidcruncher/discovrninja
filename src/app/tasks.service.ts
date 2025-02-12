@@ -54,16 +54,7 @@ export class TasksService {
             fs.mkdirSync(baseDir, { recursive: true });
 
             FluentHttpClient.Get(imgurl)
-              .DownloadTo(
-                path.join(
-                  __dirname,
-                  "../",
-                  "client",
-                  "public",
-                  "img",
-                  "bing.jpg",
-                ),
-              )
+              .DownloadTo(path.join(baseDir, "bing.jpg"))
               .then((result) => {
                 this.logger.debug("End => CronDailyImages");
                 resolve(imgurl);
