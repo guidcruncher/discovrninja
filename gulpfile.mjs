@@ -42,6 +42,7 @@ gulp.task("formatjs", task('npx js-beautify -r -s 2 -n -w 0 --type js ./src/clie
 gulp.task("format", series(task("npm run format"), "formatcss", "formathbs", "formathtml"));
 gulp.task("startdev", task("npm run start:dev"));
 gulp.task("uglify", series(task("npm run uglifycss"), task("npm run uglify"), task("npx js-beautify -r -s 2 -n -w 0 --type js ./src/client/public/js/main.js")));
+gulp.task("css", series(task("npm run uglifycss")));
 gulp.task("js", series( "templates", "formatjs", "uglify"));
 gulp.task("lint", task("npm run lint"));
 gulp.task("lint-client", task("npm run lint-client"));
@@ -57,6 +58,7 @@ gulp.task(
     "prebuild",
     "format",
     "lint",
+    "lint-client"
     "js",
     "compile",
   ),
@@ -68,6 +70,7 @@ gulp.task(
     "prebuild",
     "format",
     "lint",
+    "lint-client",
     "js",
     "startdev",
   ),

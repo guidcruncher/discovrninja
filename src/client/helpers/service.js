@@ -21,7 +21,7 @@ module.exports = (Handlebars) => {
 
       const extend = ((a, b) => {
         for (var key in b)
-          if (b.hasOwnProperty(key))
+          if (Object.prototype.hasOwnProperty.call(b, key))
             a[key] = b[key];
         return a;
       });
