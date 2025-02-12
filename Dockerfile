@@ -32,6 +32,7 @@ RUN cp ./build/node_modules/* /home/app/node_modules -R && \
     cp ./build/dist/* ./server/ -R && \
     date +"%s" > ./server/builddate && \
     cp ./build/package.json /home/app/server/package.json && \
+    cp ./build/client/* /home/app/src/cient -R && \
     cp ./build/client/* /home/app/client/ -R && \
     rm -r ./build && \
     mkdir -p /docker/stacks/
