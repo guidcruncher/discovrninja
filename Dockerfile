@@ -12,7 +12,7 @@ WORKDIR /home/app/build
 COPY gulpfile.mjs ./gulpfile.mjs
 COPY package.json ./package.json
 COPY ./src/ ./src/
-COPY ./client/ ./client/
+COPY ./src/client/ ./client/
 COPY ./config/* ./config/
 COPY ./tsconfig.* .
 COPY nest-cli.json .

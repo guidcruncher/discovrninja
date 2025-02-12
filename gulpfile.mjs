@@ -47,7 +47,7 @@ gulp.task("lint", task("npm run lint"));
 gulp.task("lint-client", task("npm run lint-client"));
 
 gulp.task("docker", series(task("docker compose up --build")));
-gulp.task("dockerbuild", series(task('docker buildx create --use --name discovrninjaBuilder'),
+gulp.task("dockerbuild", series(task('docker buildx rm discovrninjaBuilder'), task('docker buildx create --use --name discovrninjaBuilder'),
   task('docker buildx build . --builder discovrninjaBuilder -t guidcruncher/discovrninja:development  --no-cache --pull --push --platform linux/arm64'),
   task('docker buildx rm discovrninjaBuilder')));
 
