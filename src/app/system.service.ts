@@ -6,10 +6,15 @@ export class SystemService {
 
   public getVersion() {
     return new Promise((resolve, reject) => {
-      const build: any = { buildDate: new Date(), version: "development" };
+      const build: any = { startDate: new Date(), buildDate: new Date(), version: "development" };
       if (process.env.BUILDDATE) {
         build.buildDate = new Date(0);
         build.buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE));
+      }
+
+      if (process.env.STARTDATE) {
+        build.startDate = new Date(0);
+        build.startDate.setUTCSeconds(parseInt(process.env.STARTDATE));
       }
 
       build.runMode = "Direct";
@@ -23,6 +28,7 @@ export class SystemService {
         build.version = process.env.PACKAGE_VERSION;
       }
       build.epochBuildDate = build.buildDate.getTime();
+      build.epochStartDate = build.startDate.getTime();
       resolve(build);
     });
   }
