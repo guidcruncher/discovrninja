@@ -9,7 +9,7 @@ services:
       proxy:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/jcrocker/docker/stacks/discovrninja/config/:/home/app/config/
+      - /home/jcrocker/docker/stacks/discovrninja/config/:/home/node/config/
       - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
       - ./themes:/home/app/client/public/themes
     container_name: discovrninja_dev

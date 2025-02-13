@@ -1,64 +1,46 @@
-FROM guidcruncher/node-base:lts-alpine3.20 AS base
-
+FROM guidcruncher/node-base:lts-alpine AS build
+ 
 RUN apk add --no-cache jq git
 
-RUN npm i -g gulp-cli
+RUN mkdir -p /home/node/app /home/node/config /home/node/config /home/node/cache /home/node/.defaults
+WORKDIR /home/node/.build
 
-RUN mkdir -p /home/app/.defaults/ /home/app/config/ /home/app/build/dist /home/app/build/client/dist /ho me/app/build/src /home/app/build/ config /home/app/server /home/app/src/client /home/app/client /home/app/node_modules /etc/caddy/caddyfile.d	/etc/caddy/includes
+COPY package*.json ./
 
-FROM base AS build
+RUN npm i
 
-WORKDIR /home/app/build
-COPY gulpfile.mjs ./gulpfile.mjs
-COPY package.json ./package.json
-COPY ./src/ ./src/
-COPY ./src/client/ ./client/
-COPY ./config/* ./config/
-COPY ./tsconfig.* .
-COPY nest-cli.json .
+COPY . .
 
-RUN npm i && \
-    apk del .build-deps && \
-    gulp js && \
-    npm run build && \
-    rm -r ./node_modules && \
-    npm i --omit=dev
+RUN npm run build
 
-# Assemble
+COPY ./provisioning/userpasswd /home/node/userpasswd
+COPY ./provisioning/useradd /home/node/useradd
+COPY ./provisioning/start.sh /home/node/start.sh
+RUN chmod +x /home/node/userpasswd /home/node/useradd /home/node/start.sh
+COPY ./provisioning/defaults/iconsets.json /home/node/.defaults/iconsets.default
+COPY ./provisioning/defaults/config.yaml /home/node/.defaults/config.default
+COPY ./provisioning/defaults/desktop.yaml /home/node/.defaults/desktop.default
+COPY ./provisioning/defaults/services.yaml /home/node/.defaults/services.default
 
-WORKDIR /home/app
+RUN cp ./dist/* /home/node/app -R
+RUN cp ./package.json /home/node/app
 
-RUN cp ./build/node_modules/* /home/app/node_modules -R && \
-    cp ./build/dist/* ./server/ -R && \
-    date +"%s" > ./server/builddate && \
-    cp ./build/package.json /home/app/server/package.json && \
-    cp ./build/client/* /home/app/src/client -R && \
-    cp ./build/client/* /home/app/client/ -R && \
-    rm -r ./build && \
-    mkdir -p /docker/stacks/
-
-COPY ./provisioning/userpasswd /home/app/userpasswd
-COPY ./provisioning/useradd /home/app/useradd
-COPY ./provisioning/start.sh /home/app/start.sh
-COPY ./provisioning/defaults/iconsets.json /home/app/.defaults/iconsets.default
-COPY ./provisioning/defaults/config.yaml /home/app/.defaults/config.default
-COPY ./provisioning/defaults/desktop.yaml /home/app/.defaults/desktop.default
-COPY ./provisioning/defaults/services.yaml /home/app/.defaults/services.default
-
-RUN chmod +x /home/app/userpasswd /home/app/useradd /home/app/start.sh
+WORKDIR /home/node/app/
+RUN npm i --production --include prod
+RUN rm -r /home/node/.build
+RUN date +%s > /home/node/app/builddate
 
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 
 FROM build AS production
 
-WORKDIR /home/app/
+WORKDIR /home/node/app/
 
-ENV NODE_CONFIG_DIR=/home/app/config/
+ENV NODE_CONFIG_DIR=/home/node/config/
 ENV NODE_ENV=production
 ENV NODE_PATH=./build
 ENV TZ=UTC
 
 EXPOSE 5001
  
-CMD [ "/home/app/start.sh" ]
-
+CMD [ "/home/node/start.sh" ]
