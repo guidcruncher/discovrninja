@@ -10,6 +10,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/:/home/node/config/
+      - ./cache/:/home/node/cache/
       - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
       - ./themes:/home/app/client/public/themes
     container_name: discovrninja_dev

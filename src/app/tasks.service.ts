@@ -51,7 +51,7 @@ export class TasksService {
               baseDir = path.join(process.env.CLIENT_BASE, "public", "img");
             }
 
-            this.logger.debug("Writing bing background to "+baseDir);
+            this.logger.debug("Writing bing background to " + baseDir);
             fs.mkdirSync(baseDir, { recursive: true });
 
             FluentHttpClient.Get(imgurl)

@@ -23,7 +23,7 @@ async function startServers(app: any, config: any, log: any) {
   let serverPort: number = parseInt(config.get("host.appServer.listenPort"));
   let serverHost: string = config.get("host.appServer.listenAddress");
 
-  if (process.env.IN_DOCKER=="true") {
+  if (process.env.IN_DOCKER == "true") {
     serverHost = "0.0.0.0";
     serverPort = 5001;
   }
@@ -69,11 +69,7 @@ async function bootstrap() {
   });
 
   if (config.get("desktop.enableLocalIconCache") == true) {
-    let dirPath = config.get("desktop.localIconCacheFolder");
-
-    if (process.env.IN_DOCKER=="true") {
-      dirPath = process.env.CACHE_BASE;
-    }
+    let dirPath = path.join(process.env.CACHE_BASE, "icons");
 
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);

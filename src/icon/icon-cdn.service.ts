@@ -37,10 +37,7 @@ export class IconCDNService {
 
   resolveIconUrl(catalog: string, slug: string) {
     if (this.configService.get("desktop.enableLocalIconCache") == true) {
-      let dirPath = this.configService.get("desktop.localIconCacheFolder");
-      if (process.env.IN_DOCKER) {
-        dirPath = "/iconcache";
-      }
+      let dirPath = path.join(process.env.CACHE_BASE, "icons");
       return "/icons/" + catalog.toLowerCase() + "/" + slug.toLowerCase();
     } else {
       return this.resolveIconSourceUrl(catalog, slug);
@@ -198,6 +195,7 @@ export class IconCDNService {
             .then((e) => {
               resolve(icons);
             })
+
             .catch((err) => {
               this.logger.error("Error in updateIconCache", err);
               reject(err);

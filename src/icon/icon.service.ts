@@ -43,11 +43,7 @@ export class IconService {
         "/" +
         this.iconSettingsService.format(data.filename, { slug: slug });
       const srcUrl = this.resourceSourceUrl(catalog, slug);
-      let dirPath = this.configService.get("desktop.localIconCacheFolder");
-      if (process.env.IN_DOCKER) {
-        dirPath = "/iconcache";
-      }
-
+      let dirPath = path.join(process.env.CACHE_BASE, "icons");
       dirPath = path.join(
         dirPath,
         catalog.toLowerCase(),
