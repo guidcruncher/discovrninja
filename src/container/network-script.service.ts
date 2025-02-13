@@ -61,9 +61,9 @@ export class NetworkScriptService {
 
     if (net.IPAM.Config) {
       net.IPAM.Config.forEach((cfg) => {
-        sb.appendFormat("    --ip-range {0}", cfg.IPRange);
-        sb.appendFormat("    --subnet {0}", cfg.Subnet);
-        sb.appendFormat("    --gateway {0}", cfg.Gateway);
+        if (cfg.IPRange && cfg.IPRange != "") {sb.appendFormat("    --ip-range {0}", cfg.IPRange);}
+        if (cfg.Subnet && cfg.Subnet != "") {sb.appendFormat("    --subnet {0}", cfg.Subnet);}
+        if (cfg.Gateway && cfg.Gateway != "") {sb.appendFormat("    --gateway {0}", cfg.Gateway);}
       });
     }
 

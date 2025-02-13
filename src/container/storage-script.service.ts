@@ -39,7 +39,7 @@ export class StorageScriptService {
     }
 
     result.push(
-      "sudo tar -zcvpf ./" + vol.Name + ".tar.gz -C " + mountPoint + ".",
+      "sudo tar -zcvpf ./" + vol.Name + ".tar.gz -C " + mountPoint + " .",
     );
     result.push("");
     result.push("docker volume rm " + vol.Name + " --force");

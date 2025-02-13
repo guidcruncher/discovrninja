@@ -5,6 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+#      watch:
+#        - action: sync
+#          path: ./src/client
+#          target: /home/node/app/client
     networks:
       proxy:
     volumes:
