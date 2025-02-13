@@ -70,4 +70,3 @@ echo "Starting server process"
 export STARTDATE=$(date +%s)
 cd /home/node/app
 node main --config=/home/node/config/config.yaml
-tail -f  /dev/null
