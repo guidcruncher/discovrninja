@@ -1,8 +1,11 @@
-FROM guidcruncher/node-base:lts-alpine AS development
+FROM guidcruncher/node-base:lts-alpine AS base
  
 RUN apk add --no-cache jq git
 
 RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/app /home/node/config /home/node/config /home/node/cache /home/node/.defaults
+
+FROM base AS development
+
 WORKDIR /home/node/build
 
 COPY package*.json ./
@@ -11,7 +14,7 @@ RUN npm ci
 
 COPY . .
 
-FROM guidcruncher/node-base:lts-alpine as build
+FROM base AS build
 
 WORKDIR /home/node/build
 
@@ -31,15 +34,16 @@ COPY ./provisioning/defaults/services.yaml /home/node/.defaults/services.default
 
 ENV NODE_ENV=production
 ARG NODE_ENV=production
-RUN cp ./dist/* /home/node/app -R
+RUN rm ./dist/client/public/js/lib ./dist/client/public/css/lib -r
+RUN cp ./dist/* /home/node/app -r
 RUN cp ./package*.json /home/node/app
-RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -R
+RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
 
 WORKDIR /home/node/app/
 RUN npm ci --only=production && npm cache clean --force
 RUN date +%s > /home/node/app/builddate
 
-FROM guidcruncher/node-base:lts-alpine AS production
+FROM base AS production
 
 WORKDIR /home/node/app
 
@@ -53,8 +57,6 @@ COPY --from=build /home/node/useradd /home/node/useradd
 COPY --from=build /home/node/userpasswd  /home/node/userpasswd
 
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
-
-WORKDIR /home/node/app/
 
 ENV NODE_CONFIG_DIR=/home/node/config/
 ENV NODE_ENV=production
