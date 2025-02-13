@@ -22,8 +22,10 @@ COPY ./provisioning/defaults/config.yaml /home/node/.defaults/config.default
 COPY ./provisioning/defaults/desktop.yaml /home/node/.defaults/desktop.default
 COPY ./provisioning/defaults/services.yaml /home/node/.defaults/services.default
 
+ENV NODE_ENV=production
+ARG NODE_ENV=production
 RUN cp ./dist/* /home/node/app -R
-RUN cp ./package.json /home/node/app
+RUN cp ./package*.json /home/node/app
 
 WORKDIR /home/node/app/
 RUN npm i --production --include prod
@@ -42,5 +44,7 @@ ENV NODE_PATH=./build
 ENV TZ=UTC
 
 EXPOSE 5001
+
+WORKDIR /home/node
  
 CMD [ "/home/node/start.sh" ]

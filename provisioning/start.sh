@@ -56,8 +56,8 @@ fi
 
 echo "Determining build version"
 export PACKAGE_VERSION=Development
-if [ -f /home/node/app/server/package.json ]; then
- export PACKAGE_VERSION=$(cat /home/node/app/server/package.json | jq ".version" -r)
+if [ -f /home/node/app/package.json ]; then
+ export PACKAGE_VERSION=$(cat /home/node/app/package.json | jq ".version" -r)
 fi
 
 echo "Determining build date"
@@ -68,5 +68,6 @@ fi
 
 echo "Starting server process"
 export STARTDATE=$(date +%s)
-node ./app/main --config=/home/node/config/config.yaml
+cd /home/node/app
+node main --config=/home/node/config/config.yaml
 tail -f  /dev/null
