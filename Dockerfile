@@ -28,7 +28,7 @@ RUN cp ./dist/* /home/node/app -R
 RUN cp ./package*.json /home/node/app
 
 WORKDIR /home/node/app/
-RUN npm i --production --include prod
+RUN npm i --production --include prod --omit dev
 RUN rm -r /home/node/.build
 RUN date +%s > /home/node/app/builddate
 

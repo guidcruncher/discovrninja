@@ -9,7 +9,7 @@ services:
       proxy:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/jcrocker/docker/stacks/discovrninja/config/:/home/node/config/
+      - ./config/:/home/node/config/
       - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
       - ./themes:/home/app/client/public/themes
     container_name: discovrninja_dev
@@ -19,7 +19,7 @@ services:
       host.docker.internal: 172.17.0.1
       auth.thecrockers.localcert.net: 192.168.1.201
     ports:
-      - 5101:3000
+      - 5001:5001
 
 networks:
   proxy:

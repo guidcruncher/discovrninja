@@ -4,7 +4,6 @@ cd /home/node/app
 mkdir -p /home/node/config/dnsmasq.d
 mkdir -p /home/node/config/caddyfile.d
 
-# node server/main --config=/home/node/config/config.yaml
 if [ ! -z "$TZ" ]; then
 echo "Configuring timezone"
 target="/usr/share/zoneinfo/$TZ"

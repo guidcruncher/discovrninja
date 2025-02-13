@@ -16,7 +16,7 @@ export class DesktopService {
   ) {}
 
   public readFile(): any {
-    const filename = path.resolve(this.configService.get("desktop.filename"));
+    const filename = path.resolve(path.join(process.env.NODE_CONFIG_DIR, this.configService.get("desktop.filename")));
 
     this.logger.log("Reading desktop from", filename);
     if (fs.existsSync(filename)) {
