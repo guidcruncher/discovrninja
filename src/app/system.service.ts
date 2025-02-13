@@ -6,7 +6,11 @@ export class SystemService {
 
   public getVersion() {
     return new Promise((resolve, reject) => {
-      const build: any = { startDate: new Date(), buildDate: new Date(), version: "development" };
+      const build: any = {
+        startDate: new Date(),
+        buildDate: new Date(),
+        version: "development",
+      };
       if (process.env.BUILDDATE) {
         build.buildDate = new Date(0);
         build.buildDate.setUTCSeconds(parseInt(process.env.BUILDDATE));
