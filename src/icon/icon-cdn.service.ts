@@ -5,6 +5,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import * as path from "path";
 
 import { IconResult } from "./icon.service";
 import { IconSettingsService } from "./icon-settings.service";
@@ -37,7 +38,7 @@ export class IconCDNService {
 
   resolveIconUrl(catalog: string, slug: string) {
     if (this.configService.get("desktop.enableLocalIconCache") == true) {
-      let dirPath = path.join(process.env.CACHE_BASE, "icons");
+      const dirPath = path.join(process.env.CACHE_BASE, "icons");
       return "/icons/" + catalog.toLowerCase() + "/" + slug.toLowerCase();
     } else {
       return this.resolveIconSourceUrl(catalog, slug);

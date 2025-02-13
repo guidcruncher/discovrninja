@@ -72,6 +72,6 @@ gulp.task(
     "lint",
     "lint-client",
     "js",
-    "startdev",
+    "docker",
   ),
 );

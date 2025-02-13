@@ -13,9 +13,10 @@ target="/usr/share/zoneinfo/$TZ"
 fi
 
 echo "Checking for theme"
-if [ ! -f /home/node/app/client/public/themes/bootstrap5.3.3/bootstrap.min.css ]; then
-  mkdir -p /home/node/app/client/public/themes/bootstrap5.3.3/
-  cp /home/node/node/client/themes/bootstrap5.3.3/* /home/node/node/client/public/themes/bootstrap5.3.3/ -R
+export THEME_BASE=/home/node/themes
+if [ ! -f /home/node/themes/bootstrap5.3.3/bootstrap.min.css ]; then
+  mkdir -p /home/node/themes/bootstrap5.3.3/
+  cp ./client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -R
 fi
 
 echo "Checking for configuration" 

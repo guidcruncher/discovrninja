@@ -69,7 +69,7 @@ async function bootstrap() {
   });
 
   if (config.get("desktop.enableLocalIconCache") == true) {
-    let dirPath = path.join(process.env.CACHE_BASE, "icons");
+    const dirPath = path.join(process.env.CACHE_BASE, "icons");
 
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);

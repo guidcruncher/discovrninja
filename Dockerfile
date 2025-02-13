@@ -2,7 +2,7 @@ FROM guidcruncher/node-base:lts-alpine AS build
  
 RUN apk add --no-cache jq git
 
-RUN mkdir -p /home/node/app /home/node/config /home/node/config /home/node/cache /home/node/.defaults
+RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/app /home/node/config /home/node/config /home/node/cache /home/node/.defaults
 WORKDIR /home/node/.build
 
 COPY package*.json ./
@@ -26,9 +26,10 @@ ENV NODE_ENV=production
 ARG NODE_ENV=production
 RUN cp ./dist/* /home/node/app -R
 RUN cp ./package*.json /home/node/app
+RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -R
 
 WORKDIR /home/node/app/
-RUN npm i --production --include prod --omit dev
+RUN npm i --production --include prod --omit=dev
 RUN rm -r /home/node/.build
 RUN date +%s > /home/node/app/builddate
 

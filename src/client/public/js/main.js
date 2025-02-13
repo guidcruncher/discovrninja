@@ -26513,7 +26513,9 @@ function loadPlaylist(url, ch, vid, cb) {
     ch.selectedIndex = 0;
     cb(pl)
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26570,7 +26572,9 @@ function saveVolume() {
     axios.post(apiUrl, vol).then(saveResponse => {
       showVolumeScript(id, true)
     }).catch(err => {
-      alert(err)
+      if (console) {
+        console.log("ERROR ", err)
+      }
     })
   } else {
     axios.get(apiUrl).then(response => {
@@ -26580,10 +26584,14 @@ function saveVolume() {
       axios.post(apiUrl, vol).then(saveResponse => {
         showVolumeScript(id, true)
       }).catch(err => {
-        alert(err)
+        if (console) {
+          console.log("ERROR ", err)
+        }
       })
     }).catch(err => {
-      alert(err)
+      if (console) {
+        console.log("ERROR ", err)
+      }
     })
   }
 }
@@ -26599,7 +26607,9 @@ function showVolumeScript(id, preferdb) {
     const myModal = new bootstrap.Modal(document.getElementById("scriptModal"), {});
     myModal.show()
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26636,7 +26646,9 @@ function getNetwork(id) {
       document.getElementById("noprune").checked = net.Labels["noprune"] == "true"
     }
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26645,7 +26657,9 @@ function deleteNetwork(id) {
   axios.get(apiUrl).then(response => {
     window.location.href = "/admin/network"
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26654,7 +26668,9 @@ function deleteVolume(id) {
   axios.get(apiUrl).then(response => {
     window.location.href = "/admin/storage"
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26669,7 +26685,9 @@ function showNetworkScript(id, preferdb) {
     const myModal = new bootstrap.Modal(document.getElementById("scriptModal"), {});
     myModal.show()
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26742,13 +26760,19 @@ function saveNetwork() {
           const myModal = new bootstrap.Modal(document.getElementById("scriptModal"), {});
           myModal.show()
         }, err => {
-          alert(err)
+          if (console) {
+            console.log("ERROR ", err)
+          }
         })
       }).catch(err => {
-        alert(err)
+        if (console) {
+          console.log("ERROR ", err)
+        }
       })
     }).catch(err => {
-      alert(err)
+      if (console) {
+        console.log("ERROR ", err)
+      }
     })
   } else {
     var network = {
@@ -26764,10 +26788,14 @@ function saveNetwork() {
         const myModal = new bootstrap.Modal(document.getElementById("scriptModal"), {});
         myModal.show()
       }, err => {
-        alert(err)
+        if (console) {
+          console.log("ERROR ", err)
+        }
       })
     }).catch(err => {
-      alert(err)
+      if (console) {
+        console.log("ERROR ", err)
+      }
     })
   }
 }
@@ -26777,7 +26805,9 @@ function deleteStack(container) {
   axios.get(apiUrl).then(response => {
     window.location.href = "/admin/index?tab=1"
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26796,7 +26826,9 @@ function runTask(name, btn) {
     })
   }).catch(err => {
     toggleWait(btn);
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26811,7 +26843,9 @@ function updateIconCache(btn) {
     })
   }).catch(err => {
     toggleWait(btn);
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26854,7 +26888,9 @@ function getBingBackground() {
     var imgs = response.data;
     wimgs[0].url
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26880,7 +26916,9 @@ function importCatalog() {
     window.location.reload(true);
     return false
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -26994,7 +27032,9 @@ function tagCloud(id, func) {
       feed: feed
     })
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27052,7 +27092,9 @@ function viewWeather(lat, long, days, index) {
     document.querySelector("#modalBody").innerHTML = app.templates.weather(result);
     window.modal.show()
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27162,10 +27204,14 @@ function saveConfiguration() {
     axios.post("/api/discovery/project/definition/" + encodeURIComponent(project.projectName), project).then(response => {
       window.location.href = "/admin/index?tab=1"
     }).catch(err => {
-      alert(err)
+      if (console) {
+        console.log("ERROR ", err)
+      }
     })
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27256,7 +27302,9 @@ function scanDocker(btn) {
     })
   }).catch(err => {
     toggleWait(btn);
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27271,7 +27319,9 @@ function pruneDocker(btn) {
     })
   }).catch(err => {
     toggleWait(btn);
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27306,7 +27356,9 @@ function changeIcon(target, action) {
     window.iconSearchModal.show();
     document.getElementById("iconSearchQuery").focus()
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27316,7 +27368,9 @@ function saveChangeIcon(name, catalog, slug) {
     document.getElementById("btnSearch").setAttribute("data-action", "");
     window.iconSearchModal.hide()
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 
@@ -27380,7 +27434,9 @@ function updateEditForm(name, catalog, slug) {
     document.getElementById("imgIcon").src = response.data;
     window.iconSearchModal.hide()
   }).catch(err => {
-    alert(err)
+    if (console) {
+      console.log("ERROR ", err)
+    }
   })
 }
 

@@ -1,5 +1,5 @@
 name: discovrninja-dev
-
+ 
 services:
   discovrninja-dev:
     build:
@@ -12,7 +12,7 @@ services:
       - ./config/:/home/node/config/
       - ./cache/:/home/node/cache/
       - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
-      - ./themes:/home/app/client/public/themes
+      - ./themes:/home/node/themes
     container_name: discovrninja_dev
     hostname: discovrninja-dev
     restart: unless-stopped
