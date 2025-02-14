@@ -28,10 +28,7 @@ COPY ./provisioning/userpasswd /home/node/userpasswd
 COPY ./provisioning/useradd /home/node/useradd
 COPY ./provisioning/start.sh /home/node/start.sh
 RUN chmod +x /home/node/userpasswd /home/node/useradd /home/node/start.sh
-COPY ./provisioning/defaults/iconsets.json /home/node/.defaults/iconsets.default
-COPY ./provisioning/defaults/config.yaml /home/node/.defaults/config.default
-COPY ./provisioning/defaults/desktop.yaml /home/node/.defaults/desktop.default
-COPY ./provisioning/defaults/services.yaml /home/node/.defaults/services.default
+COPY ./provisioning/defaults/ /home/node/.defaults/
 
 ENV NODE_ENV=production
 ARG NODE_ENV=production

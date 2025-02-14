@@ -21,22 +21,27 @@ fi
 
 echo "Checking for configuration" 
 if [ ! -f /home/node/config/config.yaml ]; then
-  cp /home/node/.defaults/config.default /home/node/config/config.yaml
+  cp /home/node/.defaults/config.yaml /home/node/config/config.yaml
 fi
 
 echo "Checking for desktop" 
 if [ ! -f /home/node/config/desktop.yaml ]; then
-cp /home/node/.defaults/desktop.default /home/node/config/desktop.yaml
+cp /home/node/.defaults/desktop.yaml /home/node/config/desktop.yaml
 fi 
 
 echo "Checking for iconsets"
 if [ ! -f /home/node/config/iconsets.json ]; then
-  cp /home/node/.defaults/iconsets.default /home/node/config/iconsets.json
+  cp /home/node/.defaults/iconsets.json /home/node/config/iconsets.json
+fi
+
+echo "Checking for repositories"
+if [ ! -f /home/node/config/repositories.json ]; then
+  cp /home/node/.defaults/repositories.json /home/node/config/repositories.json
 fi
 
 echo "Checking for services"
 if [ ! -f /home/node/config/services.yaml ]; then
-  cp /home/node/.defaults/services.default /home/node/config/services.yaml
+  cp /home/node/.defaults/services.yaml /home/node/config/services.yaml
 fi
 
 echo "Setting environment variables"
