@@ -60,10 +60,10 @@ export class ImageUpdateService {
 
     const replaceTokens = (s) => {
       return s
-        .replace("{host}", repo.host)
-        .replace("{repo}", repo.repo)
-        .replace("{ref}", repo.ref)
-        .replace("{tag}", repo.tag);
+        .replaceAll("{host}", repo.host)
+        .replaceAll("{repo}", repo.repo)
+        .replaceAll("{ref}", repo.ref)
+        .replaceAll("{tag}", repo.tag);
     };
 
     if (!match) {
@@ -83,10 +83,10 @@ export class ImageUpdateService {
 
     const replaceTokens = (s) => {
       return s
-        .replace("{host}", repo.host)
-        .replace("{repo}", repo.repo)
-        .replace("{ref}", repo.ref)
-        .replace("{tag}", repo.tag);
+        .replaceAll("{host}", repo.host)
+        .replaceAll("{repo}", repo.repo)
+        .replaceAll("{ref}", repo.ref)
+        .replaceAll("{tag}", repo.tag);
     };
 
     const fetchDigests = (token) => {
@@ -105,12 +105,14 @@ export class ImageUpdateService {
             let value = "";
 
             if (settings.manifest.header != "") {
-              value = res.headers.get(settings.manifest.header);
+              value = res.headers
+                .get(settings.manifest.header)
+                .replaceAll('"', "");
             }
 
             digests.remote = replaceTokens(
               settings.manifest.outputFormat,
-            ).replace("{value}", value);
+            ).replaceAll("{value}", value);
 
             const img = docker.getImage(repo.ref);
             img.inspect((err, data: any) => {
