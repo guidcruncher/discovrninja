@@ -31,9 +31,18 @@ export class ImageUpdateService {
   private getFullRef(ref: string): string {
     const args = ref.split("/");
     if (args.length > 2) {
-      return ref;
+      if (ref.includes(":")) {
+        return ref;
+      } else {
+        return ref + ":latest";
+      }
     }
-    return "docker.io/" + ref;
+
+    if (ref.includes(":")) {
+      return "docker.io/" + ref;
+    }
+
+    return "docker.io/" + ref + ":latest";
   }
 
   private parseRef(ref: string): any {
@@ -96,7 +105,7 @@ export class ImageUpdateService {
           .Execute()
           .then((res) => {
             const digests = {
-              ref: this.getFullRef(ref),
+              ref: this.parseRef(ref),
               remote: "",
               local: "",
               localDigests: [],
@@ -160,6 +169,7 @@ export class ImageUpdateService {
               })
               .catch((err) => {
                 this.logger.error("Error in fetchDigests", err);
+                reject(err);
               });
           })
           .catch((err) => {
@@ -173,6 +183,7 @@ export class ImageUpdateService {
           })
           .catch((err) => {
             this.logger.error("Error in fetchDigests", err);
+            reject(err);
           });
       }
     });
