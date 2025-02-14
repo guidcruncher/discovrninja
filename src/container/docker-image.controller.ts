@@ -1,17 +1,13 @@
-import { Controller, Get, Param, Query, Res } from "@nestjs/common";
+import { Controller, Get, Query } from "@nestjs/common";
 
-import { ImageUpdateService } from "./image~update.service";
+import { ImageUpdateService } from "./image-update.service";
 
-@Controller('api/docker/image')
+@Controller("api/docker/image")
 export class DockerImageController {
+  constructor(private readonly updateService: ImageUpdateService) {}
 
-constructor(
-private readonly updateService: ImageUpdateService,
-) {}
-
-@Get("update/check")
-public updateCheck(@Query("ref") ref: string) {
-return this.updateService.updateCheck(ref);
-}
-
+  @Get("update/check")
+  public updateCheck(@Query("ref") ref: string) {
+    return this.updateService.updateCheck(ref);
+  }
 }

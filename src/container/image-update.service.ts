@@ -3,6 +3,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as fs from "fs";
 import * as path from "path";
+
 import { DockerConnectorService } from "./docker-connector.service";
 
 @Injectable()
@@ -14,18 +15,21 @@ export class ImageUpdateService {
     private readonly connectorService: DockerConnectorService,
   ) {}
 
-  private readRepositories(): [] {
-    var filename = path.join(process.env.NODE_CONFIG_DIR, "repositories.json");
+  private readRepositories(): any[] {
+    const filename = path.join(
+      process.env.NODE_CONFIG_DIR,
+      "repositories.json",
+    );
     if (!fs.existsSync(filename)) {
       return [];
     }
 
-    var json = fs.readFileSync(filename);
-    return JSON.parse(json) as [];
+    const json = fs.readFileSync(filename);
+    return JSON.parse(json.toString("utf8")) as [];
   }
 
   private getFullRef(ref: string): string {
-    var args = ref.split("/");
+    const args = ref.split("/");
     if (args.length > 2) {
       return ref;
     }
@@ -33,10 +37,10 @@ export class ImageUpdateService {
   }
 
   private parseRef(ref: string): any {
-    var fullRef: string = this.getFullRef(ref);
-    var parts = fullRef.split("/");
-    var result = { ref: fullRef, host: "", repo: "", tag: "latest" };
-    var tagparts = parts[2].split(":");
+    const fullRef: string = this.getFullRef(ref);
+    const parts = fullRef.split("/");
+    const result = { ref: fullRef, host: "", repo: "", tag: "latest" };
+    const tagparts = parts[2].split(":");
     result.host = parts[0];
     result.repo = parts[1] + "/" + parts[2];
     if (tagparts.length > 1) {
@@ -48,9 +52,9 @@ export class ImageUpdateService {
   }
 
   private getRepositorySettings(ref: string): any {
-    var repo = this.parseRef(ref);
-    var repositories: [] = this.readRepositories();
-    var match = repositories.find((r) => {
+    const repo = this.parseRef(ref);
+    const repositories: any[] = this.readRepositories();
+    const match: any = repositories.find((r) => {
       return r.hostMatches.includes(repo.host);
     });
 
@@ -73,9 +77,17 @@ export class ImageUpdateService {
   }
 
   public updateCheck(ref: string) {
-    var repo = this.parseRef(ref);
-    var settings = getRepositorySettings(ref);
+    const repo = this.parseRef(ref);
+    const settings = this.getRepositorySettings(ref);
     const docker = this.connectorService.createDocker();
+
+    const replaceTokens = (s) => {
+      return s
+        .replace("{host}", repo.host)
+        .replace("{repo}", repo.repo)
+        .replace("{ref}", repo.ref)
+        .replace("{tag}", repo.tag);
+    };
 
     const fetchDigests = (token) => {
       return new Promise((resolve, reject) => {
@@ -83,24 +95,24 @@ export class ImageUpdateService {
           .Authorization("bearer", token)
           .Execute()
           .then((res) => {
-            var digests = {
-              ref: getFullRef(ref),
+            const digests = {
+              ref: this.getFullRef(ref),
               remote: "",
               local: "",
               localDigests: [],
               updateAvailable: false,
             };
-            var value = "";
+            let value = "";
 
             if (settings.manifest.header != "") {
               value = res.headers.get(settings.manifest.header);
             }
 
             digests.remote = replaceTokens(
-              settimgs.manifest.outputFormat,
+              settings.manifest.outputFormat,
             ).replace("{value}", value);
 
-            var img = docker.getImage(ref.ref);
+            const img = docker.getImage(repo.ref);
             img.inspect((err, data: any) => {
               if (err) {
                 this.logger.error("Error in updateCheck inspect", err);
@@ -135,9 +147,9 @@ export class ImageUpdateService {
         FluentHttpClient.Get(settings.token.url)
           .Execute()
           .then((tokenRes) => {
-            var token = tokenRes.value;
+            let token = tokenRes.value;
             if (settings.token.field != "") {
-              var json = JSON.parse(tokenRes.value);
+              const json = JSON.parse(tokenRes.value);
               token = json[settings.token.field];
             }
             fetchDigests(token)
