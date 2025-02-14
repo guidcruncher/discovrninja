@@ -23179,7 +23179,49 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           column: 101
         }
       }
-    }) : helper)) + '" onclick="composeEdit(this, 1); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>\n           </td>\n           <td>\n' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "configured") : depth0, {
+    }) : helper)) + '" onclick="composeEdit(this, 1); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>\n             <a title="Update available" href="#" data-imageid="' + alias4((helper = (helper = lookupProperty(helpers, "image") || (depth0 != null ? lookupProperty(depth0, "image") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+      name: "image",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 23,
+          column: 64
+        },
+        end: {
+          line: 23,
+          column: 73
+        }
+      }
+    }) : helper)) + '" data-containerid="' + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+      name: "name",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 23,
+          column: 93
+        },
+        end: {
+          line: 23,
+          column: 101
+        }
+      }
+    }) : helper)) + '" data-project="' + alias4((helper = (helper = lookupProperty(helpers, "project") || (depth0 != null ? lookupProperty(depth0, "project") : depth0)) != null ? helper : alias2, typeof helper === alias3 ? helper.call(alias1, {
+      name: "project",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 23,
+          column: 117
+        },
+        end: {
+          line: 23,
+          column: 128
+        }
+      }
+    }) : helper)) + '" onclick="" class="btn btn-outline-secondary btn-sm updatecheck"><i class="fa-regular fa-circle-question"></i></a>\n           </td>\n           <td>\n' + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "configured") : depth0, {
       name: "if",
       hash: {},
       fn: container.program(6, data, 0),
@@ -23187,11 +23229,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 25,
+          line: 26,
           column: 13
         },
         end: {
-          line: 29,
+          line: 30,
           column: 20
         }
       }
@@ -23203,11 +23245,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 32,
+          line: 33,
           column: 30
         },
         end: {
-          line: 32,
+          line: 33,
           column: 89
         }
       }
@@ -23217,11 +23259,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 32,
+          line: 33,
           column: 100
         },
         end: {
-          line: 32,
+          line: 33,
           column: 112
         }
       }
@@ -23231,11 +23273,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 32,
+          line: 33,
           column: 146
         },
         end: {
-          line: 32,
+          line: 33,
           column: 156
         }
       }
@@ -23245,11 +23287,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 32,
+          line: 33,
           column: 173
         },
         end: {
-          line: 32,
+          line: 33,
           column: 183
         }
       }
@@ -23261,11 +23303,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 34,
+          line: 35,
           column: 15
         },
         end: {
-          line: 34,
+          line: 35,
           column: 117
         }
       }
@@ -23277,11 +23319,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 35,
+          line: 36,
           column: 13
         },
         end: {
-          line: 35,
+          line: 36,
           column: 69
         }
       }
@@ -23293,11 +23335,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 37,
+          line: 38,
           column: 15
         },
         end: {
-          line: 37,
+          line: 38,
           column: 74
         }
       }
@@ -23309,11 +23351,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 37,
+          line: 38,
           column: 75
         },
         end: {
-          line: 37,
+          line: 38,
           column: 131
         }
       }
@@ -23325,11 +23367,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 38,
+          line: 39,
           column: 15
         },
         end: {
-          line: 38,
+          line: 39,
           column: 120
         }
       }
@@ -23341,11 +23383,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 38,
+          line: 39,
           column: 121
         },
         end: {
-          line: 38,
+          line: 39,
           column: 183
         }
       }
@@ -23357,11 +23399,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 39,
+          line: 40,
           column: 15
         },
         end: {
-          line: 39,
+          line: 40,
           column: 107
         }
       }
@@ -23406,11 +23448,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 26,
+          line: 27,
           column: 39
         },
         end: {
-          line: 26,
+          line: 27,
           column: 47
         }
       }
@@ -23433,11 +23475,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 28,
+          line: 29,
           column: 69
         },
         end: {
-          line: 28,
+          line: 29,
           column: 77
         }
       }
@@ -23449,11 +23491,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 28,
+          line: 29,
           column: 79
         },
         end: {
-          line: 28,
+          line: 29,
           column: 138
         }
       }
@@ -23463,11 +23505,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 28,
+          line: 29,
           column: 183
         },
         end: {
-          line: 28,
+          line: 29,
           column: 191
         }
       }
@@ -23494,11 +23536,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 34,
+          line: 35,
           column: 30
         },
         end: {
-          line: 34,
+          line: 35,
           column: 73
         }
       }
@@ -23543,11 +23585,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 38,
+          line: 39,
           column: 30
         },
         end: {
-          line: 38,
+          line: 39,
           column: 76
         }
       }
@@ -23579,11 +23621,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 39,
+          line: 40,
           column: 42
         },
         end: {
-          line: 39,
+          line: 40,
           column: 56
         }
       }
@@ -23593,11 +23635,11 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 39,
+          line: 40,
           column: 58
         },
         end: {
-          line: 39,
+          line: 40,
           column: 82
         }
       }
@@ -23641,7 +23683,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           column: 7
         },
         end: {
-          line: 41,
+          line: 42,
           column: 18
         }
       }
@@ -26494,6 +26536,29 @@ window.ui().desktop();
 setInterval(function() {
   window.ui().desktop()
 }, 1e3);
+
+function checkForImageUpdates() {
+  const checkImage = obj => {
+    var image = $(obj).attr("data-imageid");
+    var container = $(obj).attr("data-containerid");
+    var project = $(obj).attr("data=project");
+    var apiUrl = "/api/docker/image/update/check?ref=" + encodeURIComponent(image);
+    $(obj).html('<i class="fa-solid fa-hourglass-half"></i>');
+    axios.get(apiUrl).then(response => {
+      var result = response.data;
+      if (result.updateAvailable) {
+        $(obj).html('<i title="Update available" class="text-warning fa-solid fa-download"></i>')
+      } else {
+        $(obj).html('<i title="Up-to-date" class="text-success fa-regular fa-circle-check"></i>')
+      }
+    }).catch(err => {
+      $(obj).html('<i title="Update state unknown" class="text-danger-emphasis fa-regular fa-circle-question"></i>')
+    })
+  };
+  $(".updatecheck").each((i, obj) => {
+    checkImage(obj)
+  })
+}
 
 function loadPlaylist(url, ch, vid, cb) {
   var apiUrl = "/api/resources/playlist";

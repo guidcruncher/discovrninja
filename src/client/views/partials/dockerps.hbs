@@ -20,6 +20,7 @@
              <a title="Navigate to" {{#if publicUrl}}href="{{publicUrl}}" target="_new" class="btn btn-outline-secondary btn-sm" {{else}} class="btn btn-outline-secondary btn-sm  disabled" {{/if}}><i class="fa-solid fa-link"></i></a>
              <a title="Export" href="#" data-containerid="{{name}}" onclick="exportContainer(this); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-export"></i></a>
              <a title="Edit container" href="#" data-containerid="{{name}}" data-project="{{project}}" onclick="composeEdit(this, 1); return false;" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+             <a title="Update available" href="#" data-imageid="{{image}}" data-containerid="{{name}}" data-project="{{project}}" onclick="" class="btn btn-outline-secondary btn-sm updatecheck"><i class="fa-regular fa-circle-question"></i></a>
            </td>
            <td>
              {{#if configured}}

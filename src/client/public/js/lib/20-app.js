@@ -1,3 +1,32 @@
+function checkForImageUpdates() {
+
+  const checkImage = ((obj) => {
+    var image = $(obj).attr("data-imageid");
+    var container = $(obj).attr("data-containerid");
+    var project = $(obj).attr("data=project");
+    var apiUrl = "/api/docker/image/update/check?ref=" + encodeURIComponent(image);
+console.log(image);
+    if (image != "") {
+    $(obj).html('<i class="fa-solid fa-hourglass-half"></i>');
+
+    axios.get(apiUrl).then((response) => {
+      var result = response.data;
+      if (result.updateAvailable) {
+        $(obj).html('<i title="Update available" class="text-warning fa-solid fa-download"></i>');
+      } else {
+        $(obj).html('<i title="Up-to-date" class="text-success fa-regular fa-circle-check"></i>');
+      }
+    }).catch((err) => {
+      $(obj).html('<i title="Update state unknown" class="text-danger-emphasis fa-regular fa-circle-question"></i>');
+    });
+  }
+  });
+
+  $(".updatecheck").each((i, obj) => {
+    checkImage(obj);
+  });
+}
+
 function loadPlaylist(url, ch, vid, cb) {
   var apiUrl = "/api/resources/playlist";
   axios.post(apiUrl, {

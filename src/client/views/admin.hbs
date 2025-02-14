@@ -17,6 +17,14 @@
      <div id="hbsprojects" class="hbs-template" data-url="/api/docker/projects" data-template="projects"></div>
    </div>
  </div>
+
+ <script type="text/javascript">
+   $('hbsps').on('DOMSubtreeModified', function () {
+     checkForImageUpdates();
+   });
+
+ </script>
+
  {{>messagebox}}
  {{>search}}
  <div id="containerInfo" data-url="/api/docker/container/{id}" data-template="containerinfo">
