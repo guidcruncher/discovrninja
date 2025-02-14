@@ -20,6 +20,8 @@ class HttpClientResult {
 
   public value: string;
 
+  public headers: any;
+
   constructor() {
     this.contentType = "";
     this.contentDisposition = "";
@@ -102,6 +104,9 @@ class FluentHttpClient {
   }
 
   public Authorization(scheme: string, credentials: string): FluentHttpClient {
+    if (credentials == "") {
+      return this;
+    }
     return this.Header({ Authorization: scheme + " " + credentials });
   }
 
@@ -196,6 +201,7 @@ class FluentHttpClient {
               result.contentDisposition = response.headers.get(
                 "Content-Disposition",
               );
+              result.headers = response.headers;
               result.contentType = response.headers.get("Content-Type");
               return response.text();
             }

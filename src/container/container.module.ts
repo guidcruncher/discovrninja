@@ -15,6 +15,8 @@ import { DockerStorageService } from "./docker-storage.service";
 import { DockerSystemService } from "./docker-system.service";
 import { NetworkScriptService } from "./network-script.service";
 import { StorageScriptService } from "./storage-script.service";
+import { ImageUpdateService } from "./image-update.service";
+import { DockerImageController } from './docker-image.controller';
 
 @Module({
   imports: [
@@ -27,6 +29,7 @@ import { StorageScriptService } from "./storage-script.service";
     DockerController,
     DockerStorageController,
     DockerNetworkController,
+    DockerImageController,
   ],
   providers: [
     DockerService,
@@ -37,6 +40,7 @@ import { StorageScriptService } from "./storage-script.service";
     NetworkScriptService,
     DockerSystemService,
     StorageScriptService,
+    ImageUpdateService,
   ],
   exports: [DockerConnectorService, DockerService],
 })
