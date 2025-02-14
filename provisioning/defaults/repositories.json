@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Docker Hub",
+    "match": [
+      "",
+      "docker.io"
+    ],
+    "token": {
+      "url": "https://auth.docker.io/token?service=registry.docker.io&scope=repository:{repo}:pull",
+      "field": "token"
+    },
+    "manifest": {
+      "url": "https://index.docker.io/v2/{repo}/manifests/{tag}",
+      "field": "",
+      "header": "etag",
+      "outputFormat": "{repo}@{value}"
+    }
+  }
+]

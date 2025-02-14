@@ -21,6 +21,7 @@ WORKDIR /home/node/build
 COPY package*.json ./
 COPY --from=development /home/node/build/node_modules ./node_modules
 COPY . .
+RUN npx gulp js
 RUN npm run build
 
 COPY ./provisioning/userpasswd /home/node/userpasswd
