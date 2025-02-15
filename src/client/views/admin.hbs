@@ -4,7 +4,8 @@
 <nav id="tabs" selectedIndex="{{tab}}">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <button onclick="chooseTab(0);" class="nav-link {{#when tab "eq" 0}}active{{/when}}" id="nav-summary-tab" data-bs-toggle="tab" data-bs-target="#nav-summary" type="button" role="tab" aria-controls="nav-summary" aria-selected="{{bool tab "eq" 0}}"><i class="fa-solid fa-gauge"></i> Dashboard</button>
-    <button onclick="chooseTab(1);" class="nav-link {{#when tab "eq" 1}}active{{/when}}" id="nav-container-tab" data-bs-toggle="tab" data-bs-target="#nav-container" type="button" role="tab" aria-controls="nav-container" aria-selected="{{bool tab "eq" 1}}"><i class="fa-solid fa-box" Container</button <button onclick="chooseTab(2);" class="nav-link {{#when tab "eq" 2}}active{{/when}}" id="nav-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-projects" type="button" role="tab" aria-controls="nav-projects" aria-selected="{{bool tab "eq" 2}}"><i class="fa-solid fa-diagram-project"></i> Projects</button>
+    <button onclick="chooseTab(1);" class="nav-link {{#when tab "eq" 1}}active{{/when}}" id="nav-container-tab" data-bs-toggle="tab" data-bs-target="#nav-container" type="button" role="tab" aria-controls="nav-container" aria-selected="{{bool tab "eq" 1}}"><i class="fa-solid fa-box"></i> Container</button>
+    <button onclick="chooseTab(2);" class="nav-link {{#when tab "eq" 2}}active{{/when}}" id="nav-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-projects" type="button" role="tab" aria-controls="nav-projects" aria-selected="{{bool tab "eq" 2}}"><i class="fa-solid fa-diagram-project"></i> Projects</button>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
