@@ -1,5 +1,5 @@
 [
-  {
+   {
     "name": "Docker Hub",
     "hostMatches": [
       "",
@@ -12,8 +12,7 @@
     "manifest": {
       "url": "https://index.docker.io/v2/{repo}/manifests/{tag}",
       "field": "",
-      "header": "etag",
-      "outputFormat": "{package}@{value}"
+      "header": "etag"
     }
   }
 ]

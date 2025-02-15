@@ -82,6 +82,14 @@ export class ImageUpdateService {
       .replaceAll("{tag}", repo.tag);
   }
 
+  private formatDigest(tag) {
+    let v = tag.replaceAll('"', "");
+    if (v.includes("@")) {
+      v = v.split("@")[1];
+    }
+    return v;
+  }
+
   private getRepositorySettings(ref: string): any {
     const repo = this.parseRef(ref);
     const repositories: any[] = this.readRepositories();
@@ -128,10 +136,7 @@ export class ImageUpdateService {
                 .replaceAll('"', "");
             }
 
-            digests.remote = this.replaceTokens(
-              settings.manifest.outputFormat,
-              repo,
-            ).replaceAll("{value}", value);
+            digests.remote = this.formatDigest(value);
 
             const img = docker.getImage(repo.ref);
             img.inspect((err, data: any) => {
@@ -139,10 +144,12 @@ export class ImageUpdateService {
                 this.logger.error("Error in updateCheck inspect", err);
                 resolve(digests);
               } else {
-                digests.localDigests = data.RepoDigests;
+                digests.localDigests = data.RepoDigests.map((d) => {
+                  return this.formatDigest(d);
+                });
                 digests.local =
                   digests.localDigests.length > 0
-                    ? digests.localDigests[0]
+                    ? this.formatDigest(digests.localDigests[0])
                     : "";
                 digests.updateAvailable = digests.local != digests.remote;
                 resolve(digests);
