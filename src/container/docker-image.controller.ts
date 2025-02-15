@@ -8,6 +8,15 @@ export class DockerImageController {
 
   @Get("update/check")
   public updateCheck(@Query("ref") ref: string) {
-    return this.updateService.updateCheck(ref);
+    return new Promise((resolve, reject) => {
+      this.updateService
+        .updateCheck(ref)
+        .then((r) => {
+          resolve(r);
+        })
+        .catch((err) => {
+          resolve({});
+        });
+    });
   }
 }

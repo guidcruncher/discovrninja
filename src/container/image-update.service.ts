@@ -127,7 +127,7 @@ export class ImageUpdateService {
             img.inspect((err, data: any) => {
               if (err) {
                 this.logger.error("Error in updateCheck inspect", err);
-                reject(err);
+                resolve(digests);
               } else {
                 digests.localDigests = data.RepoDigests;
                 digests.local =

@@ -38,7 +38,7 @@ RUN cp ./package*.json /home/node/app
 RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
 
 WORKDIR /home/node/app/
-RUN npm ci --only=production && npm cache clean --force
+RUN npm ci --omit=dev --only=production && npm cache clean --force
 RUN date +%s > /home/node/app/builddate
 
 FROM base AS production

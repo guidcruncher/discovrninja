@@ -1,4 +1,15 @@
 window._render = function(template, args) {
+  const trigger = ((elem, name, e) => {
+    var func = new Function('e',
+      'with(document) {' +
+      'with(this) {' +
+      elem.getAttribute('on' + name) +
+      '}' +
+      '}');
+
+    func.call(elem, e);
+  });
+
   return new Promise((resolve, reject) => {
     var url = template.getAttribute("data-url");
     var name = template.getAttribute("data-template");
@@ -40,6 +51,9 @@ window._render = function(template, args) {
       .then((response) => {
         var data = response.data;
         data._s = settings;
+        if (template.getAttribute("onprerender")) {
+          trigger(template, "prerender", data);
+        }
         template.innerHTML = f(data);
         $(template).find('.datatable').DataTable({
           paging: false,
@@ -51,6 +65,9 @@ window._render = function(template, args) {
           setTimeout(async () => {
             window._render(template, args);
           }, timeout);
+        }
+        if (template.getAttribute("onrender")) {
+          trigger(template, "render", data);
         }
         resolve(template);
       })
@@ -160,6 +177,9 @@ window.ui = function(selector) {
           targets.forEach((template) => {
             //            this.observe(template);
             promises.push(window._render(template, args));
+            template.reload = (() => {
+              window._render(template, args);
+            });
           });
           Promise.allSettled(promises)
             .then((results) => {

@@ -1326,7 +1326,7 @@ this["app"]["templates"]["dockerps"] = Handlebars.template({
           }
         }
       })) != null ? stack1 : "") +
-      "     </tbody>\n     <tfoot>\n     </tfoot>\n   </table>\n </div>\n\n <script type=\"text/javascript\">\n     checkForImageUpdates();\n </script>\n";
+      "     </tbody>\n     <tfoot>\n     </tfoot>\n   </table>\n </div>\n";
   },
   "useData": true
 });
