@@ -128,7 +128,7 @@ export class ImageUpdateService {
                 .replaceAll('"', "");
             }
 
-            digests.remote = replaceTokens(
+            digests.remote = this.replaceTokens(
               settings.manifest.outputFormat,
               repo,
             ).replaceAll("{value}", value);

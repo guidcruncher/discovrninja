@@ -16,6 +16,12 @@ window._render = function(template, args) {
     var settings = null;
     var refreshInterval = template.getAttribute("data-refresh-interval");
     var query = null;
+    var initialRender = true;
+
+    if (template.getAttribute("data-initalrender")) {
+      var value = (template.getAttribute("data-initalrender"))
+      initialRender = value ? (value.toLowerCase() == "true") : false
+    }
 
     if (template.getAttribute("data-settings")) {
       var s = template.getAttribute("data-settings");
@@ -45,36 +51,38 @@ window._render = function(template, args) {
     } else {
       apiUrl += url;
     }
-    var f = app.templates[name];
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        var data = response.data;
-        data._s = settings;
-        if (template.getAttribute("onprerender")) {
-          trigger(template, "prerender", data);
-        }
-        template.innerHTML = f(data);
-        $(template).find('.datatable').DataTable({
-          paging: false,
-          searching: false,
-          stateSave: true,
+    if (initialRender) {
+      var f = app.templates[name];
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          var data = response.data;
+          data._s = settings;
+          if (template.getAttribute("onprerender")) {
+            trigger(template, "prerender", data);
+          }
+          template.innerHTML = f(data);
+          $(template).find('.datatable').DataTable({
+            paging: false,
+            searching: false,
+            stateSave: true,
+          });
+          var timeout = parseInt(refreshInterval ?? "0") * 1000;
+          if (timeout > 0) {
+            setTimeout(async () => {
+              window._render(template, args);
+            }, timeout);
+          }
+          if (template.getAttribute("onrender")) {
+            trigger(template, "render", data);
+          }
+          resolve(template);
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(template, err);
         });
-        var timeout = parseInt(refreshInterval ?? "0") * 1000;
-        if (timeout > 0) {
-          setTimeout(async () => {
-            window._render(template, args);
-          }, timeout);
-        }
-        if (template.getAttribute("onrender")) {
-          trigger(template, "render", data);
-        }
-        resolve(template);
-      })
-      .catch((err) => {
-        console.log(err);
-        reject(template, err);
-      });
+    }
   });
 };
 
