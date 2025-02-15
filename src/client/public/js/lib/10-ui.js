@@ -1,4 +1,4 @@
-window._render = function(template, args) {
+window._render = function(template, args, force) {
   const trigger = ((elem, name, e) => {
     var func = new Function('e',
       'with(document) {' +
@@ -21,6 +21,10 @@ window._render = function(template, args) {
     if (template.getAttribute("data-initalrender")) {
       var value = (template.getAttribute("data-initalrender"))
       initialRender = value ? (value.toLowerCase() == "true") : false
+    }
+
+    if (force) {
+      initialRender = true;
     }
 
     if (template.getAttribute("data-settings")) {
@@ -70,7 +74,7 @@ window._render = function(template, args) {
           var timeout = parseInt(refreshInterval ?? "0") * 1000;
           if (timeout > 0) {
             setTimeout(async () => {
-              window._render(template, args);
+              window._render(template, args, true);
             }, timeout);
           }
           if (template.getAttribute("onrender")) {
@@ -184,9 +188,9 @@ window.ui = function(selector) {
           var promises = [];
           targets.forEach((template) => {
             //            this.observe(template);
-            promises.push(window._render(template, args));
+            promises.push(window._render(template, args, false));
             template.reload = (() => {
-              window._render(template, args);
+              window._render(template, args, true);
             });
           });
           Promise.allSettled(promises)

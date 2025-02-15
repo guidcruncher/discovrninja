@@ -71,7 +71,7 @@ export class ImageUpdateService {
 
   private replaceTokens(s, repo) {
     let pkg = repo.repo;
-    if (s.repo.startsWith("library/")) {
+    if (repo.repo.startsWith("library/")) {
       pkg = repo.package;
     }
     return s
