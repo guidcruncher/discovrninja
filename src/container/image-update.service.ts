@@ -48,16 +48,38 @@ export class ImageUpdateService {
   private parseRef(ref: string): any {
     const fullRef: string = this.getFullRef(ref);
     const parts = fullRef.split("/");
-    const result = { ref: fullRef, host: "", repo: "", tag: "latest" };
+    const result = {
+      ref: fullRef,
+      host: "",
+      repo: "",
+      package: "",
+      tag: "latest",
+    };
     const tagparts = parts[2].split(":");
     result.host = parts[0];
     result.repo = parts[1] + "/" + parts[2];
+    result.package = parts[2];
+
     if (tagparts.length > 1) {
+      result.package = tagparts[0];
       result.repo = parts[1] + "/" + tagparts[0];
       result.tag = tagparts[1];
     }
 
     return result;
+  }
+
+  private replaceTokens(s, repo) {
+    let pkg = repo.repo;
+    if (s.repo.startsWith("library/")) {
+      pkg = repo.package;
+    }
+    return s
+      .replaceAll("{host}", repo.host)
+      .replaceAll("{repo}", repo.repo)
+      .replaceAll("{package}", pkg)
+      .replaceAll("{ref}", repo.ref)
+      .replaceAll("{tag}", repo.tag);
   }
 
   private getRepositorySettings(ref: string): any {
@@ -67,21 +89,16 @@ export class ImageUpdateService {
       return r.hostMatches.includes(repo.host);
     });
 
-    const replaceTokens = (s) => {
-      return s
-        .replaceAll("{host}", repo.host)
-        .replaceAll("{repo}", repo.repo)
-        .replaceAll("{ref}", repo.ref)
-        .replaceAll("{tag}", repo.tag);
-    };
-
     if (!match) {
       return null;
     }
 
-    match.token.url = replaceTokens(match.token.url);
-    match.manifest.url = replaceTokens(match.manifest.url);
-    match.manifest.outputFormat = replaceTokens(match.manifest.outputFormat);
+    match.token.url = this.replaceTokens(match.token.url, repo);
+    match.manifest.url = this.replaceTokens(match.manifest.url, repo);
+    match.manifest.outputFormat = this.replaceTokens(
+      match.manifest.outputFormat,
+      repo,
+    );
     return match;
   }
 
@@ -89,14 +106,6 @@ export class ImageUpdateService {
     const repo = this.parseRef(ref);
     const settings = this.getRepositorySettings(ref);
     const docker = this.connectorService.createDocker();
-
-    const replaceTokens = (s) => {
-      return s
-        .replaceAll("{host}", repo.host)
-        .replaceAll("{repo}", repo.repo)
-        .replaceAll("{ref}", repo.ref)
-        .replaceAll("{tag}", repo.tag);
-    };
 
     const fetchDigests = (token) => {
       return new Promise((resolve, reject) => {
@@ -121,6 +130,7 @@ export class ImageUpdateService {
 
             digests.remote = replaceTokens(
               settings.manifest.outputFormat,
+              repo,
             ).replaceAll("{value}", value);
 
             const img = docker.getImage(repo.ref);

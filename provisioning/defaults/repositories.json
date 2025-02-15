@@ -13,7 +13,7 @@
       "url": "https://index.docker.io/v2/{repo}/manifests/{tag}",
       "field": "",
       "header": "etag",
-      "outputFormat": "{repo}@{value}"
+      "outputFormat": "{package}@{value}"
     }
   }
 ]
