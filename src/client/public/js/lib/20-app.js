@@ -53,10 +53,14 @@ function lintCompose(src, target, autofix, editor) {
     var results = response.data;
     ctl.innerHTML = formatter(results.results);
     if (editor) {
-      document.getElementById(src).value = results.compose;
-      var cm6editor = document.getElementById(editor);
-      var newState = cm6.createEditorState(results.compose);
-      cm6editor.view.setState(newState);
+      document.getElementById(src).value = results.content;
+      var cm6Editor = document.getElementById(editor);
+      const getTheme = () => document.documentElement.getAttribute('data-bs-theme');
+      var theme = getTheme();
+      const newState = cm6.createEditorState(results.content, {
+        dark: (theme == "dark")
+      });
+      cm6Editor.view.setState(newState);
     }
   }).catch((err) => {
     if (console) {
