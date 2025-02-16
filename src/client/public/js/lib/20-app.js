@@ -1,12 +1,57 @@
-function composeLint(src, target) {
+function lintCompose(src, target) {
+  const formatter = ((results) => {
+    let output = '';
+    let errorCount = 0;
+    let warningCount = 0;
+    let fixableErrorCount = 0;
+    let fixableWarningCount = 0;
+
+    results.forEach((result) => {
+      if (result.messages.length === 0) {
+        return;
+      }
+
+      result.messages.forEach((message) => {
+        const {
+          type
+        } = message;
+        const color = type === 'error' ? "text-danger" : "text-warning";
+        const line = message.line.toString().padStart(4, ' ');
+        const column = message.column.toString().padEnd(4, ' ');
+
+        const position = `<span class="text-body-tertiary">${line}:${column}</span>`
+        const formattedType = '<span class="' + color + '">';
+        const ruleInfo = '<span class="text-body-tertiay">' + message.rule + '</span>';
+
+        output += `<div>${position}  ${formattedType}  ${message.message}</span>  ${ruleInfo}</div>`;
+
+        if (type === 'error') {
+          errorCount += 1;
+          if (message.fixable) {
+            fixableErrorCount += 1;
+          }
+        } else {
+          warningCount += 1;
+          if (message.fixable) {
+            fixableWarningCount += 1;
+          }
+        }
+      });
+    });
+
+    return output;
+  });
+
   var data = {
     compose: document.getElementById(src).value,
     autofix: false
   };
   var ctl = document.getElementById(target);
+ ctl.innerHTML="";
 
   axios.post("/api/compose/lint", data).then((response) => {
-    var result = response.data;
+    var results = response.data;
+    ctl.innerHTML = formatter(results);
   }).catch((err) => {
     if (console) {
       console.log("ERROR", err);

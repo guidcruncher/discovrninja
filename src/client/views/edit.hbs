@@ -83,11 +83,13 @@
           <div id="yamlEdit" class="editor"></div>
           <script type="text/javascript">
             createEditor("yamlEdit", "txtCompose");
-          </script></div>
-          <div class="mb-3">
-            <button type="button" onclick="lintCompose('txtCompose','lintResult'); return false;" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Check</button>
-          </div>
-          <div class="mb-3" id="lintResult"></div>
+
+          </script>
+        </div>
+        <div class="mb-3">
+          <button type="button" onclick="lintCompose('txtCompose','lintResult'); return false;" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Check</button>
+        </div>
+        <div class="mb-3" id="lintResult"></div>
       </div>
       <div class="tab-pane fade" id="nav-env" role="tabpanel" aria-labelledby="nav-env-tab" tabindex="0">
         <div class="mb-3">
