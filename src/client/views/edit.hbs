@@ -79,11 +79,11 @@
       <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab" tabindex="0">
         <div class="mb-3">
           <label for="txtCompose" class="form-label">Project Compose file:</label><br />
-          <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace;display:none" data-project="{{projectName}}" onchange="document.getElementById('changed')='true';" id="txtCompose"> {{project.compose}}</textarea>
+          <textarea onchange="document.getElementById('changed')='true';" style="display:none" data-project="{{projectName}}" onchange="document.getElementById('changed')='true';" id="txtCompose"></textarea>
           <div id="yamlEdit" class="editor"></div>
           <script type="text/javascript">
+            document.getElementById("txtCompose").value = {{stringify project.compose}};
             createEditor("yamlEdit", "txtCompose");
-
           </script>
         </div>
         <div class="mb-3">
