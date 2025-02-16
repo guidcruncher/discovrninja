@@ -88,7 +88,9 @@
           </script>
         </div>
         <div class="mb-3">
-          <button type="button" onclick="lintCompose('txtCompose','lintResult'); return false;" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Check</button>
+          <button type="button" onclick="lintCompose('txtCompose','lintResult', false); return false;" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Lint</button>
+          &nbsp;
+          <button type="button" onclick="lintCompose('txtCompose','lintResult', true, 'yamlEdit'); return false;" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Lint and Fix</button>
         </div>
         <div class="mb-3" id="lintResult"></div>
       </div>

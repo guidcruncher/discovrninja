@@ -68,12 +68,12 @@ export class ComposeService {
         "composelint_" + crypto.randomBytes(16).toString("hex") + ".yaml",
       );
       fs.writeFileSync(filename, content);
-      this.composeLintFile(filename)
-        .then((r) => {
-          result.results = r;
-          if (autofix) {
-            this.composeLintFixFile(filename)
-              .then(() => {
+      if (autofix) {
+        this.composeLintFixFile(filename)
+          .then(() => {
+            this.composeLintFile(filename)
+              .then((r) => {
+                result.results = r;
                 if (fs.existsSync(filename)) {
                   result.content = fs.readFileSync(filename, "utf8");
                   fs.unlinkSync(filename);
@@ -81,29 +81,44 @@ export class ComposeService {
                 resolve(result);
               })
               .catch((err) => {
-                this.logger.error("Error in composeLint autofix", err);
+                this.logger.error(
+                  "Error in composeLint autofix post check",
+                  err,
+                );
                 if (fs.existsSync(filename)) {
                   result.content = fs.readFileSync(filename, "utf8");
                   fs.unlinkSync(filename);
                 }
                 resolve(result);
               });
-          } else {
+          })
+          .catch((err) => {
+            this.logger.error("Error in composeLint autofix", err);
             if (fs.existsSync(filename)) {
               result.content = fs.readFileSync(filename, "utf8");
               fs.unlinkSync(filename);
             }
             resolve(result);
-          }
-        })
-        .catch((err) => {
-          this.logger.error("Error in composeLint", err);
-          if (fs.existsSync(filename)) {
-            result.content = fs.readFileSync(filename, "utf8");
-            fs.unlinkSync(filename);
-          }
-          reject(err);
-        });
+          });
+      } else {
+        this.composeLintFile(filename)
+          .then((r) => {
+            result.results = r;
+            if (fs.existsSync(filename)) {
+              result.content = fs.readFileSync(filename, "utf8");
+              fs.unlinkSync(filename);
+            }
+            resolve(result);
+          })
+          .catch((err) => {
+            this.logger.error("Error in composeLint", err);
+            if (fs.existsSync(filename)) {
+              result.content = fs.readFileSync(filename, "utf8");
+              fs.unlinkSync(filename);
+            }
+            resolve(result);
+          });
+      }
     });
   }
 

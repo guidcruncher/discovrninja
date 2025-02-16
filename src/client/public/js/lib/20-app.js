@@ -1,4 +1,4 @@
-function lintCompose(src, target) {
+function lintCompose(src, target, autofix, editor) {
   const formatter = ((results) => {
     let output = '';
     let errorCount = 0;
@@ -44,7 +44,7 @@ function lintCompose(src, target) {
 
   var data = {
     compose: document.getElementById(src).value,
-    autofix: false
+    autofix: autofix
   };
   var ctl = document.getElementById(target);
   ctl.innerHTML = "";
@@ -52,6 +52,12 @@ function lintCompose(src, target) {
   axios.post("/api/compose/lint", data).then((response) => {
     var results = response.data;
     ctl.innerHTML = formatter(results.results);
+    if (editor) {
+      document.getElementById(src).value = results.compose;
+      var cm6editor = document.getElementById(editor);
+      var newState = cm6.createEditorState(results.compose);
+      cm6editor.view.setState(newState);
+    }
   }).catch((err) => {
     if (console) {
       console.log("ERROR", err);
