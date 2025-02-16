@@ -69,7 +69,7 @@ export class ComposeService {
       fs.writeFileSync(filename, content);
       this.composeLintFile(filename)
         .then((r) => {
-          var result = { results: [], content: "" };
+          var result = { results: new LintResult(), content: "" };
           result.results = r;
           if (autofix) {
             this.composeLintFixFile(filename)
@@ -107,7 +107,7 @@ export class ComposeService {
     });
   }
 
-  public composeLintFile(filename: string): Promise<any> {
+  public composeLintFile(filename: string): Promise<LintResults> {
     return new Promise<any>((resolve, reject) => {
       const linter = new DCLinter();
 
@@ -115,10 +115,6 @@ export class ComposeService {
       linter
         .lintFiles([filename], false)
         .then((lintResults) => {
-          const formattedResults = await linter.formatResults(
-            lintResults,
-            "stylish",
-          );
           resolve(lintResults);
         })
         .catch((err) => {
@@ -135,11 +131,7 @@ export class ComposeService {
       this.logger.debug("Running compose lint autofix on", filename);
       linter
         .fixFiles([filename], false, false)
-        .then((lintResults) => {
-          const formattedResults = await linter.formatResults(
-            lintResults,
-            "stylish",
-          );
+        .then(() => {
           resolve();
         })
         .catch((err) => {
