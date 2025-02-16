@@ -47,7 +47,7 @@ function lintCompose(src, target) {
     autofix: false
   };
   var ctl = document.getElementById(target);
- ctl.innerHTML="";
+  ctl.innerHTML = "";
 
   axios.post("/api/compose/lint", data).then((response) => {
     var results = response.data;

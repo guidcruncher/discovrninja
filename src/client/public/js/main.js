@@ -26602,8 +26602,10 @@ function lintCompose(src, target) {
     autofix: false
   };
   var ctl = document.getElementById(target);
+  ctl.innerHTML = "";
   axios.post("/api/compose/lint", data).then(response => {
-    var result = response.data
+    var results = response.data;
+    ctl.innerHTML = formatter(results)
   }).catch(err => {
     if (console) {
       console.log("ERROR", err)
