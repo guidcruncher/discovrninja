@@ -47,7 +47,9 @@ function lintCompose(src, target, autofix, editor) {
     autofix: autofix
   };
 
-  if (editor) { data.compose = document.getElementById(editor).view.state.doc.toString(); }
+  if (editor) {
+    data.compose = document.getElementById(editor).view.state.doc.toString();
+  }
 
   var ctl = document.getElementById(target);
   ctl.innerHTML = "";
