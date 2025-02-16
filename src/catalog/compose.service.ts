@@ -1,11 +1,11 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { default as convertDockerRunToCompose } from "composerize";
+import crypto from "crypto";
 import { DCLinter } from "dclint";
 import { default as convertDockerComposeToRun } from "decomposerize";
 import fs from "fs";
 import path from "path";
-import crypto from "crypto";
 
 @Injectable()
 export class ComposeService {
@@ -62,14 +62,14 @@ export class ComposeService {
 
   public composeLint(content: string, autofix: boolean): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      var filename = path.join(
+      const result = { results: {}, content: "" };
+      const filename = path.join(
         "/tmp/",
         "composelint_" + crypto.randomBytes(16).toString("hex") + ".yaml",
       );
       fs.writeFileSync(filename, content);
       this.composeLintFile(filename)
         .then((r) => {
-          var result = { results: new LintResult(), content: "" };
           result.results = r;
           if (autofix) {
             this.composeLintFixFile(filename)
@@ -107,7 +107,7 @@ export class ComposeService {
     });
   }
 
-  public composeLintFile(filename: string): Promise<LintResults> {
+  public composeLintFile(filename: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const linter = new DCLinter();
 
