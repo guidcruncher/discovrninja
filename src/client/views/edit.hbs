@@ -13,7 +13,7 @@
   <form>
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-desktop-tab" data-bs-toggle="tab" data-bs-target="#nav-desktop" type="button" role="tab" aria-controls="nav-desktop" aria-selected="true">Desktop</button>
+        <button class="nav-link active" id="nav-desktop-tab" data-bs-t oggle="tab" data-bs-target="#nav-desktop" type="button" role="tab" aria-controls="nav-desktop" aria-selected="true">Desktop</button>
         <button class="nav-link" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="false">Compose</button>
         <button class="nav-link" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-env" type="button" role="tab" aria-controls="nav-env" aria-selected="false">Environment</button>
       </div>
@@ -83,16 +83,13 @@
           <div id="yamlEdit" class="editor"></div>
           <script type="text/javascript">
             createEditor("yamlEdit", "txtCompose");
-
-          </script>
+          </script></div>
           <div class="mb-3">
             <button type="button" onclick="lintCompose('txtCompose','lintResult'); return false;" class="btn btn-secondary"><i class="fa-solid fa-list-check"></i> Check</button>
           </div>
           <div class="mb-3" id="lintResult"></div>
-
-        </div>
       </div>
-      <div class="tab-pane fade" id="nav-env" role="tabpanel" aria-labelledby="nav-env-tab" tabindex="0">o
+      <div class="tab-pane fade" id="nav-env" role="tabpanel" aria-labelledby="nav-env-tab" tabindex="0">
         <div class="mb-3">
           <label for="txtEnv" class="form-label">Project Environment file:</label><br />
           <textarea onchange="document.getElementById('changed')='true';" style="white-space: pre;overflow-wrap: normal;overflow-x: scroll;height:300px;width:700px;overflow:scroll !important; font-family: monospace" id="txtEnv">{{project.env}}</textarea>
