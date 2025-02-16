@@ -4,6 +4,7 @@ import { default as convertDockerRunToCompose } from "composerize";
 import { default as convertDockerComposeToRun } from "decomposerize";
 import fs from "fs";
 import path from "path";
+import { DCLinter } from "dclint";
 
 @Injectable()
 export class ComposeService {
@@ -55,6 +56,48 @@ export class ComposeService {
       multiline: true,
       "long-args": false,
       "arg-value-seperator": " ",
+    });
+  }
+
+  public composeLint(filename: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const linter = new DCLinter();
+
+      this.logger.debug("Running compose lint on", filename);
+      linter
+        .lintFiles([filename], false)
+        .then((lintResults) => {
+          const formattedResults = await linter.formatResults(
+            lintResults,
+            "stylish",
+          );
+          resolve(lintResults);
+        })
+        .catch((err) => {
+          this.logger.error("Error in composeLint", err);
+          reject(err);
+        });
+    });
+  }
+
+  public composeLintFix(filename: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const linter = new DCLinter();
+
+      this.logger.debug("Running compose lint autofix on", filename);
+      linter
+        .fixFiles([filename], false, false)
+        .then((lintResults) => {
+          const formattedResults = await linter.formatResults(
+            lintResults,
+            "stylish",
+          );
+          resolve();
+        })
+        .catch((err) => {
+          this.logger.error("Error in composeLintFix", err);
+          reject(err);
+        });
     });
   }
 

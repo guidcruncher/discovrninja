@@ -39,6 +39,7 @@
     "class-transformer": "^0.5.1",
     "composerize": "^1.7.1",
     "cookie": "^1.0.2",
+    "dclint": "^2.2.2",
     "decomposerize": "^1.4.4",
     "docker-compose": "^1.1.1",
     "dockerode": "^4.0.4",
