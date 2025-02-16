@@ -51,7 +51,7 @@ function lintCompose(src, target) {
 
   axios.post("/api/compose/lint", data).then((response) => {
     var results = response.data;
-    ctl.innerHTML = formatter(results);
+    ctl.innerHTML = formatter(results.results);
   }).catch((err) => {
     if (console) {
       console.log("ERROR", err);
