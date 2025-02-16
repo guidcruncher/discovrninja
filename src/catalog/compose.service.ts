@@ -1,10 +1,11 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { default as convertDockerRunToCompose } from "composerize";
+import { DCLinter } from "dclint";
 import { default as convertDockerComposeToRun } from "decomposerize";
 import fs from "fs";
 import path from "path";
-import { DCLinter } from "dclint";
+import crypto from "crypto";
 
 @Injectable()
 export class ComposeService {
@@ -59,7 +60,54 @@ export class ComposeService {
     });
   }
 
-  public composeLint(filename: string): Promise<any> {
+  public composeLint(content: string, autofix: boolean): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      var filename = path.join(
+        "/tmp/",
+        "composelint_" + crypto.randomBytes(16).toString("hex") + ".yaml",
+      );
+      fs.writeFileSync(filename, content);
+      this.composeLintFile(filename)
+        .then((r) => {
+          var result = { results: [], content: "" };
+          result.results = r;
+          if (autofix) {
+            this.composeLintFixFile(filename)
+              .then(() => {
+                if (fs.existsSync(filename)) {
+                  result.content = fs.readFileSync(filename, "utf8");
+                  fs.unlinkSync(filename);
+                }
+                resolve(result);
+              })
+              .catch((err) => {
+                this.logger.error("Error in composeLint autofix", err);
+                if (fs.existsSync(filename)) {
+                  result.content = fs.readFileSync(filename, "utf8");
+                  fs.unlinkSync(filename);
+                }
+                resolve(result);
+              });
+          } else {
+            if (fs.existsSync(filename)) {
+              result.content = fs.readFileSync(filename, "utf8");
+              fs.unlinkSync(filename);
+            }
+            resolve(result);
+          }
+        })
+        .catch((err) => {
+          this.logger.error("Error in composeLint", err);
+          if (fs.existsSync(filename)) {
+            result.content = fs.readFileSync(filename, "utf8");
+            fs.unlinkSync(filename);
+          }
+          reject(err);
+        });
+    });
+  }
+
+  public composeLintFile(filename: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const linter = new DCLinter();
 
@@ -74,13 +122,13 @@ export class ComposeService {
           resolve(lintResults);
         })
         .catch((err) => {
-          this.logger.error("Error in composeLint", err);
+          this.logger.error("Error in composeLintFile", err);
           reject(err);
         });
     });
   }
 
-  public composeLintFix(filename: string): Promise<void> {
+  public composeLintFixFile(filename: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const linter = new DCLinter();
 
@@ -95,7 +143,7 @@ export class ComposeService {
           resolve();
         })
         .catch((err) => {
-          this.logger.error("Error in composeLintFix", err);
+          this.logger.error("Error in composeLintFixFile", err);
           reject(err);
         });
     });
