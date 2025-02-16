@@ -1,3 +1,19 @@
+function composeLint(src, target) {
+  var data = {
+    compose: document.getElementById(src).value,
+    autofix: false
+  };
+  var ctl = document.getElementById(target);
+
+  axios.post("/api/compose/lint", data).then((response) => {
+    var result = response.data;
+  }).catch((err) => {
+    if (console) {
+      console.log("ERROR", err);
+    }
+  });
+}
+
 function checkForImageUpdates() {
 
   const checkImage = ((obj) => {
@@ -5,7 +21,6 @@ function checkForImageUpdates() {
     var container = $(obj).attr("data-containerid");
     var project = $(obj).attr("data=project");
     var apiUrl = "/api/docker/image/update/check?ref=" + encodeURIComponent(image);
-    console.log(image);
     if (image != "") {
       $(obj).html('<i class="fa-solid fa-hourglass-half"></i>');
 

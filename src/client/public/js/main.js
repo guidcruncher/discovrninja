@@ -26560,13 +26560,27 @@ setInterval(function() {
   window.ui().desktop()
 }, 1e3);
 
+function composeLint(src, target) {
+  var data = {
+    compose: document.getElementById(src).value,
+    autofix: false
+  };
+  var ctl = document.getElementById(target);
+  axios.post("/api/compose/lint", data).then(response => {
+    var result = response.data
+  }).catch(err => {
+    if (console) {
+      console.log("ERROR", err)
+    }
+  })
+}
+
 function checkForImageUpdates() {
   const checkImage = obj => {
     var image = $(obj).attr("data-imageid");
     var container = $(obj).attr("data-containerid");
     var project = $(obj).attr("data=project");
     var apiUrl = "/api/docker/image/update/check?ref=" + encodeURIComponent(image);
-    console.log(image);
     if (image != "") {
       $(obj).html('<i class="fa-solid fa-hourglass-half"></i>');
       axios.get(apiUrl).then(response => {

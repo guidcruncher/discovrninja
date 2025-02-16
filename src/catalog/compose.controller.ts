@@ -24,4 +24,12 @@ export class ComposeController {
     const result = this.composeService.deComposerize(cmd.cmd);
     res.status(200).type("text/plain").send(result);
   }
+
+  @Post("lint")
+  composeLint(@Body() compose) {
+    return this.composeService.composeLint(
+      compose.compose,
+      compose.autofix ?? false,
+    );
+  }
 }
