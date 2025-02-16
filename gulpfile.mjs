@@ -67,11 +67,9 @@ gulp.task(
 gulp.task(
   "default",
   series(
-    "prebuild",
     "format",
     "lint",
     "lint-client",
-    "js",
     "docker",
   ),
 );
