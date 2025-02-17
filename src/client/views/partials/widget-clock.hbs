@@ -10,5 +10,7 @@
 
 </script>
 <button class="btn {{# isempty parent.buttonclass}}btn-secondary{{else}}{{parent.buttonclass}}{{/isempty}} widget" style="{{#isnotempty parent.opacity}}opacity:{{parent.opacity}} !important;{{/isnotempty}};width:100px;" data-bs-toggle="modal" data-bs-target="#analogClockModal{{settings.id}}">
-  {{> analogclock settings}}
+  <div style="width:100px;margin 0 auto;">
+    {{> analogclock settings}}
+  </div>
 </button>

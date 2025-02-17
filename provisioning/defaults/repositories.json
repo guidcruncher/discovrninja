@@ -1,5 +1,5 @@
 [
-   {
+  {
     "name": "Docker Hub",
     "hostMatches": [
       "",
@@ -13,6 +13,51 @@
       "url": "https://index.docker.io/v2/{repo}/manifests/{tag}",
       "field": "",
       "header": "etag"
+    }
+  },
+  {
+    "name": "ghcr.io",
+    "hostMatches": [
+      "ghcr.io"
+    ],
+    "token": {
+      "url": "htps://ghcr.io/token?scope=repository:{repo}:pull",
+      "field": "token"
+    },
+    "manifest": {
+      "url": "https://ghcr.io/{repo}/manifests/{tag}",
+      "field": "",
+      "header": ""
+    }
+  },
+  {
+    "name": "lscr.io",
+    "hostMatches": [
+      "lscr.io"
+    ],
+    "token": {
+      "url": "htps://lscr.io/token?scope=repository:{repo}:pull",
+      "field": "token"
+    },
+    "manifest": {
+      "url": "https://lscr.io/{repo}/manifests/{tag}",
+      "field": "",
+      "header": ""
+    }
+  },
+  {
+    "name": "quay.io",
+    "hostMatches": [
+      "quay.io"
+    ],
+    "token": {
+      "url": "",
+      "field": ""
+    },
+    "manifest": {
+      "url": "https://quay.io/api/v1/repository/{repo}/tags/{tag}",
+      "field": "",
+      "header": ""
     }
   }
 ]
