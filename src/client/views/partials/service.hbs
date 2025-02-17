@@ -1,4 +1,4 @@
-<button {{# if service.monitor}}{{#if service.available}}{{else}}disabled{{/if}}{{/if}} data-name="{{service.containerName}}" data-url="{{service.public}}" onclick="navigateTo(this); return false;" type="button" class="btn {{# isempty parent.buttonclass}}btn-secondary{{else}}{{parent.buttonclass}}{{/isempty}} widget" style="{{#isnotempty parent.opacity}}opacity:{{parent.opacity}} !important;{{/isnotempty}}">
+<a role="button" {{# if service.monitor}}{{#if service.available}}{{else}}disabled aria-disabled="true" {{/if}}{{/if}} data-name="{{service.containerName}}" data-url="{{service.public}}" href="{{service.public}}" class="btn {{# isempty parent.buttonclass}}btn-secondary{{else}}{{parent.buttonclass}}{{/isempty}} widget" style="{{#isnotempty parent.opacity}}opacity:{{parent.opacity}} !important;{{/isnotempty}}" target="_blank">
   <img style="padding:10px;max-width:64px;max-height:64px" src="{{#isempty service.iconSlug}}/api/icons/question{{else}}/api/icons/r/{{service.iconCatalog}}/{{service.iconSlug}}/resource{{/isempty }}" />
   <br /> {{service.name}}
-</button>
+</a>

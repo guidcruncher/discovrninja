@@ -8,9 +8,9 @@ import { IconService } from "@icon/icon.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Param, Query, Req, Res } from "@nestjs/common";
 import { ResourcesService } from "@resources/resources.service";
+import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
-import * as crypto from "crypto";
 
 import { SystemService } from "./system.service";
 import { TasksService } from "./tasks.service";
@@ -32,10 +32,16 @@ export class AppController {
 
   @Get("/analogclock.html")
   getAnalogClock(@Query("id") id, @Query("tz") tz, @Res() res) {
-    var filename = path.join(process.cwd(), "client", "img", "analogclock.svg");
-    var svg = fs.readFileSync(filename, "utf8");
-    var ident = crypto.randomBytes(16).toString("hex");
-    var timezone = "";
+    const filename = path.join(
+      process.cwd(),
+      "client",
+      "public",
+      "img",
+      "analogclock.svg",
+    );
+    let svg = fs.readFileSync(filename, "utf8");
+    let ident = crypto.randomBytes(16).toString("hex");
+    let timezone = "";
     if (id && id != "") {
       ident = id;
     }

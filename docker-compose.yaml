@@ -7,13 +7,10 @@ services:
       dockerfile: Dockerfile
     develop:
       watch:
-        - action: sync
-          path: ./src/client
+        - path: ./src/client
+          x-initialSync: true
           target: /home/node/app/client
-        - action: rebuild
-          path: ./src
-          ignore:
-            - ./src/client
+          action: sync
     networks:
       proxy:
     volumes:
