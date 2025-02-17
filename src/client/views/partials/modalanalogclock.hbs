@@ -6,9 +6,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <object style="width:90%;height:90%;pointer-event:none" data="/assets/img/clock.svg" type="image/svg+xml">
-          <param name="tz" value="{{tz}}" />
-        </object>
+        <div style="width:90%;height:90%;">
+          {{> analogclock this}}
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
