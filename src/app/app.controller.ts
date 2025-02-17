@@ -8,6 +8,9 @@ import { IconService } from "@icon/icon.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Param, Query, Req, Res } from "@nestjs/common";
 import { ResourcesService } from "@resources/resources.service";
+import * as fs from "fs";
+import * as path from "path";
+import * as crypto from "crypto";
 
 import { SystemService } from "./system.service";
 import { TasksService } from "./tasks.service";
@@ -26,6 +29,25 @@ export class AppController {
   ) {}
 
   private readonly logger = new Logger(AppController.name);
+
+  @Get("/analogclock.html")
+  getAnalogClock(@Query("id") id, @Query("tz") tz, @Res() res) {
+    var filename = path.join(process.cwd(), "client", "img", "analogclock.svg");
+    var svg = fs.readFileSync(filename, "utf8");
+    var ident = crypto.randomBytes(16).toString("hex");
+    var timezone = "";
+    if (id && id != "") {
+      ident = id;
+    }
+    if (tz && tz != "") {
+      timezone = tz;
+    }
+    svg = svg.replaceAll('id="clock"', 'id="' + ident + '"');
+    svg += '\n<script type="text/javascript">\n';
+    svg += 'analogClock("' + ident + '", "' + timezone + '");\n';
+    svg += "</script>";
+    res.status(200).type("text/html").send(svg);
+  }
 
   @Get("api/version")
   getversion(@Res() res) {

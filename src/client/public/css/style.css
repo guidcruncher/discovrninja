@@ -945,6 +945,11 @@ html.dark .dt-container .dt-paging .dt-paging-button:active {
   margin: 0 3px 0 0
 }
 
+svg {
+  display: block;
+  margin: 0 auto
+}
+
 .wait {
   display: none !important
 }

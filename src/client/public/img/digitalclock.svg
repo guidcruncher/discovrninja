@@ -116,6 +116,7 @@ return "";
 function getNow() {
 var date = new Date(); 
 var tz= getParam("tz");  
+if ((!tz) || (tz && tz == "")) {tz = Intl.DateTimeFormat().resolvedOptions().timeZone;} 
 if (tz!=""){
 date=new Date(
 new Date().toLocaleString('en-US', {
@@ -143,7 +144,7 @@ var date = getNow();
 }
 
 function init(evt){
-    date = new Date();
+    date = getNow();
     hours = format(date.getHours());
     minutes = format(date.getMinutes());
     seconds = format(date.getSeconds());
