@@ -30385,11 +30385,11 @@ this["app"]["templates"]["service"] = Handlebars.template({
       loc: {
         start: {
           line: 1,
-          column: 41
+          column: 44
         },
         end: {
           line: 1,
-          column: 111
+          column: 114
         }
       }
     })) != null ? stack1 : ""
@@ -30447,7 +30447,7 @@ this["app"]["templates"]["service"] = Handlebars.template({
         }
         return undefined
       };
-    return '<a role="button" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "monitor") : stack1, {
+    return '   <a role="button" ' + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "monitor") : stack1, {
       name: "if",
       hash: {},
       fn: container.program(1, data, 0),
@@ -30456,11 +30456,11 @@ this["app"]["templates"]["service"] = Handlebars.template({
       loc: {
         start: {
           line: 1,
-          column: 17
+          column: 20
         },
         end: {
           line: 1,
-          column: 118
+          column: 121
         }
       }
     })) != null ? stack1 : "") + ' data-name="' + alias3(alias2((stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "containerName") : stack1, depth0)) + '" data-url="' + alias3(alias2((stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "public") : stack1, depth0)) + '" href="' + alias3(alias2((stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "public") : stack1, depth0)) + '" class="btn ' + ((stack1 = (lookupProperty(helpers, "isempty") || depth0 && lookupProperty(depth0, "isempty") || alias4).call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null ? lookupProperty(stack1, "buttonclass") : stack1, {
@@ -30472,11 +30472,11 @@ this["app"]["templates"]["service"] = Handlebars.template({
       loc: {
         start: {
           line: 1,
-          column: 224
+          column: 227
         },
         end: {
           line: 1,
-          column: 311
+          column: 314
         }
       }
     })) != null ? stack1 : "") + ' widget" style="' + ((stack1 = (lookupProperty(helpers, "isnotempty") || depth0 && lookupProperty(depth0, "isnotempty") || alias4).call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "parent") : depth0) != null ? lookupProperty(stack1, "opacity") : stack1, {
@@ -30488,14 +30488,14 @@ this["app"]["templates"]["service"] = Handlebars.template({
       loc: {
         start: {
           line: 1,
-          column: 327
+          column: 330
         },
         end: {
           line: 1,
-          column: 410
+          column: 413
         }
       }
-    })) != null ? stack1 : "") + '" target="_blank">\n  <img style="padding:10px;max-width:64px;max-height:64px" src="' + ((stack1 = (lookupProperty(helpers, "isempty") || depth0 && lookupProperty(depth0, "isempty") || alias4).call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "iconSlug") : stack1, {
+    })) != null ? stack1 : "") + '" target="_blank">\n     <div style="text-align: center;padding:10px;width:100%;height:64px;">\n       <img style="width:64px;max-height:64px" src="' + ((stack1 = (lookupProperty(helpers, "isempty") || depth0 && lookupProperty(depth0, "isempty") || alias4).call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "iconSlug") : stack1, {
       name: "isempty",
       hash: {},
       fn: container.program(12, data, 0),
@@ -30503,15 +30503,15 @@ this["app"]["templates"]["service"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 2,
-          column: 64
+          line: 3,
+          column: 52
         },
         end: {
-          line: 2,
-          column: 199
+          line: 3,
+          column: 187
         }
       }
-    })) != null ? stack1 : "") + '" />\n  <br /> ' + alias3(alias2((stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "name") : stack1, depth0)) + "\n</a>\n"
+    })) != null ? stack1 : "") + '" />\n     </div>\n     <div style="padding:10px;">' + alias3(alias2((stack1 = depth0 != null ? lookupProperty(depth0, "service") : depth0) != null ? lookupProperty(stack1, "name") : stack1, depth0)) + "</div>\n   </a>\n"
   },
   useData: true
 });
@@ -30842,14 +30842,14 @@ this["app"]["templates"]["widget-clock"] = Handlebars.template({
           column: 205
         }
       }
-    })) != null ? stack1 : "") + ';width:100px;" data-bs-toggle="modal" data-bs-target="#analogClockModal' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "id") : stack1, depth0)) + '">\n' + ((stack1 = container.invokePartial(lookupProperty(partials, "analogclock"), depth0 != null ? lookupProperty(depth0, "settings") : depth0, {
+    })) != null ? stack1 : "") + ';width:100px;" data-bs-toggle="modal" data-bs-target="#analogClockModal' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "settings") : depth0) != null ? lookupProperty(stack1, "id") : stack1, depth0)) + '">\n  <div style="width:100px;margin 0 auto;">\n' + ((stack1 = container.invokePartial(lookupProperty(partials, "analogclock"), depth0 != null ? lookupProperty(depth0, "settings") : depth0, {
       name: "analogclock",
       data: data,
-      indent: "  ",
+      indent: "    ",
       helpers: helpers,
       partials: partials,
       decorators: container.decorators
-    })) != null ? stack1 : "") + "</button>\n"
+    })) != null ? stack1 : "") + "  </div>\n</button>\n"
   },
   usePartial: true,
   useData: true
