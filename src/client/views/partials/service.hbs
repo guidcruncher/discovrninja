@@ -3,4 +3,11 @@
        <img style="width:64px;max-height:64px" src="{{#isempty service.iconSlug}}/api/icons/question{{else}}/api/icons/r/{{service.iconCatalog}}/{{service.iconSlug}}/resource{{/isempty }}" />
      </div>
      <div style="padding:10px;">{{service.name}}</div>
+     {{#if service.monitor}}
+       {{# service.available}}
+         <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-2"> </span>
+     {{else}}
+       <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"> </span>
+     {{/if}}
+     {{/if}}
    </a>
