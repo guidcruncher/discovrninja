@@ -19,6 +19,9 @@ export class Job {
   State: string;
 
   @Prop()
+  Category: string;
+
+  @Prop()
   Finished: boolean;
 
   constructor() {
