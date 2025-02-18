@@ -2216,11 +2216,11 @@ this["app"]["templates"]["service"] = Handlebars.template({
       "loc": {
         "start": {
           "line": 1,
-          "column": 44
+          "column": 41
         },
         "end": {
           "line": 1,
-          "column": 114
+          "column": 111
         }
       }
     })) != null ? stack1 : "");
@@ -2275,6 +2275,40 @@ this["app"]["templates"]["service"] = Handlebars.template({
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "service") : depth0)) != null ? lookupProperty(stack1, "iconSlug") : stack1), depth0)) +
       "/resource";
   },
+  "16": function(container, depth0, helpers, partials, data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+      return undefined
+    };
+
+    return "      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary bg-gradient\">\n" +
+      ((stack1 = lookupProperty(helpers, "if").call(depth0 != null ? depth0 : (container.nullContext || {}), ((stack1 = (depth0 != null ? lookupProperty(depth0, "service") : depth0)) != null ? lookupProperty(stack1, "available") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(17, data, 0),
+        "inverse": container.program(19, data, 0),
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 8
+          },
+          "end": {
+            "line": 13,
+            "column": 15
+          }
+        }
+      })) != null ? stack1 : "") +
+      "      </span>\n";
+  },
+  "17": function(container, depth0, helpers, partials, data) {
+    return "          <span class=\"badge border border-light rounded-circle bg-success p-2\"> </span>\n";
+  },
+  "19": function(container, depth0, helpers, partials, data) {
+    return "          <span class=\"badge border border-light rounded-circle bg-danger p-2\"> </span>\n";
+  },
   "compiler": [8, ">= 4.3.0"],
   "main": function(container, depth0, helpers, partials, data) {
     var stack1, alias1 = depth0 != null ? depth0 : (container.nullContext || {}),
@@ -2288,7 +2322,7 @@ this["app"]["templates"]["service"] = Handlebars.template({
         return undefined
       };
 
-    return "   <a role=\"button\" " +
+    return "<a role=\"button\" " +
       ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "service") : depth0)) != null ? lookupProperty(stack1, "monitor") : stack1), {
         "name": "if",
         "hash": {},
@@ -2298,11 +2332,11 @@ this["app"]["templates"]["service"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 1,
-            "column": 20
+            "column": 17
           },
           "end": {
             "line": 1,
-            "column": 121
+            "column": 118
           }
         }
       })) != null ? stack1 : "") +
@@ -2322,15 +2356,15 @@ this["app"]["templates"]["service"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 1,
-            "column": 227
+            "column": 224
           },
           "end": {
             "line": 1,
-            "column": 314
+            "column": 311
           }
         }
       })) != null ? stack1 : "") +
-      " widget\" style=\"" +
+      " widget\" style=\"position: relative !imporant;" +
       ((stack1 = (lookupProperty(helpers, "isnotempty") || (depth0 && lookupProperty(depth0, "isnotempty")) || alias4).call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "parent") : depth0)) != null ? lookupProperty(stack1, "opacity") : stack1), {
         "name": "isnotempty",
         "hash": {},
@@ -2340,15 +2374,15 @@ this["app"]["templates"]["service"] = Handlebars.template({
         "loc": {
           "start": {
             "line": 1,
-            "column": 330
+            "column": 356
           },
           "end": {
             "line": 1,
-            "column": 413
+            "column": 439
           }
         }
       })) != null ? stack1 : "") +
-      "\" target=\"_blank\">\n     <div style=\"text-align: center;padding:10px;width:100%;height:64px;\">\n       <img style=\"width:64px;max-height:64px\" src=\"" +
+      "\" target=\"_blank\">\n  <div style=\"position:relative;\">\n    <div style=\"text-align: center;padding:10px;width:100%;height:64px;\">\n      <img style=\"width:64px;max-height:64px\" src=\"" +
       ((stack1 = (lookupProperty(helpers, "isempty") || (depth0 && lookupProperty(depth0, "isempty")) || alias4).call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "service") : depth0)) != null ? lookupProperty(stack1, "iconSlug") : stack1), {
         "name": "isempty",
         "hash": {},
@@ -2357,18 +2391,36 @@ this["app"]["templates"]["service"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 3,
-            "column": 52
+            "line": 4,
+            "column": 51
           },
           "end": {
-            "line": 3,
-            "column": 187
+            "line": 4,
+            "column": 186
           }
         }
       })) != null ? stack1 : "") +
-      "\" />\n     </div>\n     <div style=\"padding:10px;\">" +
+      "\" />\n    </div>\n    <div style=\"padding:10px;\">" +
       alias3(alias2(((stack1 = (depth0 != null ? lookupProperty(depth0, "service") : depth0)) != null ? lookupProperty(stack1, "name") : stack1), depth0)) +
-      "</div>\n   </a>\n";
+      "</div>\n" +
+      ((stack1 = lookupProperty(helpers, "if").call(alias1, ((stack1 = (depth0 != null ? lookupProperty(depth0, "service") : depth0)) != null ? lookupProperty(stack1, "monitor") : stack1), {
+        "name": "if",
+        "hash": {},
+        "fn": container.program(16, data, 0),
+        "inverse": container.noop,
+        "data": data,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 4
+          },
+          "end": {
+            "line": 15,
+            "column": 11
+          }
+        }
+      })) != null ? stack1 : "") +
+      "  </div>\n</a>\n";
   },
   "useData": true
 });

@@ -893,9 +893,7 @@ export class DockerService {
       r.healthy = false;
     }
 
-    r.available = !["exited", "dead", "paused"].includes(
-      c.State.toLowerCase(),
-    );
+    r.available = !["exited", "dead", "paused"].includes(c.State.toLowerCase());
     return r;
   }
 
