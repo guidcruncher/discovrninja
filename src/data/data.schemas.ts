@@ -5,6 +5,8 @@ import { Network } from "@data/dto/network.dto";
 import { Volume } from "@data/dto/volume.dto";
 import { VolumeStorageStats } from "@data/dto/volume-storagestats.dto";
 import { ContainerCatalogSchema } from "@data/schemas/containercatalog.schema";
+import { Job } from "@data/dto/job.dto";
+import { Webhook } from "@data/dto/webhook.dto";
 import {
   ContainerStats,
   ContainerStatsSchema,
@@ -16,6 +18,8 @@ import { TemplateSchema } from "@data/schemas/portainer.schema";
 import { ServiceDefinitionSchema } from "@data/schemas/servicedefinition.schema";
 import { VolumeSchema } from "@data/schemas/volume.schema";
 import { VolumeStorageStatsSchema } from "@data/schemas/volume-storagestats.schema";
+import { JobSchema } from "@data/schemas/job.schema";
+import { WebhookSchema } from "@data/schemas/webhook.schema";
 import { MongooseModule } from "@nestjs/mongoose";
 
 export class Schemas {
@@ -30,6 +34,8 @@ export class Schemas {
       { name: ContainerCatalog.name, schema: ContainerCatalogSchema },
       { name: Network.name, schema: NetworkSchema },
       { name: Volume.name, schema: VolumeSchema },
+      { name: Job.name, schema: JobSchema },
+      { name: Webhook.name, schema: WebhookSchema },
     ]);
   }
 }
