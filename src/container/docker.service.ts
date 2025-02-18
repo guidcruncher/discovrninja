@@ -893,6 +893,9 @@ export class DockerService {
       r.healthy = false;
     }
 
+    r.available = !["exited", "dead", "paused"].includes(
+      c.State.toLowerCase(),
+    );
     return r;
   }
 
@@ -929,6 +932,7 @@ export class DockerService {
       cpuAlert: false,
       memoryAlert: false,
       configured: false,
+      available: false,
       ports: [],
       publicUrl: "",
       project: "",
