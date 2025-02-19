@@ -469,12 +469,15 @@ export class DockerService {
         if (err) {
           reject(err);
         } else {
+          const res = [];
           containers.forEach((c) => {
-            c.available = !["exited", "dead", "paused"].includes(
+            const ctr: any = c;
+            ctr.available = !["exited", "dead", "paused"].includes(
               c.State.toLowerCase(),
             );
+            res.push(ctr);
           });
-          resolve(containers);
+          resolve(res);
         }
       });
     });
