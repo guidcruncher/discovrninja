@@ -469,8 +469,10 @@ export class DockerService {
         if (err) {
           reject(err);
         } else {
-          container.forEach((c)=>{
-            c.available = !["exited", "dead", "paused"].includes(c.State.toLowerCase());
+          containers.forEach((c) => {
+            c.available = !["exited", "dead", "paused"].includes(
+              c.State.toLowerCase(),
+            );
           });
           resolve(containers);
         }
