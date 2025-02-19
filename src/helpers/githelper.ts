@@ -1,13 +1,13 @@
 import { ProcessHelper, ProcessResponse } from "@helpers/processhelper";
 import { Logger } from "@nestjs/common";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import * as fs from "fs";
 
 export class GitHelper {
   private readonly logger = new Logger(GitHelper.name);
 
   private static getGitEnv(user: any): any {
-    const newHash = crypto
+    const newHash = CryptoHelper
       .createHash("md5")
       .update(user.name.toLowerCase())
       .digest("hex");
@@ -23,13 +23,13 @@ export class GitHelper {
   }
 
   public static isIdentical(filename: string, newValue: string): boolean {
-    const newHash = crypto.createHash("md5").update(newValue).digest("hex");
+    const newHash = CryptoHelper.createHash("md5").update(newValue).digest("hex");
 
     if (!fs.existsSync(filename)) {
       return false;
     }
 
-    const currentHash = crypto
+    const currentHash = CryptoHelper
       .createHash("md5")
       .update(fs.readFileSync(filename, "utf8"))
       .digest("hex");

@@ -1,5 +1,5 @@
 import { Prop, Schema } from "@nestjs/mongoose";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 
 @Schema()
 export class Job {
@@ -25,7 +25,7 @@ export class Job {
   Finished: boolean;
 
   constructor() {
-    this.Id = crypto.randomBytes(16).toString("hex");
+    this.Id = CryptoHelper.generateId();
     this.CreatedAt = new Date();
     this.State = "";
     this.Finished = false;

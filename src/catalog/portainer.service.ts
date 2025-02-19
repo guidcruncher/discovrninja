@@ -7,7 +7,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { default as convertDockerRunToCompose } from "composerize";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import * as compose from "docker-compose";
 import * as fs from "fs";
 import { Model } from "mongoose";
@@ -74,7 +74,7 @@ export class PortainerService {
   public writeCatalog(catalog: ContainerCatalog): Promise<ContainerCatalog> {
     return new Promise<ContainerCatalog>((resolve, reject) => {
       if ((catalog.id ?? "") == "") {
-        catalog.id = crypto.randomBytes(16).toString("hex");
+        catalog.id = CryptoHelper.generateId();
       }
 
       this.containerCatalogModel

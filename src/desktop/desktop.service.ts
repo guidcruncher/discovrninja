@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ResourcesService } from "@resources/resources.service";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import * as fs from "fs";
 import * as yaml from "js-yaml";
 import * as path from "path";
@@ -38,7 +38,7 @@ export class DesktopService {
   }
 
   private id() {
-    return crypto.randomBytes(16).toString("hex");
+    return CryptoHelper.generateId();
   }
 
   public renderDesktop(): any {

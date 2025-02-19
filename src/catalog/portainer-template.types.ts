@@ -1,5 +1,5 @@
 import { Prop, Schema } from "@nestjs/mongoose";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 
 @Schema()
 export class EnvSetting {
@@ -201,6 +201,6 @@ export class ContainerCatalog {
     this.url = "";
     this.dateCreated = new Date();
     this.dateUpdated = this.dateCreated;
-    this.id = crypto.randomBytes(16).toString("hex");
+    this.id = CryptoHelper.generateId();
   }
 }

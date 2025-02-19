@@ -8,7 +8,7 @@ import { IconService } from "@icon/icon.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Param, Query, Req, Res } from "@nestjs/common";
 import { ResourcesService } from "@resources/resources.service";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -40,7 +40,7 @@ export class AppController {
       "analogclock.svg",
     );
     let svg = fs.readFileSync(filename, "utf8");
-    let ident = crypto.randomBytes(16).toString("hex");
+    let ident = CryptoHelper.generateId();
     let timezone = "";
     if (id && id != "") {
       ident = id;

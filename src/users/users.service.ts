@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as bcrypt from "bcrypt";
-import * as crypto from "crypto";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import * as fs from "fs";
 
 import { User } from "./user";
@@ -92,7 +92,7 @@ export class UsersService {
       password: "",
       salt: "",
     };
-    user.userId = crypto.randomBytes(16).toString("hex");
+    user.userId = CryptoHelper.generateId();
     user.username = "admin";
     user.password = result.hash;
     user.salt = result.salt;
@@ -103,7 +103,7 @@ export class UsersService {
     this.logger.log("addUser");
     const result = this.hashPassword(password);
     let user: User;
-    user.userId = crypto.randomBytes(16).toString("hex");
+    user.userId = CryptoHelper.generateId();
     user.username = username;
     user.password = result.hash;
     user.salt = result.salt;
