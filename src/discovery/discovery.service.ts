@@ -214,14 +214,12 @@ export class DiscoveryService implements IDiscoveryAgent {
             dto.iconSlug = service.iconSlug;
             dto.public = service.public;
             dto.project = service.project;
-            dto.firstSeen = service.firstSeen;
             dto.available = service.available;
             dto.edited = false;
             dto.downtime = 0;
+            dto.firstSeen = service.firstSeen ?? new Date();
+            dto.lastPolled = new Date();
             if (service.available) {
-              if (!dto.firstSeen) {
-                dto.firstSeen = new Date();
-              }
               dto.lastSeen = new Date();
             }
 
@@ -233,7 +231,7 @@ export class DiscoveryService implements IDiscoveryAgent {
             });
             if (ico) {
               dto.downtime = ico.downtime ?? 0;
-              dto.lastPolled = ico.lastPolled;
+              dto.lastPolled = new Date();
               dto.name = ico.name;
               dto.public = ico.public;
               dto.edited = ico.edited;
@@ -242,7 +240,8 @@ export class DiscoveryService implements IDiscoveryAgent {
               dto.iconSlug = ico.iconSlug;
               dto.iconCatalog = ico.iconCatalog;
               dto.archived = ico.archived;
-              dto.firstSeen = ico.firstSeen;
+              dto.firstSeen = ico.firstSeen ?? ico.created;
+              dto.lastPolled = new Date();
               if (!service.available) {
                 if (dto.lastPolled) {
                   dto.downtime +=
@@ -254,7 +253,6 @@ export class DiscoveryService implements IDiscoveryAgent {
                 }
               }
             }
-            dto.lastPolled = new Date();
             promises.push(
               new Promise((resolve, reject) => {
                 this.ensureIcon(dto).then((r) => {

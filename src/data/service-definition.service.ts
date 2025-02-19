@@ -72,9 +72,11 @@ export class ServiceDefinitionService {
           dto.project = data.project;
           dto.monitor = data.monitor;
           dto.uptime = data.uptime;
-
+          if (!dto.firstSeen) {
+            dto.firstSeen = dto.created;
+          }
           if (data.available != null) {
-            if (data.avaiable == false && dto.available != data.available) {
+            if (data.available == false && dto.available != data.availabxle) {
               data.lastSeen = new Date();
             }
             dto.available = data.available;
