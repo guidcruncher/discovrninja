@@ -4,11 +4,11 @@ import { PortainerService } from "@catalog/portainer.service";
 import { DockerService } from "@container/docker.service";
 import { Desktop } from "@desktop/decorators";
 import { DiscoveryService } from "@discovery/discovery.service";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import { IconService } from "@icon/icon.service";
 import { Logger } from "@nestjs/common";
 import { Controller, Get, Param, Query, Req, Res } from "@nestjs/common";
 import { ResourcesService } from "@resources/resources.service";
-import { CryptoHelper } from "@helpers/cryptohelper";
 import * as fs from "fs";
 import * as path from "path";
 

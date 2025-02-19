@@ -1,5 +1,6 @@
 import { StringBuilder } from "@customtypes/stringbuilder";
 import { ServiceDefinitionService } from "@data/service-definition.service";
+import { CryptoHelper } from "@helpers/cryptohelper";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { GitHelper } from "@helpers/githelper";
 import { IconCDNService } from "@icon/icon-cdn.service";
@@ -7,7 +8,6 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { default as convertDockerRunToCompose } from "composerize";
-import { CryptoHelper } from "@helpers/cryptohelper";
 import * as compose from "docker-compose";
 import * as fs from "fs";
 import { Model } from "mongoose";

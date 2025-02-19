@@ -1,7 +1,7 @@
+import { CryptoHelper } from "@helpers/cryptohelper";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as bcrypt from "bcrypt";
-import { CryptoHelper } from "@helpers/cryptohelper";
 import * as fs from "fs";
 
 import { User } from "./user";

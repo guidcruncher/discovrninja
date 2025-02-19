@@ -1,5 +1,5 @@
-import { Prop, Schema } from "@nestjs/mongoose";
 import { CryptoHelper } from "@helpers/cryptohelper";
+import { Prop, Schema } from "@nestjs/mongoose";
 
 export class WebhookPayload {
   @Prop()

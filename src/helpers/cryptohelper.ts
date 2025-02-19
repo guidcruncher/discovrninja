@@ -1,7 +1,6 @@
 import * as crypto from "crypto";
 
 export class CryptoHelper {
-
   public static generateId() {
     return crypto.randomBytes(16).toString("hex");
   }
@@ -30,11 +29,12 @@ export class CryptoHelper {
     payload: any,
     algorithm: string,
     secret: string,
+    encoding: crypto.BinaryToTextEncoding
   ): string {
     const hash = crypto
       .createHmac(algorithm, secret)
       .update(JSON.stringify(payload))
-      .digest("hex");
+      .digest(encoding);
     return hash;
   }
 }
