@@ -29,7 +29,7 @@ export class CryptoHelper {
     payload: any,
     algorithm: string,
     secret: string,
-    encoding: crypto.BinaryToTextEncoding
+    encoding: crypto.BinaryToTextEncoding,
   ): string {
     const hash = crypto
       .createHmac(algorithm, secret)

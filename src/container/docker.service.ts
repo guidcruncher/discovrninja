@@ -58,9 +58,7 @@ export class DockerService {
     return new Promise((resolve, reject) => {
       this.getContainer(sd.containerName)
         .then((ctr) => {
-          sd.available = !["exited", "dead", "paused"].includes(
-            ctr.State.Status.toLowerCase(),
-          );
+          sd.available = ctr.available;
           resolve(sd);
         })
         .catch((err) => {
@@ -75,11 +73,7 @@ export class DockerService {
     return new Promise((resolve, reject) => {
       this.getContainer(name)
         .then((ctr) => {
-          resolve(
-            !["exited", "dead", "paused"].includes(
-              ctr.State.Status.toLowerCase(),
-            ),
-          );
+          resolve(ctr.available);
         })
         .catch((err) => {
           this.logger.error("Error checking container state", err);
@@ -475,6 +469,9 @@ export class DockerService {
         if (err) {
           reject(err);
         } else {
+          container.forEach((c)=>{
+            c.available = !["exited", "dead", "paused"].includes(c.State.toLowerCase());
+          });
           resolve(containers);
         }
       });
@@ -893,7 +890,7 @@ export class DockerService {
       r.healthy = false;
     }
 
-    r.available = !["exited", "dead", "paused"].includes(c.State.toLowerCase());
+    r.available = c.available;
     return r;
   }
 
