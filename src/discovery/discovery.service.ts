@@ -60,8 +60,41 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  public async saveDefinition(data: any, userEdited: boolean): Promise<any> {
-    return this.serviceDefinitionService.save(data, userEdited);
+  public async saveDefinition(input: any, userEdited: boolean): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.serviceDefinitionService
+        .get(input.containerName)
+        .then((sd) => {
+          if (!sd) {
+            sd = new ServiceDefinition();
+            sd.containerName = input.containerName;
+          }
+          sd.hostname = input.hostname;
+          sd.name = input.name;
+          sd.proxy = input.proxy;
+          sd.public = input.public;
+          sd.iconSlug = input.iconSlug;
+          sd.iconCatalog = input.iconCatalog;
+          sd.archived = input.archived;
+          sd.monitor = input.monitor;
+          sd.uptime = input.uptime;
+          sd.edited = true;
+
+          this.serviceDefinitionService
+            .save(sd, userEdited)
+            .then((r) => {
+              resolve(r);
+            })
+            .catch((err) => {
+              this.logger.error("Error in saveDefinition", err);
+              reject(err);
+            });
+        })
+        .catch((err) => {
+          this.logger.error("Error in saveDefinition", err);
+          reject(err);
+        });
+    });
   }
 
   public async archiveDefinition(

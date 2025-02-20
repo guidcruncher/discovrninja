@@ -17,7 +17,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/:/home/node/config/
       - ./cache/:/home/node/cache/
-      - /home/jcrocker/docker/stacks/:/docker/stacks/:ro
+      - /home/jcrocker/docker/stacks/:/docker/stacks/
       - ./themes:/home/node/themes
     container_name: discovrninja_dev
     hostname: discovrninja-dev

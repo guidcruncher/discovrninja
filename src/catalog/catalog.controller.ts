@@ -118,8 +118,7 @@ export class CatalogController {
     @Query("tab") tab,
     @Res() res,
   ) {
-    this.serviceDefinitionService.get(container).then((definition) => {
-      const result = definition.pop() ?? {};
+    this.serviceDefinitionService.get(container).then((result) => {
       result.project = project;
       if (!result.containerName) {
         result.containerName = container.toLowerCase();

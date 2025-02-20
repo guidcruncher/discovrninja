@@ -11,6 +11,8 @@ export class ServiceDefinition {
   @Prop()
   iconCatalog: string;
 
+  iconUrl: string;
+
   @Prop()
   containerName: string;
 

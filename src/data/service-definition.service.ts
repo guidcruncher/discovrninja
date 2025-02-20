@@ -1,4 +1,5 @@
-import { MongoConnection } from "@data/data.connection";
+import { ServiceDefinitionDocument } from "@data/schemas/servicedefinition.schema";
+import { MongoConnection } from "@data/data.connection"; 
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
@@ -45,6 +46,9 @@ export class ServiceDefinitionService {
         .exec()
         .then((current) => {
           if (current) {
+            if (!current.firstSeen) {
+              data.firstSeen = data.created ?? new Date();
+            }
             data.updated = new Date();
             if (!data.available) {
               if (data.available != current.available) {
@@ -118,14 +122,16 @@ export class ServiceDefinitionService {
     });
   }
 
-  public async get(containerName: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  public async get(containerName: string): Promise<ServiceDefinition> {
+    return new Promise<ServiceDefinition>((resolve, reject) => {
       const old = this.serviceDefModel
-        .find({ containerName: containerName })
+        .findOne({ containerName: containerName })
         .lean()
         .exec()
         .then((r) => {
-          resolve(r);
+var sd: ServiceDefinition = new ServiceDefinition();
+sd = r.value.toObject();
+          resolve(sd);
         })
         .catch((err) => {
           this.logger.error(

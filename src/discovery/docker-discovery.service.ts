@@ -66,6 +66,7 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
               sd.project =
                 container.Config.Labels["com.docker.compose.project"] ?? "";
               sd.available = container.available;
+              sd.firstSeen = container.Created;
 
               if (
                 container.Config.Labels["com.guidcruncher.discovrninja.title"]
