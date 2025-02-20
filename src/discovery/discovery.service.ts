@@ -78,7 +78,6 @@ export class DiscoveryService implements IDiscoveryAgent {
           sd.archived = input.archived;
           sd.monitor = input.monitor;
           sd.uptime = input.uptime;
-          sd.edited = true;
 
           this.serviceDefinitionService
             .save(sd, userEdited)

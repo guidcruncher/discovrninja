@@ -41,9 +41,13 @@ export class ServiceDefinitionService {
     return new Promise((resolve, reject) => {
       this.serviceDefModel
         .findOne({ containerName: data.containerName })
-        .lean()
         .exec()
-        .then((current) => {
+        .then((r) => {
+          let current: ServiceDefinition = null;
+          if (r) {
+            current = r.toObject();
+          }
+
           if (current) {
             if (!current.firstSeen) {
               data.firstSeen = data.created ?? new Date();
@@ -60,12 +64,13 @@ export class ServiceDefinitionService {
               data.lastSeen = new Date();
             }
 
-            if (current.edited && !userEdited) {
+            if (!userEdited) {
               data.proxy = current.proxy;
               data.public = current.public;
               data.iconCatalog = current.iconCatalog;
               data.iconSlug = current.iconSlug;
               data.name = current.name;
+              data.edited = current.edited;
             }
           } else {
             data.created = new Date();
@@ -127,9 +132,18 @@ export class ServiceDefinitionService {
         .findOne({ containerName: containerName })
         .exec()
         .then((r) => {
-          let sd: ServiceDefinition = new ServiceDefinition();
-          sd = r.toObject();
-          resolve(sd);
+          if (r) {
+            let sd: ServiceDefinition = new ServiceDefinition();
+            sd = r.toObject();
+            resolve(sd);
+          } else {
+            this.logger.warn(
+              'Error in serviceDefinition container not found "' +
+                containerName +
+                '"',
+            );
+            reject({});
+          }
         })
         .catch((err) => {
           this.logger.error(
