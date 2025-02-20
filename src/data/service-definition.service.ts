@@ -53,6 +53,10 @@ export class ServiceDefinitionService {
               data.firstSeen = data.created ?? new Date();
             }
             data.updated = new Date();
+            if (data.iconUrl == "" && current.iconUrl != "") {
+              data.iconUrl = current.iconUrl;
+            }
+
             if (!data.available) {
               if (data.available != current.available) {
                 data.lastSeen = new Date();
@@ -85,8 +89,6 @@ export class ServiceDefinitionService {
           if (userEdited) {
             data.edited = true;
           }
-
-          data.iconUrl = "";
 
           this.serviceDefModel
             .findOneAndUpdate({ containerName: data.containerName }, data, {

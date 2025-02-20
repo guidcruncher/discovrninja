@@ -26,6 +26,11 @@ export class DiscoveryController {
     return await this.discoveryService.scan();
   }
 
+  @Get("/refresh")
+  async refreshDefinitions(): Promise<any> {
+    return this.discoveryService.refreshDefinitions();
+  }
+
   @Get("changeicon/:id")
   async changeIcon(
     @Param("id") id,

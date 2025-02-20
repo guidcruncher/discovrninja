@@ -62,8 +62,31 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  public async saveDefinition(input: any, userEdited: boolean): Promise<any> {
+  public async refreshDefinitions(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
+      this.serviceDefinitionService
+        .all(true)
+        .then((definitions) => {
+          const promises: Promise<ServiceDefinition>[] = [];
+          definitions.forEach((def) => {
+            promises.push(this.saveDefinition(def, false));
+          });
+          Promise.allSettled(promises).then((results) => {
+            resolve(results);
+          });
+        })
+        .catch((err) => {
+          this.logger.error("Error in refreshDefinitions", err);
+          reject(err);
+        });
+    });
+  }
+
+  public async saveDefinition(
+    input: ServiceDefinition,
+    userEdited: boolean,
+  ): Promise<ServiceDefinition> {
+    return new Promise<ServiceDefinition>((resolve, reject) => {
       this.serviceDefinitionService
         .get(input.containerName)
         .then((sd) => {
@@ -100,7 +123,7 @@ export class DiscoveryService implements IDiscoveryAgent {
               this.serviceDefinitionService
                 .save(sd, userEdited)
                 .then((r) => {
-                  resolve(r);
+                  resolve(r.toObject() as ServiceDefinition);
                 })
                 .catch((err) => {
                   this.logger.error("Error in saveDefinition", err);
