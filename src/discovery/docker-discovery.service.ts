@@ -1,15 +1,12 @@
-import { createHash } from "node:crypto";
-
+import { CryptoHelper } from "@helpers/cryptohelper";
 import { DockerConnectorService } from "@container/docker-connector.service";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Dockerode = require("dockerode");
 import { DockerService } from "@container/docker.service";
 import { Address } from "@customtypes/address";
-import { DiscoveryEntry } from "@customtypes/discoveryentry";
-import { DiscoveryScan } from "@customtypes/discoveryscan";
-import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
-import { ServiceDefinitionList } from "@customtypes/servicedefinition";
+import { IDiscoveryAgent } from "./idiscoveryagent";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { IpUtilities } from "@helpers/iputilities";
 
 /**
@@ -28,164 +25,122 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
   /**
    * Performs a docker discovery container scan and returns the results
    */
-  public scan(): Promise<ServiceDefinitionList> {
-    return new Promise<ServiceDefinitionList>((resolve, reject) => {
-      this.internalScan()
-        .then((results) => {
-          const services = ServiceDefinitionList.fromDiscoveryScan(results);
-          resolve(services);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  public internalScan(): Promise<DiscoveryScan> {
-    return new Promise<DiscoveryScan>((resolve, reject) => {
+  public scan(): Promise<ServiceDefinition[]> {
+    return new Promise<ServiceDefinition[]>((resolve, reject) => {
       if (!this.configService.get("discovery.docker.enabled")) {
         this.logger.warn("Skipping Docker based discovery");
         reject();
         return;
       }
-      const result = new DiscoveryScan();
+
       const docker = this.connectorService.createDocker();
       docker.listContainers({ all: true, size: false }, (err, containers) => {
         if (err) {
+          this.logger.error("Error in docker discovery scan", err);
           reject(err);
-        } else {
-          const promises: Promise<any>[] = [];
+          return;
+        }
+        let defs: ServiceDefinition[] = [];
+        const promises: Promise<any>[] = [];
 
-          containers.forEach((container) => {
-            promises.push(this.dockerService.getContainer(container.Id));
-          });
+        containers.forEach((container) => {
+          promises.push(this.dockerService.getContainer(container.Id));
+        });
 
-          Promise.allSettled(promises).then((results) => {
-            const addressPromises: Promise<DiscoveryEntry>[] = [];
+        Promise.allSettled(promises).then((results) => {
+          const addressPromises: Promise<ServiceDefinition>[] = [];
 
-            results.forEach((promise) => {
-              if (promise.status == "fulfilled") {
-                const container = promise.value;
-                const networkMode = container.HostConfig.NetworkMode;
-                const record: DiscoveryEntry = {
-                  project: "",
-                  name: container.Config.Labels["homepage.name"],
-                  containerName: container.Name,
-                  hostname: container.Config.Hostname,
-                  iconSlug: "",
-                  iconCatalog: "",
-                  available: container.available,
-                  ports: this.resolvePorts(container.Config.ExposedPorts),
-                  sourceAddress: { network: "", address: "", preferred: false },
-                  targetAddress: container.Config.Labels["homepage.href"],
-                  ipAddresses: this.resolveNetworks(
-                    container.NetworkSettings,
-                    container.HostConfig.NetworkMode,
-                  ),
-                };
+          results.forEach((promise) => {
+            if (promise.status == "fulfilled") {
+              const container = promise.value;
+              const networkMode = container.HostConfig.NetworkMode;
+              let sd: ServiceDefinition = new ServiceDefinition();
+              sd.name = container.Config.Labels["homepage.name"] ?? "";
+              sd.iconSlug == "";
+              sd.iconCatalog = "";
+              sd.containerName = container.Name;
+              sd.hostname = container.Config.Hostname;
+              sd.ipaddress = "";
+              sd.proxy = "";
+              sd.public = container.Config.Labels["homepage.href"] ?? "";
+              sd.project =
+                container.Config.Labels["com.docker.compose.project"] ?? "";
+              sd.available = container.available;
 
-                if (
-                  container.Config.Labels["com.guidcruncher.discovrninja.title"]
-                ) {
-                  record.name =
-                    container.Config.Labels[
-                      "com.guidcruncher.discovrninja.title"
-                    ];
-                }
+              if (
+                container.Config.Labels["com.guidcruncher.discovrninja.title"]
+              ) {
+                sd.name =
+                  container.Config.Labels[
+                    "com.guidcruncher.discovrninja.title"
+                  ];
+              }
 
-                if (
+              if (
+                container.Config.Labels[
+                  "com.guidcruncher.discovrninja.icon_slug"
+                ]
+              ) {
+                sd.iconSlug =
                   container.Config.Labels[
                     "com.guidcruncher.discovrninja.icon_slug"
-                  ]
-                ) {
-                  record.iconSlug =
-                    container.Config.Labels[
-                      "com.guidcruncher.discovrninja.icon_slug"
-                    ];
-                }
+                  ];
+              }
 
-                if (
+              if (
+                container.Config.Labels[
+                  "com.guidcruncher.discovrninja.icon_catalog"
+                ]
+              ) {
+                sd.iconCatalog =
                   container.Config.Labels[
                     "com.guidcruncher.discovrninja.icon_catalog"
-                  ]
-                ) {
-                  record.iconCatalog =
-                    container.Config.Labels[
-                      "com.guidcruncher.discovrninja.icon_catalog"
-                    ];
-                }
+                  ];
+              }
 
-                if (
+              if (
+                container.Config.Labels["com.guidcruncher.discovrninja.public"]
+              ) {
+                sd.public =
                   container.Config.Labels[
                     "com.guidcruncher.discovrninja.public"
-                  ]
-                ) {
-                  record.targetAddress =
-                    container.Config.Labels[
-                      "com.guidcruncher.discovrninja.public"
-                    ];
-                }
-
-                record.project =
-                  container.Config.Labels["com.docker.compose.project"] ?? "";
-
-                if (container.Config.Labels["homepage.targetaddress"]) {
-                  record.targetAddress =
-                    container.Config.Labels["homepage.targetaddress"];
-                }
-
-                if (
-                  container.Config.Labels["com.guidcruncher.discovrninja.proxy"]
-                ) {
-                  record.sourceAddress.address =
-                    container.Config.Labels[
-                      "com.guidcruncher.discovrninja.proxy"
-                    ];
-                  record.sourceAddress.preferred = true;
-                  result.entries.push(record);
-                } else {
-                  if (networkMode.startsWith("container:")) {
-                    const containerId: string = networkMode.split(":")[1];
-                    const parentContainer = results
-                      .filter((a) => a.status == "fulfilled")
-                      .map((b) => b.value)
-                      .find((c) => c.Id == containerId);
-                    record.ipAddresses = this.resolveNetworks(
-                      parentContainer.NetworkSettings,
-                      parentContainer.HostConfig.NetworkMode,
-                    );
-                    addressPromises.push(
-                      this.resolveSourceAddress(record, parentContainer),
-                    );
-                  } else {
-                    addressPromises.push(
-                      this.resolveSourceAddress(record, container),
-                    );
-                  }
-                }
+                  ];
               }
-            });
 
-            Promise.allSettled(addressPromises).then((results) => {
-              const fulfilled = results.filter(
-                (res) => res.status === "fulfilled",
-              ) as PromiseFulfilledResult<DiscoveryEntry>[];
+              if (container.Config.Labels["homepage.targetaddress"]) {
+                sd.public = container.Config.Labels["homepage.targetaddress"];
+              }
 
-              fulfilled.forEach((value) => {
-                result.entries.push(value.value);
-              });
+              if (
+                container.Config.Labels["com.guidcruncher.discovrninja.proxy"]
+              ) {
+                sd.proxy =
+                  container.Config.Labels[
+                    "com.guidcruncher.discovrninja.proxy"
+                  ];
+              } else {
+                sd.proxy = "http://" + sd.hostname;
+              }
 
-              result.entries.sort((a, b) =>
-                a.containerName.localeCompare(b.containerName),
+              const networks = this.resolveNetworks(
+                container.NetworkSettings,
+                container.HostConfig.NetworkMode,
               );
+              sd.ipaddresses = networks.map((n) => {
+                return n.address;
+              });
+              if (sd.ipaddresses.length > 0) {
+                sd.ipaddress = sd.ipaddresses[0];
+              }
 
-              result.hash = createHash("sha256")
-                .update(JSON.stringify(result.entries))
-                .digest("base64");
-              resolve(result);
-            });
+              defs.push(sd);
+            }
           });
-        }
+          defs = defs.sort((a, b) => {
+            return a.containerName.localeCompare(b.containerName);
+          });
+          resolve(defs);
+        });
       });
     });
   }
@@ -195,70 +150,6 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
       return "https:";
     }
     return "http:";
-  }
-
-  private resolveSourceAddress(
-    entry: DiscoveryEntry,
-    container: any,
-  ): Promise<DiscoveryEntry> {
-    const iputils: IpUtilities = new IpUtilities();
-    const networks = this.resolveNetworks(
-      container.NetworkSettings,
-      container.HostConfig.NetworkMode,
-    );
-
-    return new Promise<DiscoveryEntry>((resolve, reject) => {
-      const hostIpAddress = iputils.getHostIpAddress();
-      const result: DiscoveryEntry = entry;
-      if (entry.ports.length == 0) {
-        resolve(result);
-      }
-
-      const promises: Promise<Address>[] = [];
-      const preferredNetwork = networks.find((n) => n.preferred);
-      entry.ports.forEach((port) => {
-        entry.ipAddresses.forEach((addr) => {
-          if (addr.preferred || !preferredNetwork) {
-            const url: Address = {
-              preferred: addr.preferred,
-              address: "",
-              network: addr.network,
-            };
-            const scheme: string = this.getScheme(port);
-            if (addr.address == "") {
-              addr.address = hostIpAddress;
-            }
-
-            if (scheme == "http:") {
-              url.address = "http://" + addr.address + ":" + port;
-              promises.push(iputils.checkUrlLive(url));
-            } else {
-              url.address = scheme + "//" + addr.address + ":" + port;
-              promises.push(iputils.checkUrlLive(url));
-            }
-          }
-        });
-      });
-
-      Promise.any(promises)
-        .then((result) => {
-          entry.sourceAddress = result;
-          if (result.network != "host") {
-            const uri = new URL(result.address);
-            entry.sourceAddress.address =
-              uri.protocol +
-              "//" +
-              entry.hostname +
-              (uri.port == "" ? "" : ":" + uri.port);
-          }
-          resolve(entry);
-        })
-        .catch(() => {
-          entry.sourceAddress.address = "";
-          entry.sourceAddress.network = "";
-          resolve(entry);
-        });
-    });
   }
 
   private resolveNetworks(
@@ -281,21 +172,6 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
         address.address = iputils.getHostIpAddress();
       }
       results.push(address);
-    }
-    return results;
-  }
-
-  private resolvePorts(ports: any): string[] {
-    const results: string[] = [];
-    if (ports) {
-      Object.keys(ports).forEach((key) => {
-        if (!key.includes("udp")) {
-          const currentPort = key.replace("/tcp", "");
-          if (!results.includes(currentPort)) {
-            results.push(currentPort);
-          }
-        }
-      });
     }
     return results;
   }

@@ -1,4 +1,4 @@
-import { ServiceDefinitionList } from "@customtypes/servicedefinition";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
@@ -22,7 +22,7 @@ export class DiscoveryController {
   }
 
   @Get("/scan")
-  async scan(): Promise<ServiceDefinitionList> {
+  async scan(): Promise<ServiceDefinition[]> {
     return await this.discoveryService.scan();
   }
 
@@ -50,7 +50,7 @@ export class DiscoveryController {
 
   @Post("definition/:id")
   async saveDefinition(@Param("id") id, @Body() data): Promise<any> {
-    return this.discoveryService.saveDefinition(id, data);
+    return this.discoveryService.saveDefinition(data, true);
   }
 
   @Post("project/definition/:id")

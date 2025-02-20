@@ -1,5 +1,5 @@
 import { ContainerCatalog, Template } from "@catalog/portainer-template.types";
-import { ServiceDefinition } from "@customtypes/servicedefinition";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ImageStorageStats } from "@data/dto/image-storagestats.dto";
 import { Job } from "@data/dto/job.dto";
 import { Network } from "@data/dto/network.dto";

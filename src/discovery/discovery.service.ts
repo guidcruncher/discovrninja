@@ -1,9 +1,5 @@
-import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
-import {
-  ServiceDefinition,
-  ServiceDefinitionList,
-} from "@customtypes/servicedefinition";
-import { ServiceDefinitionDto } from "@data/dto/servicedefinition.dto";
+import { IDiscoveryAgent } from "./idiscoveryagent";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { GitHelper } from "@helpers/githelper";
 import { IconCDNService } from "@icon/icon-cdn.service";
@@ -64,8 +60,8 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  public async saveDefinition(containerName: string, data: any): Promise<any> {
-    return this.serviceDefinitionService.save(containerName, data);
+  public async saveDefinition(data: any, userEdited: boolean): Promise<any> {
+    return this.serviceDefinitionService.save(data, userEdited);
   }
 
   public async archiveDefinition(
@@ -193,92 +189,25 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  public async storeInMongo(list: ServiceDefinitionList): Promise<boolean> {
+  private async storeInMongo(list: ServiceDefinition[]): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const promises = [];
-      const changes = [];
+      var bufferCommands = mongoose.get("bufferCommands");
+      mongoose.set("bufferCommands", false);
+      list.forEach((sd) => {
+        sd.lastPolled = new Date();
+        promises.push(this.serviceDefinitionService.save(sd, false));
+      });
 
-      const old = this.serviceDefModel
-        .find()
-        .exec()
-        .then((icons) => {
-          list.services.forEach((service) => {
-            const dto: ServiceDefinitionDto = new ServiceDefinitionDto();
-            dto.name = service.name;
-            dto.containerName = service.containerName.toLowerCase();
-            dto.hostname = service.hostname;
-            dto.ipaddress = service.ipaddress;
-            dto.proxy = service.proxy;
-            dto.archived = service.archived;
-            dto.iconCatalog = service.iconCatalog;
-            dto.iconSlug = service.iconSlug;
-            dto.public = service.public;
-            dto.project = service.project;
-            dto.available = service.available;
-            dto.edited = false;
-            dto.downtime = 0;
-            dto.firstSeen = service.firstSeen ?? new Date();
-            dto.lastPolled = new Date();
-            if (service.available) {
-              dto.lastSeen = new Date();
-            }
-
-            dto.created = new Date();
-            const ico = icons.find((f) => {
-              return (
-                f.containerName.toLowerCase() == dto.containerName.toLowerCase()
-              );
-            });
-            if (ico) {
-              dto.downtime = ico.downtime ?? 0;
-              dto.lastPolled = new Date();
-              dto.name = ico.name;
-              dto.public = ico.public;
-              dto.edited = ico.edited;
-              dto.updated = new Date();
-              dto.created = ico.created;
-              dto.iconSlug = ico.iconSlug;
-              dto.iconCatalog = ico.iconCatalog;
-              dto.archived = ico.archived;
-              dto.firstSeen = ico.firstSeen ?? ico.created;
-              dto.lastPolled = new Date();
-              if (!service.available) {
-                if (dto.lastPolled) {
-                  dto.downtime +=
-                    (new Date().getTime() - dto.lastPolled.getTime()) / 1000;
-                }
-              } else {
-                if (!dto.firstSeen) {
-                  dto.firstSeen = new Date();
-                }
-              }
-            }
-            promises.push(
-              new Promise((resolve, reject) => {
-                this.ensureIcon(dto).then((r) => {
-                  this.serviceDefinitionModel
-                    .findOneAndUpdate(
-                      { containerName: dto.containerName.toLowerCase() },
-                      dto,
-                      { upsert: true },
-                    )
-                    .then((res) => {
-                      resolve(res);
-                    });
-                });
-              }),
-            );
-          });
-
-          mongoose.set("bufferCommands", false);
-          Promise.allSettled(promises)
-            .then((result) => {
-              resolve(true);
-            })
-            .catch((err) => {
-              this.logger.error("Error saving ServiceDefinition", err);
-              reject(err);
-            });
+      Promise.allSettled(promises)
+        .then((result) => {
+          mongoose.set("bufferCommands", bufferCommands);
+          resolve(true);
+        })
+        .catch((err) => {
+          mongoose.set("bufferCommands", bufferCommands);
+          this.logger.error("Error saving ServiceDefinition", err);
+          reject(err);
         });
     });
   }
@@ -298,22 +227,21 @@ export class DiscoveryService implements IDiscoveryAgent {
     });
   }
 
-  scan(): Promise<ServiceDefinitionList> {
-    return new Promise<ServiceDefinitionList>((resolve, reject) => {
-      const result: ServiceDefinitionList = new ServiceDefinitionList();
-      const promises = [];
-      result.created = new Date();
+  scan(): Promise<ServiceDefinition[]> {
+    return new Promise<ServiceDefinition[]>((resolve, reject) => {
+      let result: ServiceDefinition[] = [];
+      const promises: Promise<ServiceDefinition[]>[] = [];
       promises.push(this.dockerDiscoveryService.scan());
-      promises.push(this.fileDiscoveryService.scan());
+
       Promise.allSettled(promises)
         .then((results) => {
           results.forEach((r) => {
             if (r.status == "fulfilled") {
-              const services = r.value.services;
-              result.services = result.services.concat(services);
+              const services: ServiceDefinition[] = r.value;
+              result = result.concat(services);
             }
           });
-          result.services.sort((a, b) => {
+          result = result.sort((a, b) => {
             if (a.name) {
               return a.name.localeCompare(b.name);
             }

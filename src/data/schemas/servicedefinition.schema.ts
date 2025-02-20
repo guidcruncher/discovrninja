@@ -1,4 +1,4 @@
-import { ServiceDefinition } from "@customtypes/servicedefinition";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 

@@ -1,4 +1,4 @@
-import { ServiceDefinitionList } from "@customtypes/servicedefinition";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 
 /**
  * Represents a Service discovery agent
@@ -7,7 +7,7 @@ interface IDiscoveryAgent {
   /**
    * Scan function
    */
-  scan(): Promise<ServiceDefinitionList>;
+  scan(): Promise<ServiceDefinition[]>;
 }
 
 export { IDiscoveryAgent };

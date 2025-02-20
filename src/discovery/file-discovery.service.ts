@@ -1,5 +1,5 @@
-import { IDiscoveryAgent } from "@customtypes/idiscoveryagent";
-import { ServiceDefinitionList } from "@customtypes/servicedefinition";
+import { IDiscoveryAgent } from "./idiscoveryagent";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as fs from "fs";
@@ -12,9 +12,10 @@ export class FileDiscoveryService implements IDiscoveryAgent {
 
   constructor(private configService: ConfigService) {}
 
-  private readFile(name: string): ServiceDefinitionList {
-    let result: ServiceDefinitionList;
+  private readFile(name: string): ServiceDefinition[] {
+    let result: ServiceDefinition[];
     const filename = path.resolve(name);
+    7;
 
     this.logger.log("Reading services from", filename);
     if (fs.existsSync(filename)) {
@@ -22,7 +23,7 @@ export class FileDiscoveryService implements IDiscoveryAgent {
         string,
         any
       >;
-      result = values as ServiceDefinitionList;
+      result = values as ServiceDefinition[];
     } else {
       this.logger.error("Service file not found", filename);
     }
@@ -30,9 +31,9 @@ export class FileDiscoveryService implements IDiscoveryAgent {
     return result;
   }
 
-  public scan(): Promise<ServiceDefinitionList> {
-    return new Promise<ServiceDefinitionList>((resolve, reject) => {
-      let result: ServiceDefinitionList = new ServiceDefinitionList();
+  public scan(): Promise<ServiceDefinition[]> {
+    return new Promise<ServiceDefinition[]>((resolve, reject) => {
+      let result: ServiceDefinition[] = [];
       if (!this.configService.get("discovery.file.enabled")) {
         this.logger.warn("Skipping file based discovery");
         reject();
@@ -40,7 +41,7 @@ export class FileDiscoveryService implements IDiscoveryAgent {
       }
       const filename = this.configService.get("discovery.file.filename");
       result = this.readFile(filename);
-      if (!result.services) {
+      if (!result) {
         this.logger.warn("No services defined in file.");
         reject();
       }

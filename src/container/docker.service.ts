@@ -4,7 +4,7 @@ import { ContainerCreateOptionsHelper } from "@helpers/containercreateoptionshel
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Dockerode = require("dockerode");
-import { ServiceDefinition } from "@customtypes/servicedefinition";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ContainerStats } from "@data/schemas/containerstats.schema";
 import { InjectModel } from "@nestjs/mongoose";
 import { FancyAnsi } from "fancy-ansi";

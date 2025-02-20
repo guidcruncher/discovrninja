@@ -1,4 +1,3 @@
-import { ServiceDefinition } from "@customtypes/servicedefinition";
 import { MongoConnection } from "@data/data.connection";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -6,8 +5,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { InjectConnection } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Connection } from "mongoose";
-
-import { ServiceDefinitionDto } from "./dto/servicedefinition.dto";
+import { ServiceDefinition } from "./dto/servicedefinition.dto";
 
 @Injectable()
 export class ServiceDefinitionService {
@@ -35,59 +33,54 @@ export class ServiceDefinitionService {
     });
   }
 
-  public async save(containerName: string, data: any): Promise<any> {
+  public async save(
+    data: ServiceDefinition,
+    userEdited: boolean,
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
-      const old = this.serviceDefModel
-        .find({ containerName: containerName })
+      this.serviceDefModel
+        .findOne({ containerName: data.containerName })
+        .lean()
         .exec()
-        .then((r) => {
-          const dto: ServiceDefinitionDto = new ServiceDefinitionDto();
-          if (r && r.length > 0) {
-            dto.monitor = r[0].monitor ?? true;
-            dto.uptime = r[0].uptime ?? true;
-            dto.project = r[0].project;
-            dto.firstSeen = r[0].firstSeen;
-            dto.ipaddress = r[0].ipaddress;
-            dto.created = r[0].created;
-            dto.archived = r[0].archived;
-            dto.lastSeen = r[0].lastSeen;
-            dto.lastPolled = r[0].lastPolled;
-            dto.downtime = r[0].downtime;
-            dto.available = r[0].available;
-            dto.updated = new Date();
-          } else {
-            dto.created = new Date();
-            dto.downtime = 0;
-          }
-
-          dto.edited = true;
-          dto.containerName = data.containerName.toLowerCase();
-          dto.hostname = data.hostname;
-          dto.name = data.name;
-          dto.proxy = data.proxy;
-          dto.public = data.public;
-          dto.iconSlug = data.iconSlug;
-          dto.iconCatalog = data.iconCatalog;
-          dto.archived = data.archived;
-          dto.project = data.project;
-          dto.monitor = data.monitor;
-          dto.uptime = data.uptime;
-          if (!dto.firstSeen) {
-            dto.firstSeen = dto.created;
-          }
-          if (data.available != null) {
-            if (data.available == false && dto.available != data.availabxle) {
+        .then((current) => {
+          if (current) {
+            data.updated = new Date();
+            if (!data.available) {
+              if (data.available != current.available) {
+                data.lastSeen = new Date();
+              }
+              if (!data.firstSeen) {
+                data.firstSeen = data.created ?? new Date();
+              }
+            } else {
               data.lastSeen = new Date();
             }
-            dto.available = data.available;
+
+            if (current.edited && !userEdited) {
+              data.proxy = current.proxy;
+              data.public = current.public;
+              data.iconCatalog = current.iconCatalog;
+              data.iconSlug = current.iconSlug;
+              data.name = current.name;
+            }
+          } else {
+            data.created = new Date();
+            if (data.available) {
+              data.lastSeen = new Date();
+              if (!data.firstSeen) {
+                data.firstSeen = new Date();
+              }
+            }
+          }
+
+          if (userEdited) {
+            data.edited = true;
           }
 
           this.serviceDefModel
-            .findOneAndUpdate(
-              { containerName: dto.containerName.toLowerCase() },
-              dto,
-              { upsert: true },
-            )
+            .findOneAndUpdate({ containerName: data.containerName }, data, {
+              upsert: true,
+            })
             .then((result) => {
               resolve(result);
             })
@@ -97,7 +90,10 @@ export class ServiceDefinitionService {
             });
         })
         .catch((err) => {
-          this.logger.error("Error loading definition to save", err);
+          this.logger.error(
+            "Error during saving definition fetching previous verdion",
+            err,
+          );
           reject(err);
         });
     });
