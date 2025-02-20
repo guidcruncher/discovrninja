@@ -107,8 +107,18 @@ this["app"]["templates"]["admindash"] = Handlebars.template({
       alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0, "sysinfo") : depth0)) != null ? lookupProperty(stack1, "info") : stack1)) != null ? lookupProperty(stack1, "ContainersPaused") : stack1), depth0)) +
       "</td>\n                </tr>\n                <tr>\n                  <td>Containers Stopped</td>\n                  <td>" +
       alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0, "sysinfo") : depth0)) != null ? lookupProperty(stack1, "info") : stack1)) != null ? lookupProperty(stack1, "ContainersStopped") : stack1), depth0)) +
-      "</td>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col\" style=\"padding-top:5px ! important;\">\n      <div class=\"card\" style=\"padding:5px;width: 20rem;\">\n        <div class=\"card-body\">\n          <object style=\"background:transparent;pointer-events:none;\" data=\"/assets/img/clock.svg\" type=\"image/svg+xml\">\n          </object>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
+      "</td>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col\" style=\"padding-top:5px ! important;\">\n      <div class=\"card\" style=\"padding:5px;width: 20rem;\">\n        <div class=\"card-body\">\n" +
+      ((stack1 = container.invokePartial(lookupProperty(partials, "analogclock"), depth0, {
+        "name": "analogclock",
+        "data": data,
+        "indent": "          ",
+        "helpers": helpers,
+        "partials": partials,
+        "decorators": container.decorators
+      })) != null ? stack1 : "") +
+      "        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
   },
+  "usePartial": true,
   "useData": true
 });
 this["app"]["templates"]["analogclock"] = Handlebars.template({
