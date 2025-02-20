@@ -91,6 +91,7 @@ export class IconService {
           })
           .catch((err) => {
             this.logger.error("Error resolving local icon", err);
+            reject(err);
           });
       } else {
         resolve(this.resourceSourceUrl(catalog, slug));
