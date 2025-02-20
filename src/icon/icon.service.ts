@@ -16,7 +16,7 @@ export interface IconResult {
 
 @Injectable()
 export class IconService {
-  private logger: Logger = new  Logger(IconService.name);
+  private logger: Logger = new Logger(IconService.name);
 
   constructor(
     private configService: ConfigService,
@@ -82,7 +82,7 @@ export class IconService {
     });
   }
 
-  resolveIconUrl(catalog: string,  slug: string): Promise<string> {
+  resolveIconUrl(catalog: string, slug: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       if (this.configService.get("desktop.enableLocalIconCache")) {
         this.ensureLocalIcon(catalog, slug)

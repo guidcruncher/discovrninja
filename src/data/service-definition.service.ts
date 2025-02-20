@@ -1,5 +1,4 @@
-import { ServiceDefinitionDocument } from "@data/schemas/servicedefinition.schema";
-import { MongoConnection } from "@data/data.connection"; 
+import { MongoConnection } from "@data/data.connection";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
@@ -126,11 +125,10 @@ export class ServiceDefinitionService {
     return new Promise<ServiceDefinition>((resolve, reject) => {
       const old = this.serviceDefModel
         .findOne({ containerName: containerName })
-        .lean()
         .exec()
         .then((r) => {
-var sd: ServiceDefinition = new ServiceDefinition();
-sd = r.value.toObject();
+          let sd: ServiceDefinition = new ServiceDefinition();
+          sd = r.toObject();
           resolve(sd);
         })
         .catch((err) => {
