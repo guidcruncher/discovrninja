@@ -1,5 +1,4 @@
 import { MongoConnection } from "@data/data.connection";
-import { IconService } from "@icon/icon.service";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
@@ -16,7 +15,6 @@ export class ServiceDefinitionService {
   constructor(
     private mongoConnection: MongoConnection,
     private configService: ConfigService,
-    private iconService: IconService,
     @InjectConnection() private connection: Connection,
     @InjectModel(ServiceDefinition.name)
     private serviceDefModel: Model<ServiceDefinition>,
@@ -90,36 +88,17 @@ export class ServiceDefinitionService {
 
           data.iconUrl = "";
 
-          const writeRecord = () => {
-            this.serviceDefModel
-              .findOneAndUpdate({ containerName: data.containerName }, data, {
-                upsert: true,
-              })
-              .then((result) => {
-                resolve(result);
-              })
-              .catch((err) => {
-                this.logger.error("Error saving definition", err);
-                reject(err);
-              });
-          };
-
-          if (data.iconCatalog != "" && data.iconSlug != "") {
-            this.iconService
-              .resolveIconUrl(data.iconCatalog, data.iconSlug)
-              .then((iconUrl) => {
-                data.iconUrl = "";
-                writeRecord();
-              })
-              .catch((err) => {
-                this.logger.error("Error resolving Icon Url on save", err);
-                data.iconUrl = "";
-                writeRecord();
-              });
-          } else {
-            data.iconUrl = "";
-            writeRecord();
-          }
+          this.serviceDefModel
+            .findOneAndUpdate({ containerName: data.containerName }, data, {
+              upsert: true,
+            })
+            .then((result) => {
+              resolve(result);
+            })
+            .catch((err) => {
+              this.logger.error("Error saving definition", err);
+              reject(err);
+            });
         })
         .catch((err) => {
           this.logger.error(

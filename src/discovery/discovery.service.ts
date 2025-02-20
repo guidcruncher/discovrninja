@@ -2,6 +2,7 @@ import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { GitHelper } from "@helpers/githelper";
 import { IconCDNService } from "@icon/icon-cdn.service";
+import { IconService } from "@icon/icon.service";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
@@ -22,6 +23,7 @@ export class DiscoveryService implements IDiscoveryAgent {
   constructor(
     private adapterService: AdapterService,
     private iconCDNService: IconCDNService,
+    private iconService: IconService,
     private configService: ConfigService,
     private dockerDiscoveryService: DockerDiscoveryService,
     private fileDiscoveryService: FileDiscoveryService,
@@ -78,15 +80,31 @@ export class DiscoveryService implements IDiscoveryAgent {
           sd.archived = input.archived;
           sd.monitor = input.monitor;
           sd.uptime = input.uptime;
-
-          this.serviceDefinitionService
-            .save(sd, userEdited)
-            .then((r) => {
-              resolve(r);
+          this.iconService
+            .resolveIconUrl(sd.iconCatalog, sd.iconSlug)
+            .then((iconUrl) => {
+              this.iconUrl = iconUrl;
+              this.serviceDefinitionService
+                .save(sd, userEdited)
+                .then((r) => {
+                  resolve(r);
+                })
+                .catch((err) => {
+                  this.logger.error("Error in saveDefinition", err);
+                  reject(err);
+                });
             })
             .catch((err) => {
-              this.logger.error("Error in saveDefinition", err);
-              reject(err);
+              this.logger.error("Error in resolveIconUrl during save", err);
+              this.serviceDefinitionService
+                .save(sd, userEdited)
+                .then((r) => {
+                  resolve(r);
+                })
+                .catch((err) => {
+                  this.logger.error("Error in saveDefinition", err);
+                  reject(err);
+                });
             });
         })
         .catch((err) => {

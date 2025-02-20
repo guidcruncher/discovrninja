@@ -1,7 +1,7 @@
 import { MongoConnection } from "@data/data.connection";
 import { DataModule } from "@data/data.module";
 import { Schemas } from "@data/data.schemas";
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 
 import { IconController } from "./icon.controller";
 import { IconService } from "./icon.service";
