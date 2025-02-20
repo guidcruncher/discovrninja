@@ -1,6 +1,6 @@
 import { StringBuilder } from "@customtypes/stringbuilder";
-import { ServiceDefinitionService } from "@data/service-definition.service";
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
+import { ServiceDefinitionService } from "@data/service-definition.service";
 import { CryptoHelper } from "@helpers/cryptohelper";
 import { FluentHttpClient } from "@helpers/fluenthttpclient";
 import { GitHelper } from "@helpers/githelper";
@@ -267,17 +267,17 @@ export class PortainerService {
           this.iconCDNService
             .query(cfg.template.name, true)
             .then((icon) => {
-              var def = new ServiceDefinition();
-                def.name= cfg.template.name;
-                def.containerName= cfg.template.name;
-                def.hostname= cfg.template.name;
-                def.proxy= dockerRun.serviceUrl;
-                def.public= dockerRun.publicUrl;
-                def.project= project;
-                def.iconSlug= cfg.template.name;
-                def.iconCatalog= "";
-                def.archived= false;
-                def.available= false;
+              const def = new ServiceDefinition();
+              def.name = cfg.template.name;
+              def.containerName = cfg.template.name;
+              def.hostname = cfg.template.name;
+              def.proxy = dockerRun.serviceUrl;
+              def.public = dockerRun.publicUrl;
+              def.project = project;
+              def.iconSlug = cfg.template.name;
+              def.iconCatalog = "";
+              def.archived = false;
+              def.available = false;
               if (icon) {
                 if (icon.length > 0) {
                   def.iconSlug = icon[0].slug;

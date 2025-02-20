@@ -1,4 +1,3 @@
-import { IDiscoveryAgent } from "./idiscoveryagent";
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { GitHelper } from "@helpers/githelper";
@@ -14,6 +13,7 @@ import * as path from "path";
 import { AdapterService } from "./adapter.service";
 import { DockerDiscoveryService } from "./docker-discovery.service";
 import { FileDiscoveryService } from "./file-discovery.service";
+import { IDiscoveryAgent } from "./idiscoveryagent";
 
 @Injectable()
 export class DiscoveryService implements IDiscoveryAgent {
@@ -192,7 +192,7 @@ export class DiscoveryService implements IDiscoveryAgent {
   private async storeInMongo(list: ServiceDefinition[]): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const promises = [];
-      var bufferCommands = mongoose.get("bufferCommands");
+      const bufferCommands = mongoose.get("bufferCommands");
       mongoose.set("bufferCommands", false);
       list.forEach((sd) => {
         sd.lastPolled = new Date();

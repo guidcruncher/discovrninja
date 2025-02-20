@@ -1,8 +1,8 @@
 import { ContainerCatalog, Template } from "@catalog/portainer-template.types";
-import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ImageStorageStats } from "@data/dto/image-storagestats.dto";
 import { Job } from "@data/dto/job.dto";
 import { Network } from "@data/dto/network.dto";
+import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { Volume } from "@data/dto/volume.dto";
 import { VolumeStorageStats } from "@data/dto/volume-storagestats.dto";
 import { Webhook } from "@data/dto/webhook.dto";

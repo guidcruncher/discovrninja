@@ -1,10 +1,11 @@
-import { IDiscoveryAgent } from "./idiscoveryagent";
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as fs from "fs";
 import * as yaml from "js-yaml";
 import * as path from "path";
+
+import { IDiscoveryAgent } from "./idiscoveryagent";
 
 @Injectable()
 export class FileDiscoveryService implements IDiscoveryAgent {
@@ -15,7 +16,6 @@ export class FileDiscoveryService implements IDiscoveryAgent {
   private readFile(name: string): ServiceDefinition[] {
     let result: ServiceDefinition[];
     const filename = path.resolve(name);
-    7;
 
     this.logger.log("Reading services from", filename);
     if (fs.existsSync(filename)) {

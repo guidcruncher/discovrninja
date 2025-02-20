@@ -1,13 +1,13 @@
-import { CryptoHelper } from "@helpers/cryptohelper";
 import { DockerConnectorService } from "@container/docker-connector.service";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Dockerode = require("dockerode");
 import { DockerService } from "@container/docker.service";
 import { Address } from "@customtypes/address";
-import { IDiscoveryAgent } from "./idiscoveryagent";
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { IpUtilities } from "@helpers/iputilities";
+
+import { IDiscoveryAgent } from "./idiscoveryagent";
 
 /**
  * Docker service discovery
@@ -54,9 +54,9 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
             if (promise.status == "fulfilled") {
               const container = promise.value;
               const networkMode = container.HostConfig.NetworkMode;
-              let sd: ServiceDefinition = new ServiceDefinition();
+              const sd: ServiceDefinition = new ServiceDefinition();
               sd.name = container.Config.Labels["homepage.name"] ?? "";
-              sd.iconSlug == "";
+              sd.iconSlug = "";
               sd.iconCatalog = "";
               sd.containerName = container.Name;
               sd.hostname = container.Config.Hostname;
