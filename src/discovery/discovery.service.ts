@@ -1,8 +1,8 @@
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { GitHelper } from "@helpers/githelper";
-import { IconCDNService } from "@icon/icon-cdn.service";
 import { IconService } from "@icon/icon.service";
+import { IconCDNService } from "@icon/icon-cdn.service";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
@@ -83,7 +83,7 @@ export class DiscoveryService implements IDiscoveryAgent {
           this.iconService
             .resolveIconUrl(sd.iconCatalog, sd.iconSlug)
             .then((iconUrl) => {
-              this.iconUrl = iconUrl;
+              sd.iconUrl = iconUrl;
               this.serviceDefinitionService
                 .save(sd, userEdited)
                 .then((r) => {
@@ -96,6 +96,7 @@ export class DiscoveryService implements IDiscoveryAgent {
             })
             .catch((err) => {
               this.logger.error("Error in resolveIconUrl during save", err);
+              sd.iconUrl = "";
               this.serviceDefinitionService
                 .save(sd, userEdited)
                 .then((r) => {

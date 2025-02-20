@@ -1,6 +1,6 @@
 import { MongoConnection } from "@data/data.connection";
 import { Schemas } from "@data/data.schemas";
-import { forwardRef, Module } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import { NetworkService } from "./network.service";
