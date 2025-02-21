@@ -1,6 +1,6 @@
 FROM guidcruncher/node-base:lts-alpine AS base
  
-RUN apk add --no-cache jq git@2.48.1-r0
+RUN apk add --no-cache jq git=2.48.1-r0
 
 RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/dist /home/node/config /home/node/config /home/node/cache /home/node/.defaults
 
