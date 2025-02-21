@@ -32,5 +32,5 @@ ENV STARTDATE=0
 
 # RUN npx nest start -b swc -w
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["npx", "nest", "start", "-b", "swc", "-w" ]
 
