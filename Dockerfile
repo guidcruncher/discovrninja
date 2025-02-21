@@ -4,25 +4,19 @@ RUN apk add --no-cache jq git
 
 RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/app /home/node/config /home/node/config /home/node/cache /home/node/.defaults
 
-FROM base AS development
-
-WORKDIR /home/node/build
-
-COPY package*.json ./
-
-RUN npm ci
-
-COPY . .
-
 FROM base AS build
 
 WORKDIR /home/node/build
 
 COPY package*.json ./
-COPY --from=development /home/node/build/node_modules ./node_modules
+
+RUN npm ci --no-audit --silent --cache ./.npm --prefer-offline
+
 COPY . .
+
 RUN npx gulp js
-RUN npm run build
+
+RUN npm run buildprod
 
 COPY ./provisioning/userpasswd /home/node/userpasswd
 COPY ./provisioning/useradd /home/node/useradd
@@ -38,7 +32,8 @@ RUN cp ./package*.json /home/node/app
 RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
 
 WORKDIR /home/node/app/
-RUN npm ci --omit=dev --only=production && npm cache clean --force
+RUN npm ci --omit=dev --only=production --no-audit --silent --cache /home/node/build/.npm --prefer-offline
+RUN npm cache clean --force
 RUN date +%s > /home/node/app/builddate
 
 FROM base AS production

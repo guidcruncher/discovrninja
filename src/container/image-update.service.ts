@@ -21,9 +21,10 @@ export class ImageUpdateService {
       "repositories.json",
     );
     if (!fs.existsSync(filename)) {
+      this.logger.error("Repositories not found at " + filename);
       return [];
     }
-
+    this.logger.debug("Reading repositories from " + filename);
     const json = fs.readFileSync(filename);
     return JSON.parse(json.toString("utf8")) as [];
   }
@@ -48,6 +49,7 @@ export class ImageUpdateService {
   private parseRef(ref: string): any {
     const fullRef: string = this.getFullRef(ref);
     const parts = fullRef.split("/");
+    this.logger.debug('parseRef => "' + ref + '" into "' + fullRef + '"');
     const result = {
       ref: fullRef,
       host: "",
@@ -66,6 +68,9 @@ export class ImageUpdateService {
       result.tag = tagparts[1];
     }
 
+    this.logger.debug(
+      'parseRef => Parsed ref "' + ref + '" into ' + JSON.stringify(result),
+    );
     return result;
   }
 
@@ -93,8 +98,9 @@ export class ImageUpdateService {
   private getRepositorySettings(ref: string): any {
     const repo = this.parseRef(ref);
     const repositories: any[] = this.readRepositories();
+    this.logger.debug("getRepositorySettings for " + ref + " " + repo.host);
     const match: any = repositories.find((r) => {
-      return r.hostMatches.includes(repo.host);
+      return r.hostMatches.includes(repo.host.toLowerCase().trim());
     });
 
     if (!match) {
