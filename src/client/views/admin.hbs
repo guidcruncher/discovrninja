@@ -10,7 +10,7 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade {{#when tab "eq" 0}}show active{{/when}}" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab" tabindex="0">
-    <div data-initalrender="{{#when tab "eq" 0}}true{{else}}false{{/when}}" id="admindash" class="hbs-template" data-url="/api/admin/dashboard" data-template="admindash"></div>
+    <div data-initalrender="{{#when tab "eq" 0}}true{{else}}false{{/when}}" id="admindash" class="hbs-template" data-url="/api/admin/dashboard" data-template="admindash" onrender="analogClock('dashclock', '');"></div>
   </div>
   <div class="tab-pane fade {{#when tab "eq" 1}}show active{{/when}}" id="nav-container" role="tabpanel" aria-labelledby="nav-container-tab" tabindex="0">
     <div data-initalrender="{{#when tab "eq" 1}}true{{else}}false{{/when}}" onrender="checkForImageUpdates();return false;" id="hbsps" class="hbs-template" data-url="/api/docker/ps" data-template="dockerps"></div>
