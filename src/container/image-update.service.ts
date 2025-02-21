@@ -79,6 +79,7 @@ export class ImageUpdateService {
     if (repo.repo.startsWith("library/")) {
       pkg = repo.package;
     }
+if (!s) {return "";}
     return s
       .replaceAll("{host}", repo.host)
       .replaceAll("{repo}", repo.repo)
@@ -113,7 +114,8 @@ export class ImageUpdateService {
       match.manifest.outputFormat,
       repo,
     );
-    return match;
+    return match;e
+
   }
 
   public updateCheck(ref: string) {

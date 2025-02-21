@@ -14,7 +14,7 @@ RUN npm ci --no-audit --silent --cache ./.npm --prefer-offline
 
 COPY . .
 
-RUN npx gulp js
+RUN npx gulp partials templates js
 
 RUN npm run buildprod
 
