@@ -2,7 +2,7 @@ FROM guidcruncher/node-base:lts-alpine AS base
  
 RUN apk add --no-cache jq git
 
-RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/app /home/node/config /home/node/config /home/node/cache /home/node/.defaults
+RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/dist /home/node/config /home/node/config /home/node/cache /home/node/.defaults
 
 FROM base AS build
 
@@ -14,7 +14,7 @@ RUN npm ci --no-audit --silent --cache ./.npm --prefer-offline
 
 COPY . .
 
-RUN npx gulp js
+RUN npx gulp partials templates js
 
 RUN npm run buildprod
 
@@ -27,20 +27,20 @@ COPY ./provisioning/defaults/ /home/node/.defaults/
 ENV NODE_ENV=production
 ARG NODE_ENV=production
 RUN rm ./dist/client/public/js/lib ./dist/client/public/css/lib -r
-RUN cp ./dist/* /home/node/app -r
-RUN cp ./package*.json /home/node/app
+RUN cp ./dist/* /home/node/dist -r
+RUN cp ./package*.json /home/node/dist
 RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
 
-WORKDIR /home/node/app/
+WORKDIR /home/node/dist/
 RUN npm ci --omit=dev --only=production --no-audit --silent --cache /home/node/build/.npm --prefer-offline
 RUN npm cache clean --force
-RUN date +%s > /home/node/app/builddate
+RUN date +%s > /home/node/dist/builddate
 
 FROM base AS production
 
-WORKDIR /home/node/app
+WORKDIR /home/node/dist
 
-COPY --from=build /home/node/app .
+COPY --from=build /home/node/dist .
 
 WORKDIR /hone/node
 

@@ -9,11 +9,7 @@ export class Handlebars {
   }
 
   public getClientBase() {
-    if (process.env.IN_DOCKER == "true") {
-      return path.join(process.cwd(), "client");
-    }
-
-    return path.join(process.cwd(), "src", "client");
+    return process.env.CLIENT_BASE;
   }
 
   public getPartials() {

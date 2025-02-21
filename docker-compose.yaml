@@ -5,20 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-dev
-    develop:
-      watch:
-        - path: ./src/client
-          x-initialSync: true
-          target: /home/node/app/client
-          action: sync
     networks:
       proxy:
     volumes:
+      - .:/home/node/
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/:/home/node/config/
-      - ./cache/:/home/node/cache/
       - /home/jcrocker/docker/stacks/:/docker/stacks/
-      - ./themes:/home/node/themes
     container_name: discovrninja_dev
     hostname: discovrninja-dev
     restart: unless-stopped

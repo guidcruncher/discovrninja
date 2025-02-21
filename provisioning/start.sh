@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "Setting up directories"
-cd /home/node/app
+cd /home/node/dist
 mkdir -p /home/node/config/dnsmasq.d
 mkdir -p /home/node/config/caddyfile.d
 
@@ -45,7 +45,7 @@ if [ ! -f /home/node/config/services.yaml ]; then
 fi
 
 echo "Setting environment variables"
-export CLIENT_BASE=/home/node/app/client
+export CLIENT_BASE=/home/node/dist/client
 export CACHE_BASE=/home/node/cache 
 export NODE_CONFIG_DIR=/home/node/config
 export IN_DOCKER=false
@@ -61,17 +61,17 @@ fi
 
 echo "Determining build version"
 export PACKAGE_VERSION=Development
-if [ -f /home/node/app/package.json ]; then
- export PACKAGE_VERSION=$(cat /home/node/app/package.json | jq ".version" -r)
+if [ -f /home/node/dist/package.json ]; then
+ export PACKAGE_VERSION=$(cat /home/node/dist/package.json | jq ".version" -r)
 fi
 
 echo "Determining build date"
 export BUILDDATE=$(date +%s)
-if [ -f /home/node/app/builddate ]; then
-export BUILDDATE=$(cat /home/node/app/builddate)
+if [ -f /home/node/dist/builddate ]; then
+export BUILDDATE=$(cat /home/node/dist/builddate)
 fi
 
 echo "Starting server process"
 export STARTDATE=$(date +%s)
-cd /home/node/app
+cd /home/node/dist
 node main --config=/home/node/config/config.yaml
