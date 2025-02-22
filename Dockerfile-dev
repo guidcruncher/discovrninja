@@ -7,8 +7,8 @@ FROM base AS build
 WORKDIR /home/node/
 
 COPY package*.json ./
-
-RUN npm i --no-audit --prefer-offline  --progress=false  --cache ./.npm
+COPY ./.npm ./
+RUN npm i --no-fund --no-audit --prefer-offline  --progress=false  --cache ./.npm
 
 COPY . .
 

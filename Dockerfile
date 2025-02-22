@@ -10,7 +10,7 @@ WORKDIR /home/node/build
 
 COPY package*.json ./
 
-RUN npm ci --no-audit --silent --cache ./.npm --prefer-offline
+RUN npm ci --no-fund --no-audit --silent --cache ./.npm --prefer-offline
 
 COPY . .
 
@@ -32,7 +32,7 @@ RUN cp ./package*.json /home/node/dist
 RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
 
 WORKDIR /home/node/dist/
-RUN npm ci --omit=dev --only=production --no-audit --silent --cache /home/node/build/.npm --prefer-offline
+RUN npm ci --omit=dev --no-fund --only=production --no-audit --silent --cache /home/node/build/.npm --prefer-offline
 RUN npm cache clean --force
 RUN date +%s > /home/node/dist/builddate
 
