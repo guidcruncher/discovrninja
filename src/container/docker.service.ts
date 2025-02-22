@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/prefer-for-of */
 
-import { ImageUpdateService } from "./image-update.service";
-import { ContainerProp } from "./containerprop";
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { ContainerCreateOptionsHelper } from "@helpers/containercreateoptionshelper";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+
+import { ContainerProp } from "./containerprop";
+import { ImageUpdateService } from "./image-update.service";
 import Dockerode = require("dockerode");
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
 import { ContainerStats } from "@data/schemas/containerstats.schema";
@@ -201,7 +202,7 @@ export class DockerService {
         if (err) {
           reject(err);
         } else {
-          var prop = new ContainerProp();
+          const prop = new ContainerProp();
           container.Name = container.Name.substring(1);
           container.Config.Image = this.formatImage(container.Config.Image);
           prop.available = !["exited", "dead", "paused"].includes(
