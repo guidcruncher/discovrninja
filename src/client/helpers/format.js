@@ -50,7 +50,7 @@ module.exports = (Handlebars) => {
 
     const getDate = function(v) {
       if (typeof v === 'string' || v instanceof String) {
-        return Date.parse(v);
+        return new Date(Date.parse(v));
       }
       return new Date(value);
     }

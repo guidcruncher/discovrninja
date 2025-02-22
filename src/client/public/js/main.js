@@ -27966,7 +27966,7 @@ function _format(Handlebars) {
     };
     const getDate = function(v) {
       if (typeof v === "string" || v instanceof String) {
-        return Date.Parse(v)
+        return new Date(Date.parse(v))
       }
       return new Date(value)
     };
@@ -32317,11 +32317,11 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 20,
+          line: 27,
           column: 0
         },
         end: {
-          line: 20,
+          line: 27,
           column: 77
         }
       }
@@ -32366,16 +32366,31 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
   },
   compiler: [8, ">= 4.3.0"],
   main: function(container, depth0, helpers, partials, data) {
-    var stack1, alias1 = container.lambda,
-      alias2 = container.escapeExpression,
-      alias3 = depth0 != null ? depth0 : container.nullContext || {},
+    var stack1, helper, alias1 = depth0 != null ? depth0 : container.nullContext || {},
+      alias2 = container.hooks.helperMissing,
+      alias3 = container.escapeExpression,
+      alias4 = container.lambda,
       lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName]
         }
         return undefined
       };
-    return '      <div class="modal-body">\n\n        <div style="text-align:center;margin-top:5px" class="card">\n          <img class="card-img-top" style="padding:5px;width:10rem;height:10rem;" src="/api/icons/r/' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "definition") : depth0) != null ? lookupProperty(stack1, "iconCatalog") : stack1, depth0)) + "/" + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "definition") : depth0) != null ? lookupProperty(stack1, "iconSlug") : stack1, depth0)) + '/resource" />\n        </div>\n        <div class="card-body">\n          <p class="card-text">\n          <table border="0" cellpadding="2" cellspacing="0">\n            <tr>\n              <td>Hostname:</td>\n              <td>' + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Config") : stack1) != null ? lookupProperty(stack1, "Hostname") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Image:</td>\n              <td>" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Config") : stack1) != null ? lookupProperty(stack1, "Image") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Updatable:</td>\n              <td>" + ((stack1 = lookupProperty(helpers, "if").call(alias3, depth0 != null ? lookupProperty(depth0, "updateStatus") : depth0, {
+    return '<div class="modal fade" id="containerInfoModal" tabindex="-1" aria-label>\n  <div class="modal-dialog modal-dialog-scrollable modal-lg">\n    <div class="modal-content">\n      <div class="modal-header">\n        <h1 class="modal-title fs-5" id="containerInfoLabel">' + alias3((helper = (helper = lookupProperty(helpers, "Name") || (depth0 != null ? lookupProperty(depth0, "Name") : depth0)) != null ? helper : alias2, typeof helper === "function" ? helper.call(alias1, {
+      name: "Name",
+      hash: {},
+      data: data,
+      loc: {
+        start: {
+          line: 5,
+          column: 61
+        },
+        end: {
+          line: 5,
+          column: 69
+        }
+      }
+    }) : helper)) + '</h1>\n        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>\n      </div>\n        <div class="modal-body">\n\n        <div style="text-align:center;margin-top:5px" class="card">\n          <img class="card-img-top" style="padding:5px;width:10rem;height:10rem;" src="/api/icons/r/' + alias3(alias4((stack1 = depth0 != null ? lookupProperty(depth0, "definition") : depth0) != null ? lookupProperty(stack1, "iconCatalog") : stack1, depth0)) + "/" + alias3(alias4((stack1 = depth0 != null ? lookupProperty(depth0, "definition") : depth0) != null ? lookupProperty(stack1, "iconSlug") : stack1, depth0)) + '/resource" />\n        </div>\n        <div class="card-body">\n          <p class="card-text">\n          <table border="0" cellpadding="2" cellspacing="0">\n            <tr>\n              <td>Hostname:</td>\n              <td>' + alias3(alias4((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Config") : stack1) != null ? lookupProperty(stack1, "Hostname") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Image:</td>\n              <td>" + alias3(alias4((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Config") : stack1) != null ? lookupProperty(stack1, "Image") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Updatable:</td>\n              <td>" + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "updateStatus") : depth0, {
       name: "if",
       hash: {},
       fn: container.program(1, data, 0),
@@ -32383,29 +32398,29 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 19,
+          line: 26,
           column: 18
         },
         end: {
-          line: 21,
+          line: 28,
           column: 22
         }
       }
-    })) != null ? stack1 : "") + "</td>\n            </tr>\n            <tr>\n              <td>Created:</td>\n              <td>" + alias2((lookupProperty(helpers, "format") || depth0 && lookupProperty(depth0, "format") || container.hooks.helperMissing).call(alias3, "datetime", (stack1 = depth0 != null ? lookupProperty(depth0, "definition") : depth0) != null ? lookupProperty(stack1, "created") : stack1, {
+    })) != null ? stack1 : "") + "</td>\n            </tr>\n            <tr>\n              <td>Created:</td>\n              <td>" + alias3((lookupProperty(helpers, "format") || depth0 && lookupProperty(depth0, "format") || alias2).call(alias1, "datetime", (stack1 = depth0 != null ? lookupProperty(depth0, "definition") : depth0) != null ? lookupProperty(stack1, "created") : stack1, {
       name: "format",
       hash: {},
       data: data,
       loc: {
         start: {
-          line: 25,
+          line: 32,
           column: 18
         },
         end: {
-          line: 25,
+          line: 32,
           column: 59
         }
       }
-    })) + "</td>\n            </tr>\n            <tr>\n              <td>Available:</td>\n              <td>" + ((stack1 = lookupProperty(helpers, "if").call(alias3, depth0 != null ? lookupProperty(depth0, "available") : depth0, {
+    })) + "</td>\n            </tr>\n            <tr>\n              <td>Available:</td>\n              <td>" + ((stack1 = lookupProperty(helpers, "if").call(alias1, depth0 != null ? lookupProperty(depth0, "available") : depth0, {
       name: "if",
       hash: {},
       fn: container.program(8, data, 0),
@@ -32413,15 +32428,15 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 29,
+          line: 36,
           column: 18
         },
         end: {
-          line: 29,
+          line: 36,
           column: 55
         }
       }
-    })) != null ? stack1 : "") + "</td>\n            </tr>\n            <tr>\n              <td>Status:</td>\n              <td>" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "State") : stack1) != null ? lookupProperty(stack1, "Status") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Health:</td>\n              <td>" + alias2(alias1((stack1 = (stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "State") : stack1) != null ? lookupProperty(stack1, "Health") : stack1) != null ? lookupProperty(stack1, "Status") : stack1, depth0)) + '</td>\n            </tr>\n          </table>\n        </div>\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-danger" data-containerid="' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Name") : stack1, depth0)) + '" data-command="container-stop">Stop</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Name") : stack1, depth0)) + '" data-command="container-start">Start</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' + alias2(alias1((stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Name") : stack1, depth0)) + '" data-command="container-restart">Restart</button>\n' + ((stack1 = lookupProperty(helpers, "if").call(alias3, (stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "editable") : stack1, {
+    })) != null ? stack1 : "") + "</td>\n            </tr>\n            <tr>\n              <td>Status:</td>\n              <td>" + alias3(alias4((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "State") : stack1) != null ? lookupProperty(stack1, "Status") : stack1, depth0)) + "</td>\n            </tr>\n            <tr>\n              <td>Health:</td>\n              <td>" + alias3(alias4((stack1 = (stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "State") : stack1) != null ? lookupProperty(stack1, "Health") : stack1) != null ? lookupProperty(stack1, "Status") : stack1, depth0)) + '</td>\n            </tr>\n          </table>\n        </div>\n      </div>\n      <div class="modal-footer">\n        <button type="button" class="btn btn-danger" data-containerid="' + alias3(alias4((stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Name") : stack1, depth0)) + '" data-command="container-stop">Stop</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' + alias3(alias4((stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Name") : stack1, depth0)) + '" data-command="container-start">Start</button>\n        <button type="button" class="btn btn-secondary" data-containerid="' + alias3(alias4((stack1 = depth0 != null ? lookupProperty(depth0, "container") : depth0) != null ? lookupProperty(stack1, "Name") : stack1, depth0)) + '" data-command="container-restart">Restart</button>\n' + ((stack1 = lookupProperty(helpers, "if").call(alias1, (stack1 = depth0 != null ? lookupProperty(depth0, "editor") : depth0) != null ? lookupProperty(stack1, "editable") : stack1, {
       name: "if",
       hash: {},
       fn: container.program(12, data, 0),
@@ -32429,15 +32444,15 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
       data: data,
       loc: {
         start: {
-          line: 46,
+          line: 53,
           column: 8
         },
         end: {
-          line: 50,
+          line: 57,
           column: 15
         }
       }
-    })) != null ? stack1 : "") + '        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n'
+    })) != null ? stack1 : "") + '        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>\n      </div>\n    </div>\n</div></div>\n'
   },
   useData: true
 });
