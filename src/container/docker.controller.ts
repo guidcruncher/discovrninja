@@ -91,15 +91,7 @@ export class DockerController {
       this.dockerService
         .getContainerProp(id)
         .then((container) => {
-          this.dockerService
-            .checkForUpdateImage(container.Config.Image)
-            .then((updateStatus) => {
-              container.UpdateStatus = updateStatus;
-              resolve(container);
-            })
-            .catch(() => {
-              resolve(container);
-            });
+          resolve(container);
         })
         .catch((err) => {
           reject(err);

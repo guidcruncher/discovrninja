@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-for-of */
+
+import { ImageUpdateService } from "./image-update.service";
+import { ContainerProp } from "./containerprop";
 import { ServiceDefinitionService } from "@data/service-definition.service";
 import { ContainerCreateOptionsHelper } from "@helpers/containercreateoptionshelper";
 import { Inject, Injectable, Logger } from "@nestjs/common";
@@ -24,7 +27,8 @@ export class DockerService {
 
   constructor(
     private readonly dockerRepositoryService: DockerRepositoryService,
-    private configService: ConfigService,
+    private readonly configService: ConfigService,
+    private readonly imageUpdateService: ImageUpdateService,
     private readonly connectorService: DockerConnectorService,
     private readonly serviceDefinitionService: ServiceDefinitionService,
     @InjectModel(ContainerStats.name)
@@ -190,20 +194,54 @@ export class DockerService {
   }
 
   public getContainerProp(id: string): Promise<ContainerProp> {
-	return new Promise<ContainerProp>((resolve, reject) => {
-const docker = this.connectorService.createDocker();
-const container = docker.getContainer(id);
-container.inspect((err, data: any) => {
-if (err) {
-reject(err);
-} else {
-var prop = new ContainerProp();
-prop.container=container;
+    return new Promise<ContainerProp>((resolve, reject) => {
+      const docker = this.connectorService.createDocker();
+      const containerRef = docker.getContainer(id);
+      containerRef.inspect((err, container) => {
+        if (err) {
+          reject(err);
+        } else {
+          var prop = new ContainerProp();
+          container.Name = container.Name.substring(1);
+          container.Config.Image = this.formatImage(container.Config.Image);
+          prop.available = !["exited", "dead", "paused"].includes(
+            container.State.Status.toLowerCase(),
+          );
+          prop.container = container;
 
-resolve(prop);
-}
-});
-});
+          const resolver = () => {
+            this.serviceDefinitionService
+              .get(container.Name)
+              .then((sd) => {
+                prop.definition = sd;
+                resolve(prop);
+              })
+              .catch((err) => {
+                this.logger.error(
+                  "Error getting ServiceDefinition in getContainerProp ",
+                  err,
+                );
+                prop.definition = null;
+                resolve(prop);
+              });
+          };
+
+          this.imageUpdateService
+            .updateCheck(container.Config.Image)
+            .then((updateState) => {
+              prop.updateStatus = updateState;
+              resolver();
+            })
+            .catch((err) => {
+              this.logger.error(
+                "Error getting updateStatus in getContainerProp",
+                err,
+              );
+              resolver();
+            });
+        }
+      });
+    });
   }
 
   public getContainer(id: string): Promise<any> {

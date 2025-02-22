@@ -21,7 +21,7 @@
       "ghcr.io"
     ],
     "token": {
-      "url": "htps://ghcr.io/token?scope=repository:{repo}:pull",
+      "url": "https://ghcr.io/token?scope=repository:{repo}:pull",
       "field": "token"
     },
     "manifest": {

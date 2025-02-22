@@ -1,10 +1,11 @@
 import { ServiceDefinition } from "@data/dto/servicedefinition.dto";
- 
+
 export class ContainerProp {
-public container: any;
+  public container: any;
 
-public available: boolean;
+  public available: boolean;
 
-public definition: ServiceDefinition;
+  public updateStatus: any;
 
+  public definition: ServiceDefinition;
 }
