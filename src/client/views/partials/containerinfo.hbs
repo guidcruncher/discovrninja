@@ -2,10 +2,11 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="containerInfoLabel">{{container.Name}}</h1>
+        <h1 class="modal-title fs-5" id="containerInfoLabel">{{Name}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+        <div class="modal-body">
+
         <div style="text-align:center;margin-top:5px" class="card">
           <img class="card-img-top" style="padding:5px;width:10rem;height:10rem;" src="/api/icons/r/{{definition.iconCatalog}}/{{definition.iconSlug}}/resource" />
         </div>
@@ -23,8 +24,8 @@
             <tr>
               <td>Updatable:</td>
               <td>{{#if updateStatus}}
-{{#if updateStatus.updateAvailable}}Update Available{{else}}Up-to-date{{/if}}</td>
-{{else}}Unknown{{/if}}
+{{#if updateStatus.updateAvailable}}Update Available{{else}}Up-to-date{{/if}}
+{{else}}Unknown{{/if}}</td>
             </tr>
             <tr>
               <td>Created:</td>
@@ -57,5 +58,4 @@
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
+</div></div>

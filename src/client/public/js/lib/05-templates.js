@@ -377,16 +377,16 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 26,
+            "line": 20,
             "column": 0
           },
           "end": {
-            "line": 26,
+            "line": 20,
             "column": 77
           }
         }
       })) != null ? stack1 : "") +
-      "</td>\n";
+      "\n";
   },
   "2": function(container, depth0, helpers, partials, data) {
     return "Update Available";
@@ -447,9 +447,7 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         return undefined
       };
 
-    return "<div class=\"modal fade\" id=\"containerInfoModal\" tabindex=\"-1\" aria-label>\n  <div class=\"modal-dialog modal-dialog-scrollable modal-lg\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h1 class=\"modal-title fs-5\" id=\"containerInfoLabel\">" +
-      alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "container") : depth0)) != null ? lookupProperty(stack1, "Name") : stack1), depth0)) +
-      "</h1>\n        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n      </div>\n      <div class=\"modal-body\">\n        <div style=\"text-align:center;margin-top:5px\" class=\"card\">\n          <img class=\"card-img-top\" style=\"padding:5px;width:10rem;height:10rem;\" src=\"/api/icons/r/" +
+    return "      <div class=\"modal-body\">\n\n        <div style=\"text-align:center;margin-top:5px\" class=\"card\">\n          <img class=\"card-img-top\" style=\"padding:5px;width:10rem;height:10rem;\" src=\"/api/icons/r/" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "definition") : depth0)) != null ? lookupProperty(stack1, "iconCatalog") : stack1), depth0)) +
       "/" +
       alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0, "definition") : depth0)) != null ? lookupProperty(stack1, "iconSlug") : stack1), depth0)) +
@@ -466,27 +464,27 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 25,
+            "line": 19,
             "column": 18
           },
           "end": {
-            "line": 27,
+            "line": 21,
             "column": 22
           }
         }
       })) != null ? stack1 : "") +
-      "\n            </tr>\n            <tr>\n              <td>Created:</td>\n              <td>" +
+      "</td>\n            </tr>\n            <tr>\n              <td>Created:</td>\n              <td>" +
       alias2((lookupProperty(helpers, "format") || (depth0 && lookupProperty(depth0, "format")) || container.hooks.helperMissing).call(alias3, "datetime", ((stack1 = (depth0 != null ? lookupProperty(depth0, "definition") : depth0)) != null ? lookupProperty(stack1, "created") : stack1), {
         "name": "format",
         "hash": {},
         "data": data,
         "loc": {
           "start": {
-            "line": 31,
+            "line": 25,
             "column": 18
           },
           "end": {
-            "line": 31,
+            "line": 25,
             "column": 59
           }
         }
@@ -500,11 +498,11 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 35,
+            "line": 29,
             "column": 18
           },
           "end": {
-            "line": 35,
+            "line": 29,
             "column": 55
           }
         }
@@ -528,16 +526,16 @@ this["app"]["templates"]["containerinfo"] = Handlebars.template({
         "data": data,
         "loc": {
           "start": {
-            "line": 52,
+            "line": 46,
             "column": 8
           },
           "end": {
-            "line": 56,
+            "line": 50,
             "column": 15
           }
         }
       })) != null ? stack1 : "") +
-      "        <button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n";
+      "        <button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n";
   },
   "useData": true
 });
