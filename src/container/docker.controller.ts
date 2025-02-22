@@ -89,7 +89,7 @@ export class DockerController {
   async getcontainer(@Param("id") id): Promise<any> {
     return await new Promise((resolve, reject) => {
       this.dockerService
-        .getContainer(id)
+        .getContainerProp(id)
         .then((container) => {
           this.dockerService
             .checkForUpdateImage(container.Config.Image)

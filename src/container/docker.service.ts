@@ -189,6 +189,23 @@ export class DockerService {
     });
   }
 
+  public getContainerProp(id: string): Promise<ContainerProp> {
+	return new Promise<ContainerProp>((resolve, reject) => {
+const docker = this.connectorService.createDocker();
+const container = docker.getContainer(id);
+container.inspect((err, data: any) => {
+if (err) {
+reject(err);
+} else {
+var prop = new ContainerProp();
+prop.container=container;
+
+resolve(prop);
+}
+});
+});
+  }
+
   public getContainer(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const docker = this.connectorService.createDocker();
