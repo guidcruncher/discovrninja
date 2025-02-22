@@ -28,11 +28,11 @@
             </tr>
             <tr>
               <td>Created:</td>
-              <td></td>
+              <td>{{format "datetime" definition.created }}</td>
             </tr>
             <tr>
-              <td>Latest Build:</td>
-              <td></td>
+              <td>Available:</td>
+              <td>{{#if available}}Yes{{else}}No{{/if}}</td>
             </tr>
             <tr>
               <td>Status:</td>

@@ -49,8 +49,7 @@ module.exports = (Handlebars) => {
     }
 
     const getDate = function(v) {
-      var value = parseInt(v);
-      if (isNaN(value)) {
+      if (typeof v === 'string' || v instanceof String) {
         return Date.Parse(v);
       }
       return new Date(value);
