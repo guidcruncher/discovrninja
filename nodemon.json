@@ -2,6 +2,7 @@
   "verbose": true,
   "ignore": ["*.spec.ts", "**/node_modules/**", "./dist" ],
   "watch": [ "./src"],
-  "delay": 10,
+  "delay": 2500,
+  "signal": "SIGHUP",
   "extension": [".js", ".json", ".ts", ".hbs", ".css"]
 }

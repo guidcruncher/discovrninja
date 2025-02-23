@@ -18,6 +18,10 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as fs from "fs";
 import path from "path";
 
+process.on("SIGHUP", function () {
+  process.kill(process.pid, "SIGTERM");
+})
+
 async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");
   let serverPort: number = parseInt(config.get("host.appServer.listenPort"));
