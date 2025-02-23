@@ -47,7 +47,7 @@ export class DesktopService {
       const desktop = this.readFile();
 
       Object.keys(desktop.layout).forEach((key) => {
-      desktop.layout[key].id = this.id();
+        desktop.layout[key].id = this.id();
         desktop.layout[key].items.forEach((item) => {
           Object.keys(item).forEach((prop) => {
             if (item[prop]) {

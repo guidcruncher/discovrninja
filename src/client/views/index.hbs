@@ -3,17 +3,18 @@
    <div id="card_{{id}}" class="card" style="{{#isnotempty ../this.desktop.background.foregroundOpacity}}opacity:{{../this.desktop.background.foregroundOpacity}};{{/isnotempty}}margin-bottom:10px;{{#isnotempty bgcolor}}background-color:{{bgcolor}};{{/isnotempty}}{{#isnotempty background}}background: {{background}} !important;{{/isnotempty}}">
      <div class="card-header">{{title}}
 
-<button class="btn btn-primary text-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#cardBody_{{id}}" aria-expanded="false" aria-controls="cardBody_{{id}}">
-<i class="text-collapsed fa-solid fa-maximize"></i>
-<i class="text-expanded fa-solid fa-minimize"></i>
-  </button>
-</div>
-    </div>
-     <div class="card-body" id="cardBody_{{id}}">
-       {{#each this.items}}
-         {{service this ../../this.services ../this ../../this.desktop.background.buttonForegroundOpacity }}
-       {{/each}}
+       <button class="btn btn-primary text-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#cardBody_{{id}}" aria-expanded="false" aria-controls="cardBody_{{id}}">
+         <i class="text-collapsed fa-solid fa-maximize"></i>
+         <i class="text-expanded fa-solid fa-minimize"></i>
+       </button>
      </div>
+   </div>
+   <div class="collapse" id="cardBody_{{id}}" <div class="card-body">
+     {{#each this.items}}
+       {{service this ../../this.services ../this ../../this.desktop.background.buttonForegroundOpacity }}
+     {{/each}}
+   </div>
+   </div>
    </div>
    {{/each}}
    <br><br><br>
