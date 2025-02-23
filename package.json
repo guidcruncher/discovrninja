@@ -7,6 +7,9 @@
   "license": "GNU",
   "scripts": {
     "shell": "docker exec -i -t discovrninja_dev sh",
+    "stop": "docker compose rm -f",
+    "restart": "docker compose restart",
+    "logs": "docker compose logs -f",
     "helpers": "./buildscripts/mergehelpers.sh  > ./src/client/public/js/lib/03-helpers.js",
     "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img ./dist/client/public/weather",
     "dev": "npx nest build && npm run uglify && npm run uglifycss && node ./dist/main.js",
