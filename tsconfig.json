@@ -1,4 +1,4 @@
-  {
+{
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -19,23 +19,70 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "paths": {
-      "@app/*": [ "src/app/*" ],
-      "@auth/*": [ "src/auth/*" ],
-      "@users/*": [ "src/users/*" ],
-      "@customtypes/*": [ "src/types/*" ],
-      "@helpers/*": [ "src/helpers/*" ],
-      "@/*": ["src/*"],
-      "@projects/*": ["src/projects/*"],
-      "@desktop/*": ["src/desktop/*"],
-      "@container/*": ["src/container/*"],
-      "@catalog/*": ["src/catalog/*"],
-      "@resources/*": ["src/resources/*"],
-      "@icon/*": ["src/icon/*"],
-      "@discovery/*": ["src/discovery/*"],
-      "@configuration/*": ["src/configuration/*"],
-      "@data/*": ["src/data/*"],
-      "@notification/*": ["src/notification/*"],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@auth/*": [
+        "src/auth/*"
+      ],
+      "@users/*": [
+        "src/users/*"
+      ],
+      "@customtypes/*": [
+        "src/types/*"
+      ],
+      "@helpers/*": [
+        "src/helpers/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@projects/*": [
+        "src/projects/*"
+      ],
+      "@desktop/*": [
+        "src/desktop/*"
+      ],
+      "@container/*": [
+        "src/container/*"
+      ],
+      "@catalog/*": [
+        "src/catalog/*"
+      ],
+      "@resources/*": [
+        "src/resources/*"
+      ],
+      "@icon/*": [
+        "src/icon/*"
+      ],
+      "@discovery/*": [
+        "src/discovery/*"
+      ],
+      "@configuration/*": [
+        "src/configuration/*"
+      ],
+      "@data/*": [
+        "src/data/*"
+      ],
+      "@notification/*": [
+        "src/notification/*"
+      ]
     }
-  }, "include": ["src/**/*"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": [
+      "**/node_modules",
+      "./dist"
+    ],
+    "excludeFiles": [
+      "build/fileWhichChangesOften.ts"
+    ]
+  }
 }
-

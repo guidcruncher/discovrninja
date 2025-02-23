@@ -7,17 +7,15 @@
   "license": "GNU",
   "scripts": {
     "helpers": "./buildscripts/mergehelpers.sh  > ./src/client/public/js/lib/03-helpers.js",
-    "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./app && mkdir -p ./app/client/public/js/",
+    "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img",
     "build": "npx nest build",
     "buildprod": "npx nest build",
     "format": "npx prettier --write \"src/**/*.ts\" ",
-    "start:dev": "NODE_CONFIG_DIR=/home/jcrocker/src/discovrninja/config/ && npx nest start --watch",
     "start:debug": "npx nest start --debug --watch",
-    "start:prod": "npx node app/main",
     "lint": "npx eslint -c ./eslint.config.mjs '{src,apps,libs}/**/*.ts' --fix",
     "lint-client": "npx eslint -c ./eslint.config.client.mjs src/client/**/*.js --fix",
-    "uglify": "npx uglifyjs ./src/client/public/js/lib/*.js -o ./src/client/public/js/main.js && npx uglifyjs ./src/client/public/js/main.js -c -m --source-map -o ./src/client/public/js/main.min.js",
-    "uglifycss": "npx uglifycss ./src/client/public/css/lib/*.css --output ./src/client/public/css/style.css"
+    "uglify": "npx uglifyjs ./src/client/public/js/lib/*.js -o ./dist/client/public/js/main.js && npx uglifyjs ./dist/client/public/js/main.js -c -m --source-map -o ./dist/client/public/js/main.min.js",
+    "uglifycss": "npx uglifycss ./src/client/public/css/lib/*.css --output ./dist/client/public/css/style.css"
   },
   "dependencies": {
     "@fastify/compress": "^8.0.1",

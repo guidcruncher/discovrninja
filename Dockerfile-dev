@@ -12,7 +12,7 @@ RUN npm i --no-fund --no-audit --prefer-offline  --progress=false  --cache ./.np
 
 COPY . .
 
-RUN npx gulp partials templates js format lint lint-client
+RUN npx gulp prebuild js
 
 EXPOSE 5001
 

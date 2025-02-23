@@ -38,10 +38,8 @@ gulp.task("formathbs", task("npx js-beautify -r --templating handlebars -s 2 -n 
 gulp.task("formatcss", task('npx js-beautify -r -s 2 -n -w 0 --type css ./src/client/**/*.css'));
 gulp.task("formatjs", task('npx js-beautify -r -s 2 -n -w 0 --type js ./src/client/public/js/lib/*.js ./src/client/helpers/*.js '));
 gulp.task("format", series(task("npm run format"), "formatcss", "formathbs", "formathtml"));
-gulp.task("startdev", task("npm run start:dev"));
 gulp.task("uglify", series(task("npm run uglifycss"), task("npm run uglify"), task("npx js-beautify -r -s 2 -n -w 0 --type js ./src/client/public/js/main.js")));
-gulp.task("css", series(task('npx js-beautify -r -s 2 -n -w 0 --type css ./src/client/**/*.css'), task("npm run uglifycss")));
-gulp.task("js", series( "templates", "formatjs", "uglify"));
+gulp.task("js", series( "helpers", "partials", "templates", "uglify"));
 gulp.task("lint", task("npm run lint"));
 gulp.task("lint-client", task("npm run lint-client"));
 
@@ -65,7 +63,7 @@ gulp.task(
 gulp.task(
   "default",
   series(
-    task("npm run helpers"),	
+    task("npm run helpers"),
     "docker"
   ),
 );
