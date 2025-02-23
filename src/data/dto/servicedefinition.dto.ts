@@ -44,11 +44,14 @@ export class ServiceDefinition {
   @Prop()
   updated: Date;
 
-  @Prop()
+  @Prop({ default: false })
   edited: boolean;
 
-  @Prop()
+  @Prop({ default: false })
   available: boolean;
+
+  @Prop({ default: true })
+  editable: boolean;
 
   @Prop()
   lastSeen: Date;
@@ -59,7 +62,7 @@ export class ServiceDefinition {
   @Prop({ default: 0 })
   downtime: number;
 
-  @Prop()
+  @Prop({ default: false })
   archived: boolean;
 
   @Prop({ default: true })

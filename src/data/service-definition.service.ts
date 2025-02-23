@@ -5,7 +5,8 @@ import { InjectModel } from "@nestjs/mongoose";
 import { InjectConnection } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Connection } from "mongoose";
-
+import * as path from "path";
+import * as fs from "fs";
 import { ServiceDefinition } from "./dto/servicedefinition.dto";
 
 @Injectable()
@@ -90,6 +91,15 @@ export class ServiceDefinitionService {
             data.edited = true;
           }
 
+          data.editable = false;
+          if (data.project && data.project != "") {
+            var compose = path.join(
+              "/docker/stacks",
+              data.project,
+              "compose.yaml",
+            );
+            data.editable = fs.existsSync(compose);
+          }
           this.serviceDefModel
             .findOneAndUpdate({ containerName: data.containerName }, data, {
               upsert: true,

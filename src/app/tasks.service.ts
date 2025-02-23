@@ -194,7 +194,7 @@ export class TasksService {
   }
 
   private removeOrphanDefinitions() {
-    return this.serviceDefinitionwService.removeOrphanDefinitions();
+    return this.serviceDefinitionService.removeOrphanDefinitions();
   }
 
   public runTask(name) {
