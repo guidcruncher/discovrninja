@@ -159,6 +159,23 @@ export class ServiceDefinitionService {
     });
   }
 
+  public removeOrphanDefinitions() {
+    return new Promise((resolve, reject) => {
+      const old = this.serviceDefModel
+        .deleteMany({
+          $and: [{ available: { $eq: false } }, { edited: { $eq: false } }],
+        })
+        .exec()
+        .then((r) => {
+          resolve();
+        })
+        .catch((err) => {
+          this.logger.error("Error removing orphan definitions", err);
+          reject(err);
+        });
+    });
+  }
+
   public async all(excludeArchived: boolean): Promise<any> {
     return this.mongoConnection.transaction<any>((session) => {
       let filter = {};

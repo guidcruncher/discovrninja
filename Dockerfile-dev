@@ -16,8 +16,8 @@ WORKDIR /home/node/
 
 COPY . .
 RUN npx gulp prebuild js
-COPY ./src/client/public/img/ ./dist/client/public/img/
-COPY ./src/client/public/weather/ ./dist/client/public/weather/
+RUN cp ./src/client/public/img/ ./dist/client/public/img/
+RUN cp  ./src/client/public/weather/ ./dist/client/public/weather/
 
 EXPOSE 5001
 
@@ -35,7 +35,4 @@ ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-# RUN npx nest start -b swc -w
-
-ENTRYPOINT ["npx", "nest", "start", "-b", "swc", "-w" ]
-
+ENTRYPOINT ["gulp", "dev"]

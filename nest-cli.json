@@ -19,7 +19,7 @@
       },
       {
         "include": "./client/",
-        "outDir": "./dist/client/",
+        "outDir": "./dist/",
         "watchAssets": true
       }
     ]

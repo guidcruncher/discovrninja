@@ -193,8 +193,14 @@ export class TasksService {
     });
   }
 
+  private removeOrphanDefinitions() {
+    return this.serviceDefinitionwService.removeOrphanDefinitions();
+  }
+
   public runTask(name) {
     switch (name.toLowerCase()) {
+      case "removeorphans":
+        return this.removeOrphanDefinitions();
       case "dailyimages":
         return this.crongetdailyimages();
       case "storagestats":
