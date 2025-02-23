@@ -3,12 +3,12 @@
    <div id="card_{{id}}" class="card" style="{{#isnotempty ../this.desktop.background.foregroundOpacity}}opacity:{{../this.desktop.background.foregroundOpacity}};{{/isnotempty}}margin-bottom:10px;{{#isnotempty bgcolor}}background-color:{{bgcolor}};{{/isnotempty}}{{#isnotempty background}}background: {{background}} !important;{{/isnotempty}}">
      <div class="card-header">{{title}}
      </div>
-   </div>
-   <div id="cardBody_{{id}}">
-     <div class="card-body">
-       {{#each this.items}}
-         {{service this ../../this.services ../this ../../this.desktop.background.buttonForegroundOpacity }}
-       {{/each}}
+     <div id="cardBody_{{id}}">
+       <div class="card-body">
+         {{#each this.items}}
+           {{service this ../../this.services ../this ../../this.desktop.background.buttonForegroundOpacity }}
+         {{/each}}
+       </div>
      </div>
    </div>
    {{/each}}
