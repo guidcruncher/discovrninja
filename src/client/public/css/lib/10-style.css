@@ -1,3 +1,10 @@
+.text-toogle[aria-expanded=false] .text-expanded {
+  display: none;
+}
+.text-toogle[aria-expanded=true] .text-collapsed {
+  display: none;
+}
+
 svg {
   display: block;
   margin: 0 auto;
