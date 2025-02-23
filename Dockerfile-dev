@@ -16,7 +16,7 @@ FROM buildbase AS build
 WORKDIR /home/node/
 
 COPY . .
-RUN npx gulp prebuild js
+RUN npx gulp prebuild
 
 EXPOSE 5001
 
@@ -34,5 +34,4 @@ ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-RUN gulp dev
-ENTRYPOINT ["npx", "nest", "start", "-b", "swc", "-w" ]
+ENTRYPOINT ["npx", "nodemon", "--config", "./nodemon.json", "--exec", "npm run dev" ]
