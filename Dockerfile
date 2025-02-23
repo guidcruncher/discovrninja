@@ -28,7 +28,6 @@ COPY ./provisioning/defaults/ /home/node/.defaults/
 
 ENV NODE_ENV=production
 ARG NODE_ENV=production
-RUN rm ./dist/client/public/js/lib ./dist/client/public/css/lib -r
 RUN cp ./dist/* /home/node/dist -r
 RUN cp ./package*.json /home/node/dist
 RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
