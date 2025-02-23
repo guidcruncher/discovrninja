@@ -64,7 +64,7 @@ gulp.task(
   series(
     task("sudo rm -r -f ./dist"),
     task("npm run helpers"),
-    task("docker compose up --build")
+    task("docker compose up -d")
   ),
 );
 
