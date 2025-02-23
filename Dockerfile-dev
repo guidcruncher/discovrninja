@@ -16,7 +16,6 @@ WORKDIR /home/node/
 
 COPY . .
 RUN npx gulp prebuild js
-RUN rm ./dist/client/public/js/lib ./dist/client/public/css/lib -r
 COPY ./src/client/public/img/ ./dist/client/public/img/
 COPY ./src/client/public/weather/ ./dist/client/public/weather/
 
