@@ -72,6 +72,7 @@
   "include": [
     "src/**/*"
   ],
+  "exclude": [ "src/client/public/**/*" ],
   "watchOptions": {
     "watchFile": "useFsEvents",
     "watchDirectory": "useFsEvents",

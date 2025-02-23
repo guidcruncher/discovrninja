@@ -7,7 +7,7 @@
   "license": "GNU",
   "scripts": {
     "helpers": "./buildscripts/mergehelpers.sh  > ./src/client/public/js/lib/03-helpers.js",
-    "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img",
+    "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img ./dist/client/public/weather",
     "build": "npx nest build",
     "buildprod": "npx nest build",
     "format": "npx prettier --write \"src/**/*.ts\" ",

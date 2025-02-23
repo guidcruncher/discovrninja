@@ -1,7 +1,7 @@
+buildscripts
 config
 cache
 themes
-buildscripts
 node_modules
 npm-debug.log
 dist
