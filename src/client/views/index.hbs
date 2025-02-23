@@ -1,5 +1,3 @@
-{{debug this.desktop.layout}}
-
  {{# each this.desktop.layout }}
 
    <div id="card_{{id}}" class="card" style="{{#isnotempty ../this.desktop.background.foregroundOpacity}}opacity:{{../this.desktop.background.foregroundOpacity}};{{/isnotempty}}margin-bottom:10px;{{#isnotempty bgcolor}}background-color:{{bgcolor}};{{/isnotempty}}{{#isnotempty background}}background: {{background}} !important;{{/isnotempty}}">
