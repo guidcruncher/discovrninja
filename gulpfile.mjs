@@ -45,9 +45,8 @@ gulp.task("lint-client", task("npm run lint-client"));
 
 gulp.task("dev", series(
 task("rm -r -f ./dist"), "prebuild", "js", 
-task("cp -r ./src/client/public/img/* ./dist/client/public/img/"),
-task("cp -r ./src/client/public/weather/* ./dist/client/public/weather/"),
-task("npx nest start -b swc -w")
+task("cp -r ./src/client/public/img/ ./dist/client/public/img/"),
+task("cp -r ./src/client/public/weather/ ./dist/client/public/weather/")
 ));
 
 gulp.task("dockerbuild", series(task("npm run helpers"), "format" ,"lint","lint-client", task('docker buildx create --use --bootstrap --driver docker-container  --name discovrninjaBuilder'),

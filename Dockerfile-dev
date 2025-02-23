@@ -34,4 +34,5 @@ ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-ENTRYPOINT ["gulp", "dev"]
+RUN gulp dev
+ENTRYPOINT ["npx", "nest", "start", "-b", "swc", "-w" ]
