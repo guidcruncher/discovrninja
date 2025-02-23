@@ -1,7 +1,7 @@
-.text-toogle[aria-expanded=false] .text-expanded {
+.text-toggle[aria-expanded=false] .text-expanded {
   display: none;
 }
-.text-toogle[aria-expanded=true] .text-collapsed {
+.text-toggle[aria-expanded=true] .text-collapsed {
   display: none;
 }
 
