@@ -6,6 +6,7 @@ FROM base AS buildbase
 
 WORKDIR /home/node/
 
+COPY gulpfile.mjs ./
 COPY package*.json ./
 COPY ./.npm ./
 RUN npm i --no-fund --no-audit --prefer-offline  --progress=false  --cache ./.npm
@@ -16,8 +17,6 @@ WORKDIR /home/node/
 
 COPY . .
 RUN npx gulp prebuild js
-RUN cp ./src/client/public/img/ ./dist/client/public/img/
-RUN cp  ./src/client/public/weather/ ./dist/client/public/weather/
 
 EXPOSE 5001
 

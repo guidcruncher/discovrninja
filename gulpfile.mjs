@@ -45,8 +45,8 @@ gulp.task("lint-client", task("npm run lint-client"));
 
 gulp.task("dev", series(
 task("rm -r -f ./dist"), "prebuild", "js", 
-task("cp ./src/client/public/img/* ./dist/client/public/img/ -r"),
-task("cp ./src/client/public/weather/* ./dist/client/public/weather/ -r"),
+task("cp -r ./src/client/public/img/* ./dist/client/public/img/"),
+task("cp -r ./src/client/public/weather/* ./dist/client/public/weather/"),
 task("npx nest start -b swc -w")
 ));
 
