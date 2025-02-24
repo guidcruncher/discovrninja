@@ -147,9 +147,9 @@ export class CatalogController {
             res.view(
               "edit.hbs",
               {
-               projectName: project,
-               containerName: container, 
-               size: size,
+                projectName: project,
+                containerName: container,
+                size: size,
                 error: true,
               },
               { layout: "./layouts/layout.hbs" },
