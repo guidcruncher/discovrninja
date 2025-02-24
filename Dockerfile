@@ -19,8 +19,8 @@ COPY ./src/client/public/weather/ ./dist/client/public/weather/
 
 RUN npm run buildprod
 
-COPY ./provisioning/userpasswd /home/n*(ode/userpasswd
-COPY ./provisioning/useradd /hofsdsss me/node/useradd
+COPY ./provisioning/userpasswd /home/node/userpasswd
+COPY ./provisioning/useradd /home/node/useradd
 COPY ./provisioning/start.sh /home/node/start.sh
 RUN chmod  +x /home/node/userpasswd /home/node/useradd /home/node/start.sh
 COPY ./provisioning/defaults/ /home/node/.defaults/
