@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "ignore": ["*.spec.ts", "**/node_modules/**", "dist" ],
+  "ignore": ["*.spec.ts", "**/node_modules/**", "dist", "src/client/public/js/lib/090-helpers.js", "src/client/public/js/lib/100-partials.js", "src/client/public/js/lib/110-templates.js" ],
   "watch": [ "src/", "package.json", "config/config.yaml"],
   "delay": 2500,
   "signal": "SIGHUP",
