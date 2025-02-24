@@ -14,7 +14,7 @@ return gulp.src(['./src/client/views/partials/*.hbs', './src/client/views/browse
       namespace: 'app.templates',
       noRedeclare: true, // Avoid duplicate declarations
     }))
-    .pipe(concat('05-templates.js'))
+    .pipe(concat('100-templates.js'))
     .pipe(gulp.dest('./src/client/public/js/lib/'));
 });
 
@@ -26,7 +26,7 @@ gulp.task('partials', function() {
       namespace: 'app.templates',
       noRedeclare: true, // Avoid duplicate declarations
     }))
-    .pipe(concat('04-partials.js'))
+    .pipe(concat('90-partials.js'))
     .pipe(gulp.dest('./src/client/public/js/lib/'));
 });
 
