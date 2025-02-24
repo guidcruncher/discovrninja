@@ -10,7 +10,7 @@
     "stop": "docker compose stop && docker compose rm -f",
     "restart": "docker compose restart",
     "logs": "docker compose logs -f",
-    "helpers": "./buildscripts/mergehelpers.sh  > ./src/client/public/js/lib/090-helpers.js",
+    "helpers": "/home/node/buildscripts/mergehelpers.sh > /home/node/src/client/public/js/lib/090-helpers.js",
     "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img ./dist/client/public/weather",
     "dev": "npx nest build && npm run uglify && npm run uglifycss && node ",
     "buildprod": "npx nest build",
@@ -18,7 +18,7 @@
     "start:debug": "npx nest start --debug --watch",
     "lint": "npx eslint -c ./eslint.config.mjs '{src,apps,libs}/**/*.ts' --fix",
     "lint-client": "npx eslint -c ./eslint.config.client.mjs src/client/**/*.js --fix",
-    "uglify": "./buildscripts/packagejs.sh",
+    "uglify": "/home/node/buildscripts/packagejs.sh",
     "uglifycss": "npx uglifycss ./src/client/public/css/lib/*.css --output ./dist/client/public/css/style.css"
   },
   "dependencies": {
