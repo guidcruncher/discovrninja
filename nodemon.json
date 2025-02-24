@@ -1,8 +1,8 @@
 {
   "verbose": true,
-  "ignore": ["*.spec.ts", "**/node_modules/**", "./dist" ],
-  "watch": [ "./src"],
+  "ignore": ["*.spec.ts", "**/node_modules/**", "dist" ],
+  "watch": [ "src/", "package.json", "config/config.yaml"],
   "delay": 2500,
   "signal": "SIGHUP",
-  "extension": [".js", ".json", ".ts", ".hbs", ".css"]
+  "extension": ".js,.json,.ts,.hbs,.css,.svg"
 }

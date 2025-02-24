@@ -13,6 +13,7 @@ import { DiscoveryService } from "./discovery.service";
 import { DnsmasqService } from "./dnsmasq.service";
 import { DockerDiscoveryService } from "./docker-discovery.service";
 import { FileDiscoveryService } from "./file-discovery.service";
+import { NetworkDiscoveryService } from './network-discovery.service';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { FileDiscoveryService } from "./file-discovery.service";
     DnsmasqService,
     CaddyService,
     AdapterService,
+    NetworkDiscoveryService,
   ],
   exports: [DiscoveryService],
 })
