@@ -13,7 +13,7 @@ COPY package*.json ./
 RUN npm ci --no-fund --no-audit --silent --cache ./.npm --prefer-offline
 
 COPY . .
-RUN npx gulp prebuild helpers js
+RUN npx gulp prebuild js
 COPY ./src/client/public/img/ ./dist/client/public/img/
 COPY ./src/client/public/weather/ ./dist/client/public/weather/
 
