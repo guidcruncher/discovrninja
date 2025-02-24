@@ -36,7 +36,7 @@
       "lscr.io"
     ],
     "token": {
-      "url": "htps://lscr.io/token?scope=repository:{repo}:pull",
+      "url": "https://lscr.io/token?scope=repository:{repo}:pull",
       "field": "token"
     },
     "manifest": {
