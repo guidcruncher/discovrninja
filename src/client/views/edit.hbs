@@ -5,7 +5,8 @@
     <div class="card-body">
       <h5 class="card-title">Cannot edit this container</h5>
       <p class="card-text">One or more project files required to edit this container cannot be found in the project directory.</p>
-      <a href="/admin/index?tab=1" class="btn btn-primary">Go Back</a>
+      <a href="/admin/index?tab=1" class="btn btn-primary">Go Back</a>&nbsp;
+      <button onclick="deleteStack('{{containerName}}');return false;" type="button" class="btn btn-danger">Delete Configuration</button>
     </div>
   </div>
 
