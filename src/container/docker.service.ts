@@ -88,7 +88,18 @@ export class DockerService {
   }
 
   public deleteStack(container) {
-    return this.serviceDefinitionService.deleteStack(container);
+    this.logger.debug('Deleting stack for "' + container + '"');
+    return new Promise((resolve, reject) => {
+      this.serviceDefinitionService
+        .deleteStack(container)
+        .then((r) => {
+          resolve(r);
+        })
+        .catch((err) => {
+          this.logger.error("Error in deleteStack", err);
+          reject(err);
+        });
+    });
   }
 
   public getContainerDashboard(id: string, limit: number): Promise<any> {

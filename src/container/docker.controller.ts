@@ -33,7 +33,7 @@ export class DockerController {
   }
 
   @Get("delete/:container")
-  async delete(@Param("container") container) {
+  deleteStack(@Param("container") container) {
     return this.dockerService.deleteStack(container);
   }
 

@@ -24,12 +24,16 @@ export class ServiceDefinitionService {
 
   public deleteStack(containerName) {
     return new Promise((resolve, reject) => {
-    this.logger.debug("Deleting service definition for \"" + containerName + "\"");
+      this.logger.debug(
+        'Deleting service definition for "' + containerName + '"',
+      );
 
       this.serviceDefModel
         .deleteOne({ containerName: containerName })
         .then((result) => {
-          this.logger.debug("Deleteted service definition for \"" + containerName + "\"");
+          this.logger.debug(
+            'Deleteted service definition for "' + containerName + '"',
+          );
           resolve(result);
         })
         .catch((err) => {
