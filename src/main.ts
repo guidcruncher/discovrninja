@@ -20,7 +20,7 @@ import path from "path";
 
 process.on("SIGHUP", function () {
   process.kill(process.pid, "SIGTERM");
-})
+});
 
 async function startServers(app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");

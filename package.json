@@ -18,7 +18,7 @@
     "start:debug": "npx nest start --debug --watch",
     "lint": "npx eslint -c ./eslint.config.mjs '{src,apps,libs}/**/*.ts' --fix",
     "lint-client": "npx eslint -c ./eslint.config.client.mjs src/client/**/*.js --fix",
-    "uglify": "npx uglifyjs ./src/client/public/js/lib/*.js -o ./dist/client/public/js/main.js && npx uglifyjs ./dist/client/public/js/main.js -c -m --source-map -o ./dist/client/public/js/main.min.js",
+    "uglify": "npx uglifyjs ./src/client/public/js/lib/*.js -o ./dist/client/public/js/main.js && npx uglifyjs ./dist/client/public/js/main.js -c unused=false -m --source-map -o ./dist/client/public/js/main.min.js",
     "uglifycss": "npx uglifycss ./src/client/public/css/lib/*.css --output ./dist/client/public/css/style.css"
   },
   "dependencies": {

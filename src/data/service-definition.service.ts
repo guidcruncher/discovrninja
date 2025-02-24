@@ -3,10 +3,11 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { InjectConnection } from "@nestjs/mongoose";
+import * as fs from "fs";
 import { Model } from "mongoose";
 import { Connection } from "mongoose";
 import * as path from "path";
-import * as fs from "fs";
+
 import { ServiceDefinition } from "./dto/servicedefinition.dto";
 
 @Injectable()
@@ -93,7 +94,7 @@ export class ServiceDefinitionService {
 
           data.editable = false;
           if (data.project && data.project != "") {
-            var compose = path.join(
+            const compose = path.join(
               "/docker/stacks",
               data.project,
               "compose.yaml",
