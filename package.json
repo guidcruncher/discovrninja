@@ -12,7 +12,7 @@
     "logs": "docker compose logs -f",
     "helpers": "/home/node/buildscripts/mergehelpers.sh > /home/node/src/client/public/js/lib/090-helpers.js",
     "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img ./dist/client/public/weather",
-    "dev": "npx nest build && npm run uglify && npm run uglifycss && node ",
+    "dev": "npm run helpers && npx nest build && npm run uglify && npm run uglifycss && node ",
     "buildprod": "npx nest build",
     "format": "npx prettier --write \"src/**/*.ts\" ",
     "start:debug": "npx nest start --debug --watch",
