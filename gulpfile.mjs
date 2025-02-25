@@ -67,3 +67,10 @@ gulp.task(
   ),
 );
 
+gulp.task(
+  "debug",
+  series(
+    task("sudo rm -r -f ./dist"),
+    task("docker compose up --build")
+  ),
+);
