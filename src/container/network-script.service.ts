@@ -13,10 +13,11 @@ export class NetworkScriptService {
     const result = [];
     net.AttachedContainers.forEach((c) => {
       result.push(
-        "docker network connect " + (c.IPAddress ? ("--ip " + c.IPAddress + " ") : "") +
+        "docker network connect " +
+          (c.IPAddress ? "--ip " + c.IPAddress + " " : "") +
           net.Name +
           " " +
-          c.Name
+          c.Name,
       );
     });
     return result.sort();

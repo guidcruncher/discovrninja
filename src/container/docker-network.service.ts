@@ -80,7 +80,7 @@ export class DockerNetworkService {
                     });
                     result.push(net);
                   });
-                   dbnets.forEach((dbn) => {
+                  dbnets.forEach((dbn) => {
                     if (
                       !result.find((db) => {
                         return db.Name == dbn.Name;

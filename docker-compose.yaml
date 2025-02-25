@@ -3,6 +3,8 @@ name: discovrninja-dev
 services:
   discovrninja-dev:
     user: "${UID}:${GID}"
+    dns:
+      - 192.168.1.201
     build:
       context: .
       dockerfile: Dockerfile-dev
