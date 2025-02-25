@@ -66,7 +66,7 @@ export class DockerNetworkService {
                       const contNet =
                         container.NetworkSettings.Networks[net.Name];
                       if (contNet) {
-                        var attached = {
+                        const attached = {
                           Name: container.Name,
                           IPAddress: contNet.IPAddress,
                         };
