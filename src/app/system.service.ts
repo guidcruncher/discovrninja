@@ -1,8 +1,14 @@
 import { Injectable, Logger } from "@nestjs/common";
 
 @Injectable()
-export class SystemService {
+export class SystemService implements OnApplicationShutdown {
   private logger: Logger = new Logger(SystemService.name);
+
+  onApplicationShutdown(signal: string) {
+    this.logger.error(
+      "**** RECIEVED SIGNAL: " + signal + ", Shutting down. ****",
+    );
+  }
 
   public getVersion() {
     return new Promise((resolve, reject) => {
