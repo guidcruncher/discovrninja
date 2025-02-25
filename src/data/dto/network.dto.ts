@@ -36,7 +36,7 @@ export class NetworkContainer {
   Name: string;
 
   @Prop({ default: "" })
-  IpAddress: string;
+  IPAddress: string;
 }
 
 @Schema()

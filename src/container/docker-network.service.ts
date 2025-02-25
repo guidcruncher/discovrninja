@@ -68,7 +68,7 @@ export class DockerNetworkService {
                       if (contNet) {
                         var attached = {
                           Name: container.Name,
-                          IpAddress: contNet.IpAddress,
+                          IPAddress: contNet.IPAddress,
                         };
                         net.AttachedContainers.push(attached);
                         contNet.Name = container.Name;
@@ -80,7 +80,7 @@ export class DockerNetworkService {
                     });
                     result.push(net);
                   });
-                  dbnets.forEach((dbn) => {
+                   dbnets.forEach((dbn) => {
                     if (
                       !result.find((db) => {
                         return db.Name == dbn.Name;
