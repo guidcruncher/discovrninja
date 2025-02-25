@@ -64,10 +64,12 @@ export class DockerDiscoveryService implements IDiscoveryAgent {
               sd.proxy = "";
               sd.public = container.Config.Labels["homepage.href"] ?? "";
               sd.project =
-                container.Config.Labels["com.docker.compose.project"] ?? "";
+              container.Config.Labels["com.docker.compose.project"] ?? "";
               sd.available = container.available;
               sd.firstSeen = container.Created;
-
+if  ( container.Config.Labels["com.guidcruncher.discovrninja.annotations"]) {
+sd.annotations=container.Config.Labels["com.guidcruncher.discovrninja.annotations"].split(",");
+}
               if (
                 container.Config.Labels["com.guidcruncher.discovrninja.title"]
               ) {

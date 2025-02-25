@@ -65,6 +65,9 @@ export class ServiceDefinition {
   @Prop({ default: false })
   archived: boolean;
 
+  @Prop({type: Array, default: []})
+  annotations: string[];
+
   @Prop({ default: true })
   monitor: boolean;
 

@@ -325,7 +325,17 @@ function _map(Handlebars) {
 };
 _map(Handlebars);
 
-                                                                                                                                                                                             function _now(Handlebars) {
+function _minify(Handlebars) {
+
+  Handlebars.registerHelper("minify", function(obj) {
+    return new Handlebars.SafeString(
+      JSON.stringify(obj),
+    );
+  });
+};
+_minify(Handlebars);
+
+function _now(Handlebars) {
 
   Handlebars.registerHelper("now", function() {
     var dte = new Date();
