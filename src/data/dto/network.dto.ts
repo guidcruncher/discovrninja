@@ -31,6 +31,14 @@ export class IPAM {
   }
 }
 
+export class NetworkContainer {
+  @Prop({ default: "" })
+  Name: string;
+
+  @Prop({ default: "" })
+  IpAddress: string;
+}
+
 @Schema()
 export class Network {
   live: boolean;
@@ -75,7 +83,7 @@ export class Network {
   edited: boolean;
 
   @Prop({ Type: Array })
-  AttachedContainers: string[];
+  AttachedContainers: NetworkContainer[];
 
   constructor() {
     this.Driver = "";

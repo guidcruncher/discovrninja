@@ -5,9 +5,11 @@ RUN apk add --no-cache jq git
 FROM base AS buildbase
 
 WORKDIR /home/node/
-
+COPY nodemon.json ./
 COPY gulpfile.mjs ./
 COPY package*.json ./
+COPY tsconfig* ./
+COPY nest-cli.json ./
 COPY ./.npm ./
 RUN npm i --no-fund --no-audit --prefer-offline  --progress=false  --cache ./.npm
 
@@ -34,4 +36,4 @@ ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-ENTRYPOINT ["npx", "nodemon", "-L", "-V", "--config", "./nodemon.json", "--exec", "npm run dev", "./dist/main.js" ]
+ENTRYPOINT ["npm", "run", "dev" ]

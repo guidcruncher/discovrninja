@@ -5,7 +5,7 @@ import { InjectConnection } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Connection } from "mongoose";
 
-import { Network } from "./dto/network.dto";
+import { NetworkContainer, Network } from "./dto/network.dto";
 
 @Injectable()
 export class NetworkService {

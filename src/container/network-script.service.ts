@@ -12,7 +12,14 @@ export class NetworkScriptService {
   public getAttach(net: Network) {
     const result = [];
     net.AttachedContainers.forEach((c) => {
-      result.push("docker network connect " + net.Name + " " + c);
+      result.push(
+        "docker network connect --ip " +
+          c.IpAddress +
+          " " +
+          net.Name +
+          " " +
+          c.Name,
+      );
     });
     return result.sort();
   }
@@ -20,7 +27,9 @@ export class NetworkScriptService {
   public getDetach(net: Network) {
     const result = [];
     net.AttachedContainers.forEach((c) => {
-      result.push("docker network disconnect --force " + net.Name + " " + c);
+      result.push(
+        "docker network disconnect --force " + net.Name + " " + c.Name,
+      );
     });
     return result.sort();
   }
