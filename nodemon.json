@@ -4,7 +4,7 @@
   "watch": [ "src/", "package.json", "config/config.yaml"],
   "ext": ".js,.json,.ts,.hbs,.css,.svg",
   "signal": "SIGTERM",
-  "delay": "3000ms",
+  "delay": "5000ms",
   "events": {
     "exit": "npm run dev"
   }
