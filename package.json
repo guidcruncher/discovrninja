@@ -10,7 +10,7 @@
     "stop": "docker compose stop && docker compose rm -f",
     "restart": "docker compose restart",
     "logs": "docker compose logs -f",
-    "helpers": "mkdir -p /home/node/src/client/public/js/lib  && /home/node/buildscripts/mergehelpers.sh > /home/node/src/client/public/js/lib/090-helpers.js",
+    "helpers": "./buildscripts/mergehelpers.sh > ./src/client/public/js/lib/090-helpers.js",
     "prebuild": "npx rimraf ./src/client/public/img/bing.jpg ./dist && mkdir -p ./dist/client/public/js ./dist/client/public/css ./dist/client/public/img ./dist/client/public/weather",
     "dev": "npm npx nest build && npm run uglify && npm run uglifycss && npx nodemon -V --config ./nodemon.json ./dist/main.js",
     "buildprod": "npx nest build",

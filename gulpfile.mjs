@@ -43,7 +43,7 @@ gulp.task("js", series( "partials", "templates", "uglify"));
 gulp.task("lint", task("npm run lint"));
 gulp.task("lint-client", task("npm run lint-client"));
 
-gulp.task("dockerbuild", series("format" ,"lint","lint-client", task('docker buildx create --use --bootstrap --driver docker-container  --name discovrninjaBuilder'),
+gulp.task("dockerbuild", series("format" ,"helpers", "lint", "lint-client", task('docker buildx create --use --bootstrap --driver docker-container  --name discovrninjaBuilder'),
   task('docker buildx build . --builder discovrninjaBuilder -t guidcruncher/discovrninja:development  --no-cache --pull --push --platform linux/arm64'),
   task('docker buildx rm discovrninjaBuilder')));
 gulp.task("dockerrm", 	series(task('docker buildx rm discovrninjaBuilder')));
@@ -63,6 +63,7 @@ gulp.task(
   "default",
   series(
     task("sudo rm -r -f ./dist"),
+    "helpers",
     task("docker compose up -d --build")
   ),
 );
@@ -71,6 +72,7 @@ gulp.task(
   "debug",
   series(
     task("sudo rm -r -f ./dist"),
+    "helpers",
     task("docker compose up --build")
   ),
 );
