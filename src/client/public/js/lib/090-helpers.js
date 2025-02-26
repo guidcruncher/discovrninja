@@ -91,10 +91,8 @@ _cell(Handlebars);
 
 function _debug(Handlebars) {
 
-  Handlebars.registerHelper("debug", function(obj) {
-    return new Handlebars.SafeString(
-      "<pre>" + JSON.stringify(obj, null, 2) + "</pre>",
-    );
+  Handlebars.registerHelper("debug", function() {
+    return process.env.DEBUG_UI === "true";
   });
 };
 _debug(Handlebars);
