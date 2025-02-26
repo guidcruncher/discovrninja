@@ -2,6 +2,8 @@ FROM guidcruncher/node-base:lts-alpine AS base
 
 RUN apk add --no-cache jq git
 
+RUN npm i -g @nestjs/cli nodemon uglify-js  uglifycss rimraf prettier eslint
+
 FROM base AS buildbase
 
 WORKDIR /home/node/
@@ -18,7 +20,7 @@ FROM buildbase AS build
 WORKDIR /home/node/
 
 COPY . .
-RUN npx gulp prebuild
+RUN gulp prebuild
 
 EXPOSE 5001
 

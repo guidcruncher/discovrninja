@@ -22,10 +22,9 @@
     {{else}}
       <link rel="stylesheet" href="/assets/themes/bootstrap5.3.3/bootstrap.min.css">
       {{/if}}
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
       <link rel="stylesheet" href="/assets/css/style.css">
       <script src="/desktop.js" type="text/javascript"></script>
-      <script src="/assets/js/main.min.js"></script>
+      <script src="/assets/js/main{{#if prod}}.min{{/if}}.js"></script>
 </head>
 
 <body {{#if desktop.background.isimage}} onload="loadBackground({{#if desktop.background.dynamic}}{{desktop.background.dynamic}}, {{desktop.background.reloadIntervalMinutes}}{{else}}false, 0{{/if}}, '{{desktop.background.url}}');" {{/if}}>
