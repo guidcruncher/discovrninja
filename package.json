@@ -52,6 +52,7 @@
     "js-yaml": "^4.1.0",
     "mongoose": "^8.10.1",
     "nestjs-pino": "^4.3.1",
+    "npx": "^10.2.2",
     "openmeteo": "^1.1.4",
     "pino-http": "^10.4.0",
     "pino-pretty": "^13.0.0",
