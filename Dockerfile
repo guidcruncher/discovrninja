@@ -54,8 +54,6 @@ COPY --from=build /app/entrypoint.sh /app/entrypoint.sh
 COPY --from=build /app/useradd /app/useradd
 COPY --from=build /app/userpasswd  /app/userpasswd
 
-ENTRYPOINT [ "/bin/sh", "-e", "-c", "/app/entrypoint.sh" ]
-
 ENV NODE_CONFIG_DIR=/app/config/
 ENV NODE_ENV=production
 ENV NODE_PATH=./build
@@ -79,4 +77,4 @@ ENV PACKAGE_VERSION=Production
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-CMD [ "/app/start.sh" ]
+ENTRYPOINT [ "/bin/sh", "-e", "-c", "/app/entrypoint.sh" ]
