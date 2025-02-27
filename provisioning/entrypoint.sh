@@ -32,5 +32,5 @@ fi
 if [ "$NODE_ENV" == "production" ]; then
   sudo -u user -E /app/start.sh
 else
-  sudo -u user -E /app/provisioning/start.sh
+  sudo -u user -E /app/provisioning/start-dev.sh
 fi
