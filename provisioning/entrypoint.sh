@@ -1,5 +1,4 @@
 #!/bin/sh
-id
 
 if [ "$UID" != "0" ] && [ "$GID" != "0" ]; then
 groupmod -g $GID user
@@ -26,4 +25,4 @@ if [[ -S /var/run/docker.sock ]]; then
   fi
 fi
  
-sudo -u user /app/start.sh
+su -p -c /app/start.sh user

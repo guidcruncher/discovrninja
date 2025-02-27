@@ -1,4 +1,4 @@
-cFROM guidcruncher/node-base:lts-alpine AS base
+FROM guidcruncher/node-base:lts-alpine AS base
 
 RUN apk add --no-cache jq git sudo shadow
 RUN addgroup sudo
