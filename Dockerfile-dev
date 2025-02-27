@@ -28,6 +28,7 @@ WORKDIR /app/
 
 COPY . .
 COPY ./provisioning/ /app/provisioning/
+RUN chmod  +x /app/provisioning/userpasswd /app/provisioning/useradd /app/provisioning/entrypoint.sh /app/provisioning/start.sh
 RUN gulp prebuild
 
 EXPOSE 5001

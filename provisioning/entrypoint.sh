@@ -29,7 +29,7 @@ if [ -f /app/dist/builddate ]; then
   export BUILDDATE=$(cat /app/dist/builddate)
 fi
 
-ls -lR /app/
+ls -lR /app/provisioning/
 
 if [ "$NODE_ENV" == "production" ]; then
   sudo -u user -E /app/start.sh
