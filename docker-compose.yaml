@@ -1,4 +1,4 @@
-#name: discovrninja-dev
+name: discovrninja-dev
 
 services:
   discovrninja-dev:

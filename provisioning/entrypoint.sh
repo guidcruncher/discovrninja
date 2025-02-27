@@ -10,13 +10,13 @@ fi
 dockergid=$(stat -c '%g' '/var/run/docker.sock')
 
 if ! getent group "$dockergid" >/dev/null; then
-addgroup --gid "$dockergid" docker
+addgroup -g "$dockergid" docker
 fi
 
 dockergname=$(getent group "$dockergid" | cut -d: -f1)
 
-if ! groups node | grep --quiet "\b${dockergname}\b"; then
-usermod --append --groups "$dockergid" node
+if ! groups node | grep -q  "\b${dockergname}\b"; then
+addgroup -g "$dockergid" node
 fi
 
 sudo -u node "$@"
