@@ -4,8 +4,10 @@ id
 if [ "$UID" != "0" ] && [ "$GID" != "0" ]; then
 groupmod -g $GID user
 usermod -u $UID -g $GID user
-find /app/ -exec chown -v-h $UID '{}' \;
-find /app/ -exec chgrp -v$GID '{}' \;
+chown -R -v -h $UID /app/cache /app/dist /app/themes /app/config
+chown -v -h $UID /app/userpasswd /app/start.sh /app/useradd
+chgrp -R -v $GID /app/cache /app/dist /app/themes /app/config
+chgrp -v $GID /app/userpasswd /app/start.sh /app/useradd
 fi
 
 if [[ -S /var/run/dockeor.sock ]]; then
