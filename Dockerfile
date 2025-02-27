@@ -22,7 +22,8 @@ RUN npm run buildprod
 COPY ./provisioning/userpasswd /home/node/userpasswd
 COPY ./provisioning/useradd /home/node/useradd
 COPY ./provisioning/start.sh /home/node/start.sh
-RUN chmod  +x /home/node/userpasswd /home/node/useradd /home/node/start.sh
+COPY ./provisioning/entrypoint.sh /home/node/entrypoint.sh
+RUN chmod  +x /home/node/userpasswd /home/node/useradd /home/node/entrypoint.sh /home/node/start.sh
 COPY ./provisioning/defaults/ /home/node/.defaults/
 
 ENV NODE_ENV=production
@@ -46,10 +47,11 @@ WORKDIR /hone/node
 
 COPY --from=build /home/node/.defaults /home/node/.defaults
 COPY --from=build /home/node/start.sh /home/node/start.sh
+COPY --from=build /home/node/entrypoint.sh /home/node/entrypoint.sh
 COPY --from=build /home/node/useradd /home/node/useradd
 COPY --from=build /home/node/userpasswd  /home/node/userpasswd
 
-ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
+ENTRYPOINT [ "/bin/sh", "-e", "-c", "/home/node/entrypoint.sh" ]
 
 ENV NODE_CONFIG_DIR=/home/node/config/
 ENV NODE_ENV=production

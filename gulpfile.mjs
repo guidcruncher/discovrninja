@@ -64,7 +64,7 @@ gulp.task(
   series(
     task("sudo rm -r -f ./dist"),
     "helpers",
-    task("docker compose up -d --build")
+    task("docker compose up -d --build --remove-orphans")
   ),
 );
 
@@ -73,6 +73,15 @@ gulp.task(
   series(
     task("sudo rm -r -f ./dist"),
     "helpers",
-    task("docker compose up --build")
+    task("docker compose up --build --remove-orphans")
+  ),
+);
+
+gulp.task(
+  "up",
+  series(
+    task("sudo rm -r -f ./dist"),
+    "helpers",
+    task("docker compose up --remove-orphans")
   ),
 );
