@@ -2,8 +2,8 @@
 
 echo "Setting up directories"
 cd /app/dist
-mkdir -p /home/user/config/dnsmasq.d
-mkdir -p /home/user/config/caddyfile.d
+mkdir -p "$NODE_CONFIG_DIR"/dnsmasq.d
+mkdir -p "$NODE_CONFIG_DIR"/caddyfile.d
 
 if [ ! -z "$TZ" ]; then
 echo "Configuring timezone"
@@ -21,35 +21,34 @@ if [ ! -f /home/user/themes/bootstrap5.3.3/bootstrap.min.css ]; then
 fi
 
 echo "Checking for configuration" 
-if [ ! -f /home/user/config/config.yaml ]; then
-  cp /app/.defaults/config.yaml /home/user/config/config.yaml
-  sudo chown user:user /home/user/config/config.yaml
+if [ ! -f "$NODE_CONFIG_DIR"/config.yaml ]; then
+  cp /app/.defaults/config.yaml "$NODE_CONFIG_DIR"/config.yaml
+  sudo chown user:user "$NODE_CONFIG_DIR"/config.yaml
 fi
 
 echo "Checking for desktop" 
-if [ ! -f /home/user/config/desktop.yaml ]; then
-  cp /app/.defaults/desktop.yaml /home/user/config/desktop.yaml
-  sudo chown user:user /home/user/config/desktop.yaml
+if [ ! -f "$NODE_CONFIG_DIR"/desktop.yaml ]; then
+  cp /app/.defaults/desktop.yaml "$NODE_CONFIG_DIR"/desktop.yaml
+  sudo chown user:user "$NODE_CONFIG_DIR"/desktop.yaml
 fi
 
 echo "Checking for iconsets"
-if [ ! -f /home/user/config/iconsets.json ]; then
-  cp /app/.defaults/iconsets.json /home/user/config/iconsets.json
-  sudo chown user:user /home/user/config/iconsets.json
+if [ ! -f "$NODE_CONFIG_DIR"/iconsets.json ]; then
+  cp /app/.defaults/iconsets.json "$NODE_CONFIG_DIR"/iconsets.json
+  sudo chown user:user "$NODE_CONFIG_DIR"/iconsets.json
 fi
 
 echo "Checking for repositories"
-if [ ! -f /home/user/config/repositories.json ]; then
-  cp /app/.defaults/repositories.json /home/user/config/repositories.json
-  sudo chown user:user /home/user/config/repositories.json
+if [ ! -f "$NODE_CONFIG_DIR"/repositories.json ]; then
+  cp /app/.defaults/repositories.json "$NODE_CONFIG_DIR"/repositories.json
+  sudo chown user:user "$NODE_CONFIG_DIR"/repositories.json
 fi
 
 echo "Checking for services"
-if [ ! -f /home/user/config/services.yaml ]; then
-  cp /app/.defaults/services.yaml /home/user/config/services.yaml
-  sudo chown user:user /home/user/config/services.yaml
+if [ ! -f "$NODE_CONFIG_DIR"/services.yaml ]; then
+  cp /app/.defaults/services.yaml "$NODE_CONFIG_DIR"/services.yaml
+  sudo chown user:user "$NODE_CONFIG_DIR"/services.yaml
 fi
-
 
 echo "Checking if running in Docker"
 if [ -f /.dockerenv ]; then
@@ -61,7 +60,7 @@ export STARTDATE=$(date +%s)
 
 if [ "$NODE_ENV" == "production" ]; then
   cd /app/dist
-  node main --config=/home/user/config/config.yaml
+  node main --config="$NODE_CONFIG_DIR"/config.yaml
 else
   npm run dev
 fi

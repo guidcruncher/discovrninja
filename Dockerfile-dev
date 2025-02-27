@@ -1,9 +1,14 @@
 FROM guidcruncher/node-base:lts-alpine AS base
 
 RUN apk add --no-cache jq git sudo shadow
-RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel 
+RUN addgroup sudo
+RUN addgroup docker
 RUN useradd user -s /bin/bash -m
-RUN addgroup user wheel
+RUN addgroup user sudo
+RUN addgroup user docker
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+RUN mkdir -p /app/dist /app/.defaults
 
 RUN npm i -g @nestjs/cli nodemon uglify-js  uglifycss rimraf prettier eslint
 
