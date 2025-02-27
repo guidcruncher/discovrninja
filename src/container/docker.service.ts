@@ -513,7 +513,7 @@ export class DockerService {
    * Gets the statistics for a given container
    */
   public getContainerStats(id: string): Promise<any> {
-     return new Promise<any>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       const docker = this.connectorService.createDocker();
       const container = docker.getContainer(id);
       container.stats({ stream: false }, (err, data) => {
@@ -537,13 +537,15 @@ export class DockerService {
           reject(err);
         } else {
           const res = [];
-          if (containers) {containers.forEach((c) => {
-            const ctr: any = c;
-            ctr.available = !["exited", "dead", "paused"].includes(
-              c.State.toLowerCase(),
-            );
-            res.push(ctr);
-          });}
+          if (containers) {
+            containers.forEach((c) => {
+              const ctr: any = c;
+              ctr.available = !["exited", "dead", "paused"].includes(
+                c.State.toLowerCase(),
+              );
+              res.push(ctr);
+            });
+          }
           resolve(res);
         }
       });
@@ -558,9 +560,11 @@ export class DockerService {
           reject(err);
         } else {
           const promises = [];
-          if (containers) {containers.forEach((container) => {
-            promises.push(this.getContainer(container.Id));
-          });}
+          if (containers) {
+            containers.forEach((container) => {
+              promises.push(this.getContainer(container.Id));
+            });
+          }
 
           const c = [];
           Promise.allSettled(promises).then((results) => {
@@ -602,83 +606,84 @@ export class DockerService {
         docker.listContainers({ all: true, size: false }, (err, containers) => {
           const promises: Promise<any>[] = [];
 
-if (containers) {
-          containers.forEach((container) => {
-            promises.push(this.getContainer(container.Id));
-          });
+          if (containers) {
+            containers.forEach((container) => {
+              promises.push(this.getContainer(container.Id));
+            });
 
-          Promise.allSettled(promises)
-            .then((results) => {
-              results.forEach((promise) => {
-                if (promise.status == "fulfilled") {
-                  const container = promise.value;
-                  const project =
-                    container.Config.Labels["com.docker.compose.project"];
-                  if (typeof projects[project] === "undefined") {
-                    const workdir =
-                      container.Config.Labels[
-                        "com.docker.compose.project.working_dir"
-                      ] ?? "";
-
-                    projects[project] = {
-                      config: (
-                        container.Config.Labels[
-                          "com.docker.compose.project.config_files"
-                        ] ?? ""
-                      ).replace(workdir, "."),
-                      environment: (
-                        container.Config.Labels[
-                          "com.docker.compose.project.environment_file"
-                        ] ?? ""
-                      ).replace(workdir, "."),
-                      workingFolder:
+            Promise.allSettled(promises)
+              .then((results) => {
+                results.forEach((promise) => {
+                  if (promise.status == "fulfilled") {
+                    const container = promise.value;
+                    const project =
+                      container.Config.Labels["com.docker.compose.project"];
+                    if (typeof projects[project] === "undefined") {
+                      const workdir =
                         container.Config.Labels[
                           "com.docker.compose.project.working_dir"
-                        ] ?? "",
-                      containers: [],
-                    };
-                    const projectPath = this.determineProjectPath(
-                      projects[project].workingFolder,
-                      projects[project].config,
-                    );
+                        ] ?? "";
 
-                    const serviceDef = serviceDefs.find((sd) => {
-                      return sd.containerName == container.Name;
+                      projects[project] = {
+                        config: (
+                          container.Config.Labels[
+                            "com.docker.compose.project.config_files"
+                          ] ?? ""
+                        ).replace(workdir, "."),
+                        environment: (
+                          container.Config.Labels[
+                            "com.docker.compose.project.environment_file"
+                          ] ?? ""
+                        ).replace(workdir, "."),
+                        workingFolder:
+                          container.Config.Labels[
+                            "com.docker.compose.project.working_dir"
+                          ] ?? "",
+                        containers: [],
+                      };
+                      const projectPath = this.determineProjectPath(
+                        projects[project].workingFolder,
+                        projects[project].config,
+                      );
+
+                      const serviceDef = serviceDefs.find((sd) => {
+                        return sd.containerName == container.Name;
+                      });
+                      if (serviceDef) {
+                        projects[project].iconCatalog = serviceDef.iconCatalog;
+                        projects[project].iconSlug = serviceDef.iconSlug;
+                      }
+
+                      projects[project].editable = projectPath != "";
+                      if (projects[project].editable) {
+                        const folder = projectPath.split(path.sep).pop();
+                        projects[project].projectPath = folder;
+                      }
+                    }
+                    projects[project].containers.push({
+                      containerName: container.Name,
+                      hostname: container.Config.Hostname,
+                      projectName: project,
+                      editable: projects[project].editable,
                     });
-                    if (serviceDef) {
-                      projects[project].iconCatalog = serviceDef.iconCatalog;
-                      projects[project].iconSlug = serviceDef.iconSlug;
-                    }
-
-                    projects[project].editable = projectPath != "";
-                    if (projects[project].editable) {
-                      const folder = projectPath.split(path.sep).pop();
-                      projects[project].projectPath = folder;
-                    }
                   }
-                  projects[project].containers.push({
-                    containerName: container.Name,
-                    hostname: container.Config.Hostname,
-                    projectName: project,
-                    editable: projects[project].editable,
-                  });
+                });
+
+                const keys = Object.keys(projects);
+                const sortedProjects = {};
+                keys.sort();
+
+                for (let i = 0; i < keys.length; i++) {
+                  const k = keys[i];
+                  sortedProjects[k] = projects[k];
                 }
+
+                resolve(sortedProjects);
+              })
+              .catch((err) => {
+                reject(err);
               });
-
-              const keys = Object.keys(projects);
-              const sortedProjects = {};
-              keys.sort();
-
-              for (let i = 0; i < keys.length; i++) {
-                const k = keys[i];
-                sortedProjects[k] = projects[k];
-              }
-
-              resolve(sortedProjects);
-            })
-            .catch((err) => {
-              reject(err);
-            });
+          }
         });
       });
     });

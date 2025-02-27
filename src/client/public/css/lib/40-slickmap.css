@@ -1,4 +1,3 @@
-
 .sitemap {
   margin: 0 0 2em 0;
   box-sizing: border-box;
@@ -280,8 +279,7 @@
   display: inline-block;
 }
 
-.
-utilityNav li:first-child {}
+. utilityNav li:first-child {}
 
 .sitemap .utilityNav li a {
   display: block;
