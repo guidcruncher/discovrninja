@@ -3,19 +3,13 @@
 if [ "$UID" != "0" ] && [ "$GID" != "0" ]; then
 groupmod -g $GID user
 usermod -u $UID -g $GID user
-  if [ "$NODE_ENV" == "production" ]; then
-    chown -R -v -h $UID /app/cache /app/dist /app/themes /app/config
-    chown -v -h $UID /app/userpasswd /app/start.sh /app/useradd
-    chgrp -R -v $GID /app/cache /app/dist /app/themes /app/config
-    chgrp -v $GID /app/userpasswd /app/start.sh /app/useradd
-  fi
 fi
 
 if [[ -S /var/run/docker.sock ]]; then
   dockergid=$(stat -c '%g' '/var/run/docker.sock')
 
   if ! getent group "$dockergid" >/dev/null; then
-    addgroup -g "$dockergid" docker
+    groupmod -g $dockergid docker
   fi
 
   dockergname=$(getent group "$dockergid" | cut -d: -f1)
@@ -25,4 +19,14 @@ if [[ -S /var/run/docker.sock ]]; then
   fi
 fi
 
-sudo -u user /app/start.sh
+export PACKAGE_VERSION=Development
+if [ -f /app/dist/package.json ]; then
+  export PACKAGE_VERSION=$(cat /app/dist/package.json | jq ".version" -r)
+fi
+
+export BUILDDATE=$(date +%s)
+if [ -f /app/dist/builddate ]; then
+  export BUILDDATE=$(cat /app/dist/builddate)
+fi
+
+sudo -u user -E /app/start.sh

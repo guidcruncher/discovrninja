@@ -41,4 +41,4 @@ ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-ENTRYPOINT [ "/bin/sh", "-e", "-c", "/app/provisioning/entrypoint.sh" ]
+ENTRYPOINT [ "/app/provisioning/entrypoint.sh" ]

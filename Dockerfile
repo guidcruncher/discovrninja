@@ -1,11 +1,14 @@
-FROM guidcruncher/node-base:lts-alpine AS base
+ FROM guidcruncher/node-base:lts-alpine AS base
  
 RUN apk add --no-cache jq git sudo shadow
-RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel 
+RUN addgroup sudo
+RUN addgroup docker
 RUN useradd user -s /bin/bash -m
-RUN addgroup user wheel
+RUN addgroup user sudo
+RUN addgroup user docker
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN mkdir -p /app/themes/bootstrap5.3.3 /app/dist /app/config /app/config /app/cache /app/.defaults
+RUN mkdir -p /app/dist /app/.defaults
 
 FROM base AS build
 
@@ -63,14 +66,16 @@ EXPOSE 5001
 
 WORKDIR /app
 
-ENV THEME_BASE=/app/themes
+RUN mkdir -p /home/user
+
+ENV THEME_BASE=/home/user/themes
 ENV CLIENT_BASE=/app/dist/client
-ENV CACHE_BASE=/app/cache 
-ENV NODE_CONFIG_DIR=/app/config
+ENV CACHE_BASE=/home/user/cache
+ENV NODE_CONFIG_DIR=/home/user/config
 ENV IN_DOCKER=true
 ENV NODE_ENV=production
-ENV CADDY_CFG=/app/config/caddyfile.d/
-ENV DNS_CFG=/app/config/dnsmasq.d/
+ENV CADDY_CFG=/home/user/config/caddyfile.d/
+ENV DNS_CFG=/home/user/config/dnsmasq.d/
 ENV JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
 ENV IN_DOCKER=true
 ENV PACKAGE_VERSION=Production
