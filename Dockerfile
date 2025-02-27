@@ -1,4 +1,4 @@
- FROM guidcruncher/node-base:lts-alpine AS base
+FROM guidcruncher/node-base:lts-alpine AS base
  
 RUN apk add --no-cache jq git sudo shadow
 RUN addgroup sudo
@@ -25,13 +25,6 @@ COPY ./src/client/public/weather/ ./dist/client/public/weather/
 
 RUN npm run buildprod
 
-COPY ./provisioning/userpasswd /app/userpasswd
-COPY ./provisioning/useradd /app/useradd
-COPY ./provisioning/start.sh /app/start.sh
-COPY ./provisioning/entrypoint.sh /app/entrypoint.sh
-RUN chmod  +x /app/userpasswd /app/useradd /app/entrypoint.sh /app/start.sh
-COPY ./provisioning/defaults/ /app/.defaults/
-
 ENV NODE_ENV=production
 ARG NODE_ENV=production
 RUN cp ./dist/* /app/dist -r
@@ -44,6 +37,13 @@ RUN npm cache clean --force
 RUN date +%s > /app/dist/builddate
 
 FROM base AS production
+WORKDIR /app
+COPY ./provisioning/userpasswd /app/userpasswd
+COPY ./provisioning/useradd /app/useradd
+COPY ./provisioning/start.sh /app/start.sh
+COPY ./provisioning/entrypoint.sh /app/entrypoint.sh
+RUN chmod  +x /app/userpasswd /app/useradd /app/entrypoint.sh /app/start.sh
+COPY ./provisioning/defaults/ /app/.defaults/
 
 WORKDIR /app/dist
 
