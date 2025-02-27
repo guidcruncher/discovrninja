@@ -1,20 +1,12 @@
 FROM guidcruncher/node-base:lts-alpine AS base
 
-RUN apk add --no-cache jq git sudo shadow
-RUN addgroup sudo
-RUN addgroup docker
-RUN useradd user -s /bin/bash -m
-RUN addgroup user sudo
-RUN addgroup user docker
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-RUN mkdir -p /app/dist /app/.defaults
+RUN apk add --no-cache jq git
 
 RUN npm i -g @nestjs/cli nodemon uglify-js  uglifycss rimraf prettier eslint
 
 FROM base AS buildbase
 
-WORKDIR /app/
+WORKDIR /home/node/
 COPY nodemon.json ./
 COPY gulpfile.mjs ./
 COPY package*.json ./
@@ -24,27 +16,25 @@ RUN npm i --no-fund --no-audit --prefer-offline  --progress=false
 
 FROM buildbase AS build
 
-WORKDIR /app/
+WORKDIR /home/node/
 
 COPY . .
-COPY ./provisioning/ /app/provisioning/
-RUN chmod  +x /app/provisioning/userpasswd /app/provisioning/useradd /app/provisioning/entrypoint.sh /app/provisioning/start.sh /app/provisioning/start-dev.sh
 RUN gulp prebuild
 
 EXPOSE 5001
 
-ENV THEME_BASE=/app/themes
-ENV CLIENT_BASE=/app/dist/client
-ENV CACHE_BASE=/app/cache
-ENV NODE_CONFIG_DIR=/app/config
+ENV THEME_BASE=/home/node/themes
+ENV CLIENT_BASE=/home/node/dist/client
+ENV CACHE_BASE=/home/node/cache
+ENV NODE_CONFIG_DIR=/home/node/config
 ENV IN_DOCKER=false
 ENV NODE_ENV=development
-ENV CADDY_CFG=/app/config/caddyfile.d/
-ENV DNS_CFG=/app/config/dnsmasq.d/
+ENV CADDY_CFG=/home/node/config/caddyfile.d/
+ENV DNS_CFG=/home/node/config/dnsmasq.d/
 ENV JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
 ENV IN_DOCKER=true
 ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-ENTRYPOINT [ "/app/provisioning/entrypoint.sh" ]
+ENTRYPOINT ["npm", "run", "dev" ]
