@@ -13,7 +13,6 @@ target="/usr/share/zoneinfo/$TZ"
 fi
 
 echo "Checking for theme"
-export THEME_BASE=/home/node/themes
 if [ ! -f /home/node/themes/bootstrap5.3.3/bootstrap.min.css ]; then
   mkdir -p /home/node/themes/bootstrap5.3.3/
   cp ./client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -R
@@ -44,15 +43,6 @@ if [ ! -f /home/node/config/services.yaml ]; then
   cp /home/node/.defaults/services.yaml /home/node/config/services.yaml
 fi
 
-echo "Setting environment variables"
-export CLIENT_BASE=/home/node/dist/client
-export CACHE_BASE=/home/node/cache 
-export NODE_CONFIG_DIR=/home/node/config
-export IN_DOCKER=false
-export NODE_ENV=production
-export CADDY_CFG=/home/node/config/caddyfile.d/
-export DNS_CFG=/home/node/config/dnsmasq.d/
-export JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
 
 echo "Checking if running in Docker"
 if [ -f /.dockerenv ]; then
@@ -73,5 +63,10 @@ fi
 
 echo "Starting server process"
 export STARTDATE=$(date +%s)
-cd /home/node/dist
-node main --config=/home/node/config/config.yaml
+
+if [ "$NODE_ENV" == "production" ]; then
+  cd /home/node/dist
+  node main --config=/home/node/config/config.yaml
+else
+  npm run dev
+fi

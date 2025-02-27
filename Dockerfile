@@ -59,5 +59,19 @@ ENV TZ=UTC
 EXPOSE 5001
 
 WORKDIR /home/node
- 
+
+ENV THEME_BASE=/home/node/themes
+ENV CLIENT_BASE=/home/node/dist/client
+ENV CACHE_BASE=/home/node/cache 
+ENV NODE_CONFIG_DIR=/home/node/config
+ENV IN_DOCKER=true
+ENV NODE_ENV=production
+ENV CADDY_CFG=/home/node/config/caddyfile.d/
+ENV DNS_CFG=/home/node/config/dnsmasq.d/
+ENV JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
+ENV IN_DOCKER=true
+ENV PACKAGE_VERSION=Production
+ENV BUILDDATE=0
+ENV STARTDATE=0
+
 CMD [ "/home/node/start.sh" ]

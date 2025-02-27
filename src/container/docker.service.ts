@@ -513,7 +513,7 @@ export class DockerService {
    * Gets the statistics for a given container
    */
   public getContainerStats(id: string): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
+     return new Promise<any>((resolve, reject) => {
       const docker = this.connectorService.createDocker();
       const container = docker.getContainer(id);
       container.stats({ stream: false }, (err, data) => {
@@ -537,13 +537,13 @@ export class DockerService {
           reject(err);
         } else {
           const res = [];
-          containers.forEach((c) => {
+          if (containers) {containers.forEach((c) => {
             const ctr: any = c;
             ctr.available = !["exited", "dead", "paused"].includes(
               c.State.toLowerCase(),
             );
             res.push(ctr);
-          });
+          });}
           resolve(res);
         }
       });
@@ -558,9 +558,9 @@ export class DockerService {
           reject(err);
         } else {
           const promises = [];
-          containers.forEach((container) => {
+          if (containers) {containers.forEach((container) => {
             promises.push(this.getContainer(container.Id));
-          });
+          });}
 
           const c = [];
           Promise.allSettled(promises).then((results) => {
@@ -602,6 +602,7 @@ export class DockerService {
         docker.listContainers({ all: true, size: false }, (err, containers) => {
           const promises: Promise<any>[] = [];
 
+if (containers) {
           containers.forEach((container) => {
             promises.push(this.getContainer(container.Id));
           });

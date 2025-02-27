@@ -99,6 +99,20 @@
 </div>
 </div>
 <div class="tab-pane fade show active" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" tabindex="0">
+<div class="sitemap" style="display:block !important;width:800px ! important; overflow: scroll !important">
+<nav class="primaryNav">
+<ul>
+  <li id="home">Host</  {{#each this.networks}}
+   <li>{{Name}}
+<ul>
+   {{#each Containers}}
+   <li>{{Name}} {{IPAddress}}</li>
+   {{/each}}
+</ul></li>
+  {{/each}}
+</ul>
+</nav>
+</div>
 </div>
 </div>
 
