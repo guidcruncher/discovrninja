@@ -1,10 +1,5 @@
 #!/bin/sh
 
-if [ "$UID" != "0" ] && [ "$GID" != "0" ]; then
-groupmod -g $GID user
-usermod -u $UID -g $GID user
-fi
-
 if [[ -S /var/run/docker.sock ]]; then
   dockergid=$(stat -c '%g' '/var/run/docker.sock')
 
@@ -19,6 +14,11 @@ if [[ -S /var/run/docker.sock ]]; then
   fi
 fi
 
+#if [ "$UID" != "0" ] && [ "$GID" != "0" ]; then
+#  groupmod -g $GID user
+#  usermod -u $UID -g $GID user
+#fi
+
 export PACKAGE_VERSION=Development
 if [ -f /app/dist/package.json ]; then
   export PACKAGE_VERSION=$(cat /app/dist/package.json | jq ".version" -r)
@@ -29,8 +29,10 @@ if [ -f /app/dist/builddate ]; then
   export BUILDDATE=$(cat /app/dist/builddate)
 fi
 
+ls -lR /app/
+
 if [ "$NODE_ENV" == "production" ]; then
   sudo -u user -E /app/start.sh
 else
-  sudo -u user =E /app/provisioning/start.sh
+  sudo -u user -E /app/provisioning/start.sh
 fi

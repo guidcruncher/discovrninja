@@ -16,7 +16,7 @@ WORKDIR /home/node/build
 
 COPY package*.json ./
 
-RUN npm ci --no-fund --no-audit --silent --cache ./.npm --prefer-offline
+RUN npm ci --no-fund --no-audit --silent --prefer-offline
 
 COPY . .
 RUN npx gulp prebuild js
@@ -32,7 +32,7 @@ RUN cp ./package*.json /app/dist
 RUN cp ./src/client/themes/bootstrap5.3.3/* /app/themes/bootstrap5.3.3/ -r
 
 WORKDIR /app/dist/
-RUN npm ci --omit=dev --no-fund --only=production --no-audit --silent --cache /home/node/build/.npm --prefer-offline
+RUN npm ci --omit=dev --no-fund --only=production --no-audit --silent --prefer-offline
 RUN npm cache clean --force
 RUN date +%s > /app/dist/builddate
 

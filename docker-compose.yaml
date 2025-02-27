@@ -2,7 +2,7 @@ name: discovrninja-dev
 
 services:
   discovrninja-dev:
-    user: "${PUID}:${PGID}"
+    user: "1001:1001"
     dns:
       - 192.168.1.201
     build:
@@ -14,8 +14,6 @@ services:
       proxy:
     environment:
       - DEBUG_UI=true
-      - UID=${PUID}
-      - GID=${PGID}
     volumes:
       - .:/home/node/
       - /var/run/docker.sock:/var/run/docker.sock:ro

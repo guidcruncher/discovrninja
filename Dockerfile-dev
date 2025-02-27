@@ -20,14 +20,14 @@ COPY gulpfile.mjs ./
 COPY package*.json ./
 COPY tsconfig* ./
 COPY nest-cli.json ./
-COPY ./.npm ./
-RUN npm i --no-fund --no-audit --prefer-offline  --progress=false  --cache ./.npm
+RUN npm i --no-fund --no-audit --prefer-offline  --progress=false
 
 FROM buildbase AS build
 
 WORKDIR /app/
 
 COPY . .
+COPY ./provisioning/ /app/provisioning/
 RUN gulp prebuild
 
 EXPOSE 5001
