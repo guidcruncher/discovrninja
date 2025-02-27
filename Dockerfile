@@ -1,8 +1,11 @@
 FROM guidcruncher/node-base:lts-alpine AS base
  
-RUN apk add --no-cache jq git sudo
+RUN apk add --no-cache jq git sudo shadow
+RUN addgroup sudo
+RUN useradd user -s /bin/bash -m
+RUN addgroup node sudo
 
-RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/dist /home/node/config /home/node/config /home/node/cache /home/node/.defaults
+RUN mkdir -p /app/themes/bootstrap5.3.3 /app/dist /app/config /app/config /app/cache /app/.defaults
 
 FROM base AS build
 
@@ -19,61 +22,61 @@ COPY ./src/client/public/weather/ ./dist/client/public/weather/
 
 RUN npm run buildprod
 
-COPY ./provisioning/userpasswd /home/node/userpasswd
-COPY ./provisioning/useradd /home/node/useradd
-COPY ./provisioning/start.sh /home/node/start.sh
-COPY ./provisioning/entrypoint.sh /home/node/entrypoint.sh
-RUN chmod  +x /home/node/userpasswd /home/node/useradd /home/node/entrypoint.sh /home/node/start.sh
-COPY ./provisioning/defaults/ /home/node/.defaults/
+COPY ./provisioning/userpasswd /app/userpasswd
+COPY ./provisioning/useradd /app/useradd
+COPY ./provisioning/start.sh /app/start.sh
+COPY ./provisioning/entrypoint.sh /app/entrypoint.sh
+RUN chmod  +x /app/userpasswd /app/useradd /app/entrypoint.sh /app/start.sh
+COPY ./provisioning/defaults/ /app/.defaults/
 
 ENV NODE_ENV=production
 ARG NODE_ENV=production
-RUN cp ./dist/* /home/node/dist -r
-RUN cp ./package*.json /home/node/dist
-RUN cp ./src/client/themes/bootstrap5.3.3/* /home/node/themes/bootstrap5.3.3/ -r
+RUN cp ./dist/* /app/dist -r
+RUN cp ./package*.json /app/dist
+RUN cp ./src/client/themes/bootstrap5.3.3/* /app/themes/bootstrap5.3.3/ -r
 
-WORKDIR /home/node/dist/
+WORKDIR /app/dist/
 RUN npm ci --omit=dev --no-fund --only=production --no-audit --silent --cache /home/node/build/.npm --prefer-offline
 RUN npm cache clean --force
-RUN date +%s > /home/node/dist/builddate
+RUN date +%s > /app/dist/builddate
 
 FROM base AS production
 
-WORKDIR /home/node/dist
+WORKDIR /app/dist
 
-COPY --from=build /home/node/dist .
+COPY --from=build /app/dist .
 
 WORKDIR /hone/node
 
-COPY --from=build /home/node/.defaults /home/node/.defaults
-COPY --from=build /home/node/start.sh /home/node/start.sh
-COPY --from=build /home/node/entrypoint.sh /home/node/entrypoint.sh
-COPY --from=build /home/node/useradd /home/node/useradd
-COPY --from=build /home/node/userpasswd  /home/node/userpasswd
+COPY --from=build /app/.defaults /app/.defaults
+COPY --from=build /app/start.sh /app/start.sh
+COPY --from=build /app/entrypoint.sh /app/entrypoint.sh
+COPY --from=build /app/useradd /app/useradd
+COPY --from=build /app/userpasswd  /app/userpasswd
 
-ENTRYPOINT [ "/bin/sh", "-e", "-c", "/home/node/entrypoint.sh" ]
+ENTRYPOINT [ "/bin/sh", "-e", "-c", "/app/entrypoint.sh" ]
 
-ENV NODE_CONFIG_DIR=/home/node/config/
+ENV NODE_CONFIG_DIR=/app/config/
 ENV NODE_ENV=production
 ENV NODE_PATH=./build
 ENV TZ=UTC
 
 EXPOSE 5001
 
-WORKDIR /home/node
+WORKDIR /app
 
-ENV THEME_BASE=/home/node/themes
-ENV CLIENT_BASE=/home/node/dist/client
-ENV CACHE_BASE=/home/node/cache 
-ENV NODE_CONFIG_DIR=/home/node/config
+ENV THEME_BASE=/app/themes
+ENV CLIENT_BASE=/app/dist/client
+ENV CACHE_BASE=/app/cache 
+ENV NODE_CONFIG_DIR=/app/config
 ENV IN_DOCKER=true
 ENV NODE_ENV=production
-ENV CADDY_CFG=/home/node/config/caddyfile.d/
-ENV DNS_CFG=/home/node/config/dnsmasq.d/
+ENV CADDY_CFG=/app/config/caddyfile.d/
+ENV DNS_CFG=/app/config/dnsmasq.d/
 ENV JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
 ENV IN_DOCKER=true
 ENV PACKAGE_VERSION=Production
 ENV BUILDDATE=0
 ENV STARTDATE=0
 
-CMD [ "/home/node/start.sh" ]
+CMD [ "/app/start.sh" ]
