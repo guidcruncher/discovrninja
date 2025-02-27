@@ -24,5 +24,5 @@ if [[ -S /var/run/docker.sock ]]; then
     addgroup -g "$dockergid" user
   fi
 fi
- 
-su -p -c /app/start.sh user
+
+sudo -u user /app/start.sh

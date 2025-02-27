@@ -1,9 +1,9 @@
 FROM guidcruncher/node-base:lts-alpine AS base
  
 RUN apk add --no-cache jq git sudo shadow
-RUN addgroup sudo
+RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel 
 RUN useradd user -s /bin/bash -m
-RUN addgroup node sudo
+RUN addgroup user wheel
 
 RUN mkdir -p /app/themes/bootstrap5.3.3 /app/dist /app/config /app/config /app/cache /app/.defaults
 
