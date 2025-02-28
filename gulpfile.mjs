@@ -64,7 +64,7 @@ gulp.task(
   series(
     task("sudo rm -r -f ./dist"),
     "helpers",
-    task("docker compose up -d --build --remove-orphans")
+    task("docker compose up -f ./docker-compose.yaml -d --build --remove-orphans")
   ),
 );
 
@@ -73,7 +73,7 @@ gulp.task(
   series(
     task("sudo rm -r -f ./dist"),
     "helpers",
-    task('docker compose up --build --remove-orphans')
+    task('docker compose up -f ./docker-compose-debug.yaml --build --remove-orphans')
   ),
 );
 
@@ -82,6 +82,6 @@ gulp.task(
   series(
     task("sudo rm -r -f ./dist"),
     "helpers",
-    task('docker compose up --remove-orphans')
+    task('docker compose up -f ./docker-compose.yaml --remove-orphans')
   ),
 );
