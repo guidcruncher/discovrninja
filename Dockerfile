@@ -1,6 +1,13 @@
 FROM guidcruncher/node-base:lts-alpine AS base
  
-RUN apk add --no-cache jq git
+RUN apk add --no-cache jq git sudo su-exec shadow
+
+RUN addgroup -g 1002 docker && \
+    useradd user -s /bin/bash -m && \
+    addgroup user docker && \
+    addgroup root docker && \
+    echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/dist /home/node/config /home/node/config /home/node/cache /home/node/.defaults
 
@@ -49,14 +56,28 @@ COPY --from=build /home/node/start.sh /home/node/start.sh
 COPY --from=build /home/node/useradd /home/node/useradd
 COPY --from=build /home/node/userpasswd  /home/node/userpasswd
 
+USER docker
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 
-ENV NODE_CONFIG_DIR=/home/node/config/
+ENV APP_BASE=/home/node/dist
+ENV THEME_BASE=/home/node/themes
+ENV CLIENT_BASE=/home/node/dist/client
+ENV CACHE_BASE=/home/node/cache
+ENV NODE_CONFIG_DIR=/home/node/config
+ENV IN_DOCKER=true
 ENV NODE_ENV=production
-ENV NODE_PATH=./build
+ENV CADDY_CFG=/home/node/config/caddyfile.d/
+ENV DNS_CFG=/home/node/config/dnsmasq.d/
+ENV JWT_SECRET="7GYyXKwiM06C1bgTJIg3AwtQjSq9anBU2r-aGXV_sqcA"
+ENV IN_DOCKER=true
+ENV PACKAGE_VERSION=Production
+ENV BUILDDATE=0
+ENV STARTDATE=0
 ENV TZ=UTC
 
 EXPOSE 5001
+
+
 
 WORKDIR /home/node
  

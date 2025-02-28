@@ -1,6 +1,13 @@
 FROM guidcruncher/node-base:lts-alpine AS base
 
-RUN apk add --no-cache jq git
+RUN apk add --no-cache jq git sudo su-exec shadow
+
+RUN addgroup -g 1002 docker && \
+    useradd user -s /bin/bash -m && \
+    addgroup user docker && \
+    addgroup root docker && \
+    echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN npm i -g @nestjs/cli nodemon uglify-js  uglifycss rimraf prettier eslint
 
@@ -23,11 +30,12 @@ RUN gulp prebuild
 
 EXPOSE 5001
 
+ENV APP_BASE=/home/node/dist
 ENV THEME_BASE=/home/node/themes
 ENV CLIENT_BASE=/home/node/dist/client
 ENV CACHE_BASE=/home/node/cache
 ENV NODE_CONFIG_DIR=/home/node/config
-ENV IN_DOCKER=false
+ENV IN_DOCKER=true
 ENV NODE_ENV=development
 ENV CADDY_CFG=/home/node/config/caddyfile.d/
 ENV DNS_CFG=/home/node/config/dnsmasq.d/
@@ -36,5 +44,6 @@ ENV IN_DOCKER=true
 ENV PACKAGE_VERSION=Development
 ENV BUILDDATE=0
 ENV STARTDATE=0
+ENV TZ=UTC
 
 ENTRYPOINT ["npm", "run", "dev" ]
