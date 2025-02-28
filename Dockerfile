@@ -29,6 +29,8 @@ COPY ./src/client/public/img/ ./dist/client/public/img/
 COPY ./src/client/public/weather/ ./dist/client/public/weather/
 
 RUN npm run buildprod
+RUN npm run uglify
+RUN npm run uglifycss
 
 COPY ./provisioning/userpasswd /home/node/userpasswd
 COPY ./provisioning/useradd /home/node/useradd
