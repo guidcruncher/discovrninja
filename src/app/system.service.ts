@@ -3,11 +3,19 @@ import { Injectable, Logger } from "@nestjs/common";
 @Injectable()
 export class SystemService implements OnApplicationShutdown {
   private logger: Logger = new Logger(SystemService.name);
+ private app: INestApplication;
+
+public setApp(app: INestApplication) {
+this.app = app;
+}
+
+public getApp(): INestApplication { return this.app;}
 
   onApplicationShutdown(signal: string) {
     this.logger.error(
       "**** RECIEVED SIGNAL: " + signal + ", Shutting down. ****",
     );
+    this.app.close();
   }
 
   public getVersion() {

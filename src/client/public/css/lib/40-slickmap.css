@@ -1,6 +1,5 @@
- #sitemap {
-  margin: 0 0 2em 0 !important;
-  box-sizing: border-box !important;
+#sitemap {
+	margin: 0 0 2em 0;
 }
 
 /* ------------------------------------------------------------
@@ -10,151 +9,121 @@
 /* -------- Top Level --------- */
 
 #sitemap .primaryNav {
-  clear: both !important;
-  width: 100% !important;
-  margin-top: 3em !important;
+	clear: both;
+	width: 100%;
+	margin-top: 3em;
 }
-
 #sitemap .primaryNav #home {
-  position: absolute !important;
-  margin-top: -3em !important;
-  margin-bottom: 0 !important;
-  min-width: 11.5em !important;
-  width: 100% !important;
+	position: absolute;
+	margin-top: -3em;
+	margin-bottom: 0;
+	min-width: 11.5em;
+	width: 100%;
 }
-
 #sitemap .primaryNav #home:before {
-  display: none !important;
+	display: none;
 }
-
 #sitemap .primaryNav ul {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  list-style: none !important;
-  position: relative !important;
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	position: relative;
 }
-
 #sitemap .primaryNav li {
-  flex: 1 !important;
-  flex-basis: 11.5em !important;
-  padding-right: 1.25em !important;
-  position: relative !important;
+	flex: 1;
+	flex-basis: 11.5em;
+	padding-right: 1.25em;
+	position: relative;
 }
-
-#sitemap .primaryNav>ul>li {
-  margin-top: 3em !important;
+#sitemap .primaryNav > ul > li {
+	margin-top: 3em;
 }
-
 #sitemap .primaryNav li a {
-  margin: 0 !important;
-  padding: .875em .9375em .9375em .9375em !important;
-  display: block !important;
-  font-size: .9375em !important;
-  font-weight: bold !important;
-  color: white !important;
-  background: #0090ff !important !important;
-  text-shadow: 0 0 10px rgba(0, 0, 0, .1) !important;
-  border: 1px solid rgba(0, 0, 0, .025) !important;
-  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.15) !important;
-  text-decoration: none !important;
-}
-
-#sitemap .primaryNav li a:hover {
-  background-color: #0070f9 !important;
+	margin: 0;
+	rpadding: .875em .9375em .9375em .9375em;
+        padding: 5px;
+	display: block;
+	font-size: .9375em;
+	font-weight: bold;
+	color: white;
+	background: #0d6efd;
+        overflow: hidden;
+        border-radius: 3px;
+	text-decoration: none;
 }
 
 #sitemap .primaryNav a:link:after,
 #sitemap .primaryNav a:visited:after,
 #sitemap .utilityNav a:link:after,
 #sitemap .utilityNav a:visited:after {
-  content: " " attr(href)" " !important;
-  display: block !important;
-  font-weight: 600 !important;
-  font-size: .75em !important;
-  margin-top: .25em !important;
-  word-wrap: break-word !important;
-  color: rgba(255, 255, 255, .75) !important;
+	content: " "attr(href)" ";
+	display: block;
+	font-weight: 600;
+	font-size: .75em;
+	margin-top: .25em;
+	word-wrap: break-word;
+	color: rgba(255,255,255,.75);
 }
 
 /* -------- Second Level --------- */
 
 #sitemap .primaryNav ul ul {
-  display: block !important;
+	display: block;
 }
-
 #sitemap .primaryNav ul ul li {
-  padding-top: .6875em !important;
-  padding-right: 0 !important;
+	padding-top: .6875em;
+	padding-right: 0;
 }
-
 #sitemap .primaryNav ul ul li a {
-  background-color: #28bf5e !important;
-}
-
-#sitemap .primaryNav ul ul li a:hover {
-  background-color: #09a63e !important;
+	background-color: #6c757d;
 }
 
 #sitemap .primaryNav ul ul li:first-child {
-  padding-top: 2em !important;
+	padding-top: 2em;
 }
 
 /* -------- Third Level --------- */
 
 #sitemap .primaryNav ul ul ul {
-  margin-top: .6em !important;
-  padding-top: .6em !important;
-  padding-bottom: .625em !important;
+	margin-top: .6em;
+	padding-top: .6em;
+	padding-bottom: .625em;
 }
-
 #sitemap .primaryNav ul ul ul li {
-  padding-top: .3125em !important;
-  padding-bottom: .3125em !important;
+	padding-top: .3125em;
+	padding-bottom: .3125em;
 }
-
 #sitemap .primaryNav ul ul ul li a {
-  background-color: #ff9d00 !important;
-  font-size: .75em !important;
-  padding: .75em !important;
-  width: 90% !important;
-  margin-right: 0 !important;
-  margin-left: auto !important;
+	background-color: #ff9d00;
+	font-size: .75em;
+	padding: .75em;
+	width: 90%;
+	margin-right: 0;
+	margin-left: auto;
 }
-
-#sitemap .primaryNav ul ul ul li a:hover {
-  background-color: #ff831b !important;
-}
-
 #sitemap .primaryNav ul ul ul li:first-child {
-  padding-top: 1em !important;
+	padding-top: 1em;
 }
-
 #sitemap .primaryNav ul ul ul li a:link:after,
 #sitemap .primaryNav ul ul ul li a:visited:after {
-  font-size: .75em !important;
+	font-size: .75em;
 }
 
 /* --------	Fourth Level --------- */
 
 #sitemap .primaryNav ul ul ul ul {
-  margin-top: 0 !important;
-  padding-top: .3125em !important;
-  padding-bottom: .3125em !important;
+	margin-top: 0;
+	padding-top: .3125em;
+	padding-bottom: .3125em;
 }
-
 #sitemap .primaryNav ul ul ul ul li a {
-  background-color: #de003a !important;
-  padding: .75em !important;
-  width: 80% !important;
+	background-color: #de003a;
+	padding: .75em ;
+	width: 80%;
 }
-
-#sitemap .primaryNav ul ul ul ul li a:hover {
-  background-color: #c20035 !important;
-}
-
 #sitemap .primaryNav ul ul ul ul li a:link:after,
 #sitemap .primaryNav ul ul ul ul li a:visited:after {
-  display: none !important;
+	display: none;
 }
 
 /* ------------------------------------------------------------
@@ -166,99 +135,87 @@
 #sitemap .primaryNav ul:after,
 #sitemap .primaryNav ul li:before,
 #sitemap .primaryNav ul li:after {
-  display: block !important;
-  content: '' !important;
-  position: absolute !important;
-  border-width: 0 !important;
-  border-color: #e3e3e3 !important;
-  border-style: solid !important;
-  z-index: -1 !important;
-  /* border-color: red !important; */
+	display: block;
+	content: '';
+	position: absolute;
+	border-width: 0;
+	border-color: #e3e3e3;
+	border-style: solid;
+	z-index: -1;
+	/* border-color: red; */
 }
-
-#sitemap .primaryNav>ul>li:before {
-  height: 1.375em !important;
-  top: -1.375em !important;
-   !important;
-  right: calc(50% + .625em) !important;
-  width: calc(100% - 2px) !important;
-  border-top-width: 2px !important;
-  border-right-width: 2px !important;
-  /* border-color: red !important; */
+#sitemap .primaryNav > ul > li:before {
+	height: 1.375em;
+	top: -1.375em;;
+	right: calc(50% + .625em);
+	width: calc(100% - 2px);
+	border-top-width: 2px;
+	border-right-width: 2px;
+	/* border-color: red; */
 }
-
-#sitemap .primaryNav>ul>li:first-child+li:before {
-  border-top-width: 0 !important;
-  height: 5em !important;
-  top: -5em !important;
-  /* border-color: red !important; */
+#sitemap .primaryNav > ul > li:first-child + li:before {
+	border-top-width: 0;
+	height: 5em;
+	top: -5em;
+	/* border-color: red; */
 }
-
 #sitemap .primaryNav ul ul li:after {
-  width: 50% !important;
-  height: .6875em !important;
-  top: 0 !important;
-  right: 1px !important;
-  border-left-width: 2px !important;
-  /* border-color: red */
-   !important;
+	width: 50%;
+	height: .6875em;
+	top: 0;
+	right: 1px;
+	border-left-width: 2px;
+	/* border-color: red */;
 }
-
 #sitemap .primaryNav ul ul li:first-child:before {
-  width: 50% !important;
-  height: 1.3125em !important;
-  top: .6875em !important;
-  right: 1px !important;
-  border-left-width: 2px !important;
-  /* border-color: red !important; */
+	width: 50%;
+	height: 1.3125em;
+	top: .6875em;
+	right: 1px;
+	border-left-width: 2px;
+	/* border-color: red; */
 }
-
-#sitemap .primaryNav>ul>li:last-child:after {
-  border-bottom-width: 0 !important;
+#sitemap .primaryNav > ul > li:last-child:after {
+	border-bottom-width: 0;
 }
-
 #sitemap .primaryNav ul ul ul li:before {
-  width: calc(50% - 5px) !important !important;
-  height: calc(100% - 2px) !important;
-  top: -50% !important;
-  left: 0 !important;
-  border-left-width: 2px !important;
-  border-bottom-width: 2px !important;
-  /* border-color: red !important; */
+	width: calc(50% - 5px) !important;
+	height: calc(100% - 2px);
+	top: -50%;
+	left: 0;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
+	/* border-color: red; */
 }
-
 #sitemap .primaryNav ul ul ul li:first-child:before {
-  height: 2.125em !important;
-  top: -1px !important;
-  border-top-width: 2px !important;
-  /* border-color: red !important; */
+	height: 2.125em;
+	top: -1px;
+	border-top-width: 2px;
+	/* border-color: red; */
 }
-
 #sitemap .primaryNav ul ul ul:before {
-  width: 50% !important;
-  height: 1.25em !important;
-  top: -10px !important;
-  right: 1px !important;
-  border-left-width: 2px !important;
-  /* border-color: red !important; */
+	width: 50%;
+	height: 1.25em;
+	top: -10px;
+	right: 1px;
+	border-left-width: 2px;
+	/* border-color: red; */
 }
-
 #sitemap .primaryNav ul ul ul li:after {
-  border-width: 0 !important;
+	border-width: 0;
 }
-
 #sitemap .primaryNav ul ul ul ul li:before,
 #sitemap .primaryNav ul ul ul ul li:first-child:before {
-  display: none !important;
+	display: none;
 }
 
 #sitemap .primaryNav ul ul ul ul:before {
-  width: 1px !important;
-  height: calc(100% + 2.5em) !important;
-  top: -2.5em !important;
-  left: 0 !important;
-  border-left-width: 2px !important;
-  /* border-color: red !important; */
+	width: 1px;
+	height: calc(100% + 2.5em);
+	top: -2.5em;
+	left: 0;
+	border-left-width: 2px;
+	/* border-color: red; */
 }
 
 /* ------------------------------------------------------------
@@ -266,46 +223,39 @@
 ------------------------------------------------------------ */
 
 #sitemap .utilityNav {
-  float: right !important;
-  margin-top: 0 !important;
-  margin-bottom: -.25em !important;
-  margin-right: 1.25em !important;
-  max-width: 48% !important;
-  list-style-type: none !important;
+	float: right;
+	margin-top: 0;
+	margin-bottom: -.25em;
+	margin-right: 1.25em;
+	max-width: 48%;
+	list-style-type: none;
 }
-
 #sitemap .utilityNav li {
-  padding: 0 0 .625em .625em !important;
-  display: inline-block !important;
+	padding: 0 0 .625em .625em;
+	display: inline-block;
 }
-
-. utilityNav li:first-child {}
-
+#sitemap .utilityNav li:first-child {
+}
 #sitemap .utilityNav li a {
-  display: block !important;
-  font-size: .75em !important;
-  font-weight: 700 !important;
-  padding: .75em 1em !important;
-  font-weight: bold !important;
-  text-align: left !important;
-  color: white !important;
-  background-color: #ff9d00 !important;
-  border: 1px solid rgba(0, 0, 0, .025) !important;
-  box-shadow: 0px 2px 0 rgba(0, 0, 0, 0.15) !important;
-  text-shadow: 0 0 10px rgba(0, 0, 0, .15) !important;
-  text-decoration: none !important;
+	display: block;
+	font-size: .75em;
+	font-weight: 700;
+	padding: .75em 1em;
+	font-weight: bold;
+	text-align: left;
+	color: white;
+	background-color: #ff9d00;
+	border: 1px solid  rgba(0,0,0,.025);
+	box-shadow: 0px 2px 0 rgba(0,0,0,0.15);
+	text-shadow: 0 0 10px rgba(0,0,0,.15);
+	text-decoration: none;
 }
-
-#sitemap .utilityNav li a:hover {
-  background-color: #ff831b !important;
-}
-
 #sitemap .utilityNav li a:link:after,
 #sitemap .utilityNav li a:visited:after {
-  color: rgba(255, 255, 255, .75) !important;
-  font-size: .75em !important;
-  font-weight: 600 !important;
-  margin-top: .25em !important;
+	color: rgba(255,255,255,.75);
+	font-size: .75em;
+	font-weight: 600;
+	margin-top: .25em;
 }
 
 /* ------------------------------------------------------------
@@ -313,30 +263,27 @@
 ------------------------------------------------------------ */
 
 @media screen and (max-width: 30em) {
-  #sitemap .primaryNav ul {
-    display: block !important;
-  }
-
-  #sitemap .primaryNav li {
-    width: 100% !important;
-    padding-right: 0 !important;
-  }
-
-  #sitemap .primaryNav #home {
-    width: 100% !important;
-    position: relative !important;
-    margin-bottom: -1em !important;
-    margin-top: 0 !important;
-  }
-
-  #sitemap .utilityNav {
-    float: none !important;
-    display: block !important;
-    width: 100% !important;
-    text-align: right !important;
-    margin-bottom: 2.5em !important;
-    max-width: 100% !important;
-  }
+	#sitemap .primaryNav ul {
+		display: block;
+	}
+	#sitemap .primaryNav li {
+		width: 100%;
+		padding-right: 0;
+	}
+	#sitemap .primaryNav #home {
+		width: 100%;
+		position: relative;
+		margin-bottom: -1em;
+		margin-top: 0;
+	}
+	#sitemap .utilityNav {
+		float: none;
+		display: block;
+		width: 100%;
+		text-align: right;
+		margin-bottom: 2.5em;
+		max-width: 100%;
+	}
 }
 
 /* The media queries below keep the grid column widths intact when
@@ -347,64 +294,37 @@ that you don't need, and your sitemap layout will work perfectly. */
 
 /* two column */
 @media screen and (min-width: 30em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 50% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 50%;	}
 }
-
 /* three column */
 @media screen and (min-width: 38.5em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 33% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 33%;	}
 }
-
 /* four column */
 @media screen and (min-width: 50em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 25% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 25%;	}
 }
-
 /* five column */
 @media screen and (min-width: 61em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 20% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 20%;	}
 }
-
 /* six column */
 @media screen and (min-width: 73em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 16.66% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 16.66%;	}
 }
-
 /* seven column */
 @media screen and (min-width: 84.5em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 14.285% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 14.285%;	}
 }
-
 /* eight column */
 @media screen and (min-width: 96em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 12.5% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 12.5%; }
 }
-
 /* nine column */
 @media screen and (min-width: 107.5em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 11.11% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 11.11%; }
 }
-
 /* ten column */
 @media screen and (min-width: 119em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 10% !important;
-  }
+	#sitemap .primaryNav > ul > li {	max-width: 10%; }
 }
-

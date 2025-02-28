@@ -99,19 +99,25 @@
 </div>
 </div>
 <div class="tab-pane fade show active" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" tabindex="0">
-  <div class="rounded-3 bh-primary" style="display:block !important;height:100%;width:1024px; overflow: scroll !important">
-    <div id="sitemap"><nav class="primaryNav">
-      <ul>  
-        <li id="home">Host {{#each this.networks}} <li><a href="#">{{Name}}</a>
-          <ul>
-            {{#each Containers}}
-              <li><a href="#">{{Name}} {{IPAddress}}</a></li>
-            {{/each}}
-          </ul>
-        </li>
-        {{/each}}
-      </ul>
-    </nav></div>
+  <div class="border border-secondary rounded-3" style="padding-top:10px; height:{{size.window.h}}px;width:{{size.window.w}}px; overflow: scroll !important">
+    <div id="sitemap">
+      <nav class="primaryNav">
+        <ul>
+          <li id="home" ><a href="">Host</a></li>
+ {{#each this.networks}}
+{{# if Containers}}
+          <li ><a href="">{{Name}}</a>
+            <ul>
+              {{#each Containers}} 
+                <li ><a href="{{IPAddress}}">{{Name}}</a></li>
+              {{/each}}
+            </ul>
+          </li>
+{{/if}}
+          {{/each}}
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
 </div>
@@ -154,4 +160,3 @@
     </div>
   </div>
 </div>
-

@@ -1,6 +1,7 @@
 import process from "node:process";
 
 import { AppModule } from "@app/app.module";
+import { SystemService } from "@app/system.service";
 import { ErrorExceptionFilter } from "@app/exception.filter";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
@@ -20,7 +21,7 @@ process.on("SIGHUP", function () {
   process.kill(process.pid, "SIGTERM");
 });
 
-async function startServers(app: any, config: any, log: any) {
+async function startServers( app: any, config: any, log: any) {
   log.debug("Starting Application Web Server");
   let serverPort: number = parseInt(config.get("host.appServer.listenPort"));
   let serverHost: string = config.get("host.appServer.listenAddress");
@@ -43,9 +44,7 @@ async function bootstrap() {
 
   app.enableShutdownHooks();
 
-  process.on("SIGHUP", function () {
-    process.kill(process.pid, "SIGTERM");
-  });
+  app.select(AppModule).get(SystemService).setApp(app);
 
   await app.register(secureSession, {
     secret:
