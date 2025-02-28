@@ -103,17 +103,17 @@
     <div id="sitemap">
       <nav class="primaryNav">
         <ul>
-          <li id="home" ><a href="">Host</a></li>
- {{#each this.networks}}
-{{# if Containers}}
-          <li ><a href="">{{Name}}</a>
-            <ul>
-              {{#each Containers}} 
-                <li ><a href="{{IPAddress}}">{{Name}}</a></li>
-              {{/each}}
-            </ul>
-          </li>
-{{/if}}
+          <li id="home"><a href="">Host</a></li>
+          {{#each this.networks}}
+            {{# if Containers}}
+              <li><a href="">{{Name}}</a>
+                <ul>
+                  {{#each Containers}}
+                    <li><a href="{{IPAddress}}">{{Name}}</a></li>
+                  {{/each}}
+                </ul>
+              </li>
+              {{/if}}
           {{/each}}
         </ul>
       </nav>
