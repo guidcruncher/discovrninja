@@ -2,12 +2,16 @@ FROM guidcruncher/node-base:lts-alpine AS base
  
 RUN apk add --no-cache jq git sudo su-exec shadow
 
-RUN addgroup -g 1002 docker && \
+RUN addgroup -g 1002 -S docker && \
+    addgroup -S sudo && \
     useradd user -s /bin/bash -m && \
     addgroup user docker && \
     addgroup root docker && \
-    echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    addgroup user sudo && \
+    addgroup root sudo && \
+    echo "%sudo ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    echo "root ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    echo "user ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN mkdir -p /home/node/themes/bootstrap5.3.3 /home/node/dist /home/node/config /home/node/config /home/node/cache /home/node/.defaults
 
