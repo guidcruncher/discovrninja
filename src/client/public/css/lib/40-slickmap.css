@@ -324,6 +324,10 @@ a column wraps. This prevents the wrapped column from displaying at
 appropriately. When your sitemap is complete, remove the queries
 that you don't need, and your sitemap layout will work perfectly. */
 
+#sitemap .primaryNav>ul>li {
+    max-width: 250px !important;
+  }
+
 /* two column */
 @media screen and (min-width: 30em) {
   #sitemap .primaryNav>ul>li {

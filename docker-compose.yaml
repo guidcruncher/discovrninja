@@ -11,8 +11,8 @@ services:
     tty: true
     networks:
       proxy:
-    environment:
-      - DEBUG_UI=true
+#    environment:
+#      - DEBUG_UI=true
     volumes:
       - .:/home/node/
       - /var/run/docker.sock:/var/run/docker.sock:ro
