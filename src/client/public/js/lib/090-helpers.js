@@ -89,10 +89,12 @@ function _cell(Handlebars) {
 };
 _cell(Handlebars);
 
-function _debug(Handlebars) {
+ function _debug(Handlebars) {
 
   Handlebars.registerHelper("debug", function() {
-    return process.env.DEBUG_UI === "true";
+return new Handlebars.SafeString(
+      "<pre>" + JSON.stringify(obj, null, 2) + "</pre>",
+    );
   });
 };
 _debug(Handlebars);
@@ -261,6 +263,14 @@ function _humandateonly(Handlebars) {
   });
 };
 _humandateonly(Handlebars);
+
+function _isdebug(Handlebars) {
+
+  Handlebars.registerHelper("isdebug", function() {
+    return process.env.DEBUG_UI === "true";
+  });
+};
+_isdebug(Handlebars);
 
 function _isempty(Handlebars) {
 

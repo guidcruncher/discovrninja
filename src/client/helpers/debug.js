@@ -1,5 +1,7 @@
-module.exports = (Handlebars) => {
+ module.exports = (Handlebars) => {
   Handlebars.registerHelper("debug", function() {
-    return process.env.DEBUG_UI === "true";
+return new Handlebars.SafeString(
+      "<pre>" + JSON.stringify(obj, null, 2) + "</pre>",
+    );
   });
 };
