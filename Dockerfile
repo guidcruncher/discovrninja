@@ -60,7 +60,6 @@ COPY --from=build /home/node/start.sh /home/node/start.sh
 COPY --from=build /home/node/useradd /home/node/useradd
 COPY --from=build /home/node/userpasswd  /home/node/userpasswd
 
-USER docker
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 
 ENV APP_BASE=/home/node/dist

@@ -103,17 +103,17 @@
     <div id="sitemap" style="width:3000px">
       <nav class="primaryNav">
         <ul>
-          <li id="home" ><a href="">Host</a></li>
- {{#each this.networks}}
-{{# if Containers}}
-          <li ><a href="">{{Name}}</a>
-            <ul>
-              {{#each Containers}} 
-                <li ><a href="{{IPAddress}}">{{Name}}</a></li>
-              {{/each}}
-            </ul>
-          </li>
-{{/if}}
+          <li id="home"><a href="">Host</a></li>
+          {{#each this.networks}}
+            {{# if Containers}}
+              <li><a href="">{{Name}}</a>
+                <ul>
+                  {{#each Containers}}
+                    <li><a href="{{IPAddress}}">{{Name}}</a></li>
+                  {{/each}}
+                </ul>
+              </li>
+              {{/if}}
           {{/each}}
         </ul>
       </nav>
@@ -162,14 +162,15 @@
 </div>
 
 <script type="text/javascript">
-var mv = document.getElementById("mapview");
-var width = window.innerWidth
-|| document.documentElement.clientWidth
-|| document.body.clientWidth;
+  var mv = document.getElementById("mapview");
+  var width = window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
 
-var height = window.innerHeight
-|| document.documentElement.clientHeight
-|| document.body.clientHeight;
-mv.style.width = (width-100)+"px";
-mv.style.height = (height-280) +"px";
+  var height = window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight;
+  mv.style.width = (width - 100) + "px";
+  mv.style.height = (height - 280) + "px";
+
 </script>
