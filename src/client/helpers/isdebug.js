@@ -4,7 +4,7 @@ module.exports = (Handlebars) => {
 
 if (isdebug) {
  return new Handlebars.SafeString(
-      "<hr/><pre>" + JSON.stringify(obj?ohj:{}, null, 2) + "</pre>",
+      "<hr/><pre>" + JSON.stringify(obj?obj:{}, null, 2) + "</pre>",
     );
 }
   });
