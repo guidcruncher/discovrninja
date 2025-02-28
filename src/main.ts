@@ -1,8 +1,8 @@
 import process from "node:process";
 
 import { AppModule } from "@app/app.module";
-import { SystemService } from "@app/system.service";
 import { ErrorExceptionFilter } from "@app/exception.filter";
+import { SystemService } from "@app/system.service";
 import { HandlebarsFactory } from "@customtypes/handlebars-static";
 import compression from "@fastify/compress";
 import secureSession from "@fastify/secure-session";

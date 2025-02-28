@@ -3,6 +3,7 @@ import { Injectable, Logger } from "@nestjs/common";
 @Injectable()
 export class SystemService implements OnApplicationShutdown {
   private logger: Logger = new Logger(SystemService.name);
+
   private app: INestApplication;
 
   public setApp(app: INestApplication) {
