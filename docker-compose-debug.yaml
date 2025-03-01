@@ -12,6 +12,7 @@ services:
     networks:
       proxy:
     environment:
+      - HOST_IP=${HOST_IP} # export HOST_IP=$(hostname -I | awk '{print $1}')
       - DEBUG_UI=true
       - DEBUG=true
       - NODE_ENV=development

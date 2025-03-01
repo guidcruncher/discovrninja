@@ -34,6 +34,7 @@ RUN gulp prebuild
 
 EXPOSE 5001
 
+ENV HOST_IP=""
 ENV APP_BASE=/home/node/dist
 ENV THEME_BASE=/home/node/themes
 ENV CLIENT_BASE=/home/node/dist/client

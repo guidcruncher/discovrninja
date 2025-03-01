@@ -58,7 +58,7 @@
             {{#each Containers}}
               <tr>
                 <td>{{Name}}</td>
-                <td>{{IPAddress}}</td>
+                <td>{{CurrentIPAddress}}</td>
                 <td>{{MacAddress}}</td>
                 <td>{{format "list" DNSNames}}</td>
               </tr>
@@ -103,13 +103,13 @@
     <div id="sitemap" style="width:3000px">
       <nav class="primaryNav">
         <ul>
-          <li id="home"><a href="">Host</a></li>
+          <li id="home"><a href="{{hostIpAddress}}">Host</a></li>
           {{#each this.networks}}
             {{# if Containers}}
-              <li><a href="">{{Name}}</a>
+              <li><a href="{{#when Name "eq" "host"}}{{../hostIpAddress}}{{else}}{{#each this.IPAM.Config}}{{# each this}}{{#when @key "eq" "Subnet"}}{{this}}{{/when}}{{/each}}{{/each}}{{/when}}">{{Name}}</a>
                 <ul>
                   {{#each Containers}}
-                    <li><a href="{{IPAddress}}">{{Name}}</a></li>
+                    <li><a href="{{#when CurrentIPAddress "eq" ""}}Offline{{else}}{{CurrentIPAddress}}{{/when}}">{{Name}}</a></li>
                   {{/each}}
                 </ul>
               </li>
@@ -172,5 +172,6 @@
     document.body.clientHeight;
   mv.style.width = (width - 100) + "px";
   mv.style.height = (height - 280) + "px";
-
+  $("#sitemap a").click((e)=>{e.preventDefault();
+return false;});
 </script>

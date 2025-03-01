@@ -64,6 +64,7 @@ COPY --from=build /home/node/userpasswd  /home/node/userpasswd
 
 ENTRYPOINT [ "/bin/sh", "-e", "-c" ]
 
+ENV HOST_IP=""
 ENV APP_BASE=/home/node/dist
 ENV THEME_BASE=/home/node/themes
 ENV CLIENT_BASE=/home/node/dist/client
