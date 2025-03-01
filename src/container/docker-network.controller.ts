@@ -204,7 +204,11 @@ export class DockerNetworkController {
       .then((networks) => {
         res.view(
           "networkadmin.hbs",
-          { size: size, hostIpAddress: process.env.HOST_IP??"Unknown", networks: networks },
+          {
+            size: size,
+            hostIpAddress: process.env.HOST_IP ?? "Unknown",
+            networks: networks,
+          },
           { layout: "./layouts/layout.hbs" },
         );
       })
