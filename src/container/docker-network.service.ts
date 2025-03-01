@@ -63,15 +63,16 @@ export class DockerNetworkService {
                     net.Containers = [];
                     net.AttachedContainers = [];
                     for (const container of containers) {
-                      const contNet =
+                    const contNet =
                         container.NetworkSettings.Networks[net.Name];
                       if (contNet) {
-                         var  attached = {
+                         contNet.CurrentIPAddress=contNet.IPAddress;
+if (net.Driver == "host") {contNet.CurrentIPAddress=process.env.HOST_IP ?? "Unknown";}
+                         const attached = {
                           Name: container.Name,
                           IPAddress: contNet.IPAddress,
-                          CurrentIPAddress: contNet.IPAddress
+                          CurrentIPAddress: contNet.CurrentIPAddress
                         };
-                        if (net.Driver == "host") {attached.CurrentIPAddress=process.env.HOST_IP ?? "Unknown";}
                         net.AttachedContainers.push(attached);
                         contNet.Name = container.Name;
                         net.Containers.push(contNet);

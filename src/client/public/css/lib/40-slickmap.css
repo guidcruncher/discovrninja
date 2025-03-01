@@ -46,8 +46,8 @@
 
 #sitemap .primaryNav li a {
   margin: 0;
-  rpadding: .875em .9375em .9375em .9375em;
-  padding: 5px;
+  padding: .875em .9375em .9375em .9375em;
+  ypadding: 5px;
   display: block;
   font-size: .9375em;
   font-weight: bold;
@@ -325,68 +325,8 @@ appropriately. When your sitemap is complete, remove the queries
 that you don't need, and your sitemap layout will work perfectly. */
 
 #sitemap .primaryNav>ul>li {
-  max-width: 250px !important;
+  max-width: 250px;
+  width: 250px;
 }
 
-/* two column */
-@media screen and (min-width: 30em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 50%;
-  }
-}
 
-/* three column */
-@media screen and (min-width: 38.5em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 33%;
-  }
-}
-
-/* four column */
-@media screen and (min-width: 50em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 25%;
-  }
-}
-
-/* five column */
-@media screen and (min-width: 61em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 20%;
-  }
-}
-
-/* six column */
-@media screen and (min-width: 73em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 16.66%;
-  }
-}
-
-/* seven column */
-@media screen and (min-width: 84.5em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 14.285%;
-  }
-}
-
-/* eight column */
-@media screen and (min-width: 96em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 12.5%;
-  }
-}
-
-/* nine column */
-@media screen and (min-width: 107.5em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 11.11%;
-  }
-}
-
-/* ten column */
-@media screen and (min-width: 119em) {
-  #sitemap .primaryNav>ul>li {
-    max-width: 10%;
-  }
-}

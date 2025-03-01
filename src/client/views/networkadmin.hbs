@@ -98,12 +98,12 @@
 {{/each}}
 </div>
 </div>
-<div class="tab-pane fade show active" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" tabindex="0">
+<div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" tabindex="1">
   <div id="mapview" class="border border-secondary rounded-3" style="padding-top:10px; height:{{size.window.h}}px;width:{{size.window.w}}px; overflow: scroll !important">
     <div id="sitemap" style="width:3000px">
       <nav class="primaryNav">
         <ul>
-          <li id="home"><a href="{{hostIpAddress}}">Host</a></li>
+          <li id="home"><a href="{{hostIpAddress}}">Docker Host</a></li>
           {{#each this.networks}}
             {{# if Containers}}
               <li><a href="{{#when Name "eq" "host"}}{{../hostIpAddress}}{{else}}{{#each this.IPAM.Config}}{{# each this}}{{#when @key "eq" "Subnet"}}{{this}}{{/when}}{{/each}}{{/each}}{{/when}}">{{Name}}</a>
@@ -172,6 +172,6 @@
     document.body.clientHeight;
   mv.style.width = (width - 100) + "px";
   mv.style.height = (height - 280) + "px";
-  $("#sitemap a").click((e)=>{e.preventDefault();
-return false;});
+  $("#sitemap a").click((e)=>{e.preventDefault();return false;});
+  $("#sitemap li").css("width","250px!importanpt");
 </script>
