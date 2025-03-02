@@ -1186,6 +1186,27 @@ function getLog(id) {
     .catch((err) => {});
 }
 
+function networkInfo(containerId) {
+  var options = {
+    focus: true,
+    backdrop: "static",
+  };
+
+  ui("#containerInfo")
+    .template({
+      query: {
+        id: containerId,
+      },
+    })
+    .then(() => {
+      window.containerInfoModal = new bootstrap.Modal(
+        document.getElementById("containerInfoModal"),
+        options,
+      );
+      window.containerInfoModal.show();
+    });
+}
+
 function containerInfo(sender) {
   var options = {
     focus: true,

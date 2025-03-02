@@ -103,13 +103,13 @@
     <div id="sitemap" style="width:3000px">
       <nav class="primaryNav">
         <ul>
-          <li id="home"><a href="{{hostIpAddress}}">Docker Host</a></li>
+          <li id="home"><a data-type="host" href="{{hostIpAddress}}">Docker Host</a></li>
           {{#each this.networks}}
             {{# if Containers}}
-              <li><a href="{{#when Name "eq" "host"}}{{../hostIpAddress}}{{else}}{{#each this.IPAM.Config}}{{# each this}}{{#when @key "eq" "Subnet"}}{{this}}{{/when}}{{/each}}{{/each}}{{/when}}">{{Name}}</a>
+              <li><a data-type="network" data-id="{{Name}}" href="{{#when Name "eq" "host"}}{{../hostIpAddress}}{{else}}{{#each this.IPAM.Config}}{{# each this}}{{#when @key "eq" "Subnet"}}{{this}}{{/when}}{{/each}}{{/each}}{{/when}}">{{Name}}</a>
                 <ul>
                   {{#each Containers}}
-                    <li><a href="{{#when CurrentIPAddress "eq" ""}}Offline{{else}}{{CurrentIPAddress}}{{/when}}">{{Name}}</a></li>
+                    <li><a data-type="container" data-id="{{Name}}" href="{{#when CurrentIPAddress "eq" ""}}Offline{{else}}{{CurrentIPAddress}}{{/when}}">{{Name}}</a></li>
                   {{/each}}
                 </ul>
               </li>
@@ -172,10 +172,26 @@
     document.body.clientHeight;
   mv.style.width = (width - 100) + "px";
   mv.style.height = (height - 280) + "px";
+  $("#sitemap li").css("width", "250px!important");
+
   $("#sitemap a").click((e) => {
     e.preventDefault();
+    var ty = $(e.target).attr("data-type");
+
+    switch (ty) {
+    case "container":
+      networkInfo($(e.target).attr("data-id"));
+      break;
+    case "host":
+      break;
+    case "network":
+      break;
+    }
     return false;
   });
-  $("#sitemap li").css("width", "250px!importanpt");
+
+  }
 
 </script>
+<div id="containerInfo" data-url="/api/docker/container/{id}" data-template="networkinfo">
+</div>

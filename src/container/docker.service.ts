@@ -336,64 +336,6 @@ export class DockerService {
     });
   }
 
-  public checkForUpdateImage(img: string): Promise<any> {
-    const imgref = this.formatImage(img);
-
-    return new Promise((resolve, reject) => {
-      const docker = this.connectorService.createDocker();
-      const updateStatus: any = {
-        image: imgref,
-        imageCreated: "",
-        latestBuildDate: "",
-        updateDue: false,
-        delta: 0,
-        imageDigest: "",
-        repoDigest: "",
-      };
-
-      docker.getImage(imgref).inspect((err, image) => {
-        if (err) {
-          this.logger.error("Error checking for updates", err);
-          reject(err);
-        } else {
-          if (image.RepoDigests) {
-            if (image.RepoDigests.length > 0) {
-              updateStatus.imageDigest = image.RepoDigests[0].split("@")[1];
-            }
-          }
-          updateStatus.imageCreated = this.formatDate(
-            new Date(Date.parse(image.Created)),
-          );
-
-          this.dockerRepositoryService
-            .queryRepositoryTags(
-              this.formatImage(imgref),
-              image.Os,
-              image.Architecture,
-            )
-            .then((repo) => {
-              updateStatus.repoDigest = repo.digest;
-              updateStatus.latestBuildDate = this.formatDate(
-                new Date(Date.parse(repo.last_updated)),
-              );
-              updateStatus.delta = this.daydiff(
-                new Date(updateStatus.latestBuildDate),
-                new Date(updateStatus.imageCreated),
-              );
-
-              updateStatus.updateDue =
-                updateStatus.imageDigest != updateStatus.repoDigest;
-              resolve(updateStatus);
-            })
-            .catch((err) => {
-              this.logger.error("Error checking for update", err);
-              reject(err);
-            });
-        }
-      });
-    });
-  }
-
   public stop(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const docker = this.connectorService.createDocker();

@@ -166,9 +166,4 @@ export class DockerController {
       arch,
     );
   }
-
-  @Get("image/updatecheck")
-  async checkForUpdate(@Query("image") image: string): Promise<any> {
-    return await this.dockerService.checkForUpdateImage(image);
-  }
 }

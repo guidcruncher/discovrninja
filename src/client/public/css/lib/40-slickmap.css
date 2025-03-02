@@ -22,6 +22,10 @@
   width: 100%;
 }
 
+#sitemap .primaryNav #home a {
+  background: #198754 !important;
+}
+
 #sitemap .primaryNav #home:before {
   display: none;
 }
@@ -47,7 +51,7 @@
 #sitemap .primaryNav li a {
   margin: 0;
   padding: .875em .9375em .9375em .9375em;
-  ypadding: 5px;
+  width: 100%;
   display: block;
   font-size: .9375em;
   font-weight: bold;
@@ -80,6 +84,8 @@
 #sitemap .primaryNav ul ul li {
   padding-top: .6875em;
   padding-right: 0;
+  left: -30px;
+  width: 230px;
 }
 
 #sitemap .primaryNav ul ul li a {
